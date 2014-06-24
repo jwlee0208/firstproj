@@ -28,6 +28,11 @@ public class AngularTestController {
 	public String test2(){
 		return "angularTest/test02";		
 	}
+	@RequestMapping(value="/test03.page")
+	public String test3(){
+		return "angularTest/test03";		
+	}
+
 }
 
 
