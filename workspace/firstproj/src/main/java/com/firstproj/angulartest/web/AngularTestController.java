@@ -12,16 +12,21 @@
  * -----------------------------------------------------------------
  **/
 
-package com.firstproj.test.web;
+package com.firstproj.angulartest.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class TestController {
-	@RequestMapping(value="/test")
+@RequestMapping(value="angular/")
+public class AngularTestController {
+	@RequestMapping(value="/test01.page")
 	public String test(){
-		return "test";
+		return "angularTest/test01";
+	}
+	@RequestMapping(value="/test02.page")
+	public String test2(){
+		return "angularTest/test02";		
 	}
 }
 
