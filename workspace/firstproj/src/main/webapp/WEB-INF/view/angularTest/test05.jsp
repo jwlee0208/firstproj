@@ -15,7 +15,7 @@
 <!-- angular js -->
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/angular.min.js"></script>
 
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/test/test04.js"></script>
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/test/test05.js"></script>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,6 +28,8 @@
 		<div class="list-group-item" ng-repeat="product in store.products">
 			<h1>{{product.name}}</h1>
 			<h2>{{product.price | currency}}</h2>
+			<img ng-src="{{product.images[0].big}}"/><img ng-src="{{product.images[0].small}}"/>
+			<img ng-src="{{product.images[1].big}}"/><img ng-src="{{product.images[1].small}}"/>
 		</div>
 	</div>
 </body>

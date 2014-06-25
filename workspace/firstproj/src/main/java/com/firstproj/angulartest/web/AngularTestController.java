@@ -36,7 +36,25 @@ public class AngularTestController {
 	public String test4(){
 		return "angularTest/test04";		
 	}
+	
+	/**
+	 * <pre>
+	 * 1. MethodName	: test5
+	 * 2. ClassName		: AngularTestController
+	 * 3. Comment		: printing images in list using angularJS
+	 * 4. 작성자			: leejinwon
+	 * 5. 작성일			: 2014. 6. 25. 오전 10:48:27
+	 * </pre>
+	 *   @return
+	 *   @return String
+	 */
+	@RequestMapping(value="/test05.page")
+	public String test5(){
+		return "angularTest/test05";		
+	}
 
+	
+	
 }
 
 
