@@ -50,22 +50,38 @@
 					<blockquote ng-repeat="review in product.reviews">
 						<b>별 : {{review.stars}}</b>
 						{{review.comment}}
-						<cite>by : {{review.author}}</cite>
+						<cite class="clearfix">by : {{review.author}}</cite>
 					</blockquote>
 					<form name="reviewForm">
-						<select>
-							<option value="1">1 Star</option>
-							<option value="2">2 Stars</option>
-							<option value="3">3 Stars</option>
-							<option value="4">4 Stars</option>
-							<option value="5">5 Stars</option>
-						</select>
-						<textarea></textarea>
-						<label>by: </label>
-						<input type="email"/>
-						<input type="submit" value="Submit"/>
+						<blockquote>
+							<b>별 : {{review.stars}}</b>
+							{{review.comment}}
+							<cite class="clearfix">by : {{review.author}}</cite>
+						</blockquote>
+						<h4>Submit a review</h4>
+						<fieldset class="form-group">
+							<select class="form-control" 
+									ng-options="stars for stars in [5,4,3,2,1]" 
+									title="Stars" 
+									ng-model="review.stars">
+								<option value="">Rate the product</option>
+								<option value="1">1 Star</option>
+								<option value="2">2 Stars</option>
+								<option value="3">3 Stars</option>
+								<option value="4">4 Stars</option>
+								<option value="5">5 Stars</option>
+							</select>						
+						</fieldset>
+						<fieldset class="form-group">
+							<textarea class="form-control" placeholder="리뷰를 입력해 주세요." title="Review" ng-model="review.comment"></textarea>
+						</fieldset>
+						<fieldset class="form-group">
+							<input type="email" class="form-control" placeholder="이메일을 입력해 주세요." ng-model="review.author"/>
+						</fieldset>				
+						<fieldset class="form-group">
+							<input type="submit" value="Submit Review" class="btn btn-primary pull-right"/>	
+						</fieldset>	
 					</form>
-					
 				</div>
 			</section>
 
