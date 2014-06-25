@@ -70,6 +70,26 @@ public class AngularTestController {
 		return "angularTest/test06";		
 	}
 	
+	/**
+	 * <pre>
+	 * 1. MethodName	: test7
+	 * 2. ClassName		: AngularTestController
+	 * 3. Comment		: Creating our panel controller
+	 * 4. 작성자			: leejinwon
+	 * 5. 작성일			: 2014. 6. 25. 오후 12:44:51
+	 * </pre>
+	 *   @return
+	 *   @return String
+	 */
+	@RequestMapping(value="/test07.page")
+	public String test7(){
+		return "angularTest/test07";
+	}
+	
+	@RequestMapping(value="/test08.page")
+	public String test8(){
+		return "angularTest/test08";
+	}
 	
 }
 
