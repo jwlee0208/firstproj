@@ -8,8 +8,8 @@
 			  {
 				name 	: 'MacBook Pro'
 			  , price 	: '3000.55'
-				  , images 	: [{big : '/img/test/macbook01.jpg', small : '/img/test/macbook02.jpg'}
-		  			 		 , {big : '/img/test/macbook03.jpg', small : '/img/test/macbook04.jpg'}]   
+			  , images 	: [{big : '/img/test/macbook01.jpg', small : '/img/test/macbook02.jpg'}
+		  			 	 , {big : '/img/test/macbook03.jpg', small : '/img/test/macbook04.jpg'}]   
 			  },
 			  {
 				name 	: 'MacBook Pro Retina'

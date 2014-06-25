@@ -41,7 +41,7 @@ public class AngularTestController {
 	 * <pre>
 	 * 1. MethodName	: test5
 	 * 2. ClassName		: AngularTestController
-	 * 3. Comment		: printing images in list using angularJS
+	 * 3. Comment		: Using ng-src for images
 	 * 4. 작성자			: leejinwon
 	 * 5. 작성일			: 2014. 6. 25. 오전 10:48:27
 	 * </pre>
@@ -52,7 +52,23 @@ public class AngularTestController {
 	public String test5(){
 		return "angularTest/test05";		
 	}
-
+	
+	/**
+	 * 
+	 * <pre>
+	 * 1. MethodName	: test6
+	 * 2. ClassName		: AngularTestController
+	 * 3. Comment		: A simple set of tabs
+	 * 4. 작성자			: leejinwon
+	 * 5. 작성일			: 2014. 6. 25. 오전 11:30:48
+	 * </pre>
+	 *   @return
+	 *   @return String
+	 */
+	@RequestMapping(value="/test06.page")
+	public String test6(){
+		return "angularTest/test06";		
+	}
 	
 	
 }
