@@ -86,9 +86,92 @@ public class AngularTestController {
 		return "angularTest/test07";
 	}
 	
+	/**
+	 * <pre>
+	 * 1. MethodName	: test8
+	 * 2. ClassName		: AngularTestController
+	 * 3. Comment		: Writing out our Review Form
+	 * 4. 작성자			: leejinwon
+	 * 5. 작성일			: 2014. 6. 25. 오후 4:59:33
+	 * </pre>
+	 *   @return
+	 *   @return String
+	 */
 	@RequestMapping(value="/test08.page")
 	public String test8(){
 		return "angularTest/test08";
+	}
+	/**
+	 * <pre>
+	 * 1. MethodName	: test9
+	 * 2. ClassName		: AngularTestController
+	 * 3. Comment		: Creating the Review Controller
+	 * 4. 작성자			: leejinwon
+	 * 5. 작성일			: 2014. 6. 25. 오후 5:00:16
+	 * </pre>
+	 *   @return
+	 *   @return String
+	 */
+	@RequestMapping(value="/test09.page")
+	public String test9(){
+		return "angularTest/test09";
+	}
+	/**
+	 * <pre>
+	 * 1. MethodName	: test10
+	 * 2. ClassName		: AngularTestController
+	 * 3. Comment		: Now with validation
+	 * 4. 작성자			: leejinwon
+	 * 5. 작성일			: 2014. 6. 25. 오후 5:00:16
+	 * </pre>
+	 *   @return
+	 *   @return String
+	 */
+	@RequestMapping(value="/test10.page")
+	public String test10(){
+		return "angularTest/test10";
+	}
+
+	/**
+	 * 
+	 * <pre>
+	 * 1. MethodName	: test11
+	 * 2. ClassName		: AngularTestController
+	 * 3. Comment		: Decluttering our Code
+	 * 4. 작성자			: leejinwon
+	 * 5. 작성일			: 2014. 7. 4. 오후 4:05:03
+	 * </pre>
+	 *   @return
+	 *   @return String
+	 */
+	@RequestMapping(value="/test11.page")
+	public String test11(){
+		return "angularTest/test11";
+	}
+
+	@RequestMapping(value="/product-title.page")
+	public String productTitle(){
+		return "angularTest/common/product-title";
+	}
+
+	@RequestMapping(value="/product-images.page")
+	public String productImages(){
+		return "angularTest/common/product-images";
+	}
+
+	@RequestMapping(value="/product-description.page")
+	public String productDescription(){
+		return "angularTest/common/product-description";
+	}
+
+	@RequestMapping(value="/product-specification.page")
+	public String productSpecification(){
+		return "angularTest/common/product-specification";
+	}
+
+	@RequestMapping(value="/product-review.page")
+	public String productReview(){
+		return "angularTest/common/product-review";
 	}
 	
 }
