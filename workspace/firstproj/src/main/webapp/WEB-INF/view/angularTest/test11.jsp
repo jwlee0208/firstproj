@@ -38,29 +38,9 @@
 			<!-- page include -->
 			<product-images></product-images>
 
-			<section ng-init="tab = 1" ng-controller="PanelController as panel">
-				<ul class="nav nav-pills">
-					<li ng-class="{ active:panel.isSelected(1) }"><a href ng-click="panel.selectTab(1)">상세</a></li>
-					<li ng-class="{ active:panel.isSelected(2) }"><a href ng-click="panel.selectTab(2)">특징</a></li>
-					<li ng-class="{ active:panel.isSelected(3) }"><a href ng-click="panel.selectTab(3)">리뷰</a></li>
-				</ul>
-				<!-- page include -->
-				<div class="panel" ng-show="panel.isSelected(1)" product-description></div>
-				<!-- page include -->
-				<div class="panel" ng-show="panel.isSelected(2)" product-specification></div>
-				<div class="panel" ng-show="panel.isSelected(3)">
-					<h4>리뷰</h4>
-					<blockquote ng-repeat="review in product.reviews">
-						<b>별 : {{review.stars}}</b>
-						{{review.comment}}
-						<cite class="clearfix">by : {{review.author}}</cite>
-					</blockquote>
-					<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
-						<!-- page include -->
-						<product-review></product-review>
-					</form>
-				</div>
-			</section>
+			<product-panels></product-panels>
+
+
 
 		</div>
 	</div>

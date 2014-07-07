@@ -174,6 +174,10 @@ public class AngularTestController {
 		return "angularTest/common/product-review";
 	}
 	
+	@RequestMapping(value="/product-panels.page")
+	public String productPanels(){
+		return "angularTest/common/product-panels";
+	}
 }
 
 
