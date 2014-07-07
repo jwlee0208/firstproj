@@ -35,4 +35,10 @@
 	        <beans:property name="suffix" value=".jsp"/>
 	</beans:bean>
 
+    <!-- jsonView -->
+    <beans:bean id="jsonViewer" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+        <beans:property name="extractValueFromSingleKeyModel" value="true" />
+    </beans:bean>
+    
+
 </beans:beans>

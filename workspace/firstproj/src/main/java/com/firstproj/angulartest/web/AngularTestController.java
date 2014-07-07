@@ -14,8 +14,14 @@
 
 package com.firstproj.angulartest.web;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value="angular/")
@@ -178,6 +184,75 @@ public class AngularTestController {
 	public String productPanels(){
 		return "angularTest/common/product-panels";
 	}
+	/**
+	 * 
+	 * <pre>
+	 * 1. MethodName	: test12
+	 * 2. ClassName		: AngularTestController
+	 * 3. Comment		: Dependencies and Services
+	 * 4. 작성자			: leejinwon
+	 * 5. 작성일			: 2014. 7. 7. 오후 12:54:38
+	 * </pre>
+	 *   @return
+	 *   @return String
+	 */
+	@RequestMapping(value="/test12.page")
+	public String test12(){
+		return "angularTest/test12";
+	}
+	
+	/**
+	 * 
+	 * <pre>
+	 * 1. MethodName	: product
+	 * 2. ClassName		: AngularTestController
+	 * 3. Comment		: $http Service
+	 * 4. 작성자			: leejinwon
+	 * 5. 작성일			: 2014. 7. 7. 오후 6:05:56
+	 * </pre>
+	 *   @return
+	 *   @return JSONArray
+	 */
+	@RequestMapping(value = "/product.json", method = {RequestMethod.POST})
+	public @ResponseBody JSONArray product(){
+		JSONArray contentsList = new JSONArray();
+		JSONObject content1 = new JSONObject();
+		content1.put("name","Macbook Air");
+		content1.put("price","1500.91");
+		
+		JSONArray images1 = new JSONArray();
+		
+		JSONObject image1 = new JSONObject();
+		image1.put("big", "/img/test/macbook02.jpg");		
+		image1.put("small", "/img/test/macbook01.jpg");
+		images1.add(image1);
+		
+		JSONObject image2 = new JSONObject();
+		image2.put("big", "/img/test/macbook03.jpg");
+		image2.put("small", "/img/test/macbook04.jpg");
+		images1.add(image2);
+		
+		content1.put("images", images1);
+		content1.put("description", "It's very thin. When you carry on it to somewhere, make to feel like a 'air'!!!");
+		content1.put("specification", "OS X included, i5");
+
+		JSONArray reviewList1 = new JSONArray(); 
+		JSONObject review1 = new JSONObject();
+		review1.put("stars", "5");
+		review1.put("comment", "love it");
+		review1.put("author", "gim@mail.com");
+
+		reviewList1.add(review1);
+		
+		content1.put("reviews", reviewList1);
+		
+		contentsList.add(content1);		
+		
+		System.out.println("jsonArr : " + contentsList.toString());
+		return contentsList;
+	}
+	
+	
 }
 
 
