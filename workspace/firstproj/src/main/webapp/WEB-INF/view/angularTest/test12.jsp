@@ -13,10 +13,13 @@
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- angular js -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/angular.min.js"></script>
 
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/test/test12.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/test/product.js"></script>
+
+
 
 <style>
 	.ng-pristine.ng-valid 	{ border-color : #fa787e }

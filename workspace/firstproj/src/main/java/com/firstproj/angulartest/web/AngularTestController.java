@@ -248,11 +248,13 @@ public class AngularTestController {
 		
 		contentsList.add(content1);		
 		
-		System.out.println("jsonArr : " + contentsList.toString());
+//		System.out.println("jsonArr : " + contentsList.toString());
 		return contentsList;
 	}
-	
-	
+	@RequestMapping(value="/slideshow.page")
+	public String slideShow(){
+		return "angularTest/slideshow";
+	}
 }
 
 
