@@ -33,15 +33,6 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
-<!-- 	<bean id="userSqlSession" name="userSqlSession" -->
-<!-- 		class="com.wemakeprice.commons.lib.mybatis.UserSqlSession"> -->
-<!-- 		<constructor-arg index="0" ref="sqlSession" /> -->
-<!-- 	</bean> -->
-	<!-- db용도별 접속을 위한 factory -->
-<!-- 	<bean id="userSqlSessionFactory" name="userSqlSessionFactory" -->
-<!-- 		class="com.wemakeprice.commons.lib.mybatis.UserSqlSessionFactory"> -->
-<!-- 		<constructor-arg index="0" ref="userSqlSession" /> -->
-<!-- 	</bean> -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
