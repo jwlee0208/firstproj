@@ -16,17 +16,22 @@
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-theme.min.css">
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/list.js"></script>
 </head>
 <body>
-	
+	<h3 class="sub-header">글 목록</h3>
 	<c:set var="list" value="${boardList}"/>
-	<table style="width:100%;">
+	<div class="table-responsive">
+
+	<table style="width:100%;" class="table table-striped">
 		<colgroup><col width="33%"/><col width="33%"/><col width="34%"/></colgroup>
-		<tr>
-			<th><fieldset class="form-group">제목</fieldset></th>
-			<th><fieldset class="form-group">내용</fieldset></th>
-			<th><fieldset class="form-group">작성자</fieldset></th>
-		</tr>	
+		<thead>
+			<tr>
+				<th><fieldset class="form-group">제목</fieldset></th>
+				<th><fieldset class="form-group">내용</fieldset></th>
+				<th><fieldset class="form-group">작성자</fieldset></th>
+			</tr>
+		</thead>	
 		<tbody>
 	<c:choose>
 		<c:when test="${null ne list && list.size() > 0}">
@@ -46,5 +51,8 @@
 	</c:choose>
 	</tbody>
 	</table>
+	</div>
+	
+	<fieldset class="form-group"><input type="submit" class="btn btn-primary pull-right" value="글쓰기" name="goToWrite"/></fieldset>
 </body>
 </html>
