@@ -32,4 +32,31 @@
 			FROM test.TB_BOARD
 			            
         </select>
+		<!-- 페이징 위한 리스트 갯수 조회 -->    
+		<select id="selectListCount" resultType="Integer" parameterType="searchCondition">        
+			SELECT count(*) AS totalCnt         
+			FROM tb_board         
+			<include refid="searchConditionSql"/>    
+		</select>      
+		
+		<!-- 리스트 조회 -->    
+		<select id="selectBoardList" resultType="board.boardDto" parameterType="searchCondition">                      
+			<include refid="searchSql"/>                      
+			<include refid="searchConditionSql"/>                         
+			ORDER BY board_id desc                
+			LIMIT #{startRow}, #{endRow}     
+		</select>		
+		
+		<sql id="searchSql">
+		    SELECT board_id,
+			    title,
+			    content,
+			    author_id,
+			    author_nm,
+			    create_date
+			FROM test.TB_BOARD
+		</sql>
+		<sql id="searchConditionSql">
+		    WHERE 1 = 1
+		</sql> 
     </mapper>

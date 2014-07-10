@@ -1,8 +1,11 @@
 package com.firstproj.board.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONObject;
 
@@ -12,50 +15,90 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.firstproj.board.dto.BoardDto;
+import com.firstproj.board.service.BoardService;
 import com.firstproj.board.service.BoardServiceImpl;
+import com.firstproj.common.util.PagedList;
 
 @Controller
-@RequestMapping(value="/board")
+@RequestMapping(value = "/board")
 public class BoardController {
-	
-	public static final int DEFAULT_PAGE_NO = 1;              
-    public static final int DEFAULT_PAGE_SIZE = 10;   
-	
-	@Resource(name="BoardServiceImpl")
+
+	public static final int DEFAULT_PAGE_NO = 1;
+	public static final int DEFAULT_PAGE_SIZE = 10;
+
+	@Resource(name = "BoardServiceImpl")
 	private BoardServiceImpl boardService;
-	
-	@RequestMapping(value="/list.page")
-	public String getBoardList(Model model) throws Exception{
+
+	@RequestMapping(value = "/list.page")
+	public String getBoardList(HttpServletRequest request, Model model)
+			throws Exception {
+
+//		List<BoardDto> boardList = boardService.getBoardList();
+
+		model = this.getBoardCommonList(request, model);
 		
-		List<BoardDto> boardList = boardService.getBoardList();
-		
-		model.addAttribute("boardList", boardList);
+//		model.addAttribute("boardList", boardList);
 		return "board/list";
 	}
+
+	private Model getBoardCommonList(HttpServletRequest request, Model model) throws Exception{
+		// 검색 조건
+		String searchCondition = request.getParameter("searchCondition");
+		String searchText = request.getParameter("searchText");
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
+
+		int pageNo = (request.getParameter("pageNo") != null) ? Integer
+				.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
+
+		int listRowCnt = (request.getParameter("listRowCnt") != null) ? Integer
+				.parseInt(request.getParameter("listRowCnt")) : 10;
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		// searching condition setting
+		paramMap.put("searchCondition", searchCondition);
+		paramMap.put("searchText", searchText);
+		paramMap.put("startDate", startDate);
+		paramMap.put("endDate", endDate);
+
+		int totalListCnt = boardService.selectListCnt(paramMap);
+
+		// paging condition setting
+		paramMap.put("pageNo", pageNo);
+		paramMap.put("listRowCnt", listRowCnt);
+		paramMap.put("totalListCnt", totalListCnt);
+		paramMap.put("pageSize", DEFAULT_PAGE_SIZE);
+
+		PagedList result = boardService.getBoardPagedList(paramMap);
+
+		model.addAttribute("pagedResult", result);
+		return model;
+	}
 	
-	@RequestMapping(value="/view.page")
-	public String getView(){
+	@RequestMapping(value = "/view.page")
+	public String getView() {
 		return "board/view";
 	}
-	
-	@RequestMapping(value="/write.page")
-	public String writeBoard(){
-		
+
+	@RequestMapping(value = "/write.page")
+	public String writeBoard() {
+
 		return "board/write";
 	}
-	
-	@RequestMapping(value="/insertBoard.json")
+
+	@RequestMapping(value = "/insertBoard.json")
 	@ResponseBody
-	public JSONObject insertBoard(BoardDto boardDto) throws Exception{
-		
+	public JSONObject insertBoard(BoardDto boardDto) throws Exception {
+
 		JSONObject jsonObj = new JSONObject();
-		
+
 		int insertResult = this.boardService.insertBoard(boardDto);
 		System.out.println("boardDto == null  : " + (boardDto == null));
-		System.out.println("requested value  : " + boardDto.getTitle() +", " + boardDto.getContent());
-				
+		System.out.println("requested value  : " + boardDto.getTitle() + ", "
+				+ boardDto.getContent());
+
 		jsonObj.put("result", (insertResult > 0) ? true : false);
-		
+
 		return jsonObj;
 	}
 }
