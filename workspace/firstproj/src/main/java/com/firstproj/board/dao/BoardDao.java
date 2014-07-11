@@ -25,11 +25,11 @@ public class BoardDao extends SqlSessionDaoSupport{
 	       searchCondition.setStartRow((Integer)param.get("startRow"));
 	       searchCondition.setEndRow((Integer)param.get("endRow"));
 	                          
+	       searchCondition.setBoardCategory((int)param.get("boardCategory"));
 	       searchCondition.setSearchCondition((String)param.get("searchCondition"));
 	       searchCondition.setSearchText((String)param.get("searchText"));
 	       searchCondition.setStartDate((String)param.get("startDate"));
 	       searchCondition.setEndDate((String)param.get("endDate"));
-	       searchCondition.setEmployeeYn((String)param.get("employeeYn"));
 	 
 	       List<BoardDto> list =  getSqlSession().selectList("sql.board.selectBoardList", searchCondition);
 	       return list;   
@@ -37,12 +37,12 @@ public class BoardDao extends SqlSessionDaoSupport{
 	
 	public int selectListCnt(Map<String, Object> param) throws Exception {
 	       SearchCondition searchCondition = new SearchCondition();
-	                                                        
+	        
+	       searchCondition.setBoardCategory((int)param.get("boardCategory"));
 	       searchCondition.setSearchCondition((String)param.get("searchCondition"));
 	       searchCondition.setSearchText((String)param.get("searchText"));
 	       searchCondition.setStartDate((String)param.get("startDate"));
 	       searchCondition.setEndDate((String)param.get("endDate"));
-	       searchCondition.setEmployeeYn((String)param.get("employeeYn"));
 	 
 	       int result = getSqlSession().selectOne("sql.board.selectListCount", searchCondition);                
 	       return result;

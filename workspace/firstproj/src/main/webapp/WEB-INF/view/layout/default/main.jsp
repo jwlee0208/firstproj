@@ -13,15 +13,16 @@
 <body>
 
 	<div id="wrap">
+
 		<!-- container -->
 		<div id="container">
-        	<tiles:insertAttribute name="menu"/>
+        	
 			<!-- contentsWrap -->
-			<div id="contentsWrap" class="fluid">
+			<div id="contentsWrap">
 				<!-- header -->
-				<div class="header">
+<!-- 				<div class="header"> -->
 					<tiles:insertAttribute name="header"/>
-				</div>
+<!-- 				</div> -->
 				<!-- //header -->
 
 				<!-- contents -->
@@ -29,10 +30,11 @@
 	    			<tiles:insertAttribute name="body"/>
 				</div>
 				<!-- //contents -->
+				<tiles:insertAttribute name="footer"/>
 			</div>
 			<!-- //contentsWrap -->
 				    			
-	    	<tiles:insertAttribute name="footer"/>
+<%-- 	    	<tiles:insertAttribute name="footer"/> --%>
 		</div>
 		<!-- //container -->
 	</div>

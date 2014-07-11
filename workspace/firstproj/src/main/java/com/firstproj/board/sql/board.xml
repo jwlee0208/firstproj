@@ -30,6 +30,7 @@
 			    author_nm,
 			    create_date
 			FROM test.TB_BOARD
+			<include refid="searchConditionSql"/>
 			            
         </select>
 		<!-- 페이징 위한 리스트 갯수 조회 -->    
@@ -37,6 +38,7 @@
 			SELECT count(*) AS totalCnt         
 			FROM tb_board         
 			<include refid="searchConditionSql"/>    
+
 		</select>      
 		
 		<!-- 리스트 조회 -->    
@@ -55,8 +57,13 @@
 			    author_nm,
 			    create_date
 			FROM test.TB_BOARD
+			
 		</sql>
 		<sql id="searchConditionSql">
-		    WHERE 1 = 1
+			WHERE 1 = 1	
+				<if test="boardCategory > 0">
+				and board_category = #{boardCategory}    
+				</if>
+			     	    
 		</sql> 
     </mapper>

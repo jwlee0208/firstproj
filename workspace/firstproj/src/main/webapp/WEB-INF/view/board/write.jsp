@@ -16,10 +16,10 @@
 	
 	<input type="hidden" id="authorId" name="authorId" value="jwlee"/>
 	<input type="hidden" id="authorNm" name="authorNm" value="jinwon"/>
-	<div class="list-group">
+	<div class="wrap">
 		<h3>글 작성</h3>
-		<div class="writeArea list-group-item">
-			<table style="width:100%">
+		<div class="writeArea">
+			<table class="table table-condensed">
 				<colgroup><col width="10%"/><col width="90%"/></colgroup>
 				<tbody>
 					<tr>

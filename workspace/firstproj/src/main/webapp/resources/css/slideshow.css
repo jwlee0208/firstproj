@@ -62,7 +62,7 @@ body {
 NAV
 ---------------------------------------------------------*/
 
-.nav {
+.nav-slide {
     text-align: center;
     display: block;
     position: absolute;
@@ -73,18 +73,18 @@ NAV
     height: 48px;
 }
 
-.nav .wrapper {
+.nav-slide .wrapper {
     margin: 0 auto;
     width: 100%;
     padding: 1em 0 .8em;
 }
 
-.nav ul {
+.nav-slide ul {
     margin: 0;
     width: 100%;
 }
 
-.nav .dot, .nav .dot a {
+.nav-slide .dot, .nav-slide .dot a {
     display: inline-block;
     zoom: 1;
 }

@@ -1,0 +1,29 @@
+.fluid, .fluid .pageAnchorWrap{padding-right: 50px;}
+.header {
+	position: absolute;
+	left: 0;
+/* 	z-index: 1000; */
+	overflow: hidden;
+	min-width: 724px;
+	min-height: 63px;
+	max-height: 125px;
+	width: 100%;
+	background: #fff;
+}
+#contentsWrap {
+	position: absolute;
+	top: 0;
+	right: 50px;
+	bottom: 0;
+	left: 50px;
+	overflow: auto;
+	width: auto;
+}
+/* contents */
+.contents {
+	padding-top: 55px;
+	height: auto;
+}
+.contents.minimum {padding-top: 76px;}
+.contents.maximum {padding-top: 160px;}
+

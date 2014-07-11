@@ -31,24 +31,26 @@ public class BoardController {
 	private BoardServiceImpl boardService;
 
 	@RequestMapping(value = "/list.page")
-	public String getBoardList(HttpServletRequest request, Model model)
+	public String getBoardList(HttpServletRequest request, Model model, BoardDto boardDto)
 			throws Exception {
 
 //		List<BoardDto> boardList = boardService.getBoardList();
 
-		model = this.getBoardCommonList(request, model);
+		model = this.getBoardCommonList(request, model, boardDto);
 		
 //		model.addAttribute("boardList", boardList);
 		return "board/list";
 	}
 
-	private Model getBoardCommonList(HttpServletRequest request, Model model) throws Exception{
+	private Model getBoardCommonList(HttpServletRequest request, Model model, BoardDto boardDto) throws Exception{
 		// 검색 조건
 		String searchCondition = request.getParameter("searchCondition");
 		String searchText = request.getParameter("searchText");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
 
+		int boardCategory = boardDto.getBoardCategory();
+		
 		int pageNo = (request.getParameter("pageNo") != null) ? Integer
 				.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
 
@@ -57,6 +59,7 @@ public class BoardController {
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// searching condition setting
+		paramMap.put("boardCategory", boardCategory);
 		paramMap.put("searchCondition", searchCondition);
 		paramMap.put("searchText", searchText);
 		paramMap.put("startDate", startDate);
@@ -73,6 +76,7 @@ public class BoardController {
 		PagedList result = boardService.getBoardPagedList(paramMap);
 
 		model.addAttribute("pagedResult", result);
+		model.addAttribute("boardCategory", boardCategory);
 		return model;
 	}
 	

@@ -9,14 +9,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- jQuery -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
-<!-- bootstrap -->
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-theme.min.css">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css">
-<script type="text/javascript"	src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/list.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
@@ -24,6 +16,9 @@
 <body>
 	<h3 class="sub-header">글 목록</h3>
 	<form id="boardFrm" name="boardFrm" method="post">
+	
+	<input type="hidden" id="boardCategory" name="boardCategory" value="${boardCategory}"/>
+	
 	<c:set var="list" value="${boardList}" />
 	<div class="table-responsive" id="listDiv">
 		<!-- paging에 필요한 파라미터 -->
@@ -43,12 +38,14 @@
 
 		<table style="width: 100%;" class="table table-striped">
 			<colgroup>
-				<col width="33%" />
-				<col width="33%" />
-				<col width="34%" />
+				<col width="10%" />
+				<col width="50%" />
+				<col width="20%" />
+				<col width="20%" />
 			</colgroup>
 			<thead>
 				<tr>
+					<th>게시글 아이디</th>
 					<th>제목</th>
 					<th>작성일자</th>
 					<th>작성자</th>
@@ -59,6 +56,7 @@
 					<c:when test="${null ne pagedResult.articleList && pagedResult.articleList.size() > 0}">
 						<c:forEach var="content" items="${pagedResult.articleList}">
 							<tr>
+								<td>${content.boardId}</td>	
 								<td>${content.title}</td>
 								<td>${content.createDate}</td>
 								<td>${content.authorNm}</td>
