@@ -50,7 +50,7 @@
 			<thead>
 				<tr>
 					<th>제목</th>
-					<th>내용</th>
+					<th>작성일자</th>
 					<th>작성자</th>
 				</tr>
 			</thead>
@@ -60,7 +60,7 @@
 						<c:forEach var="content" items="${pagedResult.articleList}">
 							<tr>
 								<td>${content.title}</td>
-								<td>${content.content}</td>
+								<td>${content.createDate}</td>
 								<td>${content.authorNm}</td>
 							</tr>
 						</c:forEach>

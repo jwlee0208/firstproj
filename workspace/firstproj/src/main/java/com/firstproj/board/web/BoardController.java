@@ -1,21 +1,22 @@
 package com.firstproj.board.web;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import net.sf.json.JSONObject;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.firstproj.board.dto.BoardDto;
-import com.firstproj.board.service.BoardService;
 import com.firstproj.board.service.BoardServiceImpl;
 import com.firstproj.common.util.PagedList;
 
@@ -88,17 +89,18 @@ public class BoardController {
 
 	@RequestMapping(value = "/insertBoard.json")
 	@ResponseBody
-	public JSONObject insertBoard(BoardDto boardDto) throws Exception {
+	public JSONObject insertBoard(@Valid BoardDto boardDto, BindingResult bindingResult) throws Exception {
 
 		JSONObject jsonObj = new JSONObject();
-
-		int insertResult = this.boardService.insertBoard(boardDto);
-		System.out.println("boardDto == null  : " + (boardDto == null));
-		System.out.println("requested value  : " + boardDto.getTitle() + ", "
-				+ boardDto.getContent());
-
+		int insertResult = 0;
+		
+		if(bindingResult.hasErrors()){
+			jsonObj.put("validate", false);
+		}else{
+			insertResult = this.boardService.insertBoard(boardDto);
+		}
+		
 		jsonObj.put("result", (insertResult > 0) ? true : false);
-
 		return jsonObj;
 	}
 }

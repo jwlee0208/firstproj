@@ -314,6 +314,14 @@
 			</exclusions>
          </dependency>        
         			
+         
+        <!-- Valiator -->
+		<dependency>
+			 <groupId>org.hibernate</groupId>
+	            <artifactId>hibernate-validator</artifactId>
+	         <version>5.0.3.Final</version>
+        </dependency>
+         
 	</dependencies>	
 	
     <build>

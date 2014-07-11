@@ -55,6 +55,9 @@ public class BoardDao extends SqlSessionDaoSupport{
 	 * @throws Exception
 	 */
 	public int insertBoard(BoardDto boardDto) throws Exception{
+		
+		System.out.println("dao : " + boardDto.toString());
+		
 		return getSqlSession().insert("sql.board.insertBoard", boardDto);
 	}
 }

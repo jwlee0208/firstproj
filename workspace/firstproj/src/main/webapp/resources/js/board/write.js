@@ -17,10 +17,13 @@ $(document).on("ready", function(){
 			type : 'post',
 			data : $("#writeFrm").serialize(),
 			dataType : 'json',
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			success : function(data){
 				console.log("data : " + data.result);
 				if(data.result){
 					goList();
+				}else{
+					alert(data.validate);
 				}
 			},
 			error : function(xhr, textStatus, thrownError){
