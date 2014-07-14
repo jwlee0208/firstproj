@@ -1,11 +1,14 @@
 $(document).on("ready", function() {
 	$("input[name='goToWrite']").on("click", function() {
-		location.href = "/board/write.page";
+		location.href = "/board/write.page?boardCategory="+$("#boardCategory").val();
 	});
 });
 // 페이지 이동
-function goPage(pageNo, listRowCnt) {
+function goPage(pageNo) {
 	$("#pageNo").val(pageNo);
+	
+	console.log("pageNo : " + pageNo);
+	
 	$.ajax({
 		async : false,
 		type : 'POST',
@@ -15,6 +18,7 @@ function goPage(pageNo, listRowCnt) {
 		processData : true,
 		cache : false,
 		success : function(data) {
+			console.log('datat: ' + data);
 			if (data != null && data != undefined) {
 				var listDiv = $(data).find("#listDiv").html();
 				var pageDiv = $(data).find("#pageDiv").html();
@@ -62,4 +66,15 @@ function goFirst() {
 function goEnd() {
 	var endPageNo = $("#totalPageCnt").val();
 	goPage(endPageNo);
+}
+
+// 게시글 조회
+function goView(boardId){
+	
+	$("#selectedBoardId").val(boardId);
+	
+	var frm = $("#boardFrm");
+	frm.attr("action", "/board/view.page");
+	frm.attr("method", "post");
+	frm.submit();
 }

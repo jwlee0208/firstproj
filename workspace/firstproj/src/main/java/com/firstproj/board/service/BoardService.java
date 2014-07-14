@@ -13,4 +13,7 @@ public interface BoardService {
 	public List<BoardDto> getBoardList(Map<String,Object> paramMap) throws Exception;
 	
 	public int insertBoard(BoardDto boardDto) throws Exception;
+	public BoardDto selectBoardContent(BoardDto boardDto) throws Exception;
+	public BoardDto selectPrevBoardContent(BoardDto boardDto) throws Exception;
+	public BoardDto selectNextBoardContent(BoardDto boardDto) throws Exception; 
 }

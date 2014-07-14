@@ -32,6 +32,8 @@ public class BoardDao extends SqlSessionDaoSupport{
 	       searchCondition.setEndDate((String)param.get("endDate"));
 	 
 	       List<BoardDto> list =  getSqlSession().selectList("sql.board.selectBoardList", searchCondition);
+	       
+	       
 	       return list;   
 	}
 	
@@ -59,5 +61,33 @@ public class BoardDao extends SqlSessionDaoSupport{
 		System.out.println("dao : " + boardDto.toString());
 		
 		return getSqlSession().insert("sql.board.insertBoard", boardDto);
+	}
+	
+	/**
+	 * 게시글 조회
+	 * @param boardDto
+	 * @return
+	 * @throws Exception
+	 */
+	public BoardDto selectBoardContent(BoardDto boardDto) throws Exception{
+		return getSqlSession().selectOne("sql.board.selectBoardContent", boardDto);
+	}
+	/**
+	 * 이전 글 조회
+	 * @param boardDto
+	 * @return
+	 * @throws Exception
+	 */
+	public BoardDto selectPrevBoardContent(BoardDto boardDto) throws Exception{
+		return getSqlSession().selectOne("sql.board.selectPrevBoardContent", boardDto);
+	}
+	/**
+	 * 다음 글 조회
+	 * @param boardDto
+	 * @return
+	 * @throws Exception
+	 */
+	public BoardDto selectNextBoardContent(BoardDto boardDto) throws Exception{
+		return getSqlSession().selectOne("sql.board.selectNextBoardContent", boardDto);
 	}
 }

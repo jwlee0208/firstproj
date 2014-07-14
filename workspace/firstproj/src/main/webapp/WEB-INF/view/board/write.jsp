@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html"  pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -7,12 +11,11 @@
 
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/common-editor.js"></script>
-
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/write.js"></script>
 
 </head>
 <body>
-	<form id="writeFrm" name="writeFrm" method="post">
+	<form id="writeFrm" name="writeFrm" method="post" role="form">
 	
 	<input type="hidden" id="authorId" name="authorId" value="jwlee"/>
 	<input type="hidden" id="authorNm" name="authorNm" value="jinwon"/>
@@ -27,21 +30,21 @@
 						<td>
 							<fieldset class="form-group">
 								<select class="form-control" id="boardCategory" name="boardCategory">
-									<option value="0">-선택-</option>
-									<option value="1">자유게시판</option>
-									<option value="2">Q&A</option>
-									<option value="3">기타</option>
+									<option <c:if test='${boardCategory eq 0}'>selected</c:if> value="0">-선택-</option>
+									<option <c:if test="${boardCategory eq 1}">selected</c:if> value="1">자유게시판</option>
+									<option <c:if test="${boardCategory eq 2}">selected</c:if> value="2">Q&A</option>
+									<option <c:if test="${boardCategory eq 3}">selected</c:if> value="3">기타</option>
 								</select>
 							</fieldset>
 						</td>
 					</tr>
 					<tr>
 						<th><fieldset class="form-group">제목</fieldset></th>
-						<td><fieldset class="form-group"><input type="text" class="form-control" id="title" name="title"/></fieldset></td>
+						<td><div class="input-group"><input type="text" class="form-control" id="title" name="title"/></div></td>
 					</tr>
 					<tr>
 						<th><fieldset class="form-group">내용</fieldset></th>
-						<td><fieldset class="form-group"><textarea class="form-control tinymce" id="content" name="content" ></textarea></fieldset></td>				
+						<td><div class="input-group"><textarea class="form-control tinymce" id="content" name="content" ></textarea></div></td>				
 					</tr>
 				</tbody>
 			</table>

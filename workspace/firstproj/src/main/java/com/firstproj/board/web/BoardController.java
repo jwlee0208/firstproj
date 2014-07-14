@@ -9,11 +9,12 @@ import javax.validation.Valid;
 
 import net.sf.json.JSONObject;
 
-import org.springframework.dao.DataAccessException;
+import org.jboss.logging.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.firstproj.board.dto.BoardDto;
@@ -30,10 +31,9 @@ public class BoardController {
 	@Resource(name = "BoardServiceImpl")
 	private BoardServiceImpl boardService;
 
-	@RequestMapping(value = "/list.page")
-	public String getBoardList(HttpServletRequest request, Model model, BoardDto boardDto)
-			throws Exception {
-
+	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
+	public String getBoardList(HttpServletRequest request, Model model, BoardDto boardDto) throws Exception {
+System.out.println(">>> getBoardList()");
 //		List<BoardDto> boardList = boardService.getBoardList();
 
 		model = this.getBoardCommonList(request, model, boardDto);
@@ -51,11 +51,9 @@ public class BoardController {
 
 		int boardCategory = boardDto.getBoardCategory();
 		
-		int pageNo = (request.getParameter("pageNo") != null) ? Integer
-				.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
+		int pageNo = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
 
-		int listRowCnt = (request.getParameter("listRowCnt") != null) ? Integer
-				.parseInt(request.getParameter("listRowCnt")) : 10;
+		int listRowCnt = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// searching condition setting
@@ -66,7 +64,7 @@ public class BoardController {
 		paramMap.put("endDate", endDate);
 
 		int totalListCnt = boardService.selectListCnt(paramMap);
-
+System.out.println("totalListCnt : " + totalListCnt);
 		// paging condition setting
 		paramMap.put("pageNo", pageNo);
 		paramMap.put("listRowCnt", listRowCnt);
@@ -81,13 +79,35 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/view.page")
-	public String getView() {
+	public String getBoardContent(HttpServletRequest request, Model model, BoardDto boardDto, @Param int selectedBoardId) throws Exception{
+		
+		BoardDto contentInfo = null;
+		BoardDto prevContentInfo = null;
+		BoardDto nextContentInfo = null;
+		
+		if(selectedBoardId > 0){
+			boardDto.setBoardId(selectedBoardId);
+			// 글 조회
+			contentInfo = this.boardService.selectBoardContent(boardDto);
+			// 이전 글 조회
+			prevContentInfo = this.boardService.selectPrevBoardContent(boardDto);
+			// 다음 글 조회
+			nextContentInfo = this.boardService.selectNextBoardContent(boardDto);
+		}
+		
+		model.addAttribute("contentInfo", contentInfo);
+		model.addAttribute("prevContentInfo", prevContentInfo);
+		model.addAttribute("nextContentInfo", nextContentInfo);
+		
+		model.addAttribute("boardCategory", boardDto.getBoardCategory());
+		
 		return "board/view";
 	}
 
 	@RequestMapping(value = "/write.page")
-	public String writeBoard() {
-
+	public String writeBoard(Model model, BoardDto boardDto) {
+		
+		model.addAttribute("boardCategory", boardDto.getBoardCategory());
 		return "board/write";
 	}
 

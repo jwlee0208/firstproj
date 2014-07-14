@@ -7,7 +7,7 @@ ul { padding: 0; }
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-		<div class="nav-collapse collapse">
+		<div class="nav-collapse">
 			<ul class="nav">
 				<li <c:if test="${param.menuId eq 0}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goHome();">홈</a></li>
 				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);">소개</a></li>
