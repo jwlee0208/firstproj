@@ -6,7 +6,8 @@ tinyMCE.init({
              "searchreplace wordcount code insertdatetime media nonbreaking",
              "table contextmenu directionality textcolor paste textcolor image youTube"
      ],
-     toolbar1: "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | cut copy paste | bullist numlist | link unlink | inserttime | table | hr | charmap | image media youTube",
+     toolbar1: "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | cut copy paste | bullist numlist | link unlink | inserttime | table | hr | charmap | image media ",
+     toolbar2: "youTube imagepop ", 
      menubar: false,
      resize : true,
     
@@ -49,7 +50,7 @@ tinyMCE.init({
    setup : function(tinyMCE) {
          tinyMCE.addButton('imagepop', {
             title : '이미지 업로드', 
-            image : getContextPath() + '/images/editor_icon_file.png',
+            image :  '/img/editor_icon_file.png',
             onclick : function() {
                cmdImgUploadPop();
             }
@@ -67,9 +68,9 @@ function contentsMakeEditorInit(){
 }
 //이미지 버튼 클릭시 팝업 실제 파일업로드를 구성하여 링크할 경로를 작성한다( 아이콘클릭시 이 함수가 호출됨)
 function cmdImgUploadPop(){
- var win = window.open("imageupload?cmd=editorImg",
+ var win = window.open("imageUpload.pop?cmd=editorImg",
        "editor_win",
-       "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,width=450,height=350,left=50,top=50"
+       "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,width=700,height=500,left=50,top=50"
   );
  win.focus();  
 }

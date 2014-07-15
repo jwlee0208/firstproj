@@ -7,8 +7,6 @@ $(document).on("ready", function() {
 function goPage(pageNo) {
 	$("#pageNo").val(pageNo);
 	
-	console.log("pageNo : " + pageNo);
-	
 	$.ajax({
 		async : false,
 		type : 'POST',
@@ -18,7 +16,7 @@ function goPage(pageNo) {
 		processData : true,
 		cache : false,
 		success : function(data) {
-			console.log('datat: ' + data);
+
 			if (data != null && data != undefined) {
 				var listDiv = $(data).find("#listDiv").html();
 				var pageDiv = $(data).find("#pageDiv").html();
