@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/list.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/prohibite/list.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
 </head>
@@ -18,8 +18,8 @@
 	<form id="boardFrm" name="boardFrm" method="post">
 	
 	<!-- 리스트에서 선택된 게시글 아이디 -->
-	<input type="hidden" id="selectedBoardId" name="selectedBoardId" />
-	<input type="hidden" id="boardCategory" name="boardCategory" value="${boardCategory}"/>
+	<input type="hidden" id="selectedProhibitedWordId" name="selectedProhibitedWordId" />
+	
 	
 	<c:set var="list" value="${boardList}" />
 	<div class="table-responsive" id="listDiv">
@@ -50,15 +50,15 @@
 					<c:when test="${null ne pagedResult.articleList && pagedResult.articleList.size() > 0}">
 						<c:forEach var="content" items="${pagedResult.articleList}">
 							<tr>
-								<td>${content.boardId}</td>	
-								<td onclick="javascript:goView('${content.boardId}');">${content.title}</td>
+								<td>${content.prohibitedWordId}</td>	
+								<td onclick="javascript:goView('${content.prohibitedWordId}');">${content.prohibitedWordStr}</td>
 								<td>${content.createDate}</td>
-								<td>${content.authorNm}</td>
+								<td>${content.createUserNm}</td>
 							</tr>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<tr class="list-group-item">
+						<tr>
 							<td colspan="4">작성된 내용이 없습니다.</td>
 						</tr>
 					</c:otherwise>

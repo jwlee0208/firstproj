@@ -1,1 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="sql.prohibite">
+	
+		<insert id="insertProhibitedWord" parameterType="prohibite.prohibiteWordDto" useGeneratedKeys="true" keyProperty="prohibitedWordId">
+			INSERT INTO test.TB_PROHIBITED_WORD
+			(
+				prohibited_word_str,
+				create_user_id,
+				create_user_nm,
+				create_date)
+			VALUES
+			(
+				#{prohibitedWordStr},
+				#{createUserId},
+				#{createUserNm},
+				CURRENT_TIMESTAMP());
+		</insert>
+	
+		<select id="selectList" parameterType="prohibite.prohibiteWordDto" resultType="prohibite.prohibiteWordDto">
+            <include refid="selectProhibiteSql"/>   
+			<include refid="searchConditionSql"/>    
+        </select>
+        
+		<!-- 페이징 위한 리스트 갯수 조회 -->    
+		<select id="selectListCount" resultType="Integer" parameterType="searchCondition">        
+			SELECT count(*) AS totalCnt         
+			FROM test.tb_prohibited_word         
+			<include refid="searchConditionSql"/>    
+		</select>      
+        
+        
+		<select id="selectProhibiteList"  parameterType="searchCondition" resultType="prohibite.prohibiteWordDto">
+			<include refid="selectProhibiteSql"/>		
+			<include refid="searchConditionSql"/>   
+			ORDER BY prohibited_word_id desc                
+			LIMIT #{startRow}, #{endRow} 			
+		</select>
+
+		<select id="selectProhibiteOne" parameterType="prohibite.prohibiteWordDto" resultType="prohibite.prohibiteWordDto">
+			<include refid="selectProhibiteSql"/>
+			where 1 = 1
+				and prohibited_word_id = #{prohibitedWordId}
+		</select>
+
+		<sql id="selectProhibiteSql">
+				SELECT 	TB_PROHIBITED_WORD.prohibited_word_id,
+					    TB_PROHIBITED_WORD.prohibited_word_str,
+					    TB_PROHIBITED_WORD.create_user_id,
+					    TB_PROHIBITED_WORD.create_user_nm,
+					    TB_PROHIBITED_WORD.create_date
+				FROM test.TB_PROHIBITED_WORD			
+		</sql>
+		<sql id="searchContentSql">
+		    WHERE 1 = 1
+		    <if test="prohibitedWordId > 0">
+		        and prohibited_word_id = #{prohibitedWordId}
+		    </if>
+		    
+		</sql>		
+		<sql id="searchConditionSql">
+			WHERE 1 = 1	
+		</sql> 
+
+	</mapper>
+

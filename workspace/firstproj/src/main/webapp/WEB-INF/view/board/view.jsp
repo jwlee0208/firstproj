@@ -28,14 +28,14 @@
 			<div class="panel-footer">
 				<ul class="pager">
 					<c:if test="${prevContentInfo.boardId ne null}">
-					<li><a href="javascript:void(0);" id="previous">Previous</a></li>
+					<li><a href="javascript:void(0);" id="previous" class="previous">Previous</a></li>
 					</c:if>
 					<c:if test="${nextContentInfo.boardId ne null}">
-					<li><a href="javascript:void(0);" id="next">Next</a></li>	
+					<li><a href="javascript:void(0);" id="next" class="next">Next</a></li>	
 					</c:if>
 				</ul>
 			
-				<input type="button" class="btn btn-primary pull-right" id="goToModify" value="수정"/>
+				<input type="button" class="btn btn-primary" id="goToModify" value="수정"/>
 				<input type="button" class="btn" id="goToList" value="목록"/>	
 			</div>
 		</div>
