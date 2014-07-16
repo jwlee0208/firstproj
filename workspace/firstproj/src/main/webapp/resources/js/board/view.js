@@ -22,7 +22,7 @@ function goView(boardId){
 	$("#selectedBoardId").val(boardId);
 	
 	var frm = $("#viewFrm");
-	frm.attr("action", "/board/view.page");
+	frm.attr("action", "/firstproj/view.page");
 	frm.attr("method", "post");
 	frm.submit();
 }

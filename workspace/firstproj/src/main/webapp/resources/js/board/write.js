@@ -13,7 +13,7 @@ $(document).on("ready", function(){
 		$("#content").val(content);
 		
 		$.ajax({
-			url : '/board/insertBoard.json',
+			url : '/firstproj/insertBoard.json',
 			type : 'post',
 			data : $("#writeFrm").serialize(),
 			dataType : 'json',
@@ -35,7 +35,7 @@ $(document).on("ready", function(){
 
 function goList(){
 	var frm = $("#writeFrm");
-	frm.attr("action", "/board/list.page");
+	frm.attr("action", "/firstproj/list.page");
 	frm.attr("method", "post");
 	frm.submit();
 } 

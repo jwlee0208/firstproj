@@ -22,7 +22,7 @@ import com.firstproj.board.service.BoardServiceImpl;
 import com.firstproj.common.util.PagedList;
 
 @Controller
-@RequestMapping(value = "/board")
+@RequestMapping(value = "/firstproj")
 public class BoardController {
 
 	public static final int DEFAULT_PAGE_NO = 1;

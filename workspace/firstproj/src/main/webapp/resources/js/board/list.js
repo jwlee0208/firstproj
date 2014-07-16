@@ -1,6 +1,6 @@
 $(document).on("ready", function() {
 	$("input[name='goToWrite']").on("click", function() {
-		location.href = "/board/write.page?boardCategory="+$("#boardCategory").val();
+		location.href = "/firstproj/write.page?boardCategory="+$("#boardCategory").val();
 	});
 });
 // 페이지 이동
@@ -13,7 +13,7 @@ function goPage(pageNo) {
 		async : false,
 		type : 'POST',
 		dataType : 'html',
-		url : '/board/list.page',
+		url : '/firstproj/list.page',
 		data : $("#boardFrm").serialize(),
 		processData : true,
 		cache : false,
@@ -74,7 +74,7 @@ function goView(boardId){
 	$("#selectedBoardId").val(boardId);
 	
 	var frm = $("#boardFrm");
-	frm.attr("action", "/board/view.page");
+	frm.attr("action", "/firstproj/view.page");
 	frm.attr("method", "post");
 	frm.submit();
 }
