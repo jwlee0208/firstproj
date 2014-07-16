@@ -7,13 +7,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.firstproj.board.dto.BoardDto;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.util.PagingUtil;
 import com.firstproj.prohibiteword.dao.ProhibiteWordDao;
 import com.firstproj.prohibiteword.dto.ProhibiteWordDto;
 
-@Service
+@Service("ProhibiteServiceImpl")
 public class ProhibiteServiceImpl implements ProhibiteService{
 	@Resource(name="prohibiteWordDao")
 	private ProhibiteWordDao prohibiteWordDao;

@@ -1,6 +1,8 @@
 package com.firstproj.board.web;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -9,6 +11,22 @@ import javax.validation.Valid;
 
 import net.sf.json.JSONObject;
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.TextField;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TopScoreDocCollector;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.RAMDirectory;
+import org.apache.lucene.util.Version;
 import org.jboss.logging.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +38,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.firstproj.board.dto.BoardDto;
 import com.firstproj.board.service.BoardServiceImpl;
 import com.firstproj.common.util.PagedList;
+import com.firstproj.prohibiteword.dto.ProhibiteWordDto;
+import com.firstproj.prohibiteword.service.ProhibiteServiceImpl;
 
 @Controller
 @RequestMapping(value = "/firstproj")
@@ -30,6 +50,9 @@ public class BoardController {
 
 	@Resource(name = "BoardServiceImpl")
 	private BoardServiceImpl boardService;
+	
+	@Resource(name="ProhibiteServiceImpl")
+	private ProhibiteServiceImpl prohibiteService;
 
 	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardDto boardDto) throws Exception {
@@ -118,10 +141,107 @@ public class BoardController {
 		if(bindingResult.hasErrors()){
 			jsonObj.put("validate", false);
 		}else{
-			insertResult = this.boardService.insertBoard(boardDto);
+			
+			// lucene searching to prohibited word
+			
+			StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_40);
+			
+			// 인덱스 생성
+			Directory index = new RAMDirectory();
+			IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_40, analyzer);
+			
+			IndexWriter w = new IndexWriter(index, config);
+			
+			List<ProhibiteWordDto> prohibitedWordList = prohibiteService.getProhibiteList();
+			
+			if(null != prohibitedWordList && prohibitedWordList.size() > 0){
+				
+				for(ProhibiteWordDto prohibiteWordDto : prohibitedWordList){
+					addDoc(w, prohibiteWordDto.getProhibitedWordStr());
+				}
+			}
+			w.close();
+			
+			// query
+			String querystr = boardDto.toString();
+			
+			System.out.println("1st queryStr : " + querystr);
+			
+			querystr = querystr.replaceAll("[?]", "")
+								.replaceAll("[$]", "")
+								.replaceAll("\\(", "")
+								.replaceAll("\\)", "")
+								.replaceAll("\\{", "")
+								.replaceAll("\\}", "")
+								.replaceAll("[*]", "")
+								.replaceAll("[+]", "")
+								.replaceAll("\\^", "")
+								.replaceAll("[|]", "")
+								.replaceAll("[/]", "")
+								.replaceAll("\\[", "")
+								.replaceAll("\\]", "")
+								.replaceAll("<", "")
+								.replaceAll(">", "")
+								.replaceAll(",", "");
+//								.replaceAll("/", "");
+//								.replaceAll("!", "")
+//								.replaceAll("#", "")
+//								.replaceAll("%", "")
+//								.replaceAll("&", "")
+//								.replaceAll("@", "")
+//								.replaceAll("`", "")
+//								.replaceAll(":", "")
+//								.replaceAll(";", "")
+//								.replaceAll("-", "")
+//								.replaceAll(".", "")
+//								.replaceAll(",", "")
+//								.replaceAll("~", "")
+//								.replaceAll("'", "");//
+			
+			System.out.println("2nd queryStr : " + querystr);
+			
+			Query q = new QueryParser(Version.LUCENE_40, "title", analyzer).parse(querystr);
+			
+			// search
+			int hitsPerPage = 10;
+			
+			IndexReader reader = DirectoryReader.open(index);
+			IndexSearcher searcher = new IndexSearcher(reader);
+			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
+			searcher.search(q, collector);
+			ScoreDoc[] hits = collector.topDocs().scoreDocs;
+			
+			// display result
+			System.out.println("hits.length : " + hits.length);
+			
+			for(int i = 0; i < hits.length ; i++){
+				int docId = hits[i].doc;
+				Document d = searcher.doc(docId);
+				System.out.println(">>> " + d.get("title"));
+						
+			}
+			
+			reader.close();
+			
+			if(hits.length < 1){
+				insertResult = this.boardService.insertBoard(boardDto);	
+			}else{
+				jsonObj.put("error", "prohibitedWord");
+			}
 		}
 		
 		jsonObj.put("result", (insertResult > 0) ? true : false);
+		
 		return jsonObj;
+	}
+	
+	private static void addDoc(IndexWriter w, String title) throws IOException{
+		
+		System.out.println("title : " + title);
+		
+		Document doc = new Document();
+		doc.add(new TextField("title", title, Field.Store.YES));
+	
+		w.addDocument(doc);
 	}
 }

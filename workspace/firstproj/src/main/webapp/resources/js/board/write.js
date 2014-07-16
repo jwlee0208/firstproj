@@ -23,7 +23,7 @@ $(document).on("ready", function(){
 				if(data.result){
 					goList();
 				}else{
-					alert(data.validate);
+					alert(data.error);
 				}
 			},
 			error : function(xhr, textStatus, thrownError){

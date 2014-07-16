@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.firstproj.board.dto.BoardDto;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.prohibiteword.dto.ProhibiteWordDto;
 import com.firstproj.prohibiteword.service.ProhibiteServiceImpl;
@@ -28,7 +27,7 @@ public class ProhibiteWordController {
 	public static final int DEFAULT_PAGE_NO = 1;
 	public static final int DEFAULT_PAGE_SIZE = 10;
 
-	@Resource(name="prohibiteServiceImpl")
+	@Resource(name="ProhibiteServiceImpl")
 	private ProhibiteServiceImpl prohibiteService;
 	
 	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
