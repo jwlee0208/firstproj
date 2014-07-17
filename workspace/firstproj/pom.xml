@@ -321,7 +321,14 @@
 	            <artifactId>hibernate-validator</artifactId>
 	         <version>5.0.3.Final</version>
         </dependency>
-         
+        
+		
+		<!--  bcrypt : password security  -->
+		<dependency>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.3m</version>
+		</dependency>         
 	</dependencies>	
 	
     <build>

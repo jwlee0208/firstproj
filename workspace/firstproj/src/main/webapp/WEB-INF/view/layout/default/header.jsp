@@ -4,11 +4,12 @@
 <style>
 ul { padding: 0; }
 </style>
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-		<div class="nav-collapse">
-			<ul class="nav">
+<nav class="navbar navbar-default" role="navigation">
+
+    <div class="container-fluid">
+    	<div class="navbar-header"><a class="navbar-brand" href="#">firstproj</a></div>
+		<div class="collapse2 nav-collapse">
+			<ul class="nav navbar-nav">
 				<li <c:if test="${param.menuId eq 0}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goHome();">홈</a></li>
 				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);">소개</a></li>
 				<li <c:if test="${param.menuId eq 1}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goList(1);">자유게시판</a></li>
@@ -18,5 +19,4 @@ ul { padding: 0; }
 			</ul>	
 		</div>
 	</div>
-	</div>	
-</div>		
+</nav>	

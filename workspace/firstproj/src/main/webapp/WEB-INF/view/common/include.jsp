@@ -12,3 +12,16 @@
 <!-- angular js -->
 <%-- <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/angular.min.js"></script> --%>
 
+<style>
+
+.navbar-collapse.collapse2 {
+	display: block!important;
+	height: auto!important;
+	padding-bottom: 0;
+	overflow: visible!important;
+	}
+	
+.collapse {
+	display: none;
+}	
+</style>
