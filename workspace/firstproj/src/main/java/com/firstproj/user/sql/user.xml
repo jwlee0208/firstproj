@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="sql.user">
+        <insert id="insertUserInfo" parameterType="user.userDto"> 
+			INSERT INTO test.TB_USER
+				(user_id,
+				user_nm,
+				passwd,
+				email,
+				phone_no,
+				join_date)
+			VALUES
+				(#{userId},
+				#{userNm},
+				#{passwd},
+				#{email},
+				#{phoneNo},
+				CURRENT_TIMESTAMP())
+			
+        </insert>
+        <select id="selectUserList" parameterType="user.userDto" resultType="user.userDto">
+        </select>
+		
+		<select id="selectUserInfo" parameterType="user.userDto" resultType="user.userDto">
+		    SELECT 
+		    	user_id, 
+		    	user_nm,
+		    	passwd,
+		    	email,
+		    	phone_no,
+		    	join_date 
+		    FROM test.TB_USER
+		    WHERE user_id = #{userId}
+		</select>
+    </mapper>
