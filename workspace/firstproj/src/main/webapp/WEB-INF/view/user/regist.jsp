@@ -1,0 +1,164 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+
+
+
+</head>
+<body>
+	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form">
+		<h2>Regist</h2>
+		<div class="form-group">
+			<label for="userId" class="col-sm-2 control-label">사용자 아이디</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="userId" name="userId"/>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="userNm" class="col-sm-2 control-label">사용자 이름</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="userNm" name="userNm" style="ime-mode: active"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="passwd" class="col-sm-2 control-label">패스워드</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="passwd" name="passwd"/>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="passwdChk" class="col-sm-2 control-label">패스워드 체크</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="passwdChk" name="passwdChk"/>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="email" class="col-sm-2 control-label">E-mail</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="email" name="email"/>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="phoneNo" class="col-sm-2 control-label">핸드폰 번호</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="phoneNo" name="phoneNo"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<input type="button" class="btn btn-default" value="취소">
+			<input type="button" class="btn btn-primary" value="저장" id="registBtn">
+		</div>
+	</form>
+</body>
+<script>
+$().ready(function() {
+	
+	var numberRegExg = /[0-9]/gi;
+	var unNumberRegExg = /[^0-9]/gi;
+	var koreanRegExg 	= /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+	var specialCharRegExg 	= /[~!@\#$%^&*\()\-=+_']/gi;
+
+	$(function(){
+		$("#phoneNo").on("keyup", function(){
+			$(this).val($(this).val().replace(unNumberRegExg,""));
+		});
+		$("#userNm").on("keyup", function(){
+			$(this).val($(this).val()
+							   .replace(numberRegExg, "")
+							   .replace(specialCharRegExg, ""));
+		});
+		$("#userId").on("keyup", function(){
+			$(this).val($(this).val()
+							   .replace(koreanRegExg, "")
+							   .replace(specialCharRegExg, ""));
+		});
+	});
+
+	$("form").validate({
+		rules: {
+			userId: {
+				required : true,
+				minlength : 8,
+				maxlength : 15
+			},
+			userNm: {
+				required : true,
+				minlength : 2,
+				maxlength : 10
+			},
+			passwd: {
+				required : true,
+				minlength : 8,
+				maxlength : 15
+			},
+			email : {
+				email : true
+			},
+			phoneNo : {
+				number : true
+			}
+		},
+		messages : {
+			userId :{
+				required : "사용자 아이디 입력은 필수 입니다.",
+				minlength : "길이는 최소 8자 이상이어야 합니다.",
+				maxlength : "길이는 최대 15자까지 허용합니다."				
+			},
+			userNm : {
+				required : "사용자 이름 입력은 필수 입니다.",
+				minlength : "길이는 최소 2자 이상이어야 합니다.",
+				maxlength : "길이는 최대 10자까지 허용합니다."
+			},
+			passwd : {
+				required : "패스워드를 입력해 주세요.",
+				minlength : "길이는 최소 8자 이상이어야 합니다.",
+				maxlength : "길이는 최대 15자까지 허용합니다."									
+			},
+			email : {
+				email : "이메일 형식에 맞게 입력해 주셔야 합니다."
+			},
+			phoneNo : {
+				number : "숫자만 입력이 가능합니다."
+			} 
+		}
+	});
+
+	$("#registBtn").on("click", function(){
+// 		var isValid = $("form").valid();
+
+//			if(isValid){
+
+//			}
+
+		$.ajax({
+			url : '/user/regist.json',
+			data : $("#actionFrm").serialize(),
+			dataType : 'json',
+			method : 'post',
+			success : function(data){
+				console.log("result : " + data.resultCode + ", " + data.resultMsg);
+			},
+			error : function(data){
+
+			}
+		});
+
+
+
+	});
+});
+
+
+
+</script>
+</html>

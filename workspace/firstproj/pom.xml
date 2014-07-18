@@ -321,6 +321,7 @@
 	            <artifactId>hibernate-validator</artifactId>
 	         <version>5.0.3.Final</version>
         </dependency>
+
          
         <!-- lucene -->
 		<dependency>
@@ -347,8 +348,28 @@
 			<version>4.9.0</version>
 		</dependency>        
 		        
+
+        
+		
+		<!--  bcrypt : password security  -->
+		<dependency>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.3m</version>
+		</dependency>      
+		
+		<!-- jquery validate  -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery-validation</artifactId>
+			<version>1.12.0</version>
+		</dependency>		
+
+
 	</dependencies>	
 	
+
+		
     <build>
         
         <plugins>
