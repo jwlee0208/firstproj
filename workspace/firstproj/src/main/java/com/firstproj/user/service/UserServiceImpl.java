@@ -16,4 +16,10 @@ public class UserServiceImpl implements UserService{
 	public UserDto selectUserInfo(UserDto userDto) throws Exception{
 		return this.userDao.selectUserInfo(userDto);
 	}
+	
+	@Override
+	public int insertUserInfo(UserDto userDto) throws Exception{
+		return this.userDao.insertUserInfo(userDto);
+	}
+	
 }

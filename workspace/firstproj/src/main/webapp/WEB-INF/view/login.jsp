@@ -34,6 +34,7 @@ console.log('error');
 </head>
 <body>
 	<form role="form" class="form-horizontal" id="loginForm" name="loginForm" method="post">
+		<h2>Sign in</h2>	
 		<div class="form-group">
 			<label for="userId" class="col-sm-2 control-label">아이디</label>
 			<div class="col-sm-10">
@@ -43,7 +44,7 @@ console.log('error');
 		<div class="form-group">
 			<label for="passwd" class="col-sm-2 control-label">패스워드</label>
 			<div class="col-sm-10">
-				<input type="password" class="form-control" id="passwd" name="password"/>
+				<input type="password" class="form-control" id="passwd" name="passwd"/>
 			</div>
 		</div>
 		<div class="form-group">
