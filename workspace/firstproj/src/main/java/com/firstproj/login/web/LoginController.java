@@ -46,7 +46,7 @@ public class LoginController {
 		
 		UserDto userInfo = this.userService.selectUserInfo(userDto);
 		
-		System.out.println("userInfo : " + userInfo.toString() + "\nuserDto : " + userDto.toString() + "\ncandidate pw : " + passwd);
+//		System.out.println("userInfo : " + userInfo.toString() + "\nuserDto : " + userDto.toString() + "\ncandidate pw : " + passwd);
 		
 		
 		if(null != userInfo){
