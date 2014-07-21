@@ -3,15 +3,18 @@ package com.firstproj.login.web;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.firstproj.user.dto.UserDto;
 import com.firstproj.user.service.UserServiceImpl;
@@ -79,5 +82,13 @@ public class LoginController {
 		
 		model.addAttribute("userInfo", userInfo);
 		return checkResult;
+	}
+	@RequestMapping(value="/logout.page")
+	public String logout(@ModelAttribute UserDto userDto, HttpSession session, SessionStatus status) {
+		
+		status.setComplete();
+		session.removeAttribute("userInfo");
+		
+		return "redirect:/home.page";
 	}
 }
