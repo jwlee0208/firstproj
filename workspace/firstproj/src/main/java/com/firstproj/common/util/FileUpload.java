@@ -36,6 +36,7 @@ public class FileUpload{
 		//String newFileName = attachFile.getOriginalFilename();
 		String newFileName = Long.toString(System.currentTimeMillis()) + attachFile.getOriginalFilename().substring(attachFile.getOriginalFilename().lastIndexOf("."));
 		String thumbnailUrl = destinationUrl + "/" + newFolderDir + newFileName;
+		
 		logger.info("[thumbnailUrl]" + thumbnailUrl);
 		
 		if ("live".equals(PropertiesConfig.getInstance().getServerConfig("mode"))) {
@@ -43,7 +44,7 @@ public class FileUpload{
 		} else if ("test".equals(PropertiesConfig.getInstance().getServerConfig("mode"))) {
 			uploadFilePath = PropertiesConfig.getInstance().getServerConfig("test.thumbnail.uploadpath");
 		} else {
-			uploadFilePath = servletContext.getRealPath(destinationUrl);
+			uploadFilePath = servletContext.getRealPath("/resources" + destinationUrl);
 		}
 		
 		File file = null;

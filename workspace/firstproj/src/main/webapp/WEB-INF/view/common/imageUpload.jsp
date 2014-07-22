@@ -42,4 +42,4 @@
 	</form>
 </body>
 </html>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/fileupload/image.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/fileUpload/image.js"></script>

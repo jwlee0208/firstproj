@@ -7,7 +7,10 @@ $(document).ajaxError(function(event, request){
 );
 
 //파일전송 후 콜백 함수
-function fileuploadCallback(data, state){
+function FileuploadCallback(data, state){
+	
+	console.log('data : ' + data + ", state : " + state);
+	
    if (data=="error"){
       alert("파일전송중 에러 발생!!");
       return false;
@@ -22,8 +25,9 @@ function fileuploadCallback(data, state){
    alert("업로드 되었습니다.");
    var dataList = "<div id=\"imageUpload\">";
    var hostname = location.host;
-   
-   dataList += "<img src='http://" + hostname + getContextPath() + data + "' alt=''  style='width:120px;height:88px' />";
+console.log("contextPath : " + getContextPath());   
+   dataList += "<img src='http://" + hostname + data + "' alt=''  style='width:120px;height:88px' />";
+//   dataList += "<img src='http://" + hostname + getContextPath() + data + "' alt=''  style='width:120px;height:88px' />";
    //dataList += "<a href='##' class='btn2' onclick='imgSelect(\"" + data + "\")'>사용</a> ";
    //dataList += "<a href='##' class='btn2' onclick='deleteImg(\"" + data + "\")'>삭제</a>";
    dataList += "</div>";
@@ -43,7 +47,7 @@ function fileuploadCallback(data, state){
 $(function(){
    //비동기 파일 전송
    var frm=$('#imageForm'); 
-   frm.ajaxForm(fileuploadCallback); 
+   frm.ajaxForm(FileuploadCallback); 
    frm.submit(function(){
 	   return false;
    }); 
@@ -60,8 +64,7 @@ function fileUpload(){
  
    //파일전송
    var frm = $('#imageForm'); 
-   frm.attr("action","imageuploadaction.pop");
-//   frm.ajaxForm(fileuploadCallback);
+   frm.attr("action","imageuploadaction");
    frm.submit(); 
 }
 

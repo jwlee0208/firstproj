@@ -43,7 +43,7 @@ public class EditorController extends BaseController {
 		return "/common/popImageUpload"; 
 	}
 	
-	@RequestMapping(value="/{path}/imageuploadaction.pop", method=RequestMethod.POST)
+	@RequestMapping(value="/{path}/imageuploadaction", method=RequestMethod.POST)
     @ResponseBody
     public StringBuffer imageadd(MultipartFile imageFile) throws Exception {
 		
@@ -73,7 +73,7 @@ public class EditorController extends BaseController {
 					sb.append("fileExtensionError");
 					return sb;
 				} 
-				
+				System.out.println("imageFile : " + imageFile);
 				String fileRealPath = fileUpload.uploadFile(imageFile);
 				//boardStory.setThumbnail1(fileRealPath);
 				//sb.append(imageFile.getOriginalFilename());
@@ -89,7 +89,8 @@ public class EditorController extends BaseController {
 	@RequestMapping(value="/{path}/imagedeleteaction", method=RequestMethod.POST)
 	@ResponseBody
     public String imagedelete(String fileName, Model model) throws Exception {
-    	String realPath = servletContext.getRealPath(fileName);
+    	String realPath = servletContext.getRealPath("/resources" + fileName);
+    	System.out.println("realPath : " + realPath);
     	logger.info("[realPath]" + realPath);
     	String message = "error";
     	
