@@ -1,11 +1,11 @@
 body {
     overflow: hidden;
-    background-color: #efefef;
+    background-color: white;
 }
 
 .slider {
     width: 800px;
-    height: 400px;
+    height: 550px;
     overflow: hidden;
     position: relative;
     background: #e6e6e6;
