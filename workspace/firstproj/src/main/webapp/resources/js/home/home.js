@@ -12,3 +12,7 @@ function goRegist(boardCategory){
 function goLogin(boardCategory){
 	location.href = "/login?menuId=" + boardCategory;
 }
+
+function logout(){
+	location.href = "/logout.page";
+}

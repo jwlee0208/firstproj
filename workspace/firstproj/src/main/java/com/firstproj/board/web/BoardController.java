@@ -33,7 +33,7 @@ public class BoardController {
 
 	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardDto boardDto) throws Exception {
-System.out.println(">>> getBoardList()");
+//System.out.println(">>> getBoardList()");
 //		List<BoardDto> boardList = boardService.getBoardList();
 
 		model = this.getBoardCommonList(request, model, boardDto);
@@ -64,7 +64,7 @@ System.out.println(">>> getBoardList()");
 		paramMap.put("endDate", endDate);
 
 		int totalListCnt = boardService.selectListCnt(paramMap);
-System.out.println("totalListCnt : " + totalListCnt);
+//System.out.println("totalListCnt : " + totalListCnt);
 		// paging condition setting
 		paramMap.put("pageNo", pageNo);
 		paramMap.put("listRowCnt", listRowCnt);
