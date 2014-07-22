@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import net.sf.json.JSONObject;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.firstproj.board.dto.BoardDto;
 import com.firstproj.board.service.BoardServiceImpl;
 import com.firstproj.common.util.PagedList;
+import com.firstproj.user.dto.UserDto;
 
 @Controller
 @RequestMapping(value = "/board")
@@ -105,23 +107,41 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/write.page")
-	public String writeBoard(Model model, BoardDto boardDto) {
+	public String writeBoard(Model model, BoardDto boardDto, HttpSession session) {
 		
-		model.addAttribute("boardCategory", boardDto.getBoardCategory());
+//		System.out.println("session : " + (session == null));
+//		System.out.println("userId : " + ((UserDto)session.getAttribute("userInfo")).getUserId());
+		
+		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+		
+		if(null != sessionInfo){
+			model.addAttribute("boardCategory", boardDto.getBoardCategory());			
+		}else{
+			return "redirect:/login";
+		}
+		
 		return "board/write";
 	}
 
 	@RequestMapping(value = "/insertBoard.json")
 	@ResponseBody
-	public JSONObject insertBoard(@Valid BoardDto boardDto, BindingResult bindingResult) throws Exception {
+	public JSONObject insertBoard(@Valid BoardDto boardDto, BindingResult bindingResult, HttpSession session) throws Exception {
 
 		JSONObject jsonObj = new JSONObject();
 		int insertResult = 0;
+
+		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
 		
-		if(bindingResult.hasErrors()){
-			jsonObj.put("validate", false);
-		}else{
-			insertResult = this.boardService.insertBoard(boardDto);
+		if(null != sessionInfo){
+		
+			boardDto.setAuthorId(sessionInfo.getUserId());
+			boardDto.setAuthorNm(sessionInfo.getUserNm());
+			
+			if(bindingResult.hasErrors()){
+				jsonObj.put("validate", false);
+			}else{
+				insertResult = this.boardService.insertBoard(boardDto);
+			}						
 		}
 		
 		jsonObj.put("result", (insertResult > 0) ? true : false);

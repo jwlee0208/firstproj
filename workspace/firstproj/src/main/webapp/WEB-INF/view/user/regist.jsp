@@ -56,7 +56,7 @@
 		
 		<div class="form-group">
 			<input type="button" class="btn btn-default" value="취소">
-			<input type="button" class="btn btn-primary" value="저장" id="registBtn">
+			<input type="button" class="btn btn-primary pull-right" value="저장" id="registBtn">
 		</div>
 	</form>
 </body>
