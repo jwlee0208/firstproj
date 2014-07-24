@@ -5,9 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
-
-
 </head>
 <body>
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form">
@@ -29,21 +26,21 @@
 		<div class="form-group">
 			<label for="passwd" class="col-sm-2 control-label">패스워드</label>
 			<div class="col-sm-10">
-				<input type="password" class="form-control" id="passwd" name="passwd"/>
+				<input type="password" class="form-control" id="passwd" name="passwd" minlength="8" maxlength="15"/>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="passwdChk" class="col-sm-2 control-label">패스워드 체크</label>
 			<div class="col-sm-10">
-				<input type="password" class="form-control" id="passwdChk" name="passwdChk"/>
+				<input type="password" class="form-control" id="passwdChk" name="passwdChk" minlength="8" maxlength="15"/>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="email" class="col-sm-2 control-label">E-mail</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="email" name="email"/>
+				<input type="email" class="form-control" id="email" name="email"/>
 			</div>
 		</div>
 
@@ -82,24 +79,49 @@ $().ready(function() {
 							   .replace(koreanRegExg, "")
 							   .replace(specialCharRegExg, ""));
 		});
+
+		$("#registBtn").on("click", function(){
+			var isValid = $("form").valid();
+
+			if(isValid){
+				$.ajax({
+					url : '/user/regist.json',
+					data : $("#actionFrm").serialize(),
+					dataType : 'json',
+					method : 'post',
+					success : function(data){
+						console.log("result : " + data.resultCode + ", " + data.resultMsg);
+					},
+					error : function(data){
+
+					}
+				});
+			}
+		});		
 	});
 
 	$("form").validate({
 		rules: {
 			userId: {
-				required : true,
-				minlength : 8,
-				maxlength : 15
+				required 	: true,
+				minlength 	: 8,
+				maxlength 	: 15
 			},
 			userNm: {
-				required : true,
-				minlength : 2,
-				maxlength : 10
+				required 	: true,
+				minlength 	: 2,
+				maxlength 	: 10
 			},
 			passwd: {
-				required : true,
-				minlength : 8,
-				maxlength : 15
+				required 	: true,
+				minlength 	: 8,
+				maxlength 	: 15
+			},
+			passwdChk: {
+				required 	: true,
+				minlength 	: 8,
+				maxlength 	: 15,
+				equalTo 	: "#passwd"				
 			},
 			email : {
 				email : true
@@ -109,21 +131,27 @@ $().ready(function() {
 			}
 		},
 		messages : {
-			userId :{
-				required : "사용자 아이디 입력은 필수 입니다.",
-				minlength : "길이는 최소 8자 이상이어야 합니다.",
-				maxlength : "길이는 최대 15자까지 허용합니다."				
+			userId : {
+				required 	: "사용자 아이디 입력은 필수 입니다.",
+				minlength 	: "길이는 최소 8자 이상이어야 합니다.",
+				maxlength 	: "길이는 최대 15자까지 허용합니다."				
 			},
 			userNm : {
-				required : "사용자 이름 입력은 필수 입니다.",
-				minlength : "길이는 최소 2자 이상이어야 합니다.",
-				maxlength : "길이는 최대 10자까지 허용합니다."
+				required 	: "사용자 이름 입력은 필수 입니다.",
+				minlength 	: "길이는 최소 2자 이상이어야 합니다.",
+				maxlength 	: "길이는 최대 10자까지 허용합니다."
 			},
 			passwd : {
-				required : "패스워드를 입력해 주세요.",
-				minlength : "길이는 최소 8자 이상이어야 합니다.",
-				maxlength : "길이는 최대 15자까지 허용합니다."									
+				required 	: "패스워드를 입력해 주세요.",
+				minlength 	: "길이는 최소 8자 이상이어야 합니다.",
+				maxlength 	: "길이는 최대 15자까지 허용합니다."									
 			},
+			passwdChk: {
+				required  	: "패스워드를 한번 더 입력해 주세요.",
+				minlength 	: "길이는 최소 8자 이상이어야 합니다.",
+				maxlength 	: "길이는 최대 15자까지 허용합니다.",
+				equalTo 	: "위의 패스워드와 동일해야 합니다."				
+			},			
 			email : {
 				email : "이메일 형식에 맞게 입력해 주셔야 합니다."
 			},
@@ -131,30 +159,6 @@ $().ready(function() {
 				number : "숫자만 입력이 가능합니다."
 			} 
 		}
-	});
-
-	$("#registBtn").on("click", function(){
-// 		var isValid = $("form").valid();
-
-//			if(isValid){
-
-//			}
-
-		$.ajax({
-			url : '/user/regist.json',
-			data : $("#actionFrm").serialize(),
-			dataType : 'json',
-			method : 'post',
-			success : function(data){
-				console.log("result : " + data.resultCode + ", " + data.resultMsg);
-			},
-			error : function(data){
-
-			}
-		});
-
-
-
 	});
 });
 

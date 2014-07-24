@@ -8,7 +8,7 @@
 
 <!-- design -->
 <div id="image_upload" class="fileinput fileinput-new" data-provides="fileinput">
-	<form id="imageForm" action="popImgUpload" method="post" enctype="multipart/form-data" role="form">
+	<form id="imageForm" action="popImgUpload" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="folderId" id="folderId" value="" />
 	<input type="hidden" name="job" id="job" value="" />	
 			<h1 class="blind">이미지 등록</h1><input type="button" class="btn btn-default" value="닫기" onclick="window.close()"/>

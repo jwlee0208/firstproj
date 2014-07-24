@@ -11,33 +11,9 @@
 
 </head>
 <body>
-
-	<div id="wrap">
-
-		<!-- container -->
-		<div id="container">
-        	
-			<!-- contentsWrap -->
-			<div id="contentsWrap">
-				<!-- header -->
-<!-- 				<div class="header"> -->
-					<tiles:insertAttribute name="header"/>
-<!-- 				</div> -->
-				<!-- //header -->
-
-				<!-- contents -->
-				<div class="contents">
-	    			<tiles:insertAttribute name="body"/>
-				</div>
-				<!-- //contents -->
-				<tiles:insertAttribute name="footer"/>
-			</div>
-			<!-- //contentsWrap -->
-				    			
-<%-- 	    	<tiles:insertAttribute name="footer"/> --%>
-		</div>
-		<!-- //container -->
-	</div>
+	<tiles:insertAttribute name="header"/>
+	<tiles:insertAttribute name="body"/>
+	<tiles:insertAttribute name="footer"/>
 </body>
 
 </html>

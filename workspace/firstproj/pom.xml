@@ -281,7 +281,7 @@
             <artifactId>tiles-core</artifactId>
             <version>2.2.2</version>
         </dependency> 
- 
+
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-api</artifactId>
@@ -305,6 +305,7 @@
             <artifactId>tiles-template</artifactId>
             <version>2.2.2</version>
         </dependency>
+
 
        <!--  Dynamic Tiles -->    
          <dependency>
