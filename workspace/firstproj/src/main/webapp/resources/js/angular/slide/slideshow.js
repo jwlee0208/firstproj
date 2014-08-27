@@ -4,7 +4,7 @@
 	
 
 	
-    app.controller('MainCtrl', function ($scope) {
+    app.controller('MainCtrl', function ($scope, $timeout) {
         
     	$scope.slides = [
     	                 {image: '/img/slideshow/img00.jpg', description: 'Image 00'},
@@ -35,6 +35,25 @@
             $scope.direction = 'right';
             $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
         };
+        
+		/* Start: auto slide show */
+		
+		var timer;
+		
+		var sliderFunc=function(){
+			timer=$timeout(function(){
+				$scope.nextSlide();
+				timer=$timeout(sliderFunc,5000);
+			},5000);
+		};
+		
+		sliderFunc();
+		
+		$scope.$on('$destroy',function(){
+			$timeout.cancel(timer);
+		});
+		
+		/* End : auto slide show */        
     })
     .animation('.slide-animation', function () {
         return {
