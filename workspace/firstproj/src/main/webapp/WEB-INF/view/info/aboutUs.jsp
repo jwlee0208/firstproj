@@ -34,6 +34,7 @@
 		
 		<ol class="breadcrumb">
 		  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
+		  <li><a>About Us</a></li>
 		  <li class="secondBranch active"></li>
 		</ol>		
 		
@@ -44,26 +45,32 @@
 			<li class="li li_4"><a href="#" onclick="javascript:goToAUTab(4);">Location</a></li>
 		</ul>
 
-		<div class="tabDiv tab1">
-			<h2>Introduction</h2>
+		<div class="tabDiv tab1" style="padding-top: 20px;">
+<!-- 			<h2>Introduction</h2> -->
 		</div>		
-		<div class="tabDiv tab2">
-			<h2>History</h2>
+		<div class="tabDiv tab2" style="padding-top: 20px;">
+<!-- 			<h2>History</h2> -->
 		</div>
-		<div class="tabDiv tab3">
-			<h2>Organization</h2>
+		<div class="tabDiv tab3" style="padding-top: 20px;">
+<!-- 			<h2>Organization</h2> -->
 		</div>
-		<div class="tabDiv tab4">
-			<h2>Location</h2>  <p>서울시 강남구 대치동 000-00</p>		
+		<div class="tabDiv tab4" style="padding-top: 20px;">
+<!-- 			<h2>Location</h2>		 -->
 			<div style="height : 400px; overflow-y:scroll; padding-bottom : 20px; ">
-				<div id="map"></div>
+			  <div class="col-md-8"><div id="map"></div></div>
+			  <div class="col-md-4">
+			  	<h2><small>주소</small></h2>
+			  	<p>서울시 강남구 대치동 000-00</p>
+			  	<h2><small>대중교통</small></h2>
+			  	<p>000-00</p>
+			  </div>			
+				
 			</div>
 		</div>
 </body>
 <script>
 $(document).on("ready", function(){
 	goToAUTab(1);
-	init();
 });
 
 // var map;
@@ -76,7 +83,7 @@ $(document).on("ready", function(){
 // 	var mapTypeControl = new daum.maps.MapTypeControl();
 // 	map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
 // }
-var map = new DMap("map",{width:400,height:400});
+var map = new DMap("map",{width:700,height:400});
 	map.setCenter(new DLatLng(37.50696024199666, 127.06154455833864), 2);
 	 var iw = new DInfoWindow("http://local.daum.net/localn/include/cms_map.html", {width:270, height:160});
 	var m = new DMark(new DLatLng(37.50696024199666, 127.06154455833864));
