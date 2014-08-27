@@ -5,6 +5,10 @@ function goHome(){
 	location.href = "/home.page?menuId=0";
 }
 
+function goInfo(){
+	location.href = "/aboutUs.page";
+}
+
 function goRegist(boardCategory){
 	location.href = "/user/regist.page?menuId=" + boardCategory;
 }

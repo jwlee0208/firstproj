@@ -10,4 +10,9 @@ public class HomeController {
 	public String goHome() throws Exception{
 		return "home";
 	}
+	
+	@RequestMapping(value="/aboutUs.page")
+	public String goAboutUs() throws Exception{
+		return "/info/aboutUs";
+	}
 }

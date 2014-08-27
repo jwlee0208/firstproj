@@ -14,7 +14,22 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
 </head>
 <body>
-	<h3 class="sub-header">글 목록</h3>
+	<h1 id="btn-groups" class="page-header">Board</h1>
+	
+	<ol class="breadcrumb">
+	  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
+<!-- 		  <li>게시판</li> -->
+	  <li class="secondBranch active">
+			<c:if test="${boardCategory eq 1}">자유게시판</c:if>
+			<c:if test="${boardCategory eq 2}">Q&A</c:if>
+			<c:if test="${boardCategory eq 3}">기타게시판</c:if>		  
+	  </li>
+	</ol>		
+	
+			
+	
+	
+<!-- 	<h3 class="sub-header">글 목록</h3> -->
 	<form id="boardFrm" name="boardFrm" method="post">
 	
 	<!-- 리스트에서 선택된 게시글 아이디 -->

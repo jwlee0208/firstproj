@@ -21,7 +21,20 @@
 	<input type="hidden" id="authorId" name="authorId" value="jwlee"/>
 	<input type="hidden" id="authorNm" name="authorNm" value="jinwon"/>
 	<div class="wrap">
-		<h3>글 작성</h3>
+	<h1 id="btn-groups" class="page-header">Write Content</h1>
+	
+	<ol class="breadcrumb">
+	  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
+<!-- 		  <li>게시판</li> -->
+	  <li>
+	  	<a href="javascript:;"> 
+			<c:if test="${boardCategory eq 1}">자유게시판</c:if>
+			<c:if test="${boardCategory eq 2}">Q&A</c:if>
+			<c:if test="${boardCategory eq 3}">기타게시판</c:if>	
+		</a>		  
+	  </li>
+	  <li class="active">글 작성</li>
+	</ol>
 		<div class="writeArea list-group-item">
 			<table class="table table-condensed">
 				<colgroup><col width="10%"/><col width="90%"/></colgroup>

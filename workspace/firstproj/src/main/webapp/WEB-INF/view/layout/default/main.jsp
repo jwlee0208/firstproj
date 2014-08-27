@@ -12,7 +12,11 @@
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
+<div class="container bs-docs-container">
+    <div class="row">	
 	<tiles:insertAttribute name="body"/>
+	</div>
+</div>	
 	<tiles:insertAttribute name="footer"/>
 </body>
 
