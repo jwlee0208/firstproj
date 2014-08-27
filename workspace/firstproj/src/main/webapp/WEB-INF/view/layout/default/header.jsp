@@ -48,6 +48,7 @@ ul { padding: 0; }
 		</c:otherwise>
 
 	</c:choose>		
+				<li>&nbsp;&nbsp;&nbsp;</li>
 			</ul>	
 		</div>
 	</div>
