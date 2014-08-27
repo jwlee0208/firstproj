@@ -8,7 +8,7 @@
 </head>
 <body>
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form">
-		<h2>Regist</h2>
+		<h1 id="btn-groups" class="page-header">Regist</h1>
 		<div class="form-group">
 			<label for="userId" class="col-sm-2 control-label">사용자 아이디</label>
 			<div class="col-sm-10">

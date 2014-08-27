@@ -57,7 +57,8 @@ $(function(){
 </head>
 <body>
 	<form class="form-horizontal" id="loginForm" name="loginForm" method="post">
-		<h2>Sign in</h2>	
+	<h1 id="btn-groups" class="page-header">Sign in</h1>
+	
 		<div class="form-group">
 			<label for="userId" class="col-sm-2 control-label">아이디</label>
 			<div class="col-sm-10">
