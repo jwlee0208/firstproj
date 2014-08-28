@@ -1,6 +1,6 @@
 $(document).on("ready", function() {
 	$("input[name='goToWrite']").on("click", function() {
-		location.href = "/board/write.page?boardCategory="+$("#boardCategory").val();
+		location.href = "/board/write.page?boardId="+$("#boardId").val();
 	});
 });
 // 페이지 이동
@@ -67,9 +67,9 @@ function goEnd() {
 }
 
 // 게시글 조회
-function goView(boardId){
+function goView(articleId){
 	
-	$("#selectedBoardId").val(boardId);
+	$("#selectedArticleId").val(articleId);
 	
 	var frm = $("#boardFrm");
 	frm.attr("action", "/board/view.page");

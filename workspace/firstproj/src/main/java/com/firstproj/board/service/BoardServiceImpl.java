@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.firstproj.board.dao.BoardDao;
-import com.firstproj.board.dto.BoardDto;
+import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.util.PagingUtil;
 
@@ -19,7 +19,7 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDao boardDao;
 	
 	@Override
-	public List<BoardDto> getBoardList() throws Exception{
+	public List<BoardArticleDto> getBoardList() throws Exception{
 		return this.boardDao.getBoardList();
 	}
 	@Override
@@ -41,7 +41,7 @@ public class BoardServiceImpl implements BoardService{
 	    return pagedList;
 	}   
 	@Override
-	public List<BoardDto> getBoardList(Map<String,Object> paramMap) throws Exception {                       
+	public List<BoardArticleDto> getBoardList(Map<String,Object> paramMap) throws Exception {                       
 	       int pageNo     = (Integer) paramMap.get("pageNo");                                   
 	       int listRowCnt = (Integer) paramMap.get("listRowCnt");
 	       int startRow   = PagingUtil.getStartRow(pageNo, listRowCnt);                                        
@@ -53,14 +53,14 @@ public class BoardServiceImpl implements BoardService{
 	} 
 	
 	@Override
-	public int insertBoard(BoardDto boardDto) throws Exception{
+	public int insertBoard(BoardArticleDto boardDto) throws Exception{
 		return this.boardDao.insertBoard(boardDto);
 	}
 	/**
 	 * 게시 글 조회
 	 */
 	@Override
-	public BoardDto selectBoardContent(BoardDto boardDto) throws Exception {
+	public BoardArticleDto selectBoardContent(BoardArticleDto boardDto) throws Exception {
 		
 		return this.boardDao.selectBoardContent(boardDto);
 	}
@@ -68,14 +68,14 @@ public class BoardServiceImpl implements BoardService{
 	 * 이전 글 조회
 	 */
 	@Override
-	public BoardDto selectPrevBoardContent(BoardDto boardDto) throws Exception {
+	public BoardArticleDto selectPrevBoardContent(BoardArticleDto boardDto) throws Exception {
 		return this.boardDao.selectPrevBoardContent(boardDto);
 	}
 	/**
 	 * 다음 글 조회
 	 */
 	@Override
-	public BoardDto selectNextBoardContent(BoardDto boardDto) throws Exception {
+	public BoardArticleDto selectNextBoardContent(BoardArticleDto boardDto) throws Exception {
 		return this.boardDao.selectNextBoardContent(boardDto);
 	}
 }

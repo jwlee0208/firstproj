@@ -51,9 +51,13 @@
 			</div>
 		</div>
 		
-		<div class="form-group">
-			<input type="button" class="btn btn-default" value="취소">
-			<input type="button" class="btn btn-primary pull-right" value="저장" id="registBtn">
+		<div class="btn-group btn-group-justified" style="padding-top : 20px; padding-bottom : 20px;">
+			<div class="btn-group">
+				<input type="button" class="btn btn-default" value="취소">
+			</div>
+			<div class="btn-group">
+				<input type="button" class="btn btn-default pull-right" value="저장" id="registBtn">
+			</div>					
 		</div>
 	</form>
 </body>

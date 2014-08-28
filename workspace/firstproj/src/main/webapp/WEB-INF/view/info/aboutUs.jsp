@@ -60,9 +60,9 @@
 			  <div class="col-md-8"><div id="map"></div></div>
 			  <div class="col-md-4">
 			  	<h2><small>주소</small></h2>
-			  	<p>서울시 강남구 대치동 000-00</p>
+			  	<p class="text-info">서울시 강남구 대치동 000-00</p>
 			  	<h2><small>대중교통</small></h2>
-			  	<p>000-00</p>
+			  	<p class="text-info">000-00</p>
 			  </div>			
 				
 			</div>

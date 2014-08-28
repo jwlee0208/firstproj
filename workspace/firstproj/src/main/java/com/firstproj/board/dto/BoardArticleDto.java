@@ -6,12 +6,12 @@ import javax.validation.constraints.NotNull;
 import org.apache.ibatis.type.Alias;
 import org.hibernate.validator.constraints.NotEmpty;
 
-@Alias("board.boardDto")
-public class BoardDto {
+@Alias("board.boardArticleDto")
+public class BoardArticleDto {
 	
-	private int	   		boardId;
+	private int	   		articleId;
 	@NotNull @Min(0)
-	private int			boardCategory;
+	private int			boardId;
 	@NotNull @NotEmpty
 	private String 		title;
 	@NotNull @NotEmpty
@@ -20,17 +20,18 @@ public class BoardDto {
 	private String 		authorNm;
 	private String 		createDate;
 	
+
+	public int getArticleId() {
+		return articleId;
+	}
+	public void setArticleId(int articleId) {
+		this.articleId = articleId;
+	}
 	public int getBoardId() {
 		return boardId;
 	}
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
-	}
-	public int getBoardCategory() {
-		return boardCategory;
-	}
-	public void setBoardCategory(int boardCategory) {
-		this.boardCategory = boardCategory;
 	}
 	public String getTitle() {
 		return title;
@@ -63,14 +64,21 @@ public class BoardDto {
 		this.createDate = createDate;
 	}
 	@Override
+	public String toString() {
+		return "BoardDto [articleId=" + articleId + ", boardId=" + boardId
+				+ ", title=" + title + ", content=" + content + ", authorId="
+				+ authorId + ", authorNm=" + authorNm + ", createDate="
+				+ createDate + "]";
+	}
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + articleId;
 		result = prime * result
 				+ ((authorId == null) ? 0 : authorId.hashCode());
 		result = prime * result
 				+ ((authorNm == null) ? 0 : authorNm.hashCode());
-		result = prime * result + boardCategory;
 		result = prime * result + boardId;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result
@@ -86,7 +94,9 @@ public class BoardDto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BoardDto other = (BoardDto) obj;
+		BoardArticleDto other = (BoardArticleDto) obj;
+		if (articleId != other.articleId)
+			return false;
 		if (authorId == null) {
 			if (other.authorId != null)
 				return false;
@@ -96,8 +106,6 @@ public class BoardDto {
 			if (other.authorNm != null)
 				return false;
 		} else if (!authorNm.equals(other.authorNm))
-			return false;
-		if (boardCategory != other.boardCategory)
 			return false;
 		if (boardId != other.boardId)
 			return false;
@@ -117,13 +125,6 @@ public class BoardDto {
 		} else if (!title.equals(other.title))
 			return false;
 		return true;
-	}
-	@Override
-	public String toString() {
-		return "BoardDto [boardId=" + boardId + ", boardCategory="
-				+ boardCategory + ", title=" + title + ", content=" + content
-				+ ", authorId=" + authorId + ", authorNm=" + authorNm
-				+ ", createDate=" + createDate + "]";
 	}
 
 	

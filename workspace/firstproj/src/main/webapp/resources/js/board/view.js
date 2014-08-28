@@ -2,24 +2,24 @@ var frm = $("#viewFrm");
 
 $(document).on("ready", function(){
 	$("#goToList").on("click", function(){
-		goList($("#boardCategory").val());
+		goList($("#boardId").val());
 	});
 	
 	$("#previous").on("click", function(){
-		var prevBoardId = $("#prevBoardId").val();
-		goView(prevBoardId);
+		var prevArticleId = $("#prevArticleId").val();
+		goView(prevArticleId);
 	});
 	$("#next").on("click", function(){
-		var nextBoardId = $("#nextBoardId").val();
-		goView(nextBoardId);
+		var nextArticleId = $("#nextArticleId").val();
+		goView(nextArticleId);
 	});
 	
 });
 
 //게시글 조회
-function goView(boardId){
+function goView(articleId){
 	
-	$("#selectedBoardId").val(boardId);
+	$("#selectedArticleId").val(articleId);
 	
 	var frm = $("#viewFrm");
 	frm.attr("action", "/board/view.page");

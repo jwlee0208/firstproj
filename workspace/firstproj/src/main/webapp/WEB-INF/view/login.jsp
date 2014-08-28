@@ -71,10 +71,10 @@ $(function(){
 				<input type="password" class="form-control" id="passwd" name="passwd" />
 			</div>
 		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-		      <input type="button" class="btn btn-default pull-right" name="signinSubmit" value="Sign in">
-		    </div>			
+		<div class="btn-group btn-group-justified">
+			<div class="btn-group">
+		      <input type="button" class="btn btn-default" name="signinSubmit" value="Sign in">
+		    </div> 
 		</div>
 	</form>
 </body>

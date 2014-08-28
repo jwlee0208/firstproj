@@ -4,68 +4,68 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
     <mapper namespace="sql.board">
-        <insert id="insertBoard" parameterType="board.boardDto" useGeneratedKeys="true" keyProperty="boardId">
-            INSERT INTO test.TB_BOARD
+        <insert id="insertBoard" parameterType="board.boardArticleDto" useGeneratedKeys="true" keyProperty="boardId">
+            INSERT INTO test.TB_BOARD_ARTICLE
 				(
-				board_category,
+				board_id,
 				title,
 				content,
 				author_id,
 				author_nm,
 				create_date)
 			VALUES (
-				#{boardCategory},
+				#{boardId},
 				#{title },
 				#{content },
 				#{authorId },
 				#{authorNm },
 				CURRENT_TIMESTAMP())
         </insert>
-        <select id="selectList" parameterType="board.boardDto" resultType="board.boardDto">
+        <select id="selectList" parameterType="board.boardArticleDto" resultType="board.boardArticleDto">
             <include refid="searchSql"/>   
 			<include refid="searchConditionSql"/>    
         </select>
 		<!-- 페이징 위한 리스트 갯수 조회 -->    
 		<select id="selectListCount" resultType="Integer" parameterType="searchCondition">        
 			SELECT count(*) AS totalCnt         
-			FROM test.tb_board         
+			FROM test.tb_board_article         
 			<include refid="searchConditionSql"/>    
 
 		</select>      
 		
 		<!-- 리스트 조회 -->    
-		<select id="selectBoardList" resultType="board.boardDto" parameterType="searchCondition">                      
+		<select id="selectBoardList" resultType="board.boardArticleDto" parameterType="searchCondition">                      
 			<include refid="searchSql"/>                      
 			<include refid="searchConditionSql"/>                         
-			ORDER BY board_id desc                
+			ORDER BY article_id desc                
 			LIMIT #{startRow}, #{endRow}     
 		</select>		
 		
 		<!--  게시글 조회 -->
-		<select id="selectBoardContent" resultType="board.boardDto" parameterType="board.boardDto">
+		<select id="selectBoardContent" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">
 		    <include refid="searchSql"/>
 		    <include refid="searchContentSql"/>
 		</select>
 		<!-- 이전 글 조회 -->
-		<select id="selectPrevBoardContent" resultType="board.boardDto" parameterType="board.boardDto">
+		<select id="selectPrevBoardContent" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">
 		 	 <include refid="searchSql"/>  
 				where
+					board_id = ${boardId}	
 				<![CDATA[ 
-					board_id > ${boardId}
+					and article_id > ${articleId}
 				]]>
-				and board_category = ${boardCategory}	
-				order by board_id asc
+				order by article_id asc
 				limit 1	 	 		    
 		</select>
 		<!-- 다음 글 조회 -->
-		<select id="selectNextBoardContent" resultType="board.boardDto" parameterType="board.boardDto">
+		<select id="selectNextBoardContent" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">
 		 	 <include refid="searchSql"/>  
-				where
+				where 
+					board_id = ${boardId}
 				<![CDATA[ 
-					board_id < ${boardId}
+					and article_id < ${articleId}
 				]]>	
-				and board_category = ${boardCategory}
-				order by board_id desc
+				order by article_id desc
 				limit 1	 	 		    
 		</select>
 		
@@ -73,26 +73,26 @@
 					
 		<sql id="searchSql">
 			SELECT 
+			    article_id,
 			    board_id,
-			    board_category,
 			    title,
 			    content,
 			    author_id,
 			    author_nm,
 			    create_date
-			FROM test.TB_BOARD
+			FROM test.TB_BOARD_ARTICLE
 		</sql>
 		<sql id="searchConditionSql">
 			WHERE 1 = 1	
-				<if test="boardCategory > 0">
-				and board_category = #{boardCategory}    
+				<if test="boardId > 0">
+				and board_id = #{boardId}    
 				</if>
 			     	    
 		</sql> 
 		<sql id="searchContentSql">
 		    WHERE 1 = 1
-		    <if test="boardId > 0">
-		        and board_id = #{boardId}
+		    <if test="articleId > 0">
+		        and article_id = #{articleId}
 		    </if>
 		    
 		</sql>
