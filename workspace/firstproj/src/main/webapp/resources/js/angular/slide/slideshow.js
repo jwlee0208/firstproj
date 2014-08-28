@@ -6,17 +6,23 @@
 	
     app.controller('MainCtrl', function ($scope, $timeout) {
         
-    	$scope.slides = [
-    	                 {image: '/img/slideshow/img00.jpg', description: 'Image 00'},
-    	                 {image: '/img/slideshow/img01.jpg', description: 'Image 01'},
-    	                 {image: '/img/slideshow/img02.jpg', description: 'Image 02'},
-    	                 {image: '/img/slideshow/img03.jpg', description: 'Image 03'},
-    	                 {image: '/img/slideshow/img04.jpg', description: 'Image 04'},
-    	                 {image: '/img/slideshow/img05.jpg', description: 'Image 05'},
-    	                 {image: '/img/slideshow/img06.jpg', description: 'Image 06'},
-    	                 {image: '/img/slideshow/img07.jpg', description: 'Image 07'},
-    	                 {image: '/img/slideshow/img08.jpg', description: 'Image 08'}
-    	             ];
+    	$scope.slides = 
+					 [
+			              {image: '/img/slideshow/img_00.jpg', description: 'Image 00'},
+			              {image: '/img/slideshow/img_01.jpg', description: 'Image 01'},
+			              {image: '/img/slideshow/img_02.jpg', description: 'Image 02'},
+		             ];    		
+//    				 [
+//    	                 {image: '/img/slideshow/img00.jpg', description: 'Image 00'},
+//    	                 {image: '/img/slideshow/img01.jpg', description: 'Image 01'},
+//    	                 {image: '/img/slideshow/img02.jpg', description: 'Image 02'},
+//    	                 {image: '/img/slideshow/img03.jpg', description: 'Image 03'},
+//    	                 {image: '/img/slideshow/img04.jpg', description: 'Image 04'},
+//    	                 {image: '/img/slideshow/img05.jpg', description: 'Image 05'},
+//    	                 {image: '/img/slideshow/img06.jpg', description: 'Image 06'},
+//    	                 {image: '/img/slideshow/img07.jpg', description: 'Image 07'},
+//    	                 {image: '/img/slideshow/img08.jpg', description: 'Image 08'}
+//    	             ];
 
         $scope.direction = 'left';
         $scope.currentIndex = 0;
