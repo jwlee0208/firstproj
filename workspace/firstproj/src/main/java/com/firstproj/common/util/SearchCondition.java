@@ -6,7 +6,7 @@ public class SearchCondition {
 	private String 	searchText;
 	private String 	startDate;
 	private String 	endDate;
-	private int 	boardCategory;
+	private int 	boardId;
 
 	// 페이징을 위한 파라미터
 	private int startRow;
@@ -46,12 +46,12 @@ public class SearchCondition {
 		this.endDate = endDate;
 	}
 
-	public int getBoardCategory() {
-		return boardCategory;
+	public int getBoardId() {
+		return boardId;
 	}
 
-	public void setBoardCategory(int boardCategory) {
-		this.boardCategory = boardCategory;
+	public void setBoardId(int boardId) {
+		this.boardId = boardId;
 	}
 
 	public int getStartRow() {

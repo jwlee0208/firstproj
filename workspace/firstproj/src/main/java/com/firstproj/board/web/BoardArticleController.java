@@ -18,25 +18,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.firstproj.board.dto.BoardDto;
-import com.firstproj.board.service.BoardServiceImpl;
+import com.firstproj.board.dto.BoardArticleDto;
+import com.firstproj.board.service.BoardArticleServiceImpl;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.user.dto.UserDto;
 
 @Controller
 @RequestMapping(value = "/board")
-public class BoardController {
+public class BoardArticleController {
 
 	public static final int DEFAULT_PAGE_NO = 1;
 	public static final int DEFAULT_PAGE_SIZE = 10;
 
-	@Resource(name = "BoardServiceImpl")
-	private BoardServiceImpl boardService;
+	@Resource(name = "BoardArticleServiceImpl")
+	private BoardArticleServiceImpl boardArticleService;
 
 	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
-	public String getBoardList(HttpServletRequest request, Model model, BoardDto boardDto) throws Exception {
+	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardDto) throws Exception {
 //System.out.println(">>> getBoardList()");
-//		List<BoardDto> boardList = boardService.getBoardList();
+//		List<BoardDto> boardList = boardArticleService.getBoardList();
 
 		model = this.getBoardCommonList(request, model, boardDto);
 		
@@ -44,14 +44,14 @@ public class BoardController {
 		return "board/list";
 	}
 
-	private Model getBoardCommonList(HttpServletRequest request, Model model, BoardDto boardDto) throws Exception{
+	private Model getBoardCommonList(HttpServletRequest request, Model model, BoardArticleDto boardDto) throws Exception{
 		// 검색 조건
 		String searchCondition = request.getParameter("searchCondition");
 		String searchText = request.getParameter("searchText");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
 
-		int boardCategory = boardDto.getBoardCategory();
+		int boardId = boardDto.getBoardId();
 		
 		int pageNo = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
 
@@ -59,13 +59,13 @@ public class BoardController {
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// searching condition setting
-		paramMap.put("boardCategory", boardCategory);
+		paramMap.put("boardId", boardId);
 		paramMap.put("searchCondition", searchCondition);
 		paramMap.put("searchText", searchText);
 		paramMap.put("startDate", startDate);
 		paramMap.put("endDate", endDate);
 
-		int totalListCnt = boardService.selectListCnt(paramMap);
+		int totalListCnt = boardArticleService.selectListCnt(paramMap);
 //System.out.println("totalListCnt : " + totalListCnt);
 		// paging condition setting
 		paramMap.put("pageNo", pageNo);
@@ -73,41 +73,41 @@ public class BoardController {
 		paramMap.put("totalListCnt", totalListCnt);
 		paramMap.put("pageSize", DEFAULT_PAGE_SIZE);
 
-		PagedList result = boardService.getBoardPagedList(paramMap);
+		PagedList result = boardArticleService.getBoardPagedList(paramMap);
 
 		model.addAttribute("pagedResult", result);
-		model.addAttribute("boardCategory", boardCategory);
+		model.addAttribute("boardId", boardId);
 		return model;
 	}
 	
 	@RequestMapping(value = "/view.page")
-	public String getBoardContent(HttpServletRequest request, Model model, BoardDto boardDto, @Param int selectedBoardId) throws Exception{
+	public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardDto, @Param int selectedArticleId) throws Exception{
 		
-		BoardDto contentInfo = null;
-		BoardDto prevContentInfo = null;
-		BoardDto nextContentInfo = null;
+		BoardArticleDto contentInfo = null;
+		BoardArticleDto prevContentInfo = null;
+		BoardArticleDto nextContentInfo = null;
 		
-		if(selectedBoardId > 0){
-			boardDto.setBoardId(selectedBoardId);
+		if(selectedArticleId > 0){
+			boardDto.setArticleId(selectedArticleId);
 			// 글 조회
-			contentInfo = this.boardService.selectBoardContent(boardDto);
+			contentInfo = this.boardArticleService.selectBoardContent(boardDto);
 			// 이전 글 조회
-			prevContentInfo = this.boardService.selectPrevBoardContent(boardDto);
+			prevContentInfo = this.boardArticleService.selectPrevBoardContent(boardDto);
 			// 다음 글 조회
-			nextContentInfo = this.boardService.selectNextBoardContent(boardDto);
+			nextContentInfo = this.boardArticleService.selectNextBoardContent(boardDto);
 		}
 		
 		model.addAttribute("contentInfo", contentInfo);
 		model.addAttribute("prevContentInfo", prevContentInfo);
 		model.addAttribute("nextContentInfo", nextContentInfo);
 		
-		model.addAttribute("boardCategory", boardDto.getBoardCategory());
+		model.addAttribute("boardId", boardDto.getBoardId());
 		
 		return "board/view";
 	}
 
 	@RequestMapping(value = "/write.page")
-	public String writeBoard(Model model, BoardDto boardDto, HttpSession session) {
+	public String writeBoard(Model model, BoardArticleDto boardDto, HttpSession session) {
 		
 //		System.out.println("session : " + (session == null));
 //		System.out.println("userId : " + ((UserDto)session.getAttribute("userInfo")).getUserId());
@@ -115,7 +115,7 @@ public class BoardController {
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
 		
 		if(null != sessionInfo){
-			model.addAttribute("boardCategory", boardDto.getBoardCategory());			
+			model.addAttribute("boardId", boardDto.getBoardId());			
 		}else{
 			return "redirect:/login";
 		}
@@ -125,7 +125,7 @@ public class BoardController {
 
 	@RequestMapping(value = "/insertBoard.json")
 	@ResponseBody
-	public JSONObject insertBoard(@Valid BoardDto boardDto, BindingResult bindingResult, HttpSession session) throws Exception {
+	public JSONObject insertBoard(@Valid BoardArticleDto boardDto, BindingResult bindingResult, HttpSession session) throws Exception {
 
 		JSONObject jsonObj = new JSONObject();
 		int insertResult = 0;
@@ -140,7 +140,7 @@ public class BoardController {
 			if(bindingResult.hasErrors()){
 				jsonObj.put("validate", false);
 			}else{
-				insertResult = this.boardService.insertBoard(boardDto);
+				insertResult = this.boardArticleService.insertBoard(boardDto);
 			}						
 		}
 		

@@ -11,7 +11,11 @@
     	                 {image: '/img/slideshow/img01.jpg', description: 'Image 01'},
     	                 {image: '/img/slideshow/img02.jpg', description: 'Image 02'},
     	                 {image: '/img/slideshow/img03.jpg', description: 'Image 03'},
-    	                 {image: '/img/slideshow/img04.jpg', description: 'Image 04'}
+    	                 {image: '/img/slideshow/img04.jpg', description: 'Image 04'},
+    	                 {image: '/img/slideshow/img05.jpg', description: 'Image 05'},
+    	                 {image: '/img/slideshow/img06.jpg', description: 'Image 06'},
+    	                 {image: '/img/slideshow/img07.jpg', description: 'Image 07'},
+    	                 {image: '/img/slideshow/img08.jpg', description: 'Image 08'}
     	             ];
 
         $scope.direction = 'left';
@@ -65,7 +69,7 @@
                     if(scope.direction !== 'right') {
                         finishPoint = -finishPoint;
                     }
-                    TweenMax.to(element, 0.5, {left: finishPoint, onComplete: done });
+                    TweenMax.to(element, 1.5, {left: finishPoint, onComplete: done });
                 }
                 else {
                     done();
@@ -82,7 +86,7 @@
                         startPoint = -startPoint;
                     }
 
-                    TweenMax.fromTo(element, 0.5, { left: startPoint }, {left: 0, onComplete: done });
+                    TweenMax.fromTo(element, 1.5, { left: startPoint }, {left: 0, onComplete: done });
                 }
                 else {
                     done();
@@ -90,13 +94,4 @@
             }
         };
     });
-
-//    app.run(function($rootScope, $timeout, MainCtrl){
-//    	
-//    	$timeout(function(){
-//    		MainCtrl.nextSlide();
-//    	}, 3000);
-//    	
-//    });
-	
 })();

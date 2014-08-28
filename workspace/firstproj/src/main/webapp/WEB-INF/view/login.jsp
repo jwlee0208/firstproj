@@ -57,7 +57,8 @@ $(function(){
 </head>
 <body>
 	<form class="form-horizontal" id="loginForm" name="loginForm" method="post">
-		<h2>Sign in</h2>	
+	<h1 id="btn-groups" class="page-header">Sign in</h1>
+	
 		<div class="form-group">
 			<label for="userId" class="col-sm-2 control-label">아이디</label>
 			<div class="col-sm-10">
@@ -70,10 +71,10 @@ $(function(){
 				<input type="password" class="form-control" id="passwd" name="passwd" />
 			</div>
 		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-		      <input type="button" class="btn btn-default pull-right" name="signinSubmit" value="Sign in">
-		    </div>			
+		<div class="btn-group btn-group-justified">
+			<div class="btn-group">
+		      <input type="button" class="btn btn-default" name="signinSubmit" value="Sign in">
+		    </div> 
 		</div>
 	</form>
 </body>

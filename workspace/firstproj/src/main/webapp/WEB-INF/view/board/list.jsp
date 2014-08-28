@@ -14,12 +14,27 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
 </head>
 <body>
-	<h3 class="sub-header">글 목록</h3>
+	<h1 id="btn-groups" class="page-header">Board</h1>
+	
+	<ol class="breadcrumb">
+	  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
+<!-- 		  <li>게시판</li> -->
+	  <li class="secondBranch active">
+			<c:if test="${boardId eq 1}">자유게시판</c:if>
+			<c:if test="${boardId eq 2}">Q&A</c:if>
+			<c:if test="${boardId eq 3}">기타게시판</c:if>		  
+	  </li>
+	</ol>		
+	
+			
+	
+	
+<!-- 	<h3 class="sub-header">글 목록</h3> -->
 	<form id="boardFrm" name="boardFrm" method="post">
 	
 	<!-- 리스트에서 선택된 게시글 아이디 -->
-	<input type="hidden" id="selectedBoardId" name="selectedBoardId" />
-	<input type="hidden" id="boardCategory" name="boardCategory" value="${boardCategory}"/>
+	<input type="hidden" id="selectedArticleId" name="selectedArticleId" />
+	<input type="hidden" id="boardId" name="boardId" value="${boardId}"/>
 	
 	<c:set var="list" value="${boardList}" />
 	<div class="table-responsive" id="listDiv">
@@ -30,12 +45,12 @@
 		<input type="hidden" id="startPageNo" name="startPageNo" value="${pagedResult.startPageNo}" /> 
 		<input type="hidden" id="pageSize" name="pageSize" value="${pagedResult.pageSize}" />
 
-		<table style="width: 100%;" class="table table-striped">
+		<table style="width: 100%;" class="table table-hover">
 			<colgroup>
 				<col width="10%" />
-				<col width="50%" />
-				<col width="20%" />
-				<col width="20%" />
+				<col width="70%" />
+				<col width="10%" />
+				<col width="10%" />
 			</colgroup>
 			<thead>
 				<tr>
@@ -50,9 +65,9 @@
 					<c:when test="${null ne pagedResult.articleList && pagedResult.articleList.size() > 0}">
 						<c:forEach var="content" items="${pagedResult.articleList}">
 							<tr>
-								<td>${content.boardId}</td>	
-								<td onclick="javascript:goView('${content.boardId}');">${content.title}</td>
-								<td>${content.createDate}</td>
+								<td>${content.articleId}</td>	
+								<td onclick="javascript:goView('${content.articleId}');">${content.title}</td>
+								<td>${fn:substring(content.createDate, 0, 10)}</td>
 								<td>${content.authorNm}</td>
 							</tr>
 						</c:forEach>
@@ -79,8 +94,13 @@
 	</jsp:include>
 
 
-	<fieldset class="form-group">
-		<input type="submit" class="btn btn-primary pull-right" value="글쓰기" name="goToWrite" />
-	</fieldset>
+<!-- 	<fieldset class="form-group"> -->
+		<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
+			<div class="btn-group">
+
+				<input type="submit" class="btn btn-default pull-right" value="글쓰기" name="goToWrite" />
+			</div>
+		</div>	
+<!-- 	</fieldset> -->
 </body>
 </html>

@@ -7,24 +7,24 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.firstproj.board.dao.BoardDao;
-import com.firstproj.board.dto.BoardDto;
+import com.firstproj.board.dao.BoardArticleDao;
+import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.util.PagingUtil;
 
-@Service("BoardServiceImpl")
-public class BoardServiceImpl implements BoardService{
+@Service("BoardArticleServiceImpl")
+public class BoardArticleServiceImpl implements BoardArticleService{
 	
-	@Resource(name="BoardDao")
-	private BoardDao boardDao;
+	@Resource(name="BoardArticleDao")
+	private BoardArticleDao boardArticleDao;
 	
 	@Override
-	public List<BoardDto> getBoardList() throws Exception{
-		return this.boardDao.getBoardList();
+	public List<BoardArticleDto> getBoardList() throws Exception{
+		return this.boardArticleDao.getBoardList();
 	}
 	@Override
 	public int selectListCnt(Map<String, Object> param) throws Exception {                     
-	       return boardDao.selectListCnt(param);      
+	       return boardArticleDao.selectListCnt(param);      
 	}    
 	@Override
 	public PagedList getBoardPagedList(Map<String, Object> paramMap) throws Exception {                              
@@ -41,7 +41,7 @@ public class BoardServiceImpl implements BoardService{
 	    return pagedList;
 	}   
 	@Override
-	public List<BoardDto> getBoardList(Map<String,Object> paramMap) throws Exception {                       
+	public List<BoardArticleDto> getBoardList(Map<String,Object> paramMap) throws Exception {                       
 	       int pageNo     = (Integer) paramMap.get("pageNo");                                   
 	       int listRowCnt = (Integer) paramMap.get("listRowCnt");
 	       int startRow   = PagingUtil.getStartRow(pageNo, listRowCnt);                                        
@@ -49,33 +49,38 @@ public class BoardServiceImpl implements BoardService{
 	 
 	       paramMap.put("startRow", startRow);                                     
 	       paramMap.put("endRow", endRow);
-	       return boardDao.selectBoardList(paramMap);            
+	       return boardArticleDao.selectBoardList(paramMap);            
 	} 
 	
 	@Override
-	public int insertBoard(BoardDto boardDto) throws Exception{
-		return this.boardDao.insertBoard(boardDto);
+	public int insertBoard(BoardArticleDto boardDto) throws Exception{
+		return this.boardArticleDao.insertBoard(boardDto);
 	}
 	/**
 	 * 게시 글 조회
 	 */
 	@Override
-	public BoardDto selectBoardContent(BoardDto boardDto) throws Exception {
+	public BoardArticleDto selectBoardContent(BoardArticleDto boardDto) throws Exception {
 		
-		return this.boardDao.selectBoardContent(boardDto);
+		return this.boardArticleDao.selectBoardContent(boardDto);
 	}
 	/**
 	 * 이전 글 조회
 	 */
 	@Override
-	public BoardDto selectPrevBoardContent(BoardDto boardDto) throws Exception {
-		return this.boardDao.selectPrevBoardContent(boardDto);
+	public BoardArticleDto selectPrevBoardContent(BoardArticleDto boardDto) throws Exception {
+		return this.boardArticleDao.selectPrevBoardContent(boardDto);
 	}
 	/**
 	 * 다음 글 조회
 	 */
 	@Override
-	public BoardDto selectNextBoardContent(BoardDto boardDto) throws Exception {
-		return this.boardDao.selectNextBoardContent(boardDto);
+	public BoardArticleDto selectNextBoardContent(BoardArticleDto boardDto) throws Exception {
+		return this.boardArticleDao.selectNextBoardContent(boardDto);
+	}
+	
+	@Override
+	public List<BoardArticleDto> selectBoardArticleFive(BoardArticleDto boardDto) throws Exception {
+		return this.boardArticleDao.selectBoardArticleFive(boardDto);
 	}
 }
