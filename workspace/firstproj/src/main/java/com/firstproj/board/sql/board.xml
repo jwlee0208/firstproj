@@ -96,4 +96,14 @@
 		    </if>
 		    
 		</sql>
+		
+		
+		<!-- 5개의 게시글 조회 -->    
+		<select id="selectArticleFive" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">                      
+			<include refid="searchSql"/>                      
+			<include refid="searchConditionSql"/>                         
+			ORDER BY article_id desc                
+			LIMIT 0, 5     
+		</select>		
+		
     </mapper>

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.common.util.SearchCondition;
 
-@Repository("BoardDao")
-public class BoardDao extends SqlSessionDaoSupport{
+@Repository("BoardArticleDao")
+public class BoardArticleDao extends SqlSessionDaoSupport{
 	/**
 	 * 게시판 조회
 	 * @return
@@ -89,5 +89,23 @@ public class BoardDao extends SqlSessionDaoSupport{
 	 */
 	public BoardArticleDto selectNextBoardContent(BoardArticleDto boardDto) throws Exception{
 		return getSqlSession().selectOne("sql.board.selectNextBoardContent", boardDto);
+	}
+	/**
+	 * 다섯개의 게시글 조회
+	 * <pre>
+	 * 1. MethodName	: selectBoardArticleFive
+	 * 2. ClassName		: BoardArticleDao
+	 * 3. Comment		: 
+	 * 4. 작성자			: leejinwon
+	 * 5. 작성일			: 2014. 8. 28. 오후 3:39:03
+	 * </pre>
+	 *   @param boardDto
+	 *   @return
+	 *   @throws Exception
+	 *   @return List<BoardArticleDto>
+	 */
+	public List<BoardArticleDto> selectBoardArticleFive(BoardArticleDto boardDto) throws Exception{
+		return getSqlSession().selectList("sql.board.selectArticleFive", boardDto);
+				
 	}
 }

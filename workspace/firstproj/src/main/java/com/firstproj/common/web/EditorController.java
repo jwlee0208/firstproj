@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.firstproj.board.service.BoardService;
+import com.firstproj.board.service.BoardArticleService;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.FileUtil;
 
@@ -30,7 +30,7 @@ public class EditorController extends BaseController {
     private ServletContext servletContext;
     
 	@Autowired
-	private BoardService boardService;
+	private BoardArticleService boardService;
 	
 	
 	@Resource(name="fileUpload")

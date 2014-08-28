@@ -19,24 +19,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.firstproj.board.dto.BoardArticleDto;
-import com.firstproj.board.service.BoardServiceImpl;
+import com.firstproj.board.service.BoardArticleServiceImpl;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.user.dto.UserDto;
 
 @Controller
 @RequestMapping(value = "/board")
-public class BoardController {
+public class BoardArticleController {
 
 	public static final int DEFAULT_PAGE_NO = 1;
 	public static final int DEFAULT_PAGE_SIZE = 10;
 
-	@Resource(name = "BoardServiceImpl")
-	private BoardServiceImpl boardService;
+	@Resource(name = "BoardArticleServiceImpl")
+	private BoardArticleServiceImpl boardArticleService;
 
 	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardDto) throws Exception {
 //System.out.println(">>> getBoardList()");
-//		List<BoardDto> boardList = boardService.getBoardList();
+//		List<BoardDto> boardList = boardArticleService.getBoardList();
 
 		model = this.getBoardCommonList(request, model, boardDto);
 		
@@ -65,7 +65,7 @@ public class BoardController {
 		paramMap.put("startDate", startDate);
 		paramMap.put("endDate", endDate);
 
-		int totalListCnt = boardService.selectListCnt(paramMap);
+		int totalListCnt = boardArticleService.selectListCnt(paramMap);
 //System.out.println("totalListCnt : " + totalListCnt);
 		// paging condition setting
 		paramMap.put("pageNo", pageNo);
@@ -73,7 +73,7 @@ public class BoardController {
 		paramMap.put("totalListCnt", totalListCnt);
 		paramMap.put("pageSize", DEFAULT_PAGE_SIZE);
 
-		PagedList result = boardService.getBoardPagedList(paramMap);
+		PagedList result = boardArticleService.getBoardPagedList(paramMap);
 
 		model.addAttribute("pagedResult", result);
 		model.addAttribute("boardId", boardId);
@@ -90,11 +90,11 @@ public class BoardController {
 		if(selectedArticleId > 0){
 			boardDto.setArticleId(selectedArticleId);
 			// 글 조회
-			contentInfo = this.boardService.selectBoardContent(boardDto);
+			contentInfo = this.boardArticleService.selectBoardContent(boardDto);
 			// 이전 글 조회
-			prevContentInfo = this.boardService.selectPrevBoardContent(boardDto);
+			prevContentInfo = this.boardArticleService.selectPrevBoardContent(boardDto);
 			// 다음 글 조회
-			nextContentInfo = this.boardService.selectNextBoardContent(boardDto);
+			nextContentInfo = this.boardArticleService.selectNextBoardContent(boardDto);
 		}
 		
 		model.addAttribute("contentInfo", contentInfo);
@@ -140,7 +140,7 @@ public class BoardController {
 			if(bindingResult.hasErrors()){
 				jsonObj.put("validate", false);
 			}else{
-				insertResult = this.boardService.insertBoard(boardDto);
+				insertResult = this.boardArticleService.insertBoard(boardDto);
 			}						
 		}
 		
