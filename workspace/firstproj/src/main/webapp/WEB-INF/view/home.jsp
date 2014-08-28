@@ -37,30 +37,39 @@
 		<h5>자유게시판&nbsp;&nbsp;<small><span onclick="javascript:goList(1);">more+</span></small></h5>
 		<table class="table table-condensed">
 			<colgroup><col width="30%"/><col width="70%"/></colgroup>
-		
-		<c:if test="${null ne articleFive01 && articleFive01.size() > 0}">
+	<c:choose>		
+		<c:when test="${null ne articleFive01 && articleFive01.size() > 0}">
 			<c:forEach var="article" items="${articleFive01}">
 			<tr>
-				<td>${article.createDate}</td>
-				<td>${article.title }</td>
+				<td>${fn:substring(article.createDate, 0, 10)}</td>
+				<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal">${article.title }</span></td>
 			</tr>	
-				 
 			</c:forEach> 
-		</c:if>
+		</c:when>
+		<c:otherwise>
+			<tr><td colspan="2"></td></tr>
+		</c:otherwise>	
+	</c:choose>		
 		</table>
 	</div>
+<!-- 	<div class="col-md-4"></div> -->
 	<div class="col-md-6">
 		<h5>Q&A&nbsp;&nbsp;<small><span onclick="javascript:goList(2);">more+</span></small></h5>
 		<table class="table table-condensed">
 			<colgroup><col width="30%"/><col width="70%"/></colgroup>
-		<c:if test="${null ne articleFive02 && articleFive02.size() > 0}">
+	<c:choose>		
+		<c:when test="${null ne articleFive02 && articleFive02.size() > 0}">
 			<c:forEach var="article" items="${articleFive02}">
 			<tr>
-				<td>${article.createDate}</td>
-				<td>${article.title }</td>
+				<td>${fn:substring(article.createDate, 0, 10)}</td>
+				<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal">${article.title }</span></td>
 			</tr>
 			</c:forEach> 
-		</c:if>	
+		</c:when>	
+		<c:otherwise>
+			<tr><td colspan="2"></td></tr>
+		</c:otherwise>
+	</c:choose>	
 		</table>
 	</div>
 </div>
@@ -73,5 +82,39 @@
 
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/slide/slideshow.js"></script>
 
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width : 700px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body" style="height : 500px; overflow-y:scroll; "></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
+
+
+<script>
+	function goArticleView(articleId){
+		$.ajax({
+			url : '/board/view.page',
+			data : {selectedArticleId : articleId},
+			dataType : 'html',
+			success : function(data){
+				$('.modal-title').html(($(data).find(".panel-title").html()));
+				$('.modal-body').html(($(data).find(".panel-body").html()));
+			}
+		});
+	}
+</script>
+
+
 </html>

@@ -48,9 +48,9 @@
 		<table style="width: 100%;" class="table table-hover">
 			<colgroup>
 				<col width="10%" />
-				<col width="50%" />
-				<col width="20%" />
-				<col width="20%" />
+				<col width="70%" />
+				<col width="10%" />
+				<col width="10%" />
 			</colgroup>
 			<thead>
 				<tr>
@@ -67,7 +67,7 @@
 							<tr>
 								<td>${content.articleId}</td>	
 								<td onclick="javascript:goView('${content.articleId}');">${content.title}</td>
-								<td>${content.createDate}</td>
+								<td>${fn:substring(content.createDate, 0, 10)}</td>
 								<td>${content.authorNm}</td>
 							</tr>
 						</c:forEach>
