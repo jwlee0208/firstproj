@@ -81,6 +81,8 @@
 			    board_id,
 			    title,
 			    content,
+			    file_path, 
+			    original_file_name,
 			    author_id,
 			    author_nm,
 			    create_date

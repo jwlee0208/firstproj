@@ -39,7 +39,16 @@
 			</div>
 			<div class="panel-body" style="min-height: 300px;">
 				${contentInfo.content}
+<c:choose>
+<c:when test="${contentInfo.filePath != null && contentInfo.filePath != ''}">
+				<img src="${pageContext.request.contextPath}${contentInfo.filePath}" alt="" />
+</c:when>
+<c:otherwise>
+				<img src="${pageContext.request.contextPath}/img/no_image.png" alt="" />
+</c:otherwise>
+</c:choose>
 			</div>	
+			
 <!-- 			<div class="panel-footer"> -->
 <!-- 				<ul class="pager"> -->
 <%-- 					<c:if test="${prevContentInfo.articleId ne null}"> --%>
