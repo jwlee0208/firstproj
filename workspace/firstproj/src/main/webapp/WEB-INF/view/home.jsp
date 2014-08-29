@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html ng-app="website">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>AngularJS Animate Slider</title>
 
 
@@ -32,9 +32,9 @@
         </div>
     </nav>
 </div>
-<div class="row">
-	<div class="col-md-6">
-		<h5>자유게시판&nbsp;&nbsp;<small><span onclick="javascript:goList(1);">more+</span></small></h5>
+<div class="row" style="padding-left: 30px; padding-right: 30px;">
+	<div class="col-md-4">
+		<h4>자유게시판&nbsp;&nbsp;<small><span onclick="javascript:goList(1);">more+</span></small></h4>
 		<table class="table table-condensed">
 			<colgroup><col width="30%"/><col width="70%"/></colgroup>
 	<c:choose>		
@@ -52,9 +52,8 @@
 	</c:choose>		
 		</table>
 	</div>
-<!-- 	<div class="col-md-4"></div> -->
-	<div class="col-md-6">
-		<h5>Q&A&nbsp;&nbsp;<small><span onclick="javascript:goList(2);">more+</span></small></h5>
+	<div class="col-md-4">
+		<h4>문의게시판&nbsp;&nbsp;<small><span onclick="javascript:goList(2);">more+</span></small></h4>
 		<table class="table table-condensed">
 			<colgroup><col width="30%"/><col width="70%"/></colgroup>
 	<c:choose>		
@@ -72,6 +71,7 @@
 	</c:choose>	
 		</table>
 	</div>
+	<div class="col-md-4"></div>
 </div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

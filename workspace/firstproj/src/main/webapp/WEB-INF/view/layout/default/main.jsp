@@ -12,10 +12,10 @@
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
-	<div class="container">
-	    <div class="row">	
+	<div class="container-fluid">
+<!-- 	    <div class="row">	 -->
 		<tiles:insertAttribute name="body"/>
-		</div>
+<!-- 		</div> -->
 	</div>	
 	<tiles:insertAttribute name="footer"/>
 </body>
