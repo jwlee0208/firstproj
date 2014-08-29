@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html ng-app="website">
 <head>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AngularJS Animate Slider</title>
 
 
