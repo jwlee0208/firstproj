@@ -16,6 +16,7 @@ $(document).ajaxError(function(event, request){
 
 //파일전송 후 콜백 함수
 function FileuploadCallback(data, state){
+
    if (data=="error"){
       alert("파일전송중 에러 발생!!");
       return false;
@@ -37,54 +38,55 @@ function FileuploadCallback(data, state){
 
 $(function(){
 	   //비동기 파일 전송
-	   var frm=$('#writeFrm'); 
-	   frm.ajaxForm(FileuploadCallback); 
-	   frm.submit(function(){
-		   return false;
-	   }); 
+//	   var frm = $("#writeFrm");
+//	   frm.ajaxForm(FileuploadCallback); 
+//	   frm.submit(function(){
+//		   return false;
+//	   }); 
+	   
+	   $("#saveToWrite").on("click",function(){
+			// 에디터 입력 내용 hidden tag에 setting
+			var content = tinyMCE.get('content').getContent();
+			$("#content").val(content);
+			
+			var thumbImg = $.trim($("#thumbImg").val());
+
+			if(thumbImg.length == 0){
+				// 썸네일 파일 업로드 안할 때 저장
+				$.ajax({
+					url : '/board/insertBoard.json',
+					type : 'post',
+					data : $("#writeFrm").serialize(),
+					dataType : 'json',
+					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+					success : function(data){
+						console.log("data : " + data.result);
+						if(data.result){
+							goList();
+						}else{
+							alert(data.validate);
+						}
+					},
+					error : function(xhr, textStatus, thrownError){
+						console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
+					}
+				});
+				
+			}else{
+				// 썸네일 파일 업로드 할 때 저장
+				var frm = $("#writeFrm");
+				frm.attr("action", '/board/insertBoard');
+				frm.attr("method", "post");
+				frm.ajaxForm(FileuploadCallback); 
+				frm.submit(function(){
+					return false;
+				}); 
+			}
+		});	   
+	   
 });
 
 
 function goList(){
-	var frm = $("#writeFrm");
-	frm.attr("action", "/board/list.page");
-	frm.attr("method", "post");
-	frm.submit();
+	location.href =  "/board/list.page?boardId="+$("#boardId").val();
 } 
-
-function save(){
-	// 에디터 입력 내용 hidden tag에 setting
-	var content = tinyMCE.get('content').getContent();
-	$("#content").val(content);
-	
-	var thumbImg = $.trim($("#thumbImg").val());
-//alert(thumbImg.length);
-//return;
-	if(thumbImg.length == 0){
-		// 썸네일 파일 업로드 안할 때 저장
-		$.ajax({
-			url : '/board/insertBoard.json',
-			type : 'post',
-			data : $("#writeFrm").serialize(),
-			dataType : 'json',
-			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-			success : function(data){
-				console.log("data : " + data.result);
-				if(data.result){
-					goList();
-				}else{
-					alert(data.validate);
-				}
-			},
-			error : function(xhr, textStatus, thrownError){
-				console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
-			}
-		});
-		
-	}else{
-		// 썸네일 파일 업로드 할 때 저장
-		var frm = $('#writeFrm'); 
-		frm.attr("action", '/board/insertBoard');
-		frm.submit(); 
-	}
-}

@@ -79,7 +79,7 @@
 		    </div>
 		    <div class="btn-group">
 <!-- 				 <input type="button" class="btn btn-default pull-right" id="saveToWrite" value="저장"/> -->
-				 <button class="btn btn-default pull-right" id="saveToWrite" onclick="javascript:save();">저장</button>
+				 <button class="btn btn-default pull-right" id="saveToWrite">저장</button>
 		    </div> 
 		</div>
 		

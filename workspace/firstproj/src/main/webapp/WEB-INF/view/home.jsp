@@ -36,41 +36,45 @@
 <div class="row" style="padding-left: 30px; padding-right: 30px;">
 	<div class="col-md-4">
 		<h4>자유게시판&nbsp;&nbsp;<small><span onclick="javascript:goList(1);">more+</span></small></h4>
-		<table class="table table-condensed">
-			<colgroup><col width="30%"/><col width="70%"/></colgroup>
-	<c:choose>		
-		<c:when test="${null ne articleFive01 && articleFive01.size() > 0}">
-			<c:forEach var="article" items="${articleFive01}">
-			<tr>
-				<td>${fn:substring(article.createDate, 0, 10)}</td>
-				<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal">${article.title }</span></td>
-			</tr>	
-			</c:forEach> 
-		</c:when>
-		<c:otherwise>
-			<tr><td colspan="2"></td></tr>
-		</c:otherwise>	
-	</c:choose>		
-		</table>
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<colgroup><col width="30%"/><col width="70%"/></colgroup>
+		<c:choose>		
+			<c:when test="${null ne articleFive01 && articleFive01.size() > 0}">
+				<c:forEach var="article" items="${articleFive01}">
+				<tr>
+					<td>${fn:substring(article.createDate, 0, 10)}</td>
+					<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal">${article.title }</span></td>
+				</tr>	
+				</c:forEach> 
+			</c:when>
+			<c:otherwise>
+				<tr><td colspan="2">데이터가 없습니다.</td></tr>
+			</c:otherwise>	
+		</c:choose>		
+			</table>
+		</div>
 	</div>
 	<div class="col-md-4">
 		<h4>문의게시판&nbsp;&nbsp;<small><span onclick="javascript:goList(2);">more+</span></small></h4>
-		<table class="table table-condensed">
-			<colgroup><col width="30%"/><col width="70%"/></colgroup>
-	<c:choose>		
-		<c:when test="${null ne articleFive02 && articleFive02.size() > 0}">
-			<c:forEach var="article" items="${articleFive02}">
-			<tr>
-				<td>${fn:substring(article.createDate, 0, 10)}</td>
-				<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal">${article.title }</span></td>
-			</tr>
-			</c:forEach> 
-		</c:when>	
-		<c:otherwise>
-			<tr><td colspan="2"></td></tr>
-		</c:otherwise>
-	</c:choose>	
-		</table>
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<colgroup><col width="30%"/><col width="70%"/></colgroup>
+		<c:choose>		
+			<c:when test="${null ne articleFive02 && articleFive02.size() > 0}">
+				<c:forEach var="article" items="${articleFive02}">
+				<tr>
+					<td>${fn:substring(article.createDate, 0, 10)}</td>
+					<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal">${article.title }</span></td>
+				</tr>
+				</c:forEach> 
+			</c:when>	
+			<c:otherwise>
+				<tr><td colspan="2">데이터가 없습니다.</td></tr>
+			</c:otherwise>
+		</c:choose>	
+			</table>		
+		</div>
 	</div>
 	<div class="col-md-4"></div>
 </div>

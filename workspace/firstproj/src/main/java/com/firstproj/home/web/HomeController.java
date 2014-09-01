@@ -37,6 +37,11 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value="/home2.page")
+	public String goHome() throws Exception{		
+		return "home2";
+	}	
+	
 	@RequestMapping(value="/aboutUs.page")
 	public String goAboutUs() throws Exception{
 		return "/info/aboutUs";
