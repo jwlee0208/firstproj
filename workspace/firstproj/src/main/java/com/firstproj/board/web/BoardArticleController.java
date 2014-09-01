@@ -62,8 +62,15 @@ public class BoardArticleController {
 
 		model = this.getBoardCommonList(request, model, boardDto);
 		
+		String page = "board/list";
+		
+		if(boardDto.getBoardId() == 1){
+			page = "board/imageList";
+		}
+		
 //		model.addAttribute("boardList", boardList);
-		return "board/list";
+//		return "board/list";
+		return page;
 	}
 
 	private Model getBoardCommonList(HttpServletRequest request, Model model, BoardArticleDto boardDto) throws Exception{
