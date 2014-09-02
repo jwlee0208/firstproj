@@ -33,47 +33,109 @@
         </div>
     </nav>
 </div>
-<div class="row" style="padding-left: 30px; padding-right: 30px;">
+
+<div class="row" style="padding-left: 40px; padding-right: 30px; ">
 	<div class="col-md-4">
-		<h4>자유게시판&nbsp;&nbsp;<small><span onclick="javascript:goList(1);">more+</span></small></h4>
-		<table class="table table-condensed">
-			<colgroup><col width="30%"/><col width="70%"/></colgroup>
-	<c:choose>		
-		<c:when test="${null ne articleFive01 && articleFive01.size() > 0}">
-			<c:forEach var="article" items="${articleFive01}">
-			<tr>
-				<td>${fn:substring(article.createDate, 0, 10)}</td>
-				<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal">${article.title }</span></td>
-			</tr>	
-			</c:forEach> 
-		</c:when>
-		<c:otherwise>
-			<tr><td colspan="2"></td></tr>
-		</c:otherwise>	
-	</c:choose>		
-		</table>
+		<ul class="nav nav-tabs" role="tablist" id="boardTab">
+			<li id="li_1" class="li"><a>자유게시판&nbsp;&nbsp;<span class="btn btn-default" onclick="javascript:goList(1);">more+</span></a></li>
+			<li id="li_2" class="li"><a>Q&A&nbsp;&nbsp;<span class="btn btn-default" onclick="javascript:goList(2);">more+</span></a></li>
+		</ul>
+		<div class="boardDiv li_1_board" style="display:none; padding-top : 10px;">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<colgroup><col width="30%"/><col width="70%"/></colgroup>
+			<c:choose>		
+				<c:when test="${null ne articleFive01 && articleFive01.size() > 0}">
+					<c:forEach var="article" items="${articleFive01}">
+					<tr>
+						<td>${fn:substring(article.createDate, 0, 10)}</td>
+						<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal">${article.title }</span></td>
+					</tr>	
+					</c:forEach> 
+				</c:when>
+				<c:otherwise>
+					<tr><td colspan="2">데이터가 없습니다.</td></tr>
+				</c:otherwise>	
+			</c:choose>		
+				</table>
+			</div>
+		</div>
+		<div class="boardDiv li_2_board" style="display:none; padding-top : 10px;">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<colgroup><col width="30%"/><col width="70%"/></colgroup>
+			<c:choose>		
+				<c:when test="${null ne articleFive02 && articleFive02.size() > 0}">
+					<c:forEach var="article" items="${articleFive02}">
+					<tr>
+						<td>${fn:substring(article.createDate, 0, 10)}</td>
+						<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal" >${article.title }</span></td>
+					</tr>
+					</c:forEach> 
+				</c:when>	
+				<c:otherwise>
+					<tr><td colspan="2">데이터가 없습니다.</td></tr>
+				</c:otherwise>
+			</c:choose>	
+				</table>		
+			</div>
+		</div>	
 	</div>
-	<div class="col-md-4">
-		<h4>문의게시판&nbsp;&nbsp;<small><span onclick="javascript:goList(2);">more+</span></small></h4>
-		<table class="table table-condensed">
-			<colgroup><col width="30%"/><col width="70%"/></colgroup>
-	<c:choose>		
-		<c:when test="${null ne articleFive02 && articleFive02.size() > 0}">
-			<c:forEach var="article" items="${articleFive02}">
-			<tr>
-				<td>${fn:substring(article.createDate, 0, 10)}</td>
-				<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal">${article.title }</span></td>
-			</tr>
-			</c:forEach> 
-		</c:when>	
-		<c:otherwise>
-			<tr><td colspan="2"></td></tr>
-		</c:otherwise>
-	</c:choose>	
-		</table>
+	<div class="col-md-4">	
+		<div class="embed-responsive embed-responsive-16by9">
+		  	<iframe class="embed-responsive-item" width="420" height="255" src="//www.youtube.com/embed/sD8pJQ_9K4Y" frameborder="0" allowfullscreen></iframe>		
+		</div>
+	</div>	
+	<div class="col-md-4">	
+		Web Crawling Data
 	</div>
-	<div class="col-md-4"></div>
 </div>
+
+<!-- <div class="row"> -->
+<!-- 	<div class="col-md-4"> -->
+<!-- 		<h4>자유게시판&nbsp;&nbsp;<small><span onclick="javascript:goList(1);">more+</span></small></h4> -->
+<!-- 		<div class="table-responsive"> -->
+<!-- 			<table class="table table-striped"> -->
+<%-- 				<colgroup><col width="30%"/><col width="70%"/></colgroup> --%>
+<%-- 		<c:choose>		 --%>
+<%-- 			<c:when test="${null ne articleFive01 && articleFive01.size() > 0}"> --%>
+<%-- 				<c:forEach var="article" items="${articleFive01}"> --%>
+<!-- 				<tr> -->
+<%-- 					<td>${fn:substring(article.createDate, 0, 10)}</td> --%>
+<%-- 					<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal">${article.title }</span></td> --%>
+<!-- 				</tr>	 -->
+<%-- 				</c:forEach>  --%>
+<%-- 			</c:when> --%>
+<%-- 			<c:otherwise> --%>
+<!-- 				<tr><td colspan="2">데이터가 없습니다.</td></tr> -->
+<%-- 			</c:otherwise>	 --%>
+<%-- 		</c:choose>		 --%>
+<!-- 			</table> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- 	<div class="col-md-4"> -->
+<!-- 		<h4>문의게시판&nbsp;&nbsp;<small><span onclick="javascript:goList(2);">more+</span></small></h4> -->
+<!-- 		<div class="table-responsive"> -->
+<!-- 			<table class="table table-striped"> -->
+<%-- 				<colgroup><col width="30%"/><col width="70%"/></colgroup> --%>
+<%-- 		<c:choose>		 --%>
+<%-- 			<c:when test="${null ne articleFive02 && articleFive02.size() > 0}"> --%>
+<%-- 				<c:forEach var="article" items="${articleFive02}"> --%>
+<!-- 				<tr> -->
+<%-- 					<td>${fn:substring(article.createDate, 0, 10)}</td> --%>
+<%-- 					<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal" >${article.title }</span></td> --%>
+<!-- 				</tr> -->
+<%-- 				</c:forEach>  --%>
+<%-- 			</c:when>	 --%>
+<%-- 			<c:otherwise> --%>
+<!-- 				<tr><td colspan="2">데이터가 없습니다.</td></tr> -->
+<%-- 			</c:otherwise> --%>
+<%-- 		</c:choose>	 --%>
+<!-- 			</table>		 -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- 	<div class="col-md-4"></div> -->
+<!-- </div> -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
@@ -101,9 +163,22 @@
 </div>
 
 </body>
-
-
 <script>
+	$().ready(function(){
+		$("#li_1").addClass("active");
+		
+		$(".li_1_board").show();
+		
+		$("#boardTab .li").on("click", function(){
+			$(".li").removeClass("active");
+			$(".boardDiv").hide();
+			
+			$("#" + $(this).attr("id")).addClass("active");
+			$("." + $(this).attr("id") + "_board").show();
+		});
+	});
+
+
 	function goArticleView(articleId){
 		$.ajax({
 			url : '/board/view.page',

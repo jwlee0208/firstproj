@@ -30,6 +30,7 @@
 	  <li class="secondBranch active">${boardName}</li>
 	</ol>		
 	
+	
 <!-- 	<h3 class="sub-header">글 목록</h3> -->
 	<form id="boardFrm" name="boardFrm" method="post">
 	
@@ -40,47 +41,38 @@
 	<c:set var="list" value="${boardList}" />
 	<div class="table-responsive" id="listDiv">
 		<!-- paging에 필요한 파라미터 -->
-		<input type="hidden" id="pageNo" name="pageNo" value="${pagedResult.pageNo}" /> 
-		<input type="hidden" id="totalListCnt" name="totalListCnt" value="${pagedResult.totalListCnt}" /> 
-		<input type="hidden" id="totalPageCnt" name="totalPageCnt" value="${pagedResult.totalPageCnt}" /> 
-		<input type="hidden" id="startPageNo" name="startPageNo" value="${pagedResult.startPageNo}" /> 
-		<input type="hidden" id="pageSize" name="pageSize" value="${pagedResult.pageSize}" />
-
-		<table style="width: 100%;" class="table table-hover">
-			<colgroup>
-				<col width="10%" />
-				<col width="70%" />
-				<col width="10%" />
-				<col width="10%" />
-			</colgroup>
-			<thead>
-				<tr>
-					<th>게시글 아이디</th>
-					<th>제목</th>
-					<th>작성일자</th>
-					<th>작성자</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:choose>
-					<c:when test="${null ne pagedResult.articleList && pagedResult.articleList.size() > 0}">
-						<c:forEach var="content" items="${pagedResult.articleList}">
-							<tr>
-								<td>${content.articleId}</td>	
-								<td onclick="javascript:goView('${content.articleId}');">${content.title}</td>
-								<td>${fn:substring(content.createDate, 0, 10)}</td>
-								<td>${content.authorNm}</td>
-							</tr>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<tr class="list-group-item">
-							<td colspan="3">작성된 내용이 없습니다.</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-			</tbody>
-		</table>
+		<input type="hidden" id="pageNo" 		name="pageNo" 		value="${pagedResult.pageNo}" /> 
+		<input type="hidden" id="totalListCnt" 	name="totalListCnt" value="${pagedResult.totalListCnt}" /> 
+		<input type="hidden" id="totalPageCnt" 	name="totalPageCnt" value="${pagedResult.totalPageCnt}" /> 
+		<input type="hidden" id="startPageNo"	name="startPageNo" 	value="${pagedResult.startPageNo}" /> 
+		<input type="hidden" id="pageSize" 		name="pageSize" 	value="${pagedResult.pageSize}" />
+		
+		<ul class="media-list">
+<c:choose>
+	<c:when test="${null ne pagedResult.articleList && pagedResult.articleList.size() > 0}">
+		<c:forEach var="content" items="${pagedResult.articleList}">
+		
+			<li class="media">
+				<a class="pull-left" href="javascript:;">
+			<c:choose>
+				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img data-src="holder.js/64x64" src="${pageContext.request.contextPath}${content.filePath}" alt="" class="media-object" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goView('${content.articleId}');" data-toggle="modal" data-target="#myModal" width="64px" height="64px"/></c:when>
+				<c:otherwise><img data-src="holder.js/64x64" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="media-object" onclick="javascript:goView('${content.articleId}');" data-toggle="modal" data-target="#myModal" width="64px" height="64px"/></c:otherwise>
+			</c:choose>									
+				</a>
+				 <div class="media-body" onclick="javascript:goView('${content.articleId}');">
+				 	<h4 class="media-heading"><small>${fn:substring(content.createDate, 0, 10)}</small>&nbsp;&nbsp;&nbsp;${content.title}</h4>
+				 	<p>${fn:substring(content.contentText, 0, 50)}</p>
+				 </div>
+			</li>
+		</c:forEach>
+	</c:when>
+	<c:otherwise>
+			<li class="media">	
+				<h4 class="media-heading">등록된 내용이 없습니다.</h4>
+			</li>			
+	</c:otherwise>
+</c:choose>						
+		</ul>
 	</div>
 	</form>
 	<!-- paging area -->                                                

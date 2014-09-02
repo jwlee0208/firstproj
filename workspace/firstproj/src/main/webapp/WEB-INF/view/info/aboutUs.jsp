@@ -47,7 +47,11 @@
 		</ul>
 
 		<div class="tabDiv tab1" style="padding-top: 20px;">
-<!-- 			<h2>Introduction</h2> -->
+			<div class="jumbotron">
+				<h1>Introduction Our Organization</h1>
+				<p>Simply<br/>Steadly<br/>Smartly</p>
+				<p class="btn btn-primary btn-lg" role="button">See more</p>
+			</div>
 		</div>		
 		<div class="tabDiv tab2" style="padding-top: 20px;">
 <!-- 			<h2>History</h2> -->

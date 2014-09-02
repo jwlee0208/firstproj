@@ -17,7 +17,7 @@
 
 </head>
 <body>
-	<form id="writeFrm" name="writeFrm" method="post" role="form">
+	<form id="writeFrm" name="writeFrm" method="post" role="form" enctype="multipart/form-data">
 	
 	<input type="hidden" id="authorId" name="authorId" value="jwlee"/>
 	<input type="hidden" id="authorNm" name="authorNm" value="jinwon"/>
@@ -61,6 +61,10 @@
 						<th><div class="form-group">내용</div></th>
 						<td><div class="form-group"><textarea class="form-control tinymce" id="content" name="content" ></textarea></div></td>				
 					</tr>
+					<tr>
+						<td><div class="form-group">썸네일 업로드</div></td>
+						<td><div class="form-group"><input type="file" id="thumbImg" name="thumbImg"></div></td><!--  accept="image/x-png, image/gif, image/jpeg, image/jpg" -->
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -74,7 +78,8 @@
 				<input type="button" class="btn btn-default" id="cancelToWrite" value="취소"/>           
 		    </div>
 		    <div class="btn-group">
-				 <input type="button" class="btn btn-default pull-right" id="saveToWrite" value="저장"/>
+<!-- 				 <input type="button" class="btn btn-default pull-right" id="saveToWrite" value="저장"/> -->
+				 <button class="btn btn-default pull-right" id="saveToWrite">저장</button>
 		    </div> 
 		</div>
 		

@@ -34,7 +34,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-touch.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
 
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/slide/autoSlideShow.js"></script>
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/slide/slideshow.js"></script>
 
 </body>
 </html>

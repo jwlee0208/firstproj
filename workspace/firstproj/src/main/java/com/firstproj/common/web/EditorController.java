@@ -19,7 +19,7 @@ import com.firstproj.board.service.BoardArticleService;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.FileUtil;
 
-@Controller
+@Controller("EditorController")
 public class EditorController extends BaseController {
 	private static final Logger logger = LoggerFactory.getLogger(EditorController.class);
 	public static final long MAX_UPLOAD_FILE_SIZE = 20480000;
@@ -47,7 +47,10 @@ public class EditorController extends BaseController {
     public StringBuffer imageadd(MultipartFile imageFile) throws Exception {
 		
 		System.out.println("imageadd");
-		
+		System.out.println("" + imageFile.getOriginalFilename());
+		System.out.println("" + imageFile.getName());
+		System.out.println("" + imageFile.getSize());
+		System.out.println("" + imageFile.getBytes());
     	StringBuffer sb = this.fileUploadByEditor(imageFile);
 		return sb;
     }
@@ -74,6 +77,9 @@ public class EditorController extends BaseController {
 				} 
 				System.out.println("imageFile : " + imageFile);
 				String fileRealPath = fileUpload.uploadFile(imageFile);
+				
+				System.out.println("fileRealPath : " + fileRealPath);
+				
 				//boardStory.setThumbnail1(fileRealPath);
 				//sb.append(imageFile.getOriginalFilename());
 				sb.append(fileRealPath);

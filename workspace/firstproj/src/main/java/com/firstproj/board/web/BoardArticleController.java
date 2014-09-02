@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import junit.textui.ResultPrinter;
 import net.sf.json.JSONObject;
 
 import org.jboss.logging.Param;
@@ -17,10 +18,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import ch.qos.logback.classic.Logger;
 
 import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.board.service.BoardArticleServiceImpl;
+import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.PagedList;
+import com.firstproj.common.web.EditorController;
 import com.firstproj.user.dto.UserDto;
 
 @Controller
@@ -30,8 +36,24 @@ public class BoardArticleController {
 	public static final int DEFAULT_PAGE_NO = 1;
 	public static final int DEFAULT_PAGE_SIZE = 10;
 
+	// Related to image upload
+	public static final long MAX_UPLOAD_FILE_SIZE = 20480000;
+	public static final String FILE_EXTENSIONS_IMAGES = "jpg, jpeg, png, gif, bmp";
+	public static final int DB_RESULT_SUCCESS = 1;
+	
+	public static final int DEFAULT_THUMBNAIL_IMAGE_WIDTH = 314;
+	public static final int DEFAULT_THUMBNAIL_IMAGE_HEIGHT = 166;
+
+	
 	@Resource(name = "BoardArticleServiceImpl")
 	private BoardArticleServiceImpl boardArticleService;
+	
+	@Resource(name="fileUpload")
+	private FileUpload fileUpload;
+	
+	@Resource(name = "EditorController")
+	private EditorController editorController;
+	
 
 	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardDto) throws Exception {
@@ -40,8 +62,17 @@ public class BoardArticleController {
 
 		model = this.getBoardCommonList(request, model, boardDto);
 		
+		String page = "board/list";
+		
+		if(boardDto.getBoardId() == 1){
+			page = "board/imageList";
+		}else if(boardDto.getBoardId() == 2){
+			page = "board/imageList2";
+		}
+		
 //		model.addAttribute("boardList", boardList);
-		return "board/list";
+//		return "board/list";
+		return page;
 	}
 
 	private Model getBoardCommonList(HttpServletRequest request, Model model, BoardArticleDto boardDto) throws Exception{
@@ -57,6 +88,10 @@ public class BoardArticleController {
 
 		int listRowCnt = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
 
+		if(boardDto.getBoardId() == 1){
+			listRowCnt = 9;
+		}
+		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// searching condition setting
 		paramMap.put("boardId", boardId);
@@ -126,16 +161,18 @@ public class BoardArticleController {
 	@RequestMapping(value = "/insertBoard.json")
 	@ResponseBody
 	public JSONObject insertBoard(@Valid BoardArticleDto boardDto, BindingResult bindingResult, HttpSession session) throws Exception {
-
+System.out.println("boardDto 1 : " + boardDto.toString());	
 		JSONObject jsonObj = new JSONObject();
 		int insertResult = 0;
 
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
 		
 		if(null != sessionInfo){
-		
+
 			boardDto.setAuthorId(sessionInfo.getUserId());
 			boardDto.setAuthorNm(sessionInfo.getUserNm());
+	
+System.out.println("boardDto 2 : " + boardDto.toString());			
 			
 			if(bindingResult.hasErrors()){
 				jsonObj.put("validate", false);
@@ -146,5 +183,26 @@ public class BoardArticleController {
 		
 		jsonObj.put("result", (insertResult > 0) ? true : false);
 		return jsonObj;
+	}
+	
+	@RequestMapping(value = "/insertBoard")
+	@ResponseBody
+	public String insertBoardAndFile(@Valid BoardArticleDto boardDto, BindingResult bindingResult, HttpSession session, Model model) throws Exception {
+		
+		int insertResult = 0;
+		MultipartFile imageFile = boardDto.getThumbImg();
+		
+		String imageUploadResult = fileUpload.uploadFile(imageFile);	// editorController.imageadd(imageFile).toString();
+		String filePath = "";
+		if(!imageUploadResult.equals("fileSizeError") && !imageUploadResult.equals("fileExtensionError")){
+			filePath = imageUploadResult;
+			
+			boardDto.setFilePath(filePath);
+			boardDto.setOriginalFileName(imageFile.getOriginalFilename());
+
+			insertResult = this.boardArticleService.insertBoard(boardDto);
+		}
+//		model.addAttribute("result", imageUploadResult);
+		return imageUploadResult;
 	}
 }

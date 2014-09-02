@@ -40,6 +40,7 @@
 			<div class="panel-body" style="min-height: 300px;">
 				${contentInfo.content}
 			</div>	
+			
 <!-- 			<div class="panel-footer"> -->
 <!-- 				<ul class="pager"> -->
 <%-- 					<c:if test="${prevContentInfo.articleId ne null}"> --%>
