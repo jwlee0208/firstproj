@@ -66,6 +66,8 @@ public class BoardArticleController {
 		
 		if(boardDto.getBoardId() == 1){
 			page = "board/imageList";
+		}else if(boardDto.getBoardId() == 2){
+			page = "board/imageList2";
 		}
 		
 //		model.addAttribute("boardList", boardList);

@@ -21,17 +21,21 @@
 </script>
 </head>
 <body>
-	<h1 id="btn-groups" class="page-header">Board</h1>
+<c:set var="boardName" value=""/>
+<c:if test="${boardId eq 1}"><c:set var="boardName" value="자유게시판"/></c:if>
+<c:if test="${boardId eq 2}"><c:set var="boardName" value="Q&A"/></c:if>
+<c:if test="${boardId eq 3}"><c:set var="boardName" value="기타게시판"/></c:if>	
+
+	<div class="page-header">
+	  <h1>BOARD&nbsp;&nbsp;<small>${boardName}</small></h1>
+	</div>	
 	
 	<ol class="breadcrumb">
 	  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
-<!-- 		  <li>게시판</li> -->
-	  <li class="secondBranch active">
-			<c:if test="${boardId eq 1}">자유게시판</c:if>
-			<c:if test="${boardId eq 2}">Q&A</c:if>
-			<c:if test="${boardId eq 3}">기타게시판</c:if>		  
-	  </li>
+	  <li><a>Board</a></li>
+	  <li class="secondBranch active">${boardName}</li>
 	</ol>		
+		
 	
 			
 	
@@ -63,7 +67,7 @@
 				<div class="thumbnail">
 					
 			<c:choose>
-				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img data-src="holder.js/233x101" src="${pageContext.request.contextPath}${content.filePath}" alt="" class="img-thumbnail" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goArticleView('${content.articleId}');" onedata-toggle="modal" data-target="#myModal" width="400px" height="200px"/></c:when>
+				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img data-src="holder.js/233x101" src="${pageContext.request.contextPath}${content.filePath}" alt="" class="img-thumbnail" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal" width="400px" height="200px"/></c:when>
 				<c:otherwise><img data-src="holder.js/233x101" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="img-thumbnail" onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal" width="400px" height="200px"/></c:otherwise>
 			</c:choose>					
 					
@@ -83,63 +87,10 @@
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
-						
-						작성된 내용이 없습니다.
-						
+						작성된 내용이 없습니다.		
 	</c:otherwise>
 </c:choose>
 		</div>
-<!-- 		<table style="width: 100%;" class="table table-hover"> -->
-<%-- 			<colgroup> --%>
-<%-- 				<col width="10%" /> --%>
-<%-- 				<col width="10%" /> --%>
-<%-- 				<col width="60%" /> --%>
-<%-- 				<col width="10%" /> --%>
-<%-- 				<col width="10%" /> --%>
-<%-- 			</colgroup> --%>
-<!-- 			<thead> -->
-<!-- 				<tr> -->
-<!-- 					<th class="text-center">게시글 아이디</th> -->
-<!-- 					<th class="text-center">이미지</th> -->
-<!-- 					<th>제목</th> -->
-<!-- 					<th class="text-center">작성일자</th> -->
-<!-- 					<th class="text-center">작성자</th> -->
-<!-- 				</tr> -->
-<!-- 			</thead> -->
-<!-- 			<tbody> -->
-<%-- 				<c:choose> --%>
-<%-- 					<c:when test="${null ne pagedResult.articleList && pagedResult.articleList.size() > 0}"> --%>
-<%-- 						<c:forEach var="content" items="${pagedResult.articleList}"> --%>
-<!-- 							<tr> -->
-<%-- 								<td class="text-center">${content.articleId}</td>	 --%>
-<!-- 								<td> -->
-<%-- <c:choose> --%>
-<%-- <c:when test="${content.filePath != null && content.filePath != ''}"> --%>
-<%-- 				<img src="${pageContext.request.contextPath}${content.filePath}" alt="" class="img-thumbnail"/> --%>
-<%-- </c:when> --%>
-<%-- <c:otherwise> --%>
-<%-- 				<img src="${pageContext.request.contextPath}/img/no_image.png" alt="" /> --%>
-<%-- </c:otherwise> --%>
-<%-- </c:choose> --%>
-<!-- 								</td>								 -->
-<%-- 								<td onclick="javascript:goView('${content.articleId}');"> --%>
-<%-- 									${content.title} --%>
-<%-- 									<h3><small>${fn:substring(content.content, 0, 100)}</small></h3>	 --%>
-<!-- 								</td> -->
-<%-- 								<td class="text-center">${fn:substring(content.createDate, 0, 10)}</td> --%>
-<%-- 								<td class="text-center">${content.authorNm}</td> --%>
-<!-- 							</tr> -->
-<%-- 						</c:forEach> --%>
-<%-- 					</c:when> --%>
-<%-- 					<c:otherwise> --%>
-<!-- 						<tr class="list-group-item"> -->
-<!-- 							<td colspan="5">작성된 내용이 없습니다.</td> -->
-<!-- 						</tr> -->
-<%-- 					</c:otherwise> --%>
-<%-- 				</c:choose> --%>
-<!-- 			</tbody> -->
-<!-- 		</table> -->
-	
 	</form>
 	<!-- paging area -->                                                
 	<c:set var="totalListCnt" value="${pagedResult.totalListCnt}"/>

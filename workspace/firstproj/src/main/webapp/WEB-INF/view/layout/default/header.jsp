@@ -28,28 +28,42 @@ ul { padding: 0; }
 		          </ul>
 		        </li>				
 
-				<li <c:if test="${param.menuId eq 4}">class="active"</c:if>><a href="javascript:void(0);">Site Map</a></li>
+				
 			</ul>
-			
-			
-<%-- 				<li <c:if test="${param.menuId eq 1}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goList(1);">자유게시판</a></li> --%>
-<%-- 				<li <c:if test="${param.menuId eq 2}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goList(2);">Q&A</a></li> --%>
-<%-- 				<li <c:if test="${param.menuId eq 3}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goList(3);">기타게시판</a></li> --%>			
-						
-			<ul class="nav navbar-nav navbar-right">	
+<!-- 			<ul class="nav navbar-nav navbar-right"> -->
+<!-- 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> -->
+<%-- 				<li <c:if test="${param.menuId eq 4}">class="active"</c:if>><a href="javascript:void(0);">Site Map</a></li> --%>
+<!-- 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> -->
+<!-- 			</ul> -->
+			</div>
+
+			<form class="navbar-form navbar-right" role="search">
 	<c:choose>
 		<c:when test="${null eq userInfo}">
-				<li <c:if test="${param.menuId eq 6}">class="active"</c:if>><a onclick="javascript:goRegist(6);">Regist</a></li>
-				<li <c:if test="${param.menuId eq 7}">class="active"</c:if>><a onclick="javascript:goLogin(7);">Sign in</a></li>
+			<button type="button" class="btn btn-default" onclick="javascript:goRegist(6);">Regist</button>
+			<a onclick="javascript:goLogin(7);" class="btn btn-default">Sign in</a>
 		</c:when>	
 		<c:otherwise>
-				<li class="active"><a href="javascript:;">[ ${userInfo.userNm} ]</a></li>
-				<li><a href="javascript:'" onclick="javascript:logout();">logout</a></li>
+			Signed in as "<a href="#" class="navbar-link">${userInfo.userNm}</a>"
+	        <button type="button" class="btn btn-default" onclick="javascript:logout();">logout</button>				
 		</c:otherwise>
 
-	</c:choose>		
-				<li>&nbsp;&nbsp;&nbsp;</li>
-			</ul>	
+	</c:choose>	
+			</form>				
+<!-- 			<ul class="nav navbar-nav navbar-right">	 -->
+<%-- 	<c:choose> --%>
+<%-- 		<c:when test="${null eq userInfo}"> --%>
+<%-- 				<li <c:if test="${param.menuId eq 6}">class="active"</c:if>><a onclick="javascript:goRegist(6);" class="btn btn-default">Regist</a></li> --%>
+<%-- 				<li <c:if test="${param.menuId eq 7}">class="active"</c:if>><a onclick="javascript:goLogin(7);" class="btn btn-default">Sign in</a></li> --%>
+<%-- 		</c:when>	 --%>
+<%-- 		<c:otherwise> --%>
+<%-- 				<li class="active"><a href="javascript:;">[ ${userInfo.userNm} ]</a></li> --%>
+<!-- 				<li><a href="javascript:'" onclick="javascript:logout();"><span class="btn btn-default">logout</span></a></li> -->
+<%-- 		</c:otherwise> --%>
+
+<%-- 	</c:choose>		 --%>
+<!-- 				<li>&nbsp;&nbsp;&nbsp;</li> -->
+<!-- 			</ul>	 -->
 		</div>
 	</div>
 </nav>	
