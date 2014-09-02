@@ -86,6 +86,10 @@ public class BoardArticleController {
 
 		int listRowCnt = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
 
+		if(boardDto.getBoardId() == 1){
+			listRowCnt = 9;
+		}
+		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// searching condition setting
 		paramMap.put("boardId", boardId);

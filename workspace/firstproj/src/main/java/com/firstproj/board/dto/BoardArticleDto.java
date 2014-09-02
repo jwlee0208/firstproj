@@ -84,6 +84,11 @@ public class BoardArticleDto {
 	public void setOriginalFileName(String originalFileName) {
 		this.originalFileName = originalFileName;
 	}
+	
+	public String getContentText(){
+		return content.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+	}
+	
 	@Override
 	public String toString() {
 		return "BoardArticleDto [articleId=" + articleId + ", boardId="
