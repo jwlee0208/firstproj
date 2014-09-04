@@ -54,7 +54,7 @@ $(function(){
 			if(thumbImg.length == 0){
 				// 썸네일 파일 업로드 안할 때 저장
 				$.ajax({
-					url : '/board/insertBoard.json',
+					url : '/board/article/insertBoard.json',
 					type : 'post',
 					data : $("#writeFrm").serialize(),
 					dataType : 'json',
@@ -75,7 +75,7 @@ $(function(){
 			}else{
 				// 썸네일 파일 업로드 할 때 저장
 				var frm = $("#writeFrm");
-				frm.attr("action", '/board/insertBoard');
+				frm.attr("action", '/board/article/insertBoard');
 				frm.attr("method", "post");
 				frm.ajaxForm(FileuploadCallback); 
 				frm.submit(function(){
@@ -88,5 +88,5 @@ $(function(){
 
 
 function goList(){
-	location.href =  "/board/list.page?boardId="+$("#boardId").val();
+	location.href =  "/board/article/list.page?boardId="+$("#boardId").val();
 } 

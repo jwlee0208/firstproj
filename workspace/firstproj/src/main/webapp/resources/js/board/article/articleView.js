@@ -22,7 +22,7 @@ function goView(articleId){
 	$("#selectedArticleId").val(articleId);
 	
 	var frm = $("#viewFrm");
-	frm.attr("action", "/board/view.page");
+	frm.attr("action", "/board/article/view.page");
 	frm.attr("method", "post");
 	frm.submit();
 }

@@ -1,5 +1,5 @@
 function goList(boardId){	
-	location.href = "/board/list.page?boardId=" + boardId + "&menuId=" + boardId;
+	location.href = "/board/article/list.page?boardId=" + boardId + "&menuId=" + boardId;
 }
 function goHome(){
 	location.href = "/home.page?menuId=0";

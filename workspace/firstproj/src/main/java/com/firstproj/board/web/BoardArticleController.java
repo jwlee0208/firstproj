@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import junit.textui.ResultPrinter;
 import net.sf.json.JSONObject;
 
 import org.jboss.logging.Param;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import ch.qos.logback.classic.Logger;
 
 import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.board.service.BoardArticleServiceImpl;
@@ -55,19 +52,19 @@ public class BoardArticleController {
 	private EditorController editorController;
 	
 
-	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/article/list.page", method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardDto) throws Exception {
 //System.out.println(">>> getBoardList()");
 //		List<BoardDto> boardList = boardArticleService.getBoardList();
 
 		model = this.getBoardCommonList(request, model, boardDto);
 		
-		String page = "board/list";
+		String page = "board/article/list";
 		
 		if(boardDto.getBoardId() == 1){
-			page = "board/imageList";
+			page = "board/article/imageList";
 		}else if(boardDto.getBoardId() == 2){
-			page = "board/imageList2";
+			page = "board/article/imageList2";
 		}
 		
 //		model.addAttribute("boardList", boardList);
@@ -115,7 +112,7 @@ public class BoardArticleController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/view.page")
+	@RequestMapping(value = "/article/view.page")
 	public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardDto, @Param int selectedArticleId) throws Exception{
 		
 		BoardArticleDto contentInfo = null;
@@ -138,10 +135,10 @@ public class BoardArticleController {
 		
 		model.addAttribute("boardId", boardDto.getBoardId());
 		
-		return "board/view";
+		return "board/article/view";
 	}
 
-	@RequestMapping(value = "/write.page")
+	@RequestMapping(value = "/article/write.page")
 	public String writeBoard(Model model, BoardArticleDto boardDto, HttpSession session) {
 		
 //		System.out.println("session : " + (session == null));
@@ -155,10 +152,11 @@ public class BoardArticleController {
 			return "redirect:/login";
 		}
 		
-		return "board/write";
+		return "board/article/write";
 	}
 
-	@RequestMapping(value = "/insertBoard.json")
+	@SuppressWarnings("serial")
+	@RequestMapping(value = "/article/insertBoard.json", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject insertBoard(@Valid BoardArticleDto boardDto, BindingResult bindingResult, HttpSession session) throws Exception {
 System.out.println("boardDto 1 : " + boardDto.toString());	
@@ -174,10 +172,10 @@ System.out.println("boardDto 1 : " + boardDto.toString());
 	
 System.out.println("boardDto 2 : " + boardDto.toString());			
 			
+			insertResult = this.boardArticleService.insertBoard(boardDto);
+			
 			if(bindingResult.hasErrors()){
 				jsonObj.put("validate", false);
-			}else{
-				insertResult = this.boardArticleService.insertBoard(boardDto);
 			}						
 		}
 		
@@ -185,7 +183,7 @@ System.out.println("boardDto 2 : " + boardDto.toString());
 		return jsonObj;
 	}
 	
-	@RequestMapping(value = "/insertBoard")
+	@RequestMapping(value = "/article/insertBoard")
 	@ResponseBody
 	public String insertBoardAndFile(@Valid BoardArticleDto boardDto, BindingResult bindingResult, HttpSession session, Model model) throws Exception {
 		

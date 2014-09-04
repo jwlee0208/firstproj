@@ -10,31 +10,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/tinymce/tinymce.min.js"></script>
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/common-editor.js"></script>
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/write.js"></script>
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/common.js"></script>
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/create.js"></script>
 
 </head>
 <body>
-	<form id="writeFrm" name="writeFrm" method="post" role="form" enctype="multipart/form-data">
+	<form id="writeFrm" name="writeFrm" method="post" role="form">
 	
-	<input type="hidden" id="authorId" name="authorId" value="jwlee"/>
-	<input type="hidden" id="authorNm" name="authorNm" value="jinwon"/>
+	<input type="hidden" id="boardId"	   		name="boardId"	   		value="${boardInfo.boardId}"/>
+	<input type="hidden" id="createUserId" 		name="createUserId" 	value="${boardInfo.createUserId}"/>
+	<input type="hidden" id="createUserName" 	name="createUserName" 	value="${boardInfo.createUserName }"/>
 	<div class="wrap">
-	<h1 id="btn-groups" class="page-header">Write Content</h1>
+	<h1 id="btn-groups" class="page-header">Create Board</h1>
 	
 	<ol class="breadcrumb">
-	  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
-<!-- 		  <li>게시판</li> -->
-	  <li>
-	  	<a href="javascript:;"> 
-			<c:if test="${boardId eq 1}">자유게시판</c:if>
-			<c:if test="${boardId eq 2}">Q&A</c:if>
-			<c:if test="${boardId eq 3}">기타게시판</c:if>	
-		</a>		  
-	  </li>
-	  <li class="active">글 작성</li>
+	  <li><a>Admin</a></li>
+	  <li><a>게시판</a></li>
+	  <li class="active">게시판 생성</li>
 	</ol>
 		<div class="writeArea list-group-item">
 			<table class="table table-condensed">
@@ -44,42 +35,37 @@
 						<th><div class="form-group">카테고리</div></th>
 						<td>
 							<div class="form-group">
-								<select class="form-control" id="boardId" name="boardId">
-									<option <c:if test='${boardId eq 0}'>selected</c:if> value="0">-선택-</option>
-									<option <c:if test="${boardId eq 1}">selected</c:if> value="1">자유게시판</option>
-									<option <c:if test="${boardId eq 2}">selected</c:if> value="2">Q&A</option>
-									<option <c:if test="${boardId eq 3}">selected</c:if> value="3">기타</option>
+								<select class="form-control" id="boardType" name="boardType">
+									<option>-선택-</option>
+									<option <c:if test='${boardInfo.boardType eq 0}'>selected</c:if> value="0">기본 게시판</option>
+									<option <c:if test="${boardInfo.boardType eq 1}">selected</c:if> value="1">이미지 게시판</option>
+									<option <c:if test="${boardInfo.boardType eq 2}">selected</c:if> value="2">썸네일 게시판</option>
 								</select>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<th><div class="form-group">제목</div></th>
-						<td><div class="form-group"><input type="text" class="form-control" id="title" name="title"/></div></td>
-					</tr>
-					<tr>
-						<th><div class="form-group">내용</div></th>
-						<td><div class="form-group"><textarea class="form-control tinymce" id="content" name="content" ></textarea></div></td>				
-					</tr>
-					<tr>
-						<td><div class="form-group">썸네일 업로드</div></td>
-						<td><div class="form-group"><input type="file" id="thumbImg" name="thumbImg"></div></td><!--  accept="image/x-png, image/gif, image/jpeg, image/jpg" -->
+						<th><div class="form-group">게시판 이름</div></th>
+						<td><div class="form-group"><input type="text" class="form-control" id="boardName" name="boardName" value="${boardInfo.boardName }"/></div></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-<!-- 		<div class="btnArea list-group-item"> -->
-<!-- 			<input type="button" class="btn btn-primary pull-right" id="saveToWrite" value="저장"/> -->
-<!-- 			<input type="button" class="btn" id="cancelToWrite" value="취소"/> -->
-<!-- 		</div> -->
 		
 		<div class="btn-group btn-group-justified" style="padding-top : 20px; padding-bottom : 20px;">
 			<div class="btn-group">
-				<input type="button" class="btn btn-default" id="cancelToWrite" value="취소"/>           
+				<input type="button" class="btn btn-default" id="cancelToCreate" value="취소"/>           
 		    </div>
 		    <div class="btn-group">
-<!-- 				 <input type="button" class="btn btn-default pull-right" id="saveToWrite" value="저장"/> -->
-				 <button class="btn btn-default pull-right" id="saveToWrite">저장</button>
+	<c:choose>
+		<c:when test="${boardInfo ne null && boardInfo ne ''}">
+				 <input type="button"  class="btn btn-default pull-right" onclick="javscript:goBoardModify();" value="저장">		
+		</c:when>
+		<c:otherwise>
+				 <input type="button"  class="btn btn-default pull-right" onclick="javscript:goBoardCreate();" value="저장">		
+		</c:otherwise>
+	</c:choose>			    
+
 		    </div> 
 		</div>
 		

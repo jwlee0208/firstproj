@@ -13,7 +13,6 @@
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/boardList.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
-
 </head>
 <body>
 	<div class="page-header">
@@ -38,6 +37,84 @@
 		<input type="hidden" id="totalPageCnt" 	name="totalPageCnt" value="${pagedResult.totalPageCnt}" /> 
 		<input type="hidden" id="startPageNo" 	name="startPageNo" 	value="${pagedResult.startPageNo}" /> 
 		<input type="hidden" id="pageSize" 		name="pageSize" 	value="${pagedResult.pageSize}" />
+<div class="panel-group" id="accordion">
+				<c:choose>
+					<c:when test="${null ne pagedResult.articleList && pagedResult.articleList.size() > 0}">
+						<c:forEach var="board" items="${pagedResult.articleList}" varStatus="index">
+						  <div class="panel panel-default">
+						    <div class="panel-heading">
+						      <h4 class="panel-title">
+						        <a data-toggle="collapse" data-parent="#accordion" href="#collapse${index.count}">
+						        [${board.boardId}] ${board.boardName}
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapse${index.count}" class="panel-collapse collapse in">
+						      <div class="panel-body">
+
+								<div class="list-group-item">
+									<table class="table table-condensed">
+										<colgroup><col width="10%"/><col width="90%"/></colgroup>
+										<tbody>
+											<tr>
+												<th><div class="form-group">게시판 이름</div></th>
+												<td><div class="form-group">${board.boardName }</div></td>
+											</tr>
+						
+											<tr>
+												<th><div class="form-group">카테고리</div></th>
+												<td>
+													<div class="form-group">
+														<c:if test="${board.boardType eq 0}">기본 게시판</c:if>
+														<c:if test="${board.boardType eq 1}">이미지 게시판</c:if>
+														<c:if test="${board.boardType eq 2}">썸네일 게시판</c:if>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th><div class="form-group">생성일</div></th>
+												<td><div class="form-group">${fn:substring(board.createDate, 0, 10)}</div></td>				
+											</tr>
+											<tr>
+												<th><div class="form-group">수정일</div></th>
+												<td><div class="form-group"><c:choose><c:when test="${board.modifyDate ne null}">${fn:substring(board.modifyDate, 0, 10)}</c:when><c:otherwise>-</c:otherwise></c:choose></div></td>				
+											</tr>
+											<tr>
+												<th><div class="form-group">생성자</div></th>
+												<td><div class="form-group">${board.createUserName}(${board.createUserId})</div></td>				
+											</tr>
+											<tr>
+												<th><div class="form-group">수정자</div></th>
+												<td><div class="form-group"><c:choose><c:when test="${board.modifyUserId ne null}">${board.modifyUserName}(${board.modifyUserId})</c:when><c:otherwise>-</c:otherwise></c:choose></div></td>				
+											</tr>
+						
+										</tbody>
+									</table>
+								</div>		
+
+								<div class="btn-group btn-group-justified" style="padding-top : 20px; padding-bottom : 20px;">
+									<div class="btn-group">
+										<input type="button" class="btn btn-default pull-right" id="goToModify" value="수정" onclick="javascript:goBoardModify('${board.boardId}');"/>
+									</div>			
+								</div>
+						        
+						      </div>
+						    </div>
+						  </div>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="5">작성된 내용이 없습니다.</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+</div>
+
+
+
+
+
 
 		<table style="width: 100%;" class="table table-hover">
 			<colgroup>

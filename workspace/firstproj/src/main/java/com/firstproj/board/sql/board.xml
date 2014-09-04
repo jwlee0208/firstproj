@@ -1,115 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
     
     <mapper namespace="sql.board">
-        <insert id="insertBoard" parameterType="board.boardArticleDto" useGeneratedKeys="true" keyProperty="boardId">
-            INSERT INTO test.TB_BOARD_ARTICLE
-				(
-				board_id,
-				title,
-				content,
-				file_path,
-				original_file_name,
-				author_id,
-				author_nm,
-				create_date)
-			VALUES (
-				#{boardId},
-				#{title },
-				#{content },
-				#{filePath},
-				#{originalFileName},
-				#{authorId },
-				#{authorNm },
-				CURRENT_TIMESTAMP())
-        </insert>
-        <select id="selectList" parameterType="board.boardArticleDto" resultType="board.boardArticleDto">
-            <include refid="searchSql"/>   
-			<include refid="searchConditionSql"/>    
-        </select>
-		<!-- 페이징 위한 리스트 갯수 조회 -->    
-		<select id="selectListCount" resultType="Integer" parameterType="searchCondition">        
-			SELECT count(*) AS totalCnt         
-			FROM test.tb_board_article         
-			<include refid="searchConditionSql"/>    
 
-		</select>      
-		
-		<!-- 리스트 조회 -->    
-		<select id="selectBoardList" resultType="board.boardArticleDto" parameterType="searchCondition">                      
-			<include refid="searchSql"/>                      
-			<include refid="searchConditionSql"/>                         
-			ORDER BY article_id desc                
-			LIMIT #{startRow}, #{endRow}     
-		</select>		
-		
-		<!--  게시글 조회 -->
-		<select id="selectBoardContent" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">
-		    <include refid="searchSql"/>
-		    <include refid="searchContentSql"/>
+		<select id="selectBoardList" parameterType="searchCondition" resultType="board.boardDto">
+			<include refid="selectBoard"/>
+			<include refid="searchConditionSql"/>     
+			ORDER BY board_id desc                
+			LIMIT #{startRow}, #{endRow}     			
 		</select>
+
+		<!-- 페이징 위한 리스트 갯수 조회 -->    
+		<select id="selectListCount" parameterType="searchCondition" resultType="Integer">        
+			SELECT count(*) AS totalCnt         
+			FROM test.tb_board         
+			<include refid="searchConditionSql"/>    
+		</select>      
+
+		
+		<insert id="insertBoardInfo" parameterType="board.boardDto" useGeneratedKeys="true" keyProperty="boardId">
+			INSERT INTO test.TB_BOARD
+			( board_name
+			, board_type
+			, create_user_id
+			, create_user_name
+			, create_date)
+			VALUES
+			( #{boardName} 
+			, #{boardType} 
+			, #{createUserId} 
+			, #{createUserName} 
+			, CURRENT_TIMESTAMP())
+		</insert>
+		
+		<update id="updateBoardInfo" parameterType="board.boardDto">
+			UPDATE test.TB_BOARD
+				SET
+					board_name 			= #{boardName} ,
+					board_type 			= #{boardType} ,
+					modify_user_id 		= #{modifyUserId} ,
+					modify_user_name 	= #{modifyUserName} ,
+					modify_date 		= CURRENT_TIMESTAMP()
+			WHERE board_id = #{boardId}
+		</update>
+
+
+		<!--  게시글 조회 -->
+		<select id="selectBoardInfo" resultType="board.boardDto" parameterType="board.boardDto">
+		    <include refid="selectBoard"/>
+		    <include refid="searchConditionSql"/>
+		</select>
+		
 		<!-- 이전 글 조회 -->
-		<select id="selectPrevBoardContent" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">
-		 	 <include refid="searchSql"/>  
-				where
-					board_id = ${boardId}	
+		<select id="selectPrevBoardInfo" resultType="board.boardDto" parameterType="board.boardDto">
+		 	 <include refid="selectBoard"/>  
+				where 
+					1 = 1 	
 				<![CDATA[ 
-					and article_id > ${articleId}
+					and board_id > ${boardId}
 				]]>
-				order by article_id asc
+				order by board_id asc
 				limit 1	 	 		    
 		</select>
 		<!-- 다음 글 조회 -->
-		<select id="selectNextBoardContent" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">
-		 	 <include refid="searchSql"/>  
+		<select id="selectNextBoardInfo" resultType="board.boardDto" parameterType="board.boardDto">
+		 	 <include refid="selectBoard"/>  
 				where 
-					board_id = ${boardId}
+					1 = 1
 				<![CDATA[ 
-					and article_id < ${articleId}
+					and board_id < ${boardId}
 				]]>	
-				order by article_id desc
+				order by board_id desc
 				limit 1	 	 		    
 		</select>
 		
-		
-					
-		<sql id="searchSql">
-			SELECT 
-			    article_id,
-			    board_id,
-			    title,
-			    content,
-			    file_path, 
-			    original_file_name,
-			    author_id,
-			    author_nm,
-			    create_date
-			FROM test.TB_BOARD_ARTICLE
+		<sql id="selectBoard">
+			SELECT 	board_id,
+				    board_name,
+				    board_type,
+				    create_user_id,
+				    create_user_name,
+				    create_date,
+				    modify_user_id,
+				    modify_user_name,
+				    modify_date
+			FROM test.TB_BOARD		
 		</sql>
+		
 		<sql id="searchConditionSql">
-			WHERE 1 = 1	
-				<if test="boardId > 0">
-				and board_id = #{boardId}    
-				</if>
-			     	    
-		</sql> 
-		<sql id="searchContentSql">
 		    WHERE 1 = 1
-		    <if test="articleId > 0">
-		        and article_id = #{articleId}
+		    <if test="boardId > 0">
+		        and board_id = #{boardId}
 		    </if>
 		    
 		</sql>
 		
-		
-		<!-- 5개의 게시글 조회 -->    
-		<select id="selectArticleFive" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">                      
-			<include refid="searchSql"/>                      
-			<include refid="searchConditionSql"/>                         
-			ORDER BY article_id desc                
-			LIMIT 0, 5     
-		</select>		
-		
     </mapper>
+    

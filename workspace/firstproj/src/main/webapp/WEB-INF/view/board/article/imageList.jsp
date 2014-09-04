@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-<script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/list.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleList.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
@@ -96,7 +96,7 @@
 	<c:set var="totalListCnt" value="${pagedResult.totalListCnt}"/>
 	<c:set var="totalPageCnt" value="${pagedResult.totalPageCnt}"/>
 	                                                                                                      
-	<jsp:include page="./paging.jsp" flush="false">
+	<jsp:include page="../../common/paging.jsp" flush="false">
 	    <jsp:param value="${totalPageCnt}"            name="totalPageCnt"/>
 	    <jsp:param value="${pagedResult.pageNo}"      name="pageNo"/>
 	    <jsp:param value="${pagedResult.startPageNo}" name="startPageNo"/>
@@ -142,7 +142,7 @@ $().ready(function(){
 	
 function goArticleView(articleId){
 	$.ajax({
-		url : '/board/view.page',
+		url : '/board/article/view.page',
 		data : {selectedArticleId : articleId},
 		dataType : 'html',
 		success : function(data){

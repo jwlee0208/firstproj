@@ -1,6 +1,6 @@
 $(document).on("ready", function() {
 	$("input[name='goToWrite']").on("click", function() {
-		location.href = "/board/write.page?boardId="+$("#boardId").val();
+		location.href = "/board/article/write.page?boardId="+$("#boardId").val();
 	});
 });
 // 페이지 이동
@@ -11,7 +11,7 @@ function goPage(pageNo) {
 		async : false,
 		type : 'POST',
 		dataType : 'html',
-		url : '/board/list.page',
+		url : '/board/article/list.page',
 		data : $("#boardFrm").serialize(),
 		processData : true,
 		cache : false,
@@ -72,7 +72,7 @@ function goView(articleId){
 	$("#selectedArticleId").val(articleId);
 	
 	var frm = $("#boardFrm");
-	frm.attr("action", "/board/view.page");
+	frm.attr("action", "/board/article/view.page");
 	frm.attr("method", "post");
 	frm.submit();
 }
