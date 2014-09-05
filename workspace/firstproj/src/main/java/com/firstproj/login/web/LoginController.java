@@ -32,7 +32,13 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login")
-	public String login() throws Exception{
+	public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception{
+		
+		String referer = request.getHeader("Referer");
+System.out.println(" >>> REFER : " + referer);				
+//		return "redirect:" + referer;
+
+		model.addAttribute("prevPage", referer);
 		return "/login";
 	}
 	
@@ -65,8 +71,7 @@ public class LoginController {
 			if(isOk){
 				resultCode 	= "LOGIN_0000";
 				resultMsg 	= "checked";
-			
-				
+							
 			}else{
 				resultCode 	= "LOGIN_0002";
 				resultMsg 	= "invalid_passwd";

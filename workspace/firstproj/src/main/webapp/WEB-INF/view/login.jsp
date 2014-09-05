@@ -40,7 +40,8 @@ $(function(){
 
 					var code = data.resultCode;
 					if(code == 'LOGIN_0000'){
-						location.href="/home.page";
+						location.href = $("#prevPage").val();
+							//"/home.page";
 					}else{
 						alert(data.resultMsg);
 						$("#passwd").focus();
@@ -58,7 +59,10 @@ $(function(){
 </head>
 <body>
 	<form class="form-horizontal" id="loginForm" name="loginForm" method="post">
-	<h1 id="btn-groups" class="page-header">Sign in</h1>
+		
+		<input type="hidden" id="prevPage" name="prevPage" value="${prevPage}"/>
+		
+		<h1 id="btn-groups" class="page-header">Sign in</h1>
 	
 		<div class="form-group">
 			<label for="userId" class="col-sm-2 control-label">아이디</label>

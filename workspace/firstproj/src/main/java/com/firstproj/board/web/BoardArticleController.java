@@ -27,7 +27,7 @@ import com.firstproj.common.web.EditorController;
 import com.firstproj.user.dto.UserDto;
 
 @Controller
-@RequestMapping(value = "/board")
+@RequestMapping(value = "/board/article")
 public class BoardArticleController {
 
 	public static final int DEFAULT_PAGE_NO = 1;
@@ -52,7 +52,7 @@ public class BoardArticleController {
 	private EditorController editorController;
 	
 
-	@RequestMapping(value = "/article/list.page", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardDto) throws Exception {
 //System.out.println(">>> getBoardList()");
 //		List<BoardDto> boardList = boardArticleService.getBoardList();
@@ -112,7 +112,7 @@ public class BoardArticleController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/article/view.page")
+	@RequestMapping(value = "/view.page")
 	public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardDto, @Param int selectedArticleId) throws Exception{
 		
 		BoardArticleDto contentInfo = null;
@@ -138,7 +138,7 @@ public class BoardArticleController {
 		return "board/article/view";
 	}
 
-	@RequestMapping(value = "/article/write.page")
+	@RequestMapping(value = "/write.page")
 	public String writeBoard(Model model, BoardArticleDto boardDto, HttpSession session) {
 		
 //		System.out.println("session : " + (session == null));
@@ -156,7 +156,7 @@ public class BoardArticleController {
 	}
 
 	@SuppressWarnings("serial")
-	@RequestMapping(value = "/article/insertBoard.json", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertBoard.json", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject insertBoard(@Valid BoardArticleDto boardDto, BindingResult bindingResult, HttpSession session) throws Exception {
 System.out.println("boardDto 1 : " + boardDto.toString());	
@@ -183,7 +183,7 @@ System.out.println("boardDto 2 : " + boardDto.toString());
 		return jsonObj;
 	}
 	
-	@RequestMapping(value = "/article/insertBoard")
+	@RequestMapping(value = "/insertBoard")
 	@ResponseBody
 	public String insertBoardAndFile(@Valid BoardArticleDto boardDto, BindingResult bindingResult, HttpSession session, Model model) throws Exception {
 		

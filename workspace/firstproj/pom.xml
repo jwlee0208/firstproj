@@ -29,6 +29,8 @@
 
 		<!-- Logging -->
 		<logback.version>1.0.13</logback.version>
+		
+		<aspectj.version>1.7.1</aspectj.version>
 		<slf4j.version>1.7.5</slf4j.version>
 
 		<!-- Test -->
@@ -91,6 +93,25 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${spring-framework.version}</version>
 		</dependency>
+
+		<!-- AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
+
 
 		<!-- Logging with SLF4J & LogBack -->
 	    <dependency>

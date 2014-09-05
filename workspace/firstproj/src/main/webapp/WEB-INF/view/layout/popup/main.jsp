@@ -7,18 +7,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <title>진원's Web</title>
 <%@ include file="/WEB-INF/view/common/include.jsp"%>
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/ui.menu.js"></script> --%>
-
 </head>
 <body>
-	<tiles:insertAttribute name="header"/>
-	
-	<tiles:insertAttribute name="menu"/>
-	
-	<div class="container-fluid">
-		<tiles:insertAttribute name="body"/>
-	</div>	
-	<tiles:insertAttribute name="footer"/>
+<%-- 	<tiles:insertAttribute name="body"/>	 --%>
+	<tiles:insertDefinition name=".pop"/>
 </body>
-
 </html>

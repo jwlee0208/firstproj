@@ -37,12 +37,12 @@ public class EditorController extends BaseController {
 	private FileUpload fileUpload;
 	
 	
-	@RequestMapping(value = "/{path}/imageUpload.pop", method = RequestMethod.GET)
+	@RequestMapping(value = {"/{path}/imageUpload.pop", "/{path1}/{path2}/imageUpload.pop"}, method = RequestMethod.GET)
 	public String imageUploadForm(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		return "/common/popImageUpload"; 
 	}
 	
-	@RequestMapping(value="/{path}/imageuploadaction", method=RequestMethod.POST)
+	@RequestMapping(value = {"/{path}/imageuploadaction", "/{path1}/{path2}/imageuploadaction"}, method=RequestMethod.POST)
     @ResponseBody
     public StringBuffer imageadd(MultipartFile imageFile) throws Exception {
 		
@@ -91,7 +91,7 @@ public class EditorController extends BaseController {
 	}
 	
 	
-	@RequestMapping(value="/{path}/imagedeleteaction", method=RequestMethod.POST)
+	@RequestMapping(value = {"/{path}/imagedeleteaction", "/{path1}/{path2}/imagedeleteaction"}, method=RequestMethod.POST)
 	@ResponseBody
     public String imagedelete(String fileName, Model model) throws Exception {
     	String realPath = servletContext.getRealPath("/resources" + fileName);

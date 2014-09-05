@@ -47,8 +47,8 @@ public class BoardController {
 		}
 
 		model = this.getBoardCommonList(request, model, boardDto);
-		return "board/list";
-//		return "board/accordionList";
+//		return "board/list";
+		return "board/accordionList";
 	}
 	
 	private Model getBoardCommonList(HttpServletRequest request, Model model, BoardDto boardDto) throws Exception{
@@ -209,7 +209,6 @@ public class BoardController {
 //				model.addAttribute("validate", false);
 				jsonObj.put("validate", false);
 			}						
-
 		}
 
 		System.out.println(">>> boardDto  : " + boardDto.toString());
