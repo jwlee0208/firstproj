@@ -2,13 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
 <script type="text/javascript" src="http://apis.daum.net/maps/maps2.js?apikey=98f284673f90ce9e7af4fa2aa4776e3465dc16f3"></script>
 
 <!-- <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=98f284673f90ce9e7af4fa2aa4776e3465dc16f3" charset="utf-8"></script>  -->
@@ -29,8 +22,7 @@
 		$(".secondBranch").html(innerHtml);
 	}
 </script>
-</head>
-<body>
+<div class="container">
 		<h1 id="btn-groups" class="page-header">ABOUT US</h1>
 		
 		<ol class="breadcrumb">
@@ -78,7 +70,7 @@
 				
 			</div>
 		</div>
-</body>
+</div>		
 <script>
 $(document).on("ready", function(){
 	goToAUTab(1);
@@ -100,5 +92,4 @@ var map = new DMap("map",{width:700,height:400});
 	var m = new DMark(new DLatLng(37.50696024199666, 127.06154455833864));
 	map.addOverlay(m);
 
-</script>
-</html>		  	  
+</script>	  	  

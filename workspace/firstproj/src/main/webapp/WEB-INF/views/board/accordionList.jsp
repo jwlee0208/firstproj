@@ -3,18 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
-<!DOCTYPE>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/boardList.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
-</head>
-<body>
+
 	<div class="page-header">
  	  <h1>BOARD LIST</h1>
 	</div>	
@@ -180,6 +172,3 @@
 			<input type="submit" class="btn btn-default pull-right" value="게시판 만들기" name="goToWrite" />
 		</div>
 	</div>	
-
-</body>
-</html>

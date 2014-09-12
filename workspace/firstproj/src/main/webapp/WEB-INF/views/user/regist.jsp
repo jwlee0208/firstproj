@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container">
+	
+	
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form">
 		<h1 id="btn-groups" class="page-header">Regist</h1>
 		<div class="form-group">
@@ -61,6 +64,7 @@
 			</div>					
 		</div>
 	</form>
+</div>
 </body>
 <script>
 $().ready(function() {

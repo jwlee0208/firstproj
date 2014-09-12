@@ -54,7 +54,7 @@ $(function(){
 </script>
 <div class="container">
 
-<div class="loginWrap" style="padding-top : 170px;">
+<div class="loginWrap" style="padding-top : 170px; padding-left : 200px; padding-right : 200px; ">
     <div class="loginArea">
 	<form class="form-horizontal" id="loginForm" name="loginForm" method="post">
 		
