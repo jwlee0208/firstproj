@@ -9,10 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AngularJS Animate Slider</title>
 
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/slideshow.css">
+    <style>
+		.jumbotron {background: '${pageContext.request.contextPath}/img/slideshow/img_00.jpg'}
+    </style>
 </head>
-
+<body>
 <body ng-controller="MainCtrl">
 <div class="slider">
     <img ng-repeat="slide in slides" class="slide slide-animation nonDraggableImage"

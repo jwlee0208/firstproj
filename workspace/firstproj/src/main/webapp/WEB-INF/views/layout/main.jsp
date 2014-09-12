@@ -8,7 +8,7 @@
 <meta name="keywords" content="JW">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
-<%@ include file="/WEB-INF/view/common/include.jsp"%>
+<%@ include file="/WEB-INF/views/common/include.jsp"%>
 </head>
 <body>
 	<tiles:insertAttribute name="body"/>

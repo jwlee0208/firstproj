@@ -3,18 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
-<!DOCTYPE>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleList.js"></script>
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
-</head>
-<body>
 <c:set var="boardName" value=""/>
 <c:if test="${boardId eq 1}"><c:set var="boardName" value="자유게시판"/></c:if>
 <c:if test="${boardId eq 2}"><c:set var="boardName" value="Q&A"/></c:if>
@@ -103,5 +93,3 @@
 			</div>
 		</div>	
 <!-- 	</fieldset> -->
-</body>
-</html>

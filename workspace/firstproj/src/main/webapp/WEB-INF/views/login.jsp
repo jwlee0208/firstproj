@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+    pageEncoding="UTF-8"%>  
 <script>
 $(document).on("ready", function() {
 
@@ -19,7 +13,9 @@ $(document).on("ready", function() {
 			passwd : {required : '패스워드를 입력해 주세요.'}
 		}	
 	});
-// 	$("input:blank").css("background-color", "#efefef");
+	
+	$("#userId").focus();
+// 	$("input:blank").css("background-color", "#efefef");					
 });
 
 
@@ -56,8 +52,10 @@ $(function(){
 	});
 });
 </script>
-</head>
-<body>
+<div class="container">
+
+<div class="loginWrap" style="padding-top : 170px;">
+    <div class="loginArea">
 	<form class="form-horizontal" id="loginForm" name="loginForm" method="post">
 		
 		<input type="hidden" id="prevPage" name="prevPage" value="${prevPage}"/>
@@ -82,5 +80,6 @@ $(function(){
 		    </div> 
 		</div>
 	</form>
-</body>
-</html>
+	</div>
+</div>	
+</div>

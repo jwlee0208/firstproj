@@ -47,14 +47,20 @@
 		</ul>
 
 		<div class="tabDiv tab1" style="padding-top: 20px;">
-			<div class="jumbotron">
-				<h1>Introduction Our Organization</h1>
-				<p>Simply<br/>Steadly<br/>Smartly</p>
-				<p class="btn btn-primary btn-lg" role="button">See more</p>
-			</div>
+<!-- 			<div class="jumbotron"> -->
+<!-- 				<h1>Introduction Our Organization</h1> -->
+<!-- 				<p class="btn btn-primary btn-lg" role="button">See more</p> -->
+<!-- 			</div> -->
 		</div>		
 		<div class="tabDiv tab2" style="padding-top: 20px;">
-<!-- 			<h2>History</h2> -->
+			<div style="padding-left: 50px; padding-right: 50px;">
+				<h1>1996. <small>Aug. Stopping Baseball As Player</small></h1><br/>
+				<h1>1994. <small>Aug. Picked Up National Baseball Team</small></h1><br/>
+				<h1>1994. <small>Mar. Matriculation Into Junior High School</small></h1><br/>
+				<h1>1992. <small>Sep. Beginning Baseball As Player </small></h1><br/>
+				<h1>1988. <small>Mar. Matriculation Into Elementary School</small></h1><br/>
+				<h1>1983. <small>Feb. Born In Seoul</small></h1>			
+			</div>
 		</div>
 		<div class="tabDiv tab3" style="padding-top: 20px;">
 <!-- 			<h2>Organization</h2> -->

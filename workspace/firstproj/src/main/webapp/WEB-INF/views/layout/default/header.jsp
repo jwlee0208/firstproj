@@ -6,6 +6,4 @@
 <style>
 ul { padding: 0; }
 </style>
-<nav>
-header
-</nav>	
+<div style="height : 3px; background-color:maroon;"></div>

@@ -13,10 +13,19 @@ ul { padding: 0; }
 <nav class="navbar navbar-default" role="navigation">
 	<input type="hidden" id="menuId" name="menuId" value="${param.menuId}"/>
     <div class="container-fluid">
-    	<div class="navbar-header"><a class="navbar-brand" href="javascript:;" onclick="javascript:goHome();">firstproj</a></div>
+    	<div class="navbar-header"><a class="navbar-brand" href="javascript:;" onclick="javascript:goHome();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nevertheless The First Project is..&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
 		<div class="collapse2 nav-collapse">
 			<ul class="nav navbar-nav">
-				<li <c:if test="${param.menuId eq 0}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goHome();">Home</a></li>
+ 				<li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home<span class="caret"></span></a>
+		          <ul class="dropdown-menu" role="menu">
+					<li <c:if test="${param.menuId eq 0}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goHome();">Home</a></li>
+					<li><a href="${pageContext.request.contextPath}/home2.page">Home2</a></li>
+					<li><a href="${pageContext.request.contextPath}/home3.page">Home3</a></li>
+					<li><a href="${pageContext.request.contextPath}/home4.page">Home4</a></li>
+		          </ul>
+		        </li>				
+<%-- 				<li <c:if test="${param.menuId eq 0}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goHome();">Home</a></li> --%>
 				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();">About Us</a></li>
  				<li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board<span class="caret"></span></a>
@@ -24,7 +33,6 @@ ul { padding: 0; }
 					<li <c:if test="${param.menuId eq 1}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goList(1);">자유게시판</a></li>
 					<li <c:if test="${param.menuId eq 2}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goList(2);">Q&A</a></li>
 					<li <c:if test="${param.menuId eq 3}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goList(3);">기타게시판</a></li>
-
 		          </ul>
 		        </li>				
 

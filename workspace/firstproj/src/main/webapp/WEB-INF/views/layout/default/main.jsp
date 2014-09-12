@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <title>진원's Web</title>
-<%@ include file="/WEB-INF/view/common/include.jsp"%>
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/ui.menu.js"></script> --%>
+<%@ include file="/WEB-INF/views/common/include.jsp"%>
 
 </head>
 <body>

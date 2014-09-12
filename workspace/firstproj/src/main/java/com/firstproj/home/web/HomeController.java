@@ -42,6 +42,44 @@ public class HomeController {
 		return "home2";
 	}	
 	
+	@RequestMapping(value="/home3.page")
+	public String goHome3(Model model) throws Exception{
+		
+		BoardArticleDto boardDto01 = new BoardArticleDto();
+		boardDto01.setBoardId(1);
+		
+		List<BoardArticleDto> getBoardArticleFive01 = this.boardArticleService.selectBoardArticleFive(boardDto01);
+
+		BoardArticleDto boardDto02 = new BoardArticleDto();
+		boardDto02.setBoardId(2);
+		
+		List<BoardArticleDto> getBoardArticleFive02 = this.boardArticleService.selectBoardArticleFive(boardDto02);
+
+		model.addAttribute("articleFive01", getBoardArticleFive01);
+		model.addAttribute("articleFive02", getBoardArticleFive02);
+		
+		return "home3";
+	}	
+	
+	@RequestMapping(value="/home4.page")
+	public String goHome4(Model model) throws Exception{
+		
+		BoardArticleDto boardDto01 = new BoardArticleDto();
+		boardDto01.setBoardId(1);
+		
+		List<BoardArticleDto> getBoardArticleFive01 = this.boardArticleService.selectBoardArticleFive(boardDto01);
+
+		BoardArticleDto boardDto02 = new BoardArticleDto();
+		boardDto02.setBoardId(2);
+		
+		List<BoardArticleDto> getBoardArticleFive02 = this.boardArticleService.selectBoardArticleFive(boardDto02);
+
+		model.addAttribute("articleFive01", getBoardArticleFive01);
+		model.addAttribute("articleFive02", getBoardArticleFive02);
+		
+		return "home4";
+	}
+	
 	@RequestMapping(value="/aboutUs.page")
 	public String goAboutUs() throws Exception{
 		return "/info/aboutUs";
