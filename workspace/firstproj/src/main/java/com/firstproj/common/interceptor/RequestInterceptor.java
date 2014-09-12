@@ -66,7 +66,7 @@ public class RequestInterceptor {
 //			tilesUrlBasedViewResolver.setTilesDefinitionName("popup");        	
 //        }
 		
-System.out.println("requestInterceptor result: " + uri.indexOf(".page") +", " + uri.indexOf("pop"));		
+//System.out.println("requestInterceptor result: " + uri.indexOf(".page") +", " + uri.indexOf("pop"));		
 		
 		if(uri.indexOf(".page") > 0){
 			tilesUrlBasedViewResolver.clearCache();

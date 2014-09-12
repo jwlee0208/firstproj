@@ -26,7 +26,7 @@ function FileuploadCallback(data, state){
    var dataList = "<div id=\"imageUpload\">";
    var hostname = location.host;
 console.log("contextPath : " + getContextPath());   
-   dataList += "<img src='http://" + hostname + data + "' alt=''  style='width:120px;height:88px' />";
+   dataList += "<img src='http://" + hostname + data + "' alt='' class=\"img-thumbnail\"/>";
 //   dataList += "<img src='http://" + hostname + getContextPath() + data + "' alt=''  style='width:120px;height:88px' />";
    //dataList += "<a href='##' class='btn2' onclick='imgSelect(\"" + data + "\")'>사용</a> ";
    //dataList += "<a href='##' class='btn2' onclick='deleteImg(\"" + data + "\")'>삭제</a>";
@@ -34,14 +34,15 @@ console.log("contextPath : " + getContextPath());
    $('#imageUploadList').empty();
    $('#imageUploadList').append(dataList);
    
-   var btn_footerList = "<footer class=\"footer btn_bx border0\">";
-   btn_footerList += "<button type=\"button\" class=\"btn\" onclick='deleteImg(\"" + data + "\")'>삭제</button>";
-   btn_footerList += "<button type=\"button\" class=\"btn red\" onclick='imgSelect(\"" + data + "\")'>사용</button>";
-   btn_footerList += "</footer>";
+   var btn_footerList = ""; // "<footer class=\"footer btn_bx border0\">";
+   btn_footerList += "<div class=\"btn-group\"><button type=\"button\" class=\"btn  btn-default btn-lg\" onclick='deleteImg(\"" + data + "\")'>삭제</button></div>";
+   btn_footerList += "<div class=\"btn-group\"><button type=\"button\" class=\"btn  btn-default btn-lg\" onclick='imgSelect(\"" + data + "\")'>사용</button></div>";
+   btn_footerList += "<div class=\"btn-group\"><button type=\"button\" class=\"btn  btn-default btn-lg\" onclick='window.close()'>닫기</button></div>";
+//   btn_footerList += "</footer>";
    
    $('#btn_footerList').empty();
    $('#btn_footerList').append(btn_footerList);
-   $('#btn_footerList').attr("style", "display:");
+   $('#btn_footerList').show();
 }
 
 $(function(){
