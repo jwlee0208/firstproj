@@ -32,9 +32,9 @@
 		</ol>		
 		
 		<ul class="nav nav-tabs nav-justified" role="tablist">
-			<li class="li li_1"><a href="#" onclick="javascript:goToAUTab(1);">Introduction</a></li>
+<!-- 			<li class="li li_1"><a href="#" onclick="javascript:goToAUTab(1);">Introduction</a></li> -->
 			<li class="li li_2"><a href="#" onclick="javascript:goToAUTab(2);">History</a></li>
-			<li class="li li_3"><a href="#" onclick="javascript:goToAUTab(3);">Organization</a></li>
+<!-- 			<li class="li li_3"><a href="#" onclick="javascript:goToAUTab(3);">Organization</a></li> -->
 			<li class="li li_4"><a href="#" onclick="javascript:goToAUTab(4);">Location</a></li>
 		</ul>
 
@@ -73,7 +73,7 @@
 </div>		
 <script>
 $(document).on("ready", function(){
-	goToAUTab(1);
+	goToAUTab(2);
 });
 
 // var map;

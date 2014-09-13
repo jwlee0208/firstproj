@@ -78,9 +78,7 @@ $(function(){
 				frm.attr("action", '/board/article/insertBoard');
 				frm.attr("method", "post");
 				frm.ajaxForm(FileuploadCallback); 
-				frm.submit(function(){
-					return false;
-				}); 
+				frm.submit(); 
 			}
 		});	   
 	   

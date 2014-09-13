@@ -3,22 +3,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/slideshow.css">
-<style>
-	.jumbotron {background: '/img/slideshow/img_00.jpg'}
-</style>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-touch.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
+
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/slide/slideshow.js"></script>
+
+
 	<div class="jumbotron">
-<!-- 		<div class="container"> -->
 		<h1>Back To The Simple</h1>
 		<p>What is your important point. Have you ever lost a way to goal.</p>
-<!-- 		<p>We always try to concentrate 3 point.</p> -->
-<!-- 		<p>- What is original.</p> -->
+		<p>We always try to concentrate 3 point.</p>
+		<p>- What is original.</p>
 		<p>- How can we approach to goal simply.</p>
-<!-- 		<p>- Is this comfortable.</p> -->
+		<p>- Is this comfortable.</p>
 		<p>...</p>
-		<p class="btn btn-primary btn-lg" role="button">See more</p>
+		<p class="btn btn-primary btn-lg" role="button" onclick="javascript:goInfo();">See more</p>
 	</div>
-
-
+	
 	<div class="row-fluid" style="padding-left: 40px; padding-right: 30px; " ng-app="website">
 		<!-- left area -->
 		<div class="col-md-4">
@@ -70,7 +75,7 @@
 		<!-- center area -->
 		<div class="col-md-4">	
 			<div class="embed-responsive embed-responsive-16by9">
-				<iframe class="embed-responsive-item" width="420" height="255" src="//www.youtube.com/embed/7X9QYfwTuE8" frameborder="0" allowfullscreen></iframe>
+				<iframe class="embed-responsive-item" width="400" height="255" src="//www.youtube.com/embed/7X9QYfwTuE8" frameborder="0" allowfullscreen></iframe>
 	<!-- 		  	<iframe class="embed-responsive-item" width="420" height="255" src="//www.youtube.com/embed/sD8pJQ_9K4Y" frameborder="0" allowfullscreen></iframe>		 -->
 			</div>
 		</div>	
@@ -97,15 +102,14 @@
 			</div>
 		</div>
 	</div>
-<!-- </div> -->
+	
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-animate.min.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-touch.min.js"></script> -->
+<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script> -->
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-touch.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
-
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/slide/slideshow.js"></script>
+<%-- <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/slide/slideshow.js"></script> --%>
 
 
 <!-- Modal -->

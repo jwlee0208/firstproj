@@ -54,6 +54,7 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	
 	@Override
 	public int insertBoard(BoardArticleDto boardDto) throws Exception{
+		System.out.println(">>> In ServiceImpl : " + boardDto.toString());
 		return this.boardArticleDao.insertBoard(boardDto);
 	}
 	/**

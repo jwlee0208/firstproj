@@ -68,8 +68,7 @@
 				<input type="button" class="btn btn-default" id="cancelToWrite" value="취소"/>           
 		    </div>
 		    <div class="btn-group">
-<!-- 				 <input type="button" class="btn btn-default pull-right" id="saveToWrite" value="저장"/> -->
-				 <input type="button" class="btn btn-default pull-right" id="saveToWrite" value="저장"/>
+				<input type="button" class="btn btn-default pull-right" id="saveToWrite" value="저장"/>
 		    </div> 
 		</div>
 		
