@@ -1,5 +1,6 @@
 package com.firstproj.common.util;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUpload{
 	private Logger logger = Logger.getLogger(this.getClass());
 	private ServletContext servletContext;
+	public static final String FILE_EXTENSIONS_IMAGES = "jpg, jpeg, png, gif, bmp";
 	
 	private String destinationUrl;
 	
@@ -29,8 +31,8 @@ public class FileUpload{
 	public FileUpload(ServletContext servletContext) {
 		this.servletContext = servletContext;
 	}
-	
-	public String uploadFile(MultipartFile attachFile) throws Exception {
+
+	public String uploadFile(MultipartFile attachFile, int width, int height) throws Exception{
 		String uploadFilePath = null;
 		String newFolderDir = DateUtil.formatDateToday() + "/" ;    	
 		//String newFileName = attachFile.getOriginalFilename();
@@ -56,17 +58,6 @@ public class FileUpload{
 		fileRealPath.append(newFileName);
 		logger.info(fileRealPath.toString());
 		
-		
-		/*
-		String newFolderDir = DateUtil.formatDateToday() + "/" ;    	
-		String newFileName = newFolderDir + attachFile.getOriginalFilename();
-		String thumbnailUrl = destinationUrl + "/" + newFileName;
-		fileDir.append(destinationUrl);
-		fileDir.append("/");
-		fileDir.append(newFolderDir);
-		logger.info("[destinationUrl]" + destinationUrl);
-		String fileRealPath = servletContext.getRealPath(destinationUrl) + "/" + newFileName;
-		*/
 		try {
 			logger.info("[fileRealPath]" + fileRealPath);
 			file = makeFolder(fileRealPath.toString());
@@ -76,10 +67,38 @@ public class FileUpload{
 
 		try {
 			attachFile.transferTo(file);
+			
+			// 파일 확장자 구하기
+			String extType = attachFile.getOriginalFilename().substring(attachFile.getOriginalFilename().lastIndexOf(".") + 1);
+System.out.println("extType : " + extType +", yn : " + (FILE_EXTENSIONS_IMAGES.matches(".*" + extType.trim() + ".*")) + ", width/height : " + width +"/" + height);			
+			// 이미지 파일인 경우
+			if(FILE_EXTENSIONS_IMAGES.matches(".*" + extType.trim() + ".*")){
+				//  image file resizing
+				if(width > 0 && height > 0){
+					BufferedImage imageObj = ImageIO.read(file);
+									
+					// 이미지 타입
+					int imageType = imageObj.getType();
+					
+					// Image Resizing
+					BufferedImage resizedImage = new BufferedImage(width, height, imageType);
+					
+					Graphics2D g = resizedImage.createGraphics();
+					g.drawImage(imageObj, 0, 0, width, height, null);
+					g.dispose();
+				}				
+			}
+			
 		} catch(Exception e) {
 			logger.info("[upload transferTo Missing]", e);
 		}
 		return thumbnailUrl;
+		
+	}
+	
+	
+	public String uploadFile(MultipartFile attachFile) throws Exception {
+		return this.uploadFile(attachFile, 0, 0);
 	}
 	
 	/*

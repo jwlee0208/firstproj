@@ -19,6 +19,11 @@
      <definition name="login" template="/WEB-INF/views/login.jsp">
           <put-attribute name="body" 	value="" />
      </definition>
+
+     <definition name="/user/regist" template="/WEB-INF/views/user/regist.jsp">
+          <put-attribute name="body" 	value="" />
+     </definition>
+
      
      <definition name=".popup" template="/WEB-INF/views/layout/popup/main.jsp">
      	  <put-attribute name="title" 	value="firstproj" type="string" />

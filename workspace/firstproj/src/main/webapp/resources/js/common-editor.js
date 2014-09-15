@@ -6,8 +6,8 @@ tinyMCE.init({
              "searchreplace wordcount code insertdatetime media nonbreaking",
              "table contextmenu directionality textcolor paste textcolor image youTube"
      ],
-     toolbar1: "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | cut copy paste | bullist numlist | link unlink | inserttime | table | hr | charmap | image media ",
-     toolbar2: "youTube imagepop ", 
+     toolbar1: "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | cut copy paste | bullist numlist | link unlink | inserttime | table | hr | charmap | image media | youTube imagepop",
+//     toolbar2: "youTube imagepop ", 
      menubar: false,
      resize : true,
     

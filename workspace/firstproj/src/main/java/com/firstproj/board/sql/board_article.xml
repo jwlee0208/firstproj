@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
     <mapper namespace="sql.boardArticle">
-        <insert id="insertBoard" parameterType="board.boardArticleDto" useGeneratedKeys="true" keyProperty="articleId">
+        <insert id="insertArticleInfo" parameterType="board.boardArticleDto" useGeneratedKeys="true" keyProperty="articleId">
             INSERT INTO test.TB_BOARD_ARTICLE
 				(
 				board_id,
@@ -14,7 +14,8 @@
 				original_file_name,
 				author_id,
 				author_nm,
-				create_date)
+				create_date,
+				status)
 			VALUES (
 				#{boardId},
 				#{title },
@@ -23,7 +24,8 @@
 				#{originalFileName},
 				#{authorId },
 				#{authorNm },
-				CURRENT_TIMESTAMP())
+				CURRENT_TIMESTAMP(),
+				#{status})
         </insert>
         <select id="selectList" parameterType="board.boardArticleDto" resultType="board.boardArticleDto">
             <include refid="searchSql"/>   
@@ -58,6 +60,7 @@
 				<![CDATA[ 
 					and article_id > ${articleId}
 				]]>
+					and status = 1
 				order by article_id asc
 				limit 1	 	 		    
 		</select>
@@ -69,6 +72,7 @@
 				<![CDATA[ 
 					and article_id < ${articleId}
 				]]>	
+					and status = 1
 				order by article_id desc
 				limit 1	 	 		    
 		</select>
@@ -93,12 +97,13 @@
 				<if test="boardId > 0">
 				and board_id = #{boardId}    
 				</if>
-			     	    
+				and status = 1			     	    
 		</sql> 
 		<sql id="searchContentSql">
 		    WHERE 1 = 1
 		    <if test="articleId > 0">
 		        and article_id = #{articleId}
+		        and status = 1
 		    </if>
 		    
 		</sql>
@@ -112,4 +117,28 @@
 			LIMIT 0, 5     
 		</select>		
 		
+		<!-- 게시글 수정 -->
+		<update id="updateArticleInfo" parameterType="board.boardArticleDto">
+			UPDATE TB_BOARD_ARTICLE
+				SET
+					article_id 			= #{articleId },
+					board_id 			= #{boardId },
+					title 				= #{title },
+					content 			= #{content },
+					file_path 			= #{filePath },
+					original_file_name 	= #{originalFileName },
+					author_id 			= #{authorId },
+					author_nm 			= #{authorNm }
+			WHERE article_id = #{articleId}		
+		</update>
+		<!-- 게시글 삭제 -->		
+		<update id="deleteArticleInfo" parameterType="board.boardArticleDto">
+			UPDATE TB_BOARD_ARTICLE
+				SET
+					STATUS = 0
+			WHERE article_id = #{articleId}					
+		</update>
+<!-- 		<delete id="deleteArticleInfo" parameterType="board.boardArticleDto"> -->
+<!-- 			DELETE FROM TB_BOARD_ARTICLE WHERE ARTICLE_ID = #{articleId} -->
+<!-- 		</delete> -->
     </mapper>

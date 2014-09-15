@@ -4,6 +4,10 @@ $(document).on("ready", function(){
 			goList();
 		}
 	});
+	
+	var className = ($(".thumbImg").hasClass("unset")) ? "unset" : "set";
+	
+	toggleThumbImage(className);
 });
 
 //ajax error check
@@ -54,7 +58,7 @@ $(function(){
 			if(thumbImg.length == 0){
 				// 썸네일 파일 업로드 안할 때 저장
 				$.ajax({
-					url : '/board/article/insertBoard.json',
+					url : '/board/article/insertBoardArticle.json',
 					type : 'post',
 					data : $("#writeFrm").serialize(),
 					dataType : 'json',
@@ -75,12 +79,50 @@ $(function(){
 			}else{
 				// 썸네일 파일 업로드 할 때 저장
 				var frm = $("#writeFrm");
-				frm.attr("action", '/board/article/insertBoard');
+				frm.attr("action", '/board/article/insertBoardArticle');
 				frm.attr("method", "post");
 				frm.ajaxForm(FileuploadCallback); 
 				frm.submit(); 
 			}
 		});	   
+	   
+	   $("#saveToModify").on("click",function(){
+			// 에디터 입력 내용 hidden tag에 setting
+			var content = tinyMCE.get('content').getContent();
+			$("#content").val(content);
+			
+			var thumbImg = $.trim($("#thumbImg").val());
+alert(thumbImg.length);
+			if(thumbImg.length == 0){
+				// 썸네일 파일 업로드 안할 때 저장
+				$.ajax({
+					url : '/board/article/modifyBoardArticle.json',
+					type : 'post',
+					data : $("#writeFrm").serialize(),
+					dataType : 'json',
+					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+					success : function(data){
+						console.log("data : " + data.result);
+						if(data.result){
+							goList();
+						}else{
+							alert(data.validate);
+						}
+					},
+					error : function(xhr, textStatus, thrownError){
+						console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
+					}
+				});
+				
+			}else{
+				// 썸네일 파일 업로드 할 때 저장
+				var frm = $("#writeFrm");
+				frm.attr("action", '/board/article/modifyBoardArticle');
+				frm.attr("method", "post");
+				frm.ajaxForm(FileuploadCallback); 
+				frm.submit(); 
+			}
+		});	   	   
 	   
 });
 
@@ -88,3 +130,17 @@ $(function(){
 function goList(){
 	location.href =  "/board/article/list.page?boardId="+$("#boardId").val();
 } 
+
+function toggleThumbImage(className){
+	
+	$(".thumbImg").hide();
+	
+	$("." + className).show();
+	
+}
+
+function delThumbImage(){
+	$(".unset").remove();
+	toggleThumbImage("set");
+	
+}

@@ -23,6 +23,7 @@ public class BoardArticleDto {
 	private MultipartFile 	thumbImg;
 	private String			filePath;	
 	private String			originalFileName;
+	private int 			status;
 
 	public int getArticleId() {
 		return articleId;
@@ -85,6 +86,12 @@ public class BoardArticleDto {
 		this.originalFileName = originalFileName;
 	}
 	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public String getContentText(){
 		return content.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
 	}
@@ -96,7 +103,7 @@ public class BoardArticleDto {
 				+ ", authorId=" + authorId + ", authorNm=" + authorNm
 				+ ", createDate=" + createDate + ", thumbImg=" + thumbImg
 				+ ", filePath=" + filePath + ", originalFileName="
-				+ originalFileName + "]";
+				+ originalFileName + ", status=" + status + "]";
 	}
-
+	
 }

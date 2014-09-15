@@ -6,7 +6,7 @@
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleView.js"></script>
 <div class="container">
 	<form id="viewFrm" name="viewForm" method="post">
-	<input type="hidden" id="selectedArticleId" 	name="selectedArticleId"/>
+	<input type="hidden" id="selectedArticleId" 	name="selectedArticleId" value="${contentInfo.articleId }"/>
 	<input type="hidden" id="boardId" 				name="boardId" 				value="${contentInfo.boardId}"/>
 	<input type="hidden" id="prevArticleId" 		name="prevArticleId" 		value="${prevContentInfo.articleId}"/>
 	<input type="hidden" id="nextArticleId" 		name="nextArticleId" 		value="${nextContentInfo.articleId}"/>
@@ -63,6 +63,10 @@
 			<div class="btn-group">
 				<input type="button" class="btn btn-default pull-right" id="goToModify" value="수정"/>
 			</div>			
+			<div class="btn-group">
+				<input type="button" class="btn btn-default pull-right" id="goToDelete" value="삭제"/>
+			</div>			
+
 		</div>
 	</form>
 </div>

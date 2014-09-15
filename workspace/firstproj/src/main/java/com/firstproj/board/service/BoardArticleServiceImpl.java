@@ -19,16 +19,16 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	private BoardArticleDao boardArticleDao;
 	
 	@Override
-	public List<BoardArticleDto> getBoardList() throws Exception{
-		return this.boardArticleDao.getBoardList();
+	public List<BoardArticleDto> getBoardArticleList() throws Exception{
+		return this.boardArticleDao.getBoardArticleList();
 	}
 	@Override
-	public int selectListCnt(Map<String, Object> param) throws Exception {                     
-	       return boardArticleDao.selectListCnt(param);      
+	public int selectArticleListCnt(Map<String, Object> param) throws Exception {                     
+	       return boardArticleDao.selectArticleListCnt(param);      
 	}    
 	@Override
-	public PagedList getBoardPagedList(Map<String, Object> paramMap) throws Exception {                              
-        List<?> articleList = this.getBoardList(paramMap);
+	public PagedList getBoardArticlePagedList(Map<String, Object> paramMap) throws Exception {                              
+        List<?> articleList = this.getBoardArticleList(paramMap);
  
         int pageNo       = (Integer) paramMap.get("pageNo");    
         int listRowCnt   = (Integer) paramMap.get("listRowCnt");
@@ -41,7 +41,7 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	    return pagedList;
 	}   
 	@Override
-	public List<BoardArticleDto> getBoardList(Map<String,Object> paramMap) throws Exception {                       
+	public List<BoardArticleDto> getBoardArticleList(Map<String,Object> paramMap) throws Exception {                       
 	       int pageNo     = (Integer) paramMap.get("pageNo");                                   
 	       int listRowCnt = (Integer) paramMap.get("listRowCnt");
 	       int startRow   = PagingUtil.getStartRow(pageNo, listRowCnt);                                        
@@ -49,39 +49,61 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	 
 	       paramMap.put("startRow", startRow);                                     
 	       paramMap.put("endRow", endRow);
-	       return boardArticleDao.selectBoardList(paramMap);            
+	       return boardArticleDao.selectBoardArticleList(paramMap);            
 	} 
-	
+	/**
+	 * 게시글 입력
+	 */
 	@Override
-	public int insertBoard(BoardArticleDto boardDto) throws Exception{
-		System.out.println(">>> In ServiceImpl : " + boardDto.toString());
-		return this.boardArticleDao.insertBoard(boardDto);
+	public int insertBoardArticle(BoardArticleDto boardArticleDto) throws Exception{
+		System.out.println(">>> In ServiceImpl insertBoardArticle : " + boardArticleDto.toString());
+		return this.boardArticleDao.insertBoardArticle(boardArticleDto);
 	}
+	/**
+	 * 게시글 수정
+	 */
+	@Override
+	public int updateBoardArticle(BoardArticleDto boardArticleDto) throws Exception{
+		System.out.println(">>> In ServiceImpl updateBoardArticle : " + boardArticleDto.toString());
+		return this.boardArticleDao.updateBoardArticle(boardArticleDto);
+	}
+	/**
+	 * 게시글 삭제
+	 * @param boardArticleDto
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public int deleteBoardArticle(BoardArticleDto boardArticleDto) throws Exception{
+		return this.boardArticleDao.deleteBoardArticle(boardArticleDto);
+	}
+	
+	
 	/**
 	 * 게시 글 조회
 	 */
 	@Override
-	public BoardArticleDto selectBoardContent(BoardArticleDto boardDto) throws Exception {
+	public BoardArticleDto selectBoardArticle(BoardArticleDto boardArticleDto) throws Exception {
 		
-		return this.boardArticleDao.selectBoardContent(boardDto);
+		return this.boardArticleDao.selectBoardArticle(boardArticleDto);
 	}
 	/**
 	 * 이전 글 조회
 	 */
 	@Override
-	public BoardArticleDto selectPrevBoardContent(BoardArticleDto boardDto) throws Exception {
-		return this.boardArticleDao.selectPrevBoardContent(boardDto);
+	public BoardArticleDto selectPrevBoardArticle(BoardArticleDto boardArticleDto) throws Exception {
+		return this.boardArticleDao.selectPrevBoardArticle(boardArticleDto);
 	}
 	/**
 	 * 다음 글 조회
 	 */
 	@Override
-	public BoardArticleDto selectNextBoardContent(BoardArticleDto boardDto) throws Exception {
-		return this.boardArticleDao.selectNextBoardContent(boardDto);
+	public BoardArticleDto selectNextBoardArticle(BoardArticleDto boardArticleDto) throws Exception {
+		return this.boardArticleDao.selectNextBoardArticle(boardArticleDto);
 	}
 	
 	@Override
-	public List<BoardArticleDto> selectBoardArticleFive(BoardArticleDto boardDto) throws Exception {
-		return this.boardArticleDao.selectBoardArticleFive(boardDto);
+	public List<BoardArticleDto> selectBoardArticleFive(BoardArticleDto boardArticleDto) throws Exception {
+		return this.boardArticleDao.selectBoardArticleFive(boardArticleDto);
 	}
 }
