@@ -2,15 +2,15 @@
 CREATE TABLE `TB_BOARD` (
   `board_id` int(11) NOT NULL AUTO_INCREMENT,
   `board_name` varchar(45) DEFAULT NULL,
-  `board_type` char(1) DEFAULT NULL COMMENT '0 : 기본 게시판, 1: 이미지 게시판',
-  `create_user_id` int(11) DEFAULT NULL,
+  `board_type` char(1) CHARACTER SET latin1 DEFAULT NULL COMMENT '0 : 기본 게시판, 1: 이미지 게시판',
+  `create_user_id` varchar(45) CHARACTER SET latin1 DEFAULT NULL,
   `create_user_name` varchar(45) DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
-  `modify_user_id` int(11) DEFAULT NULL,
+  `modify_user_id` varchar(45) CHARACTER SET latin1 DEFAULT NULL,
   `modify_user_name` varchar(45) DEFAULT NULL,
   `modify_date` datetime DEFAULT NULL,
   PRIMARY KEY (`board_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- tb_board_article table creation
 CREATE TABLE `TB_BOARD_ARTICLE` (
@@ -18,11 +18,14 @@ CREATE TABLE `TB_BOARD_ARTICLE` (
   `board_id` int(11) DEFAULT NULL COMMENT '게시판 아이디',
   `title` varchar(45) DEFAULT NULL COMMENT '게시글 제목\n',
   `content` text COMMENT '게시글 내용\n',
+  `file_path` varchar(200) DEFAULT NULL COMMENT '썸네일 파일 경로\n',
+  `original_file_name` varchar(100) DEFAULT NULL COMMENT '썸네일 파일 명',
   `author_id` varchar(45) DEFAULT NULL COMMENT '작성자 아이디',
   `author_nm` varchar(45) DEFAULT NULL COMMENT '작성자 이름',
   `create_date` datetime DEFAULT NULL COMMENT '작성 일자',
+  `status` int(1) DEFAULT '1' COMMENT '게시글 상태값(0 : 삭제, 1 : 저장, 2 : 임시저장) ',
   PRIMARY KEY (`article_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8;
 
 -- tb_user table creation
 CREATE TABLE `TB_USER` (
