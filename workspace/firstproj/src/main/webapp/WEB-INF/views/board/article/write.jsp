@@ -96,11 +96,57 @@
 								</div>										
 							</c:if>
 							<div class="thumbImg set">
-								<input type="file" id="thumbImg" name="thumbImg">
+								<div class="row">
+									<div class="col-md-4"><input type="file" id="thumbImg" name="thumbImg"></div>
+									<div class="col-md-8">썸네일 사이즈 설정 : 
+										<div class="radio">
+										  <label>
+										    <input type="radio" name="thumbnailSize" id="thumbnailSizeSmall" value="small" checked>
+										    64X64
+										  </label>
+										</div>
+										<div class="radio">
+										  <label>
+										    <input type="radio" name="thumbnailSize" id="thumbnailSizeMiddle" value="middle">
+										    256X256
+										  </label>
+										</div>
+										<div class="radio">
+										  <label>
+										    <input type="radio" name="thumbnailSize" id="optionsRadiosLarge" value="large">
+										    400X400
+										  </label>
+										</div>									
+									
+									</div>
+								</div>
 							</div>				
 						</c:when>
 						<c:otherwise>
-							<input type="file" id="thumbImg" name="thumbImg">			
+								<div class="row">
+									<div class="col-md-4"><input type="file" id="thumbImg" name="thumbImg"></div>
+									<div class="col-md-8">썸네일 사이즈 설정 : 
+										<div class="radio">
+										  <label>
+										    <input type="radio" name="thumbnailSize" id="thumbnailSizeSmall" value="small" checked>
+										    64X64
+										  </label>
+										</div>
+										<div class="radio">
+										  <label>
+										    <input type="radio" name="thumbnailSize" id="thumbnailSizeMiddle" value="middle">
+										    256X256
+										  </label>
+										</div>
+										<div class="radio">
+										  <label>
+										    <input type="radio" name="thumbnailSize" id="optionsRadiosLarge" value="large">
+										    400X400
+										  </label>
+										</div>									
+									
+									</div>
+								</div>
 						</c:otherwise>
 					</c:choose>
 						

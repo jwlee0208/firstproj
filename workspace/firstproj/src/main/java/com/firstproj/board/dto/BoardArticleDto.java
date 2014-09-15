@@ -9,6 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Alias("board.boardArticleDto")
 public class BoardArticleDto {
+	// 입력 파라미터
+	private String			thumbnailSize;
+	
 	
 	private int	   			articleId;
 	@NotNull @Min(0)
@@ -96,6 +99,12 @@ public class BoardArticleDto {
 		return content.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
 	}
 	
+	public String getThumbnailSize() {
+		return thumbnailSize;
+	}
+	public void setThumbnailSize(String thumbnailSize) {
+		this.thumbnailSize = thumbnailSize;
+	}
 	@Override
 	public String toString() {
 		return "BoardArticleDto [articleId=" + articleId + ", boardId="

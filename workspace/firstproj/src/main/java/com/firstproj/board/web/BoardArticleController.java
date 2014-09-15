@@ -41,8 +41,12 @@ public class BoardArticleController {
 	public static final int DEFAULT_THUMBNAIL_IMAGE_WIDTH = 314;
 	public static final int DEFAULT_THUMBNAIL_IMAGE_HEIGHT = 166;
 	
-	private static final int THUMBNAIL_IMAGE_WIDTH 	= 64;
-	private static final int THUMBNAIL_IMAGE_HEIGHT = 64;
+	private static final int THUMBNAIL_IMAGE_WIDTH_SMALL 	= 64;
+	private static final int THUMBNAIL_IMAGE_HEIGHT_SMALL 	= 64;
+	private static final int THUMBNAIL_IMAGE_WIDTH_MIDDLE 	= 256;
+	private static final int THUMBNAIL_IMAGE_HEIGHT_MIDDLE 	= 256;
+	private static final int THUMBNAIL_IMAGE_WIDTH_LARGE 	= 400;
+	private static final int THUMBNAIL_IMAGE_HEIGHT_LARGE 	= 400;
 	
 	@Resource(name = "BoardArticleServiceImpl")
 	private BoardArticleServiceImpl boardArticleService;
@@ -193,7 +197,20 @@ System.out.println("boardArticleDto 2 : " + boardArticleDto.toString());
 		int insertResult = 0;
 		MultipartFile imageFile = boardArticleDto.getThumbImg();
 		
-		String imageUploadResult = fileUpload.uploadFile(imageFile, THUMBNAIL_IMAGE_WIDTH, THUMBNAIL_IMAGE_HEIGHT);
+		String imageUploadResult = "";
+		String thumbnailSize = boardArticleDto.getThumbnailSize();
+		if(boardArticleDto != null){
+			if(thumbnailSize.equals("small")){
+				imageUploadResult = fileUpload.uploadFile(imageFile, THUMBNAIL_IMAGE_WIDTH_SMALL, THUMBNAIL_IMAGE_HEIGHT_SMALL);
+			}else if(thumbnailSize.equals("middle")){
+				imageUploadResult = fileUpload.uploadFile(imageFile, THUMBNAIL_IMAGE_WIDTH_MIDDLE, THUMBNAIL_IMAGE_HEIGHT_MIDDLE);
+			}else if(thumbnailSize.equals("large")){
+				imageUploadResult = fileUpload.uploadFile(imageFile, THUMBNAIL_IMAGE_WIDTH_LARGE, THUMBNAIL_IMAGE_HEIGHT_LARGE);
+			}
+		} else{
+			imageUploadResult = fileUpload.uploadFile(imageFile, THUMBNAIL_IMAGE_WIDTH_SMALL, THUMBNAIL_IMAGE_HEIGHT_SMALL);
+		}
+		
 //				fileUpload.uploadFile(imageFile);	// editorController.imageadd(imageFile).toString();
 		String filePath = "";
 		if(!imageUploadResult.equals("fileSizeError") && !imageUploadResult.equals("fileExtensionError")){
@@ -244,8 +261,22 @@ System.out.println("boardArticleDto 2 : " + boardArticleDto.toString());
 		int updateResult = 0;
 		MultipartFile imageFile = boardArticleDto.getThumbImg();
 		
-		String imageUploadResult = fileUpload.uploadFile(imageFile, THUMBNAIL_IMAGE_WIDTH, THUMBNAIL_IMAGE_HEIGHT);
-				//fileUpload.uploadFile(imageFile);	// editorController.imageadd(imageFile).toString();
+		String imageUploadResult = "";
+		String thumbnailSize = boardArticleDto.getThumbnailSize();
+		if(boardArticleDto != null){
+			if(thumbnailSize.equals("small")){
+				imageUploadResult = fileUpload.uploadFile(imageFile, THUMBNAIL_IMAGE_WIDTH_SMALL, THUMBNAIL_IMAGE_HEIGHT_SMALL);
+			}else if(thumbnailSize.equals("middle")){
+				imageUploadResult = fileUpload.uploadFile(imageFile, THUMBNAIL_IMAGE_WIDTH_MIDDLE, THUMBNAIL_IMAGE_HEIGHT_MIDDLE);
+			}else if(thumbnailSize.equals("large")){
+				imageUploadResult = fileUpload.uploadFile(imageFile, THUMBNAIL_IMAGE_WIDTH_LARGE, THUMBNAIL_IMAGE_HEIGHT_LARGE);
+			}
+		} else{
+			imageUploadResult = fileUpload.uploadFile(imageFile, THUMBNAIL_IMAGE_WIDTH_SMALL, THUMBNAIL_IMAGE_HEIGHT_SMALL);
+		}
+
+		
+		//fileUpload.uploadFile(imageFile);	// editorController.imageadd(imageFile).toString();
 		String filePath = "";
 		if(!imageUploadResult.equals("fileSizeError") && !imageUploadResult.equals("fileExtensionError")){
 			filePath = imageUploadResult;

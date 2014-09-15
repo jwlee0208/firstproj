@@ -1,6 +1,6 @@
 package com.firstproj.common.util;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
@@ -66,29 +66,36 @@ public class FileUpload{
 		}
 
 		try {
-			attachFile.transferTo(file);
 			
 			// 파일 확장자 구하기
 			String extType = attachFile.getOriginalFilename().substring(attachFile.getOriginalFilename().lastIndexOf(".") + 1);
-System.out.println("extType : " + extType +", yn : " + (FILE_EXTENSIONS_IMAGES.matches(".*" + extType.trim() + ".*")) + ", width/height : " + width +"/" + height);			
+System.out.println(" >> extType : " + extType +", yn : " + (FILE_EXTENSIONS_IMAGES.matches(".*" + extType.trim() + ".*")) + ", width/height : " + width +"/" + height);			
 			// 이미지 파일인 경우
 			if(FILE_EXTENSIONS_IMAGES.matches(".*" + extType.trim() + ".*")){
 				//  image file resizing
 				if(width > 0 && height > 0){
-					BufferedImage imageObj = ImageIO.read(file);
+					BufferedImage imageObj = ImageIO.read(attachFile.getInputStream());
 									
 					// 이미지 타입
 					int imageType = imageObj.getType();
-					
+System.out.println(" >>> imageType : " + imageType);					
 					// Image Resizing
-					BufferedImage resizedImage = new BufferedImage(width, height, imageType);
+					BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 					
-					Graphics2D g = resizedImage.createGraphics();
+					Graphics g = resizedImage.getGraphics();
 					g.drawImage(imageObj, 0, 0, width, height, null);
 					g.dispose();
-				}				
+					
+					ImageIO.write(resizedImage, extType, file);
+				}else{
+					attachFile.transferTo(file);
+				}
+			}else{
+				attachFile.transferTo(file);
 			}
-			
+
+//			attachFile.transferTo(file);
+
 		} catch(Exception e) {
 			logger.info("[upload transferTo Missing]", e);
 		}

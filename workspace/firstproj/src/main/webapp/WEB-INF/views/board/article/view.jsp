@@ -31,7 +31,33 @@
 			</div>
 			<div class="panel-body" style="min-height: 300px;">
 				${contentInfo.content}
+
+							<c:if test="${contentInfo.filePath ne null && contentInfo.filePath ne ''}">	
+								<div class="thumbImg unset" style="padding-top : 20px; ">
+								썸네일 : 
+									<ul class="media-list">					
+										<li class="media">
+											<a class="pull-left" href="javascript:;">
+												
+													<img data-src="holder.js/64x64" src="${pageContext.request.contextPath}${contentInfo.filePath}" 
+														 alt="" class="media-object" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  
+														 onclick="javascript:goView('${contentInfo.articleId}');" 
+														 data-toggle="modal" data-target="#myModal" 
+														 width="64px" height="64px"/>
+											</a>
+											 <div class="media-body" onclick="javascript:goView('${contentInfo.articleId}');">
+											 	<p>파일명 : ${contentInfo.originalFileName}</p>
+											 	
+											 </div>
+										</li>							
+									</ul>	
+								</div>										
+							</c:if>
+			
+
+
 			</div>	
+			
 			
 <!-- 			<div class="panel-footer"> -->
 <!-- 				<ul class="pager"> -->

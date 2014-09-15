@@ -92,7 +92,7 @@ $(function(){
 			$("#content").val(content);
 			
 			var thumbImg = $.trim($("#thumbImg").val());
-alert(thumbImg.length);
+//alert(thumbImg.length);
 			if(thumbImg.length == 0){
 				// 썸네일 파일 업로드 안할 때 저장
 				$.ajax({
