@@ -103,7 +103,21 @@
         </beans:property>
         
         <beans:property name="ignoreAcceptHeader" value="true" />
-    </beans:bean>     
+    </beans:bean>  
+    
+    <!-- Redis -->
+    <beans:bean id="jedisConnFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" p:use-pool="true">
+	    <beans:property name="hostName" value="127.0.0.xx" />
+	    <beans:property name="port" value="6379" />
+	    <beans:property name="password" value="" />
+	    <beans:property name="usePool" value="true" />    
+    </beans:bean>
+    <beans:bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+	    <beans:property name="connectionFactory" ref="jedisConnFactory" />
+	</beans:bean>
+    
+    
+       
     <aop:aspectj-autoproxy /> 
     
     <beans:bean class="com.firstproj.common.interceptor.RequestInterceptor" />

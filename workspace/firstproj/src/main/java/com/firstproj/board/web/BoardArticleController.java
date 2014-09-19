@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import net.sf.json.JSONObject;
 
 import org.jboss.logging.Param;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,7 +58,6 @@ public class BoardArticleController {
 	@Resource(name = "EditorController")
 	private EditorController editorController;
 	
-
 	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception {
 //System.out.println(">>> getBoardList()");
@@ -165,7 +165,7 @@ public class BoardArticleController {
 	@RequestMapping(value = "/insertBoardArticle.json", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject insertBoardArticleJSON(@Valid BoardArticleDto boardArticleDto, BindingResult bindingResult, HttpSession session) throws Exception {
-System.out.println("boardArticleDto 1 : " + boardArticleDto.toString());	
+//System.out.println("boardArticleDto 1 : " + boardArticleDto.toString());	
 		JSONObject jsonObj = new JSONObject();
 		int insertResult = 0;
 
@@ -177,7 +177,7 @@ System.out.println("boardArticleDto 1 : " + boardArticleDto.toString());
 			boardArticleDto.setAuthorNm(sessionInfo.getUserNm());
 			boardArticleDto.setStatus(1);
 	
-System.out.println("boardArticleDto 2 : " + boardArticleDto.toString());			
+//System.out.println("boardArticleDto 2 : " + boardArticleDto.toString());			
 			
 			insertResult = this.boardArticleService.insertBoardArticle(boardArticleDto);
 			
@@ -230,7 +230,7 @@ System.out.println("boardArticleDto 2 : " + boardArticleDto.toString());
 	@RequestMapping(value = "/modifyBoardArticle.json", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject modifyBoardArticleJSON(@Valid BoardArticleDto boardArticleDto, BindingResult bindingResult, HttpSession session) throws Exception {
-System.out.println("boardArticleDto 1 : " + boardArticleDto.toString());	
+//System.out.println("boardArticleDto 1 : " + boardArticleDto.toString());	
 		JSONObject jsonObj = new JSONObject();
 		int updateResult = 0;
 
@@ -241,7 +241,7 @@ System.out.println("boardArticleDto 1 : " + boardArticleDto.toString());
 			boardArticleDto.setAuthorId(sessionInfo.getUserId());
 			boardArticleDto.setAuthorNm(sessionInfo.getUserNm());
 	
-System.out.println("boardArticleDto 2 : " + boardArticleDto.toString());			
+//System.out.println("boardArticleDto 2 : " + boardArticleDto.toString());			
 			
 			updateResult = this.boardArticleService.updateBoardArticle(boardArticleDto);
 			

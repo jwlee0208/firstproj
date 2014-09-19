@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.firstproj.board.dao.BoardArticleDao;
+import com.firstproj.board.dao.BoardArticleRedisDao;
 import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.util.PagingUtil;
@@ -17,6 +18,10 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	
 	@Resource(name="BoardArticleDao")
 	private BoardArticleDao boardArticleDao;
+
+	@Resource(name="BoardArticleRedisDao")
+	private BoardArticleRedisDao boardArticleRedisDao;
+
 	
 	@Override
 	public List<BoardArticleDto> getBoardArticleList() throws Exception{

@@ -11,6 +11,7 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
 
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/slide/slideshow.js"></script>
+	<textarea id="boardJson01" name="boardJson01">${articleFive01JsonArr}</textarea>
 
 
 	<div class="jumbotron">
@@ -51,6 +52,7 @@
 					</table>
 				</div>
 			</div>
+			${articleFile02Redis}
 			<div class="boardDiv li_2_board" style="display:none; padding-top : 10px;">
 				<div class="table-responsive">
 					<table class="table table-striped">
@@ -140,6 +142,8 @@
 			$("#" + $(this).attr("id")).addClass("active");
 			$("." + $(this).attr("id") + "_board").show();
 		});
+
+		setBoard01();
 	});
 
 
@@ -153,5 +157,21 @@
 				$('.modal-body').html(($(data).find(".panel-body").html()));
 			}
 		});
+	}
+
+	function setBoard01(){
+		var boardJson01 = $.parseJSON($("#boardJson01").val());
+		var html = "<table class=\"table table-striped\"><colgroup><col width=\"30%\"/><col width=\"70%\"/></colgroup>";
+		
+		for(var i = 0 ; i < boardJson01.length; i++){
+			html += "<tr>";
+			html += "<td>" + boardJson01[i].createDate.substring(0,10) +"</td>";
+			html += "<td><span onclick=\"javascript:goArticleView('" + boardJson01[i].articleId + "');\" data-toggle=\"modal\" data-target=\"#myModal\" >" + boardJson01[i].title + "</span></td>";
+			html += "</tr>";
+// 			alert(boardJson01[i].boardId +", " + boardJson01[i].articleId +", " + boardJson01[i].filePath +", " + boardJson01[i].authorNm +", " + boardJson01[i].thumbnailSize +", " + boardJson01[i].contentText);
+		}
+		html += "</table>";
+		
+		$(".li_1_board div").html(html);
 	}
 </script>
