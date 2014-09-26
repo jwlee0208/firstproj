@@ -24,8 +24,11 @@ firstproj
 3.6. redis_N_jedis_jwlee0208
 ----------------------------
 3.6.1. 1st commit
+----------------------------
 3.6.1.1. Contents 
+----------------------------
 3.6.1.1.1. Installation redis
+----------------------------
 3.6.1.1.1.1. Go to http://redis.io/download , download and execute to install redis
 
 3.6.1.1.1.2. set about redis into pom.xml(maven dependency) and update maven dependency following this : 
@@ -44,14 +47,15 @@ firstproj
 		</dependency>
 
 
-3.6.1.1.1.2.2. update maven dependency
+3.6.1.1.2. update maven dependency
+--------------------------------
 if you use to eclipse, 
 - Select to project
 - Click to right mouse
 - Select 'Maven > Update Project'
 
-3.6.1.1.1.3. Create to redis_config.xml into "src/main/resources/spring" directory following this : 
-
+3.6.1.1.3. Create to redis_config.xml into "src/main/resources/spring" directory following this : 
+------------------------------------------------------------------------------------------------
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:p="http://www.springframework.org/schema/p"
@@ -96,13 +100,14 @@ if you use to eclipse,
 </beans>			
 
 
-3.6.1.1.1.3. Import redis-config.xml into application-config.xml following this : 
-
+3.6.1.1.4. Import redis-config.xml into application-config.xml following this : 
+------------------------------------------------------------------------------------------------
 	<import resource = "classpath:spring/redis-config.xml" />
 
 
-3.6.1.1.1.4. Create to java source
-3.6.1.1.1.4.1. Into BoardArticleController.java
+3.6.1.1.5. Create to java source
+--------------------------------
+3.6.1.1.5.1. Into BoardArticleController.java
 
 		// spring-data-redis 사용.
 	@Autowired
@@ -220,21 +225,23 @@ if you use to eclipse,
 
 * This code is just for checking out to spring-data-redis. I think it'll be more to create mvc pattern and to create source each class.  
 
-3.6.1.1.1.5. Build to project
+3.6.1.1.6. Build to project
+--------------------------------
 
-3.6.1.1.1.6. Set to redis sentinel & Start to redis 
+3.6.1.1.7. Set to redis sentinel & Start to redis
+--------------------------------
 * I tested using redis sentinel for master/slave monitoring and syncronize to data into 1 server(local : 127.0.0.1)
-3.6.1.1.1.6.1. Set to redis sentinel
+3.6.1.1.7.1. Set to redis sentinel
 
 Ref.] http://megnetsun.tistory.com/entry/Redis-Master-Slave-server-%EC%84%A4%EC%A0%95%EC%9E%A1%EA%B8%B0-Sentinel-tool%EB%A1%9C-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%ED%95%98%EA%B8%B0
 
-3.6.1.1.1.6.1.1. Create to redis-master.conf
+3.6.1.1.7.1.1. Create to redis-master.conf
 
 slave-server-stale-data yes
 requirepass 123456
 
 
-3.6.1.1.1.6.1.2. Create to redis-slave.conf
+3.6.1.1.7.1.2. Create to redis-slave.conf
 
 slaveof 127.0.0.1 6379
 masterauth 123456
@@ -242,7 +249,7 @@ repl-ping-slave-period 10
 repl-timeout 60 
 
 
-3.6.1.1.1.6.1.3. Modify to sentinel.conf
+3.6.1.1.7.1.3. Modify to sentinel.conf
 
 sentinel monitor mymaster 127.0.0.1 6379 1    
 sentinel auth-pass mymaster 123456            
@@ -250,24 +257,24 @@ sentinel can-failover mymaster yes
 sentinel parallel-syncs mymaster 1            
 
 
-3.6.1.1.1.6.1.4. Startup redis 
-3.6.1.1.1.6.1.4.1. Startup master redis
+3.6.1.1.7.1.4. Startup redis 
+3.6.1.1.7.1.4.1. Startup master redis
 
 ./src/redis-server redis-master.conf &
 
 
-3.6.1.1.1.6.1.4.2. Startup slave redis
+3.6.1.1.7.1.4.2. Startup slave redis
 
 ./src/redis-server redis-slave.conf &
 
 
-3.6.1.1.1.6.1.4.3. Startup Sentinel
+3.6.1.1.7.1.4.3. Startup Sentinel
 
 $ ./redis-server ../sentinel.conf --sentinel
 
 
-3.6.1.1.1.7. Startup Tomcat Server
-
+3.6.1.1.8. Startup Tomcat Server
+--------------------------------
 
 
 3.7. thumbnailUpload
