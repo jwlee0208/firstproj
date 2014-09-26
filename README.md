@@ -33,6 +33,7 @@ firstproj
 
 3.6.1.1.1.2. set about redis into pom.xml(maven dependency) and update maven dependency following this : 
 3.6.1.1.1.2.1. set about redis into pom.xml
+
 		<!-- redis -->
 		<dependency>
 			<groupId>redis.clients</groupId>
@@ -229,10 +230,10 @@ if you use to eclipse,
 --------------------------------
 
 3.6.1.1.7. Set to redis sentinel & Start to redis
---------------------------------
+----------------------------------------------------------------
 * I tested using redis sentinel for master/slave monitoring and syncronize to data into 1 server(local : 127.0.0.1)
+* 
 3.6.1.1.7.1. Set to redis sentinel
-
 Ref.] http://megnetsun.tistory.com/entry/Redis-Master-Slave-server-%EC%84%A4%EC%A0%95%EC%9E%A1%EA%B8%B0-Sentinel-tool%EB%A1%9C-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%ED%95%98%EA%B8%B0
 
 3.6.1.1.7.1.1. Create to redis-master.conf
