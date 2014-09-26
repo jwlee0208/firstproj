@@ -10,6 +10,7 @@ firstproj
 
 
 3. feature
+==========
 3.1. editorFileUpload
 
 3.2. jQuery_validate
@@ -21,6 +22,7 @@ firstproj
 3.5. map
 
 3.6. redis_N_jedis_jwlee0208
+----------------------------
 3.6.1. 1st commit
 3.6.1.1. Contents 
 3.6.1.1.1. Installation redis
