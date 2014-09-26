@@ -16,8 +16,8 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 	 * @return
 	 * @throws Exception
 	 */
-	public List<BoardArticleDto> getBoardArticleList() throws Exception{
-		return getSqlSession().selectList("sql.boardArticle.selectList");
+	public List<BoardArticleDto> getBoardArticleList(BoardArticleDto boardArticleDto) throws Exception{
+		return getSqlSession().selectList("sql.boardArticle.selectList", boardArticleDto);
 	}
 	
 	public List<BoardArticleDto> selectBoardArticleList(Map<String, Object> param) throws Exception {                          

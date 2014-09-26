@@ -143,7 +143,7 @@
 			$("." + $(this).attr("id") + "_board").show();
 		});
 
-		setBoard01();
+// 		setBoard01();
 	});
 
 

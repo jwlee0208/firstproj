@@ -59,6 +59,9 @@ public class Test {
 		System.out.println("jedis host : " + pool.getCurrentHostMaster());
 		jedis.set("sentinel", "{\"J\":5,\"0\":\"N\"}");
 		
+		jedis.del("selectBoardArticle1ListAll");
+		jedis.del("select:BoardArticle1ListAll");
+		
 		System.out.println("GET --> " + jedis.get("sentinel"));
 		
 		pool.returnResource(jedis);		
