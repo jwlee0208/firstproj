@@ -57,6 +57,7 @@ if you use to eclipse,
 
 3.6.1.1.3. Create to redis_config.xml into "src/main/resources/spring" directory following this : 
 ------------------------------------------------------------------------------------------------
+
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:p="http://www.springframework.org/schema/p"
@@ -103,6 +104,7 @@ if you use to eclipse,
 
 3.6.1.1.4. Import redis-config.xml into application-config.xml following this : 
 ------------------------------------------------------------------------------------------------
+
 	<import resource = "classpath:spring/redis-config.xml" />
 
 
@@ -110,7 +112,7 @@ if you use to eclipse,
 --------------------------------
 3.6.1.1.5.1. Into BoardArticleController.java
 
-		// spring-data-redis 사용.
+	// spring-data-redis 사용.
 	@Autowired
 	private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
 	// spring-data-redis 사용.
@@ -232,7 +234,7 @@ if you use to eclipse,
 3.6.1.1.7. Set to redis sentinel & Start to redis
 ----------------------------------------------------------------
 * I tested using redis sentinel for master/slave monitoring and syncronize to data into 1 server(local : 127.0.0.1)
-* 
+
 3.6.1.1.7.1. Set to redis sentinel
 Ref.] http://megnetsun.tistory.com/entry/Redis-Master-Slave-server-%EC%84%A4%EC%A0%95%EC%9E%A1%EA%B8%B0-Sentinel-tool%EB%A1%9C-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%ED%95%98%EA%B8%B0
 
