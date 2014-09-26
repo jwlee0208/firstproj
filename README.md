@@ -226,7 +226,8 @@ if you use to eclipse,
 
 
 
-* This code is just for checking out to spring-data-redis. I think it'll be more to create mvc pattern and to create source each class.  
+* This code is just for checking out to spring-data-redis. 
+* I think it'll be better to create mvc pattern and to create source each class.  
 
 3.6.1.1.6. Build to project
 --------------------------------
