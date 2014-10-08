@@ -67,18 +67,4 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <!-- spring security -->
-    <!-- 
-    	모든 request를 감싸게 해서 강제적으로 보안이 적용되도록 하는 서블릿 필터
-    	실제로 filter-name에 지정된 이름을 갖는  스프링 빈을 호출하는 역할을 담당
-    	springSecurityFilterChain : 이후 설정될 스프링 시큐리티에 의해 자동으로 등록되는 filter chain
-    -->
-    <filter>
-    	<filter-name>springSecurityFilterChain</filter-name>
-    	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-    <filter-mapping>
-    	<filter-name>springSecurityFilterChain</filter-name>
-    	<filter-pattern>/*</filter-pattern>
-    </filter-mapping>
 </web-app>
