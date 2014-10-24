@@ -10,8 +10,8 @@
 <!-- 			<property name="url" value="jdbc:mysql://172.30.95.117:3306/test"/> -->
 			<property name="url" value="jdbc:mysql://127.0.0.1:3306/test"/>
 			<property name="username" value="root"/>
-			<property name="password" value=""/>
-<!-- 			<property name="password" value="1234test"/> -->
+<!-- 			<property name="password" value=""/> -->
+			<property name="password" value="1234test"/>
 			<property name="defaultAutoCommit" value="true"/>
 			<property name="poolPreparedStatements" value="true"/>
 			<property name="maxActive" value="15" />
