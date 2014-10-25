@@ -30,23 +30,23 @@ import com.firstproj.user.dto.UserDto;
 @RequestMapping(value = "/board/article")
 public class BoardArticleController {
 
-	public static final int DEFAULT_PAGE_NO = 1;
-	public static final int DEFAULT_PAGE_SIZE = 10;
+	public static final int 	DEFAULT_PAGE_NO 				= 1;
+	public static final int 	DEFAULT_PAGE_SIZE 				= 10;
 
 	// Related to image upload
-	public static final long MAX_UPLOAD_FILE_SIZE = 20480000;
-	public static final String FILE_EXTENSIONS_IMAGES = "jpg, jpeg, png, gif, bmp";
-	public static final int DB_RESULT_SUCCESS = 1;
+	public static final long 	MAX_UPLOAD_FILE_SIZE 			= 20480000;
+	public static final String 	FILE_EXTENSIONS_IMAGES 			= "jpg, jpeg, png, gif, bmp";
+	public static final int 	DB_RESULT_SUCCESS 				= 1;
 	
-	public static final int DEFAULT_THUMBNAIL_IMAGE_WIDTH = 314;
-	public static final int DEFAULT_THUMBNAIL_IMAGE_HEIGHT = 166;
+	public static final int 	DEFAULT_THUMBNAIL_IMAGE_WIDTH 	= 314;
+	public static final int 	DEFAULT_THUMBNAIL_IMAGE_HEIGHT 	= 166;
 	
-	private static final int THUMBNAIL_IMAGE_WIDTH_SMALL 	= 64;
-	private static final int THUMBNAIL_IMAGE_HEIGHT_SMALL 	= 64;
-	private static final int THUMBNAIL_IMAGE_WIDTH_MIDDLE 	= 256;
-	private static final int THUMBNAIL_IMAGE_HEIGHT_MIDDLE 	= 256;
-	private static final int THUMBNAIL_IMAGE_WIDTH_LARGE 	= 400;
-	private static final int THUMBNAIL_IMAGE_HEIGHT_LARGE 	= 400;
+	private static final int 	THUMBNAIL_IMAGE_WIDTH_SMALL 	= 64;
+	private static final int 	THUMBNAIL_IMAGE_HEIGHT_SMALL 	= 64;
+	private static final int 	THUMBNAIL_IMAGE_WIDTH_MIDDLE 	= 256;
+	private static final int 	THUMBNAIL_IMAGE_HEIGHT_MIDDLE 	= 256;
+	private static final int 	THUMBNAIL_IMAGE_WIDTH_LARGE 	= 400;
+	private static final int 	THUMBNAIL_IMAGE_HEIGHT_LARGE 	= 400;
 	
 	@Resource(name = "BoardArticleServiceImpl")
 	private BoardArticleServiceImpl boardArticleService;
@@ -84,7 +84,7 @@ public class BoardArticleController {
 		String searchText = request.getParameter("searchText");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
-
+//System.out.println(">>> searchCondition : " + searchCondition + ", searchText : " + searchText);
 		int boardId = boardArticleDto.getBoardId();
 		
 		int pageNo = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;

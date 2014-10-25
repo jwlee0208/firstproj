@@ -27,6 +27,7 @@ function goPage(pageNo) {
 		}
 	});
 }
+
 // 이전 페이지 그룹으로
 function goPrevious(pageNo, totalPageCnt) {
 	var pageSize = $("#pageSize").val();
@@ -75,4 +76,8 @@ function goView(articleId){
 	frm.attr("action", "/board/article/view.page");
 	frm.attr("method", "post");
 	frm.submit();
+}
+
+function goSearch(){
+	goPage(1);
 }

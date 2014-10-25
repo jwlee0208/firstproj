@@ -38,6 +38,18 @@
 	<input type="hidden" id="selectedArticleId" name="selectedArticleId" />
 	<input type="hidden" id="boardId" 			name="boardId" 				value="${boardId}"/>
 	
+	<!-- 검색 영역 -->	
+	<div class="form-group">
+		
+		<div class="col-sm-10">
+			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent"/>
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control"/>		
+		</div>
+		<div class="btn-group">
+			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검색"/>
+		</div>
+	</div>	
+	
 	<c:set var="list" value="${boardList}" />
 	<div class="table-responsive" id="listDiv">
 		<!-- paging에 필요한 파라미터 -->

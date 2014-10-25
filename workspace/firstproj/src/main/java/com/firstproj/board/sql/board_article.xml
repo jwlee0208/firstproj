@@ -97,6 +97,25 @@
 				<if test="boardId > 0">
 				and board_id = #{boardId}    
 				</if>
+				<if test="searchCondition != null and searchCondition != ''">
+					<if test="searchCondition == 'title'">
+						<if test="searchText != null and searchText != ''">
+						and title 	like CONCAT('%', #{searchText}, '%')
+						</if> 
+					</if>
+					<if test="searchCondition == 'content'">
+						<if test="searchText != null and searchText != ''">
+						and content like CONCAT('%', #{searchText}, '%')
+						</if>
+					</if>
+					<if test="searchCondition == 'titleNcontent'">
+						<if test="searchText != null and searchText != ''">
+						and (title 	 like CONCAT('%', #{searchText}, '%') 
+						     or 
+						     content like CONCAT('%', #{searchText}, '%'))
+						</if>     
+					</if>
+				</if>
 				and status = 1			     	    
 		</sql> 
 		<sql id="searchContentSql">
@@ -111,8 +130,13 @@
 		
 		<!-- 5개의 게시글 조회 -->    
 		<select id="selectArticleFive" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">                      
-			<include refid="searchSql"/>                      
-			<include refid="searchConditionSql"/>                         
+			<include refid="searchSql"/>              
+			WHERE 1 = 1	
+				<if test="boardId > 0">
+				and board_id = #{boardId}    
+				</if>
+			        
+<!-- 			<include refid="searchConditionSql"/>                          -->
 			ORDER BY article_id desc                
 			LIMIT 0, 5     
 		</select>		
