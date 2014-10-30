@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="sql.player">		
+		<select id="selectCategoryAttrElemMapList" parameterType="player.categoryAttrElemMapDto" resultType="player.categoryAttrElemMapDto">
+			<include refid="selectAttrElemMapDefault"/>
+		</select>
+		<!--  카테고리 조회 -->
+		<select id="selectCategoryList" parameterType="player.categoryDto" resultType="player.categoryDto">
+			select 
+					cat_id
+				  , parent_cat_id
+				  , cat_name
+			 from tb_category 
+			 where 1 = 1
+			 <choose>
+			 	<when test="parentCatId > 0">
+			 	and parent_cat_id = #{parentCatId}
+			 	</when>
+				<otherwise>
+				and parent_cat_id = 0	
+				</otherwise>			 
+			 </choose>
+		</select>	
+
+		
+		<select id="selectCategoryAttrElemList" parameterType="player.categoryAttrDto" resultType="player.categoryAttrElemDto">
+			select 
+				    a.attr_id
+				  , a.attr_name
+				  , ae.attr_elem_id
+				  , ae.attr_elem_name 
+			from tb_attr a 
+			left join tb_attr_elem ae on a.attr_id = ae.attr_id
+			where a.cat_id = #{catId} 
+		</select>
+		
+		<!-- 페이징 위한 리스트 갯수 조회 -->    
+		<select id="selectListCount" resultType="Integer" parameterType="searchConditionPlayer">        
+			SELECT count(*) AS totalCnt         
+			from 		tb_attr 			a 		
+			left join 	tb_attr_elem 		ae 		on a.attr_id = ae.attr_id
+			left join 	tb_attr_elem_map  	aem 	on ae.attr_elem_id = aem.attr_elem_id
+        
+			<include refid="searchConditionSql"/>    
+
+		</select>      
+		
+		<!-- 리스트 조회 -->    
+		<select id="selectBoardList" resultType="player.categoryAttrElemMapDto" parameterType="searchConditionPlayer">                      
+			<include refid="selectAttrElemMapDefault"/>                     
+			<include refid="searchConditionSql"/>                         
+			ORDER BY aem.create_date desc                
+			LIMIT #{startRow}, #{endRow}     
+		</select>		
+		
+		<sql id="selectAttrElemMapDefault">
+			select a.cat_id
+				 , a.attr_id
+				 , a.attr_name
+				 , ae.attr_elem_id
+				 , ae.attr_elem_name
+				 , aem.user_id
+				 , aem.user_name
+				 , aem.attr_elem_map_id
+				 , aem.attr_elem_map_name 
+				 , aem.create_date
+			from 		tb_attr 			a 		
+			left join 	tb_attr_elem 		ae 		on a.attr_id = ae.attr_id
+			left join 	tb_attr_elem_map  	aem 	on ae.attr_elem_id = aem.attr_elem_id
+		
+		</sql>
+		
+		<!-- 페이징 처리를 위한 검색 조건 -->
+		<sql id="searchConditionSql">
+			WHERE 1 = 1	
+				<if test="catId > 0">
+				and a.cat_id = #{catId}    
+				</if>
+				<if test="attrId > 0">
+				and a.attr_id = #{attrId}    
+				</if>
+				<if test="attrElemId != null">
+				
+				
+				and ae.attr_elem_id in 
+				
+					<foreach item="item" index="index" collection="attrElemId"
+					      open="(" separator="," close=")">
+					        #{item}
+					</foreach>				    
+				</if>     	    
+		</sql> 
+		
+    </mapper>
