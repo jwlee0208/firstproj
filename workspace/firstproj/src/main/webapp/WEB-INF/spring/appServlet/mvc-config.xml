@@ -18,7 +18,9 @@
         http://www.springframework.org/schema/aop 
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
         http://www.springframework.org/schema/task
-        http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+        http://www.springframework.org/schema/task/spring-task-3.0.xsd
+        http://www.springframework.org/schema/cache 
+        http://www.springframework.org/schema/cache/spring-cache.xsd">
 
 	<annotation-driven />
 
@@ -103,7 +105,36 @@
         </beans:property>
         
         <beans:property name="ignoreAcceptHeader" value="true" />
-    </beans:bean>     
+    </beans:bean>  
+    
+    <!-- Redis -->
+<!--     <beans:bean id="jedisConnFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"> -->
+<!-- 	    <beans:property name="hostName" value="127.0.0.xx" /> -->
+<!-- 	    <beans:property name="port" value="6379" /> -->
+<!-- 	    <beans:property name="password" value="123456" /> -->
+<!-- 	    <beans:property name="usePool" value="true" />  -->
+<!-- 	    <beans:property name="database" value="0"/>    -->
+<!--     </beans:bean> -->
+<!--     <beans:bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"> -->
+<!-- 	    <beans:property name="connectionFactory" ref="jedisConnFactory" /> -->
+<!-- 	</beans:bean> -->
+    
+ 
+<!--   <beans:bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" -->
+<!--         > -->
+<!--         <beans:property name="hostName" value="127.0.0.xx" /> -->
+<!--         <beans:property name="port" value="6379" /> -->
+<!--         <beans:property name="password" value="123456" /> -->
+<!--         <beans:property name="usePool" value="true" />   -->
+<!--   </beans:bean>       -->
+  
+  <!-- redis template definition -->
+<!--   <beans:bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" -->
+<!--     p:connection-factory-ref="jedisConnectionFactory"/>  -->
+ 
+ 
+
+
     <aop:aspectj-autoproxy /> 
     
     <beans:bean class="com.firstproj.common.interceptor.RequestInterceptor" />

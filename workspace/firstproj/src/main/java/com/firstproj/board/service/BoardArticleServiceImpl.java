@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.firstproj.board.dao.BoardArticleDao;
+import com.firstproj.board.dao.BoardArticleRedisDao;
 import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.util.PagingUtil;
@@ -17,10 +18,14 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	
 	@Resource(name="BoardArticleDao")
 	private BoardArticleDao boardArticleDao;
+
+	@Resource(name="BoardArticleRedisDao")
+	private BoardArticleRedisDao boardArticleRedisDao;
+
 	
 	@Override
-	public List<BoardArticleDto> getBoardArticleList() throws Exception{
-		return this.boardArticleDao.getBoardArticleList();
+	public List<BoardArticleDto> getBoardArticleList(BoardArticleDto boardArticleDto) throws Exception{
+		return this.boardArticleDao.getBoardArticleList(boardArticleDto);
 	}
 	@Override
 	public int selectArticleListCnt(Map<String, Object> param) throws Exception {                     
@@ -51,6 +56,23 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	       paramMap.put("endRow", endRow);
 	       return boardArticleDao.selectBoardArticleList(paramMap);            
 	} 
+	
+	@Override
+	public PagedList getBoardArticlePagedListForJson(Map<String, Object> paramMap) throws Exception {                              
+        List<?> articleList = this.getBoardArticleList(paramMap);
+ 
+        int pageNo       = (Integer) paramMap.get("pageNo");    
+        int listRowCnt   = (Integer) paramMap.get("listRowCnt");
+        int totalListCnt = (Integer) paramMap.get("totalListCnt");
+        int pageSize     = (Integer) paramMap.get("pageSize");
+        int startRow     = (Integer) paramMap.get("startRow");                              
+        int endRow       = (Integer) paramMap.get("endRow");       
+ 
+        PagedList pagedList = new PagedList(articleList, pageNo, pageSize, totalListCnt, startRow, endRow, listRowCnt);
+	    return pagedList;
+	}   
+
+	
 	/**
 	 * 게시글 입력
 	 */

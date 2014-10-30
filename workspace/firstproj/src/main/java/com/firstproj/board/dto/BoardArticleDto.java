@@ -1,5 +1,7 @@
 package com.firstproj.board.dto;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -7,8 +9,9 @@ import org.apache.ibatis.type.Alias;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
+
 @Alias("board.boardArticleDto")
-public class BoardArticleDto {
+public class BoardArticleDto implements Serializable{
 	// 입력 파라미터
 	private String			thumbnailSize;
 	
