@@ -118,7 +118,7 @@ public class PlayerController {
         paramMap.put("searchText",      searchText);
         paramMap.put("startDate",       startDate);
         paramMap.put("endDate",         endDate);
-
+System.out.println("searchCondition : " + searchCondition + ", searchText : " + searchText);
         int totalListCnt = playerService.getCategoryAttrElemMapCnt(paramMap);
 //System.out.println("totalListCnt : " + totalListCnt);
         // paging condition setting

@@ -215,7 +215,7 @@
 		</div>
 		<div class="row">
 			<!--속성 & 속성 항목들에 대한 체크박스 리스트 -->
-			<div id="attrElemList"></div>
+			<div id="attrElemList" class="col-md-12"></div>
 		</div>
 
 	</div>
