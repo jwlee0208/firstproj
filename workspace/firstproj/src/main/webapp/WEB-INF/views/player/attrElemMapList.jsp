@@ -3,12 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
 <script>
 	function setChildCategory(){
@@ -25,16 +19,17 @@
 				
 				if(childCatListLength > 0){
 					for(var i = 0 ; i < childCatListLength ; i++){
-						$("#cat2").append("<option value=\""+ childCatList[i].catId +"\">" + childCatList[i].catName + "</option>");
+						$("#cat2").append("<option value=\""+ childCatList[i].catId +"\">" + childCatList[i].categoryNameStr + "</option>");
 					}
 				}
+				goPage(1);
 			}
 		});	
 	}
 
 	function setAttrList(){
 		var catId = $("#cat2").val();
-// 		alert($("#cat2").val());
+		
 		$.ajax({
 			url : '/player/attrElementList.json',
 			data : {catId : catId},
@@ -48,20 +43,21 @@
 					if(attrElementList != null){
 						var attrElementListLength = attrElementList.length;
 						var prevAttrId = 0;
-						var innerHtml = "";
+						var innerHtml = "<div style=\"padding-top: 10px;padding-left: 10px;padding-bottom: 10px;\">";
 						for(var i = 0 ; i < attrElementListLength ; i++){
 							console.log(attrElementList[i].attrElemName + ", " + attrElementList[i] + ", " + attrElementList[i].attrName);
 
 							var attrId = attrElementList[i].attrId;
+
 							if(prevAttrId == 0 || (prevAttrId != 0 && attrId > prevAttrId)){
-								innerHtml += "<div id=\"" + attrId +"\" onclick=\"javascript:attrFilterList(" + attrId + ");\">" + attrElementList[i].attrName + "</div>";
+								innerHtml += "<div id=\"" + attrId +"\" onclick=\"javascript:attrFilterList(" + attrId + ");\" style=\"font-weight:bold;\">" + attrElementList[i].attrNameStr + "</div>";
 							}
 
-							innerHtml += "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"attrElem_" + attrElementList[i].attrElemId +"\" " + " name=\"" + attrElementList[i].attrElemId + "\" class=\"attrElemChkBox\" value=\"" + attrElementList[i].attrElemId + "\"/>" + attrElementList[i].attrElemName + "</label>";
+							innerHtml += "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"attrElem_" + attrElementList[i].attrElemId +"\" " + " name=\"" + attrElementList[i].attrElemId + "\" class=\"attrElemChkBox\" value=\"" + attrElementList[i].attrElemId + "\"/>" + attrElementList[i].attrElemNameStr + "</label>";
 
 							prevAttrId = attrId;
-							
 						}
+						innerHtml += "</div>";
 						$("#attrElemList").html(innerHtml);
 						// 각 체크박스에  onclick 이벤트 설정
 						$(".attrElemChkBox").attr("onclick", "javascript:attrElemFilterList();");
@@ -123,6 +119,9 @@
 
 					$("#listDiv").html(listDiv);
 					$("#pageDiv").html(pageDiv);
+				}else{
+					$("#listDiv").html("");
+					$("#pageDiv").html("");
 				}
 			}
 		});
@@ -172,9 +171,7 @@
 		goPage(1);
 	}	
 </script>
-</head>
-<body>
-
+<div class="container">
 <form id="listFrm" name="listFrm" method="post">
 <!-- paging에 필요한 파라미터 -->
 <input type="hidden" id="pageNo" name="pageNo" value="${pagedResult.pageNo}" /> 
@@ -189,46 +186,53 @@
 <input type="hidden" id="selectedCatId" 		name="selectedCatId" />
 
 	<div class="form-group">
-		<div class="col-sm-10">
-			<input type="hidden" 	id="searchCondition" name="searchCondition" value="userName"/>
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control"/>		
-		</div>
-		<div class="btn-group">
-			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검색"/>
-		</div>
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-10">
+			<input type="hidden" 	id="searchCondition" name="searchCondition" value="userName"/>
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control"/>	
+			</div>
+			<div class="col-md-2">	
+			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검색"/>
+			</div>
+		</div>
+		
+		
+		
+		<div class="row"  style="padding-top: 10px; ">
+			<div class="col-md-4">
 				<!-- 첫번째 카테고리 -->
 				<select id="cat1" name="cat1" onchange="javascript:setChildCategory();" class="form-control">
 					<option value="-1">카테고리를 선택해 주세요.</option>
 					<c:forEach var="cat" items="${catList}">
-					<option value="${cat.catId}">${cat.catName}</option>	
+					<option value="${cat.catId}">${cat.categoryNameStr}</option>	
 					</c:forEach>
 				</select>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<!-- 두번째 카테고리 -->
 				<select id="cat2" name="cat2" onchange="javascript:setAttrList();" class="form-control">
 					<option value="-1">카테고리를 선택해 주세요.</option>
 				</select>
-			</div>	
+			</div>
+			<div class="col-md-4"></div>	
 		</div>
-		<div class="row">
+		<div class="row" style="padding-top: 10px; padding-left : 30px; padding-right: 30px;">
 			<!--속성 & 속성 항목들에 대한 체크박스 리스트 -->
-			<div id="attrElemList" class="col-md-12"></div>
+			<div id="attrElemList" style="background-color: #efefef;">
+			</div>
 		</div>
 
 	</div>
 	
 	
 	<div class="table-responsive" id="listDiv">
+		총 게시글 :  ${pagedResult.totalListCnt } 개
 		<table class="table table-hover">
 			<tr>
 				<td></td>
 				<td>Category</td>
 				<td>Attribute</td>
 				<td>Attribute's Element</td>
-				<td>Elements' Value</td>
 				<td>User Name</td>
 				<td>Mapping Date</td>
 			</tr>
@@ -236,10 +240,9 @@
 		<c:forEach var="list" items="${pagedResult.articleList}">
 			<tr>
 				<td></td>
-				<td>${list.catId}${list.catName}</td>
-				<td>${list.attrId}${list.attrName}</td>
-				<td>${list.attrElemId}${list.attrElemName}</td>
-				<td>${list.attrElemMapName}</td>
+				<td>${list.categoryNameStr}</td>
+				<td>${list.attrNameStr}</td>
+				<td>${list.attrElemNameStr}</td>
 				<td>${list.userName}</td>
 				<td>${list.createDate}</td>
 			</tr>
@@ -259,5 +262,4 @@
 	</jsp:include>
 
 </form>
-</body>
-</html>
+</div>

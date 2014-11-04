@@ -72,5 +72,21 @@ public class CategoryAttrDto extends CategoryDto implements Serializable{
         this.modifyUserName = modifyUserName;
     }
     
-    
+    public String getAttrNameStr(){
+        
+        String attrNameStr = "";
+        
+        if(this.attrId == 1 || this.attrId == 5){
+            attrNameStr = "투구";
+        }else if(this.attrId == 2){
+            attrNameStr = "투구타입";
+        }else if(this.attrId == 3 || this.attrId == 6){
+            attrNameStr = "타격";
+        }else if(this.attrId == 4){
+            attrNameStr = "포지션";
+        }else{
+            attrNameStr = "기타";
+        }
+        return attrNameStr;
+    }
 }

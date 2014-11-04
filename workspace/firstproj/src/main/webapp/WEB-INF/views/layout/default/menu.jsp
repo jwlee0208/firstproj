@@ -35,7 +35,7 @@ ul { padding: 0; }
 					<li <c:if test="${param.menuId eq 3}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goList(3);">기타게시판</a></li>
 		          </ul>
 		        </li>				
-
+				<li <c:if test="${param.menuId eq 4}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goPlayer();">Player</a></li>
 				
 			</ul>
 <!-- 			<ul class="nav navbar-nav navbar-right"> -->

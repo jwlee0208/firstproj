@@ -28,36 +28,39 @@ public class PlayerDao extends SqlSessionDaoSupport{
     }
     
     public List<CategoryAttrElemMapDto> selectBoardArticleList(Map<String, Object> param) throws Exception {                          
-        SearchConditionPlayer searchCondition = new SearchConditionPlayer();             
-        searchCondition.setStartRow((Integer)param.get("startRow"));
-        searchCondition.setEndRow((Integer)param.get("endRow"));
+        SearchConditionPlayer searchConditionPlayer = new SearchConditionPlayer();             
+        searchConditionPlayer.setStartRow((Integer)param.get("startRow"));
+        searchConditionPlayer.setEndRow((Integer)param.get("endRow"));
                            
-        searchCondition.setCatId((String)param.get("catId"));
-        searchCondition.setAttrId((String)param.get("attrId"));
-        searchCondition.setAttrElemId((List<String>)param.get("attrElemId"));
-        searchCondition.setSearchCondition((String)param.get("searchCondition"));
-        searchCondition.setSearchText((String)param.get("searchText"));
-        searchCondition.setStartDate((String)param.get("startDate"));
-        searchCondition.setEndDate((String)param.get("endDate"));
+        searchConditionPlayer.setCatId((String)param.get("catId"));
+        searchConditionPlayer.setAttrId((String)param.get("attrId"));
+        searchConditionPlayer.setAttrElemId((List<String>)param.get("attrElemId"));
+        searchConditionPlayer.setSearchCondition((String)param.get("searchCondition"));
+        searchConditionPlayer.setSearchText((String)param.get("searchText"));
+        searchConditionPlayer.setStartDate((String)param.get("startDate"));
+        searchConditionPlayer.setEndDate((String)param.get("endDate"));
   
-        List<CategoryAttrElemMapDto> list =  getSqlSession().selectList("sql.player.selectBoardList", searchCondition);
+        System.out.println("dao searchText : " + searchConditionPlayer.getSearchText());
+        System.out.println("dao searchCondition : " + searchConditionPlayer.getSearchCondition());
+        
+        List<CategoryAttrElemMapDto> list =  getSqlSession().selectList("sql.player.selectBoardList", searchConditionPlayer);
         
         return list;   
  }
     
     
     public int selectArticleListCnt(Map<String, Object> param) throws Exception {
-        SearchConditionPlayer searchCondition = new SearchConditionPlayer();
+        SearchConditionPlayer searchConditionPlayer = new SearchConditionPlayer();
          
-        searchCondition.setCatId((String)param.get("catId"));
-        searchCondition.setAttrId((String)param.get("attrId"));
-        searchCondition.setAttrElemId((List<String>)param.get("attrElemId"));
-        searchCondition.setSearchCondition((String)param.get("searchCondition"));
-        searchCondition.setSearchText((String)param.get("searchText"));
-        searchCondition.setStartDate((String)param.get("startDate"));
-        searchCondition.setEndDate((String)param.get("endDate"));
+        searchConditionPlayer.setCatId((String)param.get("catId"));
+        searchConditionPlayer.setAttrId((String)param.get("attrId"));
+        searchConditionPlayer.setAttrElemId((List<String>)param.get("attrElemId"));
+        searchConditionPlayer.setSearchCondition((String)param.get("searchCondition"));
+        searchConditionPlayer.setSearchText((String)param.get("searchText"));
+        searchConditionPlayer.setStartDate((String)param.get("startDate"));
+        searchConditionPlayer.setEndDate((String)param.get("endDate"));
   
-        int result = getSqlSession().selectOne("sql.player.selectListCount", searchCondition);                
+        int result = getSqlSession().selectOne("sql.player.selectListCount", searchConditionPlayer);                
         return result;
  } 
 }

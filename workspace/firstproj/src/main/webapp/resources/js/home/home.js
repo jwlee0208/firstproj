@@ -20,3 +20,7 @@ function goLogin(boardId){
 function logout(){
 	location.href = "/logout.page";
 }
+
+function goPlayer(){
+	location.href = "/player/attrElemMapList.page";
+}

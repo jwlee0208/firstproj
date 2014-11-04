@@ -66,7 +66,28 @@ public class CategoryDto implements Serializable{
         this.modifyUserName = modifyUserName;
     }
     
-    
+    public String getCategoryNameStr(){
+        
+        String categoryNameStr = "";
+        
+        if(this.catId == 1){
+            categoryNameStr = "선수";
+        }else if(this.catId == 2){
+            categoryNameStr = "감독";
+        }else if(this.catId == 3){
+            categoryNameStr = "코치";
+        }else if(this.catId == 4){
+            categoryNameStr = "에이전트";
+        }else if(this.catId == 5){
+            categoryNameStr = "팀";
+        }else if(this.catId == 6){
+            categoryNameStr = "투수";
+        }else if(this.catId == 7){
+            categoryNameStr = "타자";
+        }
+        
+        return categoryNameStr;
+    }
     
     
 }

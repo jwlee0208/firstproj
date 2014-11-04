@@ -76,25 +76,11 @@
 		<!-- 페이징 처리를 위한 검색 조건 -->
 		<sql id="searchConditionSql">
 			WHERE 1 = 1
-				<if test="searchCondition != null and searchCondition != ''">
-					<if test="searchCondition == 'userName'">
-						<if test="searchText != null and searchText != ''">
+					<if test='searchCondition == "userName"'>
+						<if test='searchText != null and searchText != ""'>
 						and aem.user_name 	like CONCAT('%', #{searchText}, '%')
 						</if> 
 					</if>
-<!-- 					<if test="searchCondition == 'content'"> -->
-<!-- 						<if test="searchText != null and searchText != ''"> -->
-<!-- 						and content like CONCAT('%', #{searchText}, '%') -->
-<!-- 						</if> -->
-<!-- 					</if> -->
-<!-- 					<if test="searchCondition == 'titleNcontent'"> -->
-<!-- 						<if test="searchText != null and searchText != ''"> -->
-<!-- 						and (title 	 like CONCAT('%', #{searchText}, '%')  -->
-<!-- 						     or  -->
-<!-- 						     content like CONCAT('%', #{searchText}, '%')) -->
-<!-- 						</if>      -->
-<!-- 					</if> -->
-				</if>
 			
 				
 				<if test="catId > 0">
@@ -110,7 +96,8 @@
 					      open="(" separator="," close=")">
 					        #{item}
 					</foreach>				    
-				</if>     	    
+				</if>   
+				and aem.attr_elem_map_id > 0  	    
 		</sql> 
 		
     </mapper>
