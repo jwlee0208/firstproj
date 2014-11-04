@@ -29,7 +29,13 @@
         </insert>
         <select id="selectList" parameterType="board.boardArticleDto" resultType="board.boardArticleDto">
             <include refid="searchSql"/>   
-			<include refid="searchConditionSql"/>
+            WHERE 1 = 1	
+				<if test="boardId > 0">
+				and board_id = #{boardId}
+				and status = 1    
+				</if>
+            
+<!-- 			<include refid="searchConditionSql"/> -->
 			ORDER BY article_id desc        
         </select>
 		<!-- 페이징 위한 리스트 갯수 조회 -->    

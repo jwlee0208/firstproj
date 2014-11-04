@@ -211,6 +211,7 @@ public class BoardArticleController {
 
 		int totalListCnt = boardArticleService.selectArticleListCnt(paramMap);
 //System.out.println("totalListCnt : " + totalListCnt);
+		
 		// paging condition setting
 		paramMap.put("pageNo", pageNo);
 		paramMap.put("listRowCnt", listRowCnt);
@@ -280,6 +281,9 @@ public class BoardArticleController {
 			return "redirect:/login";
 		}
 		
+		
+		
+		
 		return "board/article/write";
 	}
 
@@ -307,13 +311,25 @@ public class BoardArticleController {
 			boardArticleDto.setAuthorNm(sessionInfo.getUserNm());
 			boardArticleDto.setStatus(1);
 	
-//System.out.println("boardArticleDto 2 : " + boardArticleDto.toString());			
+			int boardId = boardArticleDto.getBoardId();
 			
 			insertResult = this.boardArticleService.insertBoardArticle(boardArticleDto);
 			
 			if(bindingResult.hasErrors()){
 				jsonObj.put("validate", false);
-			}						
+			}			
+			
+			// 게시글 데이터 하나씩 추가될 때마다 redis 키값에 저장된 리스트 데이터 삭제 후 데이터 재설정하는 부분 
+			try{
+	            valueOps.set("selectBoardArticle"+ boardId +"ListAll", null);
+	            
+	            BoardArticleDto boardArticleObj = new BoardArticleDto();
+	            boardArticleObj.setBoardId(boardId);
+	                
+	            valueOps.set("selectBoardArticle"+ boardId +"ListAll", boardArticleService.getBoardArticleList(boardArticleObj));
+			}catch(Exception e){
+			    e.printStackTrace();
+			}
 		}
 		
 		jsonObj.put("result", (insertResult > 0) ? true : false);
@@ -338,6 +354,9 @@ public class BoardArticleController {
 		
 		String imageUploadResult = "";
 		String thumbnailSize = boardArticleDto.getThumbnailSize();
+		
+		int boardId = boardArticleDto.getBoardId();
+		
 		if(boardArticleDto != null){
 			if(thumbnailSize.equals("small")){
 				imageUploadResult = fileUpload.uploadFile(imageFile, THUMBNAIL_IMAGE_WIDTH_SMALL, THUMBNAIL_IMAGE_HEIGHT_SMALL);
@@ -361,6 +380,23 @@ public class BoardArticleController {
 			
 			insertResult = this.boardArticleService.insertBoardArticle(boardArticleDto);
 		}
+		
+		if(insertResult > 0){
+	          // 게시글 데이터 하나씩 추가될 때마다 redis 키값에 저장된 리스트 데이터 삭제 후 데이터 재설정하는 부분 
+            try{
+                valueOps.set("selectBoardArticle"+ boardId +"ListAll", null);
+                
+                BoardArticleDto boardArticleObj = new BoardArticleDto();
+                boardArticleObj.setBoardId(boardId);
+                    
+                valueOps.set("selectBoardArticle"+ boardId +"ListAll", boardArticleService.getBoardArticleList(boardArticleObj));
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+		}
+		
+		
 //		model.addAttribute("result", imageUploadResult);
 		return imageUploadResult;
 	}
@@ -377,7 +413,6 @@ public class BoardArticleController {
 	@RequestMapping(value = "/modifyBoardArticle.json", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject modifyBoardArticleJSON(@Valid BoardArticleDto boardArticleDto, BindingResult bindingResult, HttpSession session) throws Exception {
-//System.out.println("boardArticleDto 1 : " + boardArticleDto.toString());	
 		JSONObject jsonObj = new JSONObject();
 		int updateResult = 0;
 
@@ -388,8 +423,6 @@ public class BoardArticleController {
 			boardArticleDto.setAuthorId(sessionInfo.getUserId());
 			boardArticleDto.setAuthorNm(sessionInfo.getUserNm());
 	
-//System.out.println("boardArticleDto 2 : " + boardArticleDto.toString());			
-			
 			updateResult = this.boardArticleService.updateBoardArticle(boardArticleDto);
 			
 			if(bindingResult.hasErrors()){

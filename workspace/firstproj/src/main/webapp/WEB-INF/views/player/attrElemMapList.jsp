@@ -6,10 +6,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
 <script>
 	function setChildCategory(){
-		
+		var catId = $("#cat1").val();
 		$.ajax({
 			url : '/player/childCategoryList.json',
-			data : {parentCatId : $("#cat1").val()},
+			data : {parentCatId : catId},
 			method : 'post',
 			dateType : 'json',
 			success : function(data){
@@ -21,7 +21,12 @@
 					for(var i = 0 ; i < childCatListLength ; i++){
 						$("#cat2").append("<option value=\""+ childCatList[i].catId +"\">" + childCatList[i].categoryNameStr + "</option>");
 					}
+				}else{
+					$("#cat2 option").remove();
+					$("#cat2").append("<option value=\"\">카테고리를 선택해 주세요.</option>");
 				}
+
+				$("#selectedCatId").val(catId);
 				goPage(1);
 			}
 		});	
