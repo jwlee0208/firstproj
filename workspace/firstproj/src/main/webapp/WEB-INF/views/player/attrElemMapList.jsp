@@ -27,6 +27,8 @@
 				}
 
 				$("#selectedCatId").val(catId);
+				$("#selectedAttrElemId").val('');
+				$("#attrElemList").html('');
 				goPage(1);
 			}
 		});	
