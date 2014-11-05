@@ -31,8 +31,8 @@
 		<input type="hidden" id="pageSize" 		name="pageSize" 	value="${pagedResult.pageSize}" />
 <div class="panel-group" id="accordion">
 				<c:choose>
-					<c:when test="${null ne pagedResult.articleList && pagedResult.articleList.size() > 0}">
-						<c:forEach var="board" items="${pagedResult.articleList}" varStatus="index">
+					<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
+						<c:forEach var="board" items="${pagedResult.list}" varStatus="index">
 						  <div class="panel panel-default">
 						    <div class="panel-heading">
 						      <h4 class="panel-title">

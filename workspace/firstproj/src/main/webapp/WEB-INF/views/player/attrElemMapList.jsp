@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/common/paging.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
 <script>
 	function setChildCategory(){
@@ -135,48 +136,48 @@
 	}
 
 
-	// 이전 페이지 그룹으로
-	function goPrevious(pageNo, totalPageCnt) {
-		var pageSize = $("#pageSize").val();
-		var divide = Math.floor(Number(pageNo) / pageSize);
-		var remain = Math.floor(Number(pageNo) % pageSize);
-		var prevPageNo = 0;
-		if (divide > 0) {
-			if (remain > 0)
-				divide++;
-			prevPageNo = (divide - 1) * Number(pageSize);
-		} else {
-			return;
-		}
-		if (prevPageNo < 1) {
-			return;
-		}
-		goPage(prevPageNo);
-	}
-	// 다음 페이지 그룹으로
-	function goNext(pageNo, totalPageCnt) {
-		var pageSize = $("#pageSize").val();
-		var divide = Math.floor((Number(pageNo) - 1) / (Number(pageSize)));
-		var nextPageNo = (divide + 1) * Number(pageSize) + 1;
+// 	// 이전 페이지 그룹으로
+// 	function goPrevious(pageNo, totalPageCnt) {
+// 		var pageSize = $("#pageSize").val();
+// 		var divide = Math.floor(Number(pageNo) / pageSize);
+// 		var remain = Math.floor(Number(pageNo) % pageSize);
+// 		var prevPageNo = 0;
+// 		if (divide > 0) {
+// 			if (remain > 0)
+// 				divide++;
+// 			prevPageNo = (divide - 1) * Number(pageSize);
+// 		} else {
+// 			return;
+// 		}
+// 		if (prevPageNo < 1) {
+// 			return;
+// 		}
+// 		goPage(prevPageNo);
+// 	}
+// 	// 다음 페이지 그룹으로
+// 	function goNext(pageNo, totalPageCnt) {
+// 		var pageSize = $("#pageSize").val();
+// 		var divide = Math.floor((Number(pageNo) - 1) / (Number(pageSize)));
+// 		var nextPageNo = (divide + 1) * Number(pageSize) + 1;
 
-		if (nextPageNo > Number(totalPageCnt))
-			return;
-		else
-			goPage(nextPageNo);
-	}
-	// 처음으로
-	function goFirst() {
-		goPage(1);
-	}
-	// 마지막으로
-	function goEnd() {
-		var endPageNo = $("#totalPageCnt").val();
-		goPage(endPageNo);
-	}
+// 		if (nextPageNo > Number(totalPageCnt))
+// 			return;
+// 		else
+// 			goPage(nextPageNo);
+// 	}
+// 	// 처음으로
+// 	function goFirst() {
+// 		goPage(1);
+// 	}
+// 	// 마지막으로
+// 	function goEnd() {
+// 		var endPageNo = $("#totalPageCnt").val();
+// 		goPage(endPageNo);
+// 	}
 
-	function goSearch(){
-		goPage(1);
-	}	
+// 	function goSearch(){
+// 		goPage(1);
+// 	}	
 </script>
 <div class="container">
 <form id="listFrm" name="listFrm" method="post">
@@ -244,7 +245,7 @@
 				<td>Mapping Date</td>
 			</tr>
 		
-		<c:forEach var="list" items="${pagedResult.articleList}">
+		<c:forEach var="list" items="${pagedResult.list}">
 			<tr>
 				<td></td>
 				<td>${list.categoryNameStr}</td>

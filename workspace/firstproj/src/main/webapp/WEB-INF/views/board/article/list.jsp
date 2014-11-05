@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/common/paging.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleList.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
 <c:set var="boardName" value=""/>
@@ -66,8 +67,8 @@
 			</thead>
 			<tbody>
 				<c:choose>
-					<c:when test="${null ne pagedResult.articleList && pagedResult.articleList.size() > 0}">
-						<c:forEach var="content" items="${pagedResult.articleList}">
+					<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
+						<c:forEach var="content" items="${pagedResult.list}">
 							<tr>
 								<td>${content.articleId}</td>	
 								<td onclick="javascript:goView('${content.articleId}');">${content.title}</td>

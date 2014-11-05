@@ -5,7 +5,7 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class PagedList implements Serializable {
-	private List<?> articleList; // 게시글 목록
+	private List<?> list; // 리스트 목록
 	private int pageNo; // 페이지 번호
 	private int pageSize; // 페이지 사이즈
 	private int totalListCnt; // 목록 총계
@@ -13,9 +13,9 @@ public class PagedList implements Serializable {
 	private int endRow; // 종료 열
 	private int listRowCnt; // 출력 목록 갯수
 
-	public PagedList(List<?> articleList, int pageNo, int pageSize,
+	public PagedList(List<?> list, int pageNo, int pageSize,
 			int totaListCnt, int startRow, int endRow, int listRowCnt) {
-		this.articleList = articleList;
+		this.list = list;
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
 		this.totalListCnt = totaListCnt;
@@ -24,15 +24,15 @@ public class PagedList implements Serializable {
 		this.listRowCnt = listRowCnt;
 	}
 
-	public List<?> getArticleList() {
-		return articleList;
-	}
+	public List<?> getList() {
+        return list;
+    }
 
-	public void setArticleList(List<?> articleList) {
-		this.articleList = articleList;
-	}
+	public void setList(List<?> list) {
+        this.list = list;
+    }
 
-	public int getPageNo() {
+    public int getPageNo() {
 		return pageNo;
 	}
 
@@ -103,56 +103,55 @@ public class PagedList implements Serializable {
 		return result;
 	}
 
-	@Override
-	public String toString() {
-		return "PagedList [articleList=" + articleList + ", pageNo=" + pageNo
-				+ ", pageSize=" + pageSize + ", totalListCnt=" + totalListCnt
-				+ ", startRow=" + startRow + ", endRow=" + endRow
-				+ ", listRowCnt=" + listRowCnt + "]";
-	}
+    @Override
+    public String toString() {
+        return "PagedList [list=" + list + ", pageNo=" + pageNo + ", pageSize="
+                + pageSize + ", totalListCnt=" + totalListCnt + ", startRow="
+                + startRow + ", endRow=" + endRow + ", listRowCnt="
+                + listRowCnt + "]";
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((articleList == null) ? 0 : articleList.hashCode());
-		result = prime * result + endRow;
-		result = prime * result + listRowCnt;
-		result = prime * result + pageNo;
-		result = prime * result + pageSize;
-		result = prime * result + startRow;
-		result = prime * result + totalListCnt;
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + endRow;
+        result = prime * result + ((list == null) ? 0 : list.hashCode());
+        result = prime * result + listRowCnt;
+        result = prime * result + pageNo;
+        result = prime * result + pageSize;
+        result = prime * result + startRow;
+        result = prime * result + totalListCnt;
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PagedList other = (PagedList) obj;
-		if (articleList == null) {
-			if (other.articleList != null)
-				return false;
-		} else if (!articleList.equals(other.articleList))
-			return false;
-		if (endRow != other.endRow)
-			return false;
-		if (listRowCnt != other.listRowCnt)
-			return false;
-		if (pageNo != other.pageNo)
-			return false;
-		if (pageSize != other.pageSize)
-			return false;
-		if (startRow != other.startRow)
-			return false;
-		if (totalListCnt != other.totalListCnt)
-			return false;
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PagedList other = (PagedList) obj;
+        if (endRow != other.endRow)
+            return false;
+        if (list == null) {
+            if (other.list != null)
+                return false;
+        } else if (!list.equals(other.list))
+            return false;
+        if (listRowCnt != other.listRowCnt)
+            return false;
+        if (pageNo != other.pageNo)
+            return false;
+        if (pageSize != other.pageSize)
+            return false;
+        if (startRow != other.startRow)
+            return false;
+        if (totalListCnt != other.totalListCnt)
+            return false;
+        return true;
+    }
 
 }

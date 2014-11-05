@@ -58,8 +58,8 @@
 			</thead>
 			<tbody>
 				<c:choose>
-					<c:when test="${null ne pagedResult.articleList && pagedResult.articleList.size() > 0}">
-						<c:forEach var="board" items="${pagedResult.articleList}">
+					<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
+						<c:forEach var="board" items="${pagedResult.list}">
 							<tr>
 								<td style="text-align : center;">${board.boardId}</td>	
 								<td onclick="javascript:goBoardView('${board.boardId}');">${board.boardName}</td>

@@ -56,6 +56,37 @@
 			LIMIT #{startRow}, #{endRow}     
 		</select>		
 		
+		
+		<!-- 페이징 위한 playerInfo 리스트 갯수 조회 -->    
+		<select id="selectPlayerListCount" resultType="Integer" parameterType="searchConditionPlayer">        
+<!-- 			SELECT count(*) AS totalCnt          -->
+<!-- 			FROM TB_PLAYER_INFO pi -->
+<!-- 			LEFT JOIN TB_USER U ON pi.user_id = U.user_id -->
+<!-- 			LEFT JOIN TB_CATEGORY C1 ON pi.cat_id1 = C1.CAT_ID -->
+<!-- 			LEFT JOIN TB_CATEGORY C2 ON pi.CAT_ID2 = C2.CAT_ID -->
+<!-- 			LEFT JOIN TB_ATTR_ELEM ae ON pi.cat_id2 = ae.cat_id -->
+<!-- 			LEFT JOIN TB_ATTR_ELEM_MAP aem ON ae.attr_elem_id = aem.attr_elem_id	         -->
+
+			select count(*) from (
+			<include refid="selectPlayerListDefault"/>
+			<include refid="searchConditionPlayerSql"/>    
+			) as count
+			
+		</select>      
+		
+		
+		<!-- playerInfo 리스트 조회 -->
+		<select id="selectPlayerList" resultType="player.playerInfoDto" parameterType="searchConditionPlayer">
+			<include refid="selectPlayerListDefault"/>			
+			<include refid="searchConditionPlayerSql"/>     
+			ORDER BY U.user_nm desc	
+			LIMIT #{startRow}, #{endRow}  
+		</select>
+		
+		
+		
+		
+		
 		<sql id="selectAttrElemMapDefault">
 			select a.cat_id
 				 , a.attr_id
@@ -69,20 +100,17 @@
 				 , aem.create_date
 			from 		tb_attr 			a 		
 			left join 	tb_attr_elem 		ae 		on a.attr_id = ae.attr_id
-			left join 	tb_attr_elem_map  	aem 	on ae.attr_elem_id = aem.attr_elem_id
-		
+			left join 	tb_attr_elem_map  	aem 	on ae.attr_elem_id = aem.attr_elem_id		
 		</sql>
 		
 		<!-- 페이징 처리를 위한 검색 조건 -->
 		<sql id="searchConditionSql">
 			WHERE 1 = 1
-					<if test='searchCondition == "userName"'>
-						<if test='searchText != null and searchText != ""'>
-						and aem.user_name 	like CONCAT('%', #{searchText}, '%')
-						</if> 
-					</if>
-			
-				
+				<if test='searchCondition == "userName"'>
+					<if test='searchText != null and searchText != ""'>
+					and aem.user_name 	like CONCAT('%', #{searchText}, '%')
+					</if> 
+				</if>
 				<if test="catId > 0">
 				and a.cat_id = #{catId}    
 				</if>
@@ -99,5 +127,53 @@
 				</if>   
 				and aem.attr_elem_map_id > 0  	    
 		</sql> 
+
+		<!-- playerInfo 페이징 처리를 위한 검색 조건 -->
+		<sql id="searchConditionPlayerSql">
+			WHERE 1 = 1
+					<if test='searchCondition == "userName"'>
+						<if test='searchText != null and searchText != ""'>
+						and aem.user_name 	like CONCAT('%', #{searchText}, '%')
+						</if> 
+					</if>
+			
+				
+				<if test="catId > 0">
+				and (pi.cat_id1 = #{catId} or pi.cat_id2 = #{catId})    
+				</if>
+				<if test="attrId > 0">
+				and a.attr_id = #{attrId}    
+				</if>
+				<if test="attrElemId != null">
+					   and aem.attr_elem_id in 
+					<foreach item="item" index="index" collection="attrElemId"
+					      open="(" separator="," close=")">
+					        #{item}
+					</foreach>
+					
+							    				
+<!-- 				and pi.cat_id2 in  -->
+<!-- 					(select cat_id  -->
+<!-- 					 from tb_attr_elem_map aem  -->
+<!-- 					 where 1 = 1  -->
+<!-- 					   and aem.attr_elem_id in  -->
+<!-- 					<foreach item="item" index="index" collection="attrElemId" -->
+<!-- 					      open="(" separator="," close=")"> -->
+<!-- 					        #{item} -->
+<!-- 					</foreach>				     -->
+<!-- 					) -->
+				</if> 
+				GROUP BY pi.player_info_id, U.user_nm, pi.cat_id1, c1.cat_name, c2.cat_id, c2.cat_name	    	    
+		</sql> 
+
+		<sql id="selectPlayerListDefault">
+			SELECT pi.player_info_id, pi.user_id, U.user_nm, pi.cat_id1, c1.cat_name as catNm1, pi.cat_id2, c2.cat_name as catNm2 
+			FROM TB_PLAYER_INFO pi
+			LEFT JOIN TB_USER U ON pi.user_id = U.user_id	
+			LEFT JOIN TB_CATEGORY C1 ON pi.cat_id1 = C1.CAT_ID
+			LEFT JOIN TB_CATEGORY C2 ON pi.CAT_ID2 = C2.CAT_ID
+			LEFT JOIN TB_ATTR_ELEM ae ON pi.cat_id2 = ae.cat_id
+			LEFT JOIN TB_ATTR_ELEM_MAP aem ON ae.attr_elem_id = aem.attr_elem_id and pi.user_id = aem.user_id
+		</sql>
 		
     </mapper>

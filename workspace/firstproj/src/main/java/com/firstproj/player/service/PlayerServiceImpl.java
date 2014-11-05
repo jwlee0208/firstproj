@@ -14,6 +14,7 @@ import com.firstproj.player.dto.CategoryAttrDto;
 import com.firstproj.player.dto.CategoryAttrElemDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
+import com.firstproj.player.dto.PlayerInfoDto;
 
 @Service("PlayerServiceImpl")
 public class PlayerServiceImpl implements PlayerService{
@@ -34,11 +35,11 @@ public class PlayerServiceImpl implements PlayerService{
     
     @Override
     public int getCategoryAttrElemMapCnt(Map<String, Object> param) throws Exception {                     
-           return playerDao.selectArticleListCnt(param);      
+           return playerDao.selectAttrElemMapListCnt(param);      
     }    
     @Override
     public PagedList getCategoryAttrElemMapPagedList(Map<String, Object> paramMap) throws Exception {                              
-        List<?> articleList = this.getCategoryAttrElemMapList(paramMap);
+        List<?> list = this.getCategoryAttrElemMapList(paramMap);
  
         int pageNo       = (Integer) paramMap.get("pageNo");    
         int listRowCnt   = (Integer) paramMap.get("listRowCnt");
@@ -47,7 +48,7 @@ public class PlayerServiceImpl implements PlayerService{
         int startRow     = (Integer) paramMap.get("startRow");                              
         int endRow       = (Integer) paramMap.get("endRow");       
  
-        PagedList pagedList = new PagedList(articleList, pageNo, pageSize, totalListCnt, startRow, endRow, listRowCnt);
+        PagedList pagedList = new PagedList(list, pageNo, pageSize, totalListCnt, startRow, endRow, listRowCnt);
         return pagedList;
     }   
     @Override
@@ -59,8 +60,39 @@ public class PlayerServiceImpl implements PlayerService{
      
            paramMap.put("startRow", startRow);                                     
            paramMap.put("endRow", endRow);
-           return playerDao.selectBoardArticleList(paramMap);            
+           return playerDao.selectAttrElemMapList(paramMap);            
     } 
 
+    @Override
+    public int getPlayerInfoCnt(Map<String, Object> param) throws Exception {                     
+           return playerDao.selectPlayerListCnt(param);      
+    }    
+ 
+    @Override
+    public PagedList getPlayerInfoPagedList(Map<String, Object> paramMap) throws Exception {                              
+        List<?> list = this.getPlayerInfoList(paramMap);
+ 
+        int pageNo       = (Integer) paramMap.get("pageNo");    
+        int listRowCnt   = (Integer) paramMap.get("listRowCnt");
+        int totalListCnt = (Integer) paramMap.get("totalListCnt");
+        int pageSize     = (Integer) paramMap.get("pageSize");
+        int startRow     = (Integer) paramMap.get("startRow");                              
+        int endRow       = (Integer) paramMap.get("endRow");       
+ 
+        PagedList pagedList = new PagedList(list, pageNo, pageSize, totalListCnt, startRow, endRow, listRowCnt);
+        return pagedList;
+    }   
+    @Override
+    public List<PlayerInfoDto> getPlayerInfoList(Map<String,Object> paramMap) throws Exception {                       
+           int pageNo     = (Integer) paramMap.get("pageNo");                                   
+           int listRowCnt = (Integer) paramMap.get("listRowCnt");
+           int startRow   = PagingUtil.getStartRow(pageNo, listRowCnt);                                        
+           int endRow     = PagingUtil.getEndRow(startRow, listRowCnt);
+     
+           paramMap.put("startRow", startRow);                                     
+           paramMap.put("endRow", endRow);
+           
+           return playerDao.selectPlayerList(paramMap);            
+    } 
     
 }

@@ -64,8 +64,8 @@
 		
 			
 <c:choose>
-	<c:when test="${null ne pagedResult.articleList && pagedResult.articleList.size() > 0}">
-		<c:forEach var="content" items="${pagedResult.articleList}" varStatus="index">		
+	<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
+		<c:forEach var="content" items="${pagedResult.list}" varStatus="index">		
 			<div class="col-sm-6 col-md-4">
 				<div class="thumbnail">
 					

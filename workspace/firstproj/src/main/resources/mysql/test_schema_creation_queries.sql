@@ -115,3 +115,13 @@ CREATE TABLE `TB_ATTR_ELEM_MAP` (
   `modify_user_name` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`attr_elem_map_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+-- tb_player_info table creation
+CREATE TABLE `TB_PLAYER_INFO` (
+  `player_info_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(50) DEFAULT NULL,
+  `cat_id1` int(11) DEFAULT NULL,
+  `cat_id2` int(11) DEFAULT NULL,
+  PRIMARY KEY (`player_info_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+

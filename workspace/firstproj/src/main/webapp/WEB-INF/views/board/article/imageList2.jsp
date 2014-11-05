@@ -52,8 +52,8 @@
 		
 		<ul class="media-list">
 <c:choose>
-	<c:when test="${null ne pagedResult.articleList && pagedResult.articleList.size() > 0}">
-		<c:forEach var="content" items="${pagedResult.articleList}">
+	<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
+		<c:forEach var="content" items="${pagedResult.list}">
 		
 			<li class="media">
 				<a class="pull-left" href="javascript:;">
