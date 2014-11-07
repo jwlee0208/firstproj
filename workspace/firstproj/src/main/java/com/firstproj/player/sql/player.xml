@@ -83,17 +83,23 @@
 		
 		<!-- playerInfo 검색 리스트 조회 -->
 		<select id="selectSearchCountListPerCategory" resultType="player.playerInfoSearchDto" parameterType="searchConditionPlayer">
-			select c1.cat_id, c1.cat_name as catNm1, c2.cat_id, c2.cat_name as catNm2, count(pi.user_id) as searchCntPerCat
-			from tb_player_info pi
-			left join tb_user u on u.user_id = pi.user_id 
-			left join tb_category c1 on c1.cat_id = pi.cat_id1
-			left join tb_category c2 on c2.cat_id = pi.cat_id2
+			select 
+					c1.cat_id 			as catId1
+				  , c1.cat_name 		as catNm1
+				  , c2.cat_id 			as catId2
+				  , c2.cat_name 		as catNm2
+				  , count(pi.user_id) 	as searchCntPerCat
+			from tb_player_info 	pi
+			left join tb_user 		u 	on u.user_id = pi.user_id 
+			left join tb_category 	c1 	on c1.cat_id = pi.cat_id1
+			left join tb_category 	c2 	on c2.cat_id = pi.cat_id2
 			where 1 = 1
 			<if test='searchCondition == "userName"'>
 				<if test='searchText != null and searchText != ""'>
 			  and u.user_nm like CONCAT('%', #{searchText}, '%')
 			  	</if>
 			</if>  	
+			group by c1.cat_id, c1.cat_name, c2.cat_id, c2.cat_name
 			order by u.user_nm
 		</select>
 		

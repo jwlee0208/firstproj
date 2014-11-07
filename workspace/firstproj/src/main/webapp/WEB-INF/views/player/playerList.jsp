@@ -55,13 +55,13 @@
 			</div>
 			<div class="col-md-4"></div>	
 		</div>
-		<div class="row" style="padding-top: 10px; padding-left : 30px; padding-right: 30px;">
+		<div class="row" style="padding-top : 10px; padding-left : 30px; padding-right: 30px;">
 			<!--속성 & 속성 항목들에 대한 체크박스 리스트 -->
 			<div id="attrElemList" style="background-color: #efefef;">
 			</div>
 		</div>
 		
-		<div class="row" style="padding-top : 10px; " id="cntPerCatList">
+		<div class="row" style="padding-top : 10px; padding-left : 30px; padding-right: 30px;" id="cntPerCatList">
 			<c:choose>	
 			<c:when test="${perCategoryCntList eq null }">
 						
@@ -70,7 +70,7 @@
 				
 				<c:forEach var="cntInfo" items="${perCategoryCntList}">
 					<c:if test="${cntInfo.catId1 ne null}">
-				<div>${cntInfo.catNm1} / ${cntInfo.catNm2}<span style="color: #red" onclick="javascript:searchAttrList(${cntInfo.searchCntPerCat});">(${cntInfo.searchCntPerCat})</span></div>	
+				<div>${cntInfo.catNm1} / ${cntInfo.catNm2}<span style="color: #red" onclick="javascript:searchAttrList(${cntInfo.catId2});">(${cntInfo.searchCntPerCat})</span></div>	
 					</c:if>
 				</c:forEach>
 			</c:otherwise>
