@@ -17,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import antlr.StringUtils;
+
 import com.firstproj.common.util.PagedList;
 import com.firstproj.player.dto.CategoryAttrDto;
 import com.firstproj.player.dto.CategoryAttrElemDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
+import com.firstproj.player.dto.PlayerInfoSearchDto;
 import com.firstproj.player.service.PlayerServiceImpl;
 
 @Controller
@@ -116,7 +119,9 @@ public class PlayerController {
         String catId            = (String)request.getParameter("selectedCatId");        // String.valueOf(categoryAttrElemMapDto.getCatId());
         String attrId           = (String)request.getParameter("selectedAttrId");       // String.valueOf(categoryAttrElemMapDto.getAttrId());
         String attrElemId       = (String)request.getParameter("selectedAttrElemId");   // String.valueOf(categoryAttrElemMapDto.getAttrElemId());
-System.out.println("Controller's attrElemId : " + attrElemId);        
+
+System.out.println("Controller's catId : " + catId + "\nController's attrId : " + attrId + "\nController's attrElemId : " + attrElemId);        
+
         List<String> attrElemIdArr = null;
         
         if(attrElemId != null && attrElemId != ""){
@@ -165,18 +170,25 @@ System.out.println("searchCondition : " + searchCondition + ", searchText : " + 
         // 카테고리 목록 조회하는 부분
         CategoryDto             categoryObj = null;
         List<CategoryDto> catList = this.playerService.getCategoryList(categoryObj);
-       
+        
         // 페이징 리스트 조회하는 부분
         PagedList result = null;
+        List<PlayerInfoSearchDto> perCategoryCntList = null;
         if(page.equals("attrElemMapList.page")){
             result = playerService.getCategoryAttrElemMapPagedList(paramMap);
         }else if(page.equals("playerList.page")){
             result = playerService.getPlayerInfoPagedList(paramMap);
+            
+//            System.out.println("searchText is not null : " + (null != searchText) + "or not empty : " + org.apache.commons.lang.StringUtils.isNotEmpty(searchText));
+            if(org.apache.commons.lang.StringUtils.isNotEmpty(searchText)){
+                perCategoryCntList = playerService.getPlayerInfoCntPerCategory(paramMap);
+            }
         }
         
-        model.addAttribute("catList",       catList);
-        model.addAttribute("pagedResult",   result);
-        model.addAttribute("catId",         catId);
+        model.addAttribute("catList"            ,    catList);
+        model.addAttribute("pagedResult"        ,    result);
+        model.addAttribute("perCategoryCntList" ,    perCategoryCntList);
+        model.addAttribute("catId"              ,    catId);
         return model;
     }    
     

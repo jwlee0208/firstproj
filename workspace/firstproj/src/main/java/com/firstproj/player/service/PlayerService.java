@@ -9,6 +9,7 @@ import com.firstproj.player.dto.CategoryAttrElemDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoDto;
+import com.firstproj.player.dto.PlayerInfoSearchDto;
 
 public interface PlayerService {
     public List<CategoryAttrElemMapDto> getCategoryAttrElemMapList(CategoryAttrElemMapDto param) throws Exception;
@@ -20,6 +21,7 @@ public interface PlayerService {
 
     public int getPlayerInfoCnt(Map<String, Object> param) throws Exception;
     public PagedList getPlayerInfoPagedList(Map<String, Object> paramMap) throws Exception; 
-    public List<PlayerInfoDto> getPlayerInfoList(Map<String,Object> paramMap) throws Exception; 
+    public List<PlayerInfoDto> getPlayerInfoList(Map<String,Object> paramMap) throws Exception;
+    public List<PlayerInfoSearchDto> getPlayerInfoCntPerCategory(Map<String, Object> paramMap) throws Exception; 
     
 }

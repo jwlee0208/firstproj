@@ -12,6 +12,7 @@ import com.firstproj.player.dto.CategoryAttrElemDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoDto;
+import com.firstproj.player.dto.PlayerInfoSearchDto;
 
 @Repository("PlayerDao")
 public class PlayerDao extends SqlSessionDaoSupport{
@@ -86,7 +87,7 @@ public class PlayerDao extends SqlSessionDaoSupport{
         searchConditionPlayer.setStartRow((Integer)param.get("startRow"));
         searchConditionPlayer.setEndRow((Integer)param.get("endRow"));
                            
-        searchConditionPlayer.setCatId((String)param.get("catId"));
+        searchConditionPlayer.setCatId((String)param.get("catId"));        
         searchConditionPlayer.setAttrId((String)param.get("attrId"));
         searchConditionPlayer.setAttrElemId((List<String>)param.get("attrElemId"));
         searchConditionPlayer.setSearchCondition((String)param.get("searchCondition"));
@@ -96,6 +97,7 @@ public class PlayerDao extends SqlSessionDaoSupport{
   
         System.out.println("dao searchText : " + searchConditionPlayer.getSearchText());
         System.out.println("dao searchCondition : " + searchConditionPlayer.getSearchCondition());
+        System.out.println("dao catId : " + searchConditionPlayer.getCatId());
         
         List<PlayerInfoDto> list =  getSqlSession().selectList("sql.player.selectPlayerList", searchConditionPlayer);
         
@@ -122,5 +124,17 @@ public class PlayerDao extends SqlSessionDaoSupport{
         int result = getSqlSession().selectOne("sql.player.selectPlayerListCount", searchConditionPlayer);                
         return result;
 
+    }
+    /**
+     * 카테고리별 검색된 갯수 조회
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public List<PlayerInfoSearchDto> selectSearchedPlayerListPerCategory(Map<String, Object> param) throws Exception{
+        SearchConditionPlayer searchConditionPlayer = new SearchConditionPlayer();
+        searchConditionPlayer.setSearchCondition((String)param.get("searchCondition"));
+        searchConditionPlayer.setSearchText((String)param.get("searchText"));
+        return getSqlSession().selectList("sql.player.selectSearchCountListPerCategory", searchConditionPlayer); 
     }
 }

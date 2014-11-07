@@ -3,140 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/player/common.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/player/playerList.js"></script>
+
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/common/paging.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
-
-<script>
-	function setChildCategory(){
-		var catId = $("#cat1").val();
-		$.ajax({
-			url : '/player/childCategoryList.json',
-			data : {parentCatId : catId},
-			method : 'post',
-			dateType : 'json',
-			success : function(data){
-
-				var childCatList = data.childCatList;
-				var childCatListLength = childCatList.length;
-				
-				if(childCatListLength > 0){
-					for(var i = 0 ; i < childCatListLength ; i++){
-						$("#cat2").append("<option value=\""+ childCatList[i].catId +"\">" + childCatList[i].categoryNameStr + "</option>");
-					}
-				}else{
-					$("#cat2 option").remove();
-					$("#cat2").append("<option value=\"\">카테고리를 선택해 주세요.</option>");
-				}
-
-				$("#selectedCatId").val(catId);
-				$("#selectedAttrElemId").val('');
-				$("#attrElemList").html('');
-				goPage(1);
-			}
-		});	
-	}
-
-	function setAttrList(){
-		var catId = $("#cat2").val();
-		
-		$.ajax({
-			url : '/player/attrElementList.json',
-			data : {catId : catId},
-			method : 'post',
-			dateType : 'json',
-			success : function(data){
-
-				if(data != null){
-					var attrElementList = data.attrElementList;
-
-					if(attrElementList != null){
-						var attrElementListLength = attrElementList.length;
-						var prevAttrId = 0;
-						var innerHtml = "<div style=\"padding-top: 10px;padding-left: 10px;padding-bottom: 10px;\">";
-						for(var i = 0 ; i < attrElementListLength ; i++){
-							console.log(attrElementList[i].attrElemName + ", " + attrElementList[i] + ", " + attrElementList[i].attrName);
-
-							var attrId = attrElementList[i].attrId;
-
-							if(prevAttrId == 0 || (prevAttrId != 0 && attrId > prevAttrId)){
-								innerHtml += "<div id=\"" + attrId +"\" onclick=\"javascript:attrFilterList(" + attrId + ");\" style=\"font-weight:bold;\">" + attrElementList[i].attrNameStr + "</div>";
-							}
-
-							innerHtml += "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"attrElem_" + attrElementList[i].attrElemId +"\" " + " name=\"" + attrElementList[i].attrElemId + "\" class=\"attrElemChkBox\" value=\"" + attrElementList[i].attrElemId + "\"/>" + attrElementList[i].attrElemNameStr + "</label>";
-
-							prevAttrId = attrId;
-						}
-						innerHtml += "</div>";
-						$("#attrElemList").html(innerHtml);
-						// 각 체크박스에  onclick 이벤트 설정
-						$(".attrElemChkBox").attr("onclick", "javascript:attrElemFilterList();");
-
-						$("#selectedCatId").val(catId);
-
-						goPage(1);
-						
-					}
-				}
-			}				
-		});
-	}
-	function attrFilterList(attrId){
-		$("#selectedAttrId").val(attrId);
-		goPage(1);
-		
-	} 
-	
-	function attrElemFilterList(){
-		var attrElemIds = "";
-		
-		$.each($(".attrElemChkBox"), function(index, value){
-
-			if($(this).is(":checked")){
-				attrElemIds += $(this).val();
-				attrElemIds += ",";	
-			}	
-			
-		});
-		if(attrElemIds != ""){
-			attrElemIds += "end";
-		}
-		
-		attrElemIds = attrElemIds.replace(/,end/g,"");
-
-		$("#selectedAttrElemId").val(attrElemIds);
-				
-		goPage(1);
-	}
-
-	// 페이지 이동
-	function goPage(pageNo) {
-		$("#pageNo").val(pageNo);
-		
-		$.ajax({
-			async : false,
-			type : 'POST',
-			dataType : 'html',
-			url : '/player/playerList.page',
-			data : $("#listFrm").serialize(),
-			processData : true,
-			cache : false,
-			success : function(data) {
-
-				if (data != null && data != undefined) {
-					var listDiv = $(data).find("#listDiv").html();
-					var pageDiv = $(data).find("#pageDiv").html();
-
-					$("#listDiv").html(listDiv);
-					$("#pageDiv").html(pageDiv);
-				}else{
-					$("#listDiv").html("");
-					$("#pageDiv").html("");
-				}
-			}
-		});
-	}
-
-</script>
 
 <div class="container">
 <form 	id="listFrm" name="listFrm" method="post">
@@ -188,7 +60,24 @@
 			<div id="attrElemList" style="background-color: #efefef;">
 			</div>
 		</div>
-
+		
+		<div class="row" style="padding-top : 10px; " id="cntPerCatList">
+			<c:choose>	
+			<c:when test="${perCategoryCntList eq null }">
+						
+			</c:when>			
+			<c:otherwise>
+				
+				<c:forEach var="cntInfo" items="${perCategoryCntList}">
+					<c:if test="${cntInfo.catId1 ne null}">
+				<div>${cntInfo.catNm1} / ${cntInfo.catNm2}<span style="color: #red" onclick="javascript:searchAttrList(${cntInfo.searchCntPerCat});">(${cntInfo.searchCntPerCat})</span></div>	
+					</c:if>
+				</c:forEach>
+			</c:otherwise>
+			</c:choose>
+		
+		</div>
+		
 	</div>
 	
 	

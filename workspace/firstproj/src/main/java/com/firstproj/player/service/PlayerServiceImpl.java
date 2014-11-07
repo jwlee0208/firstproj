@@ -15,6 +15,7 @@ import com.firstproj.player.dto.CategoryAttrElemDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoDto;
+import com.firstproj.player.dto.PlayerInfoSearchDto;
 
 @Service("PlayerServiceImpl")
 public class PlayerServiceImpl implements PlayerService{
@@ -94,5 +95,15 @@ public class PlayerServiceImpl implements PlayerService{
            
            return playerDao.selectPlayerList(paramMap);            
     } 
+    /**
+     * 카테고리별 검색된 갯수 조회
+     * @param paramMap
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<PlayerInfoSearchDto> getPlayerInfoCntPerCategory(Map<String, Object> paramMap) throws Exception {
+        return this.playerDao.selectSearchedPlayerListPerCategory(paramMap);
+    }
     
 }
