@@ -106,12 +106,22 @@ $().ready(function() {
 
 			if(isValid){
 				$.ajax({
-					url : '/user/regist.json',
+// 					url : '/user/regist.json',
+					url : '/user/regist',
 					data : $("#actionFrm").serialize(),
 					dataType : 'json',
 					method : 'post',
 					success : function(data){
-						console.log("result : " + data.resultCode + ", " + data.resultMsg);
+// 						console.log("result : " + data.resultCode + ", " + data.resultMsg);
+						console.log("result : " + data.status + ", " + data.result + ', ' + data.result.length);
+						var result = data.result;
+						var length = result.length;
+						if(result != null && length > 0){
+							for(var i = 0 ; i < length ; i++){
+								console.log(result[i].field + ", " + result[i].defaultMessage +", " + result[i].code);
+								$("#" + result[i].field).attr("placeholder", result[i].defaultMessage);
+							}
+						}
 					},
 					error : function(data){
 
@@ -121,66 +131,66 @@ $().ready(function() {
 		});		
 	});
 
-	$("form").validate({
-		rules: {
-			userId: {
-				required 	: true,
-				minlength 	: 8,
-				maxlength 	: 15
-			},
-			userNm: {
-				required 	: true,
-				minlength 	: 2,
-				maxlength 	: 10
-			},
-			passwd: {
-				required 	: true,
-				minlength 	: 8,
-				maxlength 	: 15
-			},
-			passwdChk: {
-				required 	: true,
-				minlength 	: 8,
-				maxlength 	: 15,
-				equalTo 	: "#passwd"				
-			},
-			email : {
-				email : true
-			},
-			phoneNo : {
-				number : true
-			}
-		},
-		messages : {
-			userId : {
-				required 	: "사용자 아이디 입력은 필수 입니다.",
-				minlength 	: "길이는 최소 8자 이상이어야 합니다.",
-				maxlength 	: "길이는 최대 15자까지 허용합니다."				
-			},
-			userNm : {
-				required 	: "사용자 이름 입력은 필수 입니다.",
-				minlength 	: "길이는 최소 2자 이상이어야 합니다.",
-				maxlength 	: "길이는 최대 10자까지 허용합니다."
-			},
-			passwd : {
-				required 	: "패스워드를 입력해 주세요.",
-				minlength 	: "길이는 최소 8자 이상이어야 합니다.",
-				maxlength 	: "길이는 최대 15자까지 허용합니다."									
-			},
-			passwdChk: {
-				required  	: "패스워드를 한번 더 입력해 주세요.",
-				minlength 	: "길이는 최소 8자 이상이어야 합니다.",
-				maxlength 	: "길이는 최대 15자까지 허용합니다.",
-				equalTo 	: "위의 패스워드와 동일해야 합니다."				
-			},			
-			email : {
-				email : "이메일 형식에 맞게 입력해 주셔야 합니다."
-			},
-			phoneNo : {
-				number : "숫자만 입력이 가능합니다."
-			} 
-		}
-	});
+// 	$("form").validate({
+// 		rules: {
+// 			userId: {
+// 				required 	: true,
+// 				minlength 	: 8,
+// 				maxlength 	: 15
+// 			},
+// 			userNm: {
+// 				required 	: true,
+// 				minlength 	: 2,
+// 				maxlength 	: 10
+// 			},
+// 			passwd: {
+// 				required 	: true,
+// 				minlength 	: 8,
+// 				maxlength 	: 15
+// 			},
+// 			passwdChk: {
+// 				required 	: true,
+// 				minlength 	: 8,
+// 				maxlength 	: 15,
+// 				equalTo 	: "#passwd"				
+// 			},
+// 			email : {
+// 				email : true
+// 			},
+// 			phoneNo : {
+// 				number : true
+// 			}
+// 		},
+// 		messages : {
+// 			userId : {
+// 				required 	: "사용자 아이디 입력은 필수 입니다.",
+// 				minlength 	: "길이는 최소 8자 이상이어야 합니다.",
+// 				maxlength 	: "길이는 최대 15자까지 허용합니다."				
+// 			},
+// 			userNm : {
+// 				required 	: "사용자 이름 입력은 필수 입니다.",
+// 				minlength 	: "길이는 최소 2자 이상이어야 합니다.",
+// 				maxlength 	: "길이는 최대 10자까지 허용합니다."
+// 			},
+// 			passwd : {
+// 				required 	: "패스워드를 입력해 주세요.",
+// 				minlength 	: "길이는 최소 8자 이상이어야 합니다.",
+// 				maxlength 	: "길이는 최대 15자까지 허용합니다."									
+// 			},
+// 			passwdChk: {
+// 				required  	: "패스워드를 한번 더 입력해 주세요.",
+// 				minlength 	: "길이는 최소 8자 이상이어야 합니다.",
+// 				maxlength 	: "길이는 최대 15자까지 허용합니다.",
+// 				equalTo 	: "위의 패스워드와 동일해야 합니다."				
+// 			},			
+// 			email : {
+// 				email : "이메일 형식에 맞게 입력해 주셔야 합니다."
+// 			},
+// 			phoneNo : {
+// 				number : "숫자만 입력이 가능합니다."
+// 			} 
+// 		}
+// 	});
 });
 
 

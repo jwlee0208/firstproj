@@ -1,23 +1,18 @@
 package com.firstproj.user.dto;
 
-import javax.validation.constraints.NotNull;
-
 import org.apache.ibatis.type.Alias;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.NumberFormat;
 
 @Alias("user.userDto")
 public class UserDto {
 	private String userId;
-	@NotNull @NotEmpty
+//	@NotNull @NotEmpty
 	private String userNm;
-	@NotNull @NotEmpty
+//	@NotNull @NotEmpty
 	private String passwd;
 	
-	@Email
+//	@Email
 	private String email;
-	@NumberFormat
+//	@NumberFormat
 	private String phoneNo;
 	
 	private String joinDate;
