@@ -1,4 +1,4 @@
-package com.firstproj.common;
+package com.firstproj.common.validate;
 
 public class JsonResponse {
     private String status;

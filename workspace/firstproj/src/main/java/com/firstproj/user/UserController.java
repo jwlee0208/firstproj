@@ -8,15 +8,18 @@ import net.sf.json.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.firstproj.common.JsonResponse;
+import com.firstproj.common.validate.JsonResponse;
+import com.firstproj.common.validate.ValidationUtil;
 import com.firstproj.user.dto.UserDto;
 import com.firstproj.user.service.UserServiceImpl;
+import com.firstproj.user.validate.UserValidator;
 
 @Controller
 @RequestMapping(value="/user")
@@ -68,13 +71,26 @@ public class UserController {
     @RequestMapping(value="/regist")
     @ResponseBody	
     public JsonResponse registUser2(Model model, @ModelAttribute UserDto userDto, BindingResult result) throws Exception{
-        
-        
+                
         JsonResponse returnObj = new JsonResponse();
-        ValidationUtils.rejectIfEmpty(result, "userId", "user.regist.userId.empty", "아이디가 입력되지 않았습니다.");
-        ValidationUtils.rejectIfEmpty(result, "userNm", "user.regist.userNm.empty", "이름이 입력되지 않았습니다.");
-        ValidationUtils.rejectIfEmpty(result, "passwd", "user.regist.passwd.empty", "비밀번호가 입력되지 않았습니다.");
-        ValidationUtils.rejectIfEmpty(result, "email", "user.regist.email.empty", "이메일이 입력되지 않았습니다.");
+        
+        UserValidator.insertValidate(result, userDto);
+        
+//        ValidationUtil.rejectIfEmpty(result, "userId", "user.regist.userId.empty", "아이디가 입력되지 않았습니다.");
+//        if(!StringUtils.isEmpty(userDto.getUserId())){
+//            ValidationUtil.rejectIfNotRegEx(result, "userId", "user.regist.userId.regex", "아이디는 영문과 숫자만 사용가능합니다.", ValidationUtil.REG_EX_ENG_NUM);
+//        }
+//                
+//        ValidationUtils.rejectIfEmpty(result, "userNm", "user.regist.userNm.empty", "이름이 입력되지 않았습니다.");        
+//        
+//        ValidationUtils.rejectIfEmpty(result, "passwd", "user.regist.passwd.empty", "비밀번호가 입력되지 않았습니다.");
+//        
+//        if(StringUtils.hasLength(userDto.getPhoneNo())){
+//            ValidationUtil.rejectIfNotRegEx(result, "phoneNo", "user.regist.phoneNo.regex", "전화번호 형식에 맞지 않습니다.", ValidationUtil.REG_EX_CELL_PHONE_NO);
+//        }
+//        
+//        ValidationUtils.rejectIfEmpty(result, "email", "user.regist.email.empty", "이메일이 입력되지 않았습니다.");
+//        ValidationUtil.rejectIfNotRegEx(result, "email", "user.regist.email.unregex", "이메일 형식이 맞지 않습니다.", ValidationUtil.REG_EX_EMAIL);
         
         String resultCode = "REGIST_0000";
         String resultMsg = "";

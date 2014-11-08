@@ -28,42 +28,42 @@
 		<div class="form-group">
 			<label for="userId" class="col-sm-2 control-label">사용자 아이디</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="userId" name="userId"/>
+				<input type="text" class="form-control" id="userId" name="userId"/><span id="userIdErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="userNm" class="col-sm-2 control-label">사용자 이름</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="userNm" name="userNm" style="ime-mode: active"/>
+				<input type="text" class="form-control" id="userNm" name="userNm" style="ime-mode: active"/><span id="userNmErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="passwd" class="col-sm-2 control-label">패스워드</label>
 			<div class="col-sm-10">
-				<input type="password" class="form-control" id="passwd" name="passwd" minlength="8" maxlength="15"/>
+				<input type="password" class="form-control" id="passwd" name="passwd" minlength="8" maxlength="15"/><span id="passwdErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="passwdChk" class="col-sm-2 control-label">패스워드 체크</label>
 			<div class="col-sm-10">
-				<input type="password" class="form-control" id="passwdChk" name="passwdChk" minlength="8" maxlength="15"/>
+				<input type="password" class="form-control" id="passwdChk" name="passwdChk" minlength="8" maxlength="15"/><span id="passwdChkErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="email" class="col-sm-2 control-label">E-mail</label>
 			<div class="col-sm-10">
-				<input type="email" class="form-control" id="email" name="email"/>
+				<input type="email" class="form-control" id="email" name="email"/><span id="emailErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="phoneNo" class="col-sm-2 control-label">핸드폰 번호</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="phoneNo" name="phoneNo"/>
+				<input type="text" class="form-control" id="phoneNo" name="phoneNo"/><span id="phoneNoErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
 		
@@ -119,7 +119,8 @@ $().ready(function() {
 						if(result != null && length > 0){
 							for(var i = 0 ; i < length ; i++){
 								console.log(result[i].field + ", " + result[i].defaultMessage +", " + result[i].code);
-								$("#" + result[i].field).attr("placeholder", result[i].defaultMessage);
+								$("#" + result[i].field+"Err").html(result[i].defaultMessage);
+								$("#" + result[i].field+"Err").show();
 							}
 						}
 					},
@@ -131,6 +132,11 @@ $().ready(function() {
 		});		
 	});
 
+
+	$("input[type=text]").on("click", function(e){
+		$("#" +e.target.id + "Err").hide();
+		$("#" +e.target.id + "Err").html('');
+	});
 // 	$("form").validate({
 // 		rules: {
 // 			userId: {
