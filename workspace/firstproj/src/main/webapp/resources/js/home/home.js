@@ -22,5 +22,6 @@ function logout(){
 }
 
 function goPlayer(){
-	location.href = "/player/attrElemMapList.page";
+	location.href = "/player/playerList.page"; 
+//		"/player/attrElemMapList.page";
 }

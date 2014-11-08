@@ -1,8 +1,14 @@
 	$(document).on("ready", function() {
+		$("input[name='goToRegist']").on("click", function() {
+			console.log('goTAoWrite');
+			location.href = "/player/write.page";
+		});
+
+		
 		$( "#searchText" ).keypress(function( event ) {
 			  if ( event.which == 13 ) {
 				  event.preventDefault();
-			  }
+			  }			  
 			  goSearch();
 		});
 	});

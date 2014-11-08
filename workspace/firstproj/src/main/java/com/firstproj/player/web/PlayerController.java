@@ -224,6 +224,10 @@ System.out.println("searchCondition : " + searchCondition + ", searchText : " + 
         return "player/playerList";
     }
     
-    
-
+    @RequestMapping(value="/write.page")
+    public String registPlayer(HttpServletRequest request, Model model) throws Exception{
+    	
+    	
+    	return "player/registPlayer";
+    }
 }
