@@ -2,7 +2,7 @@ package com.firstproj.common.validate;
 
 public class JsonResponse {
     private String status;
-    private Object Result;
+    private Object result;
     
     public String getStatus() {
         return status;
@@ -11,9 +11,11 @@ public class JsonResponse {
         this.status = status;
     }
     public Object getResult() {
-        return Result;
+        return result;
     }
     public void setResult(Object result) {
-        Result = result;
+        this.result = result;
     }
+    
+    
 }
