@@ -1,3 +1,14 @@
+	$(document).on("ready", function() {
+		$( "#searchText" ).keypress(function( event ) {
+			  if ( event.which == 13 ) {
+				  event.preventDefault();
+				  goSearch();
+			  }			  
+		});
+	});
+
+
+
 	// 페이지 이동
 	function goPage(pageNo) {
 		$("#pageNo").val(pageNo);

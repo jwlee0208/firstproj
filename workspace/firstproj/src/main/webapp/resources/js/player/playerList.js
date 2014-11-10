@@ -1,3 +1,18 @@
+	$(document).on("ready", function() {
+		$("input[name='goToRegist']").on("click", function() {
+			location.href = "/player/write.page";
+		});
+
+		$( "#searchText" ).keypress(function( event ) {
+			  if ( event.which == 13 ) {
+				  event.preventDefault();
+				  goSearch();
+			  }			  
+		});		
+	});
+
+
+
 	// 페이지 이동
 	function goPage(pageNo) {
 		// 검색된 카테고리 영역 비활성화

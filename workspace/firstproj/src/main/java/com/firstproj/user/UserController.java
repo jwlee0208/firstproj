@@ -1,6 +1,7 @@
 package com.firstproj.user;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import net.sf.json.JSONObject;
@@ -8,27 +9,33 @@ import net.sf.json.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.firstproj.common.validate.JsonResponse;
-import com.firstproj.common.validate.ValidationUtil;
 import com.firstproj.user.dto.UserDto;
 import com.firstproj.user.service.UserServiceImpl;
 import com.firstproj.user.validate.UserValidator;
 
 @Controller
 @RequestMapping(value="/user")
+@SessionAttributes("userInfo")
 public class UserController {
 	@Resource(name="UserServiceImpl")
 	private UserServiceImpl userService;
 	
 	@RequestMapping(value="/regist.page")
-	public String registUser() throws Exception{
+	public String registUser(Model model, HttpServletRequest request) throws Exception{
+	    
+        String referer = request.getHeader("Referer");
+System.out.println(" >>> REFER : " + referer);              
+//      return "redirect:" + referer;
+
+        model.addAttribute("prevPage", referer);
+	    
 		return "/user/regist";
 	}
 	
@@ -68,9 +75,9 @@ public class UserController {
 		return returnObj;
 	}
 	
-    @RequestMapping(value="/regist")
+    @RequestMapping(value="/registAction")
     @ResponseBody	
-    public JsonResponse registUser2(Model model, @ModelAttribute UserDto userDto, BindingResult result) throws Exception{
+    public JsonResponse registUser2(Model model, HttpServletRequest request, @ModelAttribute UserDto userDto, BindingResult result) throws Exception{
                 
         JsonResponse returnObj = new JsonResponse();
         
@@ -109,22 +116,31 @@ public class UserController {
             
             userDto.setPasswd(hashedPassword);
             
-            registResult = this.userService.insertUserInfo(userDto);
+            UserDto duplicatedUser = this.userService.selectUserInfo(userDto);
             
-            if(registResult > 0){
-                resultCode = "REGIST_0002";
-                resultMsg = "duplicated_user";
+            if(duplicatedUser == null){
+                registResult = this.userService.insertUserInfo(userDto);
+               
+                if(registResult > 0){                    
+                    resultCode = "REGIST_0000";
+                    resultMsg = "complelted";               
+
+                }else{
+                    resultCode = "REGIST_0002";
+                    resultMsg = "insert_error";
+                }
 
             }else{
-                resultCode = "REGIST_0000";
-                resultMsg = "complelted";               
+                resultCode = "REGIST_0003";
+                resultMsg = "duplicated_user";
             }
-
+            
             returnObj.setStatus(resultCode);
             returnObj.setResult(resultMsg);
 
         }
 
+        model.addAttribute("userInfo", this.userService.selectUserInfo(userDto));
         return returnObj;
     }
 	

@@ -17,7 +17,8 @@ public class ValidationUtil extends ValidationUtils{
     /**
      * 핸드폰 전화번호 체크
      */
-    public static final String REG_EX_CELL_PHONE_NO    = "^01(?:[0-9])"+"-"+"(?:\\d{3}|\\d{4})"+"-"+"\\d{4}$";
+//    public static final String REG_EX_CELL_PHONE_NO    = "^01(?:[0-9])"+"-"+"(?:\\d{3}|\\d{4})"+"-"+"\\d{4}$";
+    public static final String REG_EX_CELL_PHONE_NO    = "^01(?:[0-9])"+"(?:\\d{3}|\\d{4})"+"\\d{4}$";
     /**
      * 이메일 정규식 체크
      */

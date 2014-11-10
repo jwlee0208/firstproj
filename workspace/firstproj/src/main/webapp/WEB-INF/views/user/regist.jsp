@@ -22,6 +22,7 @@
 <body>
 <div class="container">
 	
+	<input type="hidden" id="prevPage" name="prevPage" value="${prevPage}"/>
 	
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form">
 		<h1 id="btn-groups" class="page-header">Regist</h1>
@@ -69,10 +70,13 @@
 		
 		<div class="btn-group btn-group-justified" style="padding-top : 20px; padding-bottom : 20px;">
 			<div class="btn-group">
-				<input type="button" class="btn btn-default" value="취소">
+				<input type="button" class="btn btn-default" value="Home" id="homeBtn">
 			</div>
 			<div class="btn-group">
-				<input type="button" class="btn btn-default pull-right" value="저장" id="registBtn">
+				<input type="button" class="btn btn-default" value="Cancel" id="cancelBtn">
+			</div>
+			<div class="btn-group">
+				<input type="button" class="btn btn-default pull-right" value="Regist" id="registBtn">
 			</div>					
 		</div>
 	</form>
@@ -101,28 +105,44 @@ $().ready(function() {
 							   .replace(specialCharRegExg, ""));
 		});
 
+		$("#homeBtn").on("click", function(){
+			history.go(-1);
+		});
+
+		$("#cancelBtn").on("click", function(){
+			history.go(0);
+		});
+		
 		$("#registBtn").on("click", function(){
 			var isValid = $("form").valid();
 
 			if(isValid){
 				$.ajax({
 // 					url : '/user/regist.json',
-					url : '/user/regist',
+					url : '/user/registAction',
 					data : $("#actionFrm").serialize(),
 					dataType : 'json',
 					method : 'post',
 					success : function(data){
 // 						console.log("result : " + data.resultCode + ", " + data.resultMsg);
-						console.log("result : " + data.status + ", " + data.result + ', ' + data.result.length);
-						var result = data.result;
-						var length = result.length;
-						if(result != null && length > 0){
-							for(var i = 0 ; i < length ; i++){
-								console.log(result[i].field + ", " + result[i].defaultMessage +", " + result[i].code);
-								$("#" + result[i].field+"Err").html(result[i].defaultMessage);
-								$("#" + result[i].field+"Err").show();
+// 						console.log("result : " + data.status + ", " + data.result + ', ' + data.result.length);
+						var status = data.status;
+						
+						if(status == 'REGIST_0000'){
+							location.href = $("#prevPage").val();
+						}else{
+							var result = data.result;
+							var length = result.length;
+							if(result != null && length > 0){
+
+								for(var i = 0 ; i < length ; i++){
+//	 								console.log(result[i].field + ", " + result[i].defaultMessage +", " + result[i].code);
+									$("#" + result[i].field+"Err").html(result[i].defaultMessage);
+									$("#" + result[i].field+"Err").show();
+								}
 							}
 						}
+						
 					},
 					error : function(data){
 

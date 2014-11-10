@@ -115,7 +115,7 @@
 
 	<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
 		<div class="btn-group">
-			<input type="submit" class="btn btn-default pull-right" value="프로필쓰기" name="goToRegist" />
+			<input type="button" class="btn btn-default pull-right" value="프로필쓰기" name="goToRegist" />
 		</div>
 	</div>	
 

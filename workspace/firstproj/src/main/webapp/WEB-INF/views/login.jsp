@@ -13,6 +13,15 @@ $(document).on("ready", function() {
 			passwd : {required : '패스워드를 입력해 주세요.'}
 		}	
 	});
+
+
+	$( "input" ).keypress(function( event ) {
+		  if ( event.which == 13 ) {
+			  event.preventDefault();
+			  loginAction();
+		  }
+	});
+
 	
 	$("#userId").focus();
 // 	$("input:blank").css("background-color", "#efefef");					
@@ -23,34 +32,37 @@ $(document).on("ready", function() {
 
 $(function(){
 	$("input[name=signinSubmit]").on("click", function(){
-
-		var isvalid = $("#loginForm").valid();
-
-		if(isvalid){
-			$.ajax({
-				url : "/loginProcess.json",
-				data : $("#loginForm").serialize(),
-				dataType : "json",
-				method : "post",
-				success : function(data){
-
-					var code = data.resultCode;
-					if(code == 'LOGIN_0000'){
-						location.href = $("#prevPage").val();
-							//"/home.page";
-					}else{
-						alert(data.resultMsg);
-						$("#passwd").focus();
-						return;
-					}
-				},
-				error : function(data){
-		console.log('error');
-				}
-			});
-		}		
+		loginAction();
 	});
 });
+
+function loginAction(){
+	var isvalid = $("#loginForm").valid();
+
+	if(isvalid){
+		$.ajax({
+			url : "/loginProcess.json",
+			data : $("#loginForm").serialize(),
+			dataType : "json",
+			method : "post",
+			success : function(data){
+	
+				var code = data.resultCode;
+				if(code == 'LOGIN_0000'){
+					location.href = $("#prevPage").val();
+						//"/home.page";
+				}else{
+					alert(data.resultMsg);
+					$("#passwd").focus();
+					return;
+				}
+			},
+			error : function(data){
+	console.log('error');
+			}
+		});
+	}
+}
 </script>
 <div class="container">
 

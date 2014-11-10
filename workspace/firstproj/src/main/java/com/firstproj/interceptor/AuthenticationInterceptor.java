@@ -29,7 +29,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter{
 		
 		String uri = request.getRequestURI();
 		
-		if(!uri.endsWith("login") && !uri.endsWith("logout.page")){
+		if(!uri.endsWith("login") && !uri.endsWith("logout.page") && !uri.endsWith("regist")){
 			UserDto userInfo = (UserDto) request.getSession().getAttribute("userInfo");
 			
 			if(null == userInfo){

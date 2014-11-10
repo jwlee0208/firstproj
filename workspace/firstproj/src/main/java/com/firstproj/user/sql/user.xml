@@ -19,6 +19,7 @@
 				#{email},
 				#{phoneNo},
 				CURRENT_TIMESTAMP())
+<!-- 			WHERE user_id != #{userId}	 -->
 			
         </insert>
         <select id="selectUserList" parameterType="user.userDto" resultType="user.userDto">
