@@ -57,8 +57,23 @@
 							if(prevAttrId == 0 || (prevAttrId != 0 && attrId > prevAttrId)){
 								innerHtml += "<div id=\"" + attrId +"\" onclick=\"javascript:attrFilterList(" + attrId + ");\" style=\"font-weight:bold;\">" + attrElementList[i].attrNameStr + "</div>";
 							}
-
-							innerHtml += "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"attrElem_" + attrElementList[i].attrElemId +"\" " + " name=\"" + attrElementList[i].attrElemId + "\" class=\"attrElemChkBox\" value=\"" + attrElementList[i].attrElemId + "\"/>" + attrElementList[i].attrElemNameStr + "</label>";
+							
+							var categoryAttrElemList = attrElementList[i].categoryAttrElemList;
+							
+							var categoryAttrElemListLength = categoryAttrElemList.length; 
+							if(categoryAttrElemListLength > 0){
+								for(var j = 0; j < categoryAttrElemListLength ; j++){
+									var catAttrElemObj = categoryAttrElemList[j];
+								
+									innerHtml += "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"attrElem_" + catAttrElemObj.attrElemId +"\" " + " name=\"" + catAttrElemObj.attrElemId + "\" class=\"attrElemChkBox\" value=\"" + catAttrElemObj.attrElemId + "\"/>" + catAttrElemObj.attrElemNameStr + "</label>";
+//									innerHtml += "<div>";
+//									innerHtml += "<input type=\"radio\" id=\"attr_" + catAttrElemObj.attrElemId + "\"" + "name=attr_" + catAttrElemObj.attrElemId +"\" value=\"" + catAttrElemObj.attrElemId + "\" />" + catAttrElemObj.attrElemNameStr
+//									innerHtml += "</div>";
+										
+								}
+							}
+							
+							
 
 							prevAttrId = attrId;
 						}

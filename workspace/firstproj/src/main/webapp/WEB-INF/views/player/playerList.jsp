@@ -94,7 +94,7 @@
 		<c:forEach var="list" items="${pagedResult.list}">
 			<tr>
 				<td></td>
-				<td>${list.userNm}(${list.userId})</td>
+				<td>${list.userInfo.userNm}(${list.userInfo.userId})</td>
 				<td>${list.catNm1}</td>
 				<td>${list.catNm2}</td>
 			</tr>

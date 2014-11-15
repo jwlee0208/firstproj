@@ -26,9 +26,9 @@
 		</select>	
 
 		
-		<select id="selectCategoryAttrElemList" parameterType="player.categoryAttrDto" resultType="player.categoryAttrElemDto">
+		<select id="selectCategoryAttrElemList" parameterType="player.categoryAttrDto" resultMap="categoryAttrElemListMap">
 			select 
-				    a.attr_id
+				    a.attr_id	
 				  , a.attr_name
 				  , ae.attr_elem_id
 				  , ae.attr_elem_name 
@@ -36,6 +36,15 @@
 			left join tb_attr_elem ae on a.attr_id = ae.attr_id
 			where a.cat_id = #{catId} 
 		</select>
+		
+		<resultMap id="categoryAttrElemListMap" type="player.categoryAttrDto">
+			<id column="attr_id" property="attrId"/>
+			<result column="attr_name" property="attrName"/>
+			<collection property="categoryAttrElemList" ofType="player.categoryAttrElemDto">
+				<id column="attr_elem_id" property="attrElemId"/>
+				<result column="attr_elem_name" property="attrElemName"/>
+			</collection>
+		</resultMap> 
 		
 		<!-- 페이징 위한 리스트 갯수 조회 -->    
 		<select id="selectListCount" resultType="Integer" parameterType="searchConditionPlayer">        
@@ -45,7 +54,13 @@
 			left join 	tb_attr_elem_map  	aem 	on ae.attr_elem_id = aem.attr_elem_id
         
 			<include refid="searchConditionSql"/>    
-
+			<!-- 
+			order by null의 사용으로 filesort작업 제거 
+			ref.] http://papamake.tistory.com/118
+				  http://beautijeon.tistory.com/1458
+				  http://www.mysqlkorea.com/sub.html?mcode=manual&scode=01&m_no=21460&cat1=7&cat2=217&cat3=238&lang=k 
+			-->
+			ORDER BY null	
 		</select>      
 		
 		<!-- 리스트 조회 -->    
@@ -56,6 +71,9 @@
 			LIMIT #{startRow}, #{endRow}     
 		</select>		
 		
+		<select id="checkIsRegisted" resultType="Integer" parameterType="user.userDto">
+			select count(*) from tb_player_info where user_id = #{userId}
+		</select>
 		
 		<!-- 페이징 위한 playerInfo 리스트 갯수 조회 -->    
 		<select id="selectPlayerListCount" resultType="Integer" parameterType="searchConditionPlayer">        
@@ -74,12 +92,28 @@
 		
 		
 		<!-- playerInfo 리스트 조회 -->
-		<select id="selectPlayerList" resultType="player.playerInfoDto" parameterType="searchConditionPlayer">
+		<select id="selectPlayerList" resultMap="playerListMap" parameterType="searchConditionPlayer">
 			<include refid="selectPlayerListDefault"/>			
 			<include refid="searchConditionPlayerSql"/>     
 			ORDER BY U.user_nm desc	
 			LIMIT #{startRow}, #{endRow}  
 		</select>
+		
+		<resultMap 	id="playerListMap" 	type="player.playerInfoDto">
+			<id 	column="player_info_id" 	property="playerInfoId"/>
+			<result column="catId1" 			property="catId1"/>
+			<result column="catId2" 			property="catId2"/>
+			<result column="catNm1" 			property="catNm1"/>
+			<result column="catNm2" 			property="catNm2"/>
+			<association 	property="userInfo" javaType="user.userDto">
+				<id 		column="user_id" 	property="userId"/>
+				<result 	column="userNm" 	property="userNm"/>			
+				<result 	column="email" 		property="email"/>
+				<result 	column="phone_no" 	property="phoneNo"/>
+				<result 	column="join_date" 	property="joinDate"/>
+			</association>
+		</resultMap>
+		
 		
 		<!-- playerInfo 검색 리스트 조회 -->
 		<select id="selectSearchCountListPerCategory" resultType="player.playerInfoSearchDto" parameterType="searchConditionPlayer">
@@ -193,10 +227,10 @@
 			SELECT 
 					pi.player_info_id
 				  , pi.user_id
-				  , U.user_nm
-				  , pi.cat_id1
+				  , U.user_nm	as userNm
+				  , pi.cat_id1  as catId1
 				  , c1.cat_name as catNm1
-				  , pi.cat_id2
+				  , pi.cat_id2  as catId2
 				  , c2.cat_name as catNm2 
 			FROM TB_PLAYER_INFO 		pi
 			LEFT JOIN TB_USER 			U 		ON pi.user_id 		= U.user_id	

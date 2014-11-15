@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import com.firstproj.player.SearchConditionPlayer;
 import com.firstproj.player.dto.CategoryAttrDto;
-import com.firstproj.player.dto.CategoryAttrElemDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
+import com.firstproj.user.dto.UserDto;
 
 @Repository("PlayerDao")
 public class PlayerDao extends SqlSessionDaoSupport{
@@ -25,7 +25,7 @@ public class PlayerDao extends SqlSessionDaoSupport{
         return getSqlSession().selectList("sql.player.selectCategoryList", param);
     }
     
-    public List<CategoryAttrElemDto> getAttrElemList(CategoryAttrDto param) throws Exception{
+    public List<CategoryAttrDto> getAttrElemList(CategoryAttrDto param) throws Exception{
         return getSqlSession().selectList("sql.player.selectCategoryAttrElemList", param);
     }
     /**
@@ -136,5 +136,18 @@ public class PlayerDao extends SqlSessionDaoSupport{
         searchConditionPlayer.setSearchCondition((String)param.get("searchCondition"));
         searchConditionPlayer.setSearchText((String)param.get("searchText"));
         return getSqlSession().selectList("sql.player.selectSearchCountListPerCategory", searchConditionPlayer); 
+    }
+    
+    /**
+     * @brief player에 등록된 사용자인지 여부를 체크
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public boolean selectIsRegisted(UserDto param) throws Exception{
+    	
+    	int chkCnt = getSqlSession().selectOne("sql.player.checkIsRegisted", param);
+    	
+    	return (chkCnt > 0) ? true : false;
     }
 }

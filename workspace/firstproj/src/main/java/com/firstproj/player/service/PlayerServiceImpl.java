@@ -11,11 +11,11 @@ import com.firstproj.common.util.PagedList;
 import com.firstproj.common.util.PagingUtil;
 import com.firstproj.player.dao.PlayerDao;
 import com.firstproj.player.dto.CategoryAttrDto;
-import com.firstproj.player.dto.CategoryAttrElemDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
+import com.firstproj.user.dto.UserDto;
 
 @Service("PlayerServiceImpl")
 public class PlayerServiceImpl implements PlayerService{
@@ -30,7 +30,7 @@ public class PlayerServiceImpl implements PlayerService{
         return playerDao.getCategoryList(param);
     }
     
-    public List<CategoryAttrElemDto> getAttrElementList(CategoryAttrDto param) throws Exception{
+    public List<CategoryAttrDto> getAttrElementList(CategoryAttrDto param) throws Exception{
         return playerDao.getAttrElemList(param);
     }
     
@@ -105,5 +105,14 @@ public class PlayerServiceImpl implements PlayerService{
     public List<PlayerInfoSearchDto> getPlayerInfoCntPerCategory(Map<String, Object> paramMap) throws Exception {
         return this.playerDao.selectSearchedPlayerListPerCategory(paramMap);
     }
-    
+    /**
+     * @brief player에 등록된 사용자인지 여부를 체크
+     * @param userObj
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public boolean getIsRegisted(UserDto userObj) throws Exception{
+    	return this.playerDao.selectIsRegisted(userObj);
+    }
 }

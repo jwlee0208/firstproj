@@ -5,12 +5,17 @@ import org.apache.ibatis.type.Alias;
 import com.firstproj.user.dto.UserDto;
 
 @Alias("player.playerInfoDto")
-public class PlayerInfoDto extends UserDto{
+public class PlayerInfoDto 
+//extends UserDto
+{
     private int playerInfoId;
     private int catId1;
     private int catId2;
     private String catNm1;
     private String catNm2;
+    private String introduce;
+    
+    private UserDto userInfo;
     
     public int getPlayerInfoId() {
         return playerInfoId;
@@ -42,5 +47,18 @@ public class PlayerInfoDto extends UserDto{
     public void setCatNm2(String catNm2) {
         this.catNm2 = catNm2;
     }
+	public UserDto getUserInfo() {
+		return userInfo;
+	}
+	public void setUserInfo(UserDto userInfo) {
+		this.userInfo = userInfo;
+	}
+	public String getIntroduce() {
+		return introduce;
+	}
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
+	
     
 }

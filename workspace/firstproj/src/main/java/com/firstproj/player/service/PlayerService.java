@@ -10,11 +10,12 @@ import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
+import com.firstproj.user.dto.UserDto;
 
 public interface PlayerService {
     public List<CategoryAttrElemMapDto> getCategoryAttrElemMapList(CategoryAttrElemMapDto param) throws Exception;
     public List<CategoryDto> getCategoryList(CategoryDto param) throws Exception;
-    public List<CategoryAttrElemDto> getAttrElementList(CategoryAttrDto param) throws Exception;
+    public List<CategoryAttrDto> getAttrElementList(CategoryAttrDto param) throws Exception;
     public int getCategoryAttrElemMapCnt(Map<String, Object> param) throws Exception;
     public PagedList getCategoryAttrElemMapPagedList(Map<String, Object> paramMap) throws Exception;
     public List<CategoryAttrElemMapDto> getCategoryAttrElemMapList(Map<String,Object> paramMap) throws Exception;
@@ -23,5 +24,6 @@ public interface PlayerService {
     public PagedList getPlayerInfoPagedList(Map<String, Object> paramMap) throws Exception; 
     public List<PlayerInfoDto> getPlayerInfoList(Map<String,Object> paramMap) throws Exception;
     public List<PlayerInfoSearchDto> getPlayerInfoCntPerCategory(Map<String, Object> paramMap) throws Exception; 
-    
+
+    public boolean getIsRegisted(UserDto userObj) throws Exception;
 }

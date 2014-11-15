@@ -1,6 +1,7 @@
 package com.firstproj.player.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
@@ -16,6 +17,8 @@ public class CategoryAttrDto extends CategoryDto implements Serializable{
     private String  modifyDate;
     private String  modifyUserId;
     private String  modifyUserName;
+    
+    private List<CategoryAttrElemDto> categoryAttrElemList;
     
     public int getAttrId() {
         return attrId;
@@ -72,7 +75,16 @@ public class CategoryAttrDto extends CategoryDto implements Serializable{
         this.modifyUserName = modifyUserName;
     }
     
-    public String getAttrNameStr(){
+    
+    
+    public List<CategoryAttrElemDto> getCategoryAttrElemList() {
+		return categoryAttrElemList;
+	}
+	public void setCategoryAttrElemList(
+			List<CategoryAttrElemDto> categoryAttrElemList) {
+		this.categoryAttrElemList = categoryAttrElemList;
+	}
+	public String getAttrNameStr(){
         
         String attrNameStr = "";
         

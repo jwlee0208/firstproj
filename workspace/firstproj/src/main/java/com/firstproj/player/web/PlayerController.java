@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
@@ -17,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import antlr.StringUtils;
-
 import com.firstproj.common.util.PagedList;
 import com.firstproj.player.dto.CategoryAttrDto;
 import com.firstproj.player.dto.CategoryAttrElemDto;
@@ -26,6 +25,7 @@ import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
 import com.firstproj.player.service.PlayerServiceImpl;
+import com.firstproj.user.dto.UserDto;
 
 @Controller
 @RequestMapping(value = "/player")
@@ -83,7 +83,9 @@ public class PlayerController {
         CategoryAttrDto param = new CategoryAttrDto();
         param.setCatId(catId);
         
-        List<CategoryAttrElemDto> attrElementList = this.playerService.getAttrElementList(param);
+//        List<CategoryAttrElemDto> attrElementList = this.playerService.getAttrElementList(param);
+        
+        List<CategoryAttrDto> attrElementList = this.playerService.getAttrElementList(param);
         
         System.out.println(attrElementList.size());
         
@@ -225,9 +227,27 @@ System.out.println("searchCondition : " + searchCondition + ", searchText : " + 
     }
     
     @RequestMapping(value="/write.page")
-    public String registPlayer(HttpServletRequest request, Model model) throws Exception{
+    public String registPlayer(HttpServletRequest request, Model model, HttpSession session) throws Exception{
     	
+    	UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
     	
+    	if(sessionInfo == null){
+    		return "redirect:/login";
+    	}else{
+    		
+    		if(this.playerService.getIsRegisted(sessionInfo)){
+    			return "redirect:/player/playerList.page";
+    		}else{
+    	        CategoryDto param = new CategoryDto();
+    	        param.setParentCatId(0);
+    	        
+    	        List<CategoryDto> parentCatList = this.playerService.getCategoryList(param);
+    			
+    			model.addAttribute("sessionInfo", sessionInfo);
+    			model.addAttribute("firstDepthCatList", parentCatList);
+    		}
+    	}
+
     	return "player/registPlayer";
     }
 }
