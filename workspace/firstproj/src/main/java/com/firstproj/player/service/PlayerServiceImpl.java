@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.util.PagingUtil;
+import com.firstproj.player.SearchConditionPlayer;
 import com.firstproj.player.dao.PlayerDao;
 import com.firstproj.player.dto.CategoryAttrDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
@@ -114,5 +115,15 @@ public class PlayerServiceImpl implements PlayerService{
     @Override
     public boolean getIsRegisted(UserDto userObj) throws Exception{
     	return this.playerDao.selectIsRegisted(userObj);
+    }
+    /**
+     * @brief autoComplete
+     * @param searchConditionPlayer
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<String> getAutoComplete(SearchConditionPlayer searchConditionPlayer) throws Exception{
+    	return this.playerDao.selectAutoComplete(searchConditionPlayer);
     }
 }

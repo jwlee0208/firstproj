@@ -150,4 +150,13 @@ public class PlayerDao extends SqlSessionDaoSupport{
     	
     	return (chkCnt > 0) ? true : false;
     }
+    /**
+     * @brief autoComplete
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public List<String> selectAutoComplete(SearchConditionPlayer param) throws Exception{
+    	return getSqlSession().selectList("sql.player.selectAutoComplete", param);
+    }
 }

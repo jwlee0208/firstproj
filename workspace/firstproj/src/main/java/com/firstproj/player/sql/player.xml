@@ -138,6 +138,15 @@
 		</select>
 		
 		
+		<!-- autoComplete -->
+		<select id="selectAutoComplete" resultType="String" parameterType="searchConditionPlayer">
+			select user_nm 
+			from tb_user u
+			left join tb_player_info pi on pi.user_id = u.user_id
+			where u.user_nm like concat('%', #{searchText}, '%')
+			order by user_nm
+		</select>
+		
 		
 		<sql id="selectAttrElemMapDefault">
 			select a.cat_id

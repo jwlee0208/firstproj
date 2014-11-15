@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.firstproj.common.util.PagedList;
+import com.firstproj.player.SearchConditionPlayer;
 import com.firstproj.player.dto.CategoryAttrDto;
 import com.firstproj.player.dto.CategoryAttrElemDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
@@ -26,4 +27,6 @@ public interface PlayerService {
     public List<PlayerInfoSearchDto> getPlayerInfoCntPerCategory(Map<String, Object> paramMap) throws Exception; 
 
     public boolean getIsRegisted(UserDto userObj) throws Exception;
+    
+    public List<String> getAutoComplete(SearchConditionPlayer searchConditionPlayer) throws Exception;
 }

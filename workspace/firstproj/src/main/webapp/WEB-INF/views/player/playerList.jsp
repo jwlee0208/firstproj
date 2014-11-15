@@ -10,6 +10,11 @@
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/common/paging.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
 
+
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/jquery/js/jquery-ui.min.js"></script>
+<link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/css/jquery/jquery-ui.min.css">
+
+
 <div class="container">
 <form 	id="listFrm" name="listFrm" method="post">
 <!-- paging에 필요한 파라미터 -->
@@ -120,4 +125,48 @@
 	</div>	
 
 </form>
+<script>
+$(function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#searchText" ).autocomplete({
+//       source: availableTags
+		source : function(request, response){
+			$.ajax({
+				url : '/player/autoComplete.json',
+				data : $("#listFrm").serialize(),
+				dataType : 'json',
+				method : 'post',
+				success : function (data) {
+					var searchResult = data.searchResult;
+					console.log(searchResult);
+					response(searchResult);
+				}
+			});
+		}
+    });
+  });
+</script>
 </div>

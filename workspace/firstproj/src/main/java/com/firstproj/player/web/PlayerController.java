@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.firstproj.common.util.PagedList;
+import com.firstproj.player.SearchConditionPlayer;
 import com.firstproj.player.dto.CategoryAttrDto;
-import com.firstproj.player.dto.CategoryAttrElemDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
@@ -249,5 +250,29 @@ System.out.println("searchCondition : " + searchCondition + ", searchText : " + 
     	}
 
     	return "player/registPlayer";
+    }
+    
+    /**
+     * @brief autoComplete
+     * @param request
+     * @param searchText
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/autoComplete.json", method = {RequestMethod.POST})
+    @ResponseBody
+    public JSONObject autoComplete(HttpServletRequest request, @Param String searchText) throws Exception{
+    	JSONObject returnObj = new JSONObject();
+    	
+    	SearchConditionPlayer searchConditionPlayer = new SearchConditionPlayer();
+    	if(!StringUtils.isEmpty(searchText)){
+    		searchConditionPlayer.setSearchText(searchText);
+    	}
+    	
+    	List<String> searchResult = this.playerService.getAutoComplete(searchConditionPlayer);
+    	
+    	returnObj.put("searchResult", searchResult);
+    	
+    	return returnObj;
     }
 }
