@@ -194,7 +194,8 @@
 			WHERE 1 = 1
 					<if test='searchCondition == "userName"'>
 						<if test='searchText != null and searchText != ""'>
-						and aem.user_name 	like CONCAT('%', #{searchText}, '%')
+<!-- 						and aem.user_name 	like CONCAT('%', #{searchText}, '%') -->
+							and u.user_nm 	like CONCAT('%', #{searchText}, '%')
 						</if> 
 					</if>
 			

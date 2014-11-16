@@ -14,6 +14,70 @@
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/jquery/js/jquery-ui.min.js"></script>
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/css/jquery/jquery-ui.min.css">
 
+<style>
+/* 		.ui-autocomplete { */
+/* 			background-color: white; */
+/* 			border-color: red; */
+/* 			border: 1px; */
+/* 		} */
+		.ui-autocomplete .highlight {
+			font-weight : bold;
+			color : red;
+			text-decoration: underline;
+		}
+		
+		
+/* .ui-autocomplete { */
+/*   position: absolute; */
+/*   top: 100%; */
+/*   left: 0; */
+/*   z-index: 1000; */
+/*   float: left; */
+/*   display: none; */
+/*   min-width: 160px; */
+/*   _width: 160px; */
+/*   padding: 4px 0; */
+/*   margin: 2px 0 0 0; */
+/*   list-style: none; */
+/*   background-color: #ffffff; */
+/*   border-color: #ccc; */
+/*   border-color: rgba(0, 0, 0, 0.2); */
+/*   border-style: solid; */
+/*   border-width: 1px; */
+/*   -webkit-border-radius: 5px; */
+/*   -moz-border-radius: 5px; */
+/*   border-radius: 5px; */
+/*   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); */
+/*   -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); */
+/*   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); */
+/*   -webkit-background-clip: padding-box; */
+/*   -moz-background-clip: padding; */
+/*   background-clip: padding-box; */
+/*   *border-right-width: 2px; */
+/*   *border-bottom-width: 2px; */
+ 
+/*   .ui-menu-item > a.ui-corner-all { */
+/*     display: block; */
+/*     padding: 3px 15px; */
+/*     clear: both; */
+/*     font-weight: normal; */
+/*     line-height: 18px; */
+/*     color: #555555; */
+/*     white-space: nowrap; */
+ 
+/*     &.ui-state-hover, &.ui-state-active { */
+/*       color: #ffffff; */
+/*       text-decoration: none; */
+/*       background-color: #0088cc; */
+/*       border-radius: 0px; */
+/*       -webkit-border-radius: 0px; */
+/*       -moz-border-radius: 0px; */
+/*       background-image: none; */
+/*     } */
+/*   } */
+/* }		 */
+		
+</style>
 
 <div class="container">
 <form 	id="listFrm" name="listFrm" method="post">
@@ -33,7 +97,7 @@
 		<div class="row">
 			<div class="col-md-10">
 			<input type="hidden" 	id="searchCondition" name="searchCondition" value="userName"/>
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control"/>	
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control ui-autocomplete-input"/>	
 			</div>
 			<div class="col-md-2">	
 			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검색"/>
@@ -166,7 +230,27 @@ $(function() {
 				}
 			});
 		}
-    });
+    }).data("ui-autocomplete")._renderItem = function(ul, item) {
+		var $a = $("<a></a>").text(item.label);
+		highlightText(this.term, $a);
+		return $("<li></li>").append($a).appendTo(ul);
+	};
+    
   });
+  
+  
+// autoComplete highlight 
+// REf.] http://salman-w.blogspot.kr/2013/12/jquery-ui-autocomplete-examples.html?m=1#example-2
+function highlightText(text, $node) {
+	var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
+	while ((matchIndex = currentNode.data.toLowerCase().indexOf(searchText)) >= 0) {
+		newTextNode = currentNode.splitText(matchIndex);
+		currentNode = newTextNode.splitText(searchText.length);
+		newSpanNode = document.createElement("span");
+		newSpanNode.className = "highlight";
+		currentNode.parentNode.insertBefore(newSpanNode, currentNode);
+		newSpanNode.appendChild(newTextNode);
+	}
+}
 </script>
 </div>
