@@ -24,6 +24,7 @@ import com.firstproj.player.SearchConditionPlayer;
 import com.firstproj.player.dto.CategoryAttrDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
+import com.firstproj.player.dto.PlayerInfoDetail;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
 import com.firstproj.player.service.PlayerServiceImpl;
 import com.firstproj.user.dto.UserDto;
@@ -237,7 +238,7 @@ System.out.println("searchCondition : " + searchCondition + ", searchText : " + 
     	}else{
     		
     		if(this.playerService.getIsRegisted(sessionInfo)){
-    			return "redirect:/player/playerList.page";
+    			return "redirect:/player/playerDetailView.page";
     		}else{
     	        CategoryDto param = new CategoryDto();
     	        param.setParentCatId(0);
@@ -251,6 +252,31 @@ System.out.println("searchCondition : " + searchCondition + ", searchText : " + 
 
     	return "player/registPlayer";
     }
+    
+    @RequestMapping(value="/registPlayerAction.json", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject insertPlayerDetailInfoJSON(PlayerInfoDetail playerInfoDetail, HttpSession session) throws Exception{
+    	JSONObject jsonObj = new JSONObject();
+    	
+		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+//    	System.out.println(" }}}}}}}}}}} " + playerInfoDetail.toString());
+
+		// validate
+		
+		// service 호출
+		int playerInfoId = this.playerService.insertPlayerInfoDetail(playerInfoDetail, sessionInfo);
+		
+		if(playerInfoId > 0){
+			jsonObj.put("result", "ok");
+			jsonObj.put("msg", "Successfully Registration.");
+		}else{
+			jsonObj.put("result", "error");
+			jsonObj.put("msg", "Failure Registration. Try it again, Please.");
+		}
+    	
+    	return jsonObj;
+    }
+    
     
     /**
      * @brief autoComplete
@@ -275,4 +301,28 @@ System.out.println("searchCondition : " + searchCondition + ", searchText : " + 
     	
     	return returnObj;
     }
+    /**
+     * @brief playerDetailInfo
+     * @param request
+     * @param model
+     * @param userDto
+     * @param session
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/playerDetailView", method = {RequestMethod.POST})
+    public String getPlayerDetail(HttpServletRequest request, Model model, UserDto userDto, HttpSession session) throws Exception{
+    	UserDto userInfo = null;
+    	if(userDto == null){
+    		userInfo = (UserDto)session.getAttribute("userInfo");
+    	}else{
+    		userInfo = userDto;
+    	}
+    	
+    	model.addAttribute("playerDetailInfo", this.playerService.getPlayerInfoDetail(userInfo));
+    	
+    	return "player/playerDetailView";
+    }
+    
+    
 }

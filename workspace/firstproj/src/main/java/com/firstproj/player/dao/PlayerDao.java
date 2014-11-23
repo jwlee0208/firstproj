@@ -8,10 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import com.firstproj.player.SearchConditionPlayer;
 import com.firstproj.player.dto.CategoryAttrDto;
+import com.firstproj.player.dto.CategoryAttrElemDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
+import com.firstproj.player.dto.PlayerVideoLinkDto;
 import com.firstproj.user.dto.UserDto;
 
 @Repository("PlayerDao")
@@ -158,5 +160,51 @@ public class PlayerDao extends SqlSessionDaoSupport{
      */
     public List<String> selectAutoComplete(SearchConditionPlayer param) throws Exception{
     	return getSqlSession().selectList("sql.player.selectAutoComplete", param);
+    }
+    
+    /**
+     * @brief Insert To Player Info
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public int insertPlayerInfo(PlayerInfoDto param) throws Exception{
+    	int insertResult = getSqlSession().insert("sql.player.insertPlayerInfo", param);
+    	
+    	System.out.println("insertResult : " + insertResult);
+    	
+    	int playerInfoId = 0;
+    	if(insertResult > 0){
+    		playerInfoId = param.getPlayerInfoId();
+    		System.out.println("playerInfoId : " + playerInfoId);
+    	}
+    	return playerInfoId;
+    }
+    /**
+     * @brief Insert to playerVideoLinkInfo
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public int insertPlayerVideoLinkInfo(PlayerVideoLinkDto param) throws Exception{
+    	return getSqlSession().insert("sql.player.insertPlayerVideoLinkInfo", param);
+    }
+    /**
+     * @brief Insert to CategoryAttributeElementMap
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public int insertCategoryAttrElemMap(CategoryAttrElemDto param) throws Exception{
+    	return getSqlSession().insert("sql.player.insertCategoryAttrElemMapInfo", param);
+    }
+    /**
+     * @brief Select to player's detail info
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public PlayerInfoDto selectPlayerInfoDetail(UserDto param) throws Exception{
+    	return getSqlSession().selectOne("sql.player.selectPlayerInfoDetail", param);
     }
 }

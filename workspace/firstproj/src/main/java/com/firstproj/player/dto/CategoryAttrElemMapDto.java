@@ -189,5 +189,16 @@ public class CategoryAttrElemMapDto extends CategoryAttrElemDto implements Seria
         }
         return attrNameStr;
     }
+	@Override
+	public String toString() {
+		return "CategoryAttrElemMapDto [attrElemMapId=" + attrElemMapId
+				+ ", attrId=" + attrId + ", attrElemId=" + attrElemId
+				+ ", catId=" + catId + ", userId=" + userId + ", userName="
+				+ userName + ", attrElemMapName=" + attrElemMapName
+				+ ", createDate=" + createDate + ", createUserId="
+				+ createUserId + ", createUserName=" + createUserName
+				+ ", modifyDate=" + modifyDate + ", modifyUserId="
+				+ modifyUserId + ", modifyUserName=" + modifyUserName + "]";
+	}
 
 }

@@ -6,9 +6,9 @@ import java.util.Map;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.player.SearchConditionPlayer;
 import com.firstproj.player.dto.CategoryAttrDto;
-import com.firstproj.player.dto.CategoryAttrElemDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
+import com.firstproj.player.dto.PlayerInfoDetail;
 import com.firstproj.player.dto.PlayerInfoDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
 import com.firstproj.user.dto.UserDto;
@@ -29,4 +29,10 @@ public interface PlayerService {
     public boolean getIsRegisted(UserDto userObj) throws Exception;
     
     public List<String> getAutoComplete(SearchConditionPlayer searchConditionPlayer) throws Exception;
+    
+    
+    public int insertPlayerInfoDetail(PlayerInfoDetail playerInfoDetail, UserDto userInfo) throws Exception;
+    
+    public PlayerInfoDto getPlayerInfoDetail(UserDto userDto) throws Exception;
+    
 }

@@ -163,7 +163,7 @@
 		<c:forEach var="list" items="${pagedResult.list}">
 			<tr>
 				<td></td>
-				<td>${list.userInfo.userNm}(${list.userInfo.userId})</td>
+				<td onclick="javascript:goDetail('${list.userInfo.userId}');">${list.userInfo.userNm}(${list.userInfo.userId})</td>
 				<td>${list.catNm1}</td>
 				<td>${list.catNm2}</td>
 			</tr>
@@ -252,5 +252,14 @@ function highlightText(text, $node) {
 		newSpanNode.appendChild(newTextNode);
 	}
 }
+
+function goDetail(userId){
+	
+	var frm = $("#listFrm");
+	frm.attr("action", "/player/playerDetailView.page?userId=" + userId);
+	frm.attr("method", "post");
+	frm.submit();
+}
+
 </script>
 </div>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +36,9 @@ public class LoginController {
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception{
 		
 		String referer = request.getHeader("Referer");
+		if(StringUtils.isEmpty(referer)){
+			referer="/";
+		}
 System.out.println(" >>> REFER : " + referer);				
 //		return "redirect:" + referer;
 

@@ -251,4 +251,92 @@
 										  	   and pi.user_id 		= aem.user_id
 		</sql>
 		
+		<insert id="insertPlayerInfo" parameterType="player.playerInfoDto" useGeneratedKeys="true" keyProperty="playerInfoId">
+			INSERT INTO TB_PLAYER_INFO 
+				(user_id, cat_id1, cat_id2, introduce)
+			VALUES
+				(#{userId}, #{catId1}, #{catId2}, #{introduce})
+<!-- 			<selectKey keyProperty="playerInfoId" resultType="int"> -->
+<!-- 				SELECT LAST_INSERT_ID -->
+<!-- 			</selectKey>	 -->
+		</insert>
+				
+		<insert id="insertCategoryAttrElemMapInfo" parameterType="player.categoryAttrElemDto" useGeneratedKeys="true" keyProperty="attrElemMapId">
+			INSERT INTO tb_attr_elem_map
+				(attr_id,
+				attr_elem_id,
+				cat_id,
+				user_id,
+				user_name,
+				attr_elem_map_name,
+				create_date,
+				create_user_id,
+				create_user_name)
+			VALUES
+				(#{attrId},
+				#{attrElemId},
+				#{catId},
+				#{userId},
+				#{userName},
+				#{attrElemMapName},
+				now(),
+				#{createUserId},
+				#{createUserName})
+		</insert>	
+		
+		<insert id="insertPlayerVideoLinkInfo" parameterType="player.playerVideoLinkDto" useGeneratedKeys="true" keyProperty="playerVideoLinkId">
+			INSERT INTO TB_PLAYER_VIDEO_LINK
+				(player_info_id, link_url)
+			VALUES 
+				(#{playerInfoId}, #{linkUrl})
+		</insert>
+		
+		<!-- player detail info -->
+		<select id="selectPlayerInfoDetail" parameterType="user.userDto" resultMap="playerDetailMap">
+			select 
+			        pi.player_info_id
+				  , u.user_id
+				  , u.user_nm
+				  , u.email
+				  , u.phone_no
+				  , cat1.cat_id 	as catId1
+				  , cat1.cat_name 	as catNm2
+				  , cat2.cat_id 	as catId2
+				  , cat2.cat_name 	as catNm2
+				  , ae.attr_elem_id
+				  , ae.attr_elem_name
+				  , pvl.link_url
+				  , pi.introduce  
+			from tb_user u
+			inner join tb_player_info pi on u.user_id = pi.user_id
+			left join tb_player_video_link pvl on pi.player_info_id = pvl.player_info_id
+			left join tb_attr_elem_map aem on pi.user_id = aem.user_id
+			inner join tb_category cat1 on pi.cat_id1 = cat1.cat_id
+			inner join tb_category cat2 on pi.cat_id2 = cat2.cat_id
+			inner join tb_attr_elem ae  on aem.attr_elem_id = ae.attr_elem_id
+			where u.user_id = #{userId};		
+		</select>
+		
+		<resultMap type="player.playerInfoDto" id="playerDetailMap">
+			<id 	column="user_id" 	property="userId"/>
+			<result column="catId1" 	property="catId1"/>
+			<result column="catNm1" 	property="catNm1"/>
+			<result column="catId2" 	property="catId2"/>
+			<result column="catNm2" 	property="catNm2"/>
+			<result column="introduce" 	property="introduce"/>
+			<association property="userInfo" javaType="user.userDto">
+				<id 		column="user_id" 	property="userId"/>
+				<result 	column="user_nm" 	property="userNm"/>
+				<result 	column="email" 		property="email"/>
+				<result 	column="phone_no" 	property="phoneNo"/>
+			</association>
+			<collection property="playerVideoLinkList" 	ofType="player.playerVideoLinkDto">
+				<id 	column="player_info_id" property="playerInfoId"/>
+				<result column="link_url" 		property="linkUrl"/>
+			</collection>
+			<collection property="categoryAttrElemList" ofType="player.categoryAttrElemDto">
+				<id		column="attr_elem_id"	property="attrElemId"/>
+				<result column="attr_elem_name" property="attrElemName"/>
+			</collection>
+		</resultMap>
     </mapper>

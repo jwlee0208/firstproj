@@ -14,8 +14,10 @@ import com.firstproj.player.dao.PlayerDao;
 import com.firstproj.player.dto.CategoryAttrDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
+import com.firstproj.player.dto.PlayerInfoDetail;
 import com.firstproj.player.dto.PlayerInfoDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
+import com.firstproj.player.dto.PlayerVideoLinkDto;
 import com.firstproj.user.dto.UserDto;
 
 @Service("PlayerServiceImpl")
@@ -126,4 +128,72 @@ public class PlayerServiceImpl implements PlayerService{
     public List<String> getAutoComplete(SearchConditionPlayer searchConditionPlayer) throws Exception{
     	return this.playerDao.selectAutoComplete(searchConditionPlayer);
     }
+    
+    @Override
+    public int insertPlayerInfoDetail(PlayerInfoDetail playerInfoDetail, UserDto userInfo) throws Exception{
+    	
+    	// inserting playerInfo
+    	PlayerInfoDto playerInfo = playerInfoDetail.getPlayerInfoDto();
+    	
+    	int playerInfoId = 0;
+    	if(playerInfo != null){
+    		
+    		String userId = userInfo.getUserId();
+    		System.out.println("userId : " + userId);
+//    		System.out.println("}}}}}}}}}}}}}}}}}}}}}}}}}}}} userInfo : " + userInfo.toString());
+    		
+//    		playerInfo.setUserInfo(userInfo);
+    		playerInfo.setUserId(userId);
+    		playerInfoId = this.insertPlayerInfo(playerInfo);
+
+        	// inserting playerVideoLinkInfo
+        	List<PlayerVideoLinkDto> playerVideoLinkList = playerInfoDetail.getPlayerVideoLinkList();
+
+        	if(playerVideoLinkList != null && playerVideoLinkList.size() > 0){
+        		for(PlayerVideoLinkDto playerVideoLinkDto : playerVideoLinkList){
+        			playerVideoLinkDto.setPlayerInfoId(playerInfoId);
+        			
+        			this.insertPlayerVideoLinkInfo(playerVideoLinkDto);
+        		}
+        	}
+        	
+        	// inserting categoryAttrMappingInfo
+        	List<CategoryAttrElemMapDto> attrElemMapList = playerInfoDetail.getAttrElemMapList(); 
+        	
+        	if(attrElemMapList != null && attrElemMapList.size() > 0){
+        		for(CategoryAttrElemMapDto categoryAttrElemMapDto : attrElemMapList){
+        			categoryAttrElemMapDto.setUserId(userInfo.getUserId());
+        			categoryAttrElemMapDto.setUserName(userInfo.getUserNm());
+        			
+        			this.insertCategoryPropertyMappingInfo(categoryAttrElemMapDto);
+        		}
+        	}
+    	}
+    	return playerInfoId;
+    }
+    
+    @SuppressWarnings("unused")
+	private int insertPlayerInfo(PlayerInfoDto playerInfoDto) throws Exception{
+    	int insertedProductInfoId = 0;
+    	// dao 호출
+    	insertedProductInfoId = this.playerDao.insertPlayerInfo(playerInfoDto);
+    	return insertedProductInfoId;
+    }
+    
+    @SuppressWarnings("unused")
+	private int insertPlayerVideoLinkInfo(PlayerVideoLinkDto playerVideoLinkDto) throws Exception{
+    	// dao 호출
+    	return this.playerDao.insertPlayerVideoLinkInfo(playerVideoLinkDto);
+    }
+    
+    @SuppressWarnings("unused")
+	private int insertCategoryPropertyMappingInfo(CategoryAttrElemMapDto categoryAttrElemMapDto) throws Exception{
+    	// dao 호출
+    	return this.playerDao.insertCategoryAttrElemMap(categoryAttrElemMapDto);
+    }
+
+	@Override
+	public PlayerInfoDto getPlayerInfoDetail(UserDto userDto) throws Exception {
+		return this.playerDao.selectPlayerInfoDetail(userDto);
+	}
 }
