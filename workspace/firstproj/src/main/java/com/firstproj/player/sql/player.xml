@@ -300,7 +300,7 @@
 				  , u.email
 				  , u.phone_no
 				  , cat1.cat_id 	as catId1
-				  , cat1.cat_name 	as catNm2
+				  , cat1.cat_name 	as catNm1
 				  , cat2.cat_id 	as catId2
 				  , cat2.cat_name 	as catNm2
 				  , ae.attr_elem_id
@@ -318,12 +318,13 @@
 		</select>
 		
 		<resultMap type="player.playerInfoDto" id="playerDetailMap">
-			<id 	column="user_id" 	property="userId"/>
-			<result column="catId1" 	property="catId1"/>
-			<result column="catNm1" 	property="catNm1"/>
-			<result column="catId2" 	property="catId2"/>
-			<result column="catNm2" 	property="catNm2"/>
-			<result column="introduce" 	property="introduce"/>
+			<id 	column="player_info_id" 	property="playerInfoId"/>
+			<id 	column="user_id" 			property="userId"/>
+			<result column="catId1" 			property="catId1"/>
+			<result column="catNm1" 			property="catNm1"/>
+			<result column="catId2" 			property="catId2"/>
+			<result column="catNm2" 			property="catNm2"/>
+			<result column="introduce" 			property="introduce"/>
 			<association property="userInfo" javaType="user.userDto">
 				<id 		column="user_id" 	property="userId"/>
 				<result 	column="user_nm" 	property="userNm"/>
@@ -339,4 +340,24 @@
 				<result column="attr_elem_name" property="attrElemName"/>
 			</collection>
 		</resultMap>
+		
+		<!-- 등록한 사용자인지 아닌지 체크 -->
+		<select id="selectIsRegistedPlayer" parameterType="user.userDto" resultType="user.userDto">
+			select distinct user_id 
+			from tb_player_info 
+			where user_id = #{userId}
+		</select>
+
+		<delete id="deletePlayerVideoLinkInfo" parameterType="player.playerInfoDto">
+			delete from tb_player_video_link where player_info_id = #{playerInfoId}
+		</delete>
+
+		<delete id="deletePlayerElemMapInfo" parameterType="player.playerInfoDto">
+			delete from tb_attr_elem_map where user_id = #{userId}
+		</delete>
+		
+		<delete id="deleteRegistedPlayerInfo" parameterType="player.playerInfoDto">
+			delete from tb_player_info where user_id = #{userId} 
+		</delete>
+		
     </mapper>

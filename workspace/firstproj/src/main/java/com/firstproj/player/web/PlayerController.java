@@ -25,6 +25,7 @@ import com.firstproj.player.dto.CategoryAttrDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoDetail;
+import com.firstproj.player.dto.PlayerInfoDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
 import com.firstproj.player.service.PlayerServiceImpl;
 import com.firstproj.user.dto.UserDto;
@@ -105,7 +106,7 @@ public class PlayerController {
      * @return
      * @throws Exception
      */
-    private Model getListCommonList(HttpServletRequest request, Model model, String page) throws Exception{
+    private Model getListCommonList(HttpServletRequest request, Model model, HttpSession session, String page) throws Exception{
         // 검색 조건
         String searchCondition  = request.getParameter("searchCondition");
         String searchText       = request.getParameter("searchText");
@@ -124,7 +125,7 @@ public class PlayerController {
         String attrId           = (String)request.getParameter("selectedAttrId");       // String.valueOf(categoryAttrElemMapDto.getAttrId());
         String attrElemId       = (String)request.getParameter("selectedAttrElemId");   // String.valueOf(categoryAttrElemMapDto.getAttrElemId());
 
-System.out.println("Controller's catId : " + catId + "\nController's attrId : " + attrId + "\nController's attrElemId : " + attrElemId);        
+//System.out.println("Controller's catId : " + catId + "\nController's attrId : " + attrId + "\nController's attrElemId : " + attrElemId);        
 
         List<String> attrElemIdArr = null;
         
@@ -154,7 +155,7 @@ System.out.println("Controller's catId : " + catId + "\nController's attrId : " 
         paramMap.put("searchText",      searchText);
         paramMap.put("startDate",       startDate);
         paramMap.put("endDate",         endDate);
-System.out.println("searchCondition : " + searchCondition + ", searchText : " + searchText);
+//System.out.println("searchCondition : " + searchCondition + ", searchText : " + searchText);
         int totalListCnt = 0;
                 
         if(page.equals("attrElemMapList.page")){
@@ -173,7 +174,7 @@ System.out.println("searchCondition : " + searchCondition + ", searchText : " + 
 
         // 카테고리 목록 조회하는 부분
         CategoryDto             categoryObj = null;
-        List<CategoryDto> catList = this.playerService.getCategoryList(categoryObj);
+        List<CategoryDto> 		catList 	= this.playerService.getCategoryList(categoryObj);
         
         // 페이징 리스트 조회하는 부분
         PagedList result = null;
@@ -182,6 +183,17 @@ System.out.println("searchCondition : " + searchCondition + ", searchText : " + 
             result = playerService.getCategoryAttrElemMapPagedList(paramMap);
         }else if(page.equals("playerList.page")){
             result = playerService.getPlayerInfoPagedList(paramMap);
+            
+            // checkout who logined user regist as player
+            UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+            
+            boolean isRegisted = false;
+            
+            if(sessionInfo != null){
+            	isRegisted = this.playerService.getIsRegistedPlayer(sessionInfo);
+            }
+            
+            model.addAttribute("isRegisted", isRegisted);
             
 //            System.out.println("searchText is not null : " + (null != searchText) + "or not empty : " + org.apache.commons.lang.StringUtils.isNotEmpty(searchText));
             if(org.apache.commons.lang.StringUtils.isNotEmpty(searchText)){
@@ -205,13 +217,13 @@ System.out.println("searchCondition : " + searchCondition + ", searchText : " + 
      * @throws Exception
      */
     @RequestMapping(value="/attrElemMapList.page", method = {RequestMethod.GET, RequestMethod.POST})
-    public String getCategoryAttrElemMapList(HttpServletRequest request, Model model, CategoryAttrElemMapDto categoryAttrElemMapDto) throws Exception{
+    public String getCategoryAttrElemMapList(HttpServletRequest request, Model model, CategoryAttrElemMapDto categoryAttrElemMapDto, HttpSession session) throws Exception{
         
         System.out.println("attrElemId : " + request.getParameter("selectedAttrElemId"));
         System.out.println("attrId : " + request.getParameter("selectedAttrId"));
         System.out.println("dto attrElemId : " + categoryAttrElemMapDto.getAttrElemId());
         
-        model = this.getListCommonList(request, model, "attrElemMapList.page");
+        model = this.getListCommonList(request, model, session, "attrElemMapList.page");
         
         return "player/attrElemMapList";
     }
@@ -223,8 +235,8 @@ System.out.println("searchCondition : " + searchCondition + ", searchText : " + 
      * @throws Exception
      */
     @RequestMapping(value="/playerList.page", method = {RequestMethod.GET, RequestMethod.POST})
-    public String getPlayerInfoList(HttpServletRequest request, Model model) throws Exception{
-        model = this.getListCommonList(request, model, "playerList.page");
+    public String getPlayerInfoList(HttpServletRequest request, Model model, HttpSession session) throws Exception{
+        model = this.getListCommonList(request, model, session, "playerList.page");
         return "player/playerList";
     }
     
@@ -313,6 +325,7 @@ System.out.println("searchCondition : " + searchCondition + ", searchText : " + 
     @RequestMapping(value="/playerDetailView", method = {RequestMethod.POST})
     public String getPlayerDetail(HttpServletRequest request, Model model, UserDto userDto, HttpSession session) throws Exception{
     	UserDto userInfo = null;
+    	UserDto myInfo   = (UserDto)session.getAttribute("userInfo");
     	if(userDto == null){
     		userInfo = (UserDto)session.getAttribute("userInfo");
     	}else{
@@ -320,9 +333,29 @@ System.out.println("searchCondition : " + searchCondition + ", searchText : " + 
     	}
     	
     	model.addAttribute("playerDetailInfo", this.playerService.getPlayerInfoDetail(userInfo));
-    	
+    	model.addAttribute("myInfo", myInfo);
     	return "player/playerDetailView";
     }
     
+    @RequestMapping(value="/deletePlayerInfo.json", method = RequestMethod.POST)
+    public JSONObject deletePlayerInfo(PlayerInfoDto playerInfoDto, HttpSession session) throws Exception{
+    	JSONObject 	returnObj 		= new JSONObject();
+    	int 	   	deleteResult 	= 0;
+    	UserDto 	sessionInfo 	= (UserDto)session.getAttribute("userInfo");
+    	
+    	if(playerInfoDto != null && playerInfoDto.getPlayerInfoId() > 0 && sessionInfo != null){
+    		playerInfoDto.setUserId(sessionInfo.getUserId());
+    		deleteResult = this.playerService.deletePlayerInfo(playerInfoDto);
+    	}
+
+		if(deleteResult > 0){
+			returnObj.put("result", "ok");
+			returnObj.put("msg", "Successfully deleted.");
+		}else{
+			returnObj.put("result", "error");
+			returnObj.put("msg", "Failure to delete. Try it again, Please.");
+		}
+		return returnObj;
+    }
     
 }

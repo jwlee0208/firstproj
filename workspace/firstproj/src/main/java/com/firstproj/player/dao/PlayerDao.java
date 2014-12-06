@@ -207,4 +207,32 @@ public class PlayerDao extends SqlSessionDaoSupport{
     public PlayerInfoDto selectPlayerInfoDetail(UserDto param) throws Exception{
     	return getSqlSession().selectOne("sql.player.selectPlayerInfoDetail", param);
     }
+    /**
+     * @brief Check out user is registed or not registed
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public boolean selectIsRegistedPlayer(UserDto param) throws Exception{
+    	boolean returnResult = false;
+    	UserDto userObj = getSqlSession().selectOne("sql.player.selectIsRegistedPlayer", param);
+    	
+    	if(userObj != null && userObj.getUserId() != null){
+    		returnResult = true;
+    	}
+    	return returnResult;
+    }
+    
+    
+    public int deletePlayerInfo(PlayerInfoDto param) throws Exception{
+    	return getSqlSession().delete("sql.player.deleteRegistedPlayerInfo", param);
+    }
+    
+    public int deletePlayerElemMapInfo(PlayerInfoDto param) throws Exception{
+    	return getSqlSession().delete("sql.player.deletePlayerElemMapInfo", param);
+    }
+    
+    public int deletePlayerVideoLinkInfo(PlayerInfoDto param) throws Exception{
+    	return getSqlSession().delete("sql.player.deletePlayerVideoLinkInfo", param);
+    }
 }

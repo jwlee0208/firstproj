@@ -196,4 +196,19 @@ public class PlayerServiceImpl implements PlayerService{
 	public PlayerInfoDto getPlayerInfoDetail(UserDto userDto) throws Exception {
 		return this.playerDao.selectPlayerInfoDetail(userDto);
 	}
+	@Override
+	public boolean getIsRegistedPlayer(UserDto userDto) throws Exception{
+		return this.playerDao.selectIsRegistedPlayer(userDto);
+	}
+	@Override
+	public int deletePlayerInfo(PlayerInfoDto playerInfoDto) throws Exception{
+		
+		int deleteResult = 0;
+		
+		deleteResult += this.playerDao.deletePlayerElemMapInfo(playerInfoDto);
+		deleteResult += this.playerDao.deletePlayerVideoLinkInfo(playerInfoDto);
+		deleteResult += this.playerDao.deletePlayerInfo(playerInfoDto);
+		
+		return deleteResult;
+	}
 }
