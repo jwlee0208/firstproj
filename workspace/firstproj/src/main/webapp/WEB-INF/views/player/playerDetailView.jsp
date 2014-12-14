@@ -26,8 +26,12 @@
 <body>
 <div class="container">
 	<form id="viewFrm" name="viewFrm" method="post" class="form-horizontal" role="form">
-		<input type="text" id="playerInfoId" name="playerInfoId" value="${playerDetailInfo.playerInfoId}"/>
+		<input type="hidden" id="playerInfoId" name="playerInfoId" value="${playerDetailInfo.playerInfoId}"/>
 		<h1 id="btn-groups" class="page-header">Player Info.</h1>
+		<div class="form-group">
+			<label for="profileImgFilePath" class="col-sm-2 control-label">Profile Image</label>
+			<div class="col-sm-10"><img data-src="holder.js/128x128" src="${playerDetailInfo.profileImgFilePath}"/></div>
+		</div>
 		<div class="form-group">
 			<label for="userId" class="col-sm-2 control-label">User ID</label>
 			<div class="col-sm-10">${playerDetailInfo.userInfo.userId}</div>
@@ -86,10 +90,11 @@
 			<div class="btn-group">
 				<input type="button" class="btn btn-default" value="Delete" id="deleteBtn">
 			</div>
-			</c:if>
+			
 			<div class="btn-group">
 				<input type="button" class="btn btn-default pull-right" value="Modify" id="modifyBtn">
 			</div>					
+			</c:if>
 		</div>
 	</form>
 </div>
@@ -123,6 +128,9 @@ $(function(){
 		location.href = "/player/playerList.page";	
 	});
 	
+	$("#modifyBtn").on("click", function(){
+		alert('not ready to sesrvice');
+	});
 });
 </script>
 </html>

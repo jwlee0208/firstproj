@@ -18,7 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.player.SearchConditionPlayer;
 import com.firstproj.player.dto.CategoryAttrDto;
@@ -37,6 +39,16 @@ public class PlayerController {
     public static final int DEFAULT_PAGE_NO = 1;
     public static final int DEFAULT_PAGE_SIZE = 10;
 
+	// Related to image upload
+	public static final long 	MAX_UPLOAD_FILE_SIZE 			= 20480000;
+	public static final String 	FILE_EXTENSIONS_IMAGES 			= "jpg, jpeg, png, gif, bmp";
+    
+	private static final int 	THUMBNAIL_IMAGE_WIDTH_SMALL 	= 64;
+	private static final int 	THUMBNAIL_IMAGE_HEIGHT_SMALL 	= 64;
+	
+	@Resource(name="fileUpload")
+	private FileUpload fileUpload;
+	
     @Resource(name="PlayerServiceImpl")
     private PlayerServiceImpl playerService;
  
@@ -252,6 +264,7 @@ public class PlayerController {
     		if(this.playerService.getIsRegisted(sessionInfo)){
     			return "redirect:/player/playerDetailView.page";
     		}else{
+    			
     	        CategoryDto param = new CategoryDto();
     	        param.setParentCatId(0);
     	        
@@ -265,15 +278,35 @@ public class PlayerController {
     	return "player/registPlayer";
     }
     
-    @RequestMapping(value="/registPlayerAction.json", method = RequestMethod.POST)
+    @RequestMapping(value="/registPlayerAction", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject insertPlayerDetailInfoJSON(PlayerInfoDetail playerInfoDetail, HttpSession session) throws Exception{
     	JSONObject jsonObj = new JSONObject();
     	
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
-//    	System.out.println(" }}}}}}}}}}} " + playerInfoDetail.toString());
+    	System.out.println(" }}}}}}}}}}} " + playerInfoDetail.toString());
 
 		// validate
+		
+		
+		// fileUpload
+		MultipartFile imageFile = playerInfoDetail.getPlayerInfoDto().getProfileImg();
+		String imageUploadResult = "";
+		
+		if(null != imageFile){
+			imageUploadResult = fileUpload.uploadFile(imageFile, THUMBNAIL_IMAGE_WIDTH_SMALL, THUMBNAIL_IMAGE_HEIGHT_SMALL);	
+		}
+		
+		String filePath = "";
+		if(!imageUploadResult.equals("") && !imageUploadResult.equals("fileSizeError") && !imageUploadResult.equals("fileExtensionError")){
+			filePath = imageUploadResult;
+			
+			PlayerInfoDto resetPlayerInfoObj = playerInfoDetail.getPlayerInfoDto();
+			resetPlayerInfoObj.setProfileImgFilePath(filePath);
+			resetPlayerInfoObj.setProfileImgName(imageFile.getOriginalFilename());
+	System.out.println("[resetPlayerInfo] : " + resetPlayerInfoObj.toString());		
+			playerInfoDetail.setPlayerInfoDto(resetPlayerInfoObj);	
+		}	
 		
 		// service 호출
 		int playerInfoId = this.playerService.insertPlayerInfoDetail(playerInfoDetail, sessionInfo);

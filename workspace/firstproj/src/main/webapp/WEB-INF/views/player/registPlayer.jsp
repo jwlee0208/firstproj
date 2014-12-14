@@ -29,7 +29,7 @@
 	
 	<input type="hidden" id="prevPage" name="prevPage" value="${prevPage}"/>
 	
-	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form">
+	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form"  enctype="multipart/form-data">
 		<h1 id="btn-groups" class="page-header">Player Regist</h1>
 		<div class="form-group">
 			<label for="userId" class="col-sm-2 control-label">User ID</label>
@@ -46,6 +46,16 @@
 				<input type="hidden" id="playerInfoDto.userDto.userNm" name="playerInfoDto.userDto.userNm" value="${session.userNm}"/>
 			</div>
 		</div>
+
+
+		<div class="form-group">
+			<label for="profileImg" class="col-sm-2 control-label">Profile Image Upload</label>
+			<div class="col-sm-10">
+				<input type="file" id="profileImg" name="playerInfoDto.profileImg">
+			</div>
+		</div>
+
+
 		<div class="form-group">
 			<label for="email" class="col-sm-2 control-label">You are Player?</label>
 			<div class="col-sm-10">
@@ -173,6 +183,39 @@ $(function(){
 		history.go(0);
 	});
 	
+	
+	//ajax error check
+	$(document).ajaxError(function(event, request){
+	   if(request.status==500)
+	      alert("등록에 실패하였습니다. \n업로드할 파일을 확인하세요.(파일 최대용량: 20MB)");
+	   	  return;
+	   }
+	);
+
+	//파일전송 후 콜백 함수
+	function FileuploadCallback(data, state){
+
+	   if (data=="error"){
+	      alert("파일전송중 에러 발생!!");
+	      return false;
+	   } else if (data == "fileSizeError") {
+		  alert("파일용량은 20MB 이하 이어야 합니다.");
+		  return false;
+	   } else if (data == "fileExtensionError") {
+		   alert("이미지 파일을 업로드 하셔야 합니다.\n(업로드 가능한 확장자: jpg, jpeg, gif, png, bmp)");
+		   return false;
+	   } else if (data == "fileWidthHeightError") {
+		   alert("업로드 가능한 이미지 사이즈는 314 * 166 입니다.");
+		   return false;
+	   }
+	   alert("정상적으로 등록 되었습니다.");
+	   // 정상 등록 후 목록 화면으로 이동.
+	   location.href = "/player/playerList.page";
+
+	}
+	
+	
+	
 	$("#registBtn").on("click", function(){
 		var isValid = $("form").valid();
 
@@ -181,28 +224,40 @@ $(function(){
 			var introduce = tinyMCE.get('introduce').getContent();
 			$("#introduce").val(introduce);
 
-			
-			$.ajax({
-				url : '/player/registPlayerAction.json',
-				data : $("#actionFrm").serialize(),
-				dataType : 'json',
-				method : 'post',
-				success : function(data){
-					var result = data.result;
-					var msg = data.msg;
-					
-					
-					if(result == 'ok'){
-						location.href = "/player/playerList.page";
-					}else{
-						alert(msg);
-						return;
-					}
-				},
-				error : function(data){
+			var profileImg = $.trim($("#profileImg").val());
+alert("profileImg.length : " + profileImg.length);
+			if(profileImg.length == 0){
+				$.ajax({
+					url : '/player/registPlayerAction',
+					data : $("#actionFrm").serialize(),
+					dataType : 'json',
+					method : 'post',
+					success : function(data){
+						var result = data.result;
+						var msg = data.msg;
+						
+						
+						if(result == 'ok'){
+							location.href = "/player/playerList.page";
+						}else{
+							alert(msg);
+							return;
+						}
+					},
+					error : function(data){
 
-				}
-			});
+					}
+				});				
+			}else{
+				// 썸네일 파일 업로드 할 때 저장
+				var frm = $("#actionFrm");
+				frm.attr("action", '/player/registPlayerAction');
+				frm.attr("method", "post");
+				frm.ajaxForm(FileuploadCallback); 
+				frm.submit(); 				
+			}
+	
+			
 		}
 	});		
 });

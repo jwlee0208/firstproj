@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 
+@SuppressWarnings("serial")
 @Alias("board.boardArticleDto")
 public class BoardArticleDto implements Serializable{
 	// 입력 파라미터

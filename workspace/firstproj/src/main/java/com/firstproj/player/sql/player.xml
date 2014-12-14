@@ -105,6 +105,7 @@
 			<result column="catId2" 			property="catId2"/>
 			<result column="catNm1" 			property="catNm1"/>
 			<result column="catNm2" 			property="catNm2"/>
+			<result column="profileImgFilePath" property="profileImgFilePath"/>
 			<association 	property="userInfo" javaType="user.userDto">
 				<id 		column="user_id" 	property="userId"/>
 				<result 	column="userNm" 	property="userNm"/>			
@@ -242,6 +243,7 @@
 				  , c1.cat_name as catNm1
 				  , pi.cat_id2  as catId2
 				  , c2.cat_name as catNm2 
+				  , pi.profile_img_file_path as profileImgFilePath
 			FROM TB_PLAYER_INFO 		pi
 			LEFT JOIN TB_USER 			U 		ON pi.user_id 		= U.user_id	
 			LEFT JOIN TB_CATEGORY 		C1 		ON pi.cat_id1 		= C1.CAT_ID
@@ -253,9 +255,14 @@
 		
 		<insert id="insertPlayerInfo" parameterType="player.playerInfoDto" useGeneratedKeys="true" keyProperty="playerInfoId">
 			INSERT INTO TB_PLAYER_INFO 
-				(user_id, cat_id1, cat_id2, introduce)
+				(user_id, cat_id1, cat_id2, introduce
+				, profile_img_file_path
+				, profile_img_name
+				)
 			VALUES
-				(#{userId}, #{catId1}, #{catId2}, #{introduce})
+				(#{userId}, #{catId1}, #{catId2}, #{introduce}
+				, IFNULL(#{profileImgFilePath}, ''), IFNULL(#{profileImgName}, '')
+				)
 <!-- 			<selectKey keyProperty="playerInfoId" resultType="int"> -->
 <!-- 				SELECT LAST_INSERT_ID -->
 <!-- 			</selectKey>	 -->
@@ -295,6 +302,7 @@
 		<select id="selectPlayerInfoDetail" parameterType="user.userDto" resultMap="playerDetailMap">
 			select 
 			        pi.player_info_id
+			      , pi.profile_img_file_path  
 				  , u.user_id
 				  , u.user_nm
 				  , u.email
@@ -318,13 +326,14 @@
 		</select>
 		
 		<resultMap type="player.playerInfoDto" id="playerDetailMap">
-			<id 	column="player_info_id" 	property="playerInfoId"/>
-			<id 	column="user_id" 			property="userId"/>
-			<result column="catId1" 			property="catId1"/>
-			<result column="catNm1" 			property="catNm1"/>
-			<result column="catId2" 			property="catId2"/>
-			<result column="catNm2" 			property="catNm2"/>
-			<result column="introduce" 			property="introduce"/>
+			<id 	column="player_info_id" 		property="playerInfoId"/>
+			<id 	column="user_id" 				property="userId"/>
+			<result column="profile_img_file_path" 	property="profileImgFilePath"/>
+			<result column="catId1" 				property="catId1"/>
+			<result column="catNm1" 				property="catNm1"/>
+			<result column="catId2" 				property="catId2"/>
+			<result column="catNm2" 				property="catNm2"/>
+			<result column="introduce" 				property="introduce"/>
 			<association property="userInfo" javaType="user.userDto">
 				<id 		column="user_id" 	property="userId"/>
 				<result 	column="user_nm" 	property="userNm"/>
