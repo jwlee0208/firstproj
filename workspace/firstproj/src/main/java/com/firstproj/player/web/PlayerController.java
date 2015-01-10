@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.firstproj.common.CommonConstant;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.player.SearchConditionPlayer;
@@ -35,17 +36,7 @@ import com.firstproj.user.dto.UserDto;
 @Controller
 @RequestMapping(value = "/player")
 public class PlayerController {
-    
-    public static final int DEFAULT_PAGE_NO = 1;
-    public static final int DEFAULT_PAGE_SIZE = 10;
-
-	// Related to image upload
-	public static final long 	MAX_UPLOAD_FILE_SIZE 			= 20480000;
-	public static final String 	FILE_EXTENSIONS_IMAGES 			= "jpg, jpeg, png, gif, bmp";
-    
-	private static final int 	THUMBNAIL_IMAGE_WIDTH_SMALL 	= 64;
-	private static final int 	THUMBNAIL_IMAGE_HEIGHT_SMALL 	= 64;
-	
+    	
 	@Resource(name="fileUpload")
 	private FileUpload fileUpload;
 	
@@ -127,7 +118,7 @@ public class PlayerController {
 
         int pageNo              = (request.getParameter("pageNo") != null) 
                                     ? Integer.parseInt(request.getParameter("pageNo")) 
-                                    : DEFAULT_PAGE_NO;
+                                    : CommonConstant.DEFAULT_PAGE_NO;
 
         int listRowCnt          = (request.getParameter("listRowCnt") != null) 
                                     ? Integer.parseInt(request.getParameter("listRowCnt")) 
@@ -182,7 +173,7 @@ public class PlayerController {
         paramMap.put("pageNo",          pageNo);
         paramMap.put("listRowCnt",      listRowCnt);
         paramMap.put("totalListCnt",    totalListCnt);
-        paramMap.put("pageSize",        DEFAULT_PAGE_SIZE);
+        paramMap.put("pageSize",        CommonConstant.DEFAULT_PAGE_SIZE);
 
         // 카테고리 목록 조회하는 부분
         CategoryDto             categoryObj = null;
@@ -294,7 +285,7 @@ public class PlayerController {
 		String imageUploadResult = "";
 		
 		if(null != imageFile){
-			imageUploadResult = fileUpload.uploadFile(imageFile, THUMBNAIL_IMAGE_WIDTH_SMALL, THUMBNAIL_IMAGE_HEIGHT_SMALL);	
+			imageUploadResult = fileUpload.uploadFile(imageFile, CommonConstant.THUMBNAIL_IMAGE_WIDTH_128, CommonConstant.THUMBNAIL_IMAGE_HEIGHT_128);	
 		}
 		
 		String filePath = "";

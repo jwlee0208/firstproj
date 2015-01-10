@@ -20,8 +20,12 @@
 <%-- <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-combined.min.css"> --%>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css"/>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css"/>
+<style type="text/css">
+	.form-group .col-sm-10 {vertical-align : middle;}
+</style>
 </head>
 <body>
 <div class="container">
@@ -29,28 +33,28 @@
 		<input type="hidden" id="playerInfoId" name="playerInfoId" value="${playerDetailInfo.playerInfoId}"/>
 		<h1 id="btn-groups" class="page-header">Player Info.</h1>
 		<div class="form-group">
-			<label for="profileImgFilePath" class="col-sm-2 control-label">Profile Image</label>
-			<div class="col-sm-10"><img data-src="holder.js/128x128" src="${playerDetailInfo.profileImgFilePath}"/></div>
+			<label for="profileImgFilePath" class="col-sm-4">Profile Image</label>
+			<div class="col-sm-8"><img data-src="holder.js/200x200" src="${pageContext.request.contextPath}${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" width="200px" height="200px" /></div>
+		</div>
+<!-- 		<div class="form-group"> -->
+<!-- 			<div class="col-sm-2">User ID</div> -->
+<%-- 			<div class="col-sm-10">${playerDetailInfo.userInfo.userId}</div> --%>
+<!-- 		</div> -->
+		<div class="form-group">
+			<label for="userNm" class="col-sm-4">My Name is</label>
+			<div class="col-sm-8">${playerDetailInfo.userInfo.userNm}</div>
 		</div>
 		<div class="form-group">
-			<label for="userId" class="col-sm-2 control-label">User ID</label>
-			<div class="col-sm-10">${playerDetailInfo.userInfo.userId}</div>
+			<label for="catNm1" class="col-sm-4">My type is</label>
+			<div class="col-sm-8">${playerDetailInfo.catNm1}</div>
 		</div>
 		<div class="form-group">
-			<label for="userNm" class="col-sm-2 control-label">User Name</label>
-			<div class="col-sm-10">${playerDetailInfo.userInfo.userNm}</div>
+			<label for="catNm2" class="col-sm-4">My Position is</label>
+			<div class="col-sm-8">${playerDetailInfo.catNm2}</div>
 		</div>
 		<div class="form-group">
-			<label for="email" class="col-sm-2 control-label">You are Player?</label>
-			<div class="col-sm-10">${playerDetailInfo.catNm1}</div>
-		</div>
-		<div class="form-group">
-			<label for="phoneNo" class="col-sm-2 control-label">Your Position is : </label>
-			<div class="col-sm-10">${playerDetailInfo.catNm2}</div>
-		</div>
-		<div class="form-group">
-			<label for="phoneNo" class="col-sm-2 control-label">Choice Detail Type</label>
-			<div class="col-sm-10" id="attrElemList">
+			<label for="phoneNo" class="col-sm-4">Choice Detail Type</label>
+			<div class="col-sm-8" id="attrElemList">
 			<c:set var="categoryAttrElemList" value="${playerDetailInfo.categoryAttrElemList}"/>
 			<c:if test="${categoryAttrElemList ne null or categoryAttrElemList ne ''}">
 				<c:forEach var="attrElemInfo" items="${playerDetailInfo.categoryAttrElemList}">
@@ -62,8 +66,8 @@
 
 		
 		<div class="form-group">
-			<label for="linkUrl" class="col-sm-2 control-label">Link To Your Play Stream Url</label>
-			<div class="col-sm-10">
+			<label for="linkUrl" class="col-sm-4">Link To Your Play Stream Url</label>
+			<div class="col-sm-8">
 			<c:set var="playerVideoLinkList" value="${playerDetailInfo.playerVideoLinkList}"/>
 			
 			<c:if test="${playerVideoLinkList ne '' or playerVideoLinkList ne null}">
@@ -76,8 +80,8 @@
 		
 
 		<div class="form-group">
-			<label for="introduce" class="col-sm-2 control-label">Introduce Yourself!</label>
-			<div class="col-sm-10">
+			<label for="introduce" class="col-sm-4">Introduce Yourself!</label>
+			<div class="col-sm-8">
 				${playerDetailInfo.introduce}
 			</div>
 		</div>

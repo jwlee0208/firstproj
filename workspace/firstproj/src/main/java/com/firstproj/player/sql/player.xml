@@ -106,6 +106,7 @@
 			<result column="catNm1" 			property="catNm1"/>
 			<result column="catNm2" 			property="catNm2"/>
 			<result column="profileImgFilePath" property="profileImgFilePath"/>
+			<result column="introduce"			property="introduce"/>
 			<association 	property="userInfo" javaType="user.userDto">
 				<id 		column="user_id" 	property="userId"/>
 				<result 	column="userNm" 	property="userNm"/>			
@@ -244,6 +245,7 @@
 				  , pi.cat_id2  as catId2
 				  , c2.cat_name as catNm2 
 				  , pi.profile_img_file_path as profileImgFilePath
+				  , pi.introduce
 			FROM TB_PLAYER_INFO 		pi
 			LEFT JOIN TB_USER 			U 		ON pi.user_id 		= U.user_id	
 			LEFT JOIN TB_CATEGORY 		C1 		ON pi.cat_id1 		= C1.CAT_ID

@@ -8,11 +8,13 @@
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/player/playerList.js"></script>
 
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/common/paging.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
+<link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/pagination.css">
 
 
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/jquery/js/jquery-ui.min.js"></script>
-<link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/css/jquery/jquery-ui.min.css">
+<script type="text/javascript" 	src="${pageContext.request.contextPath}/lib/jquery/js/jquery-ui.min.js"></script>
+<link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/jquery/jquery-ui.min.css">
+
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
 <style>
 /* 		.ui-autocomplete { */
@@ -25,6 +27,8 @@
 			color : red;
 			text-decoration: underline;
 		}
+		
+		.table-responsive .table.table-hover tr td {vertical-align : middle; }
 		
 		
 /* .ui-autocomplete { */
@@ -76,7 +80,13 @@
 /*     } */
 /*   } */
 /* }		 */
-		
+	.position {
+	  float: right;
+	  font-size: 18px;
+	  margin-top: -5px;
+	  margin-right: -5px;
+	  background-color: red;
+	}
 </style>
 
 <div class="container">
@@ -95,19 +105,18 @@
 
 	<div class="form-group">
 		<div class="row">
-			<div class="col-md-10">
+<!-- 			<div class="col-md-10"> -->
 			<input type="hidden" 	id="searchCondition" name="searchCondition" value="userName"/>
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control ui-autocomplete-input"/>	
-			</div>
-			<div class="col-md-2">	
-			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검색"/>
-			</div>
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control ui-autocomplete-input" placeholder="Try to search using keywords. And push enter key."/>	
+<!-- 			</div> -->
+<!-- 			<div class="col-md-2">	 -->
+<!-- 			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검색"/> -->
+<!-- 			</div> -->
 		</div>
 		
 		
 		
 		<div class="row"  style="padding-top: 10px; ">
-			<div class="col-md-4">
 				<!-- 첫번째 카테고리 -->
 				<select id="cat1" name="cat1" onchange="javascript:setChildCategory();" class="form-control">
 					<option value="-1">카테고리를 선택해 주세요.</option>
@@ -115,8 +124,8 @@
 					<option value="${cat.catId}">${cat.categoryNameStr}</option>	
 					</c:forEach>
 				</select>
-			</div>
-			<div class="col-md-4">
+		</div>
+		<div class="row"  style="padding-top: 10px; ">
 				<!-- 두번째 카테고리 -->
 				<select id="cat2" name="cat2" onchange="javascript:setAttrList();" class="form-control">
 					<option value="-1">카테고리를 선택해 주세요.</option>
@@ -124,7 +133,7 @@
 			</div>
 			<div class="col-md-4"></div>	
 		</div>
-		<div class="row" style="padding-top : 10px; padding-left : 30px; padding-right: 30px;">
+		<div class="row">
 			<!--속성 & 속성 항목들에 대한 체크박스 리스트 -->
 			<div id="attrElemList" style="background-color: #efefef;">
 			</div>
@@ -147,49 +156,86 @@
 		
 		</div>
 		
-	</div>
 	
-	
-	<div class="table-responsive" id="listDiv">
-		총 게시글 :  ${pagedResult.totalListCnt } 개
-		<table class="table table-hover">
-			<tr>
-				<td></td>
-				<td>선수</td>
-				<td>구분1</td>
-				<td>구분2</td>
-			</tr>
-		
-		<c:forEach var="list" items="${pagedResult.list}">
-			<tr>
-				<td><img data-src="holder.js/64x64" src="${list.profileImgFilePath}"/></td>
-				<td onclick="javascript:goDetail('${list.userInfo.userId}');">${list.userInfo.userNm}(${list.userInfo.userId})</td>
-				<td>${list.catNm1}</td>
-				<td>${list.catNm2}</td>
-			</tr>
+	<div class="row">
+		<div class="table-responsive" id="listDiv">
+	<%-- 		<div>Total :  ${pagedResult.totalListCnt} (Players)</div> --%>
+			 
 			
-		</c:forEach>
-		</table>
-	</div>
-	<!-- paging area -->                                                
-	<c:set var="totalListCnt" value="${pagedResult.totalListCnt}"/>
-	<c:set var="totalPageCnt" value="${pagedResult.totalPageCnt}"/>
-	                                                                                                      
-	<jsp:include page="../common/paging.jsp" flush="false">
-	    <jsp:param value="${totalPageCnt}"            name="totalPageCnt"/>
-	    <jsp:param value="${pagedResult.pageNo}"      name="pageNo"/>
-	    <jsp:param value="${pagedResult.startPageNo}" name="startPageNo"/>
-	    <jsp:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
-	</jsp:include>
-
-<c:if test="${!isRegisted}">
-	<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
-		<div class="btn-group">
-			<input type="button" class="btn btn-default pull-right" value="프로필쓰기" name="goToRegist" />
+	<!-- 		<table class="table table-hover"> -->
+	<!-- 			<tr> -->
+	<!-- 				<th>Profile Image</th> -->
+	<!-- 				<th>Name</th> -->
+	<!-- 				<th>Type</th> -->
+	<!-- 				<th>Detail Type</th> -->
+	<!-- 				<th>Detail View</th> -->
+	<!-- 			</tr> -->
+			
+	<%-- 		<c:forEach var="list" items="${pagedResult.list}" varStatus="index"> --%>
+	<!-- 			<tr> -->
+	<%-- 				<td><img data-src="holder.js/128x128" src="${pageContext.request.contextPath}<c:choose><c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">${list.profileImgFilePath}</c:when><c:otherwise>/img/no_image.png</c:otherwise></c:choose>"/></td> --%>
+	<%-- 				<td onclick="javascript:goDetail('${list.userInfo.userId}');">${list.userInfo.userNm}(${list.userInfo.userId})</td> --%>
+	<%-- 				<td>${list.catNm1}</td> --%>
+	<%-- 				<td>${list.catNm2}</td> --%>
+	<!-- 				<td><input type="button" class="btn btn-info" value="Detail Info." name="viewDetail" /></td> -->
+	<!-- 			</tr> -->
+				
+	<%-- 		</c:forEach> --%>
+	<!-- 		</table> -->
+	
+	
+			<c:forEach var="list" items="${pagedResult.list}">
+				<div class="col-sm-6 col-md-4">
+					<div class="thumbnail">
+						<span class="label label-success position">${list.catNm2Str}</span>
+				<c:choose>
+					<c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">
+						<img src="${pageContext.request.contextPath}${list.profileImgFilePath}" data-src="holder.js/300x300" alt="image" class="img-rounded" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal" style="padding-top:10px;"/>
+					</c:when>
+					<c:otherwise>
+						<img src="${pageContext.request.contextPath}/img/no_image.png" data-src="holder.js/300x300" alt="image" class="img-rounded" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal" style="padding-top:10px;"/>
+					</c:otherwise>
+				</c:choose>					
+						
+						<div class="caption">
+							<h3><span onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">${list.userInfo.userNm}</span></h3>
+							<p class="content_${index.count}" style="text-overflow:ellipsis; overflow:hidden;">
+								<div class="row"><div class="col-xs-6">Type</div><div class="col-xs-6">${list.catNm1Str}</div></div>
+								<div class="row"><div class="col-xs-6">Position</div><div class="col-xs-6">${list.catNm2Str}</div></div>
+								<c:if test="${list.introduce eq null || list.introduce eq ''}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
+								<c:if test="${list.introduce ne null && list.introduce ne ''}">
+									<span onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">${fn:substring(list.introduce, 0, 31)}...</span>
+								</c:if>
+							</p>
+							<p><span class="btn btn-info" role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">Detail Info.</span></p>
+						</div>
+	
+					</div>	
+				</div>
+			
+			</c:forEach>
 		</div>
-	</div>		
-</c:if>
-
+		<!-- paging area -->                                                
+		<c:set var="totalListCnt" value="${pagedResult.totalListCnt}"/>
+		<c:set var="totalPageCnt" value="${pagedResult.totalPageCnt}"/>
+		                                                                                                      
+		<jsp:include page="../common/paging.jsp" flush="false">
+		    <jsp:param value="${totalPageCnt}"            name="totalPageCnt"/>
+		    <jsp:param value="${pagedResult.pageNo}"      name="pageNo"/>
+		    <jsp:param value="${pagedResult.startPageNo}" name="startPageNo"/>
+		    <jsp:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
+		</jsp:include>
+	
+	<c:if test="${!isRegisted}">
+		<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
+			<div class="btn-group">
+				<input type="button" class="btn btn-default pull-right" value="프로필쓰기" name="goToRegist" />
+			</div>
+		</div>		
+	</c:if>
+	</div>
+</div>
+	
 </form>
 <script>
 $(function() {

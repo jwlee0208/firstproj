@@ -118,4 +118,36 @@ public class PlayerInfoDto implements Serializable
 				+ ", categoryAttrElemList=" + categoryAttrElemList + "]";
 	}
 	
+	public String getCatNm1Str(){
+        
+        String categoryNameStr = "";
+        
+        if(this.catId1 == 1){
+            categoryNameStr = "선수";
+        }else if(this.catId1 == 2){
+            categoryNameStr = "감독";
+        }else if(this.catId1 == 3){
+            categoryNameStr = "코치";
+        }else if(this.catId1 == 4){
+            categoryNameStr = "에이전트";
+        }else if(this.catId1 == 5){
+            categoryNameStr = "팀";
+        }
+        
+        return categoryNameStr;
+    }
+
+	public String getCatNm2Str(){
+        
+        String categoryNameStr = "";
+        
+        if(this.catId2 == 6){
+            categoryNameStr = "투수";
+        }else if(this.catId2 == 7){
+            categoryNameStr = "타자";
+        }
+        
+        return categoryNameStr;
+    }
+	
 }
