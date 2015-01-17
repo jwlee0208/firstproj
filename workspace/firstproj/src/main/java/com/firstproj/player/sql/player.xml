@@ -132,7 +132,8 @@
 			where 1 = 1
 			<if test='searchCondition == "userName"'>
 				<if test='searchText != null and searchText != ""'>
-			  and u.user_nm like CONCAT('%', #{searchText}, '%')
+<!-- 			  and u.user_nm like CONCAT('%', #{searchText}, '%') -->
+				and MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
 			  	</if>
 			</if>  	
 			group by c1.cat_id, c1.cat_name, c2.cat_id, c2.cat_name
@@ -145,7 +146,9 @@
 			select user_nm 
 			from tb_user u
 			left join tb_player_info pi on pi.user_id = u.user_id
-			where u.user_nm like concat('%', #{searchText}, '%')
+			where 1 = 1
+<!-- 			and u.user_nm like concat('%', #{searchText}, '%') -->
+				and MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
 			order by user_nm
 		</select>
 		
@@ -197,7 +200,8 @@
 					<if test='searchCondition == "userName"'>
 						<if test='searchText != null and searchText != ""'>
 <!-- 						and aem.user_name 	like CONCAT('%', #{searchText}, '%') -->
-							and u.user_nm 	like CONCAT('%', #{searchText}, '%')
+<!-- 							and u.user_nm 	like CONCAT('%', #{searchText}, '%') -->
+				and MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
 						</if> 
 					</if>
 			

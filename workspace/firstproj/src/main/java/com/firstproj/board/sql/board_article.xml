@@ -107,19 +107,22 @@
 				<if test="searchCondition != null and searchCondition != ''">
 					<if test="searchCondition == 'title'">
 						<if test="searchText != null and searchText != ''">
-						and title 	like CONCAT('%', #{searchText}, '%')
+						and MATCH(title) AGAINST(CONCAT('*',#{searchText},'*') in boolean mode);
+<!-- 						and title 	like CONCAT('%', #{searchText}, '%') -->
 						</if> 
 					</if>
 					<if test="searchCondition == 'content'">
 						<if test="searchText != null and searchText != ''">
-						and content like CONCAT('%', #{searchText}, '%')
+						and MATCH(content) AGAINST(CONCAT('*',#{searchText},'*') in boolean mode);
+<!-- 						and content like CONCAT('%', #{searchText}, '%') -->
 						</if>
 					</if>
 					<if test="searchCondition == 'titleNcontent'">
 						<if test="searchText != null and searchText != ''">
-						and (title 	 like CONCAT('%', #{searchText}, '%') 
-						     or 
-						     content like CONCAT('%', #{searchText}, '%'))
+						and MATCH(title, content) AGAINST(CONCAT('*',#{searchText},'*') in boolean mode);
+<!-- 						and (title 	 like CONCAT('%', #{searchText}, '%')  -->
+<!-- 						     or  -->
+<!-- 						     content like CONCAT('%', #{searchText}, '%')) -->
 						</if>     
 					</if>
 				</if>
