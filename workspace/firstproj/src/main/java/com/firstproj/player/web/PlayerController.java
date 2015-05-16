@@ -69,6 +69,26 @@ public class PlayerController {
         
         return jsonObj;
     }
+
+    
+    @RequestMapping(value="/ajaxChildCategoryList")
+    public String getChildCategoryList2(HttpServletRequest request, Model model, @Param int parentCatId) throws Exception{
+        
+        JSONObject jsonObj = new JSONObject();
+        
+//        int parentCatId = Integer.parseInt(request.getParameter("parentCatId"));
+        
+        CategoryDto param = new CategoryDto();
+        param.setParentCatId(parentCatId);
+        
+        List<CategoryDto> childCatList = this.playerService.getCategoryList(param);
+        
+        model.addAttribute("parentCatId", parentCatId);
+        model.addAttribute("childCatList", childCatList);
+        
+        return "player/ajaxCategoryList";
+    }
+    
     
     /**
      * 카테고리 속성 목록 조회
@@ -100,6 +120,23 @@ public class PlayerController {
         
         return jsonObj;
     }
+    
+    
+    @RequestMapping("/ajaxAttrElementList")
+    public String getAttrElementList2(HttpServletRequest request, Model model, @Param int catId) throws Exception{
+        
+        CategoryAttrDto param = new CategoryAttrDto();
+        param.setCatId(catId);
+        
+        List<CategoryAttrDto> attrElementList = this.playerService.getAttrElementList(param);
+        
+        System.out.println(attrElementList.size());
+        
+        model.addAttribute("catId", catId);
+        model.addAttribute("attrElementList", attrElementList);
+        
+        return "player/ajaxAttributeList";
+    }    
     
     /**
      * 페이징을 위한 리스트 조회
@@ -275,7 +312,7 @@ public class PlayerController {
     	JSONObject jsonObj = new JSONObject();
     	
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
-    	System.out.println(" }}}}}}}}}}} " + playerInfoDetail.toString());
+    	System.out.println(" [ playerInfoDetail ] : " + playerInfoDetail.toString());
 
 		// validate
 		
@@ -295,7 +332,7 @@ public class PlayerController {
 			PlayerInfoDto resetPlayerInfoObj = playerInfoDetail.getPlayerInfoDto();
 			resetPlayerInfoObj.setProfileImgFilePath(filePath);
 			resetPlayerInfoObj.setProfileImgName(imageFile.getOriginalFilename());
-	System.out.println("[resetPlayerInfo] : " + resetPlayerInfoObj.toString());		
+	System.out.println(" [ resetPlayerInfo ] : " + resetPlayerInfoObj.toString());		
 			playerInfoDetail.setPlayerInfoDto(resetPlayerInfoObj);	
 		}	
 		
@@ -346,7 +383,7 @@ public class PlayerController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value="/playerDetailView", method = {RequestMethod.POST})
+    @RequestMapping(value="/playerDetailView", method = {RequestMethod.POST, RequestMethod.GET})
     public String getPlayerDetail(HttpServletRequest request, Model model, UserDto userDto, HttpSession session) throws Exception{
     	UserDto userInfo = null;
     	UserDto myInfo   = (UserDto)session.getAttribute("userInfo");
@@ -381,5 +418,29 @@ public class PlayerController {
 		}
 		return returnObj;
     }
+ 
+    
+    @RequestMapping(value="/modify.page", method = {RequestMethod.POST, RequestMethod.GET})
+    public String getPlayerDetailForModify(HttpServletRequest request, Model model, UserDto userDto, HttpSession session) throws Exception{
+    	UserDto userInfo = null;
+    	UserDto myInfo   = (UserDto)session.getAttribute("userInfo");
+    	if(userDto == null){
+    		userInfo = (UserDto)session.getAttribute("userInfo");
+    	}else{
+    		userInfo = userDto;
+    	}
+    	
+        CategoryDto param = new CategoryDto();
+        param.setParentCatId(0);
+        
+        List<CategoryDto> parentCatList = this.playerService.getCategoryList(param);
+		
+    	model.addAttribute("playerDetailInfo"	, this.playerService.getPlayerInfoDetail(userInfo));
+    	model.addAttribute("myInfo"				, myInfo);
+		model.addAttribute("firstDepthCatList"	, parentCatList);
+    	model.addAttribute("sessionInfo"		, userInfo);
+    	return "player/registPlayer";
+    }
+    
     
 }

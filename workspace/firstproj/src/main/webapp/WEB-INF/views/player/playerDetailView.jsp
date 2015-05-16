@@ -69,10 +69,12 @@
 			<label for="linkUrl" class="col-sm-4">Link To Your Play Stream Url</label>
 			<div class="col-sm-8">
 			<c:set var="playerVideoLinkList" value="${playerDetailInfo.playerVideoLinkList}"/>
+			<video width="320" height="240" autoplay>
 			
+			</video>
 			<c:if test="${playerVideoLinkList ne '' or playerVideoLinkList ne null}">
 				<c:forEach var="playerVideoLinkInfo" items="playerVideoLinkList" varStatus="idx">
-					${palyerVideoLinkInfo.linkUrl}<br/>
+					<source src="${palyerVideoLinkInfo.linkUrl}"/><br/>
 				</c:forEach>
 			</c:if>
 			</div>
@@ -133,7 +135,7 @@ $(function(){
 	});
 	
 	$("#modifyBtn").on("click", function(){
-		alert('not ready to sesrvice');
+		location.href = "/player/modify.page";
 	});
 });
 </script>

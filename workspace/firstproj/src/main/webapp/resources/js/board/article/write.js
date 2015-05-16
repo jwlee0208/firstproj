@@ -63,6 +63,11 @@ $(function(){
 					data : $("#writeFrm").serialize(),
 					dataType : 'json',
 					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+					beforeSend : function(){
+						$(".pull-right").attr("id","loading");
+						$(".pull-right").val("Processing..."); 
+				
+					},
 					success : function(data){
 						console.log("data : " + data.result);
 						if(data.result){
@@ -82,7 +87,12 @@ $(function(){
 				frm.attr("action", '/board/article/insertBoardArticle');
 				frm.attr("method", "post");
 				frm.ajaxForm(FileuploadCallback); 
-				frm.submit(); 
+				frm.submit(function(e){
+					alert(e);
+					$(".pull-right").attr("id","loading");
+					$(".pull-right").val("Processing...");
+					e.preventDefault();
+				}); 
 			}
 		});	   
 	   
@@ -101,6 +111,11 @@ $(function(){
 					data : $("#writeFrm").serialize(),
 					dataType : 'json',
 					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+					beforeSend : function(){
+						$(".pull-right").attr("id","loading");
+						$(".pull-right").val("Processing..."); 
+				
+					},
 					success : function(data){
 						console.log("data : " + data.result);
 						if(data.result){
@@ -120,6 +135,10 @@ $(function(){
 				frm.attr("action", '/board/article/modifyBoardArticle');
 				frm.attr("method", "post");
 				frm.ajaxForm(FileuploadCallback); 
+				frm.beforeSubmit(function(){
+					$(".pull-right").attr("id","loading");
+					$(".pull-right").val("Processing...");
+				});
 				frm.submit(); 
 			}
 		});	   	   
