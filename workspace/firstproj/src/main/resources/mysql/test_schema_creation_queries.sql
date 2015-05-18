@@ -125,3 +125,11 @@ CREATE TABLE `TB_PLAYER_INFO` (
   PRIMARY KEY (`player_info_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
+-- tb_player_video_link table creation
+CREATE TABLE `TB_PLAYER_VIDEO_LINK` (
+  `player_video_link_id` int(11) NOT NULL AUTO_INCREMENT,
+  `player_info_id` int(11) NOT NULL,
+  `link_url` varchar(500) DEFAULT NULL,
+  `seq` smallint(6) DEFAULT '1',
+  PRIMARY KEY (`player_video_link_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
