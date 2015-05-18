@@ -235,4 +235,42 @@ public class PlayerDao extends SqlSessionDaoSupport{
     public int deletePlayerVideoLinkInfo(PlayerInfoDto param) throws Exception{
     	return getSqlSession().delete("sql.player.deletePlayerVideoLinkInfo", param);
     }
+    
+    /**
+     * @brief Update To Player Info
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public int updatePlayerInfo(PlayerInfoDto param) throws Exception{
+    	int updateResult = getSqlSession().update("sql.player.updatePlayerInfo", param);
+    	
+    	System.out.println("updateResult : " + updateResult);
+    	
+    	int playerInfoId = 0;
+    	if(updateResult > 0){
+    		playerInfoId = param.getPlayerInfoId();
+    		System.out.println("playerInfoId : " + playerInfoId);
+    	}
+    	return playerInfoId;
+    }
+    /**
+     * @brief Update to playerVideoLinkInfo
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public int updatePlayerVideoLinkInfo(PlayerVideoLinkDto param) throws Exception{
+    	return getSqlSession().update("sql.player.updatePlayerVideoLinkInfo", param);
+    }
+    /**
+     * @brief Update to CategoryAttributeElementMap
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public int updateCategoryAttrElemMap(CategoryAttrElemDto param) throws Exception{
+    	return getSqlSession().update("sql.player.updateCategoryAttrElemMapInfo", param);
+    }
+    
 }

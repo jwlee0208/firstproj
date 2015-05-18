@@ -13,6 +13,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Param;
+import org.junit.Ignore;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,19 +73,17 @@ public class PlayerController {
 
     
     @RequestMapping(value="/ajaxChildCategoryList")
-    public String getChildCategoryList2(HttpServletRequest request, Model model, @Param int parentCatId) throws Exception{
-        
-        JSONObject jsonObj = new JSONObject();
-        
-//        int parentCatId = Integer.parseInt(request.getParameter("parentCatId"));
-        
+    public String getChildCategoryList2(HttpServletRequest request, Model model, @Param int parentCatId, @Param int selectedCategoryId) throws Exception{
+        System.out.println("selectedCategoryId : " + selectedCategoryId);
         CategoryDto param = new CategoryDto();
         param.setParentCatId(parentCatId);
         
         List<CategoryDto> childCatList = this.playerService.getCategoryList(param);
         
-        model.addAttribute("parentCatId", parentCatId);
-        model.addAttribute("childCatList", childCatList);
+        model.addAttribute("parentCatId"		, parentCatId);
+        model.addAttribute("childCatList"		, childCatList);
+        // 수정(modify) 모드일 경우 사용하는 파라미터
+        model.addAttribute("selectedCategoryId"	, selectedCategoryId);
         
         return "player/ajaxCategoryList";
     }
@@ -422,25 +421,73 @@ public class PlayerController {
     
     @RequestMapping(value="/modify.page", method = {RequestMethod.POST, RequestMethod.GET})
     public String getPlayerDetailForModify(HttpServletRequest request, Model model, UserDto userDto, HttpSession session) throws Exception{
-    	UserDto userInfo = null;
     	UserDto myInfo   = (UserDto)session.getAttribute("userInfo");
-    	if(userDto == null){
-    		userInfo = (UserDto)session.getAttribute("userInfo");
+    	System.out.println("myInfo : " + myInfo.toString());
+    	if(myInfo == null){
+    		return "redirect:/login";
     	}else{
-    		userInfo = userDto;
-    	}
+    		
+    		if(!myInfo.getUserId().equals(userDto.getUserId())){
+    			return "redirect:/";
+    		}else{
+    			// 정상.
+    		}
+    	}    	
     	
         CategoryDto param = new CategoryDto();
         param.setParentCatId(0);
         
-        List<CategoryDto> parentCatList = this.playerService.getCategoryList(param);
-		
-    	model.addAttribute("playerDetailInfo"	, this.playerService.getPlayerInfoDetail(userInfo));
+        List<CategoryDto> parentCatList 	= this.playerService.getCategoryList(param);
+        PlayerInfoDto 	  playerDetailInfo 	= this.playerService.getPlayerInfoDetail(myInfo);
+    	model.addAttribute("playerDetailInfo"	, playerDetailInfo);
     	model.addAttribute("myInfo"				, myInfo);
 		model.addAttribute("firstDepthCatList"	, parentCatList);
-    	model.addAttribute("sessionInfo"		, userInfo);
+    	model.addAttribute("sessionInfo"		, myInfo);
     	return "player/registPlayer";
     }
     
+    @RequestMapping(value="/modifyPlayerAction", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject updatePlayerDetailInfoJSON(PlayerInfoDetail playerInfoDetail, HttpSession session) throws Exception{
+    	JSONObject jsonObj = new JSONObject();
+    	
+		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+    	System.out.println(" [ playerInfoDetail ] : " + playerInfoDetail.toString());
+
+		// validate
+		
+		
+		// fileUpload
+		MultipartFile imageFile = playerInfoDetail.getPlayerInfoDto().getProfileImg();
+		String imageUploadResult = "";
+		
+		if(null != imageFile){
+			imageUploadResult = fileUpload.uploadFile(imageFile, CommonConstant.THUMBNAIL_IMAGE_WIDTH_128, CommonConstant.THUMBNAIL_IMAGE_HEIGHT_128);	
+		}
+		
+		String filePath = "";
+		if(!imageUploadResult.equals("") && !imageUploadResult.equals("fileSizeError") && !imageUploadResult.equals("fileExtensionError")){
+			filePath = imageUploadResult;
+			
+			PlayerInfoDto resetPlayerInfoObj = playerInfoDetail.getPlayerInfoDto();
+			resetPlayerInfoObj.setProfileImgFilePath(filePath);
+			resetPlayerInfoObj.setProfileImgName(imageFile.getOriginalFilename());
+	System.out.println(" [ resetPlayerInfo ] : " + resetPlayerInfoObj.toString());		
+			playerInfoDetail.setPlayerInfoDto(resetPlayerInfoObj);	
+		}	
+		
+		// service 호출
+		int playerInfoId = this.playerService.updatePlayerInfoDetail(playerInfoDetail, sessionInfo);
+		
+		if(playerInfoId > 0){
+			jsonObj.put("result", "ok");
+			jsonObj.put("msg", "Successfully Registration.");
+		}else{
+			jsonObj.put("result", "error");
+			jsonObj.put("msg", "Failure Registration. Try it again, Please.");
+		}
+    	
+    	return jsonObj;
+    }
     
 }

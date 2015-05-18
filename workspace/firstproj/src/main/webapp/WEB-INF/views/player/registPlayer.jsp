@@ -28,14 +28,23 @@
 <div class="container">
 	
 	<input type="hidden" id="prevPage" name="prevPage" value="${prevPage}"/>
+	<c:set var="categoryAttrElemList" value="${playerDetailInfo.categoryAttrElemList}"/>
+	<c:if test="${categoryAttrElemList ne null or categoryAttrElemList ne ''}">
+		<c:forEach var="attrElemInfo" items="${playerDetailInfo.categoryAttrElemList}">
+		<input type="hidden" name="attrElemName" 	value="${attrElemInfo.attrElemName}"/>
+		<input type="hidden" name="attrElemId" 	value="${attrElemInfo.attrElemId}"/>
+		</c:forEach>	
+	</c:if>
 	
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form"  enctype="multipart/form-data">
-		<h1 id="btn-groups" class="page-header">Player Regist</h1>
+		<input type="hidden" id="playerInfoId" name="playerInfoDto.playerInfoId" value="${playerDetailInfo.playerInfoId}"/>
+ 		<h1 id="btn-groups" class="page-header">Player Regist</h1>
+		
 		<div class="form-group">
 			<label for="userId" class="col-sm-2 control-label">User ID</label>
 			<div class="col-sm-10">
 				${sessionInfo.userId}
-				<input type="hidden" id="playerInfoDto.userDto.userId" name="playerInfoDto.userDto.userId" value="${session.userId}"/>
+				<input type="hidden" id="playerInfoDto.userDto.userId" name="playerInfoDto.userDto.userId" value="${sessionInfo.userId}"/>
 			</div>
 		</div>
 
@@ -43,7 +52,7 @@
 			<label for="userNm" class="col-sm-2 control-label">User Name</label>
 			<div class="col-sm-10">
 				${sessionInfo.userNm}
-				<input type="hidden" id="playerInfoDto.userDto.userNm" name="playerInfoDto.userDto.userNm" value="${session.userNm}"/>
+				<input type="hidden" id="playerInfoDto.userDto.userNm" name="playerInfoDto.userDto.userNm" value="${sessionInfo.userNm}"/>
 			</div>
 		</div>
 
@@ -51,7 +60,34 @@
 		<div class="form-group">
 			<label for="profileImg" class="col-sm-2 control-label">Profile Image Upload</label>
 			<div class="col-sm-10">
-				<input type="file" id="profileImg" name="playerInfoDto.profileImg">
+<c:choose>
+	<c:when test="${playerDetailInfo ne null && playerDetailInfo ne ''}">
+		<c:if test="${playerDetailInfo.profileImgFilePath ne null && playerDetailInfo.profileImgFilePath ne ''}">	
+		
+		<div class="thumbImg unset">
+			<ul class="media-list">					
+				<li class="media">
+					<a class="pull-left" href="javascript:;">
+			<img data-src="holder.js/200x200" src="${pageContext.request.contextPath}${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" width="200px" height="200px" />
+			<input type="hidden" id="filePath" 			name="filePath" 		value="${playerDetailInfo.profileImgFilePath}"/>
+			<input type="hidden" id="originalFileName" 	name="originalFileName" value="${playerDetailInfo.profileImgName}"/>
+					</a>
+					<div class="media-body">
+						<p>파일명 : ${playerDetailInfo.profileImgName}</p>
+					</div>	
+					<input type="button" class="btn btn-default" value="삭제" onclick="javascript:delThumbImage('set');"/>
+				</li>
+			</ul>
+		</div>	
+		</c:if>
+		<div class="thumbImg set">
+			<input type="file" id="profileImg" name="playerInfoDto.profileImg">
+		</div>
+	</c:when>
+	<c:otherwise>
+			<input type="file" id="profileImg" name="playerInfoDto.profileImg">
+	</c:otherwise>
+</c:choose>		
 			</div>
 		</div>
 
@@ -63,7 +99,7 @@
 				<select id="catId1" name="playerInfoDto.catId1" class="form-control" onchange="javascript:setChildCategory();">
 					<option value="-1">Select Category.</option>
 				<c:forEach var="catInfo" items="${firstDepthCatList}">
-					<option value="${catInfo.catId}">${catInfo.catName}</option>
+					<option value="${catInfo.catId}" <c:if test="${playerDetailInfo.catId1 eq catInfo.catId}">selected</c:if>>${catInfo.catName}</option>
 				</c:forEach>
 				</select>
 <!-- 				<input type="email" class="form-control" id="email" name="email"/><span id="emailErr" class="errorMsg" style="display: none;"></span> -->
@@ -89,7 +125,7 @@
 		<div class="form-group">
 			<label for="linkUrl" class="col-sm-2 control-label">Link To Your Play Stream Url</label>
 			<div class="col-sm-10">
-				<input type="text" id="linkUrl" name="playerVideoLinkList[0].linkUrl" class="form-control"/>
+				<input type="text" id="linkUrl" name="playerVideoLinkList[0].linkUrl" class="form-control" value="${playerDetailInfo.playerVideoLinkList[0].linkUrl}"/>
 			</div>
 		</div>
 		
@@ -97,7 +133,7 @@
 		<div class="form-group">
 			<label for="introduce" class="col-sm-2 control-label">Introduce Yourself!</label>
 			<div class="col-sm-10">
-				<textarea class="form-control tinymce" id="introduce" name="playerInfoDto.introduce"></textarea>
+				<textarea class="form-control tinymce" id="introduce" name="playerInfoDto.introduce">${playerDetailInfo.introduce}</textarea>
 			</div>
 		</div>
 
@@ -109,7 +145,15 @@
 				<input type="button" class="btn btn-default" value="Cancel" id="cancelBtn">
 			</div>
 			<div class="btn-group">
+		<c:choose>
+			<c:when test="${playerDetailInfo ne null && playerDetailInfo ne ''}">
+				<input type="button" class="btn btn-default pull-right" value="Modify" id="modifyBtn">
+			</c:when>
+			<c:otherwise>
 				<input type="button" class="btn btn-default pull-right" value="Regist" id="registBtn">
+			</c:otherwise>
+		</c:choose>		
+				
 			</div>					
 		</div>
 	</form>
@@ -153,7 +197,14 @@ $().ready(function() {
 		}
 	});
 	
+	if($("#catId1").val() > -1){
+		setChildCategory();
+	}	
 	
+	var className = ($(".thumbImg").hasClass("unset")) ? "unset" : "set";
+	
+	toggleThumbImage(className);
+
 });
 
 $(function(){
@@ -221,7 +272,7 @@ $(function(){
 			$("#introduce").val(introduce);
 
 			var profileImg = $.trim($("#profileImg").val());
-alert("profileImg.length : " + profileImg.length);
+// alert("profileImg.length : " + profileImg.length);
 			if(profileImg.length == 0){
 				$.ajax({
 					url : '/player/registPlayerAction',
@@ -256,39 +307,70 @@ alert("profileImg.length : " + profileImg.length);
 			
 		}
 	});		
+
+
+	$("#modifyBtn").on("click", function(){
+		var isValid = $("form").valid();
+
+		if(isValid){
+
+			var introduce = tinyMCE.get('introduce').getContent();
+			$("#introduce").val(introduce);
+
+			var profileImg = $.trim($("#profileImg").val());
+// alert("profileImg.length : " + profileImg.length);
+			if(profileImg.length == 0){
+				$.ajax({
+					url : '/player/modifyPlayerAction',
+					data : $("#actionFrm").serialize(),
+					dataType : 'json',
+					method : 'post',
+					success : function(data){
+						var result = data.result;
+						var msg = data.msg;
+						
+						
+						if(result == 'ok'){
+							location.href = "/player/playerList.page";
+						}else{
+							alert(msg);
+							return;
+						}
+					},
+					error : function(data){
+
+					}
+				});				
+			}else{
+				// 썸네일 파일 업로드 할 때 저장
+				var frm = $("#actionFrm");
+				frm.attr("action", '/player/modifyPlayerAction');
+				frm.attr("method", "post");
+				frm.ajaxForm(FileuploadCallback); 
+				frm.submit(); 				
+			}
+	
+			
+		}
+	});		
+
+
 });
 
 
 function setChildCategory(){
 	var catId = $("#catId1").val();
+	// 수정(modify) 모드일 경우 사용하는 파라미터
+	var selectedCategoryId = -1;
+	if('${playerDetailInfo.catId2}' != ''){
+		selectedCategoryId = '${playerDetailInfo.catId2}';
+	}
+	
 	$("#catNm1").val($("#catId1 option:selected").text());
-	$("#cat2Div").load('/player/ajaxChildCategoryList', {parentCatId : catId}, function(){
+	$("#cat2Div").load('/player/ajaxChildCategoryList', {parentCatId : catId, selectedCategoryId : selectedCategoryId}, function(){
 		$("#selectedCatId").val(catId);
-		$("#attrElemList").html('');
+		$("#attrElemList").html('');		
 	});
-// 	$.ajax({
-// 		url : '/player/childCategoryList.json',
-// 		data : {parentCatId : catId},
-// 		method : 'post',
-// 		dateType : 'json',
-// 		success : function(data){
-
-// 			var childCatList = data.childCatList;
-// 			var childCatListLength = childCatList.length;
-			
-// 			if(childCatListLength > 0){
-// 				for(var i = 0 ; i < childCatListLength ; i++){
-// 					$("#catId2").append("<option value=\""+ childCatList[i].catId +"\">" + childCatList[i].categoryNameStr + "</option>");
-// 				}
-// 			}else{
-// 				$("#catId2 option").remove();
-// 				$("#catId2").append("<option value=\"\">카테고리를 선택해 주세요.</option>");
-// 			}
-
-// 			$("#selectedCatId").val(catId);
-// 			$("#attrElemList").html('');
-// 		}
-// 	});	
 }
 
 function setAttrList(){
@@ -298,63 +380,19 @@ function setAttrList(){
 }
 
 function searchAttrList(catId){
-// 	initAttrElement();
-
 	$("#attrElemList").load("/player/ajaxAttrElementList", {catId : catId, searchText : $("#searchText").val()}, function(){
 		
 	});
+}
 
-// 	$.ajax({
-// 		url : '/player/attrElementList.json',
-// 		data : {catId : catId, searchText : $("#searchText").val()},
-// 		method : 'post',
-// 		dateType : 'json',
-// 		success : function(data){
+function delThumbImage(){
+	$(".unset").remove();
+	toggleThumbImage("set");
+}
 
-// 			if(data != null){
-// 				var attrElementList = data.attrElementList;
-
-// 				if(attrElementList != null){
-// 					var attrElementListLength = attrElementList.length;
-					
-// 					console.log("attrElementListLength ; " + attrElementListLength);
-										
-// 					var innerHtml = "<div style=\"padding-top: 10px;padding-left: 10px;padding-bottom: 10px;\">";
-// 					for(var i = 0 ; i < attrElementListLength ; i++){
-						
-// 						var categoryAttrElemList = attrElementList[i].categoryAttrElemList;
-// 						var attrId = attrElementList[i].attrId;
-// 						innerHtml += "<div>[" + attrId +"] " + attrElementList[i].attrNameStr + "<span>"; 
-
-// 						console.log('categoryAttrElemListELngth : ' + categoryAttrElemList.length);
-// 						var categoryAttrElemListLength = categoryAttrElemList.length; 
-// 						if(categoryAttrElemListLength > 0){
-// 							innerHtml += "<div class=\"row\">";
-// 							innerHtml += "<input type=\"hidden\" id=\"attrElemMapList["+i+"].attrId"+ attrId +"\" name=\"attrElemMapList["+i+"].attrId\" value=\"" + attrId + "\" />";
-
-// 							for(var j = 0; j < categoryAttrElemListLength ; j++){
-// 								var catAttrElemObj = categoryAttrElemList[j];
-								
-// 								innerHtml += "<div class=\"col-md-2\">";
-// 								innerHtml += "<input type=\"radio\" id=\"attrElemMapList["+i+"].attrElemId"+ catAttrElemObj.attrElemId +"\" name=\"attrElemMapList["+i+"].attrElemId\" value=\"" + catAttrElemObj.attrElemId + "\" />" + catAttrElemObj.attrElemNameStr
-// 								innerHtml += "</div>";
-									
-// 							}
-// 							innerHtml += "</div>";
-// 						}
-						
-// 						innerHtml += "</span></div>";
-// 					}
-					
-// 					innerHtml += "</div>";
-// 					console.log("innerHtml : " + innerHtml);
-
-// 					$("#attrElemList").html(innerHtml);
-					
-// 				}
-// 			}
-// 		}				
-// 	});
+function toggleThumbImage(className){
+	$(".thumbImg").hide();
+	$("." + className).show();
 }
 
 </script>

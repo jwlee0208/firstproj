@@ -308,7 +308,8 @@
 		<select id="selectPlayerInfoDetail" parameterType="user.userDto" resultMap="playerDetailMap">
 			select 
 			        pi.player_info_id
-			      , pi.profile_img_file_path  
+			      , pi.profile_img_file_path 
+			      , pi.profile_img_name 
 				  , u.user_id
 				  , u.user_nm
 				  , u.email
@@ -335,6 +336,7 @@
 			<id 	column="player_info_id" 		property="playerInfoId"/>
 			<id 	column="user_id" 				property="userId"/>
 			<result column="profile_img_file_path" 	property="profileImgFilePath"/>
+			<result column="profile_img_name" 		property="profileImgName"/>
 			<result column="catId1" 				property="catId1"/>
 			<result column="catNm1" 				property="catNm1"/>
 			<result column="catId2" 				property="catId2"/>
@@ -374,5 +376,34 @@
 		<delete id="deleteRegistedPlayerInfo" parameterType="player.playerInfoDto">
 			delete from tb_player_info where user_id = #{userId} 
 		</delete>
+		
+		
+		<update id="updatePlayerInfo" parameterType="player.playerInfoDto">
+			UPDATE TB_PLAYER_INFO 
+				SET cat_id1	= #{catId1}		
+				  , cat_id2 = #{catId2}
+				  , introduce =#{introduce}
+				  , profile_img_file_path = IFNULL(#{profileImgFilePath}, '')
+				  , profile_img_name = IFNULL(#{profileImgName}, '')
+			WHERE player_info_id = #{playerInfoId}
+		</update>
+				
+		<update id="updateCategoryAttrElemMapInfo" parameterType="player.categoryAttrElemDto">
+			UPDATE tb_attr_elem_map
+				SET attr_id
+				  , attr_elem_id = #{attrElemId}
+				  , cat_id		 = #{catId}
+				  , attr_elem_map_name = #{attrElemMapName}
+			WHERE 
+				  user_id = #{userId}
+			  AND attr_id = #{attrId}	 	  
+		</update>	
+		
+		<update id="updatePlayerVideoLinkInfo" parameterType="player.playerVideoLinkDto">
+			UPDATE TB_PLAYER_VIDEO_LINK
+				 SET link_url = #{linkUrl}
+			WHERE  
+				 player_info_id = #{playerInfoId}
+		</update>
 		
     </mapper>

@@ -42,7 +42,10 @@
 <!-- 		</div> -->
 		<div class="form-group">
 			<label for="userNm" class="col-sm-4">My Name is</label>
-			<div class="col-sm-8">${playerDetailInfo.userInfo.userNm}</div>
+			<div class="col-sm-8">
+				<input type="hidden" id="userId" name="userId" value="${playerDetailInfo.userInfo.userId}"/>
+				${playerDetailInfo.userInfo.userNm}
+			</div>
 		</div>
 		<div class="form-group">
 			<label for="catNm1" class="col-sm-4">My type is</label>
@@ -73,7 +76,7 @@
 			
 			</video>
 			<c:if test="${playerVideoLinkList ne '' or playerVideoLinkList ne null}">
-				<c:forEach var="playerVideoLinkInfo" items="playerVideoLinkList" varStatus="idx">
+				<c:forEach var="playerVideoLinkInfo" items="${playerVideoLinkList}" varStatus="idx">
 					<source src="${palyerVideoLinkInfo.linkUrl}"/><br/>
 				</c:forEach>
 			</c:if>
@@ -135,7 +138,11 @@ $(function(){
 	});
 	
 	$("#modifyBtn").on("click", function(){
-		location.href = "/player/modify.page";
+		var frm = $("#viewFrm");
+		frm.attr("action","/player/modify.page");
+		frm.attr("method","post");
+		frm.submit();
+// 		location.href = "/player/modify.page";
 	});
 });
 </script>

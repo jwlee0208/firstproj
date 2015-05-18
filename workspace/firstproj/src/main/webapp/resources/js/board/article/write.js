@@ -20,7 +20,7 @@ $(document).ajaxError(function(event, request){
 
 //파일전송 후 콜백 함수
 function FileuploadCallback(data, state){
-
+alert(data + ', ' + state);
    if (data=="error"){
       alert("파일전송중 에러 발생!!");
       return false;
@@ -82,17 +82,19 @@ $(function(){
 				});
 				
 			}else{
+				alert('1');
 				// 썸네일 파일 업로드 할 때 저장
 				var frm = $("#writeFrm");
 				frm.attr("action", '/board/article/insertBoardArticle');
 				frm.attr("method", "post");
 				frm.ajaxForm(FileuploadCallback); 
-				frm.submit(function(e){
-					alert(e);
-					$(".pull-right").attr("id","loading");
-					$(".pull-right").val("Processing...");
-					e.preventDefault();
-				}); 
+				frm.submit();
+//				frm.submit(function(e){
+//					alert(e);
+//					$(".pull-right").attr("id","loading");
+//					$(".pull-right").val("Processing...");
+//					e.preventDefault();
+//				}); 
 			}
 		});	   
 	   
@@ -135,10 +137,10 @@ $(function(){
 				frm.attr("action", '/board/article/modifyBoardArticle');
 				frm.attr("method", "post");
 				frm.ajaxForm(FileuploadCallback); 
-				frm.beforeSubmit(function(){
-					$(".pull-right").attr("id","loading");
-					$(".pull-right").val("Processing...");
-				});
+//				frm.beforeSubmit(function(){
+//					$(".pull-right").attr("id","loading");
+//					$(".pull-right").val("Processing...");
+//				});
 				frm.submit(); 
 			}
 		});	   	   

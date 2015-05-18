@@ -16,10 +16,10 @@
 		<span>	
 		<c:if test="${categoryAttrElemListLength > 0}">
 			<div class="row">
-				<input type="hidden" id="attrElemMapList${index.count}.attrId${attrId}" name="attrElemMapList${index.count}.attrId" value="${attrId}" />
+				<input type="hidden" id="attrElemMapList[${index.count-1}].attrId${attrId}" name="attrElemMapList[${index.count-1}].attrId" value="${attrId}" />
 			<c:forEach var="categoryAttrElemInfo" items="${categoryAttrElemList}">
 				<div class="col-md-2">				
-					<input type="radio" id="attrElemMapList${index.count}.attrElemId${categoryAttrElemInfo.attrElemId}" name="attrElemMapList${index.count}.attrElemId" value="${categoryAttrElemInfo.attrElemId}" />${categoryAttrElemInfo.attrElemNameStr}
+					<input type="radio" id="attrElemMapList[${index.count-1}].attrElemId${categoryAttrElemInfo.attrElemId}" name="attrElemMapList[${index.count-1}].attrElemId" value="${categoryAttrElemInfo.attrElemId}" class="attrElemRadio"/>${categoryAttrElemInfo.attrElemNameStr}
 				</div>
 			</c:forEach>
 			</div>
@@ -33,3 +33,17 @@
 	</c:otherwise>
 </c:choose>
 </div>
+<script>
+// $().ready(function(){
+$(function(){	
+	$("input[name=attrElemId]").each(function(){
+		var selectedAttrElemId = this;
+		$(".attrElemRadio").each(function(){
+			var attrElemId = this;
+			if($(attrElemId).val() == $(selectedAttrElemId).val()){
+				$(attrElemId).attr("checked", true);
+			}
+		});
+	});
+});
+</script>

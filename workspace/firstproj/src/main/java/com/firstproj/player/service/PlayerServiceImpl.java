@@ -211,4 +211,67 @@ public class PlayerServiceImpl implements PlayerService{
 		
 		return deleteResult;
 	}
+	
+    @Override
+    public int updatePlayerInfoDetail(PlayerInfoDetail playerInfoDetail, UserDto userInfo) throws Exception{
+    	
+    	// updating playerInfo
+    	PlayerInfoDto playerInfo = playerInfoDetail.getPlayerInfoDto();
+    	
+    	int playerInfoId = 0;
+    	if(playerInfo != null){
+    		
+    		String userId = userInfo.getUserId();
+    		System.out.println("userId : " + userId);
+
+    		playerInfo.setUserId(userId);
+    		playerInfoId = this.updatePlayerInfo(playerInfo);
+
+        	// inserting playerVideoLinkInfo
+        	List<PlayerVideoLinkDto> playerVideoLinkList = playerInfoDetail.getPlayerVideoLinkList();
+
+        	if(playerVideoLinkList != null && playerVideoLinkList.size() > 0){
+        		for(PlayerVideoLinkDto playerVideoLinkDto : playerVideoLinkList){
+        			playerVideoLinkDto.setPlayerInfoId(playerInfoId);
+        			
+        			this.updatePlayerVideoLinkInfo(playerVideoLinkDto);
+        		}
+        	}
+        	
+        	// inserting categoryAttrMappingInfo
+        	List<CategoryAttrElemMapDto> attrElemMapList = playerInfoDetail.getAttrElemMapList(); 
+        	
+        	if(attrElemMapList != null && attrElemMapList.size() > 0){
+        		for(CategoryAttrElemMapDto categoryAttrElemMapDto : attrElemMapList){
+        			categoryAttrElemMapDto.setUserId(userInfo.getUserId());
+        			categoryAttrElemMapDto.setUserName(userInfo.getUserNm());
+        			
+        			this.updateCategoryPropertyMappingInfo(categoryAttrElemMapDto);
+        		}
+        	}
+    	}
+    	return playerInfoId;
+    }
+    
+    @SuppressWarnings("unused")
+	private int updatePlayerInfo(PlayerInfoDto playerInfoDto) throws Exception{
+    	int insertedProductInfoId = 0;
+    	// dao 호출
+    	insertedProductInfoId = this.playerDao.updatePlayerInfo(playerInfoDto);
+    	return insertedProductInfoId;
+    }
+    
+    @SuppressWarnings("unused")
+	private int updatePlayerVideoLinkInfo(PlayerVideoLinkDto playerVideoLinkDto) throws Exception{
+    	// dao 호출
+    	return this.playerDao.updatePlayerVideoLinkInfo(playerVideoLinkDto);
+    }
+    
+    @SuppressWarnings("unused")
+	private int updateCategoryPropertyMappingInfo(CategoryAttrElemMapDto categoryAttrElemMapDto) throws Exception{
+    	// dao 호출
+    	return this.playerDao.updateCategoryAttrElemMap(categoryAttrElemMapDto);
+    }
+
+	
 }

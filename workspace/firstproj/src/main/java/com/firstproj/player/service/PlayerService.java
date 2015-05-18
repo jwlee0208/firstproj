@@ -47,4 +47,6 @@ public interface PlayerService {
     public boolean 						getIsRegistedPlayer(UserDto userDto) 										throws Exception;
     
     public int 							deletePlayerInfo(PlayerInfoDto playerInfoDto) 								throws Exception;
+    
+    public int updatePlayerInfoDetail(PlayerInfoDetail playerInfoDetail, UserDto userInfo) 							throws Exception;
 }
