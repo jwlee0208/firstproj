@@ -41,13 +41,26 @@
 	<!-- 검색 영역 -->	
 	<div class="form-group">
 		
-		<div class="col-sm-10">
+	<table style="width:100%">
+		<colgroup><col width="93%"/><col width="7%"/></colgroup>
+		<tr>
+			<td>
 			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent"/>
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control"/>		
-		</div>
-		<div class="btn-group">
-			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검색"/>
-		</div>
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control"/>					
+			</td>
+			<td>
+		<div class="btn-group" style="float:right;">
+			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검&nbsp;&nbsp;&nbsp;색"/>
+		</div>			
+			</td>
+		</tr>
+	</table>	
+		
+		
+<!-- 		<div class="btn-group"> -->
+<!-- 			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검색"/> -->
+<!-- 		</div> -->
+		
 	</div>	
 	
 	<c:set var="list" value="${boardList}" />
@@ -70,8 +83,8 @@
 				<div class="thumbnail">
 					
 			<c:choose>
-				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img data-src="holder.js/233x101" src="${pageContext.request.contextPath}${content.filePath}" alt="" class="img-thumbnail" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal" width="400px" height="200px"/></c:when>
-				<c:otherwise><img data-src="holder.js/233x101" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="img-thumbnail" onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal" width="400px" height="200px"/></c:otherwise>
+				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img src="${pageContext.request.contextPath}${content.filePath}" alt="" class="img-thumbnail" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal"/></c:when>
+				<c:otherwise><img data-src="holder.js/250x250?auto=yes&theme=social" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="img-thumbnail" onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal"/></c:otherwise>
 			</c:choose>					
 					
 					<div class="caption">
