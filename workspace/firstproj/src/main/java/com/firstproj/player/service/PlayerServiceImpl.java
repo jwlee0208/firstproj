@@ -234,7 +234,9 @@ public class PlayerServiceImpl implements PlayerService{
         		for(PlayerVideoLinkDto playerVideoLinkDto : playerVideoLinkList){
         			playerVideoLinkDto.setPlayerInfoId(playerInfoId);
         			
-        			this.updatePlayerVideoLinkInfo(playerVideoLinkDto);
+        			if(this.updatePlayerVideoLinkInfo(playerVideoLinkDto) < 1){
+        				this.insertPlayerVideoLinkInfo(playerVideoLinkDto);
+        			};
         		}
         	}
         	

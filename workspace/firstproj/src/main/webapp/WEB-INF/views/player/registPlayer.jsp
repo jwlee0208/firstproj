@@ -69,8 +69,8 @@
 				<li class="media">
 					<a class="pull-left" href="javascript:;">
 			<img data-src="holder.js/200x200" src="${pageContext.request.contextPath}${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" width="200px" height="200px" />
-			<input type="hidden" id="filePath" 			name="filePath" 		value="${playerDetailInfo.profileImgFilePath}"/>
-			<input type="hidden" id="originalFileName" 	name="originalFileName" value="${playerDetailInfo.profileImgName}"/>
+			<input type="hidden" id="filePath" 			name="playerInfoDto.profileImgFilePath" 		value="${playerDetailInfo.profileImgFilePath}"/>
+			<input type="hidden" id="originalFileName" 	name="playerInfoDto.profileImgName" 			value="${playerDetailInfo.profileImgName}"/>
 					</a>
 					<div class="media-body">
 						<p>파일명 : ${playerDetailInfo.profileImgName}</p>
@@ -125,7 +125,7 @@
 		<div class="form-group">
 			<label for="linkUrl" class="col-sm-2 control-label">Link To Your Play Stream Url</label>
 			<div class="col-sm-10">
-				<input type="text" id="linkUrl" name="playerVideoLinkList[0].linkUrl" class="form-control" value="${playerDetailInfo.playerVideoLinkList[0].linkUrl}"/>
+				<input type="text" id="linkUrl" name="playerInfoDto.playerVideoLinkList[0].linkUrl" class="form-control" value="${playerDetailInfo.playerVideoLinkList[0].linkUrl}"/>
 			</div>
 		</div>
 		
@@ -318,7 +318,7 @@ $(function(){
 			$("#introduce").val(introduce);
 
 			var profileImg = $.trim($("#profileImg").val());
-// alert("profileImg.length : " + profileImg.length);
+alert("profileImg.length : " + profileImg.length +", " + $("input[name=profileImgFilePath]").val());
 			if(profileImg.length == 0){
 				$.ajax({
 					url : '/player/modifyPlayerAction',

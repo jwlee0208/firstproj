@@ -13,13 +13,13 @@ import com.firstproj.user.dto.UserDto;
 public class PlayerInfoDto implements Serializable
 //extends UserDto
 {
-    private int 	playerInfoId;
-    private int 	catId1;
-    private int 	catId2;
-    private String 	catNm1;
-    private String 	catNm2;
-    private String 	introduce;
-    private String 	userId;
+    private int 			playerInfoId;
+    private int 			catId1;
+    private int 			catId2;
+    private String 			catNm1;
+    private String 			catNm2;
+    private String 			introduce;
+    private String 			userId;
     private MultipartFile	profileImg;
     private String 			profileImgFilePath;
     private String 			profileImgName;
