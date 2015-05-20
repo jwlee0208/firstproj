@@ -15,12 +15,13 @@
 <!-- bootstrap -->
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-theme.min.css">
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css">
-<%-- <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-combined.min.css"> --%>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- editor -->
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/common-editor.js"></script>
+
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css"/>
 </head>
@@ -68,7 +69,7 @@
 			<ul class="media-list">					
 				<li class="media">
 					<a class="pull-left" href="javascript:;">
-			<img data-src="holder.js/200x200" src="${pageContext.request.contextPath}${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" width="200px" height="200px" />
+			<img data-src="holder.js/300x300" src="${pageContext.request.contextPath}${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" />
 			<input type="hidden" id="filePath" 			name="playerInfoDto.profileImgFilePath" 		value="${playerDetailInfo.profileImgFilePath}"/>
 			<input type="hidden" id="originalFileName" 	name="playerInfoDto.profileImgName" 			value="${playerDetailInfo.profileImgName}"/>
 					</a>

@@ -189,10 +189,19 @@
 						<span class="label <c:choose><c:when test="${list.catNm2 eq 'hitter'}">label-success</c:when><c:when test="${list.catNm2 eq 'pitcher'}">label-info</c:when><c:otherwise>label-warning</c:otherwise></c:choose> position">${list.catNm2Str}</span>
 				<c:choose>
 					<c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">
-						<img src="${pageContext.request.contextPath}${list.profileImgFilePath}" data-src="holder.js/300x300" alt="image" class="img-rounded" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal" style="padding-top:10px;"/>
+						<img src="${pageContext.request.contextPath}${list.profileImgFilePath}" 
+							 data-src="holder.js/400x400" alt="image" class="img-rounded" 
+							 onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  
+							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
+							 data-toggle="modal" data-target="#myModal" 
+							 style="padding-top:10px;"/>
 					</c:when>
 					<c:otherwise>
-						<img src="${pageContext.request.contextPath}/img/no_image.png" data-src="holder.js/300x300" alt="image" class="img-rounded" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal" style="padding-top:10px;"/>
+						<img src="${pageContext.request.contextPath}/img/no_image.png" 
+							 data-src="holder.js/400x400" alt="image" class="img-rounded" 
+							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
+							 data-toggle="modal" data-target="#myModal" 
+							 style="padding-top:10px;"/>
 					</c:otherwise>
 				</c:choose>					
 						
