@@ -13,7 +13,6 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Param;
-import org.junit.Ignore;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,10 +38,10 @@ import com.firstproj.user.dto.UserDto;
 public class PlayerController {
     	
 	@Resource(name="fileUpload")
-	private FileUpload fileUpload;
+	private FileUpload 			fileUpload;
 	
     @Resource(name="PlayerServiceImpl")
-    private PlayerServiceImpl playerService;
+    private PlayerServiceImpl 	playerService;
  
     /**
      * 하위 카테고리 목록 조회
@@ -56,17 +55,14 @@ public class PlayerController {
     @ResponseBody
     public JSONObject getChildCategoryList(HttpServletRequest request, Model model, @Param int parentCatId) throws Exception{
         
-        JSONObject jsonObj = new JSONObject();
-        
-//        int parentCatId = Integer.parseInt(request.getParameter("parentCatId"));
-        
-        CategoryDto param = new CategoryDto();
+        JSONObject 			jsonObj 	 = new JSONObject();
+        CategoryDto 		param 		 = new CategoryDto();
         param.setParentCatId(parentCatId);
         
-        List<CategoryDto> childCatList = this.playerService.getCategoryList(param);
+        List<CategoryDto> 	childCatList = this.playerService.getCategoryList(param);
         
-        jsonObj.put("parentCatId", parentCatId);
-        jsonObj.put("childCatList", childCatList);
+        jsonObj.put("parentCatId"	, parentCatId);
+        jsonObj.put("childCatList"	, childCatList);
         
         return jsonObj;
     }
@@ -75,10 +71,11 @@ public class PlayerController {
     @RequestMapping(value="/ajaxChildCategoryList")
     public String getChildCategoryList2(HttpServletRequest request, Model model, @Param int parentCatId, @Param int selectedCategoryId) throws Exception{
         System.out.println("selectedCategoryId : " + selectedCategoryId);
-        CategoryDto param = new CategoryDto();
+        
+        CategoryDto param 				= new CategoryDto();
         param.setParentCatId(parentCatId);
         
-        List<CategoryDto> childCatList = this.playerService.getCategoryList(param);
+        List<CategoryDto> childCatList  = this.playerService.getCategoryList(param);
         
         model.addAttribute("parentCatId"		, parentCatId);
         model.addAttribute("childCatList"		, childCatList);
@@ -101,20 +98,15 @@ public class PlayerController {
     @ResponseBody
     public JSONObject getAttrElementList(HttpServletRequest request, Model model, @Param int catId) throws Exception{
         
-        JSONObject jsonObj = new JSONObject();
-        
-//        int parentCatId = Integer.parseInt(request.getParameter("parentCatId"));
-        
-        CategoryAttrDto param = new CategoryAttrDto();
+        JSONObject 				jsonObj 		= new JSONObject();
+        CategoryAttrDto 		param 			= new CategoryAttrDto();
         param.setCatId(catId);
         
-//        List<CategoryAttrElemDto> attrElementList = this.playerService.getAttrElementList(param);
-        
-        List<CategoryAttrDto> attrElementList = this.playerService.getAttrElementList(param);
+        List<CategoryAttrDto> 	attrElementList = this.playerService.getAttrElementList(param);
         
         System.out.println(attrElementList.size());
         
-        jsonObj.put("catId", catId);
+        jsonObj.put("catId"			 , catId);
         jsonObj.put("attrElementList", attrElementList);
         
         return jsonObj;
@@ -124,14 +116,14 @@ public class PlayerController {
     @RequestMapping("/ajaxAttrElementList")
     public String getAttrElementList2(HttpServletRequest request, Model model, @Param int catId) throws Exception{
         
-        CategoryAttrDto param = new CategoryAttrDto();
+        CategoryAttrDto param 					= new CategoryAttrDto();
         param.setCatId(catId);
         
-        List<CategoryAttrDto> attrElementList = this.playerService.getAttrElementList(param);
+        List<CategoryAttrDto> attrElementList 	= this.playerService.getAttrElementList(param);
         
         System.out.println(attrElementList.size());
         
-        model.addAttribute("catId", catId);
+        model.addAttribute("catId"			, catId);
         model.addAttribute("attrElementList", attrElementList);
         
         return "player/ajaxAttributeList";
@@ -147,26 +139,24 @@ public class PlayerController {
      */
     private Model getListCommonList(HttpServletRequest request, Model model, HttpSession session, String page) throws Exception{
         // 검색 조건
-        String searchCondition  = request.getParameter("searchCondition");
-        String searchText       = request.getParameter("searchText");
-        String startDate        = request.getParameter("startDate");
-        String endDate          = request.getParameter("endDate");
+        String 		 searchCondition  = request.getParameter("searchCondition");
+        String 		 searchText       = request.getParameter("searchText");
+        String 		 startDate        = request.getParameter("startDate");
+        String 		 endDate          = request.getParameter("endDate");
 
-        int pageNo              = (request.getParameter("pageNo") != null) 
-                                    ? Integer.parseInt(request.getParameter("pageNo")) 
-                                    : CommonConstant.DEFAULT_PAGE_NO;
+        int 		 pageNo           = (request.getParameter("pageNo") != null) 
+                                    	? Integer.parseInt(request.getParameter("pageNo")) 
+                                    	: CommonConstant.DEFAULT_PAGE_NO;
 
-        int listRowCnt          = (request.getParameter("listRowCnt") != null) 
-                                    ? Integer.parseInt(request.getParameter("listRowCnt")) 
-                                    : 10;
+        int 		 listRowCnt       = (request.getParameter("listRowCnt") != null) 
+                                    	? Integer.parseInt(request.getParameter("listRowCnt")) 
+                                    	: 10;
 
-        String catId            = (String)request.getParameter("selectedCatId");        // String.valueOf(categoryAttrElemMapDto.getCatId());
-        String attrId           = (String)request.getParameter("selectedAttrId");       // String.valueOf(categoryAttrElemMapDto.getAttrId());
-        String attrElemId       = (String)request.getParameter("selectedAttrElemId");   // String.valueOf(categoryAttrElemMapDto.getAttrElemId());
+        String 		 catId            = (String)request.getParameter("selectedCatId");        // String.valueOf(categoryAttrElemMapDto.getCatId());
+        String 		 attrId           = (String)request.getParameter("selectedAttrId");       // String.valueOf(categoryAttrElemMapDto.getAttrId());
+        String 		 attrElemId       = (String)request.getParameter("selectedAttrElemId");   // String.valueOf(categoryAttrElemMapDto.getAttrElemId());
 
-//System.out.println("Controller's catId : " + catId + "\nController's attrId : " + attrId + "\nController's attrElemId : " + attrElemId);        
-
-        List<String> attrElemIdArr = null;
+        List<String> attrElemIdArr 	  = null;
         
         if(attrElemId != null && attrElemId != ""){
             
@@ -187,14 +177,14 @@ public class PlayerController {
         
         Map<String, Object> paramMap = new HashMap<String, Object>();
         // searching condition setting
-        paramMap.put("catId",           catId);
-        paramMap.put("attrId",          attrId);
-        paramMap.put("attrElemId",      attrElemIdArr);
-        paramMap.put("searchCondition", searchCondition);
-        paramMap.put("searchText",      searchText);
-        paramMap.put("startDate",       startDate);
-        paramMap.put("endDate",         endDate);
-//System.out.println("searchCondition : " + searchCondition + ", searchText : " + searchText);
+        paramMap.put("catId"			, catId);
+        paramMap.put("attrId"			, attrId);
+        paramMap.put("attrElemId"		, attrElemIdArr);
+        paramMap.put("searchCondition"	, searchCondition);
+        paramMap.put("searchText"		, searchText);
+        paramMap.put("startDate"		, startDate);
+        paramMap.put("endDate"			, endDate);
+
         int totalListCnt = 0;
                 
         if(page.equals("attrElemMapList.page")){
@@ -203,8 +193,6 @@ public class PlayerController {
             totalListCnt = playerService.getPlayerInfoCnt(paramMap);
         }
 
-        
-//System.out.println("totalListCnt : " + totalListCnt);
         // paging condition setting
         paramMap.put("pageNo",          pageNo);
         paramMap.put("listRowCnt",      listRowCnt);
@@ -226,7 +214,7 @@ public class PlayerController {
             // checkout who logined user regist as player
             UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
             
-            boolean isRegisted = false;
+            boolean isRegisted  = false;
             
             if(sessionInfo != null){
             	isRegisted = this.playerService.getIsRegistedPlayer(sessionInfo);
@@ -234,7 +222,6 @@ public class PlayerController {
             
             model.addAttribute("isRegisted", isRegisted);
             
-//            System.out.println("searchText is not null : " + (null != searchText) + "or not empty : " + org.apache.commons.lang.StringUtils.isNotEmpty(searchText));
             if(org.apache.commons.lang.StringUtils.isNotEmpty(searchText)){
                 perCategoryCntList = playerService.getPlayerInfoCntPerCategory(paramMap);
             }
@@ -291,14 +278,13 @@ public class PlayerController {
     		if(this.playerService.getIsRegisted(sessionInfo)){
     			return "redirect:/player/playerDetailView.page";
     		}else{
-    			
-    	        CategoryDto param = new CategoryDto();
+    	        CategoryDto 		param 		  = new CategoryDto();
     	        param.setParentCatId(0);
     	        
-    	        List<CategoryDto> parentCatList = this.playerService.getCategoryList(param);
+    	        List<CategoryDto> 	parentCatList = this.playerService.getCategoryList(param);
     			
-    			model.addAttribute("sessionInfo", sessionInfo);
-    			model.addAttribute("firstDepthCatList", parentCatList);
+    			model.addAttribute("sessionInfo"		, sessionInfo);
+    			model.addAttribute("firstDepthCatList"	, parentCatList);
     		}
     	}
 
@@ -308,30 +294,29 @@ public class PlayerController {
     @RequestMapping(value="/registPlayerAction", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject insertPlayerDetailInfoJSON(PlayerInfoDetail playerInfoDetail, HttpSession session) throws Exception{
-    	JSONObject jsonObj = new JSONObject();
-    	
-		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
-    	System.out.println(" [ playerInfoDetail ] : " + playerInfoDetail.toString());
+    	JSONObject 		jsonObj 	= new JSONObject();    	
+		UserDto 		sessionInfo = (UserDto)session.getAttribute("userInfo");
+
+		MultipartFile 	imageFile 	= playerInfoDetail.getPlayerInfoDto().getProfileImg();
 
 		// validate
-		
+
 		
 		// fileUpload
-		MultipartFile imageFile = playerInfoDetail.getPlayerInfoDto().getProfileImg();
-		String imageUploadResult = "";
-		
+		String 			imageUploadResult  = "";
+		String 			filePath 		   = "";
+		PlayerInfoDto 	resetPlayerInfoObj = null; 
 		if(null != imageFile){
 			imageUploadResult = fileUpload.uploadFile(imageFile, CommonConstant.THUMBNAIL_IMAGE_WIDTH_128, CommonConstant.THUMBNAIL_IMAGE_HEIGHT_128);	
 		}
 		
-		String filePath = "";
 		if(!imageUploadResult.equals("") && !imageUploadResult.equals("fileSizeError") && !imageUploadResult.equals("fileExtensionError")){
-			filePath = imageUploadResult;
+			filePath 			= imageUploadResult;
 			
-			PlayerInfoDto resetPlayerInfoObj = playerInfoDetail.getPlayerInfoDto();
+			resetPlayerInfoObj 	= playerInfoDetail.getPlayerInfoDto();
 			resetPlayerInfoObj.setProfileImgFilePath(filePath);
 			resetPlayerInfoObj.setProfileImgName(imageFile.getOriginalFilename());
-	System.out.println(" [ resetPlayerInfo ] : " + resetPlayerInfoObj.toString());		
+
 			playerInfoDetail.setPlayerInfoDto(resetPlayerInfoObj);	
 		}	
 		
@@ -339,11 +324,11 @@ public class PlayerController {
 		int playerInfoId = this.playerService.insertPlayerInfoDetail(playerInfoDetail, sessionInfo);
 		
 		if(playerInfoId > 0){
-			jsonObj.put("result", "ok");
-			jsonObj.put("msg", "Successfully Registration.");
+			jsonObj.put("result"	, "ok");
+			jsonObj.put("msg"		, "Successfully Registration.");
 		}else{
-			jsonObj.put("result", "error");
-			jsonObj.put("msg", "Failure Registration. Try it again, Please.");
+			jsonObj.put("result"	, "error");
+			jsonObj.put("msg"		, "Failure Registration. Try it again, Please.");
 		}
     	
     	return jsonObj;
@@ -360,14 +345,14 @@ public class PlayerController {
     @RequestMapping(value="/autoComplete.json", method = {RequestMethod.POST})
     @ResponseBody
     public JSONObject autoComplete(HttpServletRequest request, @Param String searchText) throws Exception{
-    	JSONObject returnObj = new JSONObject();
+    	JSONObject 				returnObj 				= new JSONObject();
+    	SearchConditionPlayer 	searchConditionPlayer 	= new SearchConditionPlayer();
     	
-    	SearchConditionPlayer searchConditionPlayer = new SearchConditionPlayer();
     	if(!StringUtils.isEmpty(searchText)){
     		searchConditionPlayer.setSearchText(searchText);
     	}
     	
-    	List<String> searchResult = this.playerService.getAutoComplete(searchConditionPlayer);
+    	List<String> 			searchResult 			= this.playerService.getAutoComplete(searchConditionPlayer);
     	
     	returnObj.put("searchResult", searchResult);
     	
@@ -409,11 +394,11 @@ public class PlayerController {
     	}
 
 		if(deleteResult > 0){
-			returnObj.put("result", "ok");
-			returnObj.put("msg", "Successfully deleted.");
+			returnObj.put("result"	, "ok");
+			returnObj.put("msg"		, "Successfully deleted.");
 		}else{
-			returnObj.put("result", "error");
-			returnObj.put("msg", "Failure to delete. Try it again, Please.");
+			returnObj.put("result"	, "error");
+			returnObj.put("msg"		, "Failure to delete. Try it again, Please.");
 		}
 		return returnObj;
     }
@@ -434,7 +419,7 @@ public class PlayerController {
     		}
     	}    	
     	
-        CategoryDto param = new CategoryDto();
+        CategoryDto 	  param 			= new CategoryDto();
         param.setParentCatId(0);
         
         List<CategoryDto> parentCatList 	= this.playerService.getCategoryList(param);
@@ -449,10 +434,8 @@ public class PlayerController {
     @RequestMapping(value="/modifyPlayerAction", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject updatePlayerDetailInfoJSON(PlayerInfoDetail playerInfoDetail, HttpSession session) throws Exception{
-    	JSONObject jsonObj = new JSONObject();
-    	
-		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
-    	System.out.println(" [ playerInfoDetail ] : " + playerInfoDetail.toString());
+    	JSONObject 	jsonObj 	= new JSONObject();
+		UserDto 	sessionInfo = (UserDto)session.getAttribute("userInfo");
 
 		// validate
 		
@@ -465,26 +448,28 @@ public class PlayerController {
 			imageUploadResult = fileUpload.uploadFile(imageFile, CommonConstant.THUMBNAIL_IMAGE_WIDTH_128, CommonConstant.THUMBNAIL_IMAGE_HEIGHT_128);	
 		}
 		
-		String filePath = "";
+		String 		  filePath 			 = "";
+		PlayerInfoDto resetPlayerInfoObj = null;
+		
 		if(!imageUploadResult.equals("") && !imageUploadResult.equals("fileSizeError") && !imageUploadResult.equals("fileExtensionError")){
-			filePath = imageUploadResult;
+			filePath 			= imageUploadResult;
 			
-			PlayerInfoDto resetPlayerInfoObj = playerInfoDetail.getPlayerInfoDto();
+			resetPlayerInfoObj  = playerInfoDetail.getPlayerInfoDto();
 			resetPlayerInfoObj.setProfileImgFilePath(filePath);
 			resetPlayerInfoObj.setProfileImgName(imageFile.getOriginalFilename());
-	System.out.println(" [ resetPlayerInfo ] : " + resetPlayerInfoObj.toString());		
+
 			playerInfoDetail.setPlayerInfoDto(resetPlayerInfoObj);	
 		}	
 		
 		// service 호출
-		int playerInfoId = this.playerService.updatePlayerInfoDetail(playerInfoDetail, sessionInfo);
+		int 		 playerInfoId 		= this.playerService.updatePlayerInfoDetail(playerInfoDetail, sessionInfo);
 		
 		if(playerInfoId > 0){
-			jsonObj.put("result", "ok");
-			jsonObj.put("msg", "Successfully Registration.");
+			jsonObj.put("result"	, "ok");
+			jsonObj.put("msg"		, "Successfully Registration.");
 		}else{
-			jsonObj.put("result", "error");
-			jsonObj.put("msg", "Failure Registration. Try it again, Please.");
+			jsonObj.put("result"	, "error");
+			jsonObj.put("msg"		, "Failure Registration. Try it again, Please.");
 		}
     	
     	return jsonObj;

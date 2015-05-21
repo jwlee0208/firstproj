@@ -32,13 +32,15 @@
 	<c:set var="categoryAttrElemList" value="${playerDetailInfo.categoryAttrElemList}"/>
 	<c:if test="${categoryAttrElemList ne null or categoryAttrElemList ne ''}">
 		<c:forEach var="attrElemInfo" items="${playerDetailInfo.categoryAttrElemList}">
-		<input type="hidden" name="attrElemName" 	value="${attrElemInfo.attrElemName}"/>
-		<input type="hidden" name="attrElemId" 	value="${attrElemInfo.attrElemId}"/>
+			<input type="hidden" name="attrElemName" 	value="${attrElemInfo.attrElemName}"/>
+			<input type="hidden" name="attrElemId" 		value="${attrElemInfo.attrElemId}"/>
 		</c:forEach>	
 	</c:if>
 	
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form"  enctype="multipart/form-data">
+	<c:if test="${!empty playerDetailInfo}">
 		<input type="hidden" id="playerInfoId" name="playerInfoDto.playerInfoId" value="${playerDetailInfo.playerInfoId}"/>
+	</c:if>	
  		<h1 id="btn-groups" class="page-header">Player Regist</h1>
 		
 		<div class="form-group">

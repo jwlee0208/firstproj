@@ -404,18 +404,25 @@
 		    <type>war</type>
 		</dependency>
 
-
 		<!-- redis -->
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>2.5.2</version>
 		</dependency>
+		
 		<!-- spring-data-redis -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
 			<version>1.4.0.RELEASE</version>
+		</dependency>
+
+		<!-- file mime Type chk -->
+		<dependency>
+		<groupId>org.apache.tika</groupId>
+		<artifactId>tika-core</artifactId>
+		<version>1.5</version>
 		</dependency>
 
 		<!-- solr (for searching) -->

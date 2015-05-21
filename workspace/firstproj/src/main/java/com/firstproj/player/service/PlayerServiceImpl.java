@@ -172,22 +172,19 @@ public class PlayerServiceImpl implements PlayerService{
     	return playerInfoId;
     }
     
-    @SuppressWarnings("unused")
-	private int insertPlayerInfo(PlayerInfoDto playerInfoDto) throws Exception{
+    private int insertPlayerInfo(PlayerInfoDto playerInfoDto) throws Exception{
     	int insertedProductInfoId = 0;
     	// dao 호출
     	insertedProductInfoId = this.playerDao.insertPlayerInfo(playerInfoDto);
     	return insertedProductInfoId;
     }
     
-    @SuppressWarnings("unused")
-	private int insertPlayerVideoLinkInfo(PlayerVideoLinkDto playerVideoLinkDto) throws Exception{
+    private int insertPlayerVideoLinkInfo(PlayerVideoLinkDto playerVideoLinkDto) throws Exception{
     	// dao 호출
     	return this.playerDao.insertPlayerVideoLinkInfo(playerVideoLinkDto);
     }
     
-    @SuppressWarnings("unused")
-	private int insertCategoryPropertyMappingInfo(CategoryAttrElemMapDto categoryAttrElemMapDto) throws Exception{
+    private int insertCategoryPropertyMappingInfo(CategoryAttrElemMapDto categoryAttrElemMapDto) throws Exception{
     	// dao 호출
     	return this.playerDao.insertCategoryAttrElemMap(categoryAttrElemMapDto);
     }
@@ -255,22 +252,19 @@ public class PlayerServiceImpl implements PlayerService{
     	return playerInfoId;
     }
     
-    @SuppressWarnings("unused")
-	private int updatePlayerInfo(PlayerInfoDto playerInfoDto) throws Exception{
+    private int updatePlayerInfo(PlayerInfoDto playerInfoDto) throws Exception{
     	int insertedProductInfoId = 0;
     	// dao 호출
     	insertedProductInfoId = this.playerDao.updatePlayerInfo(playerInfoDto);
     	return insertedProductInfoId;
     }
     
-    @SuppressWarnings("unused")
-	private int updatePlayerVideoLinkInfo(PlayerVideoLinkDto playerVideoLinkDto) throws Exception{
+    private int updatePlayerVideoLinkInfo(PlayerVideoLinkDto playerVideoLinkDto) throws Exception{
     	// dao 호출
     	return this.playerDao.updatePlayerVideoLinkInfo(playerVideoLinkDto);
     }
     
-    @SuppressWarnings("unused")
-	private int updateCategoryPropertyMappingInfo(CategoryAttrElemMapDto categoryAttrElemMapDto) throws Exception{
+    private int updateCategoryPropertyMappingInfo(CategoryAttrElemMapDto categoryAttrElemMapDto) throws Exception{
     	// dao 호출
     	return this.playerDao.updateCategoryAttrElemMap(categoryAttrElemMapDto);
     }
