@@ -9,22 +9,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AngularJS Animate Slider</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/slideshow.css">
+<style>
+.jumbotron {
+    position: relative;
+    background: #000 url("../img/home/img00.jpg") center center;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+    text-shadow: #444 0 1px 1px;
+    color: white;
+}
+</style>
 </head>
 <body>
-<!-- <div class="container"> -->
+
 
 	<div class="jumbotron">
-<!-- 		<div class="container"> -->
-		<h1>Back To The Simple</h1>
-		<p>What is your important point. Have you ever lost a way to goal.</p>
-		<p>We always try to concentrate 3 point.</p>
-<!-- 		<p>- What is original.</p> -->
-		<p>- How can we approach to goal simply.</p>
-<!-- 		<p>- Is this comfortable.</p> -->
-		<p>...</p>
-		<p class="btn btn-primary btn-lg" role="button">See more</p>
-		
-<!-- 		</div> -->
+		<h1>Keep Going Your Way</h1>
+		<p>Why don't you just go one step more?</p>
+		<p>Do not afraid of you. You are a good player.</p>
+		<p>Never ever give up.</p>
+		<p class="btn btn-primary btn-lg" role="button">Regist Profile&nbsp;>></p>
 	</div>
 
 
@@ -160,6 +166,16 @@
 			}
 		});
 	}
+
+	var jumboHeight = $('.jumbotron').outerHeight();
+	function parallax(){
+	    var scrolled = $(window).scrollTop();
+	    $('.bg').css('height', (jumboHeight-scrolled) + 'px');
+	}
+
+	$(window).scroll(function(e){
+	    parallax();
+	});
 </script>
 
 

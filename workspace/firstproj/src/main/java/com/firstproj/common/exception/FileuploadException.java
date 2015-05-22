@@ -2,18 +2,14 @@ package com.firstproj.common.exception;
 
 @SuppressWarnings("serial")
 public class FileuploadException extends Exception{
-	private String message = "파일업로드 진행중 오류가 발생했습니다.";
+	private static final String DEFAULT_MSG = "파일업로드 진행중 오류가 발생했습니다.";
 
 	public FileuploadException() {
-		super();
+		super(DEFAULT_MSG);
 	}
 
 	public FileuploadException(String message) {
-		super();
-		this.message = message;
+		super(message);
 	}
 
-	public FileuploadException(Throwable cause){
-		super(cause);
-	}
 }

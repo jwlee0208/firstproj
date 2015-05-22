@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.firstproj.common.CommonConstant;
+import com.firstproj.common.exception.FileuploadException;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.PagedList;
+import com.firstproj.common.validate.ValidationUtil;
 import com.firstproj.player.SearchConditionPlayer;
 import com.firstproj.player.dto.CategoryAttrDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
@@ -434,14 +436,21 @@ public class PlayerController {
     @RequestMapping(value="/modifyPlayerAction", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject updatePlayerDetailInfoJSON(PlayerInfoDetail playerInfoDetail, HttpSession session) throws Exception{
-    	JSONObject 	jsonObj 	= new JSONObject();
-		UserDto 	sessionInfo = (UserDto)session.getAttribute("userInfo");
-
+    	JSONObject 	     jsonObj 	  = new JSONObject();
+		UserDto 	     sessionInfo  = (UserDto)session.getAttribute("userInfo");
+		MultipartFile    imageFile    = playerInfoDetail.getPlayerInfoDto().getProfileImg();
 		// validate
-		
+		if(imageFile != null){
+		    
+		    if(imageFile.getInputStream() != null){
+		        if(!ValidationUtil.chkFileSign(ValidationUtil.IMAGE_FILES_EXT, imageFile.getInputStream())){
+		            throw new FileuploadException();
+		        }
+		    }
+		}
 		
 		// fileUpload
-		MultipartFile imageFile = playerInfoDetail.getPlayerInfoDto().getProfileImg();
+		
 		String imageUploadResult = "";
 		
 		if(null != imageFile){
