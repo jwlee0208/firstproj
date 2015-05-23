@@ -16,12 +16,14 @@
           <put-attribute name="body" 	value="" />
      </definition>
 
-     <definition name="login" template="/WEB-INF/views/login.jsp">
-          <put-attribute name="body" 	value="" />
+     <definition name="/login" template="/WEB-INF/views/layout/login/main.jsp">
+          <put-attribute name="body" 	value="/WEB-INF/views/login.jsp" />
+          <put-attribute name="footer" 	value="/WEB-INF/views/layout/login/footer.jsp" />
      </definition>
 
-     <definition name="/user/regist" template="/WEB-INF/views/user/regist.jsp">
-          <put-attribute name="body" 	value="" />
+     <definition name="/user/regist" template="/WEB-INF/views/layout/regist/main.jsp">
+          <put-attribute name="body" 	value="/WEB-INF/views/user/regist.jsp" />
+          <put-attribute name="footer" 	value="/WEB-INF/views/layout/regist/footer.jsp" />
      </definition>
 
      
