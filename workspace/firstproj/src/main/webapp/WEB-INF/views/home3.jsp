@@ -28,8 +28,9 @@
 	<div class="jumbotron">
 		<h1>Keep Going Your Way</h1>
 		<p>Why don't you just go one step more?</p>
-		<p>Do not afraid of you. You are a good player.</p>
+		<p>Do not afraid of yourself. You are the player.</p>
 		<p>Never ever give up.</p>
+		<p><strong>"It ain't over till it's over."</strong> - 'Yogi' Lawrence Peter Berra</p>
 		<p class="btn btn-primary btn-lg" role="button">Regist Profile&nbsp;>></p>
 	</div>
 

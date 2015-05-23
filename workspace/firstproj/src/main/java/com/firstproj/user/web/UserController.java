@@ -1,4 +1,4 @@
-package com.firstproj.user;
+package com.firstproj.user.web;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

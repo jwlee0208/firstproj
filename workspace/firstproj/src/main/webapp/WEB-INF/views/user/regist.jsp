@@ -25,44 +25,44 @@
 	<input type="hidden" id="prevPage" name="prevPage" value="${prevPage}"/>
 	
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form">
-		<h1 id="btn-groups" class="page-header">Regist</h1>
+		<h1 id="btn-groups" class="page-header">Sign up</h1>
 		<div class="form-group">
-			<label for="userId" class="col-sm-2 control-label">사용자 아이디</label>
+			<label for="userId" class="col-sm-2 control-label">Userid</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" id="userId" name="userId"/><span id="userIdErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label for="userNm" class="col-sm-2 control-label">사용자 이름</label>
+			<label for="userNm" class="col-sm-2 control-label">Username</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" id="userNm" name="userNm" style="ime-mode: active"/><span id="userNmErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
 		
 		<div class="form-group">
-			<label for="passwd" class="col-sm-2 control-label">패스워드</label>
+			<label for="passwd" class="col-sm-2 control-label">Password</label>
 			<div class="col-sm-10">
 				<input type="password" class="form-control" id="passwd" name="passwd" minlength="8" maxlength="15"/><span id="passwdErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label for="passwdChk" class="col-sm-2 control-label">패스워드 체크</label>
+			<label for="passwdChk" class="col-sm-2 control-label">Confirm your password</label>
 			<div class="col-sm-10">
 				<input type="password" class="form-control" id="passwdChk" name="passwdChk" minlength="8" maxlength="15"/><span id="passwdChkErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label for="email" class="col-sm-2 control-label">E-mail</label>
+			<label for="email" class="col-sm-2 control-label">Email Address</label>
 			<div class="col-sm-10">
 				<input type="email" class="form-control" id="email" name="email"/><span id="emailErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label for="phoneNo" class="col-sm-2 control-label">핸드폰 번호</label>
+			<label for="phoneNo" class="col-sm-2 control-label">Cellphone no.</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" id="phoneNo" name="phoneNo"/><span id="phoneNoErr" class="errorMsg" style="display: none;"></span>
 			</div>
@@ -76,7 +76,7 @@
 				<input type="button" class="btn btn-default" value="Cancel" id="cancelBtn">
 			</div>
 			<div class="btn-group">
-				<input type="button" class="btn btn-default pull-right" value="Regist" id="registBtn">
+				<input type="button" class="btn btn-primary pull-right" value="Create an account" id="registBtn">
 			</div>					
 		</div>
 	</form>

@@ -31,7 +31,7 @@
 <div class="container">
 	<form id="viewFrm" name="viewFrm" method="post" class="form-horizontal" role="form">
 		<input type="hidden" id="playerInfoId" name="playerInfoId" value="${playerDetailInfo.playerInfoId}"/>
-		<h1 id="btn-groups" class="page-header">Player Info.</h1>
+		<h1 id="btn-groups" class="page-header">Player Information</h1>
 		<div class="form-group">
 			<label for="profileImgFilePath" class="col-sm-4">Profile Image</label>
 			<div class="col-sm-8"><img data-src="holder.js/200x200" src="${pageContext.request.contextPath}${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" width="200px" height="200px" /></div>
@@ -72,12 +72,13 @@
 			<label for="linkUrl" class="col-sm-4">Link To Your Play Stream Url</label>
 			<div class="col-sm-8">
 			<c:set var="playerVideoLinkList" value="${playerDetailInfo.playerVideoLinkList}"/>
-			<video width="320" height="240" autoplay>
+<!-- 			<video width="320" height="240" autoplay> -->
 			
-			</video>
+<!-- 			</video> -->
 			<c:if test="${playerVideoLinkList ne '' or playerVideoLinkList ne null}">
 				<c:forEach var="playerVideoLinkInfo" items="${playerVideoLinkList}" varStatus="idx">
-					<source src="${palyerVideoLinkInfo.linkUrl}"/><br/>
+<!-- 					<source src=""/> -->
+					${palyerVideoLinkInfo.linkUrl}<br/>
 				</c:forEach>
 			</c:if>
 			</div>

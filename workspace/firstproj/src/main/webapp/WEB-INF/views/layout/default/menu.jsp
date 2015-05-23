@@ -25,7 +25,6 @@ ul { padding: 0; }
 					<li><a href="${pageContext.request.contextPath}/home4.page">Home4</a></li>
 		          </ul>
 		        </li>				
-<%-- 				<li <c:if test="${param.menuId eq 0}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goHome();">Home</a></li> --%>
 				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();">About Us</a></li>
  				<li class="dropdown">
 		          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Board<span class="caret"></span></a>
@@ -48,7 +47,7 @@ ul { padding: 0; }
 			<form class="navbar-form navbar-right" role="search">
 	<c:choose>
 		<c:when test="${null eq userInfo}">
-			<button type="button" class="btn btn-default" onclick="javascript:goRegist(6);">Regist</button>
+			<button type="button" class="btn btn-primary" onclick="javascript:goRegist(6);">Sign up</button>
 			<a onclick="javascript:goLogin(7);" class="btn btn-default">Sign in</a>
 		</c:when>	
 		<c:otherwise>

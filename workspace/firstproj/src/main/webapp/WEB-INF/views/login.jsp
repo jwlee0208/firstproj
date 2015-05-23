@@ -34,6 +34,8 @@ $(function(){
 	$("input[name=signinSubmit]").on("click", function(){
 		loginAction();
 	});
+	
+	$(".alert.alert-danger").hide();
 });
 
 function loginAction(){
@@ -52,7 +54,15 @@ function loginAction(){
 					location.href = $("#prevPage").val();
 						//"/home.page";
 				}else{
-					alert(data.resultMsg);
+					$(".alert.alert-danger").text(data.resultMsg);
+					$(".alert.alert-danger").fadeIn(2000, function(){
+						
+					});
+					
+					$(".alert.alert-danger").fadeOut(2000, function(){						
+						
+					});
+// 					$(".alert.alert-danger").text('');
 					$("#passwd").focus();
 					return;
 				}
@@ -75,20 +85,21 @@ function loginAction(){
 		<h1 id="btn-groups" class="page-header">Sign in</h1>
 	
 		<div class="form-group">
-			<label for="userId" class="col-sm-2 control-label">아이디</label>
+			<label for="userId" class="col-sm-2 control-label">User id</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" id="userId" name="userId" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="passwd" class="col-sm-2 control-label">패스워드</label>
+			<label for="passwd" class="col-sm-2 control-label">Password</label>
 			<div class="col-sm-10">
 				<input type="password" class="form-control" id="passwd" name="passwd" />
 			</div>
 		</div>
+		<div class="alert alert-danger"></div>
 		<div class="btn-group btn-group-justified">
 			<div class="btn-group">
-		      <input type="button" class="btn btn-default" name="signinSubmit" value="Sign in">
+		      <input type="button" class="btn btn-primary" name="signinSubmit" value="Sign in">
 		    </div> 
 		</div>
 	</form>

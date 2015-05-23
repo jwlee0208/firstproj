@@ -194,28 +194,31 @@
 							 onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  
 							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
 							 data-toggle="modal" data-target="#myModal" 
-							 style="padding-top:10px;"/>
+							 style="padding-top:10px; cursor:pointer;"/>
 					</c:when>
 					<c:otherwise>
 						<img src="${pageContext.request.contextPath}/img/no_image.png" 
 							 data-src="holder.js/400x400" alt="image" class="img-rounded" 
 							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
 							 data-toggle="modal" data-target="#myModal" 
-							 style="padding-top:10px;"/>
+							 style="padding-top:10px; cursor:pointer;"/>
 					</c:otherwise>
 				</c:choose>					
 						
-						<div class="caption">
+						<div class="caption" style="cursor:pointer;">
 							<h3><span onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">${list.userInfo.userNm}</span></h3>
 							<p class="content_${index.count}" style="text-overflow:ellipsis; overflow:hidden;">
 								<div class="row"><div class="col-xs-6">Type</div><div class="col-xs-6">${list.catNm1Str}</div></div>
 								<div class="row"><div class="col-xs-6">Position</div><div class="col-xs-6">${list.catNm2Str}</div></div>
-								<c:if test="${list.introduce eq null || list.introduce eq ''}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-								<c:if test="${list.introduce ne null && list.introduce ne ''}">
-									<span onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">${fn:substring(list.introduce, 0, 31)}...</span>
-								</c:if>
+<%-- 								<c:if test="${list.introduce eq null || list.introduce eq ''}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if> --%>
+<%-- 								<c:if test="${list.introduce ne null && list.introduce ne ''}"> --%>
+<%-- 									<span onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">${fn:substring(list.introduce, 0, 10)}...</span> --%>
+<%-- 								</c:if> --%>
 							</p>
-							<p><span class="btn btn-info" role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">Detail Info.</span></p>
+							<p>
+								<span class="btn btn-info" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">Detail View</span>
+								<span class="btn btn-primary" 	role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">LIKE</span>
+							</p>
 						</div>
 	
 					</div>	

@@ -49,47 +49,37 @@ System.out.println(" >>> REFER : " + referer);
 	@RequestMapping(value="/loginProcess.json")
 	@ResponseBody
 	public JSONObject loginProcess(HttpServletRequest request, HttpServletResponse response, Model model, UserDto userDto) throws Exception{
-		JSONObject checkResult = new JSONObject();
+		JSONObject 	checkResult = new JSONObject();
+		// Return Code/Message Data
+		String 		resultCode 	= "LOGIN_0000";
+		String 		resultMsg 	= "";
 		
-		String resultCode = "LOGIN_0000";
-		String resultMsg = "";
-		
-		String passwd = userDto.getPasswd();
+		String 		passwd 		= userDto.getPasswd();
 		// 아이디 값을 이용, db에 저장된 개인 정보 중 passwd를 가져온다.
+		UserDto 	userInfo 	= this.userService.selectUserInfo(userDto);
 		
-		UserDto userInfo = this.userService.selectUserInfo(userDto);
-		
-//		System.out.println("userInfo : " + userInfo.toString() + "\nuserDto : " + userDto.toString() + "\ncandidate pw : " + passwd);
-		
-		
-		if(null != userInfo){
+		if(userInfo == null){
+			userInfo = new UserDto();
+			resultCode 	= "LOGIN_0001";
+			resultMsg 	= "Not registed UserId. Please, Join us.";
+		}else{
 			// 입력된 passwd와 비교한다.
-			String hashedPasswd = userInfo.getPasswd();	// BCrypt.hashpw(passwd, BCrypt.gensalt(15));
-			
-//			String passwd = "11111111";
-					
-//			String hashedPasswd = BCrypt.hashpw(passwd, BCrypt.gensalt());		
-			
-			boolean isOk = BCrypt.checkpw(passwd, hashedPasswd);
+			String 	hashedPasswd = userInfo.getPasswd();	// BCrypt.hashpw(passwd, BCrypt.gensalt(15));			
+			boolean isOk 		 = BCrypt.checkpw(passwd, hashedPasswd);
 			
 			if(isOk){
 				resultCode 	= "LOGIN_0000";
 				resultMsg 	= "checked";
-							
 			}else{
 				resultCode 	= "LOGIN_0002";
-				resultMsg 	= "invalid_passwd";
+				resultMsg 	= "This password is invalid.Please, Check out password";
 			}
-			
-		}else{
-			resultCode 	= "LOGIN_0001";
-			resultMsg 	= "no_exist_user_id";
 		}
 		
-		checkResult.put("resultCode", resultCode);
-		checkResult.put("resultMsg", resultMsg);
+		checkResult.put("resultCode"	, resultCode);
+		checkResult.put("resultMsg"		, resultMsg);
 		
-		model.addAttribute("userInfo", userInfo);
+		model.addAttribute("userInfo"	, userInfo);
 		return checkResult;
 	}
 	@RequestMapping(value="/logout.page")
