@@ -152,7 +152,7 @@ public class PlayerController {
 
         int 		 listRowCnt       = (request.getParameter("listRowCnt") != null) 
                                     	? Integer.parseInt(request.getParameter("listRowCnt")) 
-                                    	: 10;
+                                    	: 12;
 
         String 		 catId            = (String)request.getParameter("selectedCatId");        // String.valueOf(categoryAttrElemMapDto.getCatId());
         String 		 attrId           = (String)request.getParameter("selectedAttrId");       // String.valueOf(categoryAttrElemMapDto.getAttrId());
