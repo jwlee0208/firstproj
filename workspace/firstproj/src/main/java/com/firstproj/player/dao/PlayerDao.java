@@ -14,6 +14,7 @@ import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
 import com.firstproj.player.dto.PlayerVideoLinkDto;
+import com.firstproj.player.dto.SearchPlayerDto;
 import com.firstproj.user.dto.UserDto;
 
 @Repository("PlayerDao")
@@ -273,4 +274,13 @@ public class PlayerDao extends SqlSessionDaoSupport{
     	return getSqlSession().update("sql.player.updateCategoryAttrElemMapInfo", param);
     }
     
+    
+    public List<PlayerInfoDto> selectPlayerList(SearchPlayerDto searchPlayerDto) throws Exception{
+        return getSqlSession().selectList("sql.player.selectPlayerList2", searchPlayerDto);
+    }
+
+    public int selectPlayerCnt(SearchPlayerDto searchPlayerDto) throws Exception{
+        return getSqlSession().selectOne("sql.player.selectPlayerListCount2", searchPlayerDto);
+    }
+
 }

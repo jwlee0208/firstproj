@@ -15,6 +15,7 @@ import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.firstproj.common.CommonConstant;
 import com.firstproj.common.exception.FileuploadException;
+import com.firstproj.common.paging.PageHolder;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.validate.ValidationUtil;
@@ -32,6 +34,7 @@ import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoDetail;
 import com.firstproj.player.dto.PlayerInfoDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
+import com.firstproj.player.dto.SearchPlayerDto;
 import com.firstproj.player.service.PlayerServiceImpl;
 import com.firstproj.user.dto.UserDto;
 
@@ -482,6 +485,55 @@ public class PlayerController {
 		}
     	
     	return jsonObj;
+    }
+
+    @RequestMapping("/playerPortal.page")
+    public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto){
+System.out.println("/playerPortal.page");
+        searchPlayerDto.setListSize(10);
+        searchPlayerDto.setPageSize(10);
+
+        // 카테고리 목록 조회하는 부분
+        CategoryDto             categoryObj = null;
+        List<CategoryDto>       catList     = null;
+        try {
+            catList = this.playerService.getCategoryList(categoryObj);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            model.addAttribute("searchPlayerInfo"   , searchPlayerDto);
+            model.addAttribute("catList"            , catList);    
+        }
+        
+        return "player/playerPortal";
+    }
+    
+    @RequestMapping("/ajaxPlayerList")
+    public String getAjaxPlayerList(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session){
+
+        System.out.println("/ajaxPlayerList");        
+        List<PlayerInfoDto> playerList = null;
+        PageHolder          pageHolder = null;
+        int                 playerCnt  = 0;
+        
+        try {
+            playerList = playerService.selectPlayerList(searchPlayerDto , session);
+            playerCnt  = playerService.selectPlayerCnt(searchPlayerDto  , session);
+        System.out.println("playerList : " + playerList  +", playerCnt : " + playerCnt);
+            if(playerCnt > 0){
+                pageHolder = new PageHolder(playerCnt, searchPlayerDto.getPage(), searchPlayerDto.getListSize());    
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            model.addAttribute("searchPlayerInfo"   , searchPlayerDto);
+            model.addAttribute("playerList"         , playerList);
+            model.addAttribute("pageHolder"         , pageHolder);
+        }
+        
+        return "player/ajaxPlayerList";
     }
     
 }

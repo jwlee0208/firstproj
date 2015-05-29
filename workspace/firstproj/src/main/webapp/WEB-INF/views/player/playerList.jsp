@@ -182,7 +182,6 @@
 	<%-- 		</c:forEach> --%>
 	<!-- 		</table> -->
 	
-	
 			<c:forEach var="list" items="${pagedResult.list}">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail">

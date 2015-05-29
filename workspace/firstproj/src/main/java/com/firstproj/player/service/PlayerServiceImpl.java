@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import com.firstproj.player.dto.PlayerInfoDetail;
 import com.firstproj.player.dto.PlayerInfoDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
 import com.firstproj.player.dto.PlayerVideoLinkDto;
+import com.firstproj.player.dto.SearchPlayerDto;
 import com.firstproj.user.dto.UserDto;
 
 @Service("PlayerServiceImpl")
@@ -269,5 +271,19 @@ public class PlayerServiceImpl implements PlayerService{
     	return this.playerDao.updateCategoryAttrElemMap(categoryAttrElemMapDto);
     }
 
+    @Override
+    public List<PlayerInfoDto> selectPlayerList(SearchPlayerDto searchPlayerDto, HttpSession session) throws Exception{
+        List<PlayerInfoDto> selectPlayerList = this.playerDao.selectPlayerList(searchPlayerDto);
+        
+        System.out.println(selectPlayerList != null);
+        System.out.println(selectPlayerList.size());
+        
+        return selectPlayerList;
+    }
+    
+    @Override
+    public int selectPlayerCnt(SearchPlayerDto searchPlayerDto, HttpSession session) throws Exception{
+        return this.playerDao.selectPlayerCnt(searchPlayerDto);
+    }
 	
 }

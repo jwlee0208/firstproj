@@ -61,7 +61,7 @@
 				  http://www.mysqlkorea.com/sub.html?mcode=manual&scode=01&m_no=21460&cat1=7&cat2=217&cat3=238&lang=k 
 			-->
 			ORDER BY null	
-		</select>      
+		</select>          
 		
 		<!-- 리스트 조회 -->    
 		<select id="selectBoardList" resultType="player.categoryAttrElemMapDto" parameterType="searchConditionPlayer">                      
@@ -90,6 +90,19 @@
 			ORDER BY null	
 		</select>      
 		
+		<select id="selectPlayerListCount2" resultType="Integer" parameterType="player.searchPlayerDto">        
+			select count(*) from (
+			<include refid="selectPlayerListDefault"/>
+			<include refid="searchConditionPlayerSql2"/>    
+			) as count
+			<!-- 
+			order by null의 사용으로 filesort작업 제거 
+			ref.] http://papamake.tistory.com/118
+				  http://beautijeon.tistory.com/1458
+				  http://www.mysqlkorea.com/sub.html?mcode=manual&scode=01&m_no=21460&cat1=7&cat2=217&cat3=238&lang=k 
+			-->
+			ORDER BY null	
+		</select>      
 		
 		<!-- playerInfo 리스트 조회 -->
 		<select id="selectPlayerList" resultMap="playerListMap" parameterType="searchConditionPlayer">
@@ -97,6 +110,13 @@
 			<include refid="searchConditionPlayerSql"/>     
 			ORDER BY U.user_nm desc	
 			LIMIT #{startRow}, #{endRow}  
+		</select>
+
+		<select id="selectPlayerList2" resultMap="playerListMap" parameterType="player.searchPlayerDto">
+			<include refid="selectPlayerListDefault"/>			
+			<include refid="searchConditionPlayerSql2"/>     
+			ORDER BY U.user_nm desc	
+			LIMIT #{fetchScale}, #{listSize}  
 		</select>
 		
 		<resultMap 	id="playerListMap" 	type="player.playerInfoDto">
@@ -169,7 +189,7 @@
 			left join 	tb_attr_elem_map  	aem 	on ae.attr_elem_id = aem.attr_elem_id		
 		</sql>
 		
-		<!-- 페이징 처리를 위한 검색 조건 -->
+				<!-- 페이징 처리를 위한 검색 조건 -->
 		<sql id="searchConditionSql">
 			WHERE 1 = 1
 				<if test='searchCondition == "userName"'>
@@ -193,8 +213,32 @@
 				</if>   
 				and aem.attr_elem_map_id > 0  	    
 		</sql> 
+		
+		<!-- 페이징 처리를 위한 검색 조건2 -->
+		<sql id="searchConditionSql2">
+			WHERE 1 = 1
+				<if test='searchCondition == "userName"'>
+					<if test='searchText != null and searchText != ""'>
+					and aem.user_name 	like CONCAT('%', #{searchText}, '%')
+					</if> 
+				</if>
+				<if test="categoryInfo != null and categoryInfo.catId > 0">
+				and a.cat_id = #{categoryInfo.catId}    
+				</if>
+<!-- 				<if test="attrId > 0"> -->
+<!-- 				and a.attr_id = #{attrId}     -->
+<!-- 				</if> -->
+<!-- 				<if test="attrElemId != null"> -->
+<!-- 				and ae.attr_elem_id in  -->
+				
+<!-- 					<foreach item="item" index="index" collection="attrElemId" -->
+<!-- 					      open="(" separator="," close=")"> -->
+<!-- 					        #{item} -->
+<!-- 					</foreach>				     -->
+<!-- 				</if>    -->
+				and aem.attr_elem_map_id > 0  	    
+		</sql> 
 
-		<!-- playerInfo 페이징 처리를 위한 검색 조건 -->
 		<sql id="searchConditionPlayerSql">
 			WHERE 1 = 1
 					<if test='searchCondition == "userName"'>
@@ -222,19 +266,40 @@
 					      open="(" separator="," close=")">
 					        #{item}
 					</foreach>
-					
-							    				
-<!-- 				and pi.cat_id2 in  -->
-<!-- 					(select cat_id  -->
-<!-- 					 from tb_attr_elem_map aem  -->
-<!-- 					 where 1 = 1  -->
+				</if> 
+				GROUP BY pi.user_id
+<!-- 				GROUP BY pi.player_info_id, U.user_nm, pi.cat_id1, c1.cat_name, c2.cat_id, c2.cat_name	    	     -->
+		</sql> 
+
+		<!-- playerInfo 페이징 처리를 위한 검색 조건 -->
+		<sql id="searchConditionPlayerSql2">
+			WHERE 1 = 1
+					<if test='searchCondition == "userName"'>
+						<if test='searchText != null and searchText != ""'>
+<!-- 						and aem.user_name 	like CONCAT('%', #{searchText}, '%') -->
+<!-- 							and u.user_nm 	like CONCAT('%', #{searchText}, '%') -->
+				and MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
+						</if> 
+					</if>
+			
+				
+				<if test="categoryInfo != null and categoryInfo.catId > 0">
+				and (pi.cat_id1 = #{categoryInfo.catId} 
+				  or pi.cat_id2 = #{categoryInfo.catId} 
+				  or pi.cat_id2 in (select cat_id 
+				  				    from tb_category 
+				  				    where parent_cat_id = #{categoryInfo.catId}))    
+				</if>
+<!-- 				<if test="attrId > 0"> -->
+<!-- 				and a.attr_id = #{attrId}     -->
+<!-- 				</if> -->
+<!-- 				<if test="attrElemId != null"> -->
 <!-- 					   and aem.attr_elem_id in  -->
 <!-- 					<foreach item="item" index="index" collection="attrElemId" -->
 <!-- 					      open="(" separator="," close=")"> -->
 <!-- 					        #{item} -->
-<!-- 					</foreach>				     -->
-<!-- 					) -->
-				</if> 
+<!-- 					</foreach> -->
+<!-- 				</if>  -->
 				GROUP BY pi.user_id
 <!-- 				GROUP BY pi.player_info_id, U.user_nm, pi.cat_id1, c1.cat_name, c2.cat_id, c2.cat_name	    	     -->
 		</sql> 
