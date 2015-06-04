@@ -36,6 +36,11 @@ public class LoginController {
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception{
 		
 		String referer = request.getHeader("Referer");
+		
+		if(null != request.getParameter("redirectPage")){
+		    referer = request.getParameter("redirectPage");
+		}
+		
 		if(StringUtils.isEmpty(referer)){
 			referer="/";
 		}

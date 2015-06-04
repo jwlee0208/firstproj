@@ -277,7 +277,7 @@ public class PlayerController {
     	UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
     	
     	if(sessionInfo == null){
-    		return "redirect:/login";
+    		return "redirect:/login?redirectPage=" + request.getRequestURI();
     	}else{
     		
     		if(this.playerService.getIsRegisted(sessionInfo)){
