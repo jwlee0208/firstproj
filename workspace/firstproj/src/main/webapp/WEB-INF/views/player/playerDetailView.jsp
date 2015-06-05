@@ -126,7 +126,7 @@ $(function(){
 					
 					var result = data.result;
 					if(result == 'ok'){
-						location.href = "/player/playerList.page";
+						location.href = "/player/playerList";
 					}
 					
 				}				
@@ -135,15 +135,15 @@ $(function(){
 	});
 	
 	$("#listBtn").on("click", function(){
-		location.href = "/player/playerList.page";	
+		location.href = "/player/playerList";	
 	});
 	
 	$("#modifyBtn").on("click", function(){
 		var frm = $("#viewFrm");
-		frm.attr("action","/player/modify.page");
+		frm.attr("action","/player/modify");
 		frm.attr("method","post");
 		frm.submit();
-// 		location.href = "/player/modify.page";
+// 		location.href = "/player/modify";
 	});
 });
 </script>

@@ -17,7 +17,7 @@
 			async : false,
 			type : 'POST',
 			dataType : 'html',
-			url : '/player/attrElemMapList.page',
+			url : '/player/attrElemMapList',
 			data : $("#listFrm").serialize(),
 			processData : true,
 			cache : false,

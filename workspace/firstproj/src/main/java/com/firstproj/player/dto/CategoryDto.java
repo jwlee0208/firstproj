@@ -5,9 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
-@SuppressWarnings("serial")
 @Alias("player.categoryDto")
-public class CategoryDto implements Serializable{
+public class CategoryDto{
     private int parentCatId;
     private int catId;
     

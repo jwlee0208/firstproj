@@ -1,13 +1,11 @@
 package com.firstproj.player.dto;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
-@SuppressWarnings("serial")
 @Alias("player.categoryAttrDto")
-public class CategoryAttrDto extends CategoryDto implements Serializable{
+public class CategoryAttrDto{
     private int     attrId;
     private int     catId;
     private String  attrName;

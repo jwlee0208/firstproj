@@ -149,7 +149,7 @@ $(function(){
 
 
 function goList(){
-	location.href =  "/board/article/list.page?boardId="+$("#boardId").val();
+	location.href =  "/board/article/list?boardId="+$("#boardId").val();
 } 
 
 function toggleThumbImage(className){

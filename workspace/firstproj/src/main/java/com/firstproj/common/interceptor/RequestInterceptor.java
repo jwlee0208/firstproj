@@ -1,36 +1,17 @@
 package com.firstproj.common.interceptor;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang.exception.ExceptionUtils;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springbyexample.web.servlet.view.tiles2.TilesUrlBasedViewResolver;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Aspect
 public class RequestInterceptor {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired
-	private TilesUrlBasedViewResolver tilesUrlBasedViewResolver;		
+//	@Autowired
+//	private TilesUrlBasedViewResolver tilesUrlBasedViewResolver;		
 
 	/**
 	 * 모든 controller에서 확장자를 통한 Tiles2 환경설정 
@@ -45,15 +26,15 @@ public class RequestInterceptor {
 	 * @return		
 	 */
 
-	@After("afterConfiguresController()")
-	public void _beforeTilesConfigures(JoinPoint joinPoint) throws Exception {
-		String uri = null;
+//	@After("afterConfiguresController()")
+//	public void _beforeTilesConfigures(JoinPoint joinPoint) throws Exception {
+//		String uri = null;
 		
-		tilesUrlBasedViewResolver.clearCache();
-		tilesUrlBasedViewResolver.setTilesDefinitionName("default");
-		
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-		uri = request.getRequestURI();
+//		tilesUrlBasedViewResolver.clearCache();
+//		tilesUrlBasedViewResolver.setTilesDefinitionName("default");
+//		
+//		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+//		uri = request.getRequestURI();
 				
 //		if(uri.endsWith("page")){
 //			tilesUrlBasedViewResolver.clearCache();
@@ -68,17 +49,11 @@ public class RequestInterceptor {
 		
 //System.out.println("requestInterceptor result: " + uri.indexOf(".page") +", " + uri.indexOf("pop"));		
 		
-		if(uri.indexOf(".page") > 0){
-			tilesUrlBasedViewResolver.clearCache();
-			tilesUrlBasedViewResolver.setTilesDefinitionName("default");
-		} else if(uri.indexOf(".pop") > 0){
-			tilesUrlBasedViewResolver.clearCache();
-			tilesUrlBasedViewResolver.setTilesDefinitionName("popup");
-	    } else {
-			tilesUrlBasedViewResolver.clearCache();
-			tilesUrlBasedViewResolver.setTilesDefinitionName("popup");        	
-	    }		
-	}
+//		if(uri.indexOf(".pop") > 0){
+//			tilesUrlBasedViewResolver.clearCache();
+//			tilesUrlBasedViewResolver.setTilesDefinitionName("popup");
+//	    }		
+//	}
 	
 //	private String getReturn(Map<?, ?> map)  throws Exception {
 //		

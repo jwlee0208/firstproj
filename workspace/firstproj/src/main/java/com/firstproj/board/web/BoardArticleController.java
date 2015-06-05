@@ -32,7 +32,6 @@ import com.firstproj.common.web.EditorController;
 import com.firstproj.user.dto.UserDto;
 
 @Controller
-@RequestMapping(value = "/board/article")
 public class BoardArticleController {
 
 	public static final int 	DEFAULT_PAGE_NO 				= 1;
@@ -77,7 +76,7 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/board/article/list", method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception {
 //System.out.println(">>> getBoardList()");
 //		List<boardArticleDto> boardList = boardArticleService.getBoardList();
@@ -234,7 +233,7 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/view.page")
+	@RequestMapping(value = "/board/article/view")
 	public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @Param int selectedArticleId) throws Exception{
 		
 		BoardArticleDto contentInfo = null;
@@ -267,7 +266,7 @@ public class BoardArticleController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value = "/write.page")
+	@RequestMapping(value = "/board/article/write")
 	public String writeBoard(Model model, BoardArticleDto boardArticleDto, HttpSession session) {
 		
 //		System.out.println("session : " + (session == null));
@@ -295,8 +294,7 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@SuppressWarnings("serial")
-	@RequestMapping(value = "/insertBoardArticle.json", method = RequestMethod.POST)
+	@RequestMapping(value = "/board/article/insertBoardArticle.json", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject insertBoardArticleJSON(@Valid BoardArticleDto boardArticleDto, BindingResult bindingResult, HttpSession session) throws Exception {
 //System.out.println("boardArticleDto 1 : " + boardArticleDto.toString());	
@@ -345,7 +343,7 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/insertBoardArticle")
+	@RequestMapping(value = "/board/article/insertBoardArticle")
 	@ResponseBody
 	public String insertBoardArticle(@Valid BoardArticleDto boardArticleDto, BindingResult bindingResult, HttpSession session, Model model) throws Exception {
 		
@@ -410,7 +408,7 @@ public class BoardArticleController {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("serial")
-	@RequestMapping(value = "/modifyBoardArticle.json", method = RequestMethod.POST)
+	@RequestMapping(value = "/board/article/modifyBoardArticle.json", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject modifyBoardArticleJSON(@Valid BoardArticleDto boardArticleDto, BindingResult bindingResult, HttpSession session) throws Exception {
 		JSONObject jsonObj = new JSONObject();
@@ -443,7 +441,7 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/modifyBoardArticle")
+	@RequestMapping(value = "/board/article/modifyBoardArticle")
 	@ResponseBody
 	public String modifyBoardArticle(@Valid BoardArticleDto boardArticleDto, BindingResult bindingResult, HttpSession session, Model model) throws Exception {
 		
@@ -491,7 +489,7 @@ System.out.println("boardArticleDto : " + boardArticleDto.toString());
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/modifyBoardArticle.page")
+	@RequestMapping(value = "/board/article/modifyArticle")
 	public String modifyBoardArticlePage(Model model, BoardArticleDto boardArticleDto, HttpSession session, @Param int selectedArticleId, @Param int selectedBoardId) throws Exception{
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
@@ -524,7 +522,7 @@ System.out.println("boardArticleDto : " + boardArticleDto.toString());
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/deleteBoardArticle.json", method = RequestMethod.POST)
+	@RequestMapping(value = "/board/article/deleteBoardArticle.json", method = RequestMethod.POST)
 	public JSONObject deleteBoardArticleJSON(Model model, HttpSession session, @Param int selectedArticleId) throws Exception{
 		BoardArticleDto boardArticleDto = new BoardArticleDto();
 		JSONObject jsonObj = new JSONObject();

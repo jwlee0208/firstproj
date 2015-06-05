@@ -27,7 +27,6 @@ import com.firstproj.common.util.PagedList;
 import com.firstproj.user.dto.UserDto;
 
 @Controller
-@RequestMapping(value = "/board")
 public class BoardController {
 	public static final int DEFAULT_PAGE_NO = 1;
 	public static final int DEFAULT_PAGE_SIZE = 10;
@@ -35,7 +34,7 @@ public class BoardController {
 	@Resource(name="BoardServiceImpl")
 	private BoardServiceImpl boardService;
 	
-	@RequestMapping(value="/list.page")
+	@RequestMapping(value="/board/list")
 	public String getBoardList(HttpServletRequest request, Model model, BoardDto boardDto, HttpSession session) throws Exception{
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
@@ -82,7 +81,7 @@ public class BoardController {
 		return model;
 
 	}
-	@RequestMapping(value = "/write.page")
+	@RequestMapping(value = "/board/write")
 	public String createBoard(Model model, BoardDto boardDto, HttpSession session) {
 		
 //		System.out.println("session : " + (session == null));
@@ -100,7 +99,7 @@ public class BoardController {
 	}
 	
 	@SuppressWarnings("serial")
-	@RequestMapping(value = "/insertBoardAction.json", method = RequestMethod.POST)
+	@RequestMapping(value = "/board/insertBoardAction.json", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject insertBoardAction(@Valid BoardDto boardDto, BindingResult bindingResult, HttpSession session) throws Exception {
 
@@ -127,7 +126,7 @@ public class BoardController {
 		return jsonObj;
 	}	
 	
-	@RequestMapping(value = "/view.page")
+	@RequestMapping(value = "/board/view")
 	public String getBoardContent(HttpServletRequest request, Model model, BoardDto boardDto, @RequestParam(value="selectedBoardId", required=false) int selectedBoardId) throws Exception{
 		
 		BoardDto boardInfo 		= null;
@@ -160,7 +159,7 @@ public class BoardController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/modifyBoard.page")
+	@RequestMapping(value = "/board/modifyBoard")
 	public String modifyBoard(Model model, BoardDto boardDto, HttpSession session, @RequestParam(value="selectedBoardId", required=false) int selectedBoardId) throws Exception{
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
@@ -183,7 +182,7 @@ public class BoardController {
 	}
 	
 	@SuppressWarnings("serial")
-	@RequestMapping(value = "/modifyBoardAction.json", method = {RequestMethod.POST})
+	@RequestMapping(value = "/board/modifyBoardAction.json", method = {RequestMethod.POST})
 	@ResponseBody
 	public JSONObject modifyBoardAction(
 	           Locale locale

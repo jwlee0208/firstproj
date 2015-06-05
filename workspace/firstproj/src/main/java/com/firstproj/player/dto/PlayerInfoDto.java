@@ -1,6 +1,5 @@
 package com.firstproj.player.dto;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;
@@ -8,9 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.firstproj.user.dto.UserDto;
 
-@SuppressWarnings("serial")
 @Alias("player.playerInfoDto")
-public class PlayerInfoDto implements Serializable
+public class PlayerInfoDto 
 //extends UserDto
 {
     private int 			          playerInfoId;

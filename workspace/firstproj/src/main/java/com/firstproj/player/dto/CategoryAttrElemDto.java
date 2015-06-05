@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 import org.apache.ibatis.type.Alias;
 
-@SuppressWarnings("serial")
+
 @Alias("player.categoryAttrElemDto")
 public class CategoryAttrElemDto 
 //extends CategoryAttrDto 
-implements Serializable {
+{
     private int     attrElemId;
     private int     attrId;
     private int     catId;

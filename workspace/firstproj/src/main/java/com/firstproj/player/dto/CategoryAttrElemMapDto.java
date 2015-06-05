@@ -1,11 +1,9 @@
 package com.firstproj.player.dto;
 
-import java.io.Serializable;
-
 import org.apache.ibatis.type.Alias;
 
 @Alias("player.categoryAttrElemMapDto")
-public class CategoryAttrElemMapDto extends CategoryAttrElemDto implements Serializable{
+public class CategoryAttrElemMapDto extends CategoryAttrElemDto{
     private int     attrElemMapId;
     private int     attrId;
     private int     attrElemId;

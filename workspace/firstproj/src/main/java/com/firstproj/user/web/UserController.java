@@ -27,7 +27,7 @@ public class UserController {
 	@Resource(name="UserServiceImpl")
 	private UserServiceImpl userService;
 	
-	@RequestMapping(value="/regist.page")
+	@RequestMapping(value="/regist")
 	public String registUser(Model model, HttpServletRequest request) throws Exception{
 	    
         String referer = request.getHeader("Referer");

@@ -33,7 +33,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/")
 	public String index() throws Exception{
-		return "redirect:/home.page";
+		return "redirect:/home";
 	}
 	
 	@RequestMapping(value="/login")
@@ -91,12 +91,12 @@ public class LoginController {
 		model.addAttribute("userInfo"	, userInfo);
 		return checkResult;
 	}
-	@RequestMapping(value="/logout.page")
+	@RequestMapping(value="/logout")
 	public String logout(@ModelAttribute UserDto userDto, HttpSession session, SessionStatus status) {
 		
 		status.setComplete();
 		session.removeAttribute("userInfo");
 		
-		return "redirect:/home.page";
+		return "redirect:/home";
 	}
 }

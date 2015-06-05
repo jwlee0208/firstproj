@@ -37,7 +37,7 @@ public class HomeController {
 	@Resource(name="redisTemplate")
 	private ValueOperations<String, List<BoardArticleDto>> valueOps;
 
-	@RequestMapping(value="/home.page")
+	@RequestMapping(value="/home")
 	public String goHome(Model model) throws Exception{
 		
 		BoardArticleDto boardDto01 = new BoardArticleDto();
@@ -56,12 +56,12 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/home2.page")
+	@RequestMapping(value="/home2")
 	public String goHome() throws Exception{		
 		return "home2";
 	}	
 	
-	@RequestMapping(value="/home3.page")
+	@RequestMapping(value="/home3")
 	public String goHome3(Model model) throws Exception{
 		
 		BoardArticleDto boardDto01 = new BoardArticleDto();
@@ -80,7 +80,7 @@ public class HomeController {
 		return "home3";
 	}	
 	
-//	@RequestMapping(value="/home4.page")
+//	@RequestMapping(value="/home4")
 //	public String goHome4(Model model) throws Exception{
 //		
 //		String boardArticleFive01 = this.boardArticleRedisService.get("boardArticleFive01");
@@ -121,7 +121,7 @@ public class HomeController {
 //		return "home4";
 //	}
 
-	@RequestMapping(value="/home4.page")
+	@RequestMapping(value="/home4")
 	public String goHome4(Model model) throws Exception{
 		
 		BoardArticleDto boardDto01 = new BoardArticleDto();
@@ -172,11 +172,11 @@ System.out.println("is Null : " + (null == getBoardArticleFive01));
 	}
 	
 	
-	@RequestMapping(value="/aboutUs.page")
+	@RequestMapping(value="/aboutUs")
 	public String goAboutUs() throws Exception{
 		return "/info/aboutUs";
 	}
-//	@RequestMapping(value="/getFiveArticle.page")
+//	@RequestMapping(value="/getFiveArticle")
 //	public String getBoardArticle(Model model) throws Exception{
 //		
 //		return "/board/articleFive";

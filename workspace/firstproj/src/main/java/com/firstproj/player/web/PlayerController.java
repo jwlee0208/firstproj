@@ -192,9 +192,9 @@ public class PlayerController {
 
         int totalListCnt = 0;
                 
-        if(page.equals("attrElemMapList.page")){
+        if(page.equals("attrElemMapList")){
             totalListCnt = playerService.getCategoryAttrElemMapCnt(paramMap);
-        }else if(page.equals("playerList.page")){
+        }else if(page.equals("playerList")){
             totalListCnt = playerService.getPlayerInfoCnt(paramMap);
         }
 
@@ -211,9 +211,9 @@ public class PlayerController {
         // 페이징 리스트 조회하는 부분
         PagedList result = null;
         List<PlayerInfoSearchDto> perCategoryCntList = null;
-        if(page.equals("attrElemMapList.page")){
+        if(page.equals("attrElemMapList")){
             result = playerService.getCategoryAttrElemMapPagedList(paramMap);
-        }else if(page.equals("playerList.page")){
+        }else if(page.equals("playerList")){
             result = playerService.getPlayerInfoPagedList(paramMap);
             
             // checkout who logined user regist as player
@@ -247,14 +247,14 @@ public class PlayerController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value="/attrElemMapList.page", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value="/attrElemMapList", method = {RequestMethod.GET, RequestMethod.POST})
     public String getCategoryAttrElemMapList(HttpServletRequest request, Model model, CategoryAttrElemMapDto categoryAttrElemMapDto, HttpSession session) throws Exception{
         
         System.out.println("attrElemId : " + request.getParameter("selectedAttrElemId"));
         System.out.println("attrId : " + request.getParameter("selectedAttrId"));
         System.out.println("dto attrElemId : " + categoryAttrElemMapDto.getAttrElemId());
         
-        model = this.getListCommonList(request, model, session, "attrElemMapList.page");
+        model = this.getListCommonList(request, model, session, "attrElemMapList");
         
         return "player/attrElemMapList";
     }
@@ -265,13 +265,13 @@ public class PlayerController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value="/playerList.page", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value="/playerList", method = {RequestMethod.GET, RequestMethod.POST})
     public String getPlayerInfoList(HttpServletRequest request, Model model, HttpSession session) throws Exception{
-        model = this.getListCommonList(request, model, session, "playerList.page");
+        model = this.getListCommonList(request, model, session, "playerList");
         return "player/playerList";
     }
     
-    @RequestMapping(value="/write.page")
+    @RequestMapping(value="/write")
     public String registPlayer(HttpServletRequest request, Model model, HttpSession session) throws Exception{
     	
     	UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
@@ -281,7 +281,7 @@ public class PlayerController {
     	}else{
     		
     		if(this.playerService.getIsRegisted(sessionInfo)){
-    			return "redirect:/player/playerDetailView.page";
+    			return "redirect:/player/playerDetailView";
     		}else{
     	        CategoryDto 		param 		  = new CategoryDto();
     	        param.setParentCatId(0);
@@ -409,7 +409,7 @@ public class PlayerController {
     }
  
     
-    @RequestMapping(value="/modify.page", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value="/modify", method = {RequestMethod.POST, RequestMethod.GET})
     public String getPlayerDetailForModify(HttpServletRequest request, Model model, UserDto userDto, HttpSession session) throws Exception{
     	UserDto myInfo   = (UserDto)session.getAttribute("userInfo");
     	System.out.println("myInfo : " + myInfo.toString());
@@ -487,9 +487,9 @@ public class PlayerController {
     	return jsonObj;
     }
 
-    @RequestMapping("/playerPortal.page")
+    @RequestMapping("/playerPortal")
     public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto){
-System.out.println("/playerPortal.page");
+System.out.println("/playerPortal");
         searchPlayerDto.setListSize(10);
         searchPlayerDto.setPageSize(10);
 

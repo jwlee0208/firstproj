@@ -25,7 +25,7 @@ $(document).on("ready", function(){
 	 * 게시글 수정
 	 */
 	$("#goToModify").on("click", function(){
-		location.href = "/board/article/modifyBoardArticle.page?selectedArticleId=" + $("#selectedArticleId").val() +"&selectedBoardId=" + $("#boardId").val();
+		location.href = "/board/article/modifyArticle?selectedArticleId=" + $("#selectedArticleId").val() +"&selectedBoardId=" + $("#boardId").val();
 	});
 	/**
 	 * 게시글 삭제
@@ -38,7 +38,7 @@ $(document).on("ready", function(){
 			dataType : 'json',
 			success : function(data){
 				if(data.result){
-					location.href = "/board/article/list.page?boardId="+$("#boardId").val();
+					location.href = "/board/article/list?boardId="+$("#boardId").val();
 				}else{
 					alert(data.validate);
 				}
@@ -57,7 +57,7 @@ function goView(articleId){
 	$("#selectedArticleId").val(articleId);
 	
 	var frm = $("#viewFrm");
-	frm.attr("action", "/board/article/view.page");
+	frm.attr("action", "/board/article/view");
 	frm.attr("method", "post");
 	frm.submit();
 }
