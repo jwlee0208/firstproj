@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,8 @@ import com.firstproj.user.service.UserServiceImpl;
 @SessionAttributes("userInfo")
 public class LoginController {
 	
+    final Log log = LogFactory.getLog("LoginController.class");
+    
 	@Resource(name="UserServiceImpl")
 	private UserServiceImpl userService;
 	
@@ -44,8 +48,8 @@ public class LoginController {
 		if(StringUtils.isEmpty(referer)){
 			referer="/";
 		}
-System.out.println(" >>> REFER : " + referer);				
-//		return "redirect:" + referer;
+		
+		log.info(" >>> REFER : " + referer);				
 
 		model.addAttribute("prevPage", referer);
 		return "/login";
