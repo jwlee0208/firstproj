@@ -3,7 +3,7 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd">
  <tlib-version>1.0</tlib-version>
  <short-name>custom</short-name>
- <uri>http://localhost:8080/taglib/custom</uri>
+ <uri>http://www.tryout.com:8080/taglib/custom</uri>
  <tag>
   <description>페이징처리</description>
   <name>pagination</name>

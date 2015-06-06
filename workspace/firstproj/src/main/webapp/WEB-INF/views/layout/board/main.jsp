@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-<title>진원's Web</title>
+<link rel="icon" href="/img/common/favicon.ico">
+<title>Let's Try Out</title>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
 <%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/ui.menu.js"></script> --%>
 

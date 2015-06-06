@@ -7,6 +7,7 @@
 <meta name="description" content="JW">
 <meta name="keywords" content="JW">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/img/common/favicon.ico">
 <title>Insert title here</title>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
 </head>
