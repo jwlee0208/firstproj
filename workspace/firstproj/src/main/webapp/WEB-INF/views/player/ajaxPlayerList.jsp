@@ -5,34 +5,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <c:choose>
 	<c:when test="${empty playerList}">
-	asdf
+			<p class="text-warning">There is no data.</p>
 	</c:when>
 	<c:otherwise>
-		<div class="table-responsive" id="listDiv">
-	<%-- 		<div>Total :  ${pagedResult.totalListCnt} (Players)</div> --%>
-			 
-			
-	<!-- 		<table class="table table-hover"> -->
-	<!-- 			<tr> -->
-	<!-- 				<th>Profile Image</th> -->
-	<!-- 				<th>Name</th> -->
-	<!-- 				<th>Type</th> -->
-	<!-- 				<th>Detail Type</th> -->
-	<!-- 				<th>Detail View</th> -->
-	<!-- 			</tr> -->
-			
-	<%-- 		<c:forEach var="list" items="${pagedResult.list}" varStatus="index"> --%>
-	<!-- 			<tr> -->
-	<%-- 				<td><img data-src="holder.js/128x128" src="${pageContext.request.contextPath}<c:choose><c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">${list.profileImgFilePath}</c:when><c:otherwise>/img/no_image.png</c:otherwise></c:choose>"/></td> --%>
-	<%-- 				<td onclick="javascript:goDetail('${list.userInfo.userId}');">${list.userInfo.userNm}(${list.userInfo.userId})</td> --%>
-	<%-- 				<td>${list.catNm1}</td> --%>
-	<%-- 				<td>${list.catNm2}</td> --%>
-	<!-- 				<td><input type="button" class="btn btn-info" value="Detail Info." name="viewDetail" /></td> -->
-	<!-- 			</tr> -->
-				
-	<%-- 		</c:forEach> --%>
-	<!-- 		</table> -->
-	
+		<div class="table-responsive">
 			<c:forEach var="list" items="${playerList}">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail">

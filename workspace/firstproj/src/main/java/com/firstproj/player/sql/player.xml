@@ -222,9 +222,13 @@
 					and aem.user_name 	like CONCAT('%', #{searchText}, '%')
 					</if> 
 				</if>
-				<if test="categoryInfo != null and categoryInfo.catId > 0">
-				and a.cat_id = #{categoryInfo.catId}    
+				<if test="catId1 > 0">
+				and a.cat_id = #{catId1}    
 				</if>
+				<if test="catId2 > 0">
+				and a.cat_id = #{catId2}    
+				</if>
+				
 <!-- 				<if test="attrId > 0"> -->
 <!-- 				and a.attr_id = #{attrId}     -->
 <!-- 				</if> -->
@@ -283,12 +287,14 @@
 					</if>
 			
 				
-				<if test="categoryInfo != null and categoryInfo.catId > 0">
-				and (pi.cat_id1 = #{categoryInfo.catId} 
-				  or pi.cat_id2 = #{categoryInfo.catId} 
+				<if test="catId1 > 0">
+				and (pi.cat_id1 = #{catId1}  
 				  or pi.cat_id2 in (select cat_id 
 				  				    from tb_category 
-				  				    where parent_cat_id = #{categoryInfo.catId}))    
+				  				    where parent_cat_id = #{catId1}))    
+				</if>
+				<if test="catId2 > 0">
+				and pi.cat_id2 = #{catId2}
 				</if>
 <!-- 				<if test="attrId > 0"> -->
 <!-- 				and a.attr_id = #{attrId}     -->

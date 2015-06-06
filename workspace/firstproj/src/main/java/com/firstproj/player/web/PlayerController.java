@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Null;
 
 import net.sf.json.JSONObject;
 
@@ -75,7 +76,8 @@ public class PlayerController {
     
     @RequestMapping(value="/ajaxChildCategoryList")
     public String getChildCategoryList2(HttpServletRequest request, Model model, @Param int parentCatId, @Param int selectedCategoryId) throws Exception{
-        System.out.println("selectedCategoryId : " + selectedCategoryId);
+    	String referer = request.getHeader("Referer");
+        System.out.println("selectedCategoryId : " + selectedCategoryId +", String referer = " + request.getHeader("Referer"));
         
         CategoryDto param 				= new CategoryDto();
         param.setParentCatId(parentCatId);
@@ -86,6 +88,16 @@ public class PlayerController {
         model.addAttribute("childCatList"		, childCatList);
         // 수정(modify) 모드일 경우 사용하는 파라미터
         model.addAttribute("selectedCategoryId"	, selectedCategoryId);
+        
+        // category selectbox name 설정을 위한 구분
+        String pageType = "";
+        if(referer.indexOf("write.page") > 0){
+        	pageType = "regist";
+        }else if(referer.indexOf("playerPortal.page") > 0){
+        	pageType = "list";
+        }
+        
+        model.addAttribute("pageType", pageType);
         
         return "player/ajaxCategoryList";
     }
@@ -117,21 +129,29 @@ public class PlayerController {
         return jsonObj;
     }
     
-    
     @RequestMapping("/ajaxAttrElementList")
     public String getAttrElementList2(HttpServletRequest request, Model model, @Param int catId) throws Exception{
-        
+    	String referer = request.getHeader("Referer");
+    	
         CategoryAttrDto param 					= new CategoryAttrDto();
         param.setCatId(catId);
         
         List<CategoryAttrDto> attrElementList 	= this.playerService.getAttrElementList(param);
         
-        System.out.println(attrElementList.size());
-        
         model.addAttribute("catId"			, catId);
         model.addAttribute("attrElementList", attrElementList);
         
-        return "player/ajaxAttributeList";
+        String returnUrl = "player/";
+        
+        if(referer != null){
+        	if(referer.indexOf("write.page") > 0){
+        		returnUrl += "ajaxAttributeList";
+        	}else if(referer.indexOf("playerPortal.page") > 0){
+        		returnUrl += "ajaxAttributeList2";
+        	}
+        }
+        
+        return returnUrl;
     }    
     
     /**
@@ -511,8 +531,7 @@ System.out.println("/playerPortal.page");
     
     @RequestMapping("/ajaxPlayerList")
     public String getAjaxPlayerList(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session){
-
-        System.out.println("/ajaxPlayerList");        
+System.out.println(searchPlayerDto.toString());
         List<PlayerInfoDto> playerList = null;
         PageHolder          pageHolder = null;
         int                 playerCnt  = 0;
@@ -520,7 +539,7 @@ System.out.println("/playerPortal.page");
         try {
             playerList = playerService.selectPlayerList(searchPlayerDto , session);
             playerCnt  = playerService.selectPlayerCnt(searchPlayerDto  , session);
-        System.out.println("playerList : " + playerList  +", playerCnt : " + playerCnt);
+
             if(playerCnt > 0){
                 pageHolder = new PageHolder(playerCnt, searchPlayerDto.getPage(), searchPlayerDto.getListSize());    
             }
