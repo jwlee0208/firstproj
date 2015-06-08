@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.constraints.Null;
 
 import net.sf.json.JSONObject;
 
@@ -150,7 +149,7 @@ public class PlayerController {
         	if(referer.indexOf("write.page") > 0){
         		returnUrl += "ajaxAttributeList";
         	}else if(referer.indexOf("playerPortal.page") > 0){
-        		returnUrl += "ajaxAttributeList2";
+				returnUrl += "ajaxAttributeList2";
         	}
         }
         
@@ -435,8 +434,8 @@ public class PlayerController {
     @RequestMapping(value="/modify.page", method = {RequestMethod.POST, RequestMethod.GET})
     public String getPlayerDetailForModify(HttpServletRequest request, Model model, UserDto userDto, HttpSession session) throws Exception{
     	UserDto myInfo   = (UserDto)session.getAttribute("userInfo");
-    	System.out.println("myInfo : " + myInfo.toString());
-    	if(myInfo == null){
+    	log.info("[ PlayerController.getPlayerDetailForModify() ][ Param ] myInfo : " + myInfo.toString());
+    	if(null == myInfo){
     		return "redirect:/login";
     	}else{
     		
@@ -512,8 +511,8 @@ public class PlayerController {
 
     @RequestMapping("/playerPortal.page")
     public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto){
-System.out.println("/playerPortal.page");
-        searchPlayerDto.setListSize(10);
+
+        searchPlayerDto.setListSize(3);
         searchPlayerDto.setPageSize(10);
 
         // 카테고리 목록 조회하는 부분
@@ -531,10 +530,18 @@ System.out.println("/playerPortal.page");
         
         return "player/playerPortal";
     }
-    
+    /**
+     * @brief Player List 조회 
+     * @param request
+     * @param model
+     * @param searchPlayerDto
+     * @param session
+     * @return
+     */
     @RequestMapping("/ajaxPlayerList")
     public String getAjaxPlayerList(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session){
-System.out.println(searchPlayerDto.toString());
+    	log.info("[ PlayerController.getAjaxPlayerList() ][ Param ] searchPlayerDto : " + searchPlayerDto.toString());
+    	
         List<PlayerInfoDto> playerList = null;
         PageHolder          pageHolder = null;
         int                 playerCnt  = 0;

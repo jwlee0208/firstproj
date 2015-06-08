@@ -325,7 +325,7 @@
 
 		<!-- playerInfo 페이징 처리를 위한 검색 조건 -->
 		<sql id="searchConditionPlayerSql2">
-			WHERE 1 = 1
+			<where>
 					<if test='searchCondition == "userName"'>
 						<if test='searchText != null and searchText != ""'>
 <!-- 						and aem.user_name 	like CONCAT('%', #{searchText}, '%') -->
@@ -335,14 +335,14 @@
 					</if>
 			
 				
-				<if test="catId1 > 0">
-				and (pi.cat_id1 = #{catId1}  
+				<if test="categoryInfo.parentCatId > 0">
+				and (pi.cat_id1 = #{categoryInfo.parentCatId}  
 				  or pi.cat_id2 in (select cat_id 
 				  				    from tb_category 
-				  				    where parent_cat_id = #{catId1}))    
+				  				    where parent_cat_id = #{categoryInfo.parentCatId}))    
 				</if>
-				<if test="catId2 > 0">
-				and pi.cat_id2 = #{catId2}
+				<if test="categoryInfo.catId > 0">
+				and pi.cat_id2 = #{categoryInfo.catId}
 				</if>
 			<if test="catAttrElemInfos != null">
 				<foreach collection="catAttrElemInfos" item="parentAttribute">
@@ -363,7 +363,7 @@
 					</if>
 				</foreach>
 			</if>				
-				
+			</where>		
 <!-- 				<if test="attrId > 0"> -->
 <!-- 				and a.attr_id = #{attrId}     -->
 <!-- 				</if> -->
