@@ -27,14 +27,14 @@
 
 		
 		<select id="selectCategoryAttrElemList" parameterType="player.categoryAttrDto" resultMap="categoryAttrElemListMap">
-			select 
+			SELECT 
 				    a.attr_id	
 				  , a.attr_name
 				  , ae.attr_elem_id
 				  , ae.attr_elem_name 
-			from tb_attr a 
-			left join tb_attr_elem ae on a.attr_id = ae.attr_id
-			where a.cat_id = #{catId} 
+			FROM tb_attr a 
+			LEFT JOIN tb_attr_elem ae ON a.attr_id = ae.attr_id
+			WHERE a.cat_id = #{catId} 
 		</select>
 		
 		<resultMap id="categoryAttrElemListMap" type="player.categoryAttrDto">
@@ -47,11 +47,11 @@
 		</resultMap> 
 		
 		<!-- 페이징 위한 리스트 갯수 조회 -->    
-		<select id="selectListCount" resultType="Integer" parameterType="searchConditionPlayer">        
+		<select id="selectListCount" resultType="Integer" parameterType="player.searchConditionPlayer">        
 			SELECT count(*) AS totalCnt         
-			from 		tb_attr 			a 		
-			left join 	tb_attr_elem 		ae 		on a.attr_id = ae.attr_id
-			left join 	tb_attr_elem_map  	aem 	on ae.attr_elem_id = aem.attr_elem_id
+			FROM 		tb_attr 			a 		
+			LEFT JOIN 	tb_attr_elem 		ae 		ON a.attr_id = ae.attr_id
+			LEFT JOIN 	tb_attr_elem_map  	aem 	ON ae.attr_elem_id = aem.attr_elem_id
         
 			<include refid="searchConditionSql"/>    
 			<!-- 
@@ -64,7 +64,7 @@
 		</select>          
 		
 		<!-- 리스트 조회 -->    
-		<select id="selectBoardList" resultType="player.categoryAttrElemMapDto" parameterType="searchConditionPlayer">                      
+		<select id="selectBoardList" resultType="player.categoryAttrElemMapDto" parameterType="player.searchConditionPlayer">                      
 			<include refid="selectAttrElemMapDefault"/>                     
 			<include refid="searchConditionSql"/>                         
 			ORDER BY aem.create_date desc                
@@ -72,12 +72,15 @@
 		</select>		
 		
 		<select id="checkIsRegisted" resultType="Integer" parameterType="user.userDto">
-			select count(*) from tb_player_info where user_id = #{userId}
+			SELECT count(*) 
+			FROM tb_player_info 
+			WHERE user_id = #{userId}
 		</select>
 		
 		<!-- 페이징 위한 playerInfo 리스트 갯수 조회 -->    
-		<select id="selectPlayerListCount" resultType="Integer" parameterType="searchConditionPlayer">        
-			select count(*) from (
+		<select id="selectPlayerListCount" resultType="Integer" parameterType="player.searchConditionPlayer">        
+			SELECT count(*) 
+			FROM (
 			<include refid="selectPlayerListDefault"/>
 			<include refid="searchConditionPlayerSql"/>    
 			) as count
@@ -91,7 +94,8 @@
 		</select>      
 		
 		<select id="selectPlayerListCount2" resultType="Integer" parameterType="player.searchPlayerDto">        
-			select count(*) from (
+			SELECT count(*) 
+			FROM (
 			<include refid="selectPlayerListDefault"/>
 			<include refid="searchConditionPlayerSql2"/>    
 			) as count
@@ -105,7 +109,7 @@
 		</select>      
 		
 		<!-- playerInfo 리스트 조회 -->
-		<select id="selectPlayerList" resultMap="playerListMap" parameterType="searchConditionPlayer">
+		<select id="selectPlayerList" resultMap="playerListMap" parameterType="player.searchConditionPlayer">
 			<include refid="selectPlayerListDefault"/>			
 			<include refid="searchConditionPlayerSql"/>     
 			ORDER BY U.user_nm desc	
@@ -138,7 +142,7 @@
 		
 		
 		<!-- playerInfo 검색 리스트 조회 -->
-		<select id="selectSearchCountListPerCategory" resultType="player.playerInfoSearchDto" parameterType="searchConditionPlayer">
+		<select id="selectSearchCountListPerCategory" resultType="player.playerInfoSearchDto" parameterType="player.searchConditionPlayer">
 			select 
 					c1.cat_id 			as catId1
 				  , c1.cat_name 		as catNm1
@@ -162,7 +166,7 @@
 		
 		
 		<!-- autoComplete -->
-		<select id="selectAutoComplete" resultType="String" parameterType="searchConditionPlayer">
+		<select id="selectAutoComplete" resultType="String" parameterType="player.searchConditionPlayer">
 			select user_nm 
 			from tb_user u
 			left join tb_player_info pi on pi.user_id = u.user_id
@@ -184,9 +188,10 @@
 				 , aem.attr_elem_map_id
 				 , aem.attr_elem_map_name 
 				 , aem.create_date
-			from 		tb_attr 			a 		
-			left join 	tb_attr_elem 		ae 		on a.attr_id = ae.attr_id
-			left join 	tb_attr_elem_map  	aem 	on ae.attr_elem_id = aem.attr_elem_id		
+			FROM 		tb_attr 			a 						
+			INNER JOIN 	tb_attr_elem 		ae 		on a.attr_id = ae.attr_id
+			INNER JOIN 	tb_attr_elem_map  	aem 	on ae.attr_elem_id = aem.attr_elem_id
+			INNER JOIN  tb_user				u		ON aem.user_id = u.user_id		
 		</sql>
 		
 				<!-- 페이징 처리를 위한 검색 조건 -->
@@ -194,24 +199,45 @@
 			WHERE 1 = 1
 				<if test='searchCondition == "userName"'>
 					<if test='searchText != null and searchText != ""'>
-					and aem.user_name 	like CONCAT('%', #{searchText}, '%')
+				AND aem.user_name 	like CONCAT('%', #{searchText}, '%')
 					</if> 
 				</if>
 				<if test="catId > 0">
-				and a.cat_id = #{catId}    
+				AND a.cat_id = #{catId}    
 				</if>
-				<if test="attrId > 0">
-				and a.attr_id = #{attrId}    
-				</if>
-				<if test="attrElemId != null">
-				and ae.attr_elem_id in 
 				
-					<foreach item="item" index="index" collection="attrElemId"
-					      open="(" separator="," close=")">
-					        #{item}
-					</foreach>				    
-				</if>   
-				and aem.attr_elem_map_id > 0  	    
+			<if test="catAttrElemInfos != null">
+				<foreach collection="catAttrElemInfos" item="parentAttribute">
+					<if test="parentAttribute.childCatAttrElemInfos != null">
+				AND 
+					EXISTS (SELECT 1 
+							FROM tb_attr_elem_map aem
+							JOIN tb_attr_elem     ae
+							WHERE aem.attr_elem_id 	= ae.attr_elem_id
+							  AND aem.user_id 		= u.user_id
+							  AND ae.attr_id 		= #{parentAttribute.attrId}
+							  AND aem.attr_elem_id  IN 
+							<foreach collection="parentAttribute.childCatAttrElemInfos" item="childAttribute" separator="," open="(" close=")">
+								#{childAttribute.attrElemId}
+							</foreach>	  
+							)
+					
+					</if>
+				</foreach>
+			</if>					
+				
+<!-- 				<if test="attrId > 0"> -->
+<!-- 				and a.attr_id = #{attrId}     -->
+<!-- 				</if> -->
+<!-- 				<if test="attrElemId != null"> -->
+<!-- 				and ae.attr_elem_id in  -->
+				
+<!-- 					<foreach item="item" index="index" collection="attrElemId" -->
+<!-- 					      open="(" separator="," close=")"> -->
+<!-- 					        #{item} -->
+<!-- 					</foreach>				     -->
+<!-- 				</if>    -->
+<!-- 				and aem.attr_elem_map_id > 0  	     -->
 		</sql> 
 		
 		<!-- 페이징 처리를 위한 검색 조건2 -->
@@ -257,16 +283,38 @@
 				  				    from tb_category 
 				  				    where parent_cat_id = #{catId}))    
 				</if>
-				<if test="attrId > 0">
-				and a.attr_id = #{attrId}    
-				</if>
-				<if test="attrElemId != null">
-					   and aem.attr_elem_id in 
-					<foreach item="item" index="index" collection="attrElemId"
-					      open="(" separator="," close=")">
-					        #{item}
-					</foreach>
-				</if> 
+				
+			<if test="catAttrElemInfos != null">
+				<foreach collection="catAttrElemInfos" item="parentAttribute">
+					<if test="parentAttribute.childCatAttrElemInfos != null">
+				AND 
+					EXISTS (SELECT 1 
+							FROM tb_attr_elem_map aem
+							JOIN tb_attr_elem     ae
+							WHERE aem.attr_elem_id 	= ae.attr_elem_id
+							  AND aem.user_id 		= u.user_id
+							  AND ae.attr_id 		= #{parentAttribute.attrId}
+							  AND aem.attr_elem_id  IN 
+							<foreach collection="parentAttribute.childCatAttrElemInfos" item="childAttribute" separator="," open="(" close=")">
+								#{childAttribute.attrElemId}
+							</foreach>	  
+							)
+					
+					</if>
+				</foreach>
+			</if>				
+				
+				
+<!-- 				<if test="attrId > 0"> -->
+<!-- 				and a.attr_id = #{attrId}     -->
+<!-- 				</if> -->
+<!-- 				<if test="attrElemId != null"> -->
+<!-- 					   and aem.attr_elem_id in  -->
+<!-- 					<foreach item="item" index="index" collection="attrElemId" -->
+<!-- 					      open="(" separator="," close=")"> -->
+<!-- 					        #{item} -->
+<!-- 					</foreach> -->
+<!-- 				</if>  -->
 				GROUP BY pi.user_id
 <!-- 				GROUP BY pi.player_info_id, U.user_nm, pi.cat_id1, c1.cat_name, c2.cat_id, c2.cat_name	    	     -->
 		</sql> 
@@ -290,6 +338,26 @@
 				  				    from tb_category 
 				  				    where parent_cat_id = #{categoryInfo.catId}))    
 				</if>
+			<if test="catAttrElemInfos != null">
+				<foreach collection="catAttrElemInfos" item="parentAttribute">
+					<if test="parentAttribute.childCatAttrElemInfos != null">
+				AND 
+					EXISTS (SELECT 1 
+							FROM tb_attr_elem_map aem
+							JOIN tb_attr_elem     ae
+							WHERE aem.attr_elem_id 	= ae.attr_elem_id
+							  AND aem.user_id 		= u.user_id
+							  AND ae.attr_id 		= #{parentAttribute.attrId}
+							  AND aem.attr_elem_id  IN 
+							<foreach collection="parentAttribute.childCatAttrElemInfos" item="childAttribute" separator="," open="(" close=")">
+								#{childAttribute.attrElemId}
+							</foreach>	  
+							)
+					
+					</if>
+				</foreach>
+			</if>				
+				
 <!-- 				<if test="attrId > 0"> -->
 <!-- 				and a.attr_id = #{attrId}     -->
 <!-- 				</if> -->

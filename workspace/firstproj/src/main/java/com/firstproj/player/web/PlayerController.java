@@ -12,10 +12,11 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jboss.logging.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,13 +28,13 @@ import com.firstproj.common.paging.PageHolder;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.validate.ValidationUtil;
-import com.firstproj.player.SearchConditionPlayer;
 import com.firstproj.player.dto.CategoryAttrDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
 import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoDetail;
 import com.firstproj.player.dto.PlayerInfoDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
+import com.firstproj.player.dto.SearchConditionPlayer;
 import com.firstproj.player.dto.SearchPlayerDto;
 import com.firstproj.player.service.PlayerServiceImpl;
 import com.firstproj.user.dto.UserDto;
@@ -42,6 +43,8 @@ import com.firstproj.user.dto.UserDto;
 @RequestMapping(value = "/player")
 public class PlayerController {
     	
+    final Log log = LogFactory.getLog(this.getClass());
+    
 	@Resource(name="fileUpload")
 	private FileUpload 			fileUpload;
 	
@@ -215,7 +218,6 @@ public class PlayerController {
             result = playerService.getCategoryAttrElemMapPagedList(paramMap);
         }else if(page.equals("playerList.page")){
             result = playerService.getPlayerInfoPagedList(paramMap);
-            
             // checkout who logined user regist as player
             UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
             
@@ -231,7 +233,7 @@ public class PlayerController {
                 perCategoryCntList = playerService.getPlayerInfoCntPerCategory(paramMap);
             }
         }
-        
+        log.info("[ Result ] totalListCnt : " + totalListCnt + ", pagedResult : " + result);        
         model.addAttribute("catList"            ,    catList);
         model.addAttribute("pagedResult"        ,    result);
         model.addAttribute("perCategoryCntList" ,    perCategoryCntList);
@@ -266,7 +268,8 @@ public class PlayerController {
      * @throws Exception
      */
     @RequestMapping(value="/playerList.page", method = {RequestMethod.GET, RequestMethod.POST})
-    public String getPlayerInfoList(HttpServletRequest request, Model model, HttpSession session) throws Exception{
+    public String getPlayerInfoList(HttpServletRequest request, Model model, HttpSession session, SearchConditionPlayer searchConditionPlayer) throws Exception{
+        log.info("[ param ] : searchConditionPlayer : " + searchConditionPlayer);
         model = this.getListCommonList(request, model, session, "playerList.page");
         return "player/playerList";
     }

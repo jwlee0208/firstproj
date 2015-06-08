@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<script type="text/javascript"	src="${pageContext.request.contextPath}/js/player/common.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/player/common2.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/player/playerPortal.js"></script>
 <script type="text/javascript" 	src="${pageContext.request.contextPath}/lib/jquery/js/jquery-ui.min.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
@@ -53,7 +53,7 @@
 		
 		<div class="row"  style="padding-top: 10px; ">
 				<!-- 첫번째 카테고리 -->
-				<select id="cat1" name="cat1" onchange="javascript:setChildCategory();" class="form-control">
+				<select id="cat1" name="categoryInfo.parentCatId" onchange="javascript:setChildCategory();" class="form-control">
 					<option value="-1">카테고리를 선택해 주세요.</option>
 					<c:forEach var="cat" items="${catList}">
 					<option value="${cat.catId}">${cat.categoryNameStr}</option>	
@@ -62,7 +62,7 @@
 		</div>
 		<div class="row"  style="padding-top: 10px; ">
 				<!-- 두번째 카테고리 -->
-				<select id="cat2" name="cat2" onchange="javascript:setAttrList();" class="form-control">
+				<select id="cat2" name="categoryInfo.catId" onchange="javascript:setAttrList();" class="form-control">
 					<option value="-1">카테고리를 선택해 주세요.</option>
 				</select>
 			</div>

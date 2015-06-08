@@ -6,10 +6,11 @@
 	function loadPlayerList(){
 		var frm = $("#listFrm").serialize();
 		$("#listDiv").load("/player/ajaxPlayerList", frm, function(){
-			alert('after load page');
+//			alert('after load page');
 		});
 	}
 	$(function() {
+
 	    var availableTags = [
 	      "ActionScript",
 	      "AppleScript",
@@ -54,8 +55,8 @@
 			highlightText(this.term, $a);
 			return $("<li></li>").append($a).appendTo(ul);
 		};
-	    
-	  });
+			    
+	});
 	  
 	  
 	// autoComplete highlight 
