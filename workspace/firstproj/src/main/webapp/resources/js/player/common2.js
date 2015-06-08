@@ -1,6 +1,6 @@
 
 	function setChildCategory(){
-		var catId = $("#cat1").val();
+		var catId = $("#parentCatId").val();
 		$.ajax({
 			url : '/player/childCategoryList.json',
 			data : {parentCatId : catId},
@@ -13,11 +13,11 @@
 				
 				if(childCatListLength > 0){
 					for(var i = 0 ; i < childCatListLength ; i++){
-						$("#cat2").append("<option value=\""+ childCatList[i].catId +"\">" + childCatList[i].categoryNameStr + "</option>");
+						$("#catId").append("<option value=\""+ childCatList[i].catId +"\">" + childCatList[i].categoryNameStr + "</option>");
 					}
 				}else{
-					$("#cat2 option").remove();
-					$("#cat2").append("<option value=\"\">카테고리를 선택해 주세요.</option>");
+					$("#catId option").remove();
+					$("#catId").append("<option value=\"\">카테고리를 선택해 주세요.</option>");
 				}
 
 				$("#selectedCatId").val(catId);
@@ -29,7 +29,7 @@
 	}
 
 	function setAttrList(){
-		var catId = $("#cat2").val();
+		var catId = $("#catId").val();
 		searchAttrList(catId);
 	}
 
@@ -50,13 +50,11 @@
 						var prevAttrId = 0;
 						var innerHtml = "<div style=\"padding-top: 10px;padding-left: 10px;padding-bottom: 10px;\">";
 						for(var i = 0 ; i < attrElementListLength ; i++){
-// 							console.log(attrElementList[i].attrElemName + ", " + attrElementList[i] + ", " + attrElementList[i].attrName);
-
 							var attrId = attrElementList[i].attrId;
 
 							if(prevAttrId == 0 || (prevAttrId != 0 && attrId > prevAttrId)){
 								innerHtml += "<div id=\"" + attrId +"\" onclick=\"javascript:attrFilterList(" + attrId + ");\" style=\"font-weight:bold;\">" + attrElementList[i].attrNameStr;
-								innerHtml += "<input type=\"text\" name=\"catAttrElemInfos["+i+"].attrId\" value="+attrId+"></div>";
+								innerHtml += "<input type=\"hidden\" name=\"catAttrElemInfos["+i+"].attrId\" value="+attrId+"></div>";
 							}
 							
 							var categoryAttrElemList = attrElementList[i].categoryAttrElemList;
@@ -65,12 +63,7 @@
 							if(categoryAttrElemListLength > 0){
 								for(var j = 0; j < categoryAttrElemListLength ; j++){
 									var catAttrElemObj = categoryAttrElemList[j];
-								
-									innerHtml += "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"attrElem_" + catAttrElemObj.attrElemId +"\" " + " name=\"catAttrElemInfos[" + i + "].childCatAttrElemInfos[" + j + "].attrElemId\" class=\"attrElemChkBox\" value=\"" + catAttrElemObj.attrElemId + "\"/>" + catAttrElemObj.attrElemNameStr + "</label>";
-//									innerHtml += "<div>";
-//									innerHtml += "<input type=\"radio\" id=\"attr_" + catAttrElemObj.attrElemId + "\"" + "name=attr_" + catAttrElemObj.attrElemId +"\" value=\"" + catAttrElemObj.attrElemId + "\" />" + catAttrElemObj.attrElemNameStr
-//									innerHtml += "</div>";
-										
+									innerHtml += "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"attrElem_" + catAttrElemObj.attrElemId +"\" " + " name=\"catAttrElemInfos[" + i + "].childCatAttrElemInfos[" + j + "].attrElemId\" class=\"attrElemChkBox\" value=\"" + catAttrElemObj.attrElemId + "\"/>" + catAttrElemObj.attrElemNameStr + "</label>";										
 								}
 							}
 							
@@ -99,26 +92,7 @@
 	} 
 	
 	function attrElemFilterList(){
-//		var attrElemIds = "";
-//		
-//		$.each($(".attrElemChkBox"), function(index, value){
-//
-//			if($(this).is(":checked")){
-//				attrElemIds += $(this).val();
-//				attrElemIds += ",";	
-//			}	
-//			
-//		});
-//		if(attrElemIds != ""){
-//			attrElemIds += "end";
-//		}
-//		
-//		attrElemIds = attrElemIds.replace(/,end/g,"");
-//
-//		$("#selectedAttrElemId").val(attrElemIds);
-				
 		ajaxPagination(1);
-
 	}
 	
 	function initAttrElement(){
