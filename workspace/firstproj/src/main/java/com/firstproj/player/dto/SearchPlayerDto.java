@@ -1,5 +1,7 @@
 package com.firstproj.player.dto;
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 import com.firstproj.common.paging.PageParam;
@@ -11,6 +13,8 @@ public class SearchPlayerDto extends PageParam{
     private String      searchText;
     
     private CategoryDto categoryInfo;
+    
+    private List<CategoryAttrElemDto> catAttrElemInfos;
     
     public String getSearchCondition() {
         return searchCondition;
@@ -36,11 +40,19 @@ public class SearchPlayerDto extends PageParam{
         this.categoryInfo = categoryInfo;
     }
 
+    public List<CategoryAttrElemDto> getCatAttrElemInfos() {
+        return catAttrElemInfos;
+    }
+
+    public void setCatAttrElemInfos(List<CategoryAttrElemDto> catAttrElemInfos) {
+        this.catAttrElemInfos = catAttrElemInfos;
+    }
+
     @Override
     public String toString() {
         return "SearchPlayerDto [searchCondition=" + searchCondition
                 + ", searchText=" + searchText + ", categoryInfo="
-                + categoryInfo + "]";
+                + categoryInfo + ", catAttrElemInfos=" + catAttrElemInfos + "]";
     }
 
 }

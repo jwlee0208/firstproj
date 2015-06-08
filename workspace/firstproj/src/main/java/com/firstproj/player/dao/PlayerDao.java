@@ -6,7 +6,6 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import com.firstproj.player.SearchConditionPlayer;
 import com.firstproj.player.dto.CategoryAttrDto;
 import com.firstproj.player.dto.CategoryAttrElemDto;
 import com.firstproj.player.dto.CategoryAttrElemMapDto;
@@ -14,6 +13,7 @@ import com.firstproj.player.dto.CategoryDto;
 import com.firstproj.player.dto.PlayerInfoDto;
 import com.firstproj.player.dto.PlayerInfoSearchDto;
 import com.firstproj.player.dto.PlayerVideoLinkDto;
+import com.firstproj.player.dto.SearchConditionPlayer;
 import com.firstproj.player.dto.SearchPlayerDto;
 import com.firstproj.user.dto.UserDto;
 

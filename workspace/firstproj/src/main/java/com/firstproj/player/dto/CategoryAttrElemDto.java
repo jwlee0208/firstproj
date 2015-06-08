@@ -1,14 +1,15 @@
 package com.firstproj.player.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
-@SuppressWarnings("serial")
 @Alias("player.categoryAttrElemDto")
 public class CategoryAttrElemDto 
 //extends CategoryAttrDto 
-implements Serializable {
+//implements Serializable 
+{
     private int     attrElemId;
     private int     attrId;
     private int     catId;
@@ -19,6 +20,8 @@ implements Serializable {
     private String  modifyDate;
     private String  modifyUserId;
     private String  modifyUserName;
+    
+    private List<CategoryAttrElemDto>  childCatAttrElemInfos;
     
     public CategoryAttrElemDto() {
         super();
@@ -85,6 +88,13 @@ implements Serializable {
         this.modifyUserName = modifyUserName;
     }
     
+    public List<CategoryAttrElemDto> getChildCatAttrElemInfos() {
+        return childCatAttrElemInfos;
+    }
+    public void setChildCatAttrElemInfos(
+            List<CategoryAttrElemDto> childCatAttrElemInfos) {
+        this.childCatAttrElemInfos = childCatAttrElemInfos;
+    }
     public String getAttrElemNameStr() {
         String attrElemNameStr = "";
         if(this.attrElemId == 1 || this.attrElemId == 19){
@@ -148,4 +158,16 @@ implements Serializable {
         }
         return attrNameStr;
     }
+    @Override
+    public String toString() {
+        return "CategoryAttrElemDto [attrElemId=" + attrElemId + ", attrId="
+                + attrId + ", catId=" + catId + ", attrElemName="
+                + attrElemName + ", createDate=" + createDate
+                + ", createUserId=" + createUserId + ", createUserName="
+                + createUserName + ", modifyDate=" + modifyDate
+                + ", modifyUserId=" + modifyUserId + ", modifyUserName="
+                + modifyUserName + ", childCatAttrElemInfos="
+                + childCatAttrElemInfos + "]";
+    }
+    
 }
