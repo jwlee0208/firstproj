@@ -3,24 +3,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:if test="${pageInfo.totalPage > 0}">
-<div class="pagination">
-    <div class="pagination_in">
+<div class="pagination pagination-centered">
+	<ul>
         <c:if test="${pageInfo.totalPage != 1}">
             <c:if test="${pageInfo.startPage > 1}">
-                <a href="javascript:${pageInfo.scriptName}('${pageInfo.previousScalePage}', '${pageInfo.paramString}')" class="num prev"></a>
+         <li><a href="javascript:${pageInfo.scriptName}('${pageInfo.previousScalePage}', '${pageInfo.paramString}')" class="num prev"></a></li>
             </c:if>
         </c:if>
         <c:forEach items="${pageInfo.pages}" var="page" varStatus="status">
             <c:if test="${pageInfo.currentPage != page}">
-                <a href="javascript:${pageInfo.scriptName}('${page}', '${pageInfo.paramString}')" class="num">${page}</a>
+         <li><a href="javascript:${pageInfo.scriptName}('${page}', '${pageInfo.paramString}')" class="num">${page}</a></li>
             </c:if>
             <c:if test="${pageInfo.currentPage == page}">
-                <a href="javascript://"><strong class="num">${page}</strong></a>
+         <li><a href="javascript://"><strong class="num">${page}</strong></a></li>
             </c:if>
         </c:forEach>
         <c:if test="${pageInfo.nextScalePage <= pageInfo.totalPage}">
-            <a href="javascript:${pageInfo.scriptName}('${pageInfo.nextScalePage}', '${pageInfo.paramString}')" class="num next"></a>
+        <li><a href="javascript:${pageInfo.scriptName}('${pageInfo.nextScalePage}', '${pageInfo.paramString}')" class="num next"></a></li>
         </c:if>
-    </div>
+    </ul>
 </div>
 </c:if>

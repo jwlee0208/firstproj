@@ -33,8 +33,14 @@ ul { padding: 0; }
 					<li <c:if test="${param.menuId eq 2}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goList(2);">Q&A</a></li>
 					<li <c:if test="${param.menuId eq 3}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goList(3);">기타게시판</a></li>
 		          </ul>
+		        </li>
+		        <li class="dropdown">
+		        	<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Player<span class="caret"></span></a>
+		        	<ul class="dropdown-menu" role="menu">
+						<li <c:if test="${param.menuId eq 4}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goPlayer(5);">PlayerList</a></li>
+						<li <c:if test="${param.menuId eq 6}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goPlayer(6);">PlayerPortal</a></li>		        	
+		        	</ul>
 		        </li>				
-				<li <c:if test="${param.menuId eq 4}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goPlayer();">Player</a></li>
 				
 			</ul>
 <!-- 			<ul class="nav navbar-nav navbar-right"> -->

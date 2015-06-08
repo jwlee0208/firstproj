@@ -1,41 +1,19 @@
 	$(document).on("ready", function() {
+		$("input[name='goToRegist']").on("click", function() {
+			location.href = "/player/write.page";
+		});
+
 		loadPlayerList();
 	});
-	
 	
 	function loadPlayerList(){
 		var frm = $("#listFrm").serialize();
 		$("#listDiv").load("/player/ajaxPlayerList", frm, function(){
-			alert('after load page');
 		});
 	}
+
 	$(function() {
-	    var availableTags = [
-	      "ActionScript",
-	      "AppleScript",
-	      "Asp",
-	      "BASIC",
-	      "C",
-	      "C++",
-	      "Clojure",
-	      "COBOL",
-	      "ColdFusion",
-	      "Erlang",
-	      "Fortran",
-	      "Groovy",
-	      "Haskell",
-	      "Java",
-	      "JavaScript",
-	      "Lisp",
-	      "Perl",
-	      "PHP",
-	      "Python",
-	      "Ruby",
-	      "Scala",
-	      "Scheme"
-	    ];
 	    $( "#searchText" ).autocomplete({
-//	       source: availableTags
 			source : function(request, response){
 				$.ajax({
 					url : '/player/autoComplete.json',
@@ -54,8 +32,18 @@
 			highlightText(this.term, $a);
 			return $("<li></li>").append($a).appendTo(ul);
 		};
-	    
-	  });
+
+		$( "#searchText" ).keypress(function( event ) {
+			  if ( event.which == 13 ) {
+				  event.preventDefault();
+				  loadPlayerList();
+			  }			  
+		});		
+
+		$("input[name='goToRegist']").on("click", function() {
+			location.href = "/player/write.page";
+		});
+	});
 	  
 	  
 	// autoComplete highlight 
@@ -83,7 +71,18 @@
 	//리스트 페이징을 위한 메서드
 	function ajaxPagination(page){
 	    var newPage = isEmpty(page) ? "1" : page;
-	    $("input[name=totPage]").val(newPage);
+	    $("input[name=page]").val(newPage);
 
 	    loadPlayerList();
+	}    
+
+	function isEmpty(val){
+		var result = false;
+		
+		if(val == 'undefined' || val == null || val ==''){
+			result = true;
+		}
+		return result;
 	}
+
+
