@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>  
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>  
+<%@ taglib uri="http://www.springframework.org/tags" prefix="tag" %>    
 <script>
 $(document).on("ready", function() {
 
@@ -82,16 +82,16 @@ function loginAction(){
 		
 		<input type="hidden" id="prevPage" name="prevPage" value="${prevPage}"/>
 		
-		<h1 id="btn-groups" class="page-header">Sign in</h1>
+		<h1 id="btn-groups" class="page-header"><tag:message code="signin"/></h1>
 	
 		<div class="form-group">
-			<label for="userId" class="col-sm-2 control-label">User id</label>
+			<label for="userId" class="col-sm-2 control-label"><tag:message code="userid"/></label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" id="userId" name="userId" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="passwd" class="col-sm-2 control-label">Password</label>
+			<label for="passwd" class="col-sm-2 control-label"><tag:message code="passwd"/></label>
 			<div class="col-sm-10">
 				<input type="password" class="form-control" id="passwd" name="passwd" />
 			</div>
@@ -99,7 +99,7 @@ function loginAction(){
 		<div class="alert alert-danger"></div>
 		<div class="btn-group btn-group-justified">
 			<div class="btn-group">
-		      <input type="button" class="btn btn-primary" name="signinSubmit" value="Sign in">
+		      <input type="button" class="btn btn-primary" name="signinSubmit" value="<tag:message code="signin"/>">
 		    </div> 
 		</div>
 	</form>

@@ -35,7 +35,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter{
 			if(null == userInfo){
 //				response.sendRedirect("/board/list.page");
 //				return false;
-			}
+			}		
 		}
 		
 		return true;

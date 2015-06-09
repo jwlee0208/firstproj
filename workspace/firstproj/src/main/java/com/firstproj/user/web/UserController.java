@@ -1,11 +1,15 @@
 package com.firstproj.user.web;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.firstproj.common.dto.CodeDto;
+import com.firstproj.common.service.impl.CommonServiceImpl;
 import com.firstproj.common.validate.JsonResponse;
 import com.firstproj.user.dto.UserDto;
 import com.firstproj.user.service.UserServiceImpl;
@@ -24,16 +30,29 @@ import com.firstproj.user.validate.UserValidator;
 @RequestMapping(value="/user")
 @SessionAttributes("userInfo")
 public class UserController {
+    
+    Log log = LogFactory.getLog(this.getClass());
+    
 	@Resource(name="UserServiceImpl")
-	private UserServiceImpl userService;
+	private UserServiceImpl    userService;
+	
+	@Resource(name="CommonServiceImpl")
+	private CommonServiceImpl  commonService;
 	
 	@RequestMapping(value="/regist.page")
 	public String registUser(Model model, HttpServletRequest request) throws Exception{
 	    
         String referer = request.getHeader("Referer");
-System.out.println(" >>> REFER : " + referer);              
-        model.addAttribute("prevPage", referer);
-	    
+        log.info("[ REFER ] : " + referer);           
+        
+        // Nation List 
+        CodeDto codeDto = new CodeDto();
+        codeDto.setCodeType("01");
+        
+        List<CodeDto> nationList = this.commonService.selectCodeList(codeDto);
+        
+        model.addAttribute("prevPage"       , referer);
+	    model.addAttribute("nationList"     , nationList);
 		return "/user/regist";
 	}
 	

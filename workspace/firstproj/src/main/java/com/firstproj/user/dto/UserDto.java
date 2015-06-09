@@ -18,6 +18,8 @@ public class UserDto {
 	
 	private String joinDate;
 	
+	private String locale;
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -60,12 +62,18 @@ public class UserDto {
 	}
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
-	}
+	}	
+    public String getLocale() {
+        return locale;
+    }
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
     @Override
     public String toString() {
         return "UserDto [userId=" + userId + ", userNm=" + userNm + ", passwd="
                 + passwd + ", passwdChk=" + passwdChk + ", email=" + email
-                + ", phoneNo=" + phoneNo + ", joinDate=" + joinDate + "]";
+                + ", phoneNo=" + phoneNo + ", joinDate=" + joinDate
+                + ", locale=" + locale + "]";
     }
- 	 
 }

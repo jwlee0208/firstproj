@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -22,7 +22,7 @@ import com.firstproj.board.service.BoardArticleServiceImpl;
 @RequestMapping(value="/")
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Log logger = LogFactory.getLog(HomeController.class);
 	
 	@Resource(name = "BoardArticleServiceImpl")
 	private BoardArticleServiceImpl boardArticleService;	
@@ -132,23 +132,23 @@ public class HomeController {
 			List<BoardArticleDto> boardArticleFive01 = valueOps.get("boardFive01List");
 			
 			if(null != boardArticleFive01){
-				System.out.println(boardArticleFive01);
+			    logger.info(boardArticleFive01);
 				
 				model.addAttribute("articleFive01", boardArticleFive01);
-				System.out.println(">>> redis printed. dataTypeOf : " + boardArticleFive01.getClass());
+				logger.info(">>> redis printed. dataTypeOf : " + boardArticleFive01.getClass());
 			}else{
 				boardDto01.setBoardId(1);
 				getBoardArticleFive01 = this.boardArticleService.selectBoardArticleFive(boardDto01);
 				
 				valueOps.set("boardFive01List", getBoardArticleFive01);
 				model.addAttribute("articleFive01", getBoardArticleFive01);
-				System.out.println(">>> redis setted");
+				logger.info(">>> redis setted");
 			}
 			
 		}catch(Exception e){
 			boardDto01.setBoardId(1);
 			getBoardArticleFive01 = this.boardArticleService.selectBoardArticleFive(boardDto01);
-System.out.println("is Null : " + (null == getBoardArticleFive01));			
+logger.info("is Null : " + (null == getBoardArticleFive01));			
 			valueOps.set("boardFive01List", getBoardArticleFive01);
 			model.addAttribute("articleFive01", getBoardArticleFive01);
 			System.out.println(">>> redis setted");

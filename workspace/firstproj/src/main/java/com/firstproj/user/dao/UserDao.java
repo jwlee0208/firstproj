@@ -1,8 +1,11 @@
 package com.firstproj.user.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.firstproj.common.dto.CodeDto;
 import com.firstproj.user.dto.UserDto;
 
 @Repository("UserDao")
@@ -24,5 +27,5 @@ public class UserDao extends SqlSessionDaoSupport{
 	 */
 	public int insertUserInfo(UserDto userDto) throws Exception{
 		return getSqlSession().insert("sql.user.insertUserInfo", userDto);
-	}
+	}	
 }

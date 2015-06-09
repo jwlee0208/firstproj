@@ -133,3 +133,12 @@ CREATE TABLE `TB_PLAYER_VIDEO_LINK` (
   `seq` smallint(6) DEFAULT '1',
   PRIMARY KEY (`player_video_link_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+
+-- tb_code table creation
+CREATE TABLE `test`.`TB_CODE` (
+  `code_id` INT NOT NULL AUTO_INCREMENT,
+  `code_name` VARCHAR(100) NULL,
+  `code_value` VARCHAR(45) NULL,
+  `code_type` CHAR(2) NULL COMMENT '01 : 국가, 02: 언어',
+  `create_date` TIMESTAMP NULL,
+  PRIMARY KEY (`code_id`));

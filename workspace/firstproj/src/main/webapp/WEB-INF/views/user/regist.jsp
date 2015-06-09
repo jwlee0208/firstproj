@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -67,7 +67,26 @@
 				<input type="text" class="form-control" id="phoneNo" name="phoneNo"/><span id="phoneNoErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
+
+		<div class="form-group">
+			<label for="nationallity" class="col-sm-2 control-label">Nationallity</label>
+			<div class="col-sm-10">
+			
+				<select class="form-control" id="nationallity" name="nationallity">
+					<option value="">국가를 선택해주세요.</option>
+				<c:forEach var="nationInfo" items="${nationList}">
+					<option value="${nationInfo.codeValue}">${nationInfo.codeName}</option>
+				</c:forEach>		
+				</select>			
+			</div>
+		</div>
 		
+		<div class="form-group">
+			<label for="language" class="col-sm-2 control-label">Language</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="language" name="language"/><span id="languageErr" class="errorMsg" style="display: none;"></span>
+			</div>
+		</div>		
 		<div class="btn-group btn-group-justified" style="padding-top : 20px; padding-bottom : 20px;">
 			<div class="btn-group">
 				<input type="button" class="btn btn-default" value="Home" id="homeBtn">

@@ -3,6 +3,7 @@ package com.firstproj.player.web;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.firstproj.common.CommonConstant;
 import com.firstproj.common.exception.FileuploadException;
@@ -510,8 +512,10 @@ public class PlayerController {
     }
 
     @RequestMapping("/playerPortal.page")
-    public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto){
+    public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session){
 
+        session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.ENGLISH);
+        
         searchPlayerDto.setListSize(3);
         searchPlayerDto.setPageSize(10);
 
