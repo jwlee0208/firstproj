@@ -76,33 +76,33 @@ function loginAction(){
 </script>
 <div class="container">
 
-<div class="loginWrap" style="padding-top : 170px; padding-left : 200px; padding-right : 200px; ">
-    <div class="loginArea">
-	<form class="form-horizontal" id="loginForm" name="loginForm" method="post">
+	<div class="loginWrap" style="padding-top : 170px; padding-left : 200px; padding-right : 200px; ">
+	    <div class="loginArea">
+		<form class="form-horizontal" id="loginForm" name="loginForm" method="post">
+			
+			<input type="hidden" id="prevPage" name="prevPage" value="${prevPage}"/>
+			
+			<h1 id="btn-groups" class="page-header"><tag:message code="signin"/></h1>
 		
-		<input type="hidden" id="prevPage" name="prevPage" value="${prevPage}"/>
-		
-		<h1 id="btn-groups" class="page-header"><tag:message code="signin"/></h1>
-	
-		<div class="form-group">
-			<label for="userId" class="col-sm-2 control-label"><tag:message code="userid"/></label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" id="userId" name="userId" />
+			<div class="form-group">
+				<label for="userId" class="col-sm-2 control-label"><tag:message code="userid"/></label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="userId" name="userId" />
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label for="passwd" class="col-sm-2 control-label"><tag:message code="passwd"/></label>
-			<div class="col-sm-10">
-				<input type="password" class="form-control" id="passwd" name="passwd" />
+			<div class="form-group">
+				<label for="passwd" class="col-sm-2 control-label"><tag:message code="passwd"/></label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" id="passwd" name="passwd" />
+				</div>
 			</div>
+			<div class="alert alert-danger"></div>
+			<div class="btn-group btn-group-justified">
+				<div class="btn-group">
+			      <input type="button" class="btn btn-primary" name="signinSubmit" value="<tag:message code="signin"/>">
+			    </div> 
+			</div>
+		</form>
 		</div>
-		<div class="alert alert-danger"></div>
-		<div class="btn-group btn-group-justified">
-			<div class="btn-group">
-		      <input type="button" class="btn btn-primary" name="signinSubmit" value="<tag:message code="signin"/>">
-		    </div> 
-		</div>
-	</form>
-	</div>
-</div>	
+	</div>	
 </div>

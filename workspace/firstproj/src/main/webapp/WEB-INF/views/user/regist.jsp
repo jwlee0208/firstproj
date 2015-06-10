@@ -71,12 +71,13 @@
 		<div class="form-group">
 			<label for="nationallity" class="col-sm-2 control-label">Nationallity</label>
 			<div class="col-sm-10">
-			
 				<select class="form-control" id="nationallity" name="nationallity">
 					<option value="">국가를 선택해주세요.</option>
+			<c:if test="${!empty nationList}">		
 				<c:forEach var="nationInfo" items="${nationList}">
 					<option value="${nationInfo.codeValue}">${nationInfo.codeName}</option>
 				</c:forEach>		
+			</c:if>
 				</select>			
 			</div>
 		</div>
@@ -84,7 +85,14 @@
 		<div class="form-group">
 			<label for="language" class="col-sm-2 control-label">Language</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="language" name="language"/><span id="languageErr" class="errorMsg" style="display: none;"></span>
+				<select class="form-control" id="language" name="language">
+					<option value="">언어를 선택해주세요.</option>
+			<c:if test="${!empty languageList}">		
+				<c:forEach var="langInfo" items="${languageList}">
+					<option value="${longInfo.codeValue}">${langInfo.codeName}</option>
+				</c:forEach>	
+			</c:if>		
+				</select>			
 			</div>
 		</div>		
 		<div class="btn-group btn-group-justified" style="padding-top : 20px; padding-bottom : 20px;">
@@ -148,7 +156,7 @@ $().ready(function() {
 						var status = data.status;
 						
 						if(status == 'REGIST_0000'){
-							location.href = $("#prevPage").val();
+							location.href = '/user/registOk.page';	//$("#prevPage").val();
 						}else{
 							var result = data.result;
 							var length = result.length;

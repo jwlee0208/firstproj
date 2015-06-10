@@ -18,7 +18,9 @@ public class UserDto {
 	
 	private String joinDate;
 	
-	private String locale;
+	private String nationality;
+	
+	private String language;
 	
 	public String getUserId() {
 		return userId;
@@ -63,17 +65,24 @@ public class UserDto {
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}	
-    public String getLocale() {
-        return locale;
+    public String getNationality() {
+        return nationality;
     }
-    public void setLocale(String locale) {
-        this.locale = locale;
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+    public String getLanguage() {
+        return language;
+    }
+    public void setLanguage(String language) {
+        this.language = language;
     }
     @Override
     public String toString() {
         return "UserDto [userId=" + userId + ", userNm=" + userNm + ", passwd="
                 + passwd + ", passwdChk=" + passwdChk + ", email=" + email
                 + ", phoneNo=" + phoneNo + ", joinDate=" + joinDate
-                + ", locale=" + locale + "]";
+                + ", nationality=" + nationality + ", language=" + language
+                + "]";
     }
 }

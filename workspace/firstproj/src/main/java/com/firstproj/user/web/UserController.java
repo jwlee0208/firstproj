@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -42,17 +43,22 @@ public class UserController {
 	@RequestMapping(value="/regist.page")
 	public String registUser(Model model, HttpServletRequest request) throws Exception{
 	    
-        String referer = request.getHeader("Referer");
+        String        referer       = request.getHeader("Referer");
         log.info("[ REFER ] : " + referer);           
         
         // Nation List 
-        CodeDto codeDto = new CodeDto();
-        codeDto.setCodeType("01");
+        CodeDto       nationCodeDto = new CodeDto();
+        nationCodeDto.setCodeType("01");
+        List<CodeDto> nationList    = this.commonService.selectCodeList(nationCodeDto);
         
-        List<CodeDto> nationList = this.commonService.selectCodeList(codeDto);
+        // Language List 
+        CodeDto       langCodeDto   = new CodeDto();
+        langCodeDto.setCodeType("02");
+        List<CodeDto> languageList  = this.commonService.selectCodeList(langCodeDto);
         
         model.addAttribute("prevPage"       , referer);
 	    model.addAttribute("nationList"     , nationList);
+	    model.addAttribute("languageList"   , languageList);
 		return "/user/regist";
 	}
 	
@@ -143,4 +149,8 @@ public class UserController {
         return returnObj;
     }
 	
+    @RequestMapping(method = RequestMethod.GET, value="/registOk.page")
+    public String registOk(HttpServletRequest request) throws Exception{
+        return "/user/registOk";
+    }
 }
