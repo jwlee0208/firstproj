@@ -514,8 +514,6 @@ public class PlayerController {
     @RequestMapping("/playerPortal.page")
     public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session){
 
-        session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.ENGLISH);
-        
         searchPlayerDto.setListSize(3);
         searchPlayerDto.setPageSize(10);
 

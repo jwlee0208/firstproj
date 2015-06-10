@@ -1,15 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c"	%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"	%>
+<%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag"%>
 
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/player/common2.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/player/playerPortal.js"></script>
-<script type="text/javascript" 	src="${pageContext.request.contextPath}/lib/jquery/js/jquery-ui.min.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
-<link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/jquery/jquery-ui.min.css">
 <link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/pagination.css">
 
 <style>
@@ -46,7 +44,7 @@
 		<div class="row"  style="padding-top: 10px;">
 				<!-- 첫번째 카테고리 -->
 				<select id="parentCatId" name="categoryInfo.parentCatId" onchange="javascript:setChildCategory();" class="form-control">
-					<option value="-1">카테고리를 선택해 주세요.</option>
+					<option value="-1"><tag:message code="text.select.1step.category"/></option>
 					<c:forEach var="cat" items="${catList}">
 					<option value="${cat.catId}">${cat.categoryNameStr}</option>	
 					</c:forEach>
@@ -55,7 +53,7 @@
 		<div class="row"  style="padding-top: 10px;">
 				<!-- 두번째 카테고리 -->
 				<select id="catId" name="categoryInfo.catId" onchange="javascript:setAttrList();" class="form-control">
-					<option value="-1">카테고리를 선택해 주세요.</option>
+					<option value="-1"><tag:message code="text.select.2step.category"/></option>
 				</select>
 		</div>
 		<div class="col-md-4"></div>	

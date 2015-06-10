@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <!-- jQuery -->
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/jquery/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/jquery/js/jquery-validate.min.js"></script>
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/jquery/js/jquery.form.min.js"></script>
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery-validate.min.js"></script>
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery.form.min.js"></script>
 
 <!-- bootstrap -->
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-theme.min.css">
@@ -71,7 +71,7 @@
 		<div class="form-group">
 			<label for="nationallity" class="col-sm-2 control-label">Nationallity</label>
 			<div class="col-sm-10">
-				<select class="form-control" id="nationallity" name="nationallity">
+				<select class="form-control" id="nationality" name="nationality">
 					<option value="">국가를 선택해주세요.</option>
 			<c:if test="${!empty nationList}">		
 				<c:forEach var="nationInfo" items="${nationList}">

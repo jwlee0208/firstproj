@@ -1,20 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/common/paging.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/player/common.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/player/playerList.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
-<script type="text/javascript"	src="${pageContext.request.contextPath}/js/common/paging.js"></script>
 <link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/pagination.css">
 
-
-<script type="text/javascript" 	src="${pageContext.request.contextPath}/lib/jquery/js/jquery-ui.min.js"></script>
-<link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/jquery/jquery-ui.min.css">
-
-<script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
 <style>
 /* 		.ui-autocomplete { */
