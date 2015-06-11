@@ -242,6 +242,7 @@
 </div>
 	
 </form>
+</div>
 <script>
 $(function() {
     var availableTags = [
@@ -315,4 +316,3 @@ function goDetail(userId){
 }
 
 </script>
-</div>

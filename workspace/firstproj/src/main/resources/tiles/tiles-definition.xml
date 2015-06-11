@@ -16,7 +16,7 @@
           <put-attribute name="footer" 	value="/WEB-INF/views/layout/default/footer.jsp" />          
      </definition>
 
-<!--      <definition name="none" template="/WEB-INF/views/layouts/noTemplate.jsp"> -->
+<!--      <definition name="none" template="/WEB-INF/views/layouts/main.jsp"> -->
 <!--        <put-attribute name="body" value="" /> -->
 <!--      </definition>   -->
 
