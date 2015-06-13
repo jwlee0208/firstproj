@@ -25,10 +25,10 @@
 				#{email},
 				#{phoneNo},
 			<if test="nationality != null and nationality != ''">
-				#{nationality},
+				LOWER(#{nationality}),
 			</if>	
 			<if test="language != null and language != ''">
-				#{language},
+				LOWER(#{language}),
 			</if>	
 				CURRENT_TIMESTAMP())
 <!-- 			WHERE user_id != #{userId}	 -->

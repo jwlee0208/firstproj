@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/fileupload.css"/>
 
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/jquery/js/jquery.form.min.js"></script>
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery.form.min.js"></script>
 
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-theme.min.css">
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css">

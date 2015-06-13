@@ -18,7 +18,7 @@ ul { padding: 0; }
 		<div class="collapse2 nav-collapse">
 			<ul class="nav navbar-nav">
  				<li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home<span class="caret"></span></a>
+		          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Home<span class="caret"></span></a>
 		          <ul class="dropdown-menu" role="menu">
 					<li <c:if test="${param.menuId eq 0}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goHome();">Home</a></li>
 					<li><a href="${pageContext.request.contextPath}/home2.page">Home2</a></li>
@@ -38,8 +38,8 @@ ul { padding: 0; }
 		        <li class="dropdown">
 		        	<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><tag:message code="menu.player"/><span class="caret"></span></a>
 		        	<ul class="dropdown-menu" role="menu">
-						<li <c:if test="${param.menuId eq 4}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goPlayer(5);"><tag:message code="menu.player.list"/></a></li>
-						<li <c:if test="${param.menuId eq 6}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goPlayer(6);"><tag:message code="menu.player.portal"/></a></li>		        	
+						<li <c:if test="${param.menuId eq 6}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goPlayer(6);"><tag:message code="menu.player.portal"/></a></li>
+						<li <c:if test="${param.menuId eq 4}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goPlayer(4);"><tag:message code="menu.player.list"/></a></li>
 		        	</ul>
 		        </li>				
 				

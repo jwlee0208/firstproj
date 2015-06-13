@@ -1,5 +1,7 @@
 package com.firstproj.login.web;
 
+import java.util.Locale;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.LocaleUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.firstproj.user.dto.UserDto;
 import com.firstproj.user.service.UserServiceImpl;
@@ -57,7 +61,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/loginProcess.json")
 	@ResponseBody
-	public JSONObject loginProcess(HttpServletRequest request, HttpServletResponse response, Model model, UserDto userDto) throws Exception{
+	public JSONObject loginProcess(HttpServletRequest request, HttpServletResponse response, Model model, UserDto userDto, HttpSession session) throws Exception{
 		JSONObject 	checkResult = new JSONObject();
 		// Return Code/Message Data
 		String 		resultCode 	= "LOGIN_0000";
@@ -83,8 +87,20 @@ public class LoginController {
 				resultCode 	= "LOGIN_0002";
 				resultMsg 	= "This password is invalid.Please, Check out password";
 			}
+			
+			Locale language = null;
+			
+			if(StringUtils.isEmpty(userInfo.getLanguage())){
+			    language = Locale.ENGLISH;
+			}else{
+			    language = LocaleUtils.toLocale(userInfo.getLanguage());
+			}
+			log.info("[ LoginController.loginProcess ] locale : " + language.toString());
+			log.info("[ LoginController.loginProcess ] session : " + (session != null));
+			session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, language);
 		}
 		
+//		log.info("[ LoginController.loginProcess ] session : " + (session != null));
 		checkResult.put("resultCode"	, resultCode);
 		checkResult.put("resultMsg"		, resultMsg);
 		
