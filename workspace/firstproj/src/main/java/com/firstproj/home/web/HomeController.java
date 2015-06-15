@@ -11,6 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.firstproj.board.dto.BoardArticleDto;
@@ -37,8 +38,8 @@ public class HomeController {
 	@Resource(name="redisTemplate")
 	private ValueOperations<String, List<BoardArticleDto>> valueOps;
 
-	@RequestMapping(value="/home")
-	public String goHome(Model model) throws Exception{
+	@RequestMapping(value="/home/{menuId}")
+	public String goHome(Model model, @PathVariable int menuId) throws Exception{
 		
 		BoardArticleDto boardDto01 = new BoardArticleDto();
 		boardDto01.setBoardId(1);
@@ -56,13 +57,13 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/home2")
-	public String goHome() throws Exception{		
+	@RequestMapping(value="/home2/{menuId}")
+	public String goHome(@PathVariable int menuId) throws Exception{		
 		return "home2";
 	}	
 	
-	@RequestMapping(value="/home3")
-	public String goHome3(Model model) throws Exception{
+	@RequestMapping(value="/home3/{menuId}")
+	public String goHome3(Model model, @PathVariable int menuId) throws Exception{
 		
 		BoardArticleDto boardDto01 = new BoardArticleDto();
 		boardDto01.setBoardId(1);
@@ -121,8 +122,8 @@ public class HomeController {
 //		return "home4";
 //	}
 
-	@RequestMapping(value="/home4")
-	public String goHome4(Model model) throws Exception{
+	@RequestMapping(value="/home4/{menuId}")
+	public String goHome4(Model model, @PathVariable int menuId) throws Exception{
 		
 		BoardArticleDto boardDto01 = new BoardArticleDto();
 		List<BoardArticleDto> getBoardArticleFive01 = null;
@@ -172,8 +173,8 @@ logger.info("is Null : " + (null == getBoardArticleFive01));
 	}
 	
 	
-	@RequestMapping(value="/aboutUs")
-	public String goAboutUs() throws Exception{
+	@RequestMapping(value="/aboutUs/{menuId}")
+	public String goAboutUs(@PathVariable int menuId) throws Exception{
 		return "/info/aboutUs";
 	}
 //	@RequestMapping(value="/getFiveArticle")

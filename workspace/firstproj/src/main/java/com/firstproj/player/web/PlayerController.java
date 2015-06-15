@@ -18,6 +18,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jboss.logging.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -288,8 +289,8 @@ public class PlayerController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value="/playerList", method = {RequestMethod.GET, RequestMethod.POST})
-    public String getPlayerInfoList(HttpServletRequest request, Model model, HttpSession session, SearchConditionPlayer searchConditionPlayer) throws Exception{
+    @RequestMapping(value="/playerList/{menuId}", method = {RequestMethod.GET, RequestMethod.POST})
+    public String getPlayerInfoList(HttpServletRequest request, Model model, HttpSession session, SearchConditionPlayer searchConditionPlayer, @PathVariable int menuId) throws Exception{
         log.info("[ param ] : searchConditionPlayer : " + searchConditionPlayer);
         model = this.getListCommonList(request, model, session, "playerList");
         return "player/playerList";
@@ -511,8 +512,8 @@ public class PlayerController {
     	return jsonObj;
     }
 
-    @RequestMapping("/playerPortal")
-    public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session){
+    @RequestMapping("/playerPortal/{menuId}")
+    public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session, @PathVariable int menuId){
 
         searchPlayerDto.setListSize(3);
         searchPlayerDto.setPageSize(10);

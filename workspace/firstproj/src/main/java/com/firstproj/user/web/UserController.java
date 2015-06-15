@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,8 +41,8 @@ public class UserController {
 	@Resource(name="CommonServiceImpl")
 	private CommonServiceImpl  commonService;
 	
-	@RequestMapping(value="/regist")
-	public String registUser(Model model, HttpServletRequest request) throws Exception{
+	@RequestMapping(value="/regist/{boardId}")
+	public String registUser(Model model, HttpServletRequest request, @PathVariable int boardId) throws Exception{
 	    
         String        referer       = request.getHeader("Referer");
         log.info("[ REFER ] : " + referer);           

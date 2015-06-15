@@ -15,7 +15,7 @@ import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,15 +35,16 @@ public class BoardController {
 	@Resource(name="BoardServiceImpl")
 	private BoardServiceImpl boardService;
 	
-	@RequestMapping(value="/list")
-	public String getBoardList(HttpServletRequest request, Model model, BoardDto boardDto, HttpSession session) throws Exception{
+	@RequestMapping(value="/list/{menuId}")
+	public String getBoardList(HttpServletRequest request, Model model, BoardDto boardDto, HttpSession session, @PathVariable int menuId) throws Exception{
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
 		
 		if(null != sessionInfo){
 					
 		}else{
-			return "redirect:/login";
+		    return "redirect:/login?redirectPage=" + request.getRequestURI();
+		    
 		}
 
 		model = this.getBoardCommonList(request, model, boardDto);
@@ -83,7 +84,7 @@ public class BoardController {
 
 	}
 	@RequestMapping(value = "/write")
-	public String createBoard(Model model, BoardDto boardDto, HttpSession session) {
+	public String createBoard(HttpServletRequest request, Model model, BoardDto boardDto, HttpSession session) {
 		
 //		System.out.println("session : " + (session == null));
 //		System.out.println("userId : " + ((UserDto)session.getAttribute("userInfo")).getUserId());
@@ -93,7 +94,7 @@ public class BoardController {
 		if(null != sessionInfo){
 					
 		}else{
-			return "redirect:/login";
+		    return "redirect:/login?redirectPage=" + request.getRequestURI();
 		}
 		
 		return "board/write";
@@ -161,7 +162,7 @@ public class BoardController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/modify")
-	public String modifyBoard(Model model, BoardDto boardDto, HttpSession session, @RequestParam(value="selectedBoardId", required=false) int selectedBoardId) throws Exception{
+	public String modifyBoard(HttpServletRequest request, Model model, BoardDto boardDto, HttpSession session, @RequestParam(value="selectedBoardId", required=false) int selectedBoardId) throws Exception{
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
 		BoardDto boardInfo = null;
@@ -175,7 +176,7 @@ public class BoardController {
 			boardInfo = boardService.getBoardInfo(boardDto);
 			
 		}else{
-			return "redirect:/login";
+		    return "redirect:/login?redirectPage=" + request.getRequestURI();
 		}
 
 		model.addAttribute("boardInfo", boardInfo);

@@ -37,7 +37,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/")
 	public String index() throws Exception{
-		return "redirect:/home";
+		return "redirect:/home/0";
 	}
 	
 	@RequestMapping(value="/login")
@@ -114,6 +114,6 @@ public class LoginController {
 		status.setComplete();
 		session.removeAttribute("userInfo");
 		
-		return "redirect:/home";
+		return "redirect:/home/0";
 	}
 }
