@@ -40,7 +40,7 @@ public class UserController {
 	@Resource(name="CommonServiceImpl")
 	private CommonServiceImpl  commonService;
 	
-	@RequestMapping(value="/regist.page")
+	@RequestMapping(value="/regist")
 	public String registUser(Model model, HttpServletRequest request) throws Exception{
 	    
         String        referer       = request.getHeader("Referer");
@@ -149,7 +149,7 @@ public class UserController {
         return returnObj;
     }
 	
-    @RequestMapping(method = RequestMethod.GET, value="/registOk.page")
+    @RequestMapping(method = RequestMethod.GET, value="/registOk")
     public String registOk(HttpServletRequest request) throws Exception{
         return "/user/registOk";
     }

@@ -77,7 +77,7 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/list", method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception {
 //System.out.println(">>> getBoardList()");
 //		List<boardArticleDto> boardList = boardArticleService.getBoardList();
@@ -234,7 +234,7 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/view.page")
+	@RequestMapping(value = "/view")
 	public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @Param int selectedArticleId) throws Exception{
 		
 		BoardArticleDto contentInfo = null;
@@ -267,7 +267,7 @@ public class BoardArticleController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value = "/write.page")
+	@RequestMapping(value = "/write")
 	public String writeBoard(Model model, BoardArticleDto boardArticleDto, HttpSession session) {
 		
 //		System.out.println("session : " + (session == null));
@@ -491,7 +491,7 @@ System.out.println("boardArticleDto : " + boardArticleDto.toString());
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/modifyBoardArticle.page")
+	@RequestMapping(value = "/modify")
 	public String modifyBoardArticlePage(Model model, BoardArticleDto boardArticleDto, HttpSession session, @Param int selectedArticleId, @Param int selectedBoardId) throws Exception{
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");

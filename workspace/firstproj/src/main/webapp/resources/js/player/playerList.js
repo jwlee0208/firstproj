@@ -1,6 +1,6 @@
 	$(document).on("ready", function() {
 		$("input[name='goToRegist']").on("click", function() {
-			location.href = "/player/write.page";
+			location.href = "/player/write";
 		});
 
 		$( "#searchText" ).keypress(function( event ) {
@@ -23,7 +23,7 @@
 			async : false,
 			type : 'POST',
 			dataType : 'html',
-			url : '/player/playerList.page',
+			url : '/player/playerList',
 			data : $("#listFrm").serialize(),
 			processData : true,
 			cache : false,

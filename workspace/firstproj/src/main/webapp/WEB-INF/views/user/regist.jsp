@@ -156,7 +156,7 @@ $().ready(function() {
 						var status = data.status;
 						
 						if(status == 'REGIST_0000'){
-							location.href = '/user/registOk.page';	//$("#prevPage").val();
+							location.href = '/user/registOk';	//$("#prevPage").val();
 						}else{
 							var result = data.result;
 							var length = result.length;

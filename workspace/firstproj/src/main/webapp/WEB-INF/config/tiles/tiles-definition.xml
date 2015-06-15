@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
  <!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
-       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <!--
      This is a blank Tiles definition file with a commented example.
 -->
 <tiles-definitions>
-     <definition name=".default" template="/WEB-INF/views/layout/default/main.jsp">
+     <definition name="default" template="/WEB-INF/views/layout/default/main.jsp">
           <put-attribute name="title" 	value="firstproj" type="string" />
           <put-attribute name="header" 	value="/WEB-INF/views/layout/default/header.jsp" />
           <put-attribute name="menu" 	value="/WEB-INF/views/layout/default/menu.jsp" />          
@@ -16,13 +16,13 @@
           <put-attribute name="footer" 	value="/WEB-INF/views/layout/default/footer.jsp" />          
      </definition>
 
-<!--      <definition name="none" template="/WEB-INF/views/layouts/main.jsp"> -->
-<!--        <put-attribute name="body" value="" /> -->
-<!--      </definition>   -->
+     <definition name="none" template="/WEB-INF/views/layout/noTemplate.jsp">
+       <put-attribute name="body" value="" />
+     </definition>  
 
-<!--      <definition name="*/ajax*" extends="none"> -->
-<!--           <put-attribute name="body" 	value="/WEB-INF/views/{1}/ajax{2}.jsp" /> -->
-<!--      </definition>     -->
+     <definition name="*/ajax*" extends="none">
+          <put-attribute name="body" 	value="/WEB-INF/views/{1}/ajax{2}.jsp" />
+     </definition>    
 
      <definition name="/login" template="/WEB-INF/views/layout/login/main.jsp">
           <put-attribute name="body" 	value="/WEB-INF/views/login.jsp" />
@@ -33,16 +33,22 @@
           <put-attribute name="body" 	value="/WEB-INF/views/user/regist.jsp" />
           <put-attribute name="footer" 	value="/WEB-INF/views/layout/regist/footer.jsp" />
      </definition>
-
      
-     <definition name=".popup" template="/WEB-INF/views/layout/popup/main.jsp">
+     <definition name="*/pop*" template="/WEB-INF/views/layout/popup/main.jsp">
      	  <put-attribute name="title" 	value="firstproj" type="string" />
-          <put-attribute name="body" 	value="" />
+          <put-attribute name="body" 	value="/WEB-INF/views/{1}/pop{2}.jsp" />
      </definition>    
+
+     <definition name="*/*/*" extends="default">
+       <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+     </definition>
      
-     <definition name="/*/*" extends=".default">
+     <definition name="*/*" extends="default">
        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
      </definition>
 
+     <definition name="*" extends="default">
+       <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+     </definition>
      
 </tiles-definitions>

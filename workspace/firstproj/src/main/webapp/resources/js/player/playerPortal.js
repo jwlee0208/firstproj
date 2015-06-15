@@ -1,6 +1,6 @@
 	$(document).on("ready", function() {
 		$("input[name='goToRegist']").on("click", function() {
-			location.href = "/player/write.page";
+			location.href = "/player/write";
 		});
 
 		loadPlayerList();
@@ -8,8 +8,8 @@
 	
 	function loadPlayerList(){
 		var frm = $("#listFrm").serialize();
-		$("#listDiv").load("/player/ajaxPlayerList", frm, function(){
-//			alert('after load page');
+		$("#listDiv").load("/player/ajaxPlayerList", frm, function(data){
+//			alert(data);
 		});	
 	}
 
@@ -67,8 +67,8 @@
 			  }			  
 		});		
 
-		$("input[name='goToRegist']").on("click", function() {
-			location.href = "/player/write.page";
+		$("input[name='goToRegist']").on("click", function() {	
+			location.href = "/player/write";
 		});
 	});
 	  
@@ -90,7 +90,7 @@
 	function goDetail(userId){
 		
 		var frm = $("#listFrm");
-		frm.attr("action", "/player/playerDetailView.page?userId=" + userId);
+		frm.attr("action", "/player/playerDetailView?userId=" + userId);
 		frm.attr("method", "post");
 		frm.submit();
 	}

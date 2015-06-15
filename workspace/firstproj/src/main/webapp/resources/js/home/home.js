@@ -1,16 +1,16 @@
 function goList(boardId){	
-	location.href = "/board/article/list.page?boardId=" + boardId + "&menuId=" + boardId;
+	location.href = "/board/article/list?boardId=" + boardId + "&menuId=" + boardId;
 }
 function goHome(){
-	location.href = "/home.page?menuId=0";
+	location.href = "/home?menuId=0";
 }
 
 function goInfo(){
-	location.href = "/aboutUs.page";
+	location.href = "/aboutUs";
 }
 
 function goRegist(boardId){
-	location.href = "/user/regist.page?menuId=" + boardId;
+	location.href = "/user/regist?menuId=" + boardId;
 }
 
 function goLogin(boardId){
@@ -18,15 +18,15 @@ function goLogin(boardId){
 }
 
 function logout(){
-	location.href = "/logout.page";
+	location.href = "/logout";
 }
 
 function goPlayer(menuId){
-	var baseUrl = "/player/playerList.page";
+	var baseUrl = "/player/playerList";
 	if(menuId == 6){
-		baseUrl = "/player/playerPortal.page";
+		baseUrl = "/player/playerPortal";
 	}
 	baseUrl += "?menuId=" + menuId;
 	location.href = baseUrl; 
-//		"/player/attrElemMapList.page";
+//		"/player/attrElemMapList";
 }

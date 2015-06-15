@@ -1,9 +1,11 @@
 package com.firstproj.user.dto;
 
+import java.io.Serializable;
+
 import org.apache.ibatis.type.Alias;
 
 @Alias("user.userDto")
-public class UserDto {
+public class UserDto implements Serializable{
 	private String userId;
 //	@NotNull @NotEmpty
 	private String userNm;

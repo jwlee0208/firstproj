@@ -95,9 +95,9 @@ public class PlayerController {
         
         // category selectbox name 설정을 위한 구분
         String pageType = "";
-        if(referer.indexOf("write.page") > 0){
+        if(referer.indexOf("write") > 0){
         	pageType = "regist";
-        }else if(referer.indexOf("playerPortal.page") > 0){
+        }else if(referer.indexOf("playerPortal") > 0){
         	pageType = "list";
         }
         
@@ -148,9 +148,9 @@ public class PlayerController {
         String returnUrl = "player/";
         
         if(referer != null){
-        	if(referer.indexOf("write.page") > 0){
+        	if(referer.indexOf("write") > 0){
         		returnUrl += "ajaxAttributeList";
-        	}else if(referer.indexOf("playerPortal.page") > 0){
+        	}else if(referer.indexOf("playerPortal") > 0){
 				returnUrl += "ajaxAttributeList2";
         	}
         }
@@ -216,9 +216,9 @@ public class PlayerController {
 
         int totalListCnt = 0;
                 
-        if(page.equals("attrElemMapList.page")){
+        if(page.equals("attrElemMapList")){
             totalListCnt = playerService.getCategoryAttrElemMapCnt(paramMap);
-        }else if(page.equals("playerList.page")){
+        }else if(page.equals("playerList")){
             totalListCnt = playerService.getPlayerInfoCnt(paramMap);
         }
 
@@ -235,9 +235,9 @@ public class PlayerController {
         // 페이징 리스트 조회하는 부분
         PagedList result = null;
         List<PlayerInfoSearchDto> perCategoryCntList = null;
-        if(page.equals("attrElemMapList.page")){
+        if(page.equals("attrElemMapList")){
             result = playerService.getCategoryAttrElemMapPagedList(paramMap);
-        }else if(page.equals("playerList.page")){
+        }else if(page.equals("playerList")){
             result = playerService.getPlayerInfoPagedList(paramMap);
             // checkout who logined user regist as player
             UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
@@ -270,14 +270,14 @@ public class PlayerController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value="/attrElemMapList.page", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value="/attrElemMapList", method = {RequestMethod.GET, RequestMethod.POST})
     public String getCategoryAttrElemMapList(HttpServletRequest request, Model model, CategoryAttrElemMapDto categoryAttrElemMapDto, HttpSession session) throws Exception{
         
         System.out.println("attrElemId : " + request.getParameter("selectedAttrElemId"));
         System.out.println("attrId : " + request.getParameter("selectedAttrId"));
         System.out.println("dto attrElemId : " + categoryAttrElemMapDto.getAttrElemId());
         
-        model = this.getListCommonList(request, model, session, "attrElemMapList.page");
+        model = this.getListCommonList(request, model, session, "attrElemMapList");
         
         return "player/attrElemMapList";
     }
@@ -288,14 +288,14 @@ public class PlayerController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value="/playerList.page", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value="/playerList", method = {RequestMethod.GET, RequestMethod.POST})
     public String getPlayerInfoList(HttpServletRequest request, Model model, HttpSession session, SearchConditionPlayer searchConditionPlayer) throws Exception{
         log.info("[ param ] : searchConditionPlayer : " + searchConditionPlayer);
-        model = this.getListCommonList(request, model, session, "playerList.page");
+        model = this.getListCommonList(request, model, session, "playerList");
         return "player/playerList";
     }
     
-    @RequestMapping(value="/write.page")
+    @RequestMapping(value="/write")
     public String registPlayer(HttpServletRequest request, Model model, HttpSession session) throws Exception{
     	
     	UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
@@ -305,7 +305,7 @@ public class PlayerController {
     	}else{
     		
     		if(this.playerService.getIsRegisted(sessionInfo)){
-    			return "redirect:/player/playerDetailView.page";
+    			return "redirect:/player/playerDetailView";
     		}else{
     	        CategoryDto 		param 		  = new CategoryDto();
     	        param.setParentCatId(0);
@@ -433,7 +433,7 @@ public class PlayerController {
     }
  
     
-    @RequestMapping(value="/modify.page", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value="/modify", method = {RequestMethod.POST, RequestMethod.GET})
     public String getPlayerDetailForModify(HttpServletRequest request, Model model, UserDto userDto, HttpSession session) throws Exception{
     	UserDto myInfo   = (UserDto)session.getAttribute("userInfo");
     	log.info("[ PlayerController.getPlayerDetailForModify() ][ Param ] myInfo : " + myInfo.toString());
@@ -511,7 +511,7 @@ public class PlayerController {
     	return jsonObj;
     }
 
-    @RequestMapping("/playerPortal.page")
+    @RequestMapping("/playerPortal")
     public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session){
 
         searchPlayerDto.setListSize(3);

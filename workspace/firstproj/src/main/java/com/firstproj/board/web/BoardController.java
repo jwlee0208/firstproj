@@ -35,7 +35,7 @@ public class BoardController {
 	@Resource(name="BoardServiceImpl")
 	private BoardServiceImpl boardService;
 	
-	@RequestMapping(value="/list.page")
+	@RequestMapping(value="/list")
 	public String getBoardList(HttpServletRequest request, Model model, BoardDto boardDto, HttpSession session) throws Exception{
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
@@ -82,7 +82,7 @@ public class BoardController {
 		return model;
 
 	}
-	@RequestMapping(value = "/write.page")
+	@RequestMapping(value = "/write")
 	public String createBoard(Model model, BoardDto boardDto, HttpSession session) {
 		
 //		System.out.println("session : " + (session == null));
@@ -127,7 +127,7 @@ public class BoardController {
 		return jsonObj;
 	}	
 	
-	@RequestMapping(value = "/view.page")
+	@RequestMapping(value = "/view")
 	public String getBoardContent(HttpServletRequest request, Model model, BoardDto boardDto, @RequestParam(value="selectedBoardId", required=false) int selectedBoardId) throws Exception{
 		
 		BoardDto boardInfo 		= null;
@@ -160,7 +160,7 @@ public class BoardController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/modifyBoard.page")
+	@RequestMapping(value = "/modify")
 	public String modifyBoard(Model model, BoardDto boardDto, HttpSession session, @RequestParam(value="selectedBoardId", required=false) int selectedBoardId) throws Exception{
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");

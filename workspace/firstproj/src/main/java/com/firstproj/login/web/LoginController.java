@@ -30,14 +30,14 @@ import com.firstproj.user.service.UserServiceImpl;
 @SessionAttributes("userInfo")
 public class LoginController {
 	
-    final Log log = LogFactory.getLog("LoginController.class");
+    final Log log = LogFactory.getLog(this.getClass());
     
 	@Resource(name="UserServiceImpl")
 	private UserServiceImpl userService;
 	
 	@RequestMapping(value="/")
 	public String index() throws Exception{
-		return "redirect:/home.page";
+		return "redirect:/home";
 	}
 	
 	@RequestMapping(value="/login")
@@ -97,6 +97,7 @@ public class LoginController {
 			}
 			log.info("[ LoginController.loginProcess ] locale : " + language.toString());
 			log.info("[ LoginController.loginProcess ] session : " + (session != null));
+			// User의 사용 language 설정 값에 따른 Locale 설정
 			session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, language);
 		}
 		
@@ -107,12 +108,12 @@ public class LoginController {
 		model.addAttribute("userInfo"	, userInfo);
 		return checkResult;
 	}
-	@RequestMapping(value="/logout.page")
+	@RequestMapping(value="/logout")
 	public String logout(@ModelAttribute UserDto userDto, HttpSession session, SessionStatus status) {
 		
 		status.setComplete();
 		session.removeAttribute("userInfo");
 		
-		return "redirect:/home.page";
+		return "redirect:/home";
 	}
 }

@@ -52,7 +52,7 @@ function loginAction(){
 				var code = data.resultCode;
 				if(code == 'LOGIN_0000'){
 					location.href = $("#prevPage").val();
-						//"/home.page";
+						//"/home";
 				}else{
 					$(".alert.alert-danger").text(data.resultMsg);
 					$(".alert.alert-danger").fadeIn(2000, function(){

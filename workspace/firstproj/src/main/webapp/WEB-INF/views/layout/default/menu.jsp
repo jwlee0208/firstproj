@@ -21,9 +21,9 @@ ul { padding: 0; }
 		          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Home<span class="caret"></span></a>
 		          <ul class="dropdown-menu" role="menu">
 					<li <c:if test="${param.menuId eq 0}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goHome();">Home</a></li>
-					<li><a href="${pageContext.request.contextPath}/home2.page">Home2</a></li>
-					<li><a href="${pageContext.request.contextPath}/home3.page">Home3</a></li>
-					<li><a href="${pageContext.request.contextPath}/home4.page">Home4</a></li>
+					<li><a href="${pageContext.request.contextPath}/home2">Home2</a></li>
+					<li><a href="${pageContext.request.contextPath}/home3">Home3</a></li>
+					<li><a href="${pageContext.request.contextPath}/home4">Home4</a></li>
 		          </ul>
 		        </li>				
 				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();"><tag:message code="menu.aboutus"/></a></li>
