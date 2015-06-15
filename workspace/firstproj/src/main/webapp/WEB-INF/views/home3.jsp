@@ -158,7 +158,7 @@
 
 	function goArticleView(articleId){
 		$.ajax({
-			url : '/board/article/view.page',
+			url : '/board/article/view',
 			data : {selectedArticleId : articleId},
 			dataType : 'html',
 			success : function(data){

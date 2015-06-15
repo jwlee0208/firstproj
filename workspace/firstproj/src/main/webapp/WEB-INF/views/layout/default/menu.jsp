@@ -21,9 +21,9 @@ ul { padding: 0; }
 		          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Home<span class="caret"></span></a>
 		          <ul class="dropdown-menu" role="menu">
 					<li <c:if test="${param.menuId eq 0}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goHome();">Home</a></li>
-					<li><a href="${pageContext.request.contextPath}/home2.page">Home2</a></li>
-					<li><a href="${pageContext.request.contextPath}/home3.page">Home3</a></li>
-					<li><a href="${pageContext.request.contextPath}/home4.page">Home4</a></li>
+					<li><a href="${pageContext.request.contextPath}/home2/0">Home2</a></li>
+					<li><a href="${pageContext.request.contextPath}/home3/0">Home3</a></li>
+					<li><a href="${pageContext.request.contextPath}/home4/0">Home4</a></li>
 		          </ul>
 		        </li>				
 				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();"><tag:message code="menu.aboutus"/></a></li>
@@ -42,7 +42,7 @@ ul { padding: 0; }
 						<li <c:if test="${param.menuId eq 4}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goPlayer(4);"><tag:message code="menu.player.list"/></a></li>
 		        	</ul>
 		        </li>				
-				
+				<li <c:if test="${param.menuId eq 7}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goBoardConfig();">게시판 설정</a></li>
 			</ul>
 <!-- 			<ul class="nav navbar-nav navbar-right"> -->
 <!-- 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> -->

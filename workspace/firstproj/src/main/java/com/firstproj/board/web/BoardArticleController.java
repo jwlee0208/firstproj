@@ -19,6 +19,7 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -77,8 +78,8 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
-	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception {
+	@RequestMapping(value = "/list/{boardId}/{menuId}", method = {RequestMethod.POST, RequestMethod.GET})
+	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int boardId, @PathVariable int menuId) throws Exception {
 //System.out.println(">>> getBoardList()");
 //		List<boardArticleDto> boardList = boardArticleService.getBoardList();
 
@@ -234,7 +235,7 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/view.page")
+	@RequestMapping(value = "/view")
 	public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @Param int selectedArticleId) throws Exception{
 		
 		BoardArticleDto contentInfo = null;
@@ -267,8 +268,8 @@ public class BoardArticleController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value = "/write.page")
-	public String writeBoard(Model model, BoardArticleDto boardArticleDto, HttpSession session) {
+	@RequestMapping(value = "/write")
+	public String writeBoard(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session) {
 		
 //		System.out.println("session : " + (session == null));
 //		System.out.println("userId : " + ((UserDto)session.getAttribute("userInfo")).getUserId());
@@ -278,7 +279,7 @@ public class BoardArticleController {
 		if(null != sessionInfo){
 			model.addAttribute("boardId", boardArticleDto.getBoardId());			
 		}else{
-			return "redirect:/login";
+		    return "redirect:/login?redirectPage=" + request.getRequestURI();
 		}
 		
 		
@@ -491,8 +492,8 @@ System.out.println("boardArticleDto : " + boardArticleDto.toString());
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/modifyBoardArticle.page")
-	public String modifyBoardArticlePage(Model model, BoardArticleDto boardArticleDto, HttpSession session, @Param int selectedArticleId, @Param int selectedBoardId) throws Exception{
+	@RequestMapping(value = "/modify")
+	public String modifyBoardArticlePage(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @Param int selectedArticleId, @Param int selectedBoardId) throws Exception{
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
 		
@@ -510,7 +511,7 @@ System.out.println("boardArticleDto : " + boardArticleDto.toString());
 			model.addAttribute("articleInfo", articleInfo);		
 			
 		}else{
-			return "redirect:/login";
+		    return "redirect:/login?redirectPage=" + request.getRequestURI();
 		}
 		
 		return "board/article/write";

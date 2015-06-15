@@ -310,7 +310,7 @@ function highlightText(text, $node) {
 function goDetail(userId){
 	
 	var frm = $("#listFrm");
-	frm.attr("action", "/player/playerDetailView.page?userId=" + userId);
+	frm.attr("action", "/player/playerDetailView?userId=" + userId);
 	frm.attr("method", "post");
 	frm.submit();
 }

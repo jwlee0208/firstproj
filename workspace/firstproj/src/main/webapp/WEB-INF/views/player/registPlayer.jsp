@@ -260,7 +260,7 @@ $(function(){
 	   }
 	   alert("정상적으로 등록 되었습니다.");
 	   // 정상 등록 후 목록 화면으로 이동.
-	   location.href = "/player/playerList.page";
+	   location.href = "/player/playerList";
 
 	}
 	
@@ -288,7 +288,7 @@ $(function(){
 						
 						
 						if(result == 'ok'){
-							location.href = "/player/playerList.page";
+							location.href = "/player/playerList";
 						}else{
 							alert(msg);
 							return;
@@ -334,7 +334,7 @@ alert("profileImg.length : " + profileImg.length +", " + $("input[name=profileIm
 						
 						
 						if(result == 'ok'){
-							location.href = "/player/playerList.page";
+							location.href = "/player/playerList";
 						}else{
 							alert(msg);
 							return;

@@ -61,7 +61,7 @@ $(function(){
 
 
 function goBoardList(){
-	location.href =  "/board/list.page";
+	location.href =  "/board/list";
 } 
 
 function goBoardCreate(){

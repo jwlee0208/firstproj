@@ -1,32 +1,37 @@
 function goList(boardId){	
-	location.href = "/board/article/list.page?boardId=" + boardId + "&menuId=" + boardId;
+	var menuId = boardId;
+	location.href = "/board/article/list/" + boardId + "/" + menuId;
 }
 function goHome(){
-	location.href = "/home.page?menuId=0";
+	location.href = "/home/0";
 }
 
 function goInfo(){
-	location.href = "/aboutUs.page";
+	location.href = "/aboutUs/5";
 }
 
 function goRegist(boardId){
-	location.href = "/user/regist.page?menuId=" + boardId;
+	location.href = "/user/regist/" + boardId;
 }
 
 function goLogin(boardId){
-	location.href = "/login?menuId=" + boardId;
+	location.href = "/login/" + boardId;
 }
 
 function logout(){
-	location.href = "/logout.page";
+	location.href = "/logout";
 }
 
 function goPlayer(menuId){
-	var baseUrl = "/player/playerList.page";
+	var baseUrl = "/player/playerList";
 	if(menuId == 6){
-		baseUrl = "/player/playerPortal.page";
+		baseUrl = "/player/playerPortal";
 	}
-	baseUrl += "?menuId=" + menuId;
+	baseUrl += "/" + menuId;
 	location.href = baseUrl; 
-//		"/player/attrElemMapList.page";
+//		"/player/attrElemMapList";
+}
+
+function goBoardConfig(){
+	location.href = "/board/list/7";
 }
