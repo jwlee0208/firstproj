@@ -90,7 +90,7 @@
 	function goDetail(userId){
 		
 		var frm = $("#listFrm");
-		frm.attr("action", "/player/playerDetailView?userId=" + userId);
+		frm.attr("action", "/player/playerDetailView/" + userId);
 		frm.attr("method", "post");
 		frm.submit();
 	}

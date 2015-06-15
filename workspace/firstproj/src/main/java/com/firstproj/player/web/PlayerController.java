@@ -397,8 +397,8 @@ public class PlayerController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value="/playerDetailView", method = {RequestMethod.POST, RequestMethod.GET})
-    public String getPlayerDetail(HttpServletRequest request, Model model, UserDto userDto, HttpSession session) throws Exception{
+    @RequestMapping(value="/playerDetailView/{userId}", method = {RequestMethod.POST, RequestMethod.GET})
+    public String getPlayerDetail(HttpServletRequest request, Model model, UserDto userDto, HttpSession session, @PathVariable String userId) throws Exception{
     	UserDto userInfo = null;
     	UserDto myInfo   = (UserDto)session.getAttribute("userInfo");
     	if(userDto == null){
@@ -438,8 +438,9 @@ public class PlayerController {
     public String getPlayerDetailForModify(HttpServletRequest request, Model model, UserDto userDto, HttpSession session) throws Exception{
     	UserDto myInfo   = (UserDto)session.getAttribute("userInfo");
     	log.info("[ PlayerController.getPlayerDetailForModify() ][ Param ] myInfo : " + myInfo.toString());
+    	
     	if(null == myInfo){
-    		return "redirect:/login";
+    	    return "redirect:/login?redirectPage=" + request.getRequestURI();
     	}else{
     		
     		if(!myInfo.getUserId().equals(userDto.getUserId())){
