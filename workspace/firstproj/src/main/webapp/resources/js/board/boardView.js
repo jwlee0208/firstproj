@@ -33,7 +33,7 @@ function goBoardView(boardId){
 }
 
 function goBoardList(){	
-	location.href = "/board/list";
+	location.href = "/board/list/1/1";
 }
 
 function goBoardModify(boardId){

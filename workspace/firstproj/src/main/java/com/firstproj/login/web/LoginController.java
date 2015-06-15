@@ -17,6 +17,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -40,9 +41,12 @@ public class LoginController {
 		return "redirect:/home/0";
 	}
 	
-	@RequestMapping(value="/login")
-	public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception{
+	@RequestMapping(value="/login/{menuId}")
+	public String login(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable int menuId) throws Exception{
 		
+		model = this.login(request, model);
+		
+		/*
 		String referer = request.getHeader("Referer");
 		
 		if(null != request.getParameter("redirectPage")){
@@ -56,7 +60,31 @@ public class LoginController {
 		log.info(" >>> REFER : " + referer);				
 
 		model.addAttribute("prevPage", referer);
+		*/
 		return "/login";
+	}
+	
+	@RequestMapping(value="/login")
+	public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception{
+		model = this.login(request, model);
+		return "/login";
+	}
+	
+	private Model login(HttpServletRequest request, Model model) throws Exception{
+		String referer = request.getHeader("Referer");
+		
+		if(null != request.getParameter("redirectPage")){
+		    referer = request.getParameter("redirectPage");
+		}
+
+		if(StringUtils.isEmpty(referer)){
+			referer="/";
+		}
+		
+		log.info(" >>> REFER : " + referer);				
+
+		model.addAttribute("prevPage", referer);
+		return model;
 	}
 	
 	@RequestMapping(value="/loginProcess.json")

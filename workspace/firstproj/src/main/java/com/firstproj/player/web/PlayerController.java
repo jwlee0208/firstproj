@@ -306,7 +306,7 @@ public class PlayerController {
     	}else{
     		
     		if(this.playerService.getIsRegisted(sessionInfo)){
-    			return "redirect:/player/playerDetailView";
+    			return "redirect:/player/playerDetailView/"+sessionInfo.getUserId();
     		}else{
     	        CategoryDto 		param 		  = new CategoryDto();
     	        param.setParentCatId(0);
