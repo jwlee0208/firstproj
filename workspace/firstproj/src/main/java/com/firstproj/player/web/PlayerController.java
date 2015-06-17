@@ -3,7 +3,6 @@ package com.firstproj.player.web;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.firstproj.common.CommonConstant;
 import com.firstproj.common.exception.FileuploadException;
@@ -550,12 +548,14 @@ public class PlayerController {
         PageHolder          pageHolder = null;
         int                 playerCnt  = 0;
         
+        searchPlayerDto.setListSize(9);
+        
         try {
             playerList = playerService.selectPlayerList(searchPlayerDto , session);
             playerCnt  = playerService.selectPlayerCnt(searchPlayerDto  , session);
 
             if(playerCnt > 0){
-                pageHolder = new PageHolder(playerCnt, searchPlayerDto.getPage(), searchPlayerDto.getListSize());    
+                pageHolder = new PageHolder(playerCnt, searchPlayerDto.getPage(), 9); //searchPlayerDto.getListSize()   
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block

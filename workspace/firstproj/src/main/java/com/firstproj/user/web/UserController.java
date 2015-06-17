@@ -3,6 +3,7 @@ package com.firstproj.user.web;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -10,9 +11,11 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.velocity.app.VelocityEngine;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.firstproj.common.dto.CodeDto;
+import com.firstproj.common.dto.MailDto;
 import com.firstproj.common.service.impl.CommonServiceImpl;
 import com.firstproj.common.validate.JsonResponse;
 import com.firstproj.user.dto.UserDto;
@@ -40,6 +44,13 @@ public class UserController {
 	
 	@Resource(name="CommonServiceImpl")
 	private CommonServiceImpl  commonService;
+	
+    @Inject
+    private VelocityEngine velocityEngine;
+
+	
+	
+	
 	
 	@RequestMapping(value="/regist/{boardId}")
 	public String registUser(Model model, HttpServletRequest request, @PathVariable int boardId) throws Exception{
@@ -129,7 +140,27 @@ public class UserController {
                
                 if(registResult > 0){                    
                     resultCode  = "REGIST_0000";
-                    resultMsg   = "complelted";               
+                    resultMsg   = "complelted";       
+                    
+                    // Sending Mail
+                    MailDto mailInfo = new MailDto();
+                    mailInfo.setContentType("text/html; charset=utf-8");
+                    mailInfo.setMailTo(userDto.getEmail());
+                    mailInfo.setMailFrom("jwlee0208@gmail.com");
+                    mailInfo.setMailSubject("[Tryout.com] Congraturation! Happy join us!!");
+                    mailInfo.setTemplateName("defaultTemplate.vm");
+                    
+                    // setting content
+                    String body = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "./mailTemplates/defaultTemplate.vm", "UTF-8", mailInfo.getModel());
+                    mailInfo.setMailContent(body);
+                    // mail 발송
+                    try{
+                        commonService.sendMail(mailInfo);    
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        log.info("[ 메일 발송 오류 ]");
+                    }
+                    
 
                 }else{
                     resultCode  = "REGIST_0002";

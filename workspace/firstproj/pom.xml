@@ -493,8 +493,14 @@
 			<artifactId>velocity</artifactId>
 			<version>1.7</version>
 		</dependency>
+    	    	
+		<!-- Java Mail -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.2</version>
+		</dependency>
     			
-    				
 	</dependencies>	
 	
 

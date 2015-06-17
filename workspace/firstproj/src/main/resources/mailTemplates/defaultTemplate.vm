@@ -1,0 +1,15 @@
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+</head>	
+<body>
+
+${name}님.
+<p/>
+
+테스트 메일 본문<p/>
+
+Thanks<br/>
+
+</body>
+</html>
