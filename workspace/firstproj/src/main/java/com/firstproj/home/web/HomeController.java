@@ -38,9 +38,16 @@ public class HomeController {
 	@Resource(name="redisTemplate")
 	private ValueOperations<String, List<BoardArticleDto>> valueOps;
 
+	
+	@RequestMapping(value="/home")
+	public String goHome(Model model) throws Exception{
+	    model = goHomeDefault(model);
+	    return "home";
+	}
+	
 	@RequestMapping(value="/home/{menuId}")
 	public String goHome(Model model, @PathVariable int menuId) throws Exception{
-		
+		/*
 		BoardArticleDto boardDto01 = new BoardArticleDto();
 		boardDto01.setBoardId(1);
 		
@@ -53,8 +60,26 @@ public class HomeController {
 
 		model.addAttribute("articleFive01", getBoardArticleFive01);
 		model.addAttribute("articleFive02", getBoardArticleFive02);
-		
+		*/
+	    model = goHomeDefault(model);
 		return "home";
+	}
+
+	private Model goHomeDefault(Model model) throws Exception{
+	    BoardArticleDto boardDto01 = new BoardArticleDto();
+	    boardDto01.setBoardId(1);
+	        
+	    List<BoardArticleDto> getBoardArticleFive01 = this.boardArticleService.selectBoardArticleFive(boardDto01);
+
+	    BoardArticleDto boardDto02 = new BoardArticleDto();
+	    boardDto02.setBoardId(2);
+	        
+	    List<BoardArticleDto> getBoardArticleFive02 = this.boardArticleService.selectBoardArticleFive(boardDto02);
+
+	    model.addAttribute("articleFive01", getBoardArticleFive01);
+	    model.addAttribute("articleFive02", getBoardArticleFive02);
+
+	    return model;
 	}
 	
 	@RequestMapping(value="/home2/{menuId}")
@@ -80,48 +105,48 @@ public class HomeController {
 		
 		return "home3";
 	}	
-	
-//	@RequestMapping(value="/home4")
-//	public String goHome4(Model model) throws Exception{
-//		
-//		String boardArticleFive01 = this.boardArticleRedisService.get("boardArticleFive01");
-//		
-//		BoardArticleDto boardDto01 = new BoardArticleDto();
-//		List<BoardArticleDto> getBoardArticleFive01 = null;
-//
-//		if(null != boardArticleFive01){
-////			System.out.println(boardArticleFive01);
-//			
-//			org.json.JSONArray jsonArr = new org.json.JSONArray(boardArticleFive01);
-//			
-//			model.addAttribute("articleFive01JsonArr", jsonArr);
-//			
-//		}else{
-//			boardDto01.setBoardId(1);
-//			getBoardArticleFive01 = this.boardArticleService.selectBoardArticleFive(boardDto01);
-//			
-//			JSONArray jsonArr = JSONArray.fromObject(getBoardArticleFive01);
-//			
-//			System.out.println(jsonArr);
-//			this.boardArticleRedisService.set("boardArticleFive01", jsonArr.toString());
-//		
-//			
-//		}
-//		
-//		BoardArticleDto boardDto02 = new BoardArticleDto();
-//		boardDto02.setBoardId(2);
-//		
-//		List<BoardArticleDto> getBoardArticleFive02 = this.boardArticleService.selectBoardArticleFive(boardDto02);
-//
-//		
-//		
-//		model.addAttribute("articleFive01", getBoardArticleFive01);
-//		model.addAttribute("articleFive02", getBoardArticleFive02);
-//		
-//		
-//		return "home4";
-//	}
+	/*
+	@RequestMapping(value="/home4")
+	public String goHome4(Model model) throws Exception{
+		
+		String boardArticleFive01 = this.boardArticleRedisService.get("boardArticleFive01");
+		
+		BoardArticleDto boardDto01 = new BoardArticleDto();
+		List<BoardArticleDto> getBoardArticleFive01 = null;
 
+		if(null != boardArticleFive01){
+//			System.out.println(boardArticleFive01);
+			
+			org.json.JSONArray jsonArr = new org.json.JSONArray(boardArticleFive01);
+			
+			model.addAttribute("articleFive01JsonArr", jsonArr);
+			
+		}else{
+			boardDto01.setBoardId(1);
+			getBoardArticleFive01 = this.boardArticleService.selectBoardArticleFive(boardDto01);
+			
+			JSONArray jsonArr = JSONArray.fromObject(getBoardArticleFive01);
+			
+			System.out.println(jsonArr);
+			this.boardArticleRedisService.set("boardArticleFive01", jsonArr.toString());
+		
+			
+		}
+		
+		BoardArticleDto boardDto02 = new BoardArticleDto();
+		boardDto02.setBoardId(2);
+		
+		List<BoardArticleDto> getBoardArticleFive02 = this.boardArticleService.selectBoardArticleFive(boardDto02);
+
+		
+		
+		model.addAttribute("articleFive01", getBoardArticleFive01);
+		model.addAttribute("articleFive02", getBoardArticleFive02);
+		
+		
+		return "home4";
+	}
+    */
 	@RequestMapping(value="/home4/{menuId}")
 	public String goHome4(Model model, @PathVariable int menuId) throws Exception{
 		

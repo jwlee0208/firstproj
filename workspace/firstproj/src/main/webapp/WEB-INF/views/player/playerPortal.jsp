@@ -33,6 +33,8 @@
 	<input type="hidden" id="selectedAttrElemId" 	name="selectedAttrElemId" />
 	<input type="hidden" id="selectedAttrId" 		name="selectedAttrId" />
 	<input type="hidden" id="selectedCatId" 		name="selectedCatId" />
+	
+	<input type="hidden" id="page"					name="page"	/>
 
 	<div class="form-group">
 
