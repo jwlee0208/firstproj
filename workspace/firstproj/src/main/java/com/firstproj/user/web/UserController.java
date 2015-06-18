@@ -1,6 +1,8 @@
 package com.firstproj.user.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -150,9 +152,19 @@ public class UserController {
                     mailInfo.setMailSubject("[Tryout.com] Congraturation! Happy join us!!");
                     mailInfo.setTemplateName("defaultTemplate.vm");
                     
+                    
+                    // Velocity Template 에 Mapping할 Data Map
+                    Map<String, Object> contentMap = new HashMap<String, Object>();
+                    contentMap.put("mailTo", mailInfo.getMailTo());
+                    contentMap.put("welcomeMessage", "Welcome To Join Us!!!");
+                    mailInfo.setModel(contentMap);
+                    
+                    
                     // setting content
                     String body = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "./mailTemplates/defaultTemplate.vm", "UTF-8", mailInfo.getModel());
                     mailInfo.setMailContent(body);
+                    
+                    
                     // mail 발송
                     try{
                         commonService.sendMail(mailInfo);    

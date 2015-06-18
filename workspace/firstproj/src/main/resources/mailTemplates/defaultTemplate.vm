@@ -5,9 +5,10 @@
 <body>
 
 ${mailTo}님.
+
 <p/>
 
-테스트 메일 본문<p/>
+${welcomeMessage}<p/>
 
 Thanks<br/>
 
