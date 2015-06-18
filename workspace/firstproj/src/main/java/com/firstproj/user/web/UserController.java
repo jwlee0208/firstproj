@@ -2,7 +2,9 @@ package com.firstproj.user.web;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -150,18 +152,21 @@ public class UserController {
                     mailInfo.setMailTo(userDto.getEmail());
                     mailInfo.setMailFrom("jwlee0208@gmail.com");
                     mailInfo.setMailSubject("[Tryout.com] Congraturation! Happy join us!!");
-                    mailInfo.setTemplateName("defaultTemplate.vm");
+                    mailInfo.setTemplateName("welcomeJoinningTemplate.vm");
                     
                     
+                    ResourceBundle resourceBundle = (userDto.getLanguage() != null) ? ResourceBundle.getBundle("Locale", new Locale(userDto.getLanguage())) : ResourceBundle.getBundle("Locale");
+                    
+                    String welcomeMsg = new String(resourceBundle.getString("welcome.message").getBytes("8859_1"), "UTF-8");
                     // Velocity Template 에 Mapping할 Data Map
                     Map<String, Object> contentMap = new HashMap<String, Object>();
-                    contentMap.put("mailTo", mailInfo.getMailTo());
-                    contentMap.put("welcomeMessage", "Welcome To Join Us!!!");
+                    contentMap.put("mailTo"         , mailInfo.getMailTo());
+                    contentMap.put("welcomeMessage" , welcomeMsg);
                     mailInfo.setModel(contentMap);
                     
                     
                     // setting content
-                    String body = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "./mailTemplates/defaultTemplate.vm", "UTF-8", mailInfo.getModel());
+                    String body = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "./mailTemplates/welcomeJoinningTemplate.vm", "UTF-8", mailInfo.getModel());
                     mailInfo.setMailContent(body);
                     
                     
