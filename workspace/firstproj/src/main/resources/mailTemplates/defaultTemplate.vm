@@ -4,7 +4,7 @@
 </head>	
 <body>
 
-${name}님.
+${mailTo}님.
 <p/>
 
 테스트 메일 본문<p/>

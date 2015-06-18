@@ -13,5 +13,5 @@ public class CommonConstant {
 
 	public static final int 	THUMBNAIL_IMAGE_WIDTH_128 	= 128;
 	public static final int 	THUMBNAIL_IMAGE_HEIGHT_128 	= 128;
-
+	
 }
