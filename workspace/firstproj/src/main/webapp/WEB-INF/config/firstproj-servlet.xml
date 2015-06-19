@@ -226,6 +226,11 @@
     	<beans:property name="defaultEncoding" value="UTF-8"/>
     	<beans:property name="cacheSeconds" value="180"/>
     </beans:bean>
+    
+    <beans:bean id="messageSourceAccessor" class="org.springframework.context.support.MessageSourceAccessor">
+        <beans:constructor-arg index="0" ref="messageSource"/>
+    </beans:bean>    
+    
     <!-- 다국어 처리 -->
     <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
 <!--     <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver"/> -->

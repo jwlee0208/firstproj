@@ -14,7 +14,6 @@
 <!-- bootstrap -->
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-theme.min.css">
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css">
-<%-- <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-combined.min.css"> --%>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css"/>
@@ -69,7 +68,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="nationallity" class="col-sm-2 control-label">Nationallity</label>
+			<label for="nationallity" class="col-sm-2 control-label">Nationality</label>
 			<div class="col-sm-10">
 				<select class="form-control" id="nationality" name="nationality">
 					<option value="">국가를 선택해주세요.</option>
@@ -89,7 +88,7 @@
 					<option value="">언어를 선택해주세요.</option>
 			<c:if test="${!empty languageList}">		
 				<c:forEach var="langInfo" items="${languageList}">
-					<option value="${longInfo.codeValue}">${langInfo.codeName}</option>
+					<option value="${langInfo.codeValue}">${langInfo.codeName}</option>
 				</c:forEach>	
 			</c:if>		
 				</select>			
@@ -151,19 +150,17 @@ $().ready(function() {
 					dataType : 'json',
 					method : 'post',
 					success : function(data){
-// 						console.log("result : " + data.resultCode + ", " + data.resultMsg);
-// 						console.log("result : " + data.status + ", " + data.result + ', ' + data.result.length);
 						var status = data.status;
 						
 						if(status == 'REGIST_0000'){
-							location.href = '/user/registOk';	//$("#prevPage").val();
+							location.replace('/user/registOk');	//$("#prevPage").val();
 						}else{
 							var result = data.result;
+							console.log(result);
 							var length = result.length;
 							if(result != null && length > 0){
 
 								for(var i = 0 ; i < length ; i++){
-//	 								console.log(result[i].field + ", " + result[i].defaultMessage +", " + result[i].code);
 									$("#" + result[i].field+"Err").html(result[i].defaultMessage);
 									$("#" + result[i].field+"Err").show();
 								}

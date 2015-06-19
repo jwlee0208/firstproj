@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -17,6 +16,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.app.VelocityEngine;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.velocity.VelocityEngineUtils;
@@ -51,6 +51,9 @@ public class UserController {
 	
     @Inject
     private VelocityEngine velocityEngine;
+    
+    @Inject
+    private MessageSourceAccessor messageSource;
 
 	
 	
@@ -117,6 +120,8 @@ public class UserController {
     @ResponseBody	
     public JsonResponse registUser2(Model model, HttpServletRequest request, @ModelAttribute UserDto userDto, BindingResult result) throws Exception{
                 
+        log.info("[ UserController.registAction() ][ userDto.toString() ] : " + userDto.toString()); 
+        
         JsonResponse returnObj = new JsonResponse();
         
         UserValidator.insertValidate(result, userDto);
@@ -142,7 +147,9 @@ public class UserController {
             if(duplicatedUser == null){
                 registResult = this.userService.insertUserInfo(userDto);
                
-                if(registResult > 0){                    
+                if(registResult > 0){  
+                    log.info("[ UserController.registAction() ][ userDto.toString() ][ 2nd ] : " + userDto.toString()); 
+                    
                     resultCode  = "REGIST_0000";
                     resultMsg   = "complelted";       
                     
@@ -154,10 +161,24 @@ public class UserController {
                     mailInfo.setMailSubject("[Tryout.com] Congraturation! Happy join us!!");
                     mailInfo.setTemplateName("welcomeJoinningTemplate.vm");
                     
+                    log.info("[ UserController.registAction() ][ userDto.getLanguage() ] : " + userDto.getLanguage());
+                    log.info("[ UserController.registAction() ][ new Locale(userDto.getLanguage()) ] : " + new Locale(userDto.getLanguage()));
                     
-                    ResourceBundle resourceBundle = (userDto.getLanguage() != null) ? ResourceBundle.getBundle("Locale", new Locale(userDto.getLanguage())) : ResourceBundle.getBundle("Locale");
                     
-                    String welcomeMsg = new String(resourceBundle.getString("welcome.message").getBytes("8859_1"), "UTF-8");
+                    // 메시지 다국어 처리
+                    String welcomeMsg = null;
+                    
+                    try{
+                        welcomeMsg = messageSource.getMessage("welcome.joinning", new Locale(userDto.getLanguage())); 
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        log.error("[ UserController.registAction() ][ welcomeMsg ] Error Occured...");
+                        welcomeMsg = "Welcome!!!";
+                    }
+                            //new String(resourceBundle.getString("welcome.joinning").getBytes("8859_1"), "UTF-8");
+                    
+                    log.info("[ UserController.registAction() ][ welcomeMsg ] : " + welcomeMsg);
+                    
                     // Velocity Template 에 Mapping할 Data Map
                     Map<String, Object> contentMap = new HashMap<String, Object>();
                     contentMap.put("mailTo"         , mailInfo.getMailTo());
@@ -194,7 +215,7 @@ public class UserController {
 
         }
 
-        model.addAttribute("userInfo", this.userService.selectUserInfo(userDto));
+//        model.addAttribute("userInfo", this.userService.selectUserInfo(userDto));
         return returnObj;
     }
 	
