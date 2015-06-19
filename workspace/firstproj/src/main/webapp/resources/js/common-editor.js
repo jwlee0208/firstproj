@@ -68,7 +68,7 @@ function contentsMakeEditorInit(){
 }
 //이미지 버튼 클릭시 팝업 실제 파일업로드를 구성하여 링크할 경로를 작성한다( 아이콘클릭시 이 함수가 호출됨)
 function cmdImgUploadPop(){
- var win = window.open("imageUpload.pop?cmd=editorImg",
+ var win = window.open("popImageUpload/editorImg",
        "editor_win",
        "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,width=700,height=500,left=50,top=50"
   );
