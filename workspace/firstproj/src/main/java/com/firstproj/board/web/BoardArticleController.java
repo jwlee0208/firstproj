@@ -13,9 +13,6 @@ import javax.validation.Valid;
 import net.sf.json.JSONObject;
 
 import org.jboss.logging.Param;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -64,11 +61,11 @@ public class BoardArticleController {
 	private EditorController editorController;
 	
 	// spring-data-redis 사용.
-	@Autowired
-	private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
+//	@Autowired
+//	private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
 	// spring-data-redis 사용.
-	@Resource(name="redisTemplate")
-	private ValueOperations<String, List<BoardArticleDto>> valueOps;
+//	@Resource(name="redisTemplate")
+//	private ValueOperations<String, List<BoardArticleDto>> valueOps;
 
 	/**
 	 * 게시글 목록 조회
@@ -123,31 +120,31 @@ public class BoardArticleController {
 		List<BoardArticleDto> boardArticleList;	
 		int totalListCnt = 0;
 
-		try{
-			
-			boardArticleList = valueOps.get("selectBoardArticle"+boardId+"ListAll");
-			totalListCnt = boardArticleList.size();
-			
-			System.out.println(">>> redis pagedList print");
-			
-		}catch(Exception e){
+//		try{
+//			
+//			boardArticleList = valueOps.get("selectBoardArticle"+boardId+"ListAll");
+//			totalListCnt = boardArticleList.size();
+//			
+//			System.out.println(">>> redis pagedList print");
+//			
+//		}catch(Exception e){
 			BoardArticleDto boardArticleObj = new BoardArticleDto();
 			boardArticleObj.setBoardId(boardId);
 			
 			boardArticleList = boardArticleService.getBoardArticleList(boardArticleObj);
 			totalListCnt = boardArticleList.size();	
 			
-			valueOps.set("selectBoardArticle"+boardId+"ListAll", boardArticleList);
+//			valueOps.set("selectBoardArticle"+boardId+"ListAll", boardArticleList);
 			
 			System.out.println(">>> redis pagedList setted");
 			
 			model = this.getBoardCommonList(request, model, boardArticleDto);
 			
-			return model;
-			
-		}finally{
-			
-		}
+//			return model;
+//			
+//		}finally{
+//			
+//		}
 		
 		int startRow = (pageNo - 1) * listRowCnt;
 		int endRow 	 = pageNo * listRowCnt;
@@ -155,12 +152,12 @@ public class BoardArticleController {
 		List<BoardArticleDto> pagedArticleList = new ArrayList<BoardArticleDto>();
 		
 		if(null != boardArticleList){
-			BoardArticleDto boardArticleObj;
+			BoardArticleDto boardArticleObjt;
 			for(int i = 0; i < boardArticleList.size() ; i++){
 				
 				if((startRow - 1) <= i && i <= (endRow - 1)){					
-					boardArticleObj = boardArticleList.get(i);
-					pagedArticleList.add(boardArticleObj);
+					boardArticleObjt = boardArticleList.get(i);
+					pagedArticleList.add(boardArticleObjt);
 				}
 			}
 		}
@@ -321,16 +318,16 @@ public class BoardArticleController {
 			}			
 			
 			// 게시글 데이터 하나씩 추가될 때마다 redis 키값에 저장된 리스트 데이터 삭제 후 데이터 재설정하는 부분 
-			try{
-	            valueOps.set("selectBoardArticle"+ boardId +"ListAll", null);
-	            
-	            BoardArticleDto boardArticleObj = new BoardArticleDto();
-	            boardArticleObj.setBoardId(boardId);
-	                
-	            valueOps.set("selectBoardArticle"+ boardId +"ListAll", boardArticleService.getBoardArticleList(boardArticleObj));
-			}catch(Exception e){
-			    e.printStackTrace();
-			}
+//			try{
+//	            valueOps.set("selectBoardArticle"+ boardId +"ListAll", null);
+//	            
+//	            BoardArticleDto boardArticleObj = new BoardArticleDto();
+//	            boardArticleObj.setBoardId(boardId);
+//	                
+//	            valueOps.set("selectBoardArticle"+ boardId +"ListAll", boardArticleService.getBoardArticleList(boardArticleObj));
+//			}catch(Exception e){
+//			    e.printStackTrace();
+//			}
 		}
 		
 		jsonObj.put("result", (insertResult > 0) ? true : false);
@@ -384,16 +381,16 @@ public class BoardArticleController {
 		
 		if(insertResult > 0){
 	          // 게시글 데이터 하나씩 추가될 때마다 redis 키값에 저장된 리스트 데이터 삭제 후 데이터 재설정하는 부분 
-            try{
-                valueOps.set("selectBoardArticle"+ boardId +"ListAll", null);
-                
-                BoardArticleDto boardArticleObj = new BoardArticleDto();
-                boardArticleObj.setBoardId(boardId);
-                    
-                valueOps.set("selectBoardArticle"+ boardId +"ListAll", boardArticleService.getBoardArticleList(boardArticleObj));
-            }catch(Exception e){
-                e.printStackTrace();
-            }
+//            try{
+//                valueOps.set("selectBoardArticle"+ boardId +"ListAll", null);
+//                
+//                BoardArticleDto boardArticleObj = new BoardArticleDto();
+//                boardArticleObj.setBoardId(boardId);
+//                    
+//                valueOps.set("selectBoardArticle"+ boardId +"ListAll", boardArticleService.getBoardArticleList(boardArticleObj));
+//            }catch(Exception e){
+//                e.printStackTrace();
+//            }
 
 		}
 		

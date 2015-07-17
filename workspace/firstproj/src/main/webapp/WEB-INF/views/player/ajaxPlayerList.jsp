@@ -6,7 +6,9 @@
 
 <c:choose>
 	<c:when test="${empty playerList}">
+		<div class="table-responsive">
 			<p class="text-warning">There is no data.</p>
+		</div>	
 	</c:when>
 	<c:otherwise>
 		<div class="table-responsive">

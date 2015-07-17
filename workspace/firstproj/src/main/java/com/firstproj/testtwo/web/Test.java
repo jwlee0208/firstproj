@@ -3,6 +3,7 @@ package com.firstproj.testtwo.web;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
@@ -67,6 +68,9 @@ public class Test {
 	public static void main(String[] args) throws Exception{
 		// Testing compareTo method
 //		Test.checkoutCompareWay();
-		Test.solution("ABBCC");
+//		Test.solution("ABBCC");
+	    String mail = new String(Base64.encodeBase64("jwlee0208@gmail.com".getBytes()));
+//		System.out.println(mail +", " + new String(Base64.decodeBase64(Base64.encodeBase64("jwlee0208@gmail.com".getBytes())))+", " + new String(Base64.decodeBase64(Base64.encodeBase64("andsZWUwMjA4QGdtYWlsLmNvbQ=="))));
+//		System.out.println(Base64.encodeBase64("jw22642912".getBytes()));
 	}	
 }

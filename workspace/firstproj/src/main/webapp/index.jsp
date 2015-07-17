@@ -16,5 +16,5 @@
 <!-- 	</body> -->
 <!-- </html> -->
 <%
-	response.sendRedirect("/home");
+	response.sendRedirect("/home3/0");
 %>

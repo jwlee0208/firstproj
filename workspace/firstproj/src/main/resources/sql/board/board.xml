@@ -15,13 +15,13 @@
 		<!-- 페이징 위한 리스트 갯수 조회 -->    
 		<select id="selectListCount" parameterType="searchCondition" resultType="Integer">        
 			SELECT count(*) AS totalCnt         
-			FROM test.tb_board         
+			FROM tb_board         
 			<include refid="searchConditionSql"/>    
 		</select>      
 
 		
 		<insert id="insertBoardInfo" parameterType="board.boardDto" useGeneratedKeys="true" keyProperty="boardId">
-			INSERT INTO test.TB_BOARD
+			INSERT INTO TB_BOARD
 			( board_name
 			, board_type
 			, create_user_id
@@ -36,7 +36,7 @@
 		</insert>
 		
 		<update id="updateBoardInfo" parameterType="board.boardDto">
-			UPDATE test.TB_BOARD
+			UPDATE TB_BOARD
 				SET
 					board_name 			= #{boardName} ,
 					board_type 			= #{boardType} ,
@@ -86,7 +86,7 @@
 				    modify_user_id,
 				    modify_user_name,
 				    modify_date
-			FROM test.TB_BOARD		
+			FROM TB_BOARD		
 		</sql>
 		
 		<sql id="searchConditionSql">

@@ -78,6 +78,13 @@
 			</c:choose>
 		</div>
 		<div id="listDiv"></div>	
+	<c:if test="${!isRegisted}">
+		<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
+			<div class="btn-group">
+				<input type="button" class="btn btn-default pull-right" value="프로필쓰기" name="goToRegist" />
+			</div>
+		</div>		
+	</c:if>
 		
 	</div>	
 </div>

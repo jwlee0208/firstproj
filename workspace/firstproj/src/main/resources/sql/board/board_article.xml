@@ -5,7 +5,7 @@
     
     <mapper namespace="sql.boardArticle">
         <insert id="insertArticleInfo" parameterType="board.boardArticleDto" useGeneratedKeys="true" keyProperty="articleId">
-            INSERT INTO test.TB_BOARD_ARTICLE
+            INSERT INTO TB_BOARD_ARTICLE
 				(
 				board_id,
 				title,
@@ -41,7 +41,7 @@
 		<!-- 페이징 위한 리스트 갯수 조회 -->    
 		<select id="selectListCount" resultType="Integer" parameterType="searchCondition">        
 			SELECT count(*) AS totalCnt         
-			FROM test.tb_board_article         
+			FROM TB_BOARD_ARTICLE         
 			<include refid="searchConditionSql"/>    
 
 		</select>      
@@ -97,7 +97,7 @@
 			    author_id,
 			    author_nm,
 			    create_date
-			FROM test.TB_BOARD_ARTICLE
+			FROM TB_BOARD_ARTICLE
 		</sql>
 		<sql id="searchConditionSql">
 			WHERE 1 = 1	
@@ -107,22 +107,22 @@
 				<if test="searchCondition != null and searchCondition != ''">
 					<if test="searchCondition == 'title'">
 						<if test="searchText != null and searchText != ''">
-						and MATCH(title) AGAINST(CONCAT('*',#{searchText},'*') in boolean mode);
-<!-- 						and title 	like CONCAT('%', #{searchText}, '%') -->
+<!-- 						and MATCH(title) AGAINST(CONCAT('*',#{searchText},'*') in boolean mode); -->
+						and title 	like CONCAT('%', #{searchText}, '%')
 						</if> 
 					</if>
 					<if test="searchCondition == 'content'">
 						<if test="searchText != null and searchText != ''">
-						and MATCH(content) AGAINST(CONCAT('*',#{searchText},'*') in boolean mode);
-<!-- 						and content like CONCAT('%', #{searchText}, '%') -->
+<!-- 						and MATCH(content) AGAINST(CONCAT('*',#{searchText},'*') in boolean mode); -->
+						and content like CONCAT('%', #{searchText}, '%')
 						</if>
 					</if>
 					<if test="searchCondition == 'titleNcontent'">
 						<if test="searchText != null and searchText != ''">
-						and MATCH(title, content) AGAINST(CONCAT('*',#{searchText},'*') in boolean mode);
-<!-- 						and (title 	 like CONCAT('%', #{searchText}, '%')  -->
-<!-- 						     or  -->
-<!-- 						     content like CONCAT('%', #{searchText}, '%')) -->
+<!-- 						and MATCH(title, content) AGAINST(CONCAT('*',#{searchText},'*') in boolean mode); -->
+						and (title 	 like CONCAT('%', #{searchText}, '%') 
+						     or 
+						     content like CONCAT('%', #{searchText}, '%'))
 						</if>     
 					</if>
 				</if>

@@ -514,6 +514,18 @@ public class PlayerController {
     @RequestMapping("/playerPortal/{menuId}")
     public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session, @PathVariable int menuId){
 
+        boolean isRegisted  = false;
+        UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+        
+        if(sessionInfo != null){
+            try {
+                isRegisted = this.playerService.getIsRegistedPlayer(sessionInfo);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
         searchPlayerDto.setListSize(3);
         searchPlayerDto.setPageSize(10);
 

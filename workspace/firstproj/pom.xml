@@ -94,6 +94,13 @@
 			<version>${spring-framework.version}</version>
 		</dependency>
 
+		<!--  SFTP -->
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.50</version>
+		</dependency>
+
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

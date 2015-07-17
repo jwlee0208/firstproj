@@ -6,9 +6,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,11 +29,11 @@ public class HomeController {
 	private BoardArticleRedisServiceImpl boardArticleRedisService;	
 
 	// spring-data-redis 사용.
-	@Autowired
-	private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
+//	@Autowired
+//	private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
 	// spring-data-redis 사용.
-	@Resource(name="redisTemplate")
-	private ValueOperations<String, List<BoardArticleDto>> valueOps;
+//	@Resource(name="redisTemplate")
+//	private ValueOperations<String, List<BoardArticleDto>> valueOps;
 
 	
 	@RequestMapping(value="/home")
@@ -154,34 +151,34 @@ public class HomeController {
 		List<BoardArticleDto> getBoardArticleFive01 = null;
 		
 //		ListOperationredisTemplate.opsForList();
-		try{
-			List<BoardArticleDto> boardArticleFive01 = valueOps.get("boardFive01List");
-			
-			if(null != boardArticleFive01){
-			    logger.info(boardArticleFive01);
+//		try{
+//			List<BoardArticleDto> boardArticleFive01 = valueOps.get("boardFive01List");
+//			
+//			if(null != boardArticleFive01){
+//			    logger.info(boardArticleFive01);
+//				
+//				model.addAttribute("articleFive01", boardArticleFive01);
+//				logger.info(">>> redis printed. dataTypeOf : " + boardArticleFive01.getClass());
+//			}else{
+//				boardDto01.setBoardId(1);
+//				getBoardArticleFive01 = this.boardArticleService.selectBoardArticleFive(boardDto01);
 				
-				model.addAttribute("articleFive01", boardArticleFive01);
-				logger.info(">>> redis printed. dataTypeOf : " + boardArticleFive01.getClass());
-			}else{
-				boardDto01.setBoardId(1);
-				getBoardArticleFive01 = this.boardArticleService.selectBoardArticleFive(boardDto01);
-				
-				valueOps.set("boardFive01List", getBoardArticleFive01);
-				model.addAttribute("articleFive01", getBoardArticleFive01);
-				logger.info(">>> redis setted");
-			}
-			
-		}catch(Exception e){
+//				valueOps.set("boardFive01List", getBoardArticleFive01);
+//				model.addAttribute("articleFive01", getBoardArticleFive01);
+//				logger.info(">>> redis setted");
+//			}
+//			
+//		}catch(Exception e){
 			boardDto01.setBoardId(1);
 			getBoardArticleFive01 = this.boardArticleService.selectBoardArticleFive(boardDto01);
 logger.info("is Null : " + (null == getBoardArticleFive01));			
-			valueOps.set("boardFive01List", getBoardArticleFive01);
+//			valueOps.set("boardFive01List", getBoardArticleFive01);
 			model.addAttribute("articleFive01", getBoardArticleFive01);
 			System.out.println(">>> redis setted");
-			e.printStackTrace();
-		}finally{
-			
-		}
+//			e.printStackTrace();
+//		}finally{
+//			
+//		}
 		
 		BoardArticleDto boardDto02 = new BoardArticleDto();
 		boardDto02.setBoardId(2);

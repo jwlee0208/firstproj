@@ -43,7 +43,7 @@ public class EditorController extends BaseController {
 		return "/common/popImageUpload"; 
 	}
 	
-	@RequestMapping(value = {"/{path}/imageuploadaction", "/{path1}/{path2}/imageuploadaction"}, method=RequestMethod.POST)
+	@RequestMapping(value = {"/{path}/imageuploadaction", "/{path1}/{path2}/imageuploadaction", "/{path1}/{path2}/{path3}/imageuploadaction"}, method={RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public StringBuffer imageadd(MultipartFile imageFile) throws Exception {
 		
@@ -92,7 +92,7 @@ public class EditorController extends BaseController {
 	}
 	
 	
-	@RequestMapping(value = {"/{path}/imagedeleteaction", "/{path1}/{path2}/imagedeleteaction"}, method=RequestMethod.POST)
+	@RequestMapping(value = {"/{path}/imagedeleteaction", "/{path1}/{path2}/imagedeleteaction", "/{path1}/{path2}/{path3}/imagedeleteaction"}, method=RequestMethod.POST)
 	@ResponseBody
     public String imagedelete(String fileName, Model model) throws Exception {
     	String realPath = servletContext.getRealPath("/resources" + fileName);

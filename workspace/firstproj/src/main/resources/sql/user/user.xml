@@ -5,7 +5,7 @@
     
     <mapper namespace="sql.user">
         <insert id="insertUserInfo" parameterType="user.userDto"> 
-			INSERT INTO test.TB_USER
+			INSERT INTO TB_USER
 				(user_id,
 				user_nm,
 				passwd,
@@ -47,7 +47,7 @@
 		    	nationality,
 		    	language,
 		    	join_date 
-		    FROM test.TB_USER
+		    FROM TB_USER
 		    WHERE user_id = #{userId}
 		</select>
 		

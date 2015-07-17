@@ -3,7 +3,7 @@ function goList(boardId){
 	location.href = "/board/article/list/" + boardId + "/" + menuId;
 }
 function goHome(){
-	location.href = "/home/0";
+	location.href = "/home3/0";
 }
 
 function goInfo(){

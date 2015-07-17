@@ -209,4 +209,24 @@ System.out.println(" >>> imageType : " + imageType);
         }	
 		return 1;
 	}
+	
+	public void remoteUpload(String thumbnailUrl, String fileRealPath, File file) throws Exception {
+	        if ("live".equals(PropertiesConfig.getInstance().getServerConfig("mode"))) {
+	            //remote upload
+	            String destionUrl = PropertiesConfig.getInstance().getServerConfig("remote.thumbnail.path");
+	            destionUrl += thumbnailUrl;
+	            logger.info("[destionuRL]" + destionUrl);
+	            SftpUtil sftpUtil = new SftpUtil();
+	            sftpUtil.init((String)PropertiesConfig.getInstance().getServerConfig("uploadserver.ip")
+	                    ,(String)PropertiesConfig.getInstance().getServerConfig("uploadserver.id")
+	                    ,(String)PropertiesConfig.getInstance().getServerConfig("uploadserver.password")
+	                    ,Integer.parseInt(PropertiesConfig.getInstance().getServerConfig("uploadserver.port")));
+	            
+	            sftpUtil.makeFolder(destionUrl);
+
+	            sftpUtil.upload(destionUrl, new File(fileRealPath));
+	            sftpUtil.disconnection();
+	        }
+	 }
+
 }

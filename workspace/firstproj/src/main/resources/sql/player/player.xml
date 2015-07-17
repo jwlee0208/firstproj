@@ -9,18 +9,18 @@
 		</select>
 		<!--  카테고리 조회 -->
 		<select id="selectCategoryList" parameterType="player.categoryDto" resultType="player.categoryDto">
-			select 
+			SELECT 
 					cat_id
 				  , parent_cat_id
 				  , cat_name
-			 from tb_category 
-			 where 1 = 1
+			FROM TB_CATEGORY 
+			WHERE 1 = 1
 			 <choose>
 			 	<when test="parentCatId > 0">
-			 	and parent_cat_id = #{parentCatId}
+			  AND parent_cat_id = #{parentCatId}
 			 	</when>
 				<otherwise>
-				and parent_cat_id = 0	
+			  AND parent_cat_id = 0	
 				</otherwise>			 
 			 </choose>
 		</select>	
@@ -32,8 +32,8 @@
 				  , a.attr_name
 				  , ae.attr_elem_id
 				  , ae.attr_elem_name 
-			FROM tb_attr a 
-			LEFT JOIN tb_attr_elem ae ON a.attr_id = ae.attr_id
+			FROM TB_ATTR a 
+			LEFT JOIN TB_ATTR_ELEM ae ON a.attr_id = ae.attr_id
 			WHERE a.cat_id = #{catId} 
 		</select>
 		
@@ -49,9 +49,9 @@
 		<!-- 페이징 위한 리스트 갯수 조회 -->    
 		<select id="selectListCount" resultType="Integer" parameterType="player.searchConditionPlayer">        
 			SELECT count(*) AS totalCnt         
-			FROM 		tb_attr 			a 		
-			LEFT JOIN 	tb_attr_elem 		ae 		ON a.attr_id = ae.attr_id
-			LEFT JOIN 	tb_attr_elem_map  	aem 	ON ae.attr_elem_id = aem.attr_elem_id
+			FROM 		TB_ATTR 			a 		
+			LEFT JOIN 	TB_ATTR_ELEM 		ae 		ON a.attr_id = ae.attr_id
+			LEFT JOIN 	TB_ATTR_ELEM_MAP  	aem 	ON ae.attr_elem_id = aem.attr_elem_id
         
 			<include refid="searchConditionSql"/>    
 			<!-- 
@@ -151,8 +151,8 @@
 				  , count(pi.user_id) 	as searchCntPerCat
 			from tb_player_info 	pi
 			left join tb_user 		u 	on u.user_id = pi.user_id 
-			left join tb_category 	c1 	on c1.cat_id = pi.cat_id1
-			left join tb_category 	c2 	on c2.cat_id = pi.cat_id2
+			left join TB_CATEGORY 	c1 	on c1.cat_id = pi.cat_id1
+			left join TB_CATEGORY 	c2 	on c2.cat_id = pi.cat_id2
 			where 1 = 1
 			<if test='searchCondition == "userName"'>
 				<if test='searchText != null and searchText != ""'>
@@ -284,7 +284,7 @@
 				and (pi.cat_id1 = #{catId} 
 				  or pi.cat_id2 = #{catId} 
 				  or pi.cat_id2 in (select cat_id 
-				  				    from tb_category 
+				  				    from TB_CATEGORY 
 				  				    where parent_cat_id = #{catId}))    
 				</if>
 				
@@ -330,27 +330,27 @@
 						<if test='searchText != null and searchText != ""'>
 <!-- 						and aem.user_name 	like CONCAT('%', #{searchText}, '%') -->
 <!-- 							and u.user_nm 	like CONCAT('%', #{searchText}, '%') -->
-				and MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
+				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
 						</if> 
 					</if>
 			
 				
 				<if test="categoryInfo.parentCatId > 0">
-				and (pi.cat_id1 = #{categoryInfo.parentCatId}  
-				  or pi.cat_id2 in (select cat_id 
-				  				    from tb_category 
+				AND (pi.cat_id1 = #{categoryInfo.parentCatId}  
+				  OR pi.cat_id2 IN (select cat_id 
+				  				    from TB_CATEGORY 
 				  				    where parent_cat_id = #{categoryInfo.parentCatId}))    
 				</if>
 				<if test="categoryInfo.catId > 0">
-				and pi.cat_id2 = #{categoryInfo.catId}
+				AND pi.cat_id2 = #{categoryInfo.catId}
 				</if>
 			<if test="catAttrElemInfos != null">
 				<foreach collection="catAttrElemInfos" item="parentAttribute">
 					<if test="parentAttribute.childCatAttrElemInfos != null">
 				AND 
 					EXISTS (SELECT 1 
-							FROM tb_attr_elem_map aem
-							JOIN tb_attr_elem     ae
+							FROM TB_ATTR_ELEM_MAP aem
+							JOIN TB_ATTR_ELEM     ae
 							WHERE aem.attr_elem_id 	= ae.attr_elem_id
 							  AND aem.user_id 		= u.user_id
 							  AND ae.attr_id 		= #{parentAttribute.attrId}
@@ -391,8 +391,8 @@
 				  , pi.introduce
 			FROM TB_PLAYER_INFO 		pi
 			LEFT JOIN TB_USER 			U 		ON pi.user_id 		= U.user_id	
-			LEFT JOIN TB_CATEGORY 		C1 		ON pi.cat_id1 		= C1.CAT_ID
-			LEFT JOIN TB_CATEGORY 		C2 		ON pi.CAT_ID2 		= C2.CAT_ID
+			LEFT JOIN TB_CATEGORY 		c1 		ON pi.cat_id1 		= c1.CAT_ID
+			LEFT JOIN TB_CATEGORY 		c2 		ON pi.CAT_ID2 		= c2.CAT_ID
 			LEFT JOIN TB_ATTR_ELEM 		ae 		ON pi.cat_id2 		= ae.cat_id
 			LEFT JOIN TB_ATTR_ELEM_MAP 	aem 	ON ae.attr_elem_id 	= aem.attr_elem_id 
 										  	   and pi.user_id 		= aem.user_id
@@ -445,7 +445,7 @@
 		
 		<!-- player detail info -->
 		<select id="selectPlayerInfoDetail" parameterType="user.userDto" resultMap="playerDetailMap">
-			select 
+			SELECT
 			        pi.player_info_id
 			      , pi.profile_img_file_path 
 			      , pi.profile_img_name 
@@ -461,14 +461,14 @@
 				  , ae.attr_elem_name
 				  , pvl.link_url
 				  , pi.introduce  
-			from tb_user u
-			inner join tb_player_info pi on u.user_id = pi.user_id
-			left join tb_player_video_link pvl on pi.player_info_id = pvl.player_info_id
-			left join tb_attr_elem_map aem on pi.user_id = aem.user_id
-			inner join tb_category cat1 on pi.cat_id1 = cat1.cat_id
-			inner join tb_category cat2 on pi.cat_id2 = cat2.cat_id
-			inner join tb_attr_elem ae  on aem.attr_elem_id = ae.attr_elem_id
-			where u.user_id = #{userId};		
+			FROM TB_USER u
+			INNER JOIN TB_PLAYER_INFO 	   		pi 		ON u.user_id 		 = pi.user_id
+			LEFT  JOIN TB_PLAYER_VIDEO_LINK 	pvl 	ON pi.player_info_id = pvl.player_info_id
+			LEFT  JOIN TB_ATTR_ELEM_MAP 		aem 	ON pi.user_id 		 = aem.user_id
+			INNER JOIN TB_CATEGORY 				cat1 	ON pi.cat_id1 		 = cat1.cat_id
+			INNER JOIN TB_CATEGORY 				cat2 	ON pi.cat_id2 		 = cat2.cat_id
+			INNER JOIN TB_ATTR_ELEM 			ae  	ON aem.attr_elem_id  = ae.attr_elem_id
+			WHERE u.user_id = #{userId}		
 		</select>
 		
 		<resultMap type="player.playerInfoDto" id="playerDetailMap">
