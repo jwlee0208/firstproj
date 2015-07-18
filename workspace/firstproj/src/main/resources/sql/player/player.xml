@@ -9,7 +9,7 @@
 		</select>
 		<!--  카테고리 조회 -->
 		<select id="selectCategoryList" parameterType="player.categoryDto" resultType="player.categoryDto">
-			SELECT 
+			SELECT 	
 					cat_id
 				  , parent_cat_id
 				  , cat_name
