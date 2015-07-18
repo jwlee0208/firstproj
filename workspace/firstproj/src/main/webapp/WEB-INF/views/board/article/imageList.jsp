@@ -27,11 +27,6 @@
 	  <li class="secondBranch active">${boardName}</li>
 	</ol>		
 		
-	
-			
-	
-	
-<!-- 	<h3 class="sub-header">글 목록</h3> -->
 	<form id="boardFrm" name="boardFrm" method="post">
 	
 	<!-- 리스트에서 선택된 게시글 아이디 -->
@@ -72,10 +67,6 @@
 		<input type="hidden" id="startPageNo" 	name="startPageNo" 	value="${pagedResult.startPageNo}" /> 
 		<input type="hidden" id="pageSize" 		name="pageSize" 	value="${pagedResult.pageSize}" />
 
-		
-		
-		
-			
 <c:choose>
 	<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
 		<c:forEach var="content" items="${pagedResult.list}" varStatus="index">		
@@ -83,8 +74,8 @@
 				<div class="thumbnail">
 					
 			<c:choose>
-				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img src="${pageContext.request.contextPath}${content.filePath}" alt="" class="img-thumbnail" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal"/></c:when>
-				<c:otherwise><img data-src="holder.js/250x250?auto=yes&theme=social" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="img-thumbnail" onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal"/></c:otherwise>
+				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img data-src="holder.js/250x250?auto=yes&theme=social" src="${pageContext.request.contextPath}${content.filePath}" alt="" class="img-thumbnail" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal"/></c:when>
+				<c:otherwise><img data-src="holder.js/250x250?auto=yes&theme=social" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="img-thumbnail" onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal"/></c:otherwise>
 			</c:choose>					
 					
 					<div class="caption">
@@ -92,7 +83,7 @@
 						<p class="content_${index.count}" style="text-overflow:ellipsis; overflow:hidden;">
 							<c:if test="${content.content eq null || content.content eq ''}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11</c:if>
 							<c:if test="${content.content ne null && content.content ne ''}">
-								<span onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal">${fn:substring(content.contentText, 0, 31)}...</span>
+								<span onclick="javascript:goArticleView('${content.articleId}', 'noPopup');" data-toggle="modal" data-target="#myModal">${fn:substring(content.contentText, 0, 31)}...</span>
 							</c:if>
 						</p>
 						<p><span class="btn btn-default" role="button" onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal">상세보기</span></p>
@@ -153,15 +144,20 @@ $().ready(function(){
 	});
 });
 	
-function goArticleView(articleId){
-	$.ajax({
-		url : '/board/article/view',
-		data : {selectedArticleId : articleId},
-		dataType : 'html',
-		success : function(data){
-			$('.modal-title').html(($(data).find(".panel-title").html()));
-			$('.modal-body').html(($(data).find(".panel-body").html()));
-		}
-	});
+function goArticleView(articleId, type){
+	
+	if(type == 'popup'){
+		$.ajax({
+			url : '/board/article/view',
+			data : {selectedArticleId : articleId},
+			dataType : 'html',
+			success : function(data){
+				$('.modal-title').html(($(data).find(".panel-title").html()));
+				$('.modal-body').html(($(data).find(".panel-body").html()));
+			}
+		});		
+	}else{
+		goView(articleId);		
+	}
 }	
 </script>

@@ -73,7 +73,7 @@
 		
 		<select id="checkIsRegisted" resultType="Integer" parameterType="user.userDto">
 			SELECT count(*) 
-			FROM tb_player_info 
+			FROM TB_PLAYER_INFO 
 			WHERE user_id = #{userId}
 		</select>
 		
@@ -143,42 +143,42 @@
 		
 		<!-- playerInfo 검색 리스트 조회 -->
 		<select id="selectSearchCountListPerCategory" resultType="player.playerInfoSearchDto" parameterType="player.searchConditionPlayer">
-			select 
+			SELECT 
 					c1.cat_id 			as catId1
 				  , c1.cat_name 		as catNm1
 				  , c2.cat_id 			as catId2
 				  , c2.cat_name 		as catNm2
 				  , count(pi.user_id) 	as searchCntPerCat
-			from tb_player_info 	pi
-			left join tb_user 		u 	on u.user_id = pi.user_id 
-			left join TB_CATEGORY 	c1 	on c1.cat_id = pi.cat_id1
-			left join TB_CATEGORY 	c2 	on c2.cat_id = pi.cat_id2
-			where 1 = 1
+			FROM TB_PLAYER_INFO 	pi
+			LEFT JOIN TB_USER 		u 	ON u.user_id = pi.user_id 
+			LEFT JOIN TB_CATEGORY 	c1 	ON c1.cat_id = pi.cat_id1
+			LEFT JOIN TB_CATEGORY 	c2 	ON c2.cat_id = pi.cat_id2
+			WHERE 1 = 1
 			<if test='searchCondition == "userName"'>
 				<if test='searchText != null and searchText != ""'>
 <!-- 			  and u.user_nm like CONCAT('%', #{searchText}, '%') -->
-				and MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
+				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
 			  	</if>
 			</if>  	
-			group by c1.cat_id, c1.cat_name, c2.cat_id, c2.cat_name
-			order by u.user_nm
+			GROUP BY c1.cat_id, c1.cat_name, c2.cat_id, c2.cat_name
+			ORDER BY u.user_nm
 		</select>
 		
 		
 		<!-- autoComplete -->
 		<select id="selectAutoComplete" resultType="String" parameterType="player.searchConditionPlayer">
-			select user_nm 
-			from tb_user u
-			left join tb_player_info pi on pi.user_id = u.user_id
+			SELECT user_nm 
+			FROM TB_USER u
+			LEFT JOIN TB_PLAYER_INFO pi ON pi.user_id = u.user_id
 			where 1 = 1
 <!-- 			and u.user_nm like concat('%', #{searchText}, '%') -->
-				and MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
-			order by user_nm
+				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
+			ORDER BY user_nm
 		</select>
 		
 		
 		<sql id="selectAttrElemMapDefault">
-			select a.cat_id
+			SELECT a.cat_id
 				 , a.attr_id
 				 , a.attr_name
 				 , ae.attr_elem_id
@@ -188,10 +188,10 @@
 				 , aem.attr_elem_map_id
 				 , aem.attr_elem_map_name 
 				 , aem.create_date
-			FROM 		tb_attr 			a 						
-			INNER JOIN 	tb_attr_elem 		ae 		on a.attr_id = ae.attr_id
-			INNER JOIN 	tb_attr_elem_map  	aem 	on ae.attr_elem_id = aem.attr_elem_id
-			INNER JOIN  tb_user				u		ON aem.user_id = u.user_id		
+			FROM 		TB_ATTR 			a 						
+			INNER JOIN 	TB_ATTR_ELEM 		ae 		ON a.attr_id = ae.attr_id
+			INNER JOIN 	TB_ATTR_ELEM_MAP  	aem 	ON ae.attr_elem_id = aem.attr_elem_id
+			INNER JOIN  TB_USER				u		ON aem.user_id = u.user_id		
 		</sql>
 		
 				<!-- 페이징 처리를 위한 검색 조건 -->
@@ -199,7 +199,7 @@
 			WHERE 1 = 1
 				<if test='searchCondition == "userName"'>
 					<if test='searchText != null and searchText != ""'>
-				AND aem.user_name 	like CONCAT('%', #{searchText}, '%')
+				AND aem.user_name 	LIKE CONCAT('%', #{searchText}, '%')
 					</if> 
 				</if>
 				<if test="catId > 0">
@@ -211,8 +211,8 @@
 					<if test="parentAttribute.childCatAttrElemInfos != null">
 				AND 
 					EXISTS (SELECT 1 
-							FROM tb_attr_elem_map aem
-							JOIN tb_attr_elem     ae
+							FROM TB_ATTR_ELEM_MAP aem
+							JOIN TB_ATTR_ELEM     ae
 							WHERE aem.attr_elem_id 	= ae.attr_elem_id
 							  AND aem.user_id 		= u.user_id
 							  AND ae.attr_id 		= #{parentAttribute.attrId}
@@ -245,14 +245,14 @@
 			WHERE 1 = 1
 				<if test='searchCondition == "userName"'>
 					<if test='searchText != null and searchText != ""'>
-					and aem.user_name 	like CONCAT('%', #{searchText}, '%')
+					AND aem.user_name 	like CONCAT('%', #{searchText}, '%')
 					</if> 
 				</if>
 				<if test="catId1 > 0">
-				and a.cat_id = #{catId1}    
+				AND a.cat_id = #{catId1}    
 				</if>
 				<if test="catId2 > 0">
-				and a.cat_id = #{catId2}    
+				AND a.cat_id = #{catId2}    
 				</if>
 				
 <!-- 				<if test="attrId > 0"> -->
@@ -266,7 +266,7 @@
 <!-- 					        #{item} -->
 <!-- 					</foreach>				     -->
 <!-- 				</if>    -->
-				and aem.attr_elem_map_id > 0  	    
+				AND aem.attr_elem_map_id > 0  	    
 		</sql> 
 
 		<sql id="searchConditionPlayerSql">
@@ -275,17 +275,17 @@
 						<if test='searchText != null and searchText != ""'>
 <!-- 						and aem.user_name 	like CONCAT('%', #{searchText}, '%') -->
 <!-- 							and u.user_nm 	like CONCAT('%', #{searchText}, '%') -->
-				and MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
+				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
 						</if> 
 					</if>
 			
 				
 				<if test="catId > 0">
-				and (pi.cat_id1 = #{catId} 
-				  or pi.cat_id2 = #{catId} 
-				  or pi.cat_id2 in (select cat_id 
-				  				    from TB_CATEGORY 
-				  				    where parent_cat_id = #{catId}))    
+				AND (pi.cat_id1 = #{catId} 
+				  OR pi.cat_id2 = #{catId} 
+				  OR pi.cat_id2 in (SELECT cat_id 
+				  				    FROM TB_CATEGORY 
+				  				    WHERE parent_cat_id = #{catId}))    
 				</if>
 				
 			<if test="catAttrElemInfos != null">
@@ -293,8 +293,8 @@
 					<if test="parentAttribute.childCatAttrElemInfos != null">
 				AND 
 					EXISTS (SELECT 1 
-							FROM tb_attr_elem_map aem
-							JOIN tb_attr_elem     ae
+							FROM TB_ATTR_ELEM_MAP aem
+							JOIN TB_ATTR_ELEM     ae
 							WHERE aem.attr_elem_id 	= ae.attr_elem_id
 							  AND aem.user_id 		= u.user_id
 							  AND ae.attr_id 		= #{parentAttribute.attrId}
@@ -499,21 +499,21 @@
 		
 		<!-- 등록한 사용자인지 아닌지 체크 -->
 		<select id="selectIsRegistedPlayer" parameterType="user.userDto" resultType="user.userDto">
-			select distinct user_id 
-			from tb_player_info 
-			where user_id = #{userId}
+			SELECT DISTINCT user_id 
+			from TB_PLAYER_INFO 
+			WHERE user_id = #{userId}
 		</select>
 
 		<delete id="deletePlayerVideoLinkInfo" parameterType="player.playerInfoDto">
-			delete from tb_player_video_link where player_info_id = #{playerInfoId}
+			DELETE FROM TB_PLAYER_VIDEO_LINK WHERE player_info_id = #{playerInfoId}
 		</delete>
 
 		<delete id="deletePlayerElemMapInfo" parameterType="player.playerInfoDto">
-			delete from tb_attr_elem_map where user_id = #{userId}
+			DELETE FROM TB_ATTR_ELEM_MAP WHERE user_id = #{userId}
 		</delete>
 		
 		<delete id="deleteRegistedPlayerInfo" parameterType="player.playerInfoDto">
-			delete from tb_player_info where user_id = #{userId} 
+			DELETE FROM TB_PLAYER_INFO WHERE user_id = #{userId} 
 		</delete>
 		
 		

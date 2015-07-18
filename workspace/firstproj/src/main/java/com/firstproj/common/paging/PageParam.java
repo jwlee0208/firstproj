@@ -93,4 +93,10 @@ public class PageParam {
         }
         return null;
     }
+
+	@Override
+	public String toString() {
+		return "PageParam [page=" + page + ", pageSize=" + pageSize + ", listSize=" + listSize + "]";
+	}
+    
 }

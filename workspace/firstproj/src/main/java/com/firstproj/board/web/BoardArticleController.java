@@ -75,12 +75,34 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RequestMapping(value = "/list", method = {RequestMethod.POST, RequestMethod.GET})
+	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
+		model = this.getBoardCommonListForJson(request, model, boardArticleDto);
+		
+		String page = "board/article/list";
+		
+		if(boardArticleDto.getBoardId() == 1){
+			page = "board/article/imageList";
+		}else if(boardArticleDto.getBoardId() == 2){
+			page = "board/article/imageList2";
+		}
+		
+//		model.addAttribute("boardList", boardList);
+//		return "board/list";
+		return page;
+	}
+	
+	/**
+	 * 게시글 목록 조회
+	 * @param request
+	 * @param model
+	 * @param boardArticleDto
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/list/{boardId}/{menuId}", method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int boardId, @PathVariable int menuId) throws Exception {
-//System.out.println(">>> getBoardList()");
-//		List<boardArticleDto> boardList = boardArticleService.getBoardList();
 
-//		model = this.getBoardCommonList(request, model, boardArticleDto);
 		model = this.getBoardCommonListForJson(request, model, boardArticleDto);
 		
 		String page = "board/article/list";

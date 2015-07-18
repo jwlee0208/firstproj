@@ -126,7 +126,7 @@ $(function(){
 					
 					var result = data.result;
 					if(result == 'ok'){
-						location.href = "/player/playerList";
+						location.href = "/player/playerPortal";
 					}
 					
 				}				
@@ -135,7 +135,7 @@ $(function(){
 	});
 	
 	$("#listBtn").on("click", function(){
-		location.href = "/player/playerList";	
+		location.href = "/player/playerPortal";	
 	});
 	
 	$("#modifyBtn").on("click", function(){

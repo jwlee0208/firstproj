@@ -511,9 +511,8 @@ public class PlayerController {
     	return jsonObj;
     }
 
-    @RequestMapping("/playerPortal/{menuId}")
-    public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session, @PathVariable int menuId){
-
+    @RequestMapping("/playerPortal")
+    public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session){
         boolean isRegisted  = false;
         UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
         
@@ -543,6 +542,12 @@ public class PlayerController {
         }
         
         return "player/playerPortal";
+
+    }
+    
+    @RequestMapping("/playerPortal/{menuId}")
+    public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session, @PathVariable int menuId){
+    	return this.getPlayerPortal(request, model, searchPlayerDto, session);
     }
     /**
      * @brief Player List 조회 

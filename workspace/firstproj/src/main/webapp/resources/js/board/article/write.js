@@ -20,7 +20,6 @@ $(document).ajaxError(function(event, request){
 
 //파일전송 후 콜백 함수
 function FileuploadCallback(data, state){
-alert(data + ', ' + state);
    if (data=="error"){
       alert("파일전송중 에러 발생!!");
       return false;
@@ -58,18 +57,18 @@ $(function(){
 			if(thumbImg.length == 0){
 				// 썸네일 파일 업로드 안할 때 저장
 				$.ajax({
-					url : '/board/article/insertBoardArticle.json',
-					type : 'post',
-					data : $("#writeFrm").serialize(),
-					dataType : 'json',
-					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-					beforeSend : function(){
+					url 		: '/board/article/insertBoardArticle.json',
+					type 		: 'post',
+					data 		: $("#writeFrm").serialize(),
+					dataType 	: 'json',
+					contentType	: "application/x-www-form-urlencoded; charset=UTF-8",
+					beforeSend 	: function(){
 						$(".pull-right").attr("id","loading");
 						$(".pull-right").val("Processing..."); 
 				
 					},
-					success : function(data){
-						console.log("data : " + data.result);
+					success 	: function(data){
+//						console.log("data : " + data.result);
 						if(data.result){
 							goList();
 						}else{
@@ -77,12 +76,11 @@ $(function(){
 						}
 					},
 					error : function(xhr, textStatus, thrownError){
-						console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
+//						console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
 					}
 				});
 				
 			}else{
-				alert('1');
 				// 썸네일 파일 업로드 할 때 저장
 				var frm = $("#writeFrm");
 				frm.attr("action", '/board/article/insertBoardArticle');
@@ -104,22 +102,22 @@ $(function(){
 			$("#content").val(content);
 			
 			var thumbImg = $.trim($("#thumbImg").val());
-//alert(thumbImg.length);
+
 			if(thumbImg.length == 0){
 				// 썸네일 파일 업로드 안할 때 저장
 				$.ajax({
-					url : '/board/article/modifyBoardArticle.json',
-					type : 'post',
-					data : $("#writeFrm").serialize(),
-					dataType : 'json',
-					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-					beforeSend : function(){
+					url 		: '/board/article/modifyBoardArticle.json',
+					type 		: 'post',
+					data 		: $("#writeFrm").serialize(),
+					dataType 	: 'json',
+					contentType	: "application/x-www-form-urlencoded; charset=UTF-8",
+					beforeSend 	: function(){
 						$(".pull-right").attr("id","loading");
 						$(".pull-right").val("Processing..."); 
 				
 					},
-					success : function(data){
-						console.log("data : " + data.result);
+					success 	: function(data){
+//						console.log("data : " + data.result);
 						if(data.result){
 							goList();
 						}else{
@@ -127,7 +125,7 @@ $(function(){
 						}
 					},
 					error : function(xhr, textStatus, thrownError){
-						console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
+//						console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
 					}
 				});
 				
