@@ -8,12 +8,21 @@
 <link rel="icon" href="/img/common/favicon.ico">
 <title>Let's Try Out</title>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/ui.menu.js"></script> --%>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/sidebar.css">
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
-	<tiles:insertAttribute name="body"/>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-9" role="main">			
+				<tiles:insertAttribute name="body"/>
+			</div>
+			<div class="col-md-3" role="complementary">	
+				<tiles:insertAttribute name="quickBoardList"/>
+			</div>	
+		</div>
+	</div>	
+
 	<tiles:insertAttribute name="footer"/>
 </body>
 

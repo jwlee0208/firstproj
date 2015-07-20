@@ -7,10 +7,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.firstproj.board.dto.BoardArticleDto;
+import com.firstproj.board.dto.SideBoardListDto;
 import com.firstproj.common.util.SearchCondition;
 
 @Repository("BoardArticleDao")
 public class BoardArticleDao extends SqlSessionDaoSupport{
+    
 	/**
 	 * 게시판 조회
 	 * @return
@@ -61,6 +63,7 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 		
 		return getSqlSession().insert("sql.boardArticle.insertArticleInfo", boardArticleDto);
 	}
+	
 	/**
 	 * 게시글 수정
 	 * @param boardArticleDto
@@ -72,7 +75,8 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 		System.out.println(">>> In Dao : " + boardArticleDto.toString());
 		
 		return getSqlSession().update("sql.boardArticle.updateArticleInfo", boardArticleDto);
-	}	
+	}
+	
 	/**
 	 * 게시글 삭제
 	 * @param boardArticleDto
@@ -93,6 +97,7 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 	public BoardArticleDto selectBoardArticle(BoardArticleDto boardArticleDto) throws Exception{
 		return getSqlSession().selectOne("sql.boardArticle.selectBoardContent", boardArticleDto);
 	}
+	
 	/**
 	 * 이전 글 조회
 	 * @param boardArticleDto
@@ -102,6 +107,7 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 	public BoardArticleDto selectPrevBoardArticle(BoardArticleDto boardArticleDto) throws Exception{
 		return getSqlSession().selectOne("sql.boardArticle.selectPrevBoardContent", boardArticleDto);
 	}
+	
 	/**
 	 * 다음 글 조회
 	 * @param boardArticleDto
@@ -111,6 +117,7 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 	public BoardArticleDto selectNextBoardArticle(BoardArticleDto boardArticleDto) throws Exception{
 		return getSqlSession().selectOne("sql.boardArticle.selectNextBoardContent", boardArticleDto);
 	}
+	
 	/**
 	 * 다섯개의 게시글 조회
 	 * <pre>
@@ -130,6 +137,13 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 				
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<SideBoardListDto> selectSideBoardList() throws Exception{
+	    return getSqlSession().selectList("sql.boardArticle.selectSideBoardList");
+	}
 	
 }

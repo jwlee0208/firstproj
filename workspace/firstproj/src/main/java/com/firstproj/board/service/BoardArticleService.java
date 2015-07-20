@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.firstproj.board.dto.BoardArticleDto;
+import com.firstproj.board.dto.SideBoardListDto;
 import com.firstproj.common.util.PagedList;
 
 public interface BoardArticleService {
@@ -23,4 +24,5 @@ public interface BoardArticleService {
 	public BoardArticleDto selectNextBoardArticle(BoardArticleDto boardArticleDto) throws Exception; 
 	
 	public List<BoardArticleDto> selectBoardArticleFive(BoardArticleDto boardArticleDto) throws Exception;
+	public List<SideBoardListDto> selectSideBoardList() throws Exception;
 }
