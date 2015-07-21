@@ -76,7 +76,7 @@
 										<li class="media">
 											<a class="pull-left" href="javascript:;">
 												
-													<img data-src="holder.js/64x64" src="${pageContext.request.contextPath}${articleInfo.filePath}" 
+													<img data-src="holder.js/64x64" src="http://jwlee0208.cdn3.cafe24.com/${articleInfo.filePath}" 
 														 alt="" class="media-object" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  
 														 onclick="javascript:goView('${articleInfo.articleId}');" 
 														 data-toggle="modal" data-target="#myModal" 

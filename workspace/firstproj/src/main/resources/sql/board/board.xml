@@ -15,7 +15,7 @@
 		<!-- 페이징 위한 리스트 갯수 조회 -->    
 		<select id="selectListCount" parameterType="searchCondition" resultType="Integer">        
 			SELECT count(*) AS totalCnt         
-			FROM tb_board         
+			FROM TB_BOARD         
 			<include refid="searchConditionSql"/>    
 		</select>      
 
@@ -56,24 +56,24 @@
 		<!-- 이전 글 조회 -->
 		<select id="selectPrevBoardInfo" resultType="board.boardDto" parameterType="board.boardDto">
 		 	 <include refid="selectBoard"/>  
-				where 
+				WHERE 
 					1 = 1 	
 				<![CDATA[ 
-					and board_id > ${boardId}
+					AND board_id > ${boardId}
 				]]>
-				order by board_id asc
-				limit 1	 	 		    
+				ORDER BY board_id ASC
+				LIMIT 1	 	 		    
 		</select>
 		<!-- 다음 글 조회 -->
 		<select id="selectNextBoardInfo" resultType="board.boardDto" parameterType="board.boardDto">
 		 	 <include refid="selectBoard"/>  
-				where 
+				WHERE 
 					1 = 1
 				<![CDATA[ 
-					and board_id < ${boardId}
+					AND board_id < ${boardId}
 				]]>	
-				order by board_id desc
-				limit 1	 	 		    
+				ORDER BY board_id DESC
+				LIMIT 1	 	 		    
 		</select>
 		
 		<sql id="selectBoard">
@@ -92,7 +92,7 @@
 		<sql id="searchConditionSql">
 		    WHERE 1 = 1
 		    <if test="boardId > 0">
-		        and board_id = #{boardId}
+		        AND board_id = #{boardId}
 		    </if>
 		    
 		</sql>

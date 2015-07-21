@@ -562,4 +562,5 @@ System.out.println("boardArticleDto : " + boardArticleDto.toString());
 		jsonObj.put("selectedArticleId", selectedArticleId);
 		return jsonObj;
 	}
+	
 }

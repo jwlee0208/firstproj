@@ -9,7 +9,7 @@ $(document).ajaxError(function(event, request){
 //파일전송 후 콜백 함수
 function FileuploadCallback(data, state){
 	
-	console.log('data : ' + data + ", state : " + state);
+//	console.log('data : ' + data + ", state : " + state);
 	
    if (data=="error"){
       alert("파일전송중 에러 발생!!");
@@ -24,8 +24,8 @@ function FileuploadCallback(data, state){
    
    alert("업로드 되었습니다.");
    var dataList = "<div id=\"imageUpload\">";
-   var hostname = location.host;
-console.log("contextPath : " + getContextPath());   
+   var hostname = "jwlee0208.cdn3.cafe24.com";	//location.host;
+//console.log("contextPath : " + getContextPath());   
    dataList += "<img src='http://" + hostname + data + "' alt='' class=\"img-thumbnail\"/>";
 //   dataList += "<img src='http://" + hostname + getContextPath() + data + "' alt=''  style='width:120px;height:88px' />";
    //dataList += "<a href='##' class='btn2' onclick='imgSelect(\"" + data + "\")'>사용</a> ";

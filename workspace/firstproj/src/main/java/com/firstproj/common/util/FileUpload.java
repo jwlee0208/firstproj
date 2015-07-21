@@ -1,8 +1,10 @@
 package com.firstproj.common.util;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -10,6 +12,9 @@ import java.util.Map.Entry;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPReply;
 import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,7 +37,7 @@ public class FileUpload{
 		this.servletContext = servletContext;
 	}
 
-	public String uploadFile(MultipartFile attachFile, int width, int height) throws Exception{
+	public String uploadFile(MultipartFile attachFile, int width, int height){
 		String uploadFilePath = null;
 		String newFolderDir = DateUtil.formatDateToday() + "/" ;    	
 		//String newFileName = attachFile.getOriginalFilename();
@@ -46,7 +51,8 @@ public class FileUpload{
 		} else if ("test".equals(PropertiesConfig.getInstance().getServerConfig("mode"))) {
 			uploadFilePath = PropertiesConfig.getInstance().getServerConfig("test.thumbnail.uploadpath");
 		} else {
-			uploadFilePath = servletContext.getRealPath("/resources" + destinationUrl);
+//			uploadFilePath = servletContext.getRealPath("/resources" + destinationUrl);
+			uploadFilePath = "/www" + destinationUrl;
 		}
 		
 		File file = null;
@@ -55,6 +61,7 @@ public class FileUpload{
 		fileRealPath.append("/");
 		fileRealPath.append(DateUtil.formatDateToday());
 		fileRealPath.append("/");
+		String fileDirPath = fileRealPath.toString();
 		fileRealPath.append(newFileName);
 		logger.info(fileRealPath.toString());
 		
@@ -64,12 +71,66 @@ public class FileUpload{
 		} catch(Exception e) {
 			logger.info("[upload makeFolder Missing]", e);
 		}
+		// FTP 파일 업로드 부분
+		FTPClient ftpClient = null;
+		
+		try {
+		    ftpClient = new FTPClient();	        
+	        ftpClient.setControlEncoding("EUC-KR");
+	        
+	        ftpClient.connect("iup.cdn3.cafe24.com", 21);
+	        System.out.println(" [ ftpClient ] : connecting.....");
+	        int replyCode = ftpClient.getReplyCode();
+	        
+	        System.out.println(" [ ftpClient ] : " + replyCode +", " + FTPReply.isPositiveCompletion(replyCode));
+	        
+	        if(!FTPReply.isPositiveCompletion(replyCode)){
+	            System.out.println(" [ ftpClient ] : disconnect.....");
+	            ftpClient.disconnect();
+	        }else{
+	            // timeout 10초
+	            ftpClient.setSoTimeout(10000);
+	            // login
+	            ftpClient.login("jwlee0208", "in2299out");
+	            System.out.println(" [ ftpClient ] : loging.....");
+	            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+	            ftpClient.enterLocalPassiveMode();
+	            
+	            FileInputStream is = (FileInputStream) attachFile.getInputStream(); 
+                //new FileInputStream(file);
+                System.out.println("[ fileDirpath ] : " + fileDirPath);
+                System.out.println(" [ ftpClient ] : makeDir : " + ftpClient.makeDirectory(fileDirPath));
+                System.out.println(" [ ftpClient ] : storeFile : " + ftpClient.storeFile(fileRealPath.toString(), is));
+                System.out.println(" [ ftpClient ] : uploading.....");
+                is.close();
+                
+                ftpClient.logout();
 
+	        }
+
+		} catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{   
+            if(ftpClient != null && ftpClient.isConnected()){
+                try {
+                    ftpClient.disconnect();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+		
+		// END : FTP 파일 업로드 부분
+		
+		
+		/*
 		try {
 			
 			// 파일 확장자 구하기
 			String extType = attachFile.getOriginalFilename().substring(attachFile.getOriginalFilename().lastIndexOf(".") + 1);
-System.out.println(" >> extType : " + extType +", yn : " + (FILE_EXTENSIONS_IMAGES.matches(".*" + extType.trim() + ".*")) + ", width/height : " + width +"/" + height);			
+			logger.info(" >> extType : " + extType + ", yn : " + (FILE_EXTENSIONS_IMAGES.matches(".*" + extType.trim() + ".*")) + ", width/height : " + width + "/" + height);			
 			// 이미지 파일인 경우
 			if(FILE_EXTENSIONS_IMAGES.matches(".*" + extType.trim() + ".*")){
 				//  image file resizing
@@ -78,7 +139,7 @@ System.out.println(" >> extType : " + extType +", yn : " + (FILE_EXTENSIONS_IMAG
 									
 					// 이미지 타입
 					int imageType = imageObj.getType();
-System.out.println(" >>> imageType : " + imageType);					
+					logger.info(" >>> imageType : " + imageType);					
 					// Image Resizing
 					BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 					
@@ -99,6 +160,7 @@ System.out.println(" >>> imageType : " + imageType);
 		} catch(Exception e) {
 			logger.info("[upload transferTo Missing]", e);
 		}
+		*/
 		return thumbnailUrl;
 		
 	}

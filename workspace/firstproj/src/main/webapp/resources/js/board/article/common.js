@@ -1,5 +1,5 @@
 function editorImgUploadComplete(fileStr){
-	var hostname = location.host;
+	var hostname = "jwlee0208.cdn3.cafe24.com";		//location.host;
 	  
 	  if( fileStr.length > 0 ){	   
 	   var strImg = "<br><img src='http://" + hostname + fileStr + "' border=0>";		  

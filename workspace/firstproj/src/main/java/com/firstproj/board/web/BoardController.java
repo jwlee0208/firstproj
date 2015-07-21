@@ -29,55 +29,59 @@ import com.firstproj.user.dto.UserDto;
 @Controller
 @RequestMapping(value = "/board")
 public class BoardController {
-	public static final int DEFAULT_PAGE_NO = 1;
-	public static final int DEFAULT_PAGE_SIZE = 10;
+	public static final int DEFAULT_PAGE_NO    = 1;
+	public static final int DEFAULT_PAGE_SIZE  = 10;
 
 	@Resource(name="BoardServiceImpl")
 	private BoardServiceImpl boardService;
 	
+	@RequestMapping(value="/list")
+	public String getBoardList(HttpServletRequest request, Model model, BoardDto boardDto, HttpSession session) throws Exception{
+	       UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+	        
+	        if(null != sessionInfo){
+	                    
+	        }else{
+	            return "redirect:/login?redirectPage=" + request.getRequestURI();
+	            
+	        }
+
+	        model = this.getBoardCommonList(request, model, boardDto);
+	        return "board/accordionList";
+	}
+	
 	@RequestMapping(value="/list/{menuId}")
 	public String getBoardList(HttpServletRequest request, Model model, BoardDto boardDto, HttpSession session, @PathVariable int menuId) throws Exception{
 		
-		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
-		
-		if(null != sessionInfo){
-					
-		}else{
-		    return "redirect:/login?redirectPage=" + request.getRequestURI();
-		    
-		}
-
-		model = this.getBoardCommonList(request, model, boardDto);
-//		return "board/list";
-		return "board/accordionList";
+		return this.getBoardList(request, model, boardDto, session);
 	}
 	
 	private Model getBoardCommonList(HttpServletRequest request, Model model, BoardDto boardDto) throws Exception{
 		// 검색 조건
 		String searchCondition = request.getParameter("searchCondition");
-		String searchText = request.getParameter("searchText");
-		String startDate = request.getParameter("startDate");
-		String endDate = request.getParameter("endDate");
+		String searchText      = request.getParameter("searchText");
+		String startDate       = request.getParameter("startDate");
+		String endDate         = request.getParameter("endDate");
 		
-		int pageNo = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
+		int    pageNo          = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
 
-		int listRowCnt = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
+		int    listRowCnt      = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// searching condition setting
 		paramMap.put("searchCondition", searchCondition);
-		paramMap.put("searchText", searchText);
-		paramMap.put("startDate", startDate);
-		paramMap.put("endDate", endDate);
+		paramMap.put("searchText"     , searchText);
+		paramMap.put("startDate"      , startDate);
+		paramMap.put("endDate"        , endDate);
 
-		int totalListCnt = boardService.selectListCnt(paramMap);
+		int    totalListCnt    = boardService.selectListCnt(paramMap);
 
-		paramMap.put("pageNo", pageNo);
-		paramMap.put("listRowCnt", listRowCnt);
-		paramMap.put("totalListCnt", totalListCnt);
-		paramMap.put("pageSize", DEFAULT_PAGE_SIZE);
+		paramMap.put("pageNo"         , pageNo);
+		paramMap.put("listRowCnt"     , listRowCnt);
+		paramMap.put("totalListCnt"   , totalListCnt);
+		paramMap.put("pageSize"       , DEFAULT_PAGE_SIZE);
 
-		PagedList result = boardService.getBoardPagedList(paramMap);
+		PagedList result       = boardService.getBoardPagedList(paramMap);
 
 		model.addAttribute("pagedResult", result);
 		return model;
@@ -85,9 +89,6 @@ public class BoardController {
 	}
 	@RequestMapping(value = "/write")
 	public String createBoard(HttpServletRequest request, Model model, BoardDto boardDto, HttpSession session) {
-		
-//		System.out.println("session : " + (session == null));
-//		System.out.println("userId : " + ((UserDto)session.getAttribute("userInfo")).getUserId());
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
 		
@@ -105,12 +106,12 @@ public class BoardController {
 	@ResponseBody
 	public JSONObject insertBoardAction(@Valid BoardDto boardDto, BindingResult bindingResult, HttpSession session) throws Exception {
 
-		System.out.println(">>> boardDto  : " + boardDto.toString());
+//		System.out.println(">>> boardDto  : " + boardDto.toString());
 		
-		JSONObject jsonObj = new JSONObject();
-		int insertResult = 0;
+		JSONObject    jsonObj         = new JSONObject();
+		int           insertResult    = 0;
 
-		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+		UserDto       sessionInfo     = (UserDto)session.getAttribute("userInfo");
 		
 		if(null != sessionInfo){
 
@@ -138,18 +139,18 @@ public class BoardController {
 		if(selectedBoardId > 0){
 			boardDto.setBoardId(selectedBoardId);
 			// 글 조회
-			boardInfo = this.boardService.selectBoardInfo(boardDto);
+			boardInfo     = this.boardService.selectBoardInfo(boardDto);
 			// 이전 글 조회
 			prevBoardInfo = this.boardService.selectPrevBoardInfo(boardDto);
 			// 다음 글 조회
 			nextBoardInfo = this.boardService.selectNextBoardInfo(boardDto);
 		}
 		
-		model.addAttribute("boardInfo", boardInfo);
+		model.addAttribute("boardInfo"    , boardInfo);
 		model.addAttribute("prevBoardInfo", prevBoardInfo);
 		model.addAttribute("nextBoardInfo", nextBoardInfo);
 		
-		model.addAttribute("boardId", boardDto.getBoardId());
+		model.addAttribute("boardId"      , boardDto.getBoardId());
 		
 		return "board/view";
 	}
@@ -195,10 +196,10 @@ public class BoardController {
 	            , BoardDto boardDto
 	            , BindingResult bindingResult) throws Exception {
 		
-		JSONObject jsonObj = new JSONObject();
-		int modifyResult = 0;
+		JSONObject jsonObj        = new JSONObject();
+		int        modifyResult   = 0;
 
-		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+		UserDto    sessionInfo    = (UserDto)session.getAttribute("userInfo");
 		
 		if(null != sessionInfo){
 
@@ -206,20 +207,12 @@ public class BoardController {
 			boardDto.setModifyUserName(sessionInfo.getUserNm());
 
 			if(bindingResult.hasErrors()){
-				System.out.println(">>> if");
-//				model.addAttribute("validate", false);
 				jsonObj.put("validate", false);
 			}						
 		}
 
-		System.out.println(">>> boardDto  : " + boardDto.toString());
-		
 		modifyResult = this.boardService.modifyBoardInfo(boardDto);
-		
-		
-System.out.println("modifyResult 1 : " + modifyResult);	
-//		model.addAttribute("result", (modifyResult > 0) ? true : false);
-//		return model;
+				
 		jsonObj.put("result", (modifyResult > 0) ? true : false);
 		return jsonObj;
 	}	
