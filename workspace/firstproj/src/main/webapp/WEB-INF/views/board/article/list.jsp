@@ -11,7 +11,7 @@
 <c:if test="${boardId eq 1}"><c:set var="boardName" value="자유게시판"/></c:if>
 <c:if test="${boardId eq 2}"><c:set var="boardName" value="Q&A"/></c:if>
 <c:if test="${boardId eq 3}"><c:set var="boardName" value="기타게시판"/></c:if>	
-<div class="container">
+<!-- <div class="container"> -->
 	<div class="page-header">
 	  <h1>BOARD&nbsp;&nbsp;<small>${boardName}</small></h1>
 	</div>	
@@ -106,4 +106,4 @@
 			<input type="submit" class="btn btn-default pull-right" value="글쓰기" name="goToWrite" />
 		</div>
 	</div>	
-</div>
+<!-- </div> -->

@@ -16,7 +16,7 @@
 <c:if test="${boardId eq 1}"><c:set var="boardName" value="자유게시판"/></c:if>
 <c:if test="${boardId eq 2}"><c:set var="boardName" value="Q&A"/></c:if>
 <c:if test="${boardId eq 3}"><c:set var="boardName" value="기타게시판"/></c:if>	
-<div class="container">
+<!-- <div class="container"> -->
 	<div class="page-header">
 	  <h1>BOARD&nbsp;&nbsp;<small>${boardName}</small></h1>
 	</div>	
@@ -74,8 +74,8 @@
 				<div class="thumbnail">
 					
 			<c:choose>
-				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img data-src="holder.js/250x250?auto=yes&theme=social" src="http://jwlee0208.cdn3.cafe24.com/${content.filePath}" alt="" class="img-thumbnail" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal"/></c:when>
-				<c:otherwise><img data-src="holder.js/250x250?auto=yes&theme=social" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="img-thumbnail" onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal"/></c:otherwise>
+				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img data-src="holder.js/250x250?auto=yes&theme=social" src="http://jwlee0208.cdn3.cafe24.com/${content.filePath}" alt="" class="img-thumbnail" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal" style="width: 200px; height: 200px;"/></c:when>
+				<c:otherwise><img data-src="holder.js/250x250?auto=yes&theme=social" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="img-thumbnail" onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal" style="width: 200px; height: 200px;"/></c:otherwise>
 			</c:choose>					
 					
 					<div class="caption">
@@ -119,7 +119,7 @@
 			</div>
 		</div>	
 <!-- 	</fieldset> -->
-</div>
+<!-- </div> -->
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

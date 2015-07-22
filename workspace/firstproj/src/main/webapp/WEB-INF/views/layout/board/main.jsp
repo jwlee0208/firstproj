@@ -12,6 +12,7 @@
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
+	<tiles:insertAttribute name="menu"/>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-9" role="main">			
