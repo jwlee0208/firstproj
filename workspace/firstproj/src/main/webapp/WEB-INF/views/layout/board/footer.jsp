@@ -14,7 +14,7 @@
 
 </style>
 <footer class="blog-footer">
-	  <p style="padding-top : 15px;"><a href="https://www.facebook.com/jwlee0208" target="_blank" class="btn btn-primary">Facebook</a>&nbsp;&nbsp;&nbsp;<a href="https://twitter.com/jwlee0208" target="_blank" class="btn btn-primary">Twitter</a>&nbsp;&nbsp;&nbsp;<a href="http://blog.naver.com/jwlee0208" target="_blank" class="btn btn-primary">Blog</a></p>
-	  <p class="text-muted" style="text-align:center;">Copyrightⓒ2014 All right reserved by leejinwon</p>
+	  <p><a href="https://www.facebook.com/jwlee0208" target="_blank" class="btn btn-primary">Facebook</a>&nbsp;&nbsp;&nbsp;<a href="https://twitter.com/jwlee0208" target="_blank" class="btn btn-primary">Twitter</a>&nbsp;&nbsp;&nbsp;<a href="http://blog.naver.com/jwlee0208" target="_blank" class="btn btn-primary">Blog</a></p>
+	  <p>Copyrightⓒ2014 All right reserved by leejinwon</p>
       <p><a href="#">Back to top</a></p>
 </footer>
