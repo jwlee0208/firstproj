@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.firstproj.board.dao.BoardDao;
-import com.firstproj.board.dto.BoardArticleDto;
+import com.firstproj.board.dto.BoardCategoryDto;
 import com.firstproj.board.dto.BoardDto;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.util.PagingUtil;
@@ -18,6 +18,12 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Resource(name="BoardDao")
 	private BoardDao boardDao;
+	
+	@Override
+	public List<BoardDto> getBoardList() throws Exception{
+	    return this.boardDao.getBoardList();
+	}
+	
 	@Override
 	public List<BoardDto> getBoardList(Map<String, Object> paramMap) throws Exception{
 	       int pageNo     = (Integer) paramMap.get("pageNo");                                   
@@ -91,6 +97,15 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int modifyBoardInfo(BoardDto boardDto) throws Exception{
 		return this.boardDao.modifyBoardInfo(boardDto);
+	}
+	/**
+	 * 게시판 카테고리 조회
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public List<BoardCategoryDto> selectBoardCategoryList() throws Exception{
+	    return this.boardDao.selectBoardCategoryList();
 	}
 
 }

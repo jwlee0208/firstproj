@@ -142,3 +142,9 @@ CREATE TABLE `test`.`TB_CODE` (
   `code_type` CHAR(2) NULL COMMENT '01 : 국가, 02: 언어',
   `create_date` TIMESTAMP NULL,
   PRIMARY KEY (`code_id`));
+  
+-- tb_board_category table creation
+CREATE TABLE `test`.`TB_BOARD_CATEGORY` (
+  `board_category_id` INT NOT NULL,
+  `board_category_name` VARCHAR(50) NULL,
+  PRIMARY KEY (`board_category_id`));  

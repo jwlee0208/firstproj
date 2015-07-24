@@ -8,3 +8,9 @@ ALTER TABLE test.tb_attr_elem_map add FOREIGN KEY (attr_elem_id) REFERENCES test
 
 
 ALTER TABLE `test`.`TB_USER` ADD COLUMN `nationality` VARCHAR(30) NULL AFTER `phone_no`, ADD COLUMN `language` CHAR(2) NULL AFTER `nationality`;
+
+
+ALTER TABLE `test`.`TB_BOARD` CHANGE COLUMN `board_category` `board_category` VARCHAR(50) NULL DEFAULT NULL COMMENT '게시판 카테고리' AFTER `board_type`;
+
+
+ALTER TABLE `test`.`TB_BOARD` CHANGE COLUMN `board_category` `board_category_id` INT NULL DEFAULT NULL COMMENT '게시판 카테고리' AFTER `board_id`;

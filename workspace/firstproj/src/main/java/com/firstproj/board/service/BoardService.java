@@ -3,6 +3,7 @@ package com.firstproj.board.service;
 import java.util.List;
 import java.util.Map;
 
+import com.firstproj.board.dto.BoardCategoryDto;
 import com.firstproj.board.dto.BoardDto;
 import com.firstproj.common.util.PagedList;
 
@@ -14,6 +15,8 @@ public interface BoardService {
 
 	int updateBoardInfo(BoardDto boardDto) throws Exception;
 
+	List<BoardDto> getBoardList() throws Exception;
+	
 	List<BoardDto> getBoardList(Map<String, Object> paramMap) throws Exception;
 
 	PagedList getBoardPagedList(Map<String, Object> paramMap) throws Exception;
@@ -27,5 +30,7 @@ public interface BoardService {
 	BoardDto selectNextBoardInfo(BoardDto boardDto) throws Exception;
 
 	int modifyBoardInfo(BoardDto boardDto) throws Exception;
+
+    List<BoardCategoryDto> selectBoardCategoryList() throws Exception;
 
 }

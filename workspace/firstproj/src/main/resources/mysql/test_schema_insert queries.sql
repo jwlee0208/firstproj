@@ -478,3 +478,14 @@ INSERT INTO TB_CODE (code_name, code_value, code_type,  create_date) VALUES('Xho
 INSERT INTO TB_CODE (code_name, code_value, code_type,  create_date) VALUES('Yoruba', 'YO', '02', now());
 INSERT INTO TB_CODE (code_name, code_value, code_type,  create_date) VALUES('Chinese', 'ZH', '02', now());
 INSERT INTO TB_CODE (code_name, code_value, code_type,  create_date) VALUES('Zulu', 'ZU', '02', now());
+
+
+
+
+
+
+
+
+INSERT INTO `test`.`TB_BOARD_CATEGORY` (`board_category_id`, `board_category_name`) VALUES ('1', 'dev');
+INSERT INTO `test`.`TB_BOARD_CATEGORY` (`board_category_id`, `board_category_name`) VALUES ('2', 'trip');
+INSERT INTO `test`.`TB_BOARD_CATEGORY` (`board_category_id`, `board_category_name`) VALUES ('3', 'baseball');

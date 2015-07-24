@@ -6,7 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import com.firstproj.board.dto.BoardArticleDto;
+import com.firstproj.board.dto.BoardCategoryDto;
 import com.firstproj.board.dto.BoardDto;
 import com.firstproj.common.util.SearchCondition;
 
@@ -18,7 +18,13 @@ public class BoardDao extends SqlSessionDaoSupport{
 	 * @return
 	 * @throws Exception
 	 */
-	public List<BoardDto> getBoardList(Map<String, Object> param) throws Exception{
+    public List<BoardDto> getBoardList() throws Exception{
+        
+     return getSqlSession().selectList("sql.board.selectBoardListAll");
+ }
+
+    
+    public List<BoardDto> getBoardList(Map<String, Object> param) throws Exception{
 		
 	       SearchCondition searchCondition = new SearchCondition();             
 	       searchCondition.setStartRow((Integer)param.get("startRow"));
@@ -108,5 +114,12 @@ public class BoardDao extends SqlSessionDaoSupport{
 	public int modifyBoardInfo(BoardDto boardDto) throws Exception{
 		return getSqlSession().update("sql.board.updateBoardInfo", boardDto);
 	}
-	
+	/**
+	 * 게시판 카테고리 조회
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BoardCategoryDto> selectBoardCategoryList() throws Exception{
+	    return getSqlSession().selectList("sql.board.selectBoardCategoryList");
+	}
 }

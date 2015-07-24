@@ -5,6 +5,10 @@
     
     <mapper namespace="sql.board">
 
+		<select id="selectBoardListAll" resultType="board.boardDto">
+			<include refid="selectBoard"/>
+			ORDER BY board_category_id , board_id asc
+		</select>
 		<select id="selectBoardList" parameterType="searchCondition" resultType="board.boardDto">
 			<include refid="selectBoard"/>
 			<include refid="searchConditionSql"/>     
@@ -78,6 +82,7 @@
 		
 		<sql id="selectBoard">
 			SELECT 	board_id,
+					board_category_id,
 				    board_name,
 				    board_type,
 				    create_user_id,
@@ -96,6 +101,12 @@
 		    </if>
 		    
 		</sql>
+		
+		<select id="selectBoardCategoryList" resultType="board.boardCategoryDto">
+			SELECT board_category_id
+				 , board_category_name 
+			FROM TB_BOARD_CATEGORY		
+		</select>
 		
     </mapper>
     
