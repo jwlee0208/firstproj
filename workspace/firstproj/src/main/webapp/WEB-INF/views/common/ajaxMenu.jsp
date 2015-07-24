@@ -23,10 +23,10 @@ ul { padding: 0; }
 		          		<c:forEach var="boardCategoryInfo" items="${boardCategoryList}">
  				<li class="dropdown">
 		          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">${boardCategoryInfo.boardCategoryName}<span class="caret"></span></a>
-		          <c:if test="${!empty boardList}">
+		          <c:if test="${!empty boardCategoryInfo.boardList}">
 		          <ul class="dropdown-menu" role="menu">
 		          
-		          		<c:forEach var="boardInfo" items="${boardList}">
+		          		<c:forEach var="boardInfo" items="${boardCategoryInfo.boardList}">
 			          		<c:if test="${boardCategoryInfo.boardCategoryId eq boardInfo.boardCategoryId}">
 					<li <c:if test="${param.menuId eq 1}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goList(${boardInfo.boardId});">${boardInfo.boardName}</a></li>
 							</c:if>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.firstproj.board.dao.BoardDao;
 import com.firstproj.board.dto.BoardCategoryDto;
+import com.firstproj.board.dto.BoardCategoryPortalDto;
 import com.firstproj.board.dto.BoardDto;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.util.PagingUtil;
@@ -38,7 +39,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public int selectListCnt(Map<String, Object> param) throws Exception {                     
+	public int getListCnt(Map<String, Object> param) throws Exception {                     
 	       return boardDao.selectListCnt(param);      
 	}    	
 	
@@ -83,14 +84,14 @@ public class BoardServiceImpl implements BoardService{
 	 * 이전 글 조회
 	 */
 	@Override
-	public BoardDto selectPrevBoardInfo(BoardDto boardDto) throws Exception {
+	public BoardDto getPrevBoardInfo(BoardDto boardDto) throws Exception {
 		return this.boardDao.selectPrevBoardInfo(boardDto);
 	}
 	/**
 	 * 다음 글 조회
 	 */
 	@Override
-	public BoardDto selectNextBoardInfo(BoardDto boardDto) throws Exception {
+	public BoardDto getNextBoardInfo(BoardDto boardDto) throws Exception {
 		return this.boardDao.selectNextBoardInfo(boardDto);
 	}
 	
@@ -104,8 +105,13 @@ public class BoardServiceImpl implements BoardService{
 	 * @throws Exception
 	 */
 	@Override
-	public List<BoardCategoryDto> selectBoardCategoryList() throws Exception{
+	public List<BoardCategoryDto> getBoardCategoryList() throws Exception{
 	    return this.boardDao.selectBoardCategoryList();
+	}
+	
+	@Override
+	public List<BoardCategoryPortalDto> getBoardCategoryAndBoardList() throws Exception{
+	    return this.boardDao.selectBoardCategoryAndBoardList();
 	}
 
 }

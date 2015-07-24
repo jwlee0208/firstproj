@@ -27,10 +27,11 @@ public class CommonController {
     
     @RequestMapping(value = "/menu")
     public String getMenu(Model model) throws Exception{
-        
-        model.addAttribute("boardCategoryList", this.boardService.selectBoardCategoryList());
+        model.addAttribute("boardCategoryList", this.boardService.getBoardCategoryAndBoardList());
+        /*
+        model.addAttribute("boardCategoryList", this.boardService.getBoardCategoryList());
         model.addAttribute("boardList", this.boardService.getBoardList());
-        
+        */
         return "common/ajaxMenu";
     }
 

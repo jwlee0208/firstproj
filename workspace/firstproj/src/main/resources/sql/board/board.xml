@@ -108,5 +108,43 @@
 			FROM TB_BOARD_CATEGORY		
 		</select>
 		
+		
+		<select id="selectBoardCategoryAndBoardList" resultMap="selectBoardCategoryAndBoardList">
+			SELECT	bc.board_category_id
+				  , bc.board_category_name
+				  , b.board_id
+				  ,	b.board_category_id
+				  , b.board_name
+				  , b.board_type
+				  , b.create_user_id
+				  , b.create_user_name
+				  , b.create_date
+				  , b.modify_user_id
+				  , b.modify_user_name
+				  , b.modify_date
+			FROM		TB_BOARD_CATEGORY bc
+			INNER JOIN	TB_BOARD 		  b 	ON b.board_category_id = bc.board_category_id
+			ORDER BY bc.board_category_id, b.board_id ASC
+		</select>
+		
+		
+		
+		<resultMap id="selectBoardCategoryAndBoardList" type="board.boardCategoryPortalDto">
+			<id		column="board_category_id" 		property="boardCategoryId"/>
+			<result column="board_category_name" 	property="boardCategoryName"/>
+			<collection property="boardList" ofType="board.boardDto">
+				<id		column="board_id" property="boardId"/>
+				<result column="board_category_id" property="boardCategoryId"/>
+				<result column="board_name"		 property="boardName"/>
+				<result column="board_yype"		 property="boardType"/>
+				<result column="create_user_id"	 property="createUserId"/>
+				<result column="create_user_name"	 property="createUserName"/>
+				<result column="create_date"		 property="createDate"/>
+				<result column="modify_user_id"	 property="modifyUserId"/>
+				<result column="modify_user_name"	 property="modifyUserName"/>
+				<result column="modify_date"		 property="modifyDate"/>
+			</collection>
+		</resultMap>
+		
     </mapper>
     

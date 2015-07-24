@@ -74,7 +74,7 @@ public class BoardController {
 		paramMap.put("startDate"      , startDate);
 		paramMap.put("endDate"        , endDate);
 
-		int    totalListCnt    = boardService.selectListCnt(paramMap);
+		int    totalListCnt    = boardService.getListCnt(paramMap);
 
 		paramMap.put("pageNo"         , pageNo);
 		paramMap.put("listRowCnt"     , listRowCnt);
@@ -141,9 +141,9 @@ public class BoardController {
 			// 글 조회
 			boardInfo     = this.boardService.selectBoardInfo(boardDto);
 			// 이전 글 조회
-			prevBoardInfo = this.boardService.selectPrevBoardInfo(boardDto);
+			prevBoardInfo = this.boardService.getPrevBoardInfo(boardDto);
 			// 다음 글 조회
-			nextBoardInfo = this.boardService.selectNextBoardInfo(boardDto);
+			nextBoardInfo = this.boardService.getNextBoardInfo(boardDto);
 		}
 		
 		model.addAttribute("boardInfo"    , boardInfo);
