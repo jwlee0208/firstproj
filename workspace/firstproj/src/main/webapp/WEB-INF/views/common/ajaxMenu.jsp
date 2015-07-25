@@ -59,7 +59,7 @@ ul { padding: 0; }
 			<a onclick="javascript:goLogin(7);" class="btn btn-default"><tag:message code="signin"/></a>
 		</c:when>	
 		<c:otherwise>
-			Signed in as "<a href="#" class="navbar-link">${userInfo.userNm}</a>"
+			<span style="color: white;">Welcome</span> <a href="#" class="navbar-link">"${userInfo.userNm}"</a>
 	        <button type="button" class="btn btn-default" onclick="javascript:logout();"><tag:message code="logout"/></button>				
 		</c:otherwise>
 

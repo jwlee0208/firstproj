@@ -4,7 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleView.js"></script>
-<div class="container">
+<!-- <div class="container"> -->
+<div>
 	<form id="viewFrm" name="viewForm" method="post">
 	<input type="hidden" id="selectedArticleId" 	name="selectedArticleId" 	value="${contentInfo.articleId }"/>
 	<input type="hidden" id="boardId" 				name="boardId" 				value="${contentInfo.boardId}"/>

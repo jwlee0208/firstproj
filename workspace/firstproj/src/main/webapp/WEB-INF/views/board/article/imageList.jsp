@@ -36,20 +36,22 @@
 	<!-- 검색 영역 -->	
 	<div class="form-group">
 		
-	<table style="width:100%">
-		<colgroup><col width="93%"/><col width="7%"/></colgroup>
-		<tr>
-			<td>
-			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent"/>
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control"/>					
-			</td>
-			<td>
-		<div class="btn-group" style="float:right;">
-			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검&nbsp;&nbsp;&nbsp;색"/>
-		</div>			
-			</td>
-		</tr>
-	</table>	
+<!-- 	<table style="width:100%"> -->
+<%-- 		<colgroup><col width="93%"/><col width="7%"/></colgroup> --%>
+<!-- 		<tr> -->
+<!-- 			<td> -->
+		<div>
+			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" placeholder="검색어를 입력해 주세요."/>
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control"/>
+		</div>						
+<!-- 			</td> -->
+<!-- 			<td> -->
+<!-- 		<div class="btn-group" style="float:right;"> -->
+<!-- 			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검&nbsp;&nbsp;&nbsp;색"/> -->
+<!-- 		</div>			 -->
+<!-- 			</td> -->
+<!-- 		</tr> -->
+<!-- 	</table>	 -->
 		
 		
 <!-- 		<div class="btn-group"> -->
@@ -70,12 +72,13 @@
 <c:choose>
 	<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
 		<c:forEach var="content" items="${pagedResult.list}" varStatus="index">		
-			<div class="col-sm-6 col-md-4">
+<!-- 			<div class="col-sm-6 col-md-4"> -->
+			<div class="">
 				<div class="thumbnail">
 					
 			<c:choose>
-				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img data-src="holder.js/250x250?auto=yes&theme=social" src="http://jwlee0208.cdn3.cafe24.com/${content.filePath}" alt="" class="img-thumbnail" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal" style="width: 200px; height: 200px;"/></c:when>
-				<c:otherwise><img data-src="holder.js/250x250?auto=yes&theme=social" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="img-thumbnail" onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal" style="width: 200px; height: 200px;"/></c:otherwise>
+				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img data-src="holder.js/250x250?auto=yes&theme=social" src="http://jwlee0208.cdn3.cafe24.com/${content.filePath}" alt="" class="img-thumbnail" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal" style="width: 700px; height: 450px;"/></c:when>
+				<c:otherwise><img data-src="holder.js/250x250?auto=yes&theme=social" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="img-thumbnail" onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal" style="width: 800px; height: 450px;"/></c:otherwise>
 			</c:choose>					
 					
 					<div class="caption">

@@ -1,15 +1,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-	<nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top">
-    	<ul class="nav bs-docs-sidenav">
-    	
+		  <div class="list-group">
     <c:if test="${sideBoardList ne null}">	
     	<c:forEach var="boardInfo" items="${sideBoardList}">
-    		<li class="">
-  				<a href="/board/article/list/${boardInfo.boardId}/1">${boardInfo.boardName} <span class="badge"> ${boardInfo.boardArticleCnt} </span></a>
-  			</li>	
+			<a href="/board/article/list/${boardInfo.boardId}/1" class="list-group-item">${boardInfo.boardName} <span class="badge"> ${boardInfo.boardArticleCnt} </span></a>
     	</c:forEach>
-    </c:if>	
+    </c:if>			  
+          </div>
+<!-- 	<nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top"> -->
+<!--     	<ul class="nav bs-docs-sidenav"> -->
+    	
+<%--     <c:if test="${sideBoardList ne null}">	 --%>
+<%--     	<c:forEach var="boardInfo" items="${sideBoardList}"> --%>
+<!--     		<li class=""> -->
+<%--   				<a href="/board/article/list/${boardInfo.boardId}/1">${boardInfo.boardName} <span class="badge"> ${boardInfo.boardArticleCnt} </span></a> --%>
+<!--   			</li>	 -->
+<%--     	</c:forEach> --%>
+<%--     </c:if>	 --%>
     	
     	
 <!-- 			<li class=""> -->
@@ -137,9 +143,6 @@
 <!-- 			</li> -->
 
               
-		</ul>
-		<a class="back-to-top" href="#top">Back to top</a>
-            
-<!-- 		<a href="#" class="bs-docs-theme-toggle" role="button">Preview theme</a> -->
-            
-	</nav>
+<!-- 		</ul> -->
+<!-- 		<a class="back-to-top" href="#top">Back to top</a> -->
+<!-- 	</nav> -->
