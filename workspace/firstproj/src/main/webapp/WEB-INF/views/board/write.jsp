@@ -32,7 +32,7 @@
 				<colgroup><col width="10%"/><col width="90%"/></colgroup>
 				<tbody>
 					<tr>
-						<th><div class="form-group">카테고리</div></th>
+						<th><div class="form-group">게시판 타입</div></th>
 						<td>
 							<div class="form-group">
 								<select class="form-control" id="boardType" name="boardType">
@@ -45,8 +45,23 @@
 						</td>
 					</tr>
 					<tr>
+						<th><div class="form-group">게시판 카테고리</div></th>
+						<td>
+							<div class="form-group">
+								<select class="form-control" id="boardCategoryId" name="boardCategoryId">
+									<option>-선택-</option>
+								<c:if test="${!empty categoryList}">
+									<c:forEach var="boardCategoryInfo" items="${categoryList}">
+										<option <c:if test='${boardInfo.boardCategoryId eq boardCategoryInfo.boardCategoryId}'>selected</c:if> value="${boardCategoryInfo.boardCategoryId}">${boardCategoryInfo.boardCategoryName}</option>
+									</c:forEach>
+								</c:if>
+								</select>
+							</div>
+						</td>
+					</tr>
+					<tr>
 						<th><div class="form-group">게시판 이름</div></th>
-						<td><div class="form-group"><input type="text" class="form-control" id="boardName" name="boardName" value="${boardInfo.boardName }"/></div></td>
+						<td><div class="form-group"><input type="text" class="form-control" id="boardName" name="boardName" value="${boardInfo.boardName}"/></div></td>
 					</tr>
 				</tbody>
 			</table>
