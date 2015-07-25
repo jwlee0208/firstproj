@@ -71,16 +71,16 @@
 		<div class="form-group">
 			<label for="linkUrl" class="col-sm-4">Link To Your Play Stream Url</label>
 			<div class="col-sm-8">
-			<c:set var="playerVideoLinkList" value="${playerDetailInfo.playerVideoLinkList}"/>
-<!-- 			<video width="320" height="240" autoplay> -->
-			
-<!-- 			</video> -->
-			<c:if test="${playerVideoLinkList ne '' or playerVideoLinkList ne null}">
-				<c:forEach var="playerVideoLinkInfo" items="${playerVideoLinkList}" varStatus="idx">
-<!-- 					<source src=""/> -->
-					${palyerVideoLinkInfo.linkUrl}<br/>
-				</c:forEach>
-			</c:if>
+				<div class="embed-responsive embed-responsive-16by9">
+					${playerDetailInfo.playerVideoLinkList[0].linkUrl}
+				</div>
+				
+<%-- 			<c:set var="playerVideoLinkList" value="${playerDetailInfo.playerVideoLinkList}"/> --%>
+<%-- 			<c:if test="${playerVideoLinkList ne '' or playerVideoLinkList ne null}"> --%>
+<%-- 				<c:forEach var="playerVideoLinkInfo" items="${playerVideoLinkList}" varStatus="idx"> --%>
+<%-- 					<iframe class="embed-responsive-item" width="420" height="255" src="${palyerVideoLinkInfo.linkUrl}" frameborder="0" allowfullscreen></iframe><br/> --%>
+<%-- 				</c:forEach> --%>
+<%-- 			</c:if> --%>
 			</div>
 		</div>
 		
