@@ -37,7 +37,7 @@
 
 	<div class="row" style="padding-left: 40px; padding-right: 30px; ">
 		<!-- left area -->
-		<div class="col-md-4">
+		<div class="row">
 			<ul class="nav nav-tabs" role="tablist" id="boardTab">
 				<li id="li_1" class="li"><a>자유게시판&nbsp;&nbsp;<span class="btn btn-default" onclick="javascript:goList(1);">more+</span></a></li>
 				<li id="li_2" class="li"><a>Q&A&nbsp;&nbsp;<span class="btn btn-default" onclick="javascript:goList(2);">more+</span></a></li>
@@ -84,34 +84,33 @@
 			</div>	
 		</div>
 		<!-- center area -->
-		<div class="col-md-4">	
-			<div class="embed-responsive embed-responsive-16by9">
-				<iframe class="embed-responsive-item" width="420" height="255" src="//www.youtube.com/embed/7X9QYfwTuE8" frameborder="0" allowfullscreen></iframe>
-	<!-- 		  	<iframe class="embed-responsive-item" width="420" height="255" src="//www.youtube.com/embed/sD8pJQ_9K4Y" frameborder="0" allowfullscreen></iframe>		 -->
-			</div>
-		</div>	
+<!-- 		<div class="row">	 -->
+<!-- 			<div class="embed-responsive embed-responsive-16by9"> -->
+<!-- 				<iframe class="embed-responsive-item" width="420" height="255" src="//www.youtube.com/embed/7X9QYfwTuE8" frameborder="0" allowfullscreen></iframe> -->
+<!-- 			</div> -->
+<!-- 		</div>	 -->
 		<!-- right area -->
-		<div class="col-md-4" ng-controller="SubCtrl">	
-			 <div class="slider2">
-			    <img ng-repeat="slide in slides" class="slide slide-animation nonDraggableImage"
-			         ng-swipe-right="nextSlide()" ng-swipe-left="prevSlide()"
-			         ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}">
+<!-- 		<div class="row" ng-controller="SubCtrl">	 -->
+<!-- 			 <div class="slider2"> -->
+<!-- 			    <img ng-repeat="slide in slides" class="slide slide-animation nonDraggableImage" -->
+<!-- 			         ng-swipe-right="nextSlide()" ng-swipe-left="prevSlide()" -->
+<!-- 			         ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}"> -->
 			
-			    <a class="arrow prev" href="#" ng-click="nextSlide()"></a>
-			    <a class="arrow next" href="#" ng-click="prevSlide()"></a>
-			    <nav class="nav-slide">
-			        <div class="wrapper">
-			            <ul class="dots">
-			                <li class="dot" ng-repeat="slide in slides">
-			                    <a href="#" 
-			                    	ng-class="{'active':isCurrentSlideIndex($index)}"
-			                       	ng-click="setCurrentSlideIndex($index);">{{slide.description}}</a>
-			                </li>
-			            </ul>
-			        </div>
-			    </nav>
-			</div>
-		</div>
+<!-- 			    <a class="arrow prev" href="#" ng-click="nextSlide()"></a> -->
+<!-- 			    <a class="arrow next" href="#" ng-click="prevSlide()"></a> -->
+<!-- 			    <nav class="nav-slide"> -->
+<!-- 			        <div class="wrapper"> -->
+<!-- 			            <ul class="dots"> -->
+<!-- 			                <li class="dot" ng-repeat="slide in slides"> -->
+<!-- 			                    <a href="#"  -->
+<!-- 			                    	ng-class="{'active':isCurrentSlideIndex($index)}" -->
+<!-- 			                       	ng-click="setCurrentSlideIndex($index);">{{slide.description}}</a> -->
+<!-- 			                </li> -->
+<!-- 			            </ul> -->
+<!-- 			        </div> -->
+<!-- 			    </nav> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 	</div>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

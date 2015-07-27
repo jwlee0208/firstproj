@@ -88,7 +88,7 @@ public class BoardController {
 
 	}
 	@RequestMapping(value = "/write")
-	public String createBoard(HttpServletRequest request, Model model, BoardDto boardDto, HttpSession session) {
+	public String createBoard(HttpServletRequest request, Model model, BoardDto boardDto, HttpSession session) throws Exception{
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
 		
@@ -97,6 +97,7 @@ public class BoardController {
 		}else{
 		    return "redirect:/login?redirectPage=" + request.getRequestURI();
 		}
+		model.addAttribute("categoryList", this.boardService.getBoardCategoryList());
 		
 		return "board/write";
 	}
@@ -180,7 +181,8 @@ public class BoardController {
 		    return "redirect:/login?redirectPage=" + request.getRequestURI();
 		}
 
-		model.addAttribute("boardInfo", boardInfo);
+		model.addAttribute("categoryList", this.boardService.getBoardCategoryList());
+		model.addAttribute("boardInfo"	 , boardInfo);
 		return "board/write";
 	}
 	

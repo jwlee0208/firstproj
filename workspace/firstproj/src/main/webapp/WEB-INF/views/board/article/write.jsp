@@ -6,7 +6,8 @@
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/common-editor.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/article/write.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/article/common.js"></script>
-<div class="container">
+<!-- <div class="container"> -->
+<div>
 	<form id="writeFrm" name="writeFrm" method="post" role="form" enctype="multipart/form-data">
 	
 	<input type="hidden" id="authorId" name="authorId" value="jwlee"/>
@@ -17,12 +18,14 @@
 	
 	<ol class="breadcrumb">
 	  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
-<!-- 		  <li>게시판</li> -->
+	  <li><a href="#" onclick="javascript:goList();">Board</a></li>
 	  <li>
 	  	<a href="javascript:;"> 
-			<c:if test="${boardId eq 1}">자유게시판</c:if>
-			<c:if test="${boardId eq 2}">Q&A</c:if>
-			<c:if test="${boardId eq 3}">기타게시판</c:if>	
+<c:if test="${!empty boardList}">
+	<c:forEach var="boardInfo" items="${boardList}">
+		<c:if test="${boardId eq boardInfo.boardId}">${boardInfo.boardName}</c:if>										
+	</c:forEach>
+</c:if>
 		</a>		  
 	  </li>
 	  <li class="active">글 작성</li>
@@ -32,22 +35,26 @@
 				<colgroup><col width="10%"/><col width="90%"/></colgroup>
 				<tbody>
 					<tr>
-						<th><div class="form-group">카테고리</div></th>
+						<th><div class="form-group">게시판</div></th>
 						<td>
 							<div class="form-group">
 								<select class="form-control" id="boardId" name="boardId">								
 							<c:choose>
 								<c:when test="${articleInfo ne null && articleInfo ne ''}">
-									<option <c:if test='${articleInfo.boardId eq 0}'>selected</c:if> value="0">-선택-</option>
-									<option <c:if test="${articleInfo.boardId eq 1}">selected</c:if> value="1">자유게시판</option>
-									<option <c:if test="${articleInfo.boardId eq 2}">selected</c:if> value="2">Q&A</option>
-									<option <c:if test="${articleInfo.boardId eq 3}">selected</c:if> value="3">기타</option>
+									
+								<c:if test="${!empty boardList}">
+									<c:forEach var="boardInfo" items="${boardList}">
+									<option <c:if test='${articleInfo.boardId eq boardInfo.boardId}'>selected</c:if> value="${boardInfo.boardId}">${boardInfo.boardName}</option>
+									</c:forEach>
+								</c:if>
+								
 								</c:when>
 								<c:otherwise>
-									<option <c:if test='${boardId eq 0}'>selected</c:if> value="0">-선택-</option>
-									<option <c:if test="${boardId eq 1}">selected</c:if> value="1">자유게시판</option>
-									<option <c:if test="${boardId eq 2}">selected</c:if> value="2">Q&A</option>
-									<option <c:if test="${boardId eq 3}">selected</c:if> value="3">기타</option>	
+								<c:if test="${!empty boardList}">
+									<c:forEach var="boardInfo" items="${boardList}">
+									<option <c:if test='${articleInfo.boardId eq boardInfo.boardId}'>selected</c:if> value="${boardInfo.boardId}">${boardInfo.boardName}</option>
+									</c:forEach>
+								</c:if>								
 								</c:otherwise>
 							</c:choose>								
 								</select>

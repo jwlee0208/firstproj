@@ -270,25 +270,26 @@ public class BoardArticleController {
 	@RequestMapping(value = "/view")
 	public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @Param int selectedArticleId) throws Exception{
 		
-		BoardArticleDto contentInfo = null;
+		BoardArticleDto contentInfo 	= null;
 		BoardArticleDto prevContentInfo = null;
 		BoardArticleDto nextContentInfo = null;
 		
 		if(selectedArticleId > 0){
 			boardArticleDto.setArticleId(selectedArticleId);
 			// 글 조회
-			contentInfo = this.boardArticleService.selectBoardArticle(boardArticleDto);
+			contentInfo 	= this.boardArticleService.selectBoardArticle(boardArticleDto);
 			// 이전 글 조회
 			prevContentInfo = this.boardArticleService.selectPrevBoardArticle(boardArticleDto);
 			// 다음 글 조회
 			nextContentInfo = this.boardArticleService.selectNextBoardArticle(boardArticleDto);
 		}
 		
-		model.addAttribute("contentInfo", contentInfo);
+		model.addAttribute("contentInfo"	, contentInfo);
 		model.addAttribute("prevContentInfo", prevContentInfo);
 		model.addAttribute("nextContentInfo", nextContentInfo);
 		
-		model.addAttribute("boardId", boardArticleDto.getBoardId());
+		model.addAttribute("boardId"		, boardArticleDto.getBoardId());
+		model.addAttribute("boardList"		, this.boardService.getBoardList());
 		
 		return "board/article/view";
 	}
@@ -301,10 +302,7 @@ public class BoardArticleController {
 	 * @return
 	 */
 	@RequestMapping(value = "/write")
-	public String writeBoard(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session) {
-		
-//		System.out.println("session : " + (session == null));
-//		System.out.println("userId : " + ((UserDto)session.getAttribute("userInfo")).getUserId());
+	public String writeBoard(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session) throws Exception{
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
 		
@@ -314,8 +312,7 @@ public class BoardArticleController {
 		    return "redirect:/login?redirectPage=" + request.getRequestURI();
 		}
 		
-		
-		
+		model.addAttribute("boardList", this.boardService.getBoardList());
 		
 		return "board/article/write";
 	}
@@ -540,7 +537,8 @@ System.out.println("boardArticleDto : " + boardArticleDto.toString());
 				articleInfo = this.boardArticleService.selectBoardArticle(boardArticleDto);
 			}
 			
-			model.addAttribute("articleInfo", articleInfo);		
+			model.addAttribute("articleInfo"	, articleInfo);		
+			model.addAttribute("boardList"		, this.boardService.getBoardList());
 			
 		}else{
 		    return "redirect:/login?redirectPage=" + request.getRequestURI();

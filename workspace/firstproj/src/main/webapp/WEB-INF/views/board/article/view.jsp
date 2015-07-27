@@ -4,9 +4,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleView.js"></script>
-<div class="container">
+<!-- <div class="container"> -->
+<div>
 	<form id="viewFrm" name="viewForm" method="post">
-	<input type="hidden" id="selectedArticleId" 	name="selectedArticleId" value="${contentInfo.articleId }"/>
+	<input type="hidden" id="selectedArticleId" 	name="selectedArticleId" 	value="${contentInfo.articleId }"/>
 	<input type="hidden" id="boardId" 				name="boardId" 				value="${contentInfo.boardId}"/>
 	<input type="hidden" id="prevArticleId" 		name="prevArticleId" 		value="${prevContentInfo.articleId}"/>
 	<input type="hidden" id="nextArticleId" 		name="nextArticleId" 		value="${nextContentInfo.articleId}"/>
@@ -15,11 +16,14 @@
 	
 	<ol class="breadcrumb">
 	  <li><a href="javascript:;" onclick="javascript:goHome();">Home</a></li>
+	  <li><a href="#" 			 onclick="javascript:goList();">Board</a></li>
 	  <li>
 	  	  <a href="javascript:;">
-			<c:if test="${boardId eq 1}">자유게시판</c:if>
-			<c:if test="${boardId eq 2}">Q&A</c:if>
-			<c:if test="${boardId eq 3}">기타게시판</c:if>	
+<c:if test="${!empty boardList}">
+	<c:forEach var="boardInfo" items="${boardList}">
+		<c:if test="${boardId eq boardInfo.boardId}">${boardInfo.boardName}</c:if>										
+	</c:forEach>
+</c:if>		  
 		  </a>		  
 	  </li>
 	  <li class="active">Article</li>

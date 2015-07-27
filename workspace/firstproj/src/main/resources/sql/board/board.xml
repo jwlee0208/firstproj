@@ -27,12 +27,14 @@
 		<insert id="insertBoardInfo" parameterType="board.boardDto" useGeneratedKeys="true" keyProperty="boardId">
 			INSERT INTO TB_BOARD
 			( board_name
+			, board_category_id
 			, board_type
 			, create_user_id
 			, create_user_name
 			, create_date)
 			VALUES
 			( #{boardName} 
+			, #{boardCategoryId}
 			, #{boardType} 
 			, #{createUserId} 
 			, #{createUserName} 
@@ -43,6 +45,7 @@
 			UPDATE TB_BOARD
 				SET
 					board_name 			= #{boardName} ,
+					board_category_id	= #{boardCategoryId} ,
 					board_type 			= #{boardType} ,
 					modify_user_id 		= #{modifyUserId} ,
 					modify_user_name 	= #{modifyUserName} ,

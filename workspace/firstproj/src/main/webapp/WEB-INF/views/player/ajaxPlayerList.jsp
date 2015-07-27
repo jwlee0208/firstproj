@@ -19,18 +19,18 @@
 				<c:choose>
 					<c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">
 						<img src="${pageContext.request.contextPath}${list.profileImgFilePath}" 
-							 data-src="holder.js/400x400" alt="image" class="img-rounded" 
+							 data-src="holder.js/250x200" alt="image" class="img-thumbnail" 
 							 onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  
 							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
 							 data-toggle="modal" data-target="#myModal" 
-							 style="padding-top:10px; cursor:pointer;"/>
+							 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
 					</c:when>
 					<c:otherwise>
 						<img src="${pageContext.request.contextPath}/img/no_image.png" 
-							 data-src="holder.js/400x400" alt="image" class="img-rounded" 
+							 data-src="holder.js/250x200" alt="image" class="img-thumbnail"
 							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
 							 data-toggle="modal" data-target="#myModal" 
-							 style="padding-top:10px; cursor:pointer;"/>
+							 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
 					</c:otherwise>
 				</c:choose>					
 						
