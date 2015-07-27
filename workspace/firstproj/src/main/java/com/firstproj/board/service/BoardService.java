@@ -36,4 +36,6 @@ public interface BoardService {
 
     List<BoardCategoryPortalDto> getBoardCategoryAndBoardList() throws Exception;
 
+    BoardDto                     getBoardCategoryAndBoardInfo(BoardDto boardDto) throws Exception;
+
 }

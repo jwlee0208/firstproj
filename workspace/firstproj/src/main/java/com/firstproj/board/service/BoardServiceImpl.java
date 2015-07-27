@@ -114,4 +114,9 @@ public class BoardServiceImpl implements BoardService{
 	    return this.boardDao.selectBoardCategoryAndBoardList();
 	}
 
+	@Override
+    public BoardDto getBoardCategoryAndBoardInfo(BoardDto boardDto) throws Exception{
+        return this.boardDao.selectBoardCategoryAndBoardInfo(boardDto);
+    }
+
 }

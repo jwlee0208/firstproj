@@ -107,8 +107,7 @@
 				 , board_category_name 
 			FROM TB_BOARD_CATEGORY		
 		</select>
-		
-		
+				
 		<select id="selectBoardCategoryAndBoardList" resultMap="selectBoardCategoryAndBoardList">
 			SELECT	bc.board_category_id
 				  , bc.board_category_name
@@ -127,8 +126,6 @@
 			ORDER BY bc.board_category_id, b.board_id ASC
 		</select>
 		
-		
-		
 		<resultMap id="selectBoardCategoryAndBoardList" type="board.boardCategoryPortalDto">
 			<id		column="board_category_id" 		property="boardCategoryId"/>
 			<result column="board_category_name" 	property="boardCategoryName"/>
@@ -146,5 +143,23 @@
 			</collection>
 		</resultMap>
 		
+		
+		<select id="selectBoardCategoryAndBoardInfo" parameterType="board.boardDto" resultType="board.boardDto">
+			SELECT	bc.board_category_id
+				  , bc.board_category_name
+				  , b.board_id
+				  ,	b.board_category_id
+				  , b.board_name
+				  , b.board_type
+				  , b.create_user_id
+				  , b.create_user_name
+				  , b.create_date
+				  , b.modify_user_id
+				  , b.modify_user_name
+				  , b.modify_date
+			FROM		TB_BOARD_CATEGORY bc
+			INNER JOIN	TB_BOARD 		  b 	ON b.board_category_id = bc.board_category_id
+			WHERE b.board_id = #{boardId}
+		</select>
     </mapper>
     

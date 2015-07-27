@@ -130,4 +130,12 @@ public class BoardDao extends SqlSessionDaoSupport{
 	public List<BoardCategoryPortalDto> selectBoardCategoryAndBoardList() throws Exception{
 	    return getSqlSession().selectList("sql.board.selectBoardCategoryAndBoardList");
 	}
+    /**
+     * 게시판 카테고리 & 게시판 정보 조회
+     * @return
+     * @throws Exception
+     */
+    public BoardDto selectBoardCategoryAndBoardInfo(BoardDto boardDto) throws Exception{
+        return getSqlSession().selectOne("sql.board.selectBoardCategoryAndBoardInfo", boardDto);
+    }
 }

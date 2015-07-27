@@ -12,19 +12,15 @@
 		
 // 	}
 </script>
-<c:set var="boardName" value=""/>
-<c:if test="${boardId eq 1}"><c:set var="boardName" value="자유게시판"/></c:if>
-<c:if test="${boardId eq 2}"><c:set var="boardName" value="Q&A"/></c:if>
-<c:if test="${boardId eq 3}"><c:set var="boardName" value="기타게시판"/></c:if>	
 <!-- <div class="container"> -->
 	<div class="page-header">
-	  <h1>BOARD&nbsp;&nbsp;<small>${boardName}</small></h1>
+	  <h1>BOARD&nbsp;&nbsp;<small>${boardInfo.boardName}</small></h1>
 	</div>	
 	
 	<ol class="breadcrumb">
 	  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
-	  <li><a>Board</a></li>
-	  <li class="secondBranch active">${boardName}</li>
+	  <li><a>${boardInfo.boardCategoryName} Board</a></li>
+	  <li class="secondBranch active">${boardInfo.boardName}</li>
 	</ol>		
 		
 	<form id="boardFrm" name="boardFrm" method="post">

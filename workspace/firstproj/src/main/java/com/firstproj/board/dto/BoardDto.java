@@ -3,7 +3,7 @@ package com.firstproj.board.dto;
 import org.apache.ibatis.type.Alias;
 
 @Alias("board.boardDto")
-public class BoardDto {
+public class BoardDto extends BoardCategoryDto{
 	private int 	boardId;
 	private int     boardCategoryId;
 	private String 	boardName;

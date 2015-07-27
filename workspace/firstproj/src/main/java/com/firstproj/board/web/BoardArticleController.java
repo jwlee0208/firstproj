@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.firstproj.board.dto.BoardArticleDto;
+import com.firstproj.board.dto.BoardDto;
 import com.firstproj.board.service.BoardArticleServiceImpl;
+import com.firstproj.board.service.BoardServiceImpl;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.web.EditorController;
@@ -50,10 +52,13 @@ public class BoardArticleController {
 	private static final int 	THUMBNAIL_IMAGE_HEIGHT_MIDDLE 	= 256;
 	private static final int 	THUMBNAIL_IMAGE_WIDTH_LARGE 	= 400;
 	private static final int 	THUMBNAIL_IMAGE_HEIGHT_LARGE 	= 400;
-	
+
+	@Resource(name = "BoardServiceImpl")
+	private BoardServiceImpl boardService;
+
 	@Resource(name = "BoardArticleServiceImpl")
 	private BoardArticleServiceImpl boardArticleService;
-	
+
 	@Resource(name="fileUpload")
 	private FileUpload fileUpload;
 	
@@ -77,14 +82,19 @@ public class BoardArticleController {
 	 */
 	@RequestMapping(value = "/list", method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
-		model = this.getBoardCommonListForJson(request, model, boardArticleDto);
 		
+	    BoardDto boardDto = new BoardDto();
+	    boardDto.setBoardId(boardArticleDto.getBoardId());
+	    
+	    model = this.getBoardCommonListForJson(request, model, boardArticleDto);
+	    model.addAttribute("boardInfo", boardService.getBoardCategoryAndBoardInfo(boardDto));
+	    
 		String page = "board/article/list";
 		
-		if(boardArticleDto.getBoardId() == 1){
+		if(boardDto.getBoardType().equals("1")){
 			page = "board/article/imageList";
-		}else if(boardArticleDto.getBoardId() == 2){
-			page = "board/article/imageList2";
+		}else if(boardDto.getBoardType().equals("2")){
+			page = "board/article/thumbList";
 		}
 		
 //		model.addAttribute("boardList", boardList);
@@ -102,16 +112,19 @@ public class BoardArticleController {
 	 */
 	@RequestMapping(value = "/list/{boardId}/{menuId}", method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int boardId, @PathVariable int menuId) throws Exception {
+        BoardDto boardDto = new BoardDto();
+        boardDto.setBoardId(boardArticleDto.getBoardId());
 
 		model = this.getBoardCommonListForJson(request, model, boardArticleDto);
-		
-		String page = "board/article/list";
-		
-		if(boardArticleDto.getBoardId() == 1){
-			page = "board/article/imageList";
-		}else if(boardArticleDto.getBoardId() == 2){
-			page = "board/article/imageList2";
-		}
+		model.addAttribute("boardInfo", boardService.getBoardCategoryAndBoardInfo(boardDto));
+        
+        String page = "board/article/list";
+        
+        if(boardDto.getBoardType().equals("1")){
+            page = "board/article/imageList";
+        }else if(boardDto.getBoardType().equals("2")){
+            page = "board/article/thumbList";
+        }
 		
 //		model.addAttribute("boardList", boardList);
 //		return "board/list";
@@ -121,23 +134,23 @@ public class BoardArticleController {
 	private Model getBoardCommonListForJson(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
 		// 검색 조건
 		String searchCondition = request.getParameter("searchCondition");
-		String searchText = request.getParameter("searchText");
-		String startDate = request.getParameter("startDate");
-		String endDate = request.getParameter("endDate");
+		String searchText      = request.getParameter("searchText");
+		String startDate       = request.getParameter("startDate");
+		String endDate         = request.getParameter("endDate");
 		
-		int boardId = boardArticleDto.getBoardId();
+		int    boardId         = boardArticleDto.getBoardId();
 		
-		int pageNo = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
+		int    pageNo          = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
 
-		int listRowCnt = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
+		int    listRowCnt      = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// searching condition setting
-		paramMap.put("boardId", boardId);
+		paramMap.put("boardId"        , boardId);
 		paramMap.put("searchCondition", searchCondition);
-		paramMap.put("searchText", searchText);
-		paramMap.put("startDate", startDate);
-		paramMap.put("endDate", endDate);
+		paramMap.put("searchText"     , searchText);
+		paramMap.put("startDate"      , startDate);
+		paramMap.put("endDate"        , endDate);
 
 		List<BoardArticleDto> boardArticleList;	
 		int totalListCnt = 0;
