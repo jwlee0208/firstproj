@@ -141,10 +141,12 @@
 		<!-- 5개의 게시글 조회 -->    
 		<select id="selectArticleFive" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">                      
 			<include refid="searchSql"/>              
-			WHERE 1 = 1	
+			<where>
 				<if test="boardId > 0">
 				and board_id = #{boardId}    
-				</if>
+				</if>			
+				and status = 1
+			</where>	
 			        
 <!-- 			<include refid="searchConditionSql"/>                          -->
 			ORDER BY article_id desc                
@@ -186,9 +188,10 @@
 				 , b.create_user_name
 				 , b.create_date
 				 , count(ba.article_id) as boardArticleCnt 
-			FROM TB_BOARD b
-			LEFT JOIN TB_BOARD_ARTICLE ba ON ba.board_id = b.board_id AND ba.status = 1
+			FROM 			TB_BOARD 			b
+			INNER 	JOIN 	TB_BOARD_CATEGORY 	bc ON b.board_category_id = bc.board_category_id
+			LEFT 	JOIN 	TB_BOARD_ARTICLE 	ba ON ba.board_id 		  = b.board_id AND ba.status = 1
 			GROUP BY b.board_id
-			ORDER BY b.board_id DESC
+			ORDER BY bc.board_category_id ASC, b.board_id DESC
 		</select>
     </mapper>

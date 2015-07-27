@@ -32,8 +32,8 @@
 				  , a.attr_name
 				  , ae.attr_elem_id
 				  , ae.attr_elem_name 
-			FROM TB_ATTR a 
-			LEFT JOIN TB_ATTR_ELEM ae ON a.attr_id = ae.attr_id
+			FROM 		TB_ATTR 	 a 
+			LEFT JOIN 	TB_ATTR_ELEM ae ON a.attr_id = ae.attr_id
 			WHERE a.cat_id = #{catId} 
 		</select>
 		
@@ -414,7 +414,7 @@
 		</insert>
 				
 		<insert id="insertCategoryAttrElemMapInfo" parameterType="player.categoryAttrElemDto" useGeneratedKeys="true" keyProperty="attrElemMapId">
-			INSERT INTO tb_attr_elem_map
+			INSERT INTO TB_ATTR_ELEM_MAP
 				(attr_id,
 				attr_elem_id,
 				cat_id,
@@ -528,7 +528,7 @@
 		</update>
 				
 		<update id="updateCategoryAttrElemMapInfo" parameterType="player.categoryAttrElemDto">
-			UPDATE tb_attr_elem_map
+			UPDATE TB_ATTR_ELEM_MAP
 				SET attr_elem_id 		= #{attrElemId}
 				  , cat_id		 		= #{catId}
 				  , attr_elem_map_name  = #{attrElemMapName}

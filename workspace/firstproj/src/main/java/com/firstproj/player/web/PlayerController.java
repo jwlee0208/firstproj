@@ -147,7 +147,7 @@ public class PlayerController {
         String returnUrl = "player/";
         
         if(referer != null){
-        	if(referer.indexOf("write") > 0){
+        	if(referer.indexOf("write") > 0 || referer.indexOf("modify") > 0 ){
         		returnUrl += "ajaxAttributeList";
         	}else if(referer.indexOf("playerPortal") > 0){
 				returnUrl += "ajaxAttributeList2";

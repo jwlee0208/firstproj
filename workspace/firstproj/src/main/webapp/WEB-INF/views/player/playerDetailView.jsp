@@ -34,7 +34,7 @@
 		<h1 id="btn-groups" class="page-header">Player Information</h1>
 		<div class="form-group">
 			<label for="profileImgFilePath" class="col-sm-4">Profile Image</label>
-			<div class="col-sm-8"><img data-src="holder.js/200x200" src="${pageContext.request.contextPath}${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" width="200px" height="200px" /></div>
+			<div class="col-sm-8"><img data-src="holder.js/200x200" src="http://jwlee0208.cdn3.cafe24.com/${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" width="200px" height="200px" /></div>
 		</div>
 <!-- 		<div class="form-group"> -->
 <!-- 			<div class="col-sm-2">User ID</div> -->
@@ -141,7 +141,7 @@ $(function(){
 	$("#modifyBtn").on("click", function(){
 		var frm = $("#viewFrm");
 		frm.attr("action","/player/modify");
-		frm.attr("method","post");
+		frm.attr("method","get");
 		frm.submit();
 // 		location.href = "/player/modify";
 	});

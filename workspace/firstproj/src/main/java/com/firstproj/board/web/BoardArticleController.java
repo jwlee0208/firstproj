@@ -86,19 +86,19 @@ public class BoardArticleController {
 	    BoardDto boardDto = new BoardDto();
 	    boardDto.setBoardId(boardArticleDto.getBoardId());
 	    
+	    BoardDto boardInfo = boardService.getBoardCategoryAndBoardInfo(boardDto);
+	    
 	    model = this.getBoardCommonListForJson(request, model, boardArticleDto);
-	    model.addAttribute("boardInfo", boardService.getBoardCategoryAndBoardInfo(boardDto));
+	    model.addAttribute("boardInfo", boardInfo);
 	    
 		String page = "board/article/list";
 		
-		if(boardDto.getBoardType().equals("1")){
+		if(boardInfo.getBoardType().equals("1")){
 			page = "board/article/imageList";
-		}else if(boardDto.getBoardType().equals("2")){
+		}else if(boardInfo.getBoardType().equals("2")){
 			page = "board/article/thumbList";
 		}
 		
-//		model.addAttribute("boardList", boardList);
-//		return "board/list";
 		return page;
 	}
 	
@@ -115,19 +115,19 @@ public class BoardArticleController {
         BoardDto boardDto = new BoardDto();
         boardDto.setBoardId(boardArticleDto.getBoardId());
 
-		model = this.getBoardCommonListForJson(request, model, boardArticleDto);
-		model.addAttribute("boardInfo", boardService.getBoardCategoryAndBoardInfo(boardDto));
+        BoardDto boardInfo = boardService.getBoardCategoryAndBoardInfo(boardDto);
+        
+        model = this.getBoardCommonListForJson(request, model, boardArticleDto);
+        model.addAttribute("boardInfo", boardInfo);
         
         String page = "board/article/list";
         
-        if(boardDto.getBoardType().equals("1")){
+        if(boardInfo.getBoardType().equals("1")){
             page = "board/article/imageList";
-        }else if(boardDto.getBoardType().equals("2")){
+        }else if(boardInfo.getBoardType().equals("2")){
             page = "board/article/thumbList";
         }
 		
-//		model.addAttribute("boardList", boardList);
-//		return "board/list";
 		return page;
 	}
 	
@@ -267,8 +267,8 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/view")
-	public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @Param int selectedArticleId) throws Exception{
+	@RequestMapping(value = "/view/{selectedArticleId}")
+	public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int selectedArticleId) throws Exception{
 		
 		BoardArticleDto contentInfo 	= null;
 		BoardArticleDto prevContentInfo = null;
@@ -521,8 +521,8 @@ System.out.println("boardArticleDto : " + boardArticleDto.toString());
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/modify")
-	public String modifyBoardArticlePage(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @Param int selectedArticleId, @Param int selectedBoardId) throws Exception{
+	@RequestMapping(value = "/modify/{selectedArticleId}/{selectedBoardId}")
+	public String modifyBoardArticlePage(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @PathVariable int selectedArticleId, @PathVariable int selectedBoardId) throws Exception{
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
 		
@@ -541,6 +541,7 @@ System.out.println("boardArticleDto : " + boardArticleDto.toString());
 			model.addAttribute("boardList"		, this.boardService.getBoardList());
 			
 		}else{
+		    System.out.println("URL : " + request.getRequestURL() +", URI : " + request.getRequestURI());
 		    return "redirect:/login?redirectPage=" + request.getRequestURI();
 		}
 		

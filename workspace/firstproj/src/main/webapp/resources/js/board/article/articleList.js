@@ -71,12 +71,12 @@ function goPage(pageNo) {
 //}
 // 게시글 조회
 function goView(articleId){
-	
-	$("#selectedArticleId").val(articleId);
-	
-	var frm = $("#boardFrm");
-	frm.attr("action", "/board/article/view.page");
-	frm.attr("method", "post");
-	frm.submit();
+	location.href = "/board/article/view/"+articleId;	
+//	$("#selectedArticleId").val(articleId);
+//	
+//	var frm = $("#boardFrm");
+//	frm.attr("action", "/board/article/view/" + articleId);
+//	frm.attr("method", "get");
+//	frm.submit();
 }
 

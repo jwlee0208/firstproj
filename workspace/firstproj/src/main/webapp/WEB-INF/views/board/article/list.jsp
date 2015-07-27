@@ -14,7 +14,7 @@
 	
 	<ol class="breadcrumb">
 	  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
-	  <li><a>${boardInfo.categoryName} Board</a></li>
+	  <li><a>${boardInfo.boardCategoryName} Board</a></li>
 	  <li class="secondBranch active">${boardInfo.boardName}</li>
 	</ol>		
 	
@@ -51,8 +51,8 @@
 		<table style="width: 100%;" class="table table-hover">
 			<colgroup>
 				<col width="10%" />
-				<col width="70%" />
-				<col width="10%" />
+				<col width="65%" />
+				<col width="15%" />
 				<col width="10%" />
 			</colgroup>
 			<thead>

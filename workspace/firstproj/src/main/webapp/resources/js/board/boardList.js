@@ -73,7 +73,7 @@ function goBoardView(boardId){
 	
 	var frm = $("#boardFrm");
 	frm.attr("action", "/board/view");
-	frm.attr("method", "post");
+	frm.attr("method", "get");
 	frm.submit();
 }
 
@@ -83,6 +83,6 @@ function goBoardModify(boardId){
 	
 	var frm = $("#boardFrm");
 	frm.attr("action", "/board/modify");
-	frm.attr("method", "post");
+	frm.attr("method", "get");
 	frm.submit();		
 }

@@ -39,8 +39,8 @@
 		<!-- left area -->
 		<div class="row">
 			<ul class="nav nav-tabs" role="tablist" id="boardTab">
-				<li id="li_1" class="li"><a>자유게시판&nbsp;&nbsp;<span class="btn btn-default" onclick="javascript:goList(1);">more+</span></a></li>
-				<li id="li_2" class="li"><a>Q&A&nbsp;&nbsp;<span class="btn btn-default" onclick="javascript:goList(2);">more+</span></a></li>
+				<li id="li_1" class="li"><a>개발 관련&nbsp;&nbsp;<span class="btn btn-default" onclick="javascript:goList(1);">more+</span></a></li>
+				<li id="li_2" class="li"><a>여행 관련&nbsp;&nbsp;<span class="btn btn-default" onclick="javascript:goList(2);">more+</span></a></li>
 			</ul>
 			<div class="boardDiv li_1_board" style="display:none; padding-top : 10px;">
 				<div class="table-responsive">
@@ -157,7 +157,7 @@
 
 	function goArticleView(articleId){
 		$.ajax({
-			url : '/board/article/view',
+			url : '/board/article/view/' + articleId,
 			data : {selectedArticleId : articleId},
 			dataType : 'html',
 			success : function(data){

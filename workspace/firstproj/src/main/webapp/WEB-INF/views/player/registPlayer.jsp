@@ -71,7 +71,7 @@
 			<ul class="media-list">					
 				<li class="media">
 					<a class="pull-left" href="javascript:;">
-			<img data-src="holder.js/300x300" src="${pageContext.request.contextPath}${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" />
+			<img data-src="holder.js/300x300" src="http://jwlee0208.cdn3.cafe24.com/${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" />
 			<input type="hidden" id="filePath" 			name="playerInfoDto.profileImgFilePath" 		value="${playerDetailInfo.profileImgFilePath}"/>
 			<input type="hidden" id="originalFileName" 	name="playerInfoDto.profileImgName" 			value="${playerDetailInfo.profileImgName}"/>
 					</a>
@@ -260,7 +260,7 @@ $(function(){
 	   }
 	   alert("정상적으로 등록 되었습니다.");
 	   // 정상 등록 후 목록 화면으로 이동.
-	   location.href = "/player/playerList";
+	   location.href = "/player/playerPortal";
 
 	}
 	
@@ -288,7 +288,7 @@ $(function(){
 						
 						
 						if(result == 'ok'){
-							location.href = "/player/playerList";
+							location.href = "/player/playerPortal";
 						}else{
 							alert(msg);
 							return;
@@ -321,7 +321,7 @@ $(function(){
 			$("#introduce").val(introduce);
 
 			var profileImg = $.trim($("#profileImg").val());
-alert("profileImg.length : " + profileImg.length +", " + $("input[name=profileImgFilePath]").val());
+// alert("profileImg.length : " + profileImg.length +", " + $("input[name=profileImgFilePath]").val());
 			if(profileImg.length == 0){
 				$.ajax({
 					url : '/player/modifyPlayerAction',
@@ -334,7 +334,7 @@ alert("profileImg.length : " + profileImg.length +", " + $("input[name=profileIm
 						
 						
 						if(result == 'ok'){
-							location.href = "/player/playerList";
+							location.href = "/player/playerPortal";
 						}else{
 							alert(msg);
 							return;

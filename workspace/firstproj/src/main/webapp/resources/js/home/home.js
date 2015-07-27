@@ -23,7 +23,7 @@ function logout(){
 }
 
 function goPlayer(menuId){
-	var baseUrl = "/player/playerList";
+	var baseUrl = "/player/playerPortal";
 	if(menuId == 6){
 		baseUrl = "/player/playerPortal";
 	}

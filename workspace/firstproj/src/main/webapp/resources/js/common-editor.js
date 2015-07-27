@@ -1,16 +1,16 @@
 // TinyMCE 사용을 위한 설정 정의
 tinyMCE.init({
-	 selector: ".tinymce",//"textarea",
+	 selector: ".tinymce",	//"textarea",
      plugins: [
-             "advlist autolink link lists charmap hr pagebreak spellchecker",
+             "advlist autolink link lists charmap print preview hr pagebreak spellchecker",
              "searchreplace wordcount code insertdatetime media nonbreaking",
              "table contextmenu directionality textcolor paste textcolor image youTube"
      ],
-     toolbar1: "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | cut copy paste | bullist numlist | link unlink | inserttime | table | hr | charmap | image media | youTube imagepop",
+     toolbar1: "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | cut copy paste | bullist numlist | link unlink | inserttime | table | hr | charmap | image media | youTube imagepop | code",
 //     toolbar2: "youTube imagepop ", 
      menubar: false,
      resize : true,
-    
+     height : 300,
      toolbar_items_size: 'small',
      theme_advanced_path : false,
      entity_encoding : "raw",

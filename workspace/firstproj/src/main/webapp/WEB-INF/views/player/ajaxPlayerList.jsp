@@ -18,15 +18,15 @@
 						<span class="label <c:choose><c:when test="${list.catNm2 eq 'hitter'}">label-success</c:when><c:when test="${list.catNm2 eq 'pitcher'}">label-info</c:when><c:otherwise>label-warning</c:otherwise></c:choose> position">${list.catNm2Str}</span>
 				<c:choose>
 					<c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">
-						<img src="${pageContext.request.contextPath}${list.profileImgFilePath}" 
+						<img src="http://jwlee0208.cdn3.cafe24.com/${list.profileImgFilePath}" 
 							 data-src="holder.js/250x200" alt="image" class="img-thumbnail" 
-							 onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  
+							 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
 							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
 							 data-toggle="modal" data-target="#myModal" 
 							 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
 					</c:when>
 					<c:otherwise>
-						<img src="${pageContext.request.contextPath}/img/no_image.png" 
+						<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
 							 data-src="holder.js/250x200" alt="image" class="img-thumbnail"
 							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
 							 data-toggle="modal" data-target="#myModal" 
