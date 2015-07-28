@@ -4,7 +4,7 @@
 	
 	<c:set var="selectName" value=""/>
 	<c:choose>
-		<c:when test="${pageType eq 'regist'}">
+		<c:when test="${pageType eq 'regist' || pageType eq 'modify'}">
 			<c:set var="selectName" value="playerInfoDto.catId2"/>
 		</c:when>
 		<c:otherwise>

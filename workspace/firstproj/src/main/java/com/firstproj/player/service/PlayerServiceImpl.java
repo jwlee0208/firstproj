@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.util.PagingUtil;
@@ -141,10 +143,9 @@ public class PlayerServiceImpl implements PlayerService{
     	if(playerInfo != null){
     		
     		String userId = userInfo.getUserId();
-    		System.out.println("userId : " + userId);
+//    		System.out.println("userId : " + userId);
 //    		System.out.println("}}}}}}}}}}}}}}}}}}}}}}}}}}}} userInfo : " + userInfo.toString());
     		
-//    		playerInfo.setUserInfo(userInfo);
     		playerInfo.setUserId(userId);
     		playerInfoId = this.insertPlayerInfo(playerInfo);
 
@@ -154,8 +155,8 @@ public class PlayerServiceImpl implements PlayerService{
         	if(playerVideoLinkList != null && playerVideoLinkList.size() > 0){
         		for(PlayerVideoLinkDto playerVideoLinkDto : playerVideoLinkList){
         			playerVideoLinkDto.setPlayerInfoId(playerInfoId);
-        			
-        			this.insertPlayerVideoLinkInfo(playerVideoLinkDto);
+        			System.out.println("[ playerVideoLinkDto ] " + playerVideoLinkDto.toString());
+        			this.insertPlayerVideoLinkInfo(playerVideoLinkDto);        			
         		}
         	}
         	

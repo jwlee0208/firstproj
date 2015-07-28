@@ -80,7 +80,7 @@ public class PlayerController {
     @RequestMapping(value="/ajaxChildCategoryList")
     public String getChildCategoryList2(HttpServletRequest request, Model model, @Param int parentCatId, @Param int selectedCategoryId) throws Exception{
     	String referer = request.getHeader("Referer");
-        System.out.println("selectedCategoryId : " + selectedCategoryId +", String referer = " + request.getHeader("Referer"));
+//        System.out.println("selectedCategoryId : " + selectedCategoryId +", String referer = " + request.getHeader("Referer"));
         
         CategoryDto param 				= new CategoryDto();
         param.setParentCatId(parentCatId);
@@ -96,6 +96,8 @@ public class PlayerController {
         String pageType = "";
         if(referer.indexOf("write") > 0){
         	pageType = "regist";
+        }else if(referer.indexOf("modify") > 0){
+            pageType = "modify";
         }else if(referer.indexOf("playerPortal") > 0){
         	pageType = "list";
         }
@@ -304,7 +306,7 @@ public class PlayerController {
     	}else{
     		
     		if(this.playerService.getIsRegisted(sessionInfo)){
-    			return "redirect:/player/playerDetailView/"+sessionInfo.getUserId();
+    			return "redirect:/player/playerDetailView/" + sessionInfo.getUserId();
     		}else{
     	        CategoryDto 		param 		  = new CategoryDto();
     	        param.setParentCatId(0);
@@ -431,7 +433,15 @@ public class PlayerController {
 		return returnObj;
     }
  
-    
+    /**
+     * @brief player 프로필 정보 수정 화면 호출
+     * @param request
+     * @param model
+     * @param userDto
+     * @param session
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value="/modify", method = {RequestMethod.POST, RequestMethod.GET})
     public String getPlayerDetailForModify(HttpServletRequest request, Model model, UserDto userDto, HttpSession session) throws Exception{
     	UserDto myInfo   = (UserDto)session.getAttribute("userInfo");
