@@ -128,7 +128,7 @@
 		<div class="form-group">
 			<label for="linkUrl" class="col-sm-2 control-label">Link To Your Play Stream Url</label>
 			<div class="col-sm-10">
-				<input type="text" id="linkUrl" name="playerVideoLinkList[0].linkUrl" class="form-control" value="${playerDetailInfo.playerVideoLinkList[0].linkUrl}"/>
+				<input type="text" id="linkUrl" name="playerVideoLinkList[0].linkUrl" class="form-control" value="<c:out value='${playerDetailInfo.playerVideoLinkList[0].linkUrl}'/>"/>
 			</div>
 		</div>
 		

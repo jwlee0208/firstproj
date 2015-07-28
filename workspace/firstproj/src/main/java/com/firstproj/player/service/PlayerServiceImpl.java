@@ -248,6 +248,8 @@ public class PlayerServiceImpl implements PlayerService{
         			categoryAttrElemMapDto.setUserId(userInfo.getUserId());
         			categoryAttrElemMapDto.setUserName(userInfo.getUserNm());
         			
+        			System.out.println("[ categoryAttrElemMapDto ] : " + categoryAttrElemMapDto.toString());
+        			
         			this.updateCategoryPropertyMappingInfo(categoryAttrElemMapDto);
         		}
         	}

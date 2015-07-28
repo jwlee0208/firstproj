@@ -3,7 +3,7 @@ tinyMCE.init({
 	 selector: ".tinymce",	//"textarea",
      plugins: [
              "advlist autolink link lists charmap print preview hr pagebreak spellchecker",
-             "searchreplace wordcount code insertdatetime media nonbreaking",
+             "searchreplace wordcount codemirror insertdatetime media nonbreaking",
              "table contextmenu directionality textcolor paste textcolor image youTube"
      ],
      toolbar1: "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | cut copy paste | bullist numlist | link unlink | inserttime | table | hr | charmap | image media | youTube imagepop | code",
@@ -13,6 +13,7 @@ tinyMCE.init({
      height : 300,
      toolbar_items_size: 'small',
      theme_advanced_path : false,
+     theme_advanced_buttons1 : "code",
      entity_encoding : "raw",
      remove_script_host : false,
      convert_urls : false,
@@ -42,7 +43,32 @@ tinyMCE.init({
     username : "Some User",
     staffid : "991234"
    },
-   
+   codemirror: {
+	    indentOnInit: true, // Whether or not to indent code on init.
+	    path: 'codemirror-4.8', // Path to CodeMirror distribution
+	    config: {           // CodeMirror config object
+	       //mode: 'application/x-httpd-php',
+	       mode: "htmlmixed",
+	       lineNumbers: true,
+	       lineWrapping : true,
+	       smartIndent : true,
+	       firstLineNumber : 1,
+	       enterMode : "flat",
+	       autofocus : true,
+	       foldGutter: true,
+	       gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+	       extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+	       //killLine : true
+	    },
+	    jsFiles: [// Additional JS files to load
+	       'mode/clike/clike.js',
+	       'mode/php/php.js'
+	    ],
+	    cssFiles: [
+	               'theme/neat.css',
+	               'theme/elegant.css'
+	            ]
+	  },   
    /*
    에디터 파일업로드 이미지및 스크립트 설정 
    위에서 설명한 에디터 아이콘명 추가. 사용할 아이콘명 아이콘 이미지 경로 클릭시 호출된 함수를 작성한다.

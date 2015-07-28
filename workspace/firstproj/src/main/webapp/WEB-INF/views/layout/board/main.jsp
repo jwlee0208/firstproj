@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow" /> 
 <link rel="icon" href="/img/common/favicon.ico">
 <title>Let's Try Out</title>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
