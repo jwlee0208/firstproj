@@ -33,7 +33,7 @@
 	</div>
 
 
-	<div class="row">
+	<div class="row" style="padding-left: 20px; padding-right: 20px; ">
 		<!-- left area -->
 		<div class="row">
 			<ul class="nav nav-tabs" role="tablist" id="boardTab">
