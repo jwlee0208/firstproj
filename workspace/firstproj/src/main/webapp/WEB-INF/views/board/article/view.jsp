@@ -6,7 +6,7 @@
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleView.js"></script>
 <!-- <div class="container"> -->
 <div>
-	<form id="viewFrm" name="viewForm" method="post">
+	<form id="viewFrm" name="viewForm" method="post" role="form">
 	<input type="hidden" id="selectedArticleId" 	name="selectedArticleId" 	value="${contentInfo.articleId }"/>
 	<input type="hidden" id="boardId" 				name="boardId" 				value="${contentInfo.boardId}"/>
 	<input type="hidden" id="prevArticleId" 		name="prevArticleId" 		value="${prevContentInfo.articleId}"/>
@@ -29,7 +29,7 @@
 	  <li class="active">Article</li>
 	</ol>		
 
-		<div class="panel panel-default">	
+		<div class="panel panel-default" role="main">	
 			<div class="panel-heading">
 				<h4 class="panel-title">${contentInfo.title}</h4>
 			</div>
@@ -77,23 +77,23 @@
 
 
 		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
-			<div class="btn-group">
+			<div class="btn-group" role="button">
 				<input type="button" class="btn btn-default" id="goToList" value="목록"/>
 			</div>
 			<c:if test="${prevContentInfo.articleId ne null}">
-			<div class="btn-group">
+			<div class="btn-group" role="button">
 				<input type="button" class="btn btn-default" id="previous" value="Previous"/>			
 			</div>
 			</c:if>
 			<c:if test="${nextContentInfo.articleId ne null}">
-			<div class="btn-group">
+			<div class="btn-group" role="button">
 				<input type="button" class="btn btn-default" id="next" value="Next"/>		
 			</div>
 			</c:if>
-			<div class="btn-group">
+			<div class="btn-group" role="button">
 				<input type="button" class="btn btn-default pull-right" id="goToModify" value="수정"/>
 			</div>			
-			<div class="btn-group">
+			<div class="btn-group" role="button">
 				<input type="button" class="btn btn-default pull-right" id="goToDelete" value="삭제"/>
 			</div>			
 

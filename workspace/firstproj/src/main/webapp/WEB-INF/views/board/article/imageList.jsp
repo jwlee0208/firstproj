@@ -30,7 +30,7 @@
 	<input type="hidden" id="boardId" 			name="boardId" 				value="${boardId}"/>
 	
 	<!-- 검색 영역 -->	
-	<div class="form-group">
+	<div class="form-group" role="search">
 		
 <!-- 	<table style="width:100%"> -->
 <%-- 		<colgroup><col width="93%"/><col width="7%"/></colgroup> --%>
@@ -57,7 +57,7 @@
 	</div>	
 	
 	<c:set var="list" value="${boardList}" />
-	<div class="table-responsive" id="listDiv">
+	<div class="table-responsive" id="listDiv" role="main">
 		<!-- paging에 필요한 파라미터 -->
 		<input type="hidden" id="pageNo" 		name="pageNo" 		value="${pagedResult.pageNo}" /> 
 		<input type="hidden" id="totalListCnt" 	name="totalListCnt" value="${pagedResult.totalListCnt}" /> 

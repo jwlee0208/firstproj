@@ -38,7 +38,7 @@
 
 	<div class="form-group">
 
-		<div class="row">
+		<div class="row" role="search">
 			<input type="hidden" 	id="searchCondition" name="searchCondition" value="userName"/>
 			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control ui-autocomplete-input" placeholder="Try to search using keywords. And push enter key."/>	
 		</div>
@@ -77,7 +77,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<div id="listDiv"></div>	
+		<div id="listDiv" role="main"></div>	
 	<c:if test="${!isRegisted}">
 		<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
 			<div class="btn-group">

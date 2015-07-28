@@ -5,8 +5,6 @@
 <!DOCTYPE html>
 <html ng-app="website">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AngularJS Animate Slider</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/slideshow.css">
 <style>
@@ -35,7 +33,7 @@
 	</div>
 
 
-	<div class="row" style="padding-left: 40px; padding-right: 30px; ">
+	<div class="row">
 		<!-- left area -->
 		<div class="row">
 			<ul class="nav nav-tabs" role="tablist" id="boardTab">

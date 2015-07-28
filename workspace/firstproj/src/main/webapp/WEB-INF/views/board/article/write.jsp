@@ -30,7 +30,7 @@
 	  </li>
 	  <li class="active">글 작성</li>
 	</ol>
-		<div class="writeArea list-group-item">
+		<div class="writeArea list-group-item" role="main">
 			<table class="table table-condensed">
 				<colgroup><col width="10%"/><col width="90%"/></colgroup>
 				<tbody>

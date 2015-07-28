@@ -76,32 +76,28 @@ function loginAction(){
 </script>
 <div class="container">
 
-	<div class="loginWrap" style="padding-top : 170px; padding-left : 200px; padding-right : 200px; ">
+	<div class="loginWrap">
 	    <div class="loginArea">
-		<form class="form-horizontal" id="loginForm" name="loginForm" method="post">
+		<form class="form-signin" id="loginForm" name="loginForm" method="post" role="form">
 			
 			<input type="hidden" id="prevPage" name="prevPage" value="${prevPage}"/>
 			
-			<h1 id="btn-groups" class="page-header"><tag:message code="signin"/></h1>
+			<h2 class="form-signin-heading"><tag:message code="signin"/></h2>
 		
 			<div class="form-group">
-				<label for="userId" class="col-sm-2 control-label"><tag:message code="userid"/></label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="userId" name="userId" />
-				</div>
+				<label for="userId" class="sr-only"><tag:message code="userid"/></label>
+				
+				<input type="text" class="form-control" id="userId" name="userId" placeholder="Input your user ID" required autofocus/>
+				
 			</div>
 			<div class="form-group">
-				<label for="passwd" class="col-sm-2 control-label"><tag:message code="passwd"/></label>
-				<div class="col-sm-10">
-					<input type="password" class="form-control" id="passwd" name="passwd" />
-				</div>
+				<label for="passwd" class="sr-only"><tag:message code="passwd"/></label>
+				
+					<input type="password" class="form-control" id="passwd" name="passwd" placeholder="Input your password"/>
+				
 			</div>
 			<div class="alert alert-danger"></div>
-			<div class="btn-group btn-group-justified">
-				<div class="btn-group">
-			      <input type="button" class="btn btn-primary" name="signinSubmit" value="<tag:message code="signin"/>">
-			    </div> 
-			</div>
+			<input type="button" class="btn btn-primary btn-lg btn-block" name="signinSubmit" value="<tag:message code="signin"/>">
 		</form>
 		</div>
 	</div>	

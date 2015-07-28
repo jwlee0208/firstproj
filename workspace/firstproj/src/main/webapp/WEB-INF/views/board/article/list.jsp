@@ -26,7 +26,7 @@
 	<input type="hidden" id="boardId" name="boardId" value="${boardInfo.boardId}"/>
 
 	<!-- 검색 영역 -->	
-	<div class="form-group">
+	<div class="form-group" role="search">
 		
 		<div class="">
 			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" placeholder="검색어를 입력해 주세요."/>
@@ -40,7 +40,7 @@
 	
 	<c:set var="list" value="${boardList}" />	
 
-	<div class="table-responsive" id="listDiv">
+	<div class="table-responsive" id="listDiv" role="main">
 		<!-- paging에 필요한 파라미터 -->
 		<input type="hidden" id="pageNo" 		name="pageNo" 		value="${pagedResult.pageNo}" /> 
 		<input type="hidden" id="totalListCnt" 	name="totalListCnt" value="${pagedResult.totalListCnt}" /> 
