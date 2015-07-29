@@ -15,42 +15,20 @@ ul { padding: 0; }
 <nav class="navbar navbar-inverse" role="navigation">
 	<input type="hidden" id="menuId" name="menuId" value="${param.menuId}"/>
     <div class="container-fluid">
-    	<div class="navbar-header"><a class="navbar-brand" href="javascript:;" onclick="javascript:goHome();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Let's Tryout Myself&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+    	<div class="navbar-header"><a class="navbar-brand" href="javascript:;" onclick="javascript:goHome();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:white; font-size: 25px; font-weight: bold;">L</span>inked<span style="color:white; font-size: 25px; font-weight: bold;">N</span>est - <span style="color:white; font-size: 15px;">Checkout future's MVP</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
 		<div class="collapse2 nav-collapse">
 			<ul class="nav navbar-nav">
-				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();"><tag:message code="menu.aboutus"/></a></li>
-		          	<c:if test="${!empty boardCategoryList}">
-		          		<c:forEach var="boardCategoryInfo" items="${boardCategoryList}">
- 				<li class="dropdown">
-		          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">${boardCategoryInfo.boardCategoryName}<span class="caret"></span></a>
-		          <c:if test="${!empty boardCategoryInfo.boardList}">
-		          <ul class="dropdown-menu" role="menu">
-		          
-		          		<c:forEach var="boardInfo" items="${boardCategoryInfo.boardList}">
-			          		<c:if test="${boardCategoryInfo.boardCategoryId eq boardInfo.boardCategoryId}">
-					<li <c:if test="${param.menuId eq 1}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goList(${boardInfo.boardId});">${boardInfo.boardName}</a></li>
-							</c:if>
-						</c:forEach>
-		          	
-		          </ul>
-		          </c:if>
+		        <li>
+		        	<a href="javascript:;" onclick="javascript:goPlayer(6);" ><tag:message code="menu.player"/></a>
 		        </li>
-						</c:forEach>
-		          	</c:if>		        
-		        <li class="dropdown">
-		        	<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><tag:message code="menu.player"/><span class="caret"></span></a>
-		        	<ul class="dropdown-menu" role="menu">
-						<li <c:if test="${param.menuId eq 6}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goPlayer(6);"><tag:message code="menu.player.portal"/></a></li>
-		        	</ul>
-		        </li>				
-<%-- 				<li <c:if test="${param.menuId eq 7}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goBoardConfig();">게시판 설정</a></li> --%>
+<!-- 		        <li> -->
+<!-- 		        	<a href="javascript:;" onclick="javascript:alert('준비중입니다.');" >구단 정보</a> -->
+<!-- 		        </li>				 -->
+<!-- 		        <li> -->
+<!-- 		        	<a href="javascript:;" onclick="javascript:alert('준비중입니다.');" >트라이아웃 정보</a> -->
+<!-- 		        </li>				 -->
 			</ul>
-<!-- 			<ul class="nav navbar-nav navbar-right"> -->
-<!-- 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> -->
-<%-- 				<li <c:if test="${param.menuId eq 4}">class="active"</c:if>><a href="javascript:void(0);">Site Map</a></li> --%>
-<!-- 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> -->
-<!-- 			</ul> -->
-			</div>
+		</div>
 
 			<form class="navbar-form navbar-right" role="search">
 	<c:choose>

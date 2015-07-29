@@ -20,6 +20,7 @@ public class CategoryAttrElemDto
     private String  modifyDate;
     private String  modifyUserId;
     private String  modifyUserName;
+    private String  attrName;
     
     private List<CategoryAttrElemDto>  childCatAttrElemInfos;
     
@@ -88,6 +89,12 @@ public class CategoryAttrElemDto
         this.modifyUserName = modifyUserName;
     }
     
+    public String getAttrName() {
+        return attrName;
+    }
+    public void setAttrName(String attrName) {
+        this.attrName = attrName;
+    }
     public List<CategoryAttrElemDto> getChildCatAttrElemInfos() {
         return childCatAttrElemInfos;
     }

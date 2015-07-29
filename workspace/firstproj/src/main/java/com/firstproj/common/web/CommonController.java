@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.firstproj.board.service.BoardArticleService;
@@ -25,14 +26,21 @@ public class CommonController {
         return "common/ajaxSideBoardList";
     }
     
-    @RequestMapping(value = "/menu")
-    public String getMenu(Model model) throws Exception{
-        model.addAttribute("boardCategoryList", this.boardService.getBoardCategoryAndBoardList());
+    @RequestMapping(value = "/menu/{menuType}")
+    public String getMenu(Model model, @PathVariable String menuType) throws Exception{
         /*
         model.addAttribute("boardCategoryList", this.boardService.getBoardCategoryList());
         model.addAttribute("boardList", this.boardService.getBoardList());
         */
-        return "common/ajaxMenu";
+        StringBuffer sb = new StringBuffer();
+        sb.append("common/");
+        if(menuType.equals("blog")){
+            model.addAttribute("boardCategoryList", this.boardService.getBoardCategoryAndBoardList());
+            sb.append("ajaxBlogMenu");
+        }else{
+            sb.append("ajaxMenu");
+        }
+        return sb.toString();
     }
 
 }

@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tryout</title>
-<!-- jQuery -->
-<%-- <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/jquery/js/jquery-1.11.1.min.js"></script> --%>
-<%-- <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/jquery/js/jquery-validate.min.js"></script> --%>
-<%-- <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/jquery/js/jquery.form.min.js"></script> --%>
-
 <!-- bootstrap -->
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-theme.min.css">
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css">
@@ -24,8 +13,6 @@
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css"/>
-</head>
-<body>
 <div class="container">
 	
 	<input type="hidden" id="prevPage" name="prevPage" value="${prevPage}"/>
@@ -162,7 +149,6 @@
 	</form>
 	
 </div>
-</body>
 <script>
 $().ready(function() {
 	
@@ -400,4 +386,3 @@ function toggleThumbImage(className){
 }
 
 </script>
-</html>

@@ -9,11 +9,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- jQuery -->
-<%-- <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/jquery/js/jquery-1.11.1.min.js"></script> --%>
-<%-- <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/jquery/js/jquery-validate.min.js"></script> --%>
-<%-- <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/jquery/js/jquery.form.min.js"></script> --%>
-
 <!-- bootstrap -->
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-theme.min.css">
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css">
@@ -34,12 +29,8 @@
 		<h1 id="btn-groups" class="page-header">Player Information</h1>
 		<div class="form-group">
 			<label for="profileImgFilePath" class="col-sm-4">Profile Image</label>
-			<div class="col-sm-8"><img data-src="holder.js/200x200" src="http://jwlee0208.cdn3.cafe24.com/${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" width="200px" height="200px" /></div>
+			<div class="col-sm-8"><img data-src="holder.js/300x200" src="http://jwlee0208.cdn3.cafe24.com/${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" width="300px" height="200px" /></div>
 		</div>
-<!-- 		<div class="form-group"> -->
-<!-- 			<div class="col-sm-2">User ID</div> -->
-<%-- 			<div class="col-sm-10">${playerDetailInfo.userInfo.userId}</div> --%>
-<!-- 		</div> -->
 		<div class="form-group">
 			<label for="userNm" class="col-sm-4">My Name is</label>
 			<div class="col-sm-8">
@@ -56,20 +47,21 @@
 			<div class="col-sm-8">${playerDetailInfo.catNm2}</div>
 		</div>
 		<div class="form-group">
-			<label for="phoneNo" class="col-sm-4">Choice Detail Type</label>
+			<label for="phoneNo" class="col-sm-4">Detail Type</label>
 			<div class="col-sm-8" id="attrElemList">
 			<c:set var="categoryAttrElemList" value="${playerDetailInfo.categoryAttrElemList}"/>
 			<c:if test="${categoryAttrElemList ne null or categoryAttrElemList ne ''}">
 				<c:forEach var="attrElemInfo" items="${playerDetailInfo.categoryAttrElemList}">
-				${attrElemInfo.attrElemName}<br/>
+				<div>
+				<h4><span class="label label-default">${attrElemInfo.attrNameStr}</span></h4><span>${attrElemInfo.attrElemNameStr}</span>
+				</div>
 				</c:forEach>	
 			</c:if>
 			</div>
 		</div>
 
-		
 		<div class="form-group">
-			<label for="linkUrl" class="col-sm-4">Link To Your Play Stream Url</label>
+			<label for="linkUrl" class="col-sm-4">Checkout Play Streamming</label>
 			<div class="col-sm-8">
 				<div class="embed-responsive embed-responsive-16by9">
 					${playerDetailInfo.playerVideoLinkList[0].linkUrl}

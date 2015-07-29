@@ -457,6 +457,8 @@
 				  , cat1.cat_name 	as catNm1
 				  , cat2.cat_id 	as catId2
 				  , cat2.cat_name 	as catNm2
+				  , a.attr_id
+				  , a.attr_name
 				  , ae.attr_elem_id
 				  , ae.attr_elem_name
 				  , pvl.link_url
@@ -468,6 +470,7 @@
 			INNER JOIN TB_CATEGORY 				cat1 	ON pi.cat_id1 		 = cat1.cat_id
 			INNER JOIN TB_CATEGORY 				cat2 	ON pi.cat_id2 		 = cat2.cat_id
 			INNER JOIN TB_ATTR_ELEM 			ae  	ON aem.attr_elem_id  = ae.attr_elem_id
+			INNER JOIN TB_ATTR					a		ON aem.attr_id		 = a.attr_id
 			WHERE u.user_id = #{userId}		
 		</select>
 		
@@ -493,7 +496,9 @@
 			</collection>
 			<collection property="categoryAttrElemList" ofType="player.categoryAttrElemDto">
 				<id		column="attr_elem_id"	property="attrElemId"/>
+				<id		column="attr_id"		property="attrId"/>
 				<result column="attr_elem_name" property="attrElemName"/>
+				<result column="attr_name" 		property="attrName"/>
 			</collection>
 		</resultMap>
 		
