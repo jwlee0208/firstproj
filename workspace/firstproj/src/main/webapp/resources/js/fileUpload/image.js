@@ -25,11 +25,8 @@ function FileuploadCallback(data, state){
    alert("업로드 되었습니다.");
    var dataList = "<div id=\"imageUpload\">";
    var hostname = "jwlee0208.cdn3.cafe24.com";	//location.host;
-//console.log("contextPath : " + getContextPath());   
+
    dataList += "<img src='http://" + hostname + data + "' alt='' class=\"img-thumbnail\"/>";
-//   dataList += "<img src='http://" + hostname + getContextPath() + data + "' alt=''  style='width:120px;height:88px' />";
-   //dataList += "<a href='##' class='btn2' onclick='imgSelect(\"" + data + "\")'>사용</a> ";
-   //dataList += "<a href='##' class='btn2' onclick='deleteImg(\"" + data + "\")'>삭제</a>";
    dataList += "</div>";
    $('#imageUploadList').empty();
    $('#imageUploadList').append(dataList);

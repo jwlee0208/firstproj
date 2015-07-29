@@ -100,3 +100,14 @@
 		</div>
 	</form>
 </div>
+<script>
+
+$(document).ready(function() {
+	$("img").addClass("media-object");
+	$("img").attr("width", "95%");
+	$("img").off("error");
+	$("img").on("error", function(){
+		$(this).attr("src", '${pageContext.request.contextPath}/img/no_image.png');
+	});
+});
+</script>

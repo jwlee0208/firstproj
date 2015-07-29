@@ -9,6 +9,7 @@
 <!-- editor -->
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/common-editor.js"></script>
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/article/common.js"></script>
 
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
