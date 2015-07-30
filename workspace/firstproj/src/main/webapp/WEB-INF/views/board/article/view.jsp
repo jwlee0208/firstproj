@@ -36,33 +36,26 @@
 			<div class="panel-body" style="min-height: 300px;">
 				${contentInfo.content}
 
-							<c:if test="${contentInfo.filePath ne null && contentInfo.filePath ne ''}">	
-								<div class="thumbImg unset" style="padding-top : 20px; ">
-								썸네일 : 
-									<ul class="media-list">					
-										<li class="media">
-											<a class="pull-left" href="javascript:;">
-												
-													<img data-src="holder.js/64x64" src="http://jwlee0208.cdn3.cafe24.com/${contentInfo.filePath}" 
-														 alt="" class="media-object" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  
-														 onclick="javascript:goView('${contentInfo.articleId}');" 
-														 data-toggle="modal" data-target="#myModal" 
-														 width="64px" height="64px"/>
-											</a>
-											 <div class="media-body" onclick="javascript:goView('${contentInfo.articleId}');">
-											 	<p>파일명 : ${contentInfo.originalFileName}</p>
-											 	
-											 </div>
-										</li>							
-									</ul>	
-								</div>										
-							</c:if>
-			
-
-
+			<c:if test="${contentInfo.filePath ne null && contentInfo.filePath ne ''}">	
+				<div class="thumbImg unset" style="padding-top : 20px; ">
+					썸네일 : 
+					<ul class="media-list">					
+						<li class="media">
+							<a class="pull-left" href="javascript:;">
+								<img data-src="holder.js/64x64" src="http://jwlee0208.cdn3.cafe24.com/${contentInfo.filePath}" 
+									 alt="" class="media-object" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  
+									 onclick="javascript:goView('${contentInfo.articleId}');" 
+									 data-toggle="modal" data-target="#myModal" 
+									 width="64px" height="64px"/>
+							</a>
+							<div class="media-body" onclick="javascript:goView('${contentInfo.articleId}');">
+								<p>파일명 : ${contentInfo.originalFileName}</p>			 	
+							</div>
+						</li>							
+					</ul>	
+				</div>										
+			</c:if>
 			</div>	
-			
-			
 <!-- 			<div class="panel-footer"> -->
 <!-- 				<ul class="pager"> -->
 <%-- 					<c:if test="${prevContentInfo.articleId ne null}"> --%>
@@ -90,23 +83,24 @@
 				<input type="button" class="btn btn-default" id="next" value="Next"/>		
 			</div>
 			</c:if>
+			<c:if test="${userInfo ne null && userInfo.userId eq contentInfo.authorId}">
 			<div class="btn-group" role="button">
 				<input type="button" class="btn btn-default pull-right" id="goToModify" value="수정"/>
 			</div>			
 			<div class="btn-group" role="button">
 				<input type="button" class="btn btn-default pull-right" id="goToDelete" value="삭제"/>
 			</div>			
-
+			</c:if>
 		</div>
 	</form>
 </div>
 <script>
 
 $(document).ready(function() {
-	$("img").addClass("media-object");
-	$("img").attr("width", "95%");
-	$("img").off("error");
-	$("img").on("error", function(){
+	$("div img").addClass("media-object");
+	$("div img").attr("width", "95%");
+	$("div img").off("error");
+	$("div img").on("error", function(){
 		$(this).attr("src", '${pageContext.request.contextPath}/img/no_image.png');
 	});
 });

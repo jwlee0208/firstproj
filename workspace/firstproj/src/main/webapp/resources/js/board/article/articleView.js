@@ -25,7 +25,7 @@ $(document).on("ready", function(){
 	 * 게시글 수정
 	 */
 	$("#goToModify").on("click", function(){
-		location.href = "/board/article/modify/" + $("#selectedArticleId").val() +"/" + $("#boardId").val();
+		location.href = "/board/article/modify?selectedArticleId=" + $("#selectedArticleId").val() +"&selectedBoardId=" + $("#boardId").val();
 	});
 	/**
 	 * 게시글 삭제

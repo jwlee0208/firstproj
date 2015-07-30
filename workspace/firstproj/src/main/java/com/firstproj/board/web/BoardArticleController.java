@@ -268,7 +268,7 @@ public class BoardArticleController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/view/{selectedArticleId}")
-	public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int selectedArticleId) throws Exception{
+	public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int selectedArticleId, HttpSession session) throws Exception{
 		
 		BoardArticleDto contentInfo 	= null;
 		BoardArticleDto prevContentInfo = null;
@@ -284,12 +284,15 @@ public class BoardArticleController {
 			nextContentInfo = this.boardArticleService.selectNextBoardArticle(boardArticleDto);
 		}
 		
+	    UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+	        
 		model.addAttribute("contentInfo"	, contentInfo);
 		model.addAttribute("prevContentInfo", prevContentInfo);
 		model.addAttribute("nextContentInfo", nextContentInfo);
 		
 		model.addAttribute("boardId"		, boardArticleDto.getBoardId());
 		model.addAttribute("boardList"		, this.boardService.getBoardList());
+		model.addAttribute("userInfo"       , sessionInfo);
 		
 		return "board/article/view";
 	}
@@ -521,8 +524,8 @@ System.out.println("boardArticleDto : " + boardArticleDto.toString());
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/modify/{selectedArticleId}/{selectedBoardId}")
-	public String modifyBoardArticlePage(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @PathVariable int selectedArticleId, @PathVariable int selectedBoardId) throws Exception{
+	@RequestMapping(value = "/modify")
+	public String modifyBoardArticlePage(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @Param int selectedArticleId, @Param int selectedBoardId) throws Exception{
 		
 		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
 		
