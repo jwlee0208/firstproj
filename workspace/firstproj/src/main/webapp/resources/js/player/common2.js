@@ -36,11 +36,11 @@
 	function searchAttrList(catId){
 		initAttrElement();
 		$.ajax({
-			url : '/player/attrElementList.json',
-			data : {catId : catId, searchText : $("#searchText").val()},
-			method : 'post',
-			dateType : 'json',
-			success : function(data){
+			url 		: '/player/attrElementList.json',
+			data 		: {catId : catId, searchText : $("#searchText").val()},
+			method 		: 'post',
+			dateType 	: 'json',
+			success 	: function(data){
 
 				if(data != null){
 					var attrElementList = data.attrElementList;
@@ -48,7 +48,7 @@
 					if(attrElementList != null){
 						var attrElementListLength = attrElementList.length;
 						var prevAttrId = 0;
-						var innerHtml = "<div style=\"padding-top: 10px;padding-left: 10px;padding-bottom: 10px;\">";
+						var innerHtml = "<div style=\"padding-top: 10px;padding-left: 10px;padding-bottom: 10px; background-color: #333; text-align: center; color: white; \">Filtering Detail Information</div><div style=\"padding-top: 10px;padding-left: 10px;padding-bottom: 10px;\">";
 						for(var i = 0 ; i < attrElementListLength ; i++){
 							var attrId = attrElementList[i].attrId;
 

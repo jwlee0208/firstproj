@@ -1,28 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleList.js"></script>
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
-<c:set var="boardName" value=""/>
-<c:if test="${boardId eq 1}"><c:set var="boardName" value="자유게시판"/></c:if>
-<c:if test="${boardId eq 2}"><c:set var="boardName" value="Q&A"/></c:if>
-<c:if test="${boardId eq 3}"><c:set var="boardName" value="기타게시판"/></c:if>	
-<!-- <div class="container"> -->
+
 	<div class="page-header">
-	  <h1>BOARD&nbsp;&nbsp;<small>${boardName}</small></h1>
+	  <h1>BOARD&nbsp;&nbsp;<small>${boardInfo.boardName}</small></h1>
 	</div>	
 	
 	<ol class="breadcrumb">
 	  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
-	  <li><a>Board</a></li>
-	  <li class="secondBranch active">${boardName}</li>
+	  <li><a>${boardInfo.boardCategoryName} Board</a></li>
+	  <li class="secondBranch active">${boardInfo.boardName}</li>
 	</ol>		
 	
-	
-<!-- 	<h3 class="sub-header">글 목록</h3> -->
 	<form id="boardFrm" name="boardFrm" method="post">
 	
 	<!-- 리스트에서 선택된 게시글 아이디 -->
@@ -30,14 +22,10 @@
 	<input type="hidden" id="boardId" name="boardId" value="${boardId}"/>
 	
 	<!-- 검색 영역 -->	
-	<div class="form-group">
-		
-		<div class="col-sm-8">
+	<div class="form-group" role="search">		
+		<div>
 			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent"/>
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control"/>		
-		</div>
-		<div class="btn-group">
-			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검색"/>
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control" placeholder="검색어를 입력해 주세요." value="${boardArticleDto.searchText}" />		
 		</div>
 	</div>	
 	
@@ -70,7 +58,7 @@
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
-			<li class="media">	
+			<li class="media" style="text-align: center;">	
 				<h4 class="media-heading">등록된 내용이 없습니다.</h4>
 			</li>			
 	</c:otherwise>
@@ -89,13 +77,8 @@
 	    <jsp:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
 	</jsp:include>
 
-
-<!-- 	<fieldset class="form-group"> -->
-		<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
-			<div class="btn-group">
-
-				<input type="submit" class="btn btn-default pull-right" value="글쓰기" name="goToWrite" />
-			</div>
-		</div>	
-<!-- 	</fieldset> -->
-<!-- </div> -->
+	<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
+		<div class="btn-group">
+			<input type="submit" class="btn btn-default pull-right" value="글쓰기" name="goToWrite" />
+		</div>
+	</div>	

@@ -89,7 +89,8 @@ public class BoardArticleController {
 	    BoardDto boardInfo = boardService.getBoardCategoryAndBoardInfo(boardDto);
 	    
 	    model = this.getBoardCommonListForJson(request, model, boardArticleDto);
-	    model.addAttribute("boardInfo", boardInfo);
+	    model.addAttribute("boardInfo"         , boardInfo);
+	    model.addAttribute("boardArticleDto"   , boardArticleDto);
 	    
 		String page = "board/article/list";
 		
@@ -110,7 +111,7 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/list/{boardId}/{menuId}", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = {"/list/{boardId}/{menuId}"}, method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int boardId, @PathVariable int menuId) throws Exception {
         BoardDto boardDto = new BoardDto();
         boardDto.setBoardId(boardArticleDto.getBoardId());
@@ -166,7 +167,7 @@ public class BoardArticleController {
 			BoardArticleDto boardArticleObj = new BoardArticleDto();
 			boardArticleObj.setBoardId(boardId);
 			
-			boardArticleList = boardArticleService.getBoardArticleList(boardArticleObj);
+			boardArticleList = boardArticleService.getBoardArticleList(boardArticleDto);
 			totalListCnt = boardArticleList.size();	
 			
 //			valueOps.set("selectBoardArticle"+boardId+"ListAll", boardArticleList);

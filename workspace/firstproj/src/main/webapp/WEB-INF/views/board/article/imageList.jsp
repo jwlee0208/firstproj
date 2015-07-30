@@ -7,12 +7,7 @@
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
-<script>
-// 	function getOnlyText(text, index){
-		
-// 	}
-</script>
-<!-- <div class="container"> -->
+
 	<div class="page-header">
 	  <h1>BOARD&nbsp;&nbsp;<small>${boardInfo.boardName}</small></h1>
 	</div>	
@@ -30,30 +25,11 @@
 	<input type="hidden" id="boardId" 			name="boardId" 				value="${boardId}"/>
 	
 	<!-- 검색 영역 -->	
-	<div class="form-group" role="search">
-		
-<!-- 	<table style="width:100%"> -->
-<%-- 		<colgroup><col width="93%"/><col width="7%"/></colgroup> --%>
-<!-- 		<tr> -->
-<!-- 			<td> -->
+	<div class="form-group" role="search">		
 		<div>
-			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" placeholder="검색어를 입력해 주세요."/>
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control"/>
+			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" />
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control" placeholder="검색어를 입력해 주세요." value="${boardArticleDto.searchText}"/>
 		</div>						
-<!-- 			</td> -->
-<!-- 			<td> -->
-<!-- 		<div class="btn-group" style="float:right;"> -->
-<!-- 			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검&nbsp;&nbsp;&nbsp;색"/> -->
-<!-- 		</div>			 -->
-<!-- 			</td> -->
-<!-- 		</tr> -->
-<!-- 	</table>	 -->
-		
-		
-<!-- 		<div class="btn-group"> -->
-<!-- 			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검색"/> -->
-<!-- 		</div> -->
-		
 	</div>	
 	
 	<c:set var="list" value="${boardList}" />
@@ -68,7 +44,6 @@
 <c:choose>
 	<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
 		<c:forEach var="content" items="${pagedResult.list}" varStatus="index">		
-<!-- 			<div class="col-sm-6 col-md-4"> -->
 			<div class="">
 				<div class="thumbnail">
 					
@@ -110,15 +85,13 @@
 	</jsp:include>
 
 
-<!-- 	<fieldset class="form-group"> -->
 		<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
 			<div class="btn-group">
 
 				<input type="submit" class="btn btn-default pull-right" value="글쓰기" name="goToWrite" />
 			</div>
 		</div>	
-<!-- 	</fieldset> -->
-<!-- </div> -->
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -141,6 +114,7 @@ $().ready(function(){
 			$(this).attr("src", "${pageContext.request.contextPath}/img/no_image.png");
 		});	
 	});
+
 });
 	
 function goArticleView(articleId, type){

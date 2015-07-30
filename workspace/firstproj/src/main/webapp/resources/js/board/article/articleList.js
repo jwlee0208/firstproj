@@ -80,3 +80,19 @@ function goView(articleId){
 //	frm.submit();
 }
 
+$(function(){
+	$("#searchText").keypress(function(event){
+		
+		if(event.which == 13){
+			event.preventDefault();
+
+			var frm = $("#boardFrm");
+			frm.attr("url", "/board/article/list");
+			frm.attr("method", "post");
+			frm.submit();
+		}
+	});
+	
+})
+
+

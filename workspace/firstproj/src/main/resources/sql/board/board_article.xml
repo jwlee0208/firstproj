@@ -29,27 +29,26 @@
         </insert>
         <select id="selectList" parameterType="board.boardArticleDto" resultType="board.boardArticleDto">
             <include refid="searchSql"/>   
-            WHERE 1 = 1	
-				<if test="boardId > 0">
-				and board_id = #{boardId}
-				and status = 1    
-				</if>
-            
-<!-- 			<include refid="searchConditionSql"/> -->
+            <where>
+				<include refid="searchConditionSql"/>
+			</where>
 			ORDER BY article_id desc        
         </select>
 		<!-- 페이징 위한 리스트 갯수 조회 -->    
 		<select id="selectListCount" resultType="Integer" parameterType="searchCondition">        
 			SELECT count(*) AS totalCnt         
-			FROM TB_BOARD_ARTICLE         
-			<include refid="searchConditionSql"/>    
-
+			FROM TB_BOARD_ARTICLE    
+			<where>     
+				<include refid="searchConditionSql"/>    
+			</where>
 		</select>      
 		
 		<!-- 리스트 조회 -->    
 		<select id="selectBoardList" resultType="board.boardArticleDto" parameterType="searchCondition">                      
-			<include refid="searchSql"/>                      
-			<include refid="searchConditionSql"/>                         
+			<include refid="searchSql"/>  
+			<where>                    
+				<include refid="searchConditionSql"/>
+			</where>                         
 			ORDER BY article_id desc                
 			LIMIT #{startRow}, #{endRow}     
 		</select>		
@@ -100,7 +99,6 @@
 			FROM TB_BOARD_ARTICLE
 		</sql>
 		<sql id="searchConditionSql">
-			WHERE 1 = 1	
 				<if test="boardId > 0">
 				and board_id = #{boardId}    
 				</if>

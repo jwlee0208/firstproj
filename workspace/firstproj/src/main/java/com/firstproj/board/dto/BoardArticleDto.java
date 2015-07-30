@@ -1,7 +1,5 @@
 package com.firstproj.board.dto;
 
-import java.io.Serializable;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -9,10 +7,15 @@ import org.apache.ibatis.type.Alias;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.firstproj.common.util.SearchCondition;
+
 
 @SuppressWarnings("serial")
 @Alias("board.boardArticleDto")
-public class BoardArticleDto implements Serializable{
+public class BoardArticleDto extends SearchCondition
+//implements Serializable
+{
+    
 	// 입력 파라미터
 	private String			thumbnailSize;
 	

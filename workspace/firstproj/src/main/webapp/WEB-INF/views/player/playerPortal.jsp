@@ -60,7 +60,7 @@
 		</div>
 		<div class="col-md-4"></div>	
 		
-		<div class="row">
+		<div class="row" style=" padding-top: 20px;">
 			<!--속성 & 속성 항목들에 대한 체크박스 리스트 -->
 			<div id="attrElemList" style="background-color: #efefef;"></div>
 		</div>

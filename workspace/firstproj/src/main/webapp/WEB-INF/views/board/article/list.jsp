@@ -18,7 +18,6 @@
 	  <li class="secondBranch active">${boardInfo.boardName}</li>
 	</ol>		
 	
-<!-- 	<h3 class="sub-header">글 목록</h3> -->
 	<form id="boardFrm" name="boardFrm" method="post">
 	
 	<!-- 리스트에서 선택된 게시글 아이디 -->
@@ -27,19 +26,13 @@
 
 	<!-- 검색 영역 -->	
 	<div class="form-group" role="search">
-		
 		<div class="">
-			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" placeholder="검색어를 입력해 주세요."/>
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control"/>		
+			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" 	/>
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control" placeholder="검색어를 입력해 주세요." value="${boardArticleDto.searchText}" />		
 		</div>
-<!-- 		<div class="btn-group"> -->
-<!-- 			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검색"/> -->
-<!-- 		</div> -->
 	</div>
 	
-	
 	<c:set var="list" value="${boardList}" />	
-
 	<div class="table-responsive" id="listDiv" role="main">
 		<!-- paging에 필요한 파라미터 -->
 		<input type="hidden" id="pageNo" 		name="pageNo" 		value="${pagedResult.pageNo}" /> 
@@ -77,7 +70,7 @@
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<td colspan="4">작성된 내용이 없습니다.</td>
+							<td colspan="4" style="text-align: center;">작성된 내용이 없습니다.</td>
 						</tr>
 					</c:otherwise>
 				</c:choose>

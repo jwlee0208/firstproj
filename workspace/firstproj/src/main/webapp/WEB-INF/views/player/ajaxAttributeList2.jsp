@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<div style="padding-top: 10px;padding-left: 10px;padding-bottom: 10px; background-color: black; text-align: center;">
+Filtering Detail Information
+</div>
 <div style="padding-top: 10px;padding-left: 10px;padding-bottom: 10px;">
 <c:choose>
 	<c:when test="${attrElementList != null && attrElementList.size() > 0}">
