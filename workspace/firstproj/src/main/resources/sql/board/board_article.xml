@@ -145,7 +145,7 @@
 			<include refid="searchSql"/>              
 			<where>
 				<if test="boardId > 0">
-				and board_id = #{boardId}    
+				and ba.board_id = #{boardId}    
 				</if>			
 				and status = 1
 			</where>	

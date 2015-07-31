@@ -59,7 +59,7 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 	 */
 	public int insertBoardArticle(BoardArticleDto boardArticleDto) throws Exception{
 		
-		System.out.println(">>> In Dao : " + boardArticleDto.toString());
+//		System.out.println(">>> In Dao : " + boardArticleDto.toString());
 		
 		return getSqlSession().insert("sql.boardArticle.insertArticleInfo", boardArticleDto);
 	}
@@ -72,7 +72,7 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 	 */
 	public int updateBoardArticle(BoardArticleDto boardArticleDto) throws Exception{
 		
-		System.out.println(">>> In Dao : " + boardArticleDto.toString());
+//		System.out.println(">>> In Dao : " + boardArticleDto.toString());
 		
 		return getSqlSession().update("sql.boardArticle.updateArticleInfo", boardArticleDto);
 	}

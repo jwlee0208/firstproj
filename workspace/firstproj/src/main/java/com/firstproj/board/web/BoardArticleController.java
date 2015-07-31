@@ -200,7 +200,7 @@ public class BoardArticleController {
 		
 		PagedList pagedList = new PagedList(pagedArticleList, pageNo, 10, totalListCnt, startRow, endRow, listRowCnt);
 		
-		System.out.println("pagedList Data : " + pagedList.toString());		
+//		System.out.println("pagedList Data : " + pagedList.toString());		
 		
 		model.addAttribute("pagedResult", pagedList);
 		model.addAttribute("boardId", boardId);
@@ -507,7 +507,7 @@ public class BoardArticleController {
 			boardArticleDto.setFilePath(filePath);
 			boardArticleDto.setOriginalFileName(imageFile.getOriginalFilename());
 
-System.out.println("boardArticleDto : " + boardArticleDto.toString());			
+//System.out.println("boardArticleDto : " + boardArticleDto.toString());			
 			
 			updateResult = this.boardArticleService.updateBoardArticle(boardArticleDto);
 		}
@@ -545,7 +545,7 @@ System.out.println("boardArticleDto : " + boardArticleDto.toString());
 			model.addAttribute("boardList"		, this.boardService.getBoardList());
 			
 		}else{
-		    System.out.println("URL : " + request.getRequestURL() +", URI : " + request.getRequestURI());
+//		    System.out.println("URL : " + request.getRequestURL() +", URI : " + request.getRequestURI());
 		    return "redirect:/login?redirectPage=" + request.getRequestURI();
 		}
 		
