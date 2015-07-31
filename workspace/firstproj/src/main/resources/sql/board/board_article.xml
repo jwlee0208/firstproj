@@ -37,7 +37,7 @@
 		<!-- 페이징 위한 리스트 갯수 조회 -->    
 		<select id="selectListCount" resultType="Integer" parameterType="searchCondition">        
 			SELECT count(*) AS totalCnt         
-			FROM TB_BOARD_ARTICLE    
+			FROM TB_BOARD_ARTICLE ba   
 			<where>     
 				<include refid="searchConditionSql"/>    
 			</where>
@@ -87,20 +87,24 @@
 					
 		<sql id="searchSql">
 			SELECT 
-			    article_id,
-			    board_id,
-			    title,
-			    content,
-			    file_path, 
-			    original_file_name,
-			    author_id,
-			    author_nm,
-			    create_date
-			FROM TB_BOARD_ARTICLE
+			    ba.article_id,
+			    ba.board_id,
+			    ba.title,
+			    ba.content,
+			    ba.file_path, 
+			    ba.original_file_name,
+			    ba.author_id,
+			    ba.author_nm,
+			    ba.create_date,
+			    bc.board_category_id,
+			    bc.board_category_name
+			FROM TB_BOARD_ARTICLE ba
+			INNER JOIN TB_BOARD b 			ON b.board_id = ba.board_id
+			INNER JOIN TB_BOARD_CATEGORY bc ON b.board_category_id = bc.board_category_id
 		</sql>
 		<sql id="searchConditionSql">
 				<if test="boardId > 0">
-				and board_id = #{boardId}    
+				and ba.board_id = #{boardId}    
 				</if>
 				<if test="searchCondition != null and searchCondition != ''">
 					<if test="searchCondition == 'title'">

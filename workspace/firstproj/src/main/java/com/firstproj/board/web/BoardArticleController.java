@@ -72,6 +72,7 @@ public class BoardArticleController {
 //	@Resource(name="redisTemplate")
 //	private ValueOperations<String, List<BoardArticleDto>> valueOps;
 
+	
 	/**
 	 * 게시글 목록 조회
 	 * @param request
@@ -80,27 +81,9 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/list", method = {RequestMethod.POST, RequestMethod.GET})
-	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
-		
-	    BoardDto boardDto = new BoardDto();
-	    boardDto.setBoardId(boardArticleDto.getBoardId());
-	    
-	    BoardDto boardInfo = boardService.getBoardCategoryAndBoardInfo(boardDto);
-	    
-	    model = this.getBoardCommonListForJson(request, model, boardArticleDto);
-	    model.addAttribute("boardInfo"         , boardInfo);
-	    model.addAttribute("boardArticleDto"   , boardArticleDto);
-	    
-		String page = "board/article/list";
-		
-		if(boardInfo.getBoardType().equals("1")){
-			page = "board/article/imageList";
-		}else if(boardInfo.getBoardType().equals("2")){
-			page = "board/article/thumbList";
-		}
-		
-		return page;
+	@RequestMapping(value = {"/list", "/main"}, method = {RequestMethod.POST, RequestMethod.GET})
+	public String getBoardArticleList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
+	    return this.getCommonBoardArticleList(request, model, boardArticleDto);
 	}
 	
 	/**
@@ -112,25 +95,41 @@ public class BoardArticleController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = {"/list/{boardId}/{menuId}"}, method = {RequestMethod.POST, RequestMethod.GET})
-	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int boardId, @PathVariable int menuId) throws Exception {
-        BoardDto boardDto = new BoardDto();
-        boardDto.setBoardId(boardArticleDto.getBoardId());
-
-        BoardDto boardInfo = boardService.getBoardCategoryAndBoardInfo(boardDto);
-        
+	public String getBoardArticleList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int boardId, @PathVariable int menuId) throws Exception {
+		return this.getCommonBoardArticleList(request, model, boardArticleDto);
+	}
+	
+	private String getCommonBoardArticleList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
+	    
         model = this.getBoardCommonListForJson(request, model, boardArticleDto);
-        model.addAttribute("boardInfo", boardInfo);
+        
+        int boardId = boardArticleDto.getBoardId();
+        String boardType = null;
+        if(boardId > 0){
+            BoardDto boardDto = new BoardDto();
+            boardDto.setBoardId(boardArticleDto.getBoardId());
+            BoardDto boardInfo = boardService.getBoardCategoryAndBoardInfo(boardDto);
+            model.addAttribute("boardInfo", boardInfo);            
+            
+            boardType = boardInfo.getBoardType();
+        }
         
         String page = "board/article/list";
         
-        if(boardInfo.getBoardType().equals("1")){
-            page = "board/article/imageList";
-        }else if(boardInfo.getBoardType().equals("2")){
-            page = "board/article/thumbList";
+        if(boardId > 0){
+            if(boardType.equals("1")){
+                page = "board/article/imageList";
+            }else if(boardType.equals("2")){
+                page = "board/article/thumbList";
+            }            
+        }else{
+            page = "board/article/arcodionList";
         }
-		
-		return page;
+        
+        return page;
+
 	}
+	
 	
 	private Model getBoardCommonListForJson(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
 		// 검색 조건
@@ -165,14 +164,15 @@ public class BoardArticleController {
 //			
 //		}catch(Exception e){
 			BoardArticleDto boardArticleObj = new BoardArticleDto();
-			boardArticleObj.setBoardId(boardId);
+			if(boardId > 0){
+			    boardArticleObj.setBoardId(boardId);    
+			}
 			
 			boardArticleList = boardArticleService.getBoardArticleList(boardArticleDto);
 			totalListCnt = boardArticleList.size();	
 			
 //			valueOps.set("selectBoardArticle"+boardId+"ListAll", boardArticleList);
-			
-			System.out.println(">>> redis pagedList setted");
+//			System.out.println(">>> redis pagedList setted");
 			
 			model = this.getBoardCommonList(request, model, boardArticleDto);
 			

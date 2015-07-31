@@ -9,7 +9,8 @@ import redis.clients.jedis.JedisPoolConfig;
 @Named(value="BoardArticleRedisDao")
 public class BoardArticleRedisDao {
 	// jedis test
-	private JedisPool pool = new JedisPool(new JedisPoolConfig(), "127.0.0.1");
+    /*
+    private JedisPool pool = new JedisPool(new JedisPoolConfig(), "127.0.0.1");
 	private Jedis	jedis = pool.getResource();
 		
 	public String set(String key, String value) throws Exception{
@@ -19,5 +20,5 @@ public class BoardArticleRedisDao {
 	public String get(String key) throws Exception{
 		return jedis.get(key);
 	}
-	
+	*/
 }

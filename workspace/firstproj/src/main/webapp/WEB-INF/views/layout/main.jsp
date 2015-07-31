@@ -4,6 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="expires" content="-1" >
 <meta name="description" content="JW">
 <meta name="keywords" content="JW">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">

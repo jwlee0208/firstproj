@@ -34,6 +34,8 @@ public class BoardArticleDto extends SearchCondition
 	private String			filePath;	
 	private String			originalFileName;
 	private int 			status;
+	private int             boardCategoryId;
+	private String          boardCategoryName;
 
 	public int getArticleId() {
 		return articleId;
@@ -112,7 +114,21 @@ public class BoardArticleDto extends SearchCondition
 	public void setThumbnailSize(String thumbnailSize) {
 		this.thumbnailSize = thumbnailSize;
 	}
-	@Override
+	
+	public int getBoardCategoryId() {
+        return boardCategoryId;
+    }
+    public void setBoardCategoryId(int boardCategoryId) {
+        this.boardCategoryId = boardCategoryId;
+    }
+    public String getBoardCategoryName() {
+        return boardCategoryName;
+    }
+    public void setBoardCategoryName(String boardCategoryName) {
+        this.boardCategoryName = boardCategoryName;
+    }
+
+    @Override
 	public String toString() {
 		return "BoardArticleDto [articleId=" + articleId + ", boardId="
 				+ boardId + ", title=" + title + ", content=" + content
