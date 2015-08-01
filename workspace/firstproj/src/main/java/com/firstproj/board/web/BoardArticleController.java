@@ -284,14 +284,14 @@ public class BoardArticleController {
 			// 다음 글 조회
 			nextContentInfo = this.boardArticleService.selectNextBoardArticle(boardArticleDto);
 		}
-		
+				
 	    UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
 	        
 		model.addAttribute("contentInfo"	, contentInfo);
 		model.addAttribute("prevContentInfo", prevContentInfo);
 		model.addAttribute("nextContentInfo", nextContentInfo);
 		
-		model.addAttribute("boardId"		, boardArticleDto.getBoardId());
+		model.addAttribute("boardId"		, contentInfo.getBoardId());
 		model.addAttribute("boardList"		, this.boardService.getBoardList());
 		model.addAttribute("userInfo"       , sessionInfo);
 		

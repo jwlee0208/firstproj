@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="expires" content="-1" >
 <link rel="icon" href="/img/common/favicon.ico">
-<title>Let's Try Out</title>
+<title>LinkedNest - Link Between Player With Club</title>
 
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
 

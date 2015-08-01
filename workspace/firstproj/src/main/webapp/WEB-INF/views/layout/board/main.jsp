@@ -10,7 +10,7 @@
 <meta name="robots" content="index,follow" /> 
 
 <link rel="icon" href="/img/common/favicon.ico">
-<title>Let's Try Out</title>
+<title>LinkedNest - Link Between Player With Club</title>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
 <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sidebar.css"> --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/offcanvas.css">

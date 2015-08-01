@@ -7,8 +7,7 @@
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleList.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
 
-<!-- <div class="container"> -->
-	<div class="page-header">
+	<div class="blog-header">
 	  <h1>BOARD&nbsp;&nbsp;<small>ALL</small></h1>
 	</div>	
 	
@@ -45,19 +44,20 @@
 					<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
 						<c:forEach var="contentInfo" items="${pagedResult.list}" varStatus="index">
 		
-			<div class="panel panel-default">
+			<div class="panel panel-info">
 				<div class="panel-heading">
 					<h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse${index.count}">
-						[${contentInfo.articleId}] ${contentInfo.title} ${contentInfo.authorNm} ${fn:substring(contentInfo.createDate, 0, 10)}
-					</a>
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapse${index.count}">${contentInfo.title} </a>
 					</h4>
 				</div>
 				<div id="collapse${index.count}" class="panel-collapse collapse in">
 					<div class="panel-body">
-						<div class="list-group-item">
-							${contentInfo.content}
-						</div>								
+						<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
+						${contentInfo.content} <br/><br/>
+						<div class="row" style="float: right; padding-right:10px;">
+						<div class="btn btn-primary" >${contentInfo.boardCategoryName}</div> <div class="btn btn-success" >${contentInfo.boardName}</div>
+						</div>
+						
 					</div>
 				</div>
 			</div>					
@@ -84,9 +84,18 @@
 	</jsp:include>
 
 
-	<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
-		<div class="btn-group">
-			<input type="submit" class="btn btn-default pull-right" value="글쓰기" name="goToWrite" />
-		</div>
-	</div>	
-<!-- </div> -->
+<!-- 	<div class="btn-group btn-group-justified" style="padding-bottom: 20px;"> -->
+<!-- 		<div class="btn-group"> -->
+<!-- 			<input type="submit" class="btn btn-default pull-right" value="글쓰기" name="goToWrite" /> -->
+<!-- 		</div> -->
+<!-- 	</div>	 -->
+<script>
+$(document).ready(function() {
+	$("div img").addClass("media-object");
+	$("div img").attr("width", "100%");
+	$("div img").off("error");
+	$("div img").on("error", function(){
+		$(this).attr("src", '${pageContext.request.contextPath}/img/no_image.png');
+	});
+});
+</script>

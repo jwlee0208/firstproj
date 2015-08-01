@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="expires" content="-1" >
-<meta name="description" content="JW">
-<meta name="keywords" content="JW">
+<meta name="description" content="LinkedNest's Web Page">
+<meta name="keywords" content="page">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title>LinkedNest - Link Between Player With Club</title>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
 </head>
 <body>

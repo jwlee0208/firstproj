@@ -62,24 +62,24 @@
 		<select id="selectPrevBoardContent" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">
 		 	 <include refid="searchSql"/>  
 				where
-					board_id = ${boardId}	
+					ba.board_id = ${boardId}	
 				<![CDATA[ 
-					and article_id > ${articleId}
+					and ba.article_id > ${articleId}
 				]]>
-					and status = 1
-				order by article_id asc
+					and ba.status = 1
+				order by ba.article_id asc
 				limit 1	 	 		    
 		</select>
 		<!-- 다음 글 조회 -->
 		<select id="selectNextBoardContent" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">
 		 	 <include refid="searchSql"/>  
 				where 
-					board_id = ${boardId}
+					ba.board_id = ${boardId}
 				<![CDATA[ 
-					and article_id < ${articleId}
+					and ba.article_id < ${articleId}
 				]]>	
-					and status = 1
-				order by article_id desc
+					and ba.status = 1
+				order by ba.article_id desc
 				limit 1	 	 		    
 		</select>
 		
@@ -97,7 +97,8 @@
 			    ba.author_nm,
 			    ba.create_date,
 			    bc.board_category_id,
-			    bc.board_category_name
+			    bc.board_category_name,
+			    b.board_name 
 			FROM TB_BOARD_ARTICLE ba
 			INNER JOIN TB_BOARD b 			ON b.board_id = ba.board_id
 			INNER JOIN TB_BOARD_CATEGORY bc ON b.board_category_id = bc.board_category_id
@@ -110,33 +111,33 @@
 					<if test="searchCondition == 'title'">
 						<if test="searchText != null and searchText != ''">
 <!-- 						and MATCH(title) AGAINST(CONCAT('*',#{searchText},'*') in boolean mode); -->
-						and title 	like CONCAT('%', #{searchText}, '%')
+						and ba.title 	like CONCAT('%', #{searchText}, '%')
 						</if> 
 					</if>
 					<if test="searchCondition == 'content'">
 						<if test="searchText != null and searchText != ''">
 <!-- 						and MATCH(content) AGAINST(CONCAT('*',#{searchText},'*') in boolean mode); -->
-						and content like CONCAT('%', #{searchText}, '%')
+						and ba.content like CONCAT('%', #{searchText}, '%')
 						</if>
 					</if>
 					<if test="searchCondition == 'titleNcontent'">
 						<if test="searchText != null and searchText != ''">
 <!-- 						and MATCH(title, content) AGAINST(CONCAT('*',#{searchText},'*') in boolean mode); -->
-						and (title 	 like CONCAT('%', #{searchText}, '%') 
+						and (ba.title 	 like CONCAT('%', #{searchText}, '%') 
 						     or 
-						     content like CONCAT('%', #{searchText}, '%'))
+						     ba.content like CONCAT('%', #{searchText}, '%'))
 						</if>     
 					</if>
 				</if>
-				and status = 1			     	    
+				and ba.status = 1			     	    
 		</sql> 
 		<sql id="searchContentSql">
-		    WHERE 1 = 1
+		    <where>
 		    <if test="articleId > 0">
-		        and article_id = #{articleId}
-		        and status = 1
+		        and ba.article_id = #{articleId}
 		    </if>
-		    
+			    and ba.status = 1
+		    </where>
 		</sql>
 		
 		

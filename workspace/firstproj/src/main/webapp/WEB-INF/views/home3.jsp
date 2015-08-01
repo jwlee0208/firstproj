@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html ng-app="website">
 <head>
-    <title>AngularJS Animate Slider</title>
+    <title>LinkedNest - Link Between Player With Club</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/slideshow.css">
 <style>
 .jumbotron {
@@ -110,7 +110,7 @@
 <!-- 			</div> -->
 <!-- 		</div> -->
 	</div>
-</div>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-animate.min.js"></script>
@@ -134,7 +134,7 @@
       </div>
     </div>
   </div>
-<!-- </div> -->
+</div>
 
 </body>
 <script>

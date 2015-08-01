@@ -36,7 +36,8 @@ public class BoardArticleDto extends SearchCondition
 	private int 			status;
 	private int             boardCategoryId;
 	private String          boardCategoryName;
-
+	private String			boardName;
+	
 	public int getArticleId() {
 		return articleId;
 	}
@@ -127,15 +128,20 @@ public class BoardArticleDto extends SearchCondition
     public void setBoardCategoryName(String boardCategoryName) {
         this.boardCategoryName = boardCategoryName;
     }
-
-    @Override
+    public String getBoardName() {
+		return boardName;
+	}
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
+	}
+	
+	@Override
 	public String toString() {
-		return "BoardArticleDto [articleId=" + articleId + ", boardId="
-				+ boardId + ", title=" + title + ", content=" + content
-				+ ", authorId=" + authorId + ", authorNm=" + authorNm
-				+ ", createDate=" + createDate + ", thumbImg=" + thumbImg
-				+ ", filePath=" + filePath + ", originalFileName="
-				+ originalFileName + ", status=" + status + "]";
+		return "BoardArticleDto [thumbnailSize=" + thumbnailSize + ", articleId=" + articleId + ", boardId=" + boardId
+				+ ", title=" + title + ", content=" + content + ", authorId=" + authorId + ", authorNm=" + authorNm
+				+ ", createDate=" + createDate + ", thumbImg=" + thumbImg + ", filePath=" + filePath
+				+ ", originalFileName=" + originalFileName + ", status=" + status + ", boardCategoryId="
+				+ boardCategoryId + ", boardCategoryName=" + boardCategoryName + ", boardName=" + boardName + "]";
 	}
 	
 }
