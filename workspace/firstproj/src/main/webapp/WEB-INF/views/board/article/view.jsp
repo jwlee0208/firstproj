@@ -29,7 +29,7 @@
 	  <li class="active">Article</li>
 	</ol>		
 
-		<div class="panel panel-default" role="main">	
+		<div class="panel panel-primary" role="main">	
 			<div class="panel-heading">
 				<h4 class="panel-title">${contentInfo.title}</h4>
 			</div>

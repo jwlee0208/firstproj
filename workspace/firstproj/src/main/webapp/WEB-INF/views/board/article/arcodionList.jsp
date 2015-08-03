@@ -32,7 +32,7 @@
 	</div>
 	
 	<c:set var="list" value="${boardList}" />	
-	<div class="table-responsive" id="listDiv" role="main">
+	<div id="listDiv" role="main">
 		<!-- paging에 필요한 파라미터 -->
 		<input type="hidden" id="pageNo" 		name="pageNo" 		value="${pagedResult.pageNo}" /> 
 		<input type="hidden" id="totalListCnt" 	name="totalListCnt" value="${pagedResult.totalListCnt}" /> 
@@ -44,13 +44,13 @@
 					<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
 						<c:forEach var="contentInfo" items="${pagedResult.list}" varStatus="index">
 		
-			<div class="panel panel-info">
+			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#collapse${index.count}">${contentInfo.title} </a>
 					</h4>
 				</div>
-				<div id="collapse${index.count}" class="panel-collapse collapse in">
+				<div id="collapse${index.count}" class="collapse in">
 					<div class="panel-body">
 						<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
 						${contentInfo.content} <br/><br/>
