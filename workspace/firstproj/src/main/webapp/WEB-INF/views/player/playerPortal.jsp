@@ -39,8 +39,10 @@
 	<div class="form-group">
 
 		<div class="row" role="search">
-			<input type="hidden" 	id="searchCondition" name="searchCondition" value="userName"/>
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control ui-autocomplete-input" placeholder="Try to search using keywords. And push enter key."/>	
+			<input type="hidden" 	id="searchCondition" 	name="searchCondition" value="userName"/>
+			<input type="hidden" 	id="searchText" 		name="searchText" />
+			<input type="text" 		id="searchTextStr" 		name="searchTextStr" class="form-control ui-autocomplete-input" placeholder="Try to search using keywords. And push enter key."/>
+				
 		</div>
 		
 		<div class="row"  style="padding-top: 10px;">

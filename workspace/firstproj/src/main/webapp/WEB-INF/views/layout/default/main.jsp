@@ -15,10 +15,9 @@
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
-	
 	<tiles:insertAttribute name="menu"/>
 	
-	<div class="container-fluid" role="application">
+	<div class="container" role="application">
 		<tiles:insertAttribute name="body"/>
 	</div>	
 	<tiles:insertAttribute name="footer"/>

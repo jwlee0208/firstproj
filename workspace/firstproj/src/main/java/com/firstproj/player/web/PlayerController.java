@@ -14,6 +14,7 @@ import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.xerces.impl.dv.util.Base64;
 import org.jboss.logging.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -570,6 +571,10 @@ public class PlayerController {
     @RequestMapping("/ajaxPlayerList")
     public String getAjaxPlayerList(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session){
     	log.info("[ PlayerController.getAjaxPlayerList() ][ Param ] searchPlayerDto : " + searchPlayerDto.toString());
+    	
+    	if(searchPlayerDto.getSearchText() != null && searchPlayerDto.getSearchText() != ""){
+    	    searchPlayerDto.setSearchText(new String(Base64.decode(searchPlayerDto.getSearchText())));
+    	}
     	
         List<PlayerInfoDto> playerList = null;
         PageHolder          pageHolder = null;

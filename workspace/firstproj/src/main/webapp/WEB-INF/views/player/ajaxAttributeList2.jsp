@@ -6,7 +6,7 @@ Filtering Detail Information
 </div>
 <div style="padding-top: 10px;padding-left: 10px;padding-bottom: 10px;">
 <c:choose>
-	<c:when test="${attrElementList != null && attrElementList.size() > 0}">
+	<c:when test="${!empty attrElementList}">
 		<!-- attribute Info Settion -->
 		<c:set var="prevAttrId" value="0"/>
 		
@@ -42,7 +42,7 @@ Filtering Detail Information
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
-	
+	<div style="text-align:center">등록된 카테고리가 없습니다.</div>
 	</c:otherwise>
 </c:choose>
 </div>

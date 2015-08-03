@@ -17,7 +17,7 @@
 					}
 				}else{
 					$("#catId option").remove();
-					$("#catId").append("<option value=\"\">카테고리를 선택해 주세요.</option>");
+					$("#catId").append("<option value=\"-1\">카테고리를 선택해 주세요.</option>");
 				}
 
 				$("#selectedCatId").val(catId);

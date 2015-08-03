@@ -2,11 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<!DOCTYPE html>
-<html ng-app="website">
-<head>
-    <title>LinkedNest - Link Between Player With Club</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/slideshow.css">
 <style>
 .jumbotron {
     position: relative;
@@ -19,9 +14,6 @@
     color: white;
 }
 </style>
-</head>
-<body>
-
 
 	<div class="jumbotron">
 		<h1>Keep Going Your Way</h1>
@@ -29,11 +21,11 @@
 		<p>Do not afraid of yourself. You are the player.</p>
 		<p>Never ever give up.</p>
 		<p><strong>"It ain't over till it's over."</strong> - 'Yogi' Lawrence Peter Berra</p>
-		<p class="btn btn-primary btn-lg" role="button">Regist Profile&nbsp;>></p>
+<!-- 		<p class="btn btn-primary btn-lg" role="button">Regist Profile&nbsp;>></p> -->
 	</div>
 
 
-	<div class="row" style="padding-left: 20px; padding-right: 20px; ">
+	<div class="row" style="padding-left: 20px; padding-right: 20px; display: none;">
 		<!-- left area -->
 		<div class="row">
 			<ul class="nav nav-tabs" role="tablist" id="boardTab">
@@ -110,14 +102,14 @@
 <!-- 			</div> -->
 <!-- 		</div> -->
 	</div>
+	<div style="height : 300px;border : 0px;"></div>
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-animate.min.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-touch.min.js"></script> -->
+<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script> -->
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-touch.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
-
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/slide/slideshow.js"></script>
+<%-- <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/slide/slideshow.js"></script> --%>
 
 
 <!-- Modal -->
@@ -135,8 +127,6 @@
     </div>
   </div>
 </div>
-
-</body>
 <script>
 	$().ready(function(){
 		$("#li_1").addClass("active");
@@ -176,5 +166,3 @@
 	});
 </script>
 
-
-</html>

@@ -1,15 +1,16 @@
 package com.firstproj.player.dto;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
-@SuppressWarnings("serial")
+
 @Alias("player.categoryDto")
-public class CategoryDto implements Serializable{
-    private int parentCatId;
-    private int catId;
+public class CategoryDto 
+//implements Serializable
+{
+    private int parentCatId = 0;
+    private int catId = 0;
     
     private String catName;
     private String createDate;
@@ -93,6 +94,8 @@ public class CategoryDto implements Serializable{
             categoryNameStr = "투수";
         }else if(this.catId == 7){
             categoryNameStr = "타자";
+        }else{
+            categoryNameStr = "";
         }
         
         return categoryNameStr;

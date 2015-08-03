@@ -11,7 +11,7 @@
 		</div>	
 	</c:when>
 	<c:otherwise>
-		<div class="table-responsive">
+		<div>
 			<c:forEach var="list" items="${playerList}">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail">

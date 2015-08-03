@@ -10,9 +10,9 @@ public class CategoryAttrElemDto
 //extends CategoryAttrDto 
 //implements Serializable 
 {
-    private int     attrElemId;
-    private int     attrId;
-    private int     catId;
+    private int     attrElemId = 0;
+    private int     attrId = 0;
+    private int     catId = 0;
     private String  attrElemName;
     private String  createDate;
     private String  createUserId;

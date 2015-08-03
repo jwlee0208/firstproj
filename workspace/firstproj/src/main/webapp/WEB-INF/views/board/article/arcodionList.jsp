@@ -44,7 +44,7 @@
 					<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
 						<c:forEach var="contentInfo" items="${pagedResult.list}" varStatus="index">
 		
-			<div class="panel panel-primary">
+			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#collapse${index.count}">${contentInfo.title} </a>
@@ -96,6 +96,28 @@ $(document).ready(function() {
 	$("div img").off("error");
 	$("div img").on("error", function(){
 		$(this).attr("src", '${pageContext.request.contextPath}/img/no_image.png');
+	});
+
+	$(".panel-title").each(function(){
+		if($(this).hasClass("collapsed")){
+			$(this).children("a").text("∨ " + $(this).children("a").text());
+		}else{
+			$(this).children("a").text("∧ " + $(this).children("a").text());
+		}
+	});
+		
+	$(".panel-title").click(function(){
+		if($($(this).children("a").attr("href")).height() > 0){
+			$(this).children("a").text($(this).children("a").text().replace("∧ ", "∨ "));
+		}else{
+			$(this).children("a").text($(this).children("a").text().replace("∨ ", "∧ "));
+				
+		}
+// 		if($($(this).children("a").attr("href")).attr("height")){
+// 			$(this).children("a").text($(this).children("a").text().replace(" > 열기", " > 닫기"));
+// 		}else{
+// 			$(this).children("a").text($(this).children("a").text().replace(" > 닫기", " > 열기"));
+// 		}	
 	});
 });
 </script>

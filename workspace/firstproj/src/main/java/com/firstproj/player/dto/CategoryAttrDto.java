@@ -8,8 +8,8 @@ import org.apache.ibatis.type.Alias;
 @SuppressWarnings("serial")
 @Alias("player.categoryAttrDto")
 public class CategoryAttrDto extends CategoryDto implements Serializable{
-    private int     attrId;
-    private int     catId;
+    private int     attrId = 0;
+    private int     catId = 0;
     private String  attrName;
     private String  createDate;
     private String  createUserId;

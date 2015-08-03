@@ -112,14 +112,14 @@
 		<select id="selectPlayerList" resultMap="playerListMap" parameterType="player.searchConditionPlayer">
 			<include refid="selectPlayerListDefault"/>			
 			<include refid="searchConditionPlayerSql"/>     
-			ORDER BY U.user_nm desc	
+			ORDER BY u.user_nm desc	
 			LIMIT #{startRow}, #{endRow}  
 		</select>
 
 		<select id="selectPlayerList2" resultMap="playerListMap" parameterType="player.searchPlayerDto">
 			<include refid="selectPlayerListDefault"/>			
 			<include refid="searchConditionPlayerSql2"/>     
-			ORDER BY U.user_nm desc	
+			ORDER BY u.user_nm desc	
 			LIMIT #{fetchScale}, #{listSize}  
 		</select>
 		
@@ -156,8 +156,8 @@
 			WHERE 1 = 1
 			<if test='searchCondition == "userName"'>
 				<if test='searchText != null and searchText != ""'>
-<!-- 			  and u.user_nm like CONCAT('%', #{searchText}, '%') -->
-				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
+			  and u.user_nm like CONCAT('%', #{searchText}, '%')
+<!-- 				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode) -->
 			  	</if>
 			</if>  	
 			GROUP BY c1.cat_id, c1.cat_name, c2.cat_id, c2.cat_name
@@ -170,9 +170,11 @@
 			SELECT user_nm 
 			FROM TB_USER u
 			LEFT JOIN TB_PLAYER_INFO pi ON pi.user_id = u.user_id
+			INNER JOIN TB_ATTR_ELEM_MAP aem ON aem.user_id = u.user_id
 			where 1 = 1
-<!-- 			and u.user_nm like concat('%', #{searchText}, '%') -->
-				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
+			and u.user_nm like concat('%', #{searchText}, '%')
+<!-- 				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode) -->
+			GROUP BY u.user_id
 			ORDER BY user_nm
 		</select>
 		
@@ -273,9 +275,9 @@
 			WHERE 1 = 1
 					<if test='searchCondition == "userName"'>
 						<if test='searchText != null and searchText != ""'>
-<!-- 						and aem.user_name 	like CONCAT('%', #{searchText}, '%') -->
-<!-- 							and u.user_nm 	like CONCAT('%', #{searchText}, '%') -->
-				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
+						and aem.user_name 	like CONCAT('%', #{searchText}, '%')
+							and u.user_nm 	like CONCAT('%', #{searchText}, '%')
+<!-- 				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode) -->
 						</if> 
 					</if>
 			
@@ -328,9 +330,9 @@
 			<where>
 					<if test='searchCondition == "userName"'>
 						<if test='searchText != null and searchText != ""'>
-<!-- 						and aem.user_name 	like CONCAT('%', #{searchText}, '%') -->
-<!-- 							and u.user_nm 	like CONCAT('%', #{searchText}, '%') -->
-				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode)
+						and (aem.user_name 	like CONCAT('%', #{searchText}, '%')
+							and u.user_nm 	like CONCAT('%', #{searchText}, '%'))
+<!-- 				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode) -->
 						</if> 
 					</if>
 			
@@ -382,7 +384,7 @@
 			SELECT 
 					pi.player_info_id
 				  , pi.user_id
-				  , U.user_nm	as userNm
+				  , u.user_nm	as userNm
 				  , pi.cat_id1  as catId1
 				  , c1.cat_name as catNm1
 				  , pi.cat_id2  as catId2
@@ -390,7 +392,7 @@
 				  , pi.profile_img_file_path as profileImgFilePath
 				  , pi.introduce
 			FROM TB_PLAYER_INFO 		pi
-			LEFT JOIN TB_USER 			U 		ON pi.user_id 		= U.user_id	
+			LEFT JOIN TB_USER 			u 		ON pi.user_id 		= u.user_id	
 			LEFT JOIN TB_CATEGORY 		c1 		ON pi.cat_id1 		= c1.CAT_ID
 			LEFT JOIN TB_CATEGORY 		c2 		ON pi.CAT_ID2 		= c2.CAT_ID
 			LEFT JOIN TB_ATTR_ELEM 		ae 		ON pi.cat_id2 		= ae.cat_id
