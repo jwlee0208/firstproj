@@ -274,11 +274,7 @@ public class PlayerServiceImpl implements PlayerService{
 
     @Override
     public List<PlayerInfoDto> selectPlayerList(SearchPlayerDto searchPlayerDto, HttpSession session) throws Exception{
-        List<PlayerInfoDto> selectPlayerList = this.playerDao.selectPlayerList(searchPlayerDto);
-        
-        System.out.println(selectPlayerList != null);
-        System.out.println(selectPlayerList.size());
-        
+        List<PlayerInfoDto> selectPlayerList = this.playerDao.selectPlayerList(searchPlayerDto);        
         return selectPlayerList;
     }
     
