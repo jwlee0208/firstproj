@@ -4,9 +4,6 @@
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
 <%@ page import="com.firstproj.user.dto.UserDto"%>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/home/home.js"></script>
-<style>
-ul { padding: 0; }
-</style>
 <%
 	UserDto userInfo = (UserDto)request.getSession().getAttribute("userInfo");
 %>
@@ -14,8 +11,8 @@ ul { padding: 0; }
 
 <nav class="navbar navbar-inverse" role="navigation">
 	<input type="hidden" id="menuId" name="menuId" value="${param.menuId}"/>
-    <div class="container-fluid">
-    	<div class="navbar-header"><a class="navbar-brand" href="javascript:;" onclick="javascript:goHome();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:white; font-size: 25px; font-weight: bold;">L</span>inked<span style="color:white; font-size: 25px; font-weight: bold;">N</span>est - <span style="color:white; font-size: 15px;">Checkout future's MVP</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+    <div class="container">
+    	<div class="navbar-header"><a class="navbar-brand" href="javascript:;" onclick="javascript:goHome();"><span style="color:white; font-size: 25px; font-weight: bold;">L</span>inked<span style="color:white; font-size: 25px; font-weight: bold;">N</span>est - <span style="color:white; font-size: 15px;">Checkout future's MVP</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
 		<div class="collapse2 nav-collapse">
 			<ul class="nav navbar-nav">
 		        <li>
@@ -43,6 +40,5 @@ ul { padding: 0; }
 
 	</c:choose>	
 			</form>				
-		</div>
 	</div>
 </nav>	

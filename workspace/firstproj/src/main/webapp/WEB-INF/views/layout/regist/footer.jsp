@@ -10,12 +10,23 @@
   ga('send', 'pageview');
 
 </script>
-<div id="footer" class="footer">
+<footer class="footer">
 	<div class="container">
-		<div class="row">
-		  <div class="col-md-8"><p style="padding-top : 15px;"><a href="https://www.facebook.com/jwlee0208" target="_blank" class="btn btn-primary">Facebook</a>&nbsp;&nbsp;&nbsp;<a href="https://twitter.com/jwlee0208" target="_blank" class="btn btn-primary">Twitter</a>&nbsp;&nbsp;&nbsp;<a href="http://blog.naver.com/jwlee0208" target="_blank" class="btn btn-primary">Blog</a></p></div>
-		  <div class="col-md-4"><p class="text-muted" style="text-align:center;">Copyrightⓒ2014 All right reserved by leejinwon</p></div>
-		</div>		
-	</div>
-</div>
+	  <p><a href="https://www.facebook.com/jwlee0208" target="_blank" class="btn btn-primary">Facebook</a>
+<!-- 	  &nbsp;&nbsp;&nbsp;<a href="https://twitter.com/jwlee0208" target="_blank" class="btn btn-primary">Twitter</a> -->
+<!-- 	  &nbsp;&nbsp;&nbsp;<a href="http://blog.naver.com/jwlee0208" target="_blank" class="btn btn-primary">Blog</a> -->
+	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/aboutUs/5">contact</a>&nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/board/article/main">developer's blog</a></p>
+	  <p>Copyrightⓒ2014 All right reserved by leejinwon</p>
+      <p><a href="#">Back to top</a></p>
+    </div>  
+</footer>
+
+<!-- <div id="footer" class="footer"> -->
+<!-- 	<div class="container"> -->
+<!-- 		<div class="row"> -->
+<!-- 		  <div class="col-md-8"><p style="padding-top : 15px;"><a href="https://www.facebook.com/jwlee0208" target="_blank" class="btn btn-primary">Facebook</a>&nbsp;&nbsp;&nbsp;<a href="https://twitter.com/jwlee0208" target="_blank" class="btn btn-primary">Twitter</a>&nbsp;&nbsp;&nbsp;<a href="http://blog.naver.com/jwlee0208" target="_blank" class="btn btn-primary">Blog</a></p></div> -->
+<!-- 		  <div class="col-md-4"><p class="text-muted" style="text-align:center;">Copyrightⓒ2014 All right reserved by leejinwon</p></div> -->
+<!-- 		</div>		 -->
+<!-- 	</div> -->
+<!-- </div> -->
 

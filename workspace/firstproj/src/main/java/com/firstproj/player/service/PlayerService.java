@@ -56,4 +56,6 @@ public interface PlayerService {
     public List<PlayerInfoDto> selectPlayerList(SearchPlayerDto searchPlayerDto, HttpSession session) throws Exception;
     
     public int selectPlayerCnt(SearchPlayerDto searchPlayerDto, HttpSession session) throws Exception;
+    
+    public List<PlayerInfoDto> getPlayerListRecently() throws Exception;
 }

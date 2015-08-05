@@ -1,12 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" 	content="IE=Edge" />
+<meta name="viewport" 				content="width=device-width, initial-scale=1">
+<meta name="title" 					content="Developer's Blog"/>
+<meta name="author" 				content="Lee Jinwon"/>
+<meta name="description" 			content="Welcome to enter here. Here is developer's blog"/>
+<meta name="robots" 				content="index,follow" /> 
+<meta name="keywords" 				content="blog, baseball, link, player, profile"/>
+
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/common/paging.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleList.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
-
+<link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/pagination.css">
+</head>
+<body>
 	<div class="blog-header">
 	  <h1>BOARD&nbsp;&nbsp;<small>ALL</small></h1>
 	</div>	
@@ -89,6 +101,7 @@
 <!-- 			<input type="submit" class="btn btn-default pull-right" value="글쓰기" name="goToWrite" /> -->
 <!-- 		</div> -->
 <!-- 	</div>	 -->
+</body>
 <script>
 $(document).ready(function() {
 	$("div img").addClass("media-object");
@@ -121,3 +134,4 @@ $(document).ready(function() {
 	});
 });
 </script>
+</html>

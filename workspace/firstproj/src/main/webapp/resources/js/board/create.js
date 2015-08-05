@@ -74,7 +74,7 @@ function goBoardCreate(){
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 //		contentType: "application/json; charset=UTF-8",
 		success : function(data){
-			console.log("data : " + data.result + ", data" + data);
+//			console.log("data : " + data.result + ", data" + data);
 			if(data.result){
 				goBoardList();
 			}else{
@@ -82,7 +82,7 @@ function goBoardCreate(){
 			}
 		},
 		error : function(xhr, textStatus, thrownError){
-			console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
+//			console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
 			return;
 		}
 	});
@@ -97,7 +97,7 @@ function goBoardModify(){
 		dataType : 'json',
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		success : function(data){
-			console.log("data : " + data.result + ", data" + data);
+//			console.log("data : " + data.result + ", data" + data);
 			if(data.result){
 				goBoardList();
 			}else{
@@ -105,7 +105,7 @@ function goBoardModify(){
 			}
 		},
 		error : function(xhr, textStatus, thrownError){
-			console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
+//			console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
 			return;
 		}
 	});

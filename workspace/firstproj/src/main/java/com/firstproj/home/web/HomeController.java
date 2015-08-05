@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.board.service.BoardArticleRedisServiceImpl;
 import com.firstproj.board.service.BoardArticleServiceImpl;
+import com.firstproj.player.dto.PlayerInfoDto;
+import com.firstproj.player.dto.SearchPlayerDto;
+import com.firstproj.player.service.PlayerServiceImpl;
 
 
 @Controller
@@ -28,6 +31,8 @@ public class HomeController {
 	@Resource(name = "BoardArticleRedisServiceImpl")
 	private BoardArticleRedisServiceImpl boardArticleRedisService;	
 
+	@Resource(name = "PlayerServiceImpl")
+	private PlayerServiceImpl playerService;    
 	// spring-data-redis 사용.
 //	@Autowired
 //	private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
@@ -86,7 +91,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/home3/{menuId}")
 	public String goHome3(Model model, @PathVariable int menuId) throws Exception{
-		
+	    /*
 		BoardArticleDto boardDto01 = new BoardArticleDto();
 		boardDto01.setBoardId(1);
 		
@@ -99,7 +104,12 @@ public class HomeController {
 
 		model.addAttribute("articleFive01", getBoardArticleFive01);
 		model.addAttribute("articleFive02", getBoardArticleFive02);
-		
+		*/
+	    
+	    List<PlayerInfoDto>    recentPlayerList    = this.playerService.getPlayerListRecently();
+	    
+	    model.addAttribute("recentPlayerList", recentPlayerList);
+	    
 		return "home3";
 	}	
 	/*

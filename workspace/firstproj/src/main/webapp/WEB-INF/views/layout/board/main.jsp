@@ -4,15 +4,13 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-<meta http-equiv="expires" content="-1" >
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="index,follow" /> 
-
+<meta http-equiv="X-UA-Compatible" 	content="IE=Edge" />
+<meta http-equiv="Pragma" 			content="no-cache">
+<meta http-equiv="expires" 			content="-1" >
+<meta name="viewport" 				content="width=device-width, initial-scale=1">
 <link rel="icon" href="/img/common/favicon.ico">
-<title>LinkedNest - Link Between Player With Club</title>
+<title>Developer's Blog - Nevertheless Keep Going</title>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
-<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sidebar.css"> --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/offcanvas.css">
 <style>
 .btn_up_layer {position:absolute;top:0;right:10px;display:none;padding:5px 10px;z-index:1; }

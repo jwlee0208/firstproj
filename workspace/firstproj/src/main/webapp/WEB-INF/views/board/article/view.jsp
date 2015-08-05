@@ -1,10 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" 	content="IE=Edge" />
+<meta name="viewport" 				content="width=device-width, initial-scale=1">
+<meta name="title" 					content="${contentInfo.title}"/>
+<meta name="author" 				content="${contentInfo.authorNm}"/>
+<meta name="description" 			content='<c:out value="${fn:escapeXml(contentInfo.content)}"/>'/>
+<meta name="robots" 				content="index,follow" /> 
+<meta name="keywords" 				content="blog, baseball, link, player, profile"/>
+
+<title>${contentInfo.title}</title>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleView.js"></script>
+</head>
+<body>
+
 <!-- <div class="container"> -->
+
 <div>
 	<form id="viewFrm" name="viewForm" method="post" role="form">
 	<input type="hidden" id="selectedArticleId" 	name="selectedArticleId" 	value="${contentInfo.articleId }"/>
@@ -94,6 +110,7 @@
 		</div>
 	</form>
 </div>
+</body>
 <script>
 
 $(document).ready(function() {
@@ -105,3 +122,4 @@ $(document).ready(function() {
 	});
 });
 </script>
+</html>

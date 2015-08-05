@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.tryout.com:8080/taglib/custom" 	prefix="custom" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
+<%@ taglib uri="http://jwlee0208.cafe24.com/taglib/custom" 	prefix="custom" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" 			prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" 	prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 			prefix="fmt"%>
 
 <c:choose>
 	<c:when test="${empty playerList}">
-		<div class="table-responsive" style="text-align: center;">
+		<div class="table-responsive" style="text-align: center; height: 100%;">
 			<p class="text-warning">N/A</p>
 		</div>	
 	</c:when>

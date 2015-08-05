@@ -4,9 +4,6 @@
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
 <%@ page import="com.firstproj.user.dto.UserDto"%>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/home/home.js"></script>
-<style>
-ul { padding: 0; }
-</style>
 <%
 	UserDto userInfo = (UserDto)request.getSession().getAttribute("userInfo");
 %>
@@ -14,8 +11,8 @@ ul { padding: 0; }
 
 <nav class="navbar navbar-inverse" role="navigation">
 	<input type="hidden" id="menuId" name="menuId" value="${param.menuId}"/>
-    <div class="container-fluid">
-    	<div class="navbar-header"><a class="navbar-brand" href="/board/article/main">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:white; font-size: 25px; font-weight: bold;">D</span>eveloper's <span style="color:white; font-size: 25px; font-weight: bold;">B</span>log &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+    <div class="container">
+    	<div class="navbar-header"><a class="navbar-brand" href="/board/article/main"><span style="color:white; font-size: 25px; font-weight: bold;">D</span>eveloper's <span style="color:white; font-size: 25px; font-weight: bold;">B</span>log &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
 		<div class="collapse2 nav-collapse">
 			<ul class="nav navbar-nav">
 				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();">I'm ..</a></li>
@@ -44,7 +41,7 @@ ul { padding: 0; }
 <%-- 				<li <c:if test="${param.menuId eq 4}">class="active"</c:if>><a href="javascript:void(0);">Site Map</a></li> --%>
 <!-- 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> -->
 <!-- 			</ul> -->
-			</div>
+		</div>
 
 			<form class="navbar-form navbar-right" role="search">
 	<c:choose>
@@ -59,6 +56,5 @@ ul { padding: 0; }
 
 	</c:choose>	
 			</form>				
-		</div>
 	</div>
 </nav>	

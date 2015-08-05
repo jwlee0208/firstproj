@@ -3,6 +3,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"	%>
 <%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag"%>
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" 	content="IE=Edge" />
+<meta name="viewport" 				content="width=device-width, initial-scale=1">
+<meta name="title" 					content="Player List"/>
+<meta name="author" 				content="Lee Jinwon"/>
+<meta name="description" 			content="Checkout Future's MVP"/>
+<meta name="robots" 				content="index,follow" /> 
+<meta name="keywords" 				content="blog, baseball, link, player, profile"/>
 
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/player/common2.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/player/playerPortal.js"></script>
@@ -27,9 +38,10 @@
 	  margin-right: -5px;
 }
 </style>
+</head>
+<body>
 <form id="listFrm" name="listFrm" method="post">
-<div class="container">
-
+	<div class="container">
 	<input type="hidden" id="selectedAttrElemId" 	name="selectedAttrElemId" />
 	<input type="hidden" id="selectedAttrId" 		name="selectedAttrId" />
 	<input type="hidden" id="selectedCatId" 		name="selectedCatId" />
@@ -89,5 +101,7 @@
 	</c:if>
 		
 	</div>	
-</div>
+	</div>
 </form>
+</body>
+</html>

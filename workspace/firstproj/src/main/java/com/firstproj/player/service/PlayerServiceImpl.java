@@ -7,8 +7,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.util.PagingUtil;
@@ -289,4 +287,8 @@ public class PlayerServiceImpl implements PlayerService{
         return this.playerDao.selectPlayerCnt(searchPlayerDto);
     }
 	
+    @Override
+    public List<PlayerInfoDto> getPlayerListRecently() throws Exception{
+        return this.playerDao.selectPlayerListRecently();
+    }
 }

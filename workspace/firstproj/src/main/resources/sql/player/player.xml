@@ -551,4 +551,11 @@
 				 player_info_id = #{playerInfoId}
 		</update>
 		
+		<select id="selectPlayerListRecently" resultMap="playerListMap">
+			<include refid="selectPlayerListDefault"/>			
+			WHERE pi.cat_id1 = 1 
+			GROUP BY pi.player_info_id
+			ORDER BY pi.player_info_id ASC	
+			LIMIT 3  	
+		</select>
     </mapper>

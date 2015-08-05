@@ -283,4 +283,8 @@ public class PlayerDao extends SqlSessionDaoSupport{
         return getSqlSession().selectOne("sql.player.selectPlayerListCount2", searchPlayerDto);
     }
 
+    public List<PlayerInfoDto> selectPlayerListRecently() throws Exception{
+        return getSqlSession().selectList("sql.player.selectPlayerListRecently");
+    }
+
 }
