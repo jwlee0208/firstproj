@@ -72,7 +72,7 @@
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
-			<li class="media" style="text-align: center;">	
+			<li class="media" style="text-align: center; min-height: 400px;">	
 				<h4 class="media-heading">등록된 내용이 없습니다.</h4>
 			</li>			
 	</c:otherwise>

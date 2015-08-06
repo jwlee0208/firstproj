@@ -49,9 +49,9 @@
 			<div class="panel-heading">
 				<h4 class="panel-title">${contentInfo.title}</h4>
 			</div>
-			<div class="panel-body" style="min-height: 300px;">
-				${contentInfo.content}
-
+			<div class="panel-body">
+				<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
+				<div style="min-height: 400px;">${contentInfo.content}</div>
 			<c:if test="${contentInfo.filePath ne null && contentInfo.filePath ne ''}">	
 				<div class="thumbImg unset" style="padding-top : 20px; ">
 					썸네일 : 
@@ -71,17 +71,10 @@
 					</ul>	
 				</div>										
 			</c:if>
+				<div class="row" style="float: right; padding-right:10px;">
+					<div class="btn btn-primary" >${contentInfo.boardCategoryName}</div> <div class="btn btn-success" >${contentInfo.boardName}</div>
+				</div>			
 			</div>	
-<!-- 			<div class="panel-footer"> -->
-<!-- 				<ul class="pager"> -->
-<%-- 					<c:if test="${prevContentInfo.articleId ne null}"> --%>
-<!-- 					<li><a href="javascript:void(0);" id="previous">Previous</a></li> -->
-<%-- 					</c:if> --%>
-<%-- 					<c:if test="${nextContentInfo.articleId ne null}"> --%>
-<!-- 					<li><a href="javascript:void(0);" id="next">Next</a></li>	 -->
-<%-- 					</c:if> --%>
-<!-- 				</ul>			 -->
-<!-- 			</div> -->
 		</div>
 
 

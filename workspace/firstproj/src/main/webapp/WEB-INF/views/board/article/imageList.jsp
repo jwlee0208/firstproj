@@ -81,7 +81,7 @@
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
-						작성된 내용이 없습니다.		
+			<div style="min-height: 400px;">작성된 내용이 없습니다.</div>					
 	</c:otherwise>
 </c:choose>
 		</div>
@@ -120,6 +120,7 @@
     </div>
   </div>
 </div>
+
 </body>
 <script>
 $().ready(function(){
@@ -128,7 +129,6 @@ $().ready(function(){
 			$(this).attr("src", "${pageContext.request.contextPath}/img/no_image.png");
 		});	
 	});
-
 });
 	
 function goArticleView(articleId, type){

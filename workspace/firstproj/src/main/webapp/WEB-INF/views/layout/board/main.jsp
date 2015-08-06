@@ -71,7 +71,7 @@ function btn_mv_up(oj) {
 				<tiles:insertAttribute name="quickBoardList"/>
 			</div>	
 		</div>
-		<button type="button" class="btn_up_layer btn btn-info">∧</button>
+		<button type="button" class="btn_up_layer btn btn-default">∧</button>
 <!-- 		<button type="button" class="btn_down_layer btn btn-primary">∨</button> -->
 	</div>	
 

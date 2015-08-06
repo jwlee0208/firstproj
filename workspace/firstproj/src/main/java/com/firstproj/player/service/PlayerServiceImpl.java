@@ -220,7 +220,7 @@ public class PlayerServiceImpl implements PlayerService{
     	if(playerInfo != null){
     		
     		String userId = userInfo.getUserId();
-    		System.out.println("userId : " + userId);
+//    		System.out.println("userId : " + userId);
 
     		playerInfo.setUserId(userId);
     		playerInfoId = this.updatePlayerInfo(playerInfo);
@@ -246,7 +246,7 @@ public class PlayerServiceImpl implements PlayerService{
         			categoryAttrElemMapDto.setUserId(userInfo.getUserId());
         			categoryAttrElemMapDto.setUserName(userInfo.getUserNm());
         			
-        			System.out.println("[ categoryAttrElemMapDto ] : " + categoryAttrElemMapDto.toString());
+//        			System.out.println("[ categoryAttrElemMapDto ] : " + categoryAttrElemMapDto.toString());
         			
         			this.updateCategoryPropertyMappingInfo(categoryAttrElemMapDto);
         		}

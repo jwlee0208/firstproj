@@ -23,7 +23,7 @@
   ga('send', 'pageview');
 
 </script>
-<footer class="blog-footer">
+<footer class="footer">
 	  <p><a href="https://www.facebook.com/jwlee0208" target="_blank" class="btn btn-primary">Facebook</a>
 <!-- 	  &nbsp;&nbsp;&nbsp;<a href="https://twitter.com/jwlee0208" target="_blank" class="btn btn-primary">Twitter</a> -->
 <!-- 	  &nbsp;&nbsp;&nbsp;<a href="http://blog.naver.com/jwlee0208" target="_blank" class="btn btn-primary">Blog</a> -->

@@ -82,7 +82,7 @@
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<td colspan="4" style="text-align: center;">작성된 내용이 없습니다.</td>
+							<td colspan="4" style="text-align: center; min-height: 400px;">작성된 내용이 없습니다.</td>
 						</tr>
 					</c:otherwise>
 				</c:choose>
