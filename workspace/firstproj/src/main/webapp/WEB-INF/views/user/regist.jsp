@@ -25,6 +25,7 @@
 	
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form">
 		<h1 id="btn-groups" class="page-header">Sign up</h1>
+		<h2>Required</h2>
 		<div class="form-group">
 			<label for="userId" class="col-sm-2 control-label">Userid</label>
 			<div class="col-sm-10">
@@ -66,7 +67,7 @@
 				<input type="text" class="form-control" id="phoneNo" name="phoneNo"/><span id="phoneNoErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
-
+		<h2>Optional</h2>
 		<div class="form-group">
 			<label for="nationallity" class="col-sm-2 control-label">Nationality</label>
 			<div class="col-sm-10">
@@ -82,6 +83,7 @@
 		</div>
 		
 		<div class="form-group">
+			
 			<label for="language" class="col-sm-2 control-label">Language</label>
 			<div class="col-sm-10">
 				<select class="form-control" id="language" name="language">

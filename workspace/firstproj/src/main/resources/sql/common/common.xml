@@ -12,5 +12,6 @@
 				  , code_type				  
 			FROM TB_CODE
 			WHERE code_type = #{codeType}
+			ORDER BY code_name ASC
 		</select> 
     </mapper>
