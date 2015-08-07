@@ -8,3 +8,7 @@ function editorImgUploadComplete(fileStr){
 	   tinyMCE.activeEditor.setContent( contents + strImg);
 	  }
 }
+
+function share(type, articleId){
+	window.open("http://www.facebook.com/sharer/sharer.php?u=http://jwlee0208.cafe24.com/board/article/view/" + articleId);
+}

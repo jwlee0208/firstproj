@@ -67,7 +67,8 @@
 						<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
 						${contentInfo.content} <br/><br/>
 						<div class="row" style="float: right; padding-right:10px;">
-						<div class="btn btn-primary" >${contentInfo.boardCategoryName}</div> <div class="btn btn-success" >${contentInfo.boardName}</div>
+							<div class="btn btn-success" >${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div>
+							<div class="btn btn-primary" onclick="share('fb', '${contentInfo.articleId}');">Facebook 공유</div>
 						</div>
 						
 					</div>

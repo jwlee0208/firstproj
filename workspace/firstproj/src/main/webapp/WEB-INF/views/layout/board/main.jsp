@@ -11,6 +11,7 @@
 <link rel="icon" href="/img/common/favicon.ico">
 <title>Developer's Blog - Nevertheless Keep Going</title>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/common.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/offcanvas.css">
 <style>
 .btn_up_layer {position:absolute;top:0;right:10px;display:none;padding:5px 10px;z-index:1; }
