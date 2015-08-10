@@ -142,6 +142,6 @@ public class LoginController {
 		status.setComplete();
 		session.removeAttribute("userInfo");
 		
-		return "redirect:/home/0";
+		return "redirect:/home3/0";
 	}
 }

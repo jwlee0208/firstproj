@@ -17,14 +17,14 @@
 
 <style>
 
-.navbar-collapse.collapse2 {
-	display: block!important;
-	height: auto!important;
-	padding-bottom: 0;
-	overflow: visible!important;
-}
+/* .navbar-collapse.collapse2 { */
+/* 	display: block!important; */
+/* 	height: auto!important; */
+/* 	padding-bottom: 0; */
+/* 	overflow: visible!important; */
+/* } */
 	
-.collapse {
-	display: none;
-}	
+/* .collapse { */
+/* 	display: none; */
+/* }	 */
 </style>
