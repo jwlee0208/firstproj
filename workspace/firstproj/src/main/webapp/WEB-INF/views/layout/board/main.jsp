@@ -4,59 +4,77 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" 	content="IE=Edge" />
-<meta http-equiv="Pragma" 			content="no-cache">
-<meta http-equiv="expires" 			content="-1" >
-<meta name="viewport" 				content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" 		content="IE=Edge" />
+<meta http-equiv="Pragma" 				content="no-cache">
+<meta http-equiv="expires" 				content="-1" >
+<meta name="viewport" 					content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" 	content="7UeiOduowaVDwAs8XpEDd9CCnyDQr6I2npw9k8guOCc" />
 <link rel="icon" href="/img/common/favicon.ico">
 <title>Developer's Blog - Nevertheless Keep Going</title>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/common.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/offcanvas.css">
 <style>
-.btn_up_layer {position:absolute;top:0;right:10px;display:none;padding:5px 10px;z-index:1; }
-.btn_down_layer {position:absolute;top:0;right:10px;display:none;padding:5px 10px;z-index:1; }
+.go_to_top {
+    display:scroll;
+    position:fixed;
+    bottom:15px;
+    right:15px;
+/*     text-decoration:none; */
+/*     font-family:Tahoma; */
+/*     font-size:11px; */
+    font-weight:bold; 
+    color:black;
+    background-color:#eee;
+    border:1px solid #e1e1e1;
+/*     padding:5px 8px; */
+/*     line-height:22px; */
+/*     -webkit-border-radius:2px; */
+/*     border-radius:2px; */
+}
+/* .btn_up_layer {position:absolute;top:0;right:10px;display:none;padding:5px 10px;z-index:1; } */
+/* .btn_down_layer {position:absolute;top:0;right:10px;display:none;padding:5px 10px;z-index:1; } */
 </style>
 <script>
 /* 위로
 스크롤이 특정 위치로 이동하면 위로버튼이 나타난다.
 위로버튼을 클릭하면 상단으로 이동
 */
-function btn_mv_up(oj) {
- if(!oj) return false;
- var st = $(window).scrollTop();
- var h = $(window).height();
+// function btn_mv_up(oj) {
+//  if(!oj) return false;
+//  var st = $(window).scrollTop();
+//  var h = $(window).height();
  
- $(oj).stop().hide().css('top',h + st - 90);    // 스크롤 이동에 따른 위로버튼의 위치 이동
- if(st > 200) { $(oj).fadeIn(); }    // 위로버튼을 보여주는 위치 지정
- else if(st < 200) { $(oj).stop().fadeOut(); }    // 위로버튼을 숨기는 위치 지정
-}
+//  $(oj).stop().hide().css('top',h + st - 90);    // 스크롤 이동에 따른 위로버튼의 위치 이동
+//  if(st > 200) { $(oj).fadeIn(); }    // 위로버튼을 보여주는 위치 지정
+//  else if(st < 200) { $(oj).stop().fadeOut(); }    // 위로버튼을 숨기는 위치 지정
+// }
 
-// function btn_mv_down(oj) {
-// 	 if(!oj) return false;
-// 	 var st = $(window).scrollTop();
-// 	 var h = $(window).height();
+// // function btn_mv_down(oj) {
+// // 	 if(!oj) return false;
+// // 	 var st = $(window).scrollTop();
+// // 	 var h = $(window).height();
 	 
-// 	 $(oj).stop().hide().css('top',h + st - 50);    // 스크롤 이동에 따른 위로버튼의 위치 이동
-// 	 if(st > 200) { $(oj).fadeIn(); }    // 위로버튼을 보여주는 위치 지정
-// 	 else if(st < 200) { $(oj).stop().fadeOut(); }    // 위로버튼을 숨기는 위치 지정
-// 	}
+// // 	 $(oj).stop().hide().css('top',h + st - 50);    // 스크롤 이동에 따른 위로버튼의 위치 이동
+// // 	 if(st > 200) { $(oj).fadeIn(); }    // 위로버튼을 보여주는 위치 지정
+// // 	 else if(st < 200) { $(oj).stop().fadeOut(); }    // 위로버튼을 숨기는 위치 지정
+// // 	}
 
-// 위로 버튼
- $(document).scroll(function() {
-  btn_mv_up('.btn_up_layer');
-//   btn_mv_down('.btn_down_layer');
- });
+// // 위로 버튼
+//  $(document).scroll(function() {
+//   btn_mv_up('.btn_up_layer');
+// //   btn_mv_down('.btn_down_layer');
+//  });
 
- $(function(){
-	 $(".btn_up_layer").click(function() {
-	 	$("html, body").animate({scrollTop:0}, 'slow');
-	 });
-
-// 	 $(".btn_down_layer").click(function() {
-// 		 	$("html, body").animate({scrollTop:($(document).height() - $(window).height() - $(window).scrollTop())}, 'slow');
+//  $(function(){
+// 	 $(".btn_up_layer").click(function() {
+// 	 	$("html, body").animate({scrollTop:0}, 'slow');
 // 	 });
- });
+
+// // 	 $(".btn_down_layer").click(function() {
+// // 		 	$("html, body").animate({scrollTop:($(document).height() - $(window).height() - $(window).scrollTop())}, 'slow');
+// // 	 });
+//  });
 </script>
 </head>
 <body>
@@ -72,8 +90,9 @@ function btn_mv_up(oj) {
 				<tiles:insertAttribute name="quickBoardList"/>
 			</div>	
 		</div>
-		<button type="button" class="btn_up_layer btn btn-default">∧</button>
+<!-- 		<button type="button" class="btn_up_layer btn btn-default">&nbsp;top&nbsp;</button> -->
 <!-- 		<button type="button" class="btn_down_layer btn btn-primary">∨</button> -->
+		<a class="go_to_top btn" href="#" title="go to top of page">Top</a>
 	</div>	
 
 	<tiles:insertAttribute name="footer"/>

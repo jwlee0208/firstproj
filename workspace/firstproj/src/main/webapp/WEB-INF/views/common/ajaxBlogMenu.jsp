@@ -43,40 +43,20 @@
 		          	</c:if>		        
 <%-- 				<li <c:if test="${param.menuId eq 7}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goBoardConfig();">게시판 설정</a></li> --%>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-				<form class="navbar-form" role="search">&nbsp;&nbsp;
-		<c:choose>
-			<c:when test="${null eq userInfo}">
-					<a onclick="javascript:goRegist(6);" 	class="btn btn-primary"><tag:message code="signup"/></a>
-					<a onclick="javascript:goLogin(7);" 	class="btn btn-default"><tag:message code="signin"/></a>
-			</c:when>	
-			<c:otherwise>
-					<span style="color: white;">Welcome</span> <a href="#" class="navbar-link">"${userInfo.userNm}"</a>
-			        <a onclick="javascript:logout();"		class="btn btn-default"><tag:message code="logout"/></a>			
-			</c:otherwise>
-	
-		</c:choose>	
-				</form>				
-				</li>
+			<c:if test="${null eq userInfo}">
+			<p class="navbar-text navbar-right">
+				<a onclick="javascript:goRegist(6);" 	class="btn btn-primary"><tag:message code="signup"/></a>
+				<a onclick="javascript:goLogin(7);" 	class="btn btn-default"><tag:message code="signin"/></a>
+			</p>
+			</c:if>	
+			<c:if test="${null ne userInfo}">
+			<p class="navbar-text navbar-right"><span style="color: white;">Welcome</span> <a href="#" class="navbar-link">"${userInfo.userNm}"</a>&nbsp;<a onclick="javascript:logout();"		class="btn btn-default"><tag:message code="logout"/></a></p>
+			</c:if>
+
 <!-- 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> -->
 <%-- 				<li <c:if test="${param.menuId eq 4}">class="active"</c:if>><a href="javascript:void(0);">Site Map</a></li> --%>
 <!-- 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> -->
-			</ul>
+			
 		</div>
-
-<!-- 			<form class="navbar-form navbar-right" role="search"> -->
-<%-- 	<c:choose> --%>
-<%-- 		<c:when test="${null eq userInfo}"> --%>
-<%-- 			<button type="button" class="btn btn-primary" onclick="javascript:goRegist(6);"><tag:message code="signup"/></button> --%>
-<%-- 			<a onclick="javascript:goLogin(7);" class="btn btn-default"><tag:message code="signin"/></a> --%>
-<%-- 		</c:when>	 --%>
-<%-- 		<c:otherwise> --%>
-<%-- 			<span style="color: white;">Welcome</span> <a href="#" class="navbar-link">"${userInfo.userNm}"</a> --%>
-<%-- 	        <button type="button" class="btn btn-default" onclick="javascript:logout();"><tag:message code="logout"/></button>				 --%>
-<%-- 		</c:otherwise> --%>
-
-<%-- 	</c:choose>	 --%>
-<!-- 			</form>				 -->
 	</div>
 </nav>	

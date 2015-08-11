@@ -20,7 +20,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		    </button>
-    		<a class="navbar-brand" href="javascript:;" onclick="javascript:goHome();"><span style="color:white; font-size: 25px; font-weight: bold;">L</span>inked<span style="color:white; font-size: 25px; font-weight: bold;">N</span>est - <span style="color:white; font-size: 15px;">Checkout future's MVP</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+    		<a class="navbar-brand" href="javascript:;" onclick="javascript:goHome();"><span style="color:white; font-size: 25px; font-weight: bold;">L</span>inked<span style="color:white; font-size: 25px; font-weight: bold;">N</span>est - <span style="color:white; font-size: 15px;">Checkout future's MVP</span>&nbsp;</a>
     	</div>
 		<div class="collapse navbar-collapse" id="nav-collapse-player-menu-list">
 			<ul class="nav navbar-nav">
@@ -34,22 +34,15 @@
 <!-- 		        	<a href="javascript:;" onclick="javascript:alert('준비중입니다.');" >트라이아웃 정보</a> -->
 <!-- 		        </li>				 -->
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-				<form class="navbar-form" role="search">&nbsp;&nbsp;
-		<c:choose>
-			<c:when test="${null eq userInfo}">
+			<c:if test="${null eq userInfo}">
+			<p class="navbar-text navbar-right">
 				<a onclick="javascript:goRegist(6);" 	class="btn btn-primary"><tag:message code="signup"/></a>
 				<a onclick="javascript:goLogin(7);" 	class="btn btn-default"><tag:message code="signin"/></a>
-			</c:when>	
-			<c:otherwise>
-				<span style="color: white;">Welcome</span> <a href="#" class="navbar-link">"${userInfo.userNm}"</a>
-		        <a onclick="javascript:logout();"		 class="btn btn-default"><tag:message code="logout"/></a>				
-			</c:otherwise>
-		</c:choose>	
-				</form>
-				</li>							
-			</ul>
+			</p>
+			</c:if>	
+			<c:if test="${null ne userInfo}">
+			<p class="navbar-text navbar-right"><span style="color: white;">Welcome</span> <a href="#" class="navbar-link">"${userInfo.userNm}"</a>&nbsp;<a onclick="javascript:logout();"		class="btn btn-default"><tag:message code="logout"/></a></p>
+			</c:if>
 		</div>
 	</div>
 </nav>	

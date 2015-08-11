@@ -4,10 +4,11 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="expires" 	content="-1" >
-<meta name="description" 	content="LinkedNest's Common Page">
-<meta name="keywords" 		content="common page">
-<meta name="viewport" 		content="width=device-width, initial-scale=1.0">
+<meta http-equiv="expires" 				content="-1" >
+<meta name="description" 				content="LinkedNest's Common Page">
+<meta name="keywords" 					content="common page">
+<meta name="viewport" 					content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" 	content="7UeiOduowaVDwAs8XpEDd9CCnyDQr6I2npw9k8guOCc" />
 <link rel="icon" 			href="/img/common/favicon.ico">
 <title>LinkedNest - Link Between Player With Club</title>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>

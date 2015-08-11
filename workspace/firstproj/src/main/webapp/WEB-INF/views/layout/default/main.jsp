@@ -4,10 +4,11 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" 	content="IE=Edge" />
-<meta http-equiv="Pragma" 			content="no-cache">
-<meta http-equiv="expires" 			content="-1" >
-<meta name="viewport" 				content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" 		content="IE=Edge" />
+<meta http-equiv="Pragma" 				content="no-cache">
+<meta http-equiv="expires" 				content="-1" >
+<meta name="viewport" 					content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" 	content="7UeiOduowaVDwAs8XpEDd9CCnyDQr6I2npw9k8guOCc" />
 <link rel="icon" href="/img/common/favicon.ico">
 <title>LinkedNest - Link Between Player With Club</title>
 
