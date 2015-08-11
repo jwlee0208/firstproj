@@ -18,8 +18,9 @@
 .go_to_top {
     display:scroll;
     position:fixed;
-    bottom:15px;
+    bottom:60px;
     right:15px;
+    width:70px;
 /*     text-decoration:none; */
 /*     font-family:Tahoma; */
 /*     font-size:11px; */
@@ -32,6 +33,18 @@
 /*     -webkit-border-radius:2px; */
 /*     border-radius:2px; */
 }
+.go_to_down {
+    display:scroll;
+    position:fixed;
+    bottom:15px;
+    right:15px;
+    width:70px;
+    font-weight:bold; 
+    color:black;
+    background-color:#eee;
+    border:1px solid #e1e1e1;
+}
+
 /* .btn_up_layer {position:absolute;top:0;right:10px;display:none;padding:5px 10px;z-index:1; } */
 /* .btn_down_layer {position:absolute;top:0;right:10px;display:none;padding:5px 10px;z-index:1; } */
 </style>
@@ -93,8 +106,10 @@
 <!-- 		<button type="button" class="btn_up_layer btn btn-default">&nbsp;top&nbsp;</button> -->
 <!-- 		<button type="button" class="btn_down_layer btn btn-primary">∨</button> -->
 		<a class="go_to_top btn" href="#" title="go to top of page">Top</a>
+		<a class="go_to_down btn" href="#scrollDown" title="go to down of page">Down</a>
 	</div>	
 
+	<div id="scrollDown"></div>
 	<tiles:insertAttribute name="footer"/>
 </body>
 
