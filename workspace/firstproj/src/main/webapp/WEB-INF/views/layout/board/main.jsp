@@ -9,7 +9,7 @@
 <meta http-equiv="expires" 				content="-1" >
 <meta name="viewport" 					content="width=device-width, initial-scale=1">
 <meta name="google-site-verification" 	content="7UeiOduowaVDwAs8XpEDd9CCnyDQr6I2npw9k8guOCc" />
-<link rel="icon" href="/img/common/favicon.ico">
+<link rel="icon" href="${pageContext.request.contextPath}/img/common/favicon.ico">
 <title>Developer's Blog - Nevertheless Keep Going</title>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/common.js"></script>
@@ -21,17 +21,10 @@
     bottom:60px;
     right:15px;
     width:70px;
-/*     text-decoration:none; */
-/*     font-family:Tahoma; */
-/*     font-size:11px; */
     font-weight:bold; 
     color:black;
     background-color:#eee;
     border:1px solid #e1e1e1;
-/*     padding:5px 8px; */
-/*     line-height:22px; */
-/*     -webkit-border-radius:2px; */
-/*     border-radius:2px; */
 }
 .go_to_down {
     display:scroll;

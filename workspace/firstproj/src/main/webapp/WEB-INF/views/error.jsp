@@ -16,8 +16,21 @@
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="page-header">
-  <h1>&nbsp;&nbsp;Error가 발생했습니다.&nbsp;&nbsp;<small>관리자 어디갔니?</small></h1>
-</div>
+	<div class="container">
+		<div class="row">
+			<div class="page-header">
+			  <h1>Error Occurred</h1>
+			</div>
+		</div>
+		<h1 style="text-align:center;"><small>Error가 발생했습니다.</small></h1>
+		<div class="well well-lg">
+			<h4>그러나 당황하지 마thㅔ요.</h4>
+			<br/>
+			<h4><a href="javascript:history.go(-1);">이전으로 돌아가거나</a></h4>
+			<br/>
+			<h4><a href="/">처음부터 다시 시작</a>할 수 있습니다.</h4>
+			<br/>
+		</div>
+	</div>
 </body>
 </html>

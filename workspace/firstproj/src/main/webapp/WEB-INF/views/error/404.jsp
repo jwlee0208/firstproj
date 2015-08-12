@@ -16,8 +16,23 @@
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="page-header">
-  <h1>&nbsp;&nbsp;404 Page Not Found&nbsp;&nbsp;<small>페이지를 찾을 수 없습니다.</small></h1>
-</div>
+	<div class="container">
+		<div class="row">
+			<div class="page-header">
+			  <h1>404 Page Not Found</h1>
+			  
+			</div>
+		</div>
+		<h1 style="text-align:center;"><small>페이지를 찾을 수 없습니다.</small></h1>
+		<div class="well well-lg">
+			<h4>하지만</h4>
+			<br/>
+			<h4><a href="javascript:history.go(-1);">이전으로 돌아가거나</a></h4>
+			<br/>
+			<h4><a href="/">처음부터 다시 시작</a>할 수 있습니다.</h4>
+			<br/>
+			<h4>무엇을 선택하든 실패는 아닐 것입니다.</h4>
+		</div>
+	</div>
 </body>
 </html>
