@@ -22,14 +22,27 @@ function logout(){
 	location.href = "/logout";
 }
 
-function goPlayer(menuId){
-	var baseUrl = "/player/playerPortal";
+function goPortal(menuId, catId){
+	var baseUrl = "";
+	/*
 	if(menuId == 6){
 		baseUrl = "/player/playerPortal";
 	}
+	*/
+	if(catId == 1){
+		baseUrl = "/player/playerPortal";
+	}else{
+		baseUrl = "/team/teamPortal";
+	}
+	
 	baseUrl += "/" + menuId;
 	location.href = baseUrl; 
-//		"/player/attrElemMapList";
+}
+
+function goClub(menuId){
+	
+	baseUrl += "/" + menuId;
+	location.href = baseUrl; 	
 }
 
 function goBoardConfig(){

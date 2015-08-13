@@ -54,11 +54,11 @@
 				<input type="hidden" 	id="searchCondition" 	name="searchCondition" value="userName"/>
 				<input type="hidden" 	id="searchText" 		name="searchText" />
 				<input type="text" 		id="searchTextStr" 		name="searchTextStr" class="form-control ui-autocomplete-input" placeholder="Try to search using keywords. And push enter key."/>
-					
+				<input type="hidden"	id="parentCatId"		name="categoryInfo.parentCatId" value="${searchPlayerInfo.categoryInfo.parentCatId}"/>	
 			</div>
-			
+			<!-- 			
 			<div class="row"  style="padding-top: 10px;">
-					<!-- 첫번째 카테고리 -->
+					첫번째 카테고리
 					<select id="parentCatId" name="categoryInfo.parentCatId" onchange="javascript:setChildCategory();" class="form-control">
 						<option value="-1"><tag:message code="text.select.1step.category"/></option>
 						<c:forEach var="cat" items="${catList}">
@@ -66,6 +66,7 @@
 						</c:forEach>
 					</select>
 			</div>
+			-->
 			<div class="row"  style="padding-top: 10px;">
 					<!-- 두번째 카테고리 -->
 					<select id="catId" name="categoryInfo.catId" onchange="javascript:setAttrList();" class="form-control">

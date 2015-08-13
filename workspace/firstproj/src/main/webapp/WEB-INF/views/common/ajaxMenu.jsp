@@ -25,24 +25,35 @@
 		<div class="collapse navbar-collapse" id="nav-collapse-player-menu-list">
 			<ul class="nav navbar-nav">
 		        <li>
-		        	<a href="javascript:;" onclick="javascript:goPlayer(6);" ><tag:message code="menu.player"/></a>
+		        	<a href="javascript:;" onclick="javascript:goPortal(6, 1);" ><tag:message code="menu.player"/></a>
 		        </li>
-<!-- 		        <li> -->
-<!-- 		        	<a href="javascript:;" onclick="javascript:alert('준비중입니다.');" >구단 정보</a> -->
-<!-- 		        </li>				 -->
+		        <li>
+		        	<a href="javascript:;" onclick="javascript:goPortal(6, 5);" ><tag:message code="menu.club"/></a>
+		        </li>				
 <!-- 		        <li> -->
 <!-- 		        	<a href="javascript:;" onclick="javascript:alert('준비중입니다.');" >트라이아웃 정보</a> -->
 <!-- 		        </li>				 -->
 			</ul>
+			<form class="navbar-form navbar-right" role="search">
 			<c:if test="${null eq userInfo}">
-			<p class="navbar-text navbar-right">
 				<a onclick="javascript:goRegist(6);" 	class="btn btn-primary"><tag:message code="signup"/></a>
 				<a onclick="javascript:goLogin(7);" 	class="btn btn-default"><tag:message code="signin"/></a>
-			</p>
 			</c:if>	
 			<c:if test="${null ne userInfo}">
-			<p class="navbar-text navbar-right"><span style="color: white;">Welcome</span> <a href="#" class="navbar-link">"${userInfo.userNm}"</a>&nbsp;<a onclick="javascript:logout();"		class="btn btn-default"><tag:message code="logout"/></a></p>
+				<span style="color: white;">Welcome</span><a href="#" class="navbar-link">"${userInfo.userNm}"</a>&nbsp;<a onclick="javascript:logout();"		class="btn btn-default"><tag:message code="logout"/></a>
 			</c:if>
+            
+          	</form>
+			<!-- 
+			<c:if test="${null eq userInfo}">
+				<li><button onclick="javascript:goRegist(6);" 	class="btn btn-primary"><tag:message code="signup"/></button></li>
+				<li><a onclick="javascript:goLogin(7);" 	class="btn btn-default"><tag:message code="signin"/></a></li>
+			</c:if>	
+			<c:if test="${null ne userInfo}">
+			<li><span style="color: white;">Welcome</span><a href="#" class="navbar-link">"${userInfo.userNm}"</a>&nbsp;<a onclick="javascript:logout();"		class="btn btn-default"><tag:message code="logout"/></a></li>
+			</c:if>
+ 			-->
+	
 		</div>
 	</div>
 </nav>	

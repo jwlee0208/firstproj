@@ -2,8 +2,11 @@
 		$("input[name='goToRegist']").on("click", function() {
 			location.href = "/player/write";
 		});
-
+		
+		setChildCategory();
+		
 		loadPlayerList();
+		
 	});
 	
 	function loadPlayerList(){

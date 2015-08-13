@@ -42,7 +42,7 @@ import com.firstproj.player.service.PlayerServiceImpl;
 import com.firstproj.user.dto.UserDto;
 
 @Controller
-@RequestMapping(value = "/player")
+@RequestMapping(value = {"/player","/team"})
 public class PlayerController {
     	
     final Log log = LogFactory.getLog(this.getClass());
@@ -127,7 +127,7 @@ public class PlayerController {
         
         List<CategoryAttrDto> 	attrElementList = this.playerService.getAttrElementList(param);
         
-        System.out.println(attrElementList.size());
+//        System.out.println(attrElementList.size());
         
         jsonObj.put("catId"			 , catId);
         jsonObj.put("attrElementList", attrElementList);
@@ -274,11 +274,11 @@ public class PlayerController {
      */
     @RequestMapping(value="/attrElemMapList", method = {RequestMethod.GET, RequestMethod.POST})
     public String getCategoryAttrElemMapList(HttpServletRequest request, Model model, CategoryAttrElemMapDto categoryAttrElemMapDto, HttpSession session) throws Exception{
-        
+        /*
         System.out.println("attrElemId : " + request.getParameter("selectedAttrElemId"));
         System.out.println("attrId : " + request.getParameter("selectedAttrId"));
         System.out.println("dto attrElemId : " + categoryAttrElemMapDto.getAttrElemId());
-        
+        */
         model = this.getListCommonList(request, model, session, "attrElemMapList");
         
         return "player/attrElemMapList";
@@ -522,7 +522,7 @@ public class PlayerController {
     	return jsonObj;
     }
 
-    @RequestMapping("/playerPortal")
+    @RequestMapping(value={"/playerPortal","/teamPortal"})
     public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session){
         boolean isRegisted  = false;
         UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
@@ -538,7 +538,19 @@ public class PlayerController {
 
         searchPlayerDto.setListSize(3);
         searchPlayerDto.setPageSize(10);
-
+        
+        String requestUri = request.getRequestURI();
+        //System.out.println("referer : " + requestUri);
+        
+        CategoryDto categoryInfo = new CategoryDto();
+        
+        if(requestUri.indexOf("playerPortal") > 0){
+            categoryInfo.setParentCatId(1);
+        }else{
+            categoryInfo.setParentCatId(5);
+        }
+        searchPlayerDto.setCategoryInfo(categoryInfo);
+        
         // 카테고리 목록 조회하는 부분
         CategoryDto             categoryObj = null;
         List<CategoryDto>       catList     = null;
@@ -556,7 +568,7 @@ public class PlayerController {
 
     }
     
-    @RequestMapping("/playerPortal/{menuId}")
+    @RequestMapping(value={"/playerPortal/{menuId}","/teamPortal/{menuId}"})
     public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session, @PathVariable int menuId){
     	return this.getPlayerPortal(request, model, searchPlayerDto, session);
     }
