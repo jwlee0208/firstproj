@@ -29,5 +29,6 @@
 <!-- 	  &nbsp;&nbsp;&nbsp;<a href="http://blog.naver.com/jwlee0208" target="_blank" class="btn btn-primary">Blog</a> -->
 	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/aboutUs/5">contact</a>&nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/">LinkedNest</a></p>
 	  <p>Copyrightⓒ2014 All right reserved by leejinwon</p>
+      <p>|&nbsp;<a href="/common/privateRule" class="btn btn_link" target="_blank">개인정보취급방침</a>&nbsp;|&nbsp;<a href="/common/useRule" class="btn btn_link" target="_blank">이용약관</a>&nbsp;|</p>
       <p><a href="#">Back to top</a></p>
 </footer>

@@ -43,4 +43,14 @@ public class CommonController {
         return sb.toString();
     }
 
+    @RequestMapping(value = "/privateRule")
+    public String getPrivateRule() throws Exception{
+        return "common/privateRule";
+    }
+    
+    @RequestMapping(value = "/useRule")
+    public String getUseRule() throws Exception{
+        return "common/useRule";
+    }
+
 }
