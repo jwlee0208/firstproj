@@ -525,11 +525,13 @@ public class PlayerController {
     @RequestMapping(value={"/playerPortal","/teamPortal"})
     public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session){
         boolean isRegisted  = false;
+        boolean isLogon     = false; 
         UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
         
         if(sessionInfo != null){
             try {
                 isRegisted = this.playerService.getIsRegistedPlayer(sessionInfo);
+                isLogon    = true;
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -563,6 +565,9 @@ public class PlayerController {
             model.addAttribute("searchPlayerInfo"   , searchPlayerDto);
             model.addAttribute("catList"            , catList);    
         }
+        
+        model.addAttribute("isRegisted" , isRegisted);
+        model.addAttribute("isLogon"    , isLogon);
         
         return "player/playerPortal";
 
