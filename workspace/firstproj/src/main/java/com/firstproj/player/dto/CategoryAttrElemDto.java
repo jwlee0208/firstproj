@@ -142,6 +142,14 @@ public class CategoryAttrElemDto
             attrElemNameStr = "우익수";
         }else if(this.attrElemId == 24){
             attrElemNameStr = "양타";
+        }else if(this.attrElemId == 25){
+            attrElemNameStr = "아시아";
+        }else if(this.attrElemId == 26){
+            attrElemNameStr = "북미";
+        }else if(this.attrElemId == 27){
+            attrElemNameStr = "남미";
+        }else if(this.attrElemId == 28){
+            attrElemNameStr = "유럽";
         }else{
             attrElemNameStr = "기타";
         }

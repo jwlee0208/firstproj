@@ -94,6 +94,10 @@ public class CategoryDto
             categoryNameStr = "투수";
         }else if(this.catId == 7){
             categoryNameStr = "타자";
+        }else if(this.catId == 8){
+            categoryNameStr = "프로";
+        }else if(this.catId == 9){
+            categoryNameStr = "세미프로";
         }else{
             categoryNameStr = "";
         }
