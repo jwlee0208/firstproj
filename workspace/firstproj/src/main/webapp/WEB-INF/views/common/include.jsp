@@ -12,6 +12,9 @@
 
 <link 	rel="stylesheet" 			type="text/css" href="${pageContext.request.contextPath}/css/base.css"/>
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/css/jquery/jquery-ui.min.css">
+
+<!--[if (gte IE 6)&(lte IE 8)]><script type="text/javascript" src="${pageContext.request.contextPath}/js/selectivizr-min.js"></script><![endif]-->
+
 <!-- angular js -->
 <%-- <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/angular.min.js"></script> --%>
 
