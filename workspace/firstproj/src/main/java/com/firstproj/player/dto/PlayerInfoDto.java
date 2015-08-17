@@ -144,6 +144,10 @@ public class PlayerInfoDto implements Serializable
             categoryNameStr = "투수";
         }else if(this.catId2 == 7){
             categoryNameStr = "타자";
+        }else if(this.catId2 == 8){
+            categoryNameStr = "프로";
+        }else if(this.catId2 == 9){
+            categoryNameStr = "세미프로";
         }
         
         return categoryNameStr;

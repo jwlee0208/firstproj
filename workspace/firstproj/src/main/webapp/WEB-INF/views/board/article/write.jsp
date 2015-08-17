@@ -62,11 +62,11 @@
 					</tr>
 					<tr>
 						<th><div class="form-group">제목</div></th>
-						<td><div class="form-group"><input type="text" class="form-control" id="title" name="title" value="${articleInfo.title}"/></div></td>
+						<td><div class="form-group"><input type="text" class="form-control" id="title" name="title" value='<c:out value="${articleInfo.title}"/>'/></div></td>
 					</tr>
 					<tr>
 						<th><div class="form-group">내용</div></th>
-						<td><div class="form-group"><textarea class="form-control tinymce" id="content" name="content">${articleInfo.content}</textarea></div></td>				
+						<td><div class="form-group"><textarea class="form-control tinymce" id="content" name="content"><c:out value="${articleInfo.content}"/></textarea></div></td>				
 					</tr>
 					<tr>
 						<td><div class="form-group">썸네일 업로드</div></td>

@@ -36,7 +36,7 @@ import com.firstproj.user.dto.UserDto;
 public class BoardArticleController {
 
 	public static final int 	DEFAULT_PAGE_NO 				= 1;
-	public static final int 	DEFAULT_PAGE_SIZE 				= 10;
+	public static final int 	DEFAULT_PAGE_SIZE 				= 3;
 
 	// Related to image upload
 	public static final long 	MAX_UPLOAD_FILE_SIZE 			= 20480000;
@@ -143,6 +143,8 @@ public class BoardArticleController {
 		int    pageNo          = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
 
 		int    listRowCnt      = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
+		
+		int    pageSize        = (request.getParameter("pageSize") != null) ? Integer.parseInt(request.getParameter("pageSize")) : DEFAULT_PAGE_SIZE;
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// searching condition setting
@@ -198,7 +200,7 @@ public class BoardArticleController {
 			}
 		}
 		
-		PagedList pagedList = new PagedList(pagedArticleList, pageNo, 10, totalListCnt, startRow, endRow, listRowCnt);
+		PagedList pagedList = new PagedList(pagedArticleList, pageNo, pageSize, totalListCnt, startRow, endRow, listRowCnt);
 		
 //		System.out.println("pagedList Data : " + pagedList.toString());		
 		

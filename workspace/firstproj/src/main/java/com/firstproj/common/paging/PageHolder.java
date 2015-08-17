@@ -3,7 +3,7 @@ package com.firstproj.common.paging;
 public class PageHolder {
 
     public static int DEFAULT_LISTSIZE = 9;
-    public static int DEFAULT_PAGESIZE = 10;
+    public static int DEFAULT_PAGESIZE = 3;
     private int listSize = DEFAULT_LISTSIZE;
     private int pageSize = DEFAULT_PAGESIZE;
     private final long totalRows;

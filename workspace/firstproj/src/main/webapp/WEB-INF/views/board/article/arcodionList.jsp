@@ -59,7 +59,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse${index.count}">${contentInfo.title} </a>
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapse${index.count}"><c:out value="${contentInfo.title}"/> </a>
 					</h4>
 				</div>
 				<div id="collapse${index.count}" class="collapse in">
@@ -67,8 +67,8 @@
 						<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
 						${contentInfo.content} <br/><br/>
 						<div class="row" style="float: right; padding-right:10px;">
-							<div class="btn btn-success" >${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div>
-							<div class="btn btn-primary" onclick="share('fb', '${contentInfo.articleId}');">Facebook 공유</div>
+							<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div>
+							<div class="btn btn-primary" onclick="share('fb', '${contentInfo.articleId}');" title="Sharing Article To Facebook">f</div>
 						</div>
 						
 					</div>

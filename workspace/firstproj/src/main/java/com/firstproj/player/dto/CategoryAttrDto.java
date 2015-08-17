@@ -96,6 +96,8 @@ public class CategoryAttrDto extends CategoryDto implements Serializable{
             attrNameStr = "타격";
         }else if(this.attrId == 4){
             attrNameStr = "포지션";
+        }else if(this.attrId == 7 || this.attrId == 8){
+            attrNameStr = "지역";
         }else{
             attrNameStr = "기타";
         }
