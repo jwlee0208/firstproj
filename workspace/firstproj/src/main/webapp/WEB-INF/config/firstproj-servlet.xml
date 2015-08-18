@@ -198,6 +198,11 @@
 			<mapping path="/**/*"/>
 			<beans:bean class="com.firstproj.interceptor.BaseInterceptor" />
 		</interceptor>
+		<interceptor>
+			<mapping path="/board/article/**"/>
+			<beans:bean class="com.firstproj.interceptor.BoardArticleInterceptor" />
+		</interceptor>
+		
 <!-- 		<interceptor>   -->
 <!-- 			<mapping path="/**/*" /> -->
 <!-- 			<exclude-mapping path="/img/**"/> -->
@@ -220,7 +225,7 @@
 	 </interceptors>    
     
     
-    <!-- 다국어 처리 -->
+    <!-- 다국어 처리 관련 -->
     <beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
     	<beans:property name="basename" value="/WEB-INF/messages/Locale"/>
     	<beans:property name="defaultEncoding" value="UTF-8"/>
@@ -235,6 +240,10 @@
     <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
 <!--     <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver"/> -->
     
+    <!-- // 다국어 처리 관련 -->
+    
+    
+    <!-- 파일 업로드 관련 -->
 	<beans:bean id="fileUpload" class="com.firstproj.common.util.FileUpload">
 		<beans:property name="destinationUrl" value="/uploadfiles" />
 		<beans:constructor-arg>
@@ -249,5 +258,5 @@
 		<beans:property name="maxUploadSize" value="20971520" />	 <!-- 20 M -->
 		<beans:property name="defaultEncoding" value="UTF-8" />
 	</beans:bean>
-    
+    <!-- // 파일 업로드 관련 -->
 </beans:beans>

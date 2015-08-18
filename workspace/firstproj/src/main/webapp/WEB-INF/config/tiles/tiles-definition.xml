@@ -10,6 +10,7 @@
 <tiles-definitions>
      <definition name="board/article/*" template="/WEB-INF/views/layout/board/main.jsp">
           <put-attribute name="title" 			value="firstproj" type="string" />
+          <put-attribute name="metatag" 		value="/WEB-INF/views/layout/board/metatag.jsp" />
           <put-attribute name="header" 			value="/WEB-INF/views/layout/board/header.jsp" />
           <put-attribute name="menu" 			value="/WEB-INF/views/layout/board/menu.jsp" />
           <put-attribute name="body" 			value="/WEB-INF/views/board/article/{1}.jsp" />

@@ -30,7 +30,7 @@
 				<tr>
 					<td>
 						<!-- 파일명 출력 -->
-						<input type="file" name="imageFile" id="imageFile" class="form-control"/>					
+						<input type="file" name="imageFile" id="imageFile" class="form-control" accept="image/*"/>					
 					</td>
 					<td>
 						<input type="button" class="btn btn-default" name="uploadBtn" id="uploadBtn" value="파일 업로드" onclick="fileUpload()"/>					

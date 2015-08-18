@@ -6,14 +6,8 @@
 <!--[if IE 9 ]>		 <html class="no-js ie ie9 lte9>" lang="ko-KR"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="ko-KR"> <!--<![endif]-->
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" 		content="IE=Edge" />
-<meta http-equiv="Pragma" 				content="no-cache">
-<meta http-equiv="expires" 				content="-1" >
-<meta name="viewport" 					content="width=device-width, initial-scale=1">
-<meta name="google-site-verification" 	content="7UeiOduowaVDwAs8XpEDd9CCnyDQr6I2npw9k8guOCc" />
 <link rel="icon" href="${pageContext.request.contextPath}/img/common/favicon.ico">
-<title>Developer's Blog - Nevertheless Keep Going</title>
+<tiles:insertAttribute name="metatag"/>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/common.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/offcanvas.css">

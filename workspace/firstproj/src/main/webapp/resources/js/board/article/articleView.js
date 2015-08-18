@@ -1,6 +1,7 @@
 var frm = $("#viewFrm");
 
-$(document).on("ready", function(){
+//$(document).on("ready", function(){
+$(function(){
 	/**
 	 * 게시글 목록으로 이동
 	 */
@@ -25,7 +26,8 @@ $(document).on("ready", function(){
 	 * 게시글 수정
 	 */
 	$("#goToModify").on("click", function(){
-		location.href = "/board/article/modify?selectedArticleId=" + $("#selectedArticleId").val() +"&selectedBoardId=" + $("#boardId").val();
+//		location.href = "/board/article/modify?selectedArticleId=" + $("#selectedArticleId").val() +"&selectedBoardId=" + $("#boardId").val();
+		location.href = "/board/article/modify/" + $("#selectedArticleId").val() +"/" + $("#boardId").val();
 	});
 	/**
 	 * 게시글 삭제
@@ -38,7 +40,8 @@ $(document).on("ready", function(){
 			dataType : 'json',
 			success : function(data){
 				if(data.result){
-					location.href = "/board/article/list.page?boardId="+$("#boardId").val();
+//					location.href = "/board/article/list.page?boardId="+$("#boardId").val();
+					location.href = "/board/article/list/" + $("#boardId").val() + "/" + $("#boardId").val();
 				}else{
 					alert(data.validate);
 				}
@@ -47,8 +50,7 @@ $(document).on("ready", function(){
 				console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
 			}
 		});
-	});
-	
+	});	
 });
 
 //게시글 조회

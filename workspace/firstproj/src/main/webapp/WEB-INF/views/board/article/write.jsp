@@ -103,7 +103,7 @@
 							</c:if>
 							<div class="thumbImg set">
 								<div class="row">
-									<div class="col-md-4"><input type="file" id="thumbImg" name="thumbImg"></div>
+									<div class="col-md-4"><input type="file" id="thumbImg" name="thumbImg" accept="image/*"></div>
 									<div class="col-md-8">썸네일 사이즈 설정 : 
 										<div class="radio">
 										  <label>

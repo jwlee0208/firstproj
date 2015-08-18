@@ -17,23 +17,29 @@
 		<c:set var="content" value="n/a"/>
 	</c:otherwise>
 </c:choose>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" 	content="IE=Edge" />
-<meta name="viewport" 				content="width=device-width, initial-scale=1">
-<meta name="title" 					content="${contentInfo.title}"/>
-<meta name="author" 				content="${contentInfo.authorNm}"/>
-<meta name="description" 			content="<c:out value='${content}'/>"/>
-<meta name="robots" 				content="index,follow" /> 
-<meta name="keywords" 				content="blog, baseball, link, player, profile"/>
+<!-- <meta charset="UTF-8"> -->
+<!-- <meta http-equiv="X-UA-Compatible" 	content="IE=Edge" /> -->
+<!-- <meta name="viewport" 				content="width=device-width, initial-scale=1"> -->
+<%-- <meta name="title" 					content=<c:out value="${contentInfo.title}"/>/> --%>
+<%-- <meta name="author" 				content="${contentInfo.authorNm}"/> --%>
+<%-- <meta name="description" 			content="<c:out value='${content}'/>"/> --%>
+<!-- <meta name="robots" 				content="index,follow" />  -->
+<!-- <meta name="keywords" 				content="blog, baseball, link, player, profile"/> -->
 
-<meta property="fb:app_id" 			content="413877918810589" />
-<meta property="og:type" 			content="website" />
-<meta property="og:title" 			content="${contentInfo.title}" />
-<meta property="og:url" 			content="http://jwlee0208.cafe24.com/board/article/view/${contentInfo.articleId}" />
-<meta property="og:description" 	content="<c:out value='${content}'/>" />
-<meta property="og:image" 			content="http://jwlee0208.cdn3.cafe24.com${contentInfo.filePath}" />
+<!-- <meta property="fb:app_id" 			content="413877918810589" /> -->
+<!-- <meta property="og:type" 			content="website" /> -->
+<%-- <meta property="og:title" 			content=<c:out value="${contentInfo.title}"/> /> --%>
+<%-- <meta property="og:url" 			content="http://jwlee0208.cafe24.com/board/article/view/${contentInfo.articleId}" /> --%>
+<%-- <meta property="og:description" 	content="<c:out value='${content}'/>" /> --%>
+<%-- <meta property="og:image" 			content="http://jwlee0208.cdn3.cafe24.com${contentInfo.filePath}" /> --%>
 
-<title>${contentInfo.title}</title>
+<!-- <meta name="google-site-verification" 	content="7UeiOduowaVDwAs8XpEDd9CCnyDQr6I2npw9k8guOCc" /> -->
+
+<!-- <meta http-equiv="Pragma" 				content="no-cache"> -->
+<!-- <meta http-equiv="expires" 				content="-1" > -->
+
+
+<title><c:out value="${contentInfo.title}"/></title>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleView.js"></script>
 </head>
 <body>
@@ -128,14 +134,34 @@
 </div>
 </body>
 <script>
-
-$(document).ready(function() {
-	$("div img").addClass("media-object");
-	$("div img").attr("width", "95%");
-	$("div img").off("error");
-	$("div img").on("error", function(){
-		$(this).attr("src", '${pageContext.request.contextPath}/img/no_image.png');
+	$(document).on("ready", function(){
+		// Initiate Meta Tag's Data
+		initMetaData();
+		
+		// Check out noImage
+		chkNoImage();
 	});
-});
+	function initMetaData(){
+		/*
+		$("head meta[name=title]").attr("content", '${contentInfo.title}');	
+		$("head meta[name=description]").attr("content", '<c:out value="${content}"/>');
+		$("head meta[name=author]").attr("content", '${contentInfo.authorNm}');
+		$("title").text('${contentInfo.title}');
+		*/
+		$("#meta_title").attr("content", '${contentInfo.title}');	
+		$("#meta_desc").attr("content", '<c:out value="${content}"/>');
+		$("#meta_author").attr("content", '${contentInfo.authorNm}');
+		$("title").text('${contentInfo.title}');
+		
+	}
+	function chkNoImage(){
+		$("div img").addClass("media-object");
+		$("div img").attr("width", "95%");
+		$("div img").off("error");
+		$("div img").on("error", function(){
+			$(this).attr("src", '${pageContext.request.contextPath}/img/no_image.png');
+		});
+	}
 </script>
+
 </html>

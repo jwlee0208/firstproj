@@ -22,7 +22,7 @@
 							<th rowspan="2">파일업로드</th>
 							<td>
 								<p class="input_txt">
-									<input type="file" name="imageFile" id="imageFile" />
+									<input type="file" name="imageFile" id="imageFile" accept="image/*"/>
 									<input class="btn" type="button" name="uploadBtn" id="uploadBtn" value="파일 업로드" onclick="fileUpload()" />
 								</p>
 							</td>
