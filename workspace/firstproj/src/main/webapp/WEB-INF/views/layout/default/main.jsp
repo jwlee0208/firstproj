@@ -11,7 +11,7 @@
 <meta http-equiv="Pragma" 				content="no-cache">
 <meta http-equiv="expires" 				content="-1" >
 <meta name="viewport" 					content="width=device-width, initial-scale=1">
-<link rel="icon" href="/img/common/favicon.ico">
+<link rel="icon" href="/img/common/favicon_ln.ico">
 <title>LinkedNest - Link Between Player With Club</title>
 
 <%@ include file="/WEB-INF/views/common/include.jsp"%>

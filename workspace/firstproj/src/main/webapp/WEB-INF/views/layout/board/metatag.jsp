@@ -26,4 +26,4 @@
 <meta http-equiv="Pragma" 				content="no-cache">
 <meta http-equiv="expires" 				content="-1" >
 
-<title><c:out value="<c:out value='${title}'/>"/></title>
+<title><c:out value='${title}'/></title>

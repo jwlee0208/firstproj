@@ -9,6 +9,12 @@ function editorImgUploadComplete(fileStr){
 	  }
 }
 
-function share(type, articleId){
-	window.open("http://www.facebook.com/sharer/sharer.php?u=http://jwlee0208.cafe24.com/board/article/view/" + articleId);
+function share(type, articleId, content){
+	var url = "";
+	if(type == 'fb'){
+		url = "http://www.facebook.com/sharer/sharer.php?u=http://jwlee0208.cafe24.com/board/article/view/" + articleId;
+	}else if(type == 'tw'){
+		url = "https://twitter.com/intent/tweet?text=" + content + "&url=http://jwlee0208.cafe24.com/board/article/view/" + articleId;
+	}
+	window.open(url);
 }

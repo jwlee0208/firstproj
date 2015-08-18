@@ -96,12 +96,12 @@
 					</ul>	
 				</div>										
 			</c:if>
-				<div class="row" style="float: right; padding-right:10px;">
-					<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div><br/><br/>
-					<div class="btn btn-primary" onclick="share('fb','${contentInfo.articleId}');" title="Sharing Article To Facebook">f</div>
+				<div class="row" style="float: left; padding-left:10px;">
+					<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div><br/>
 				</div>			
 				<div class="row" style="float: right; padding-right:10px;">
-					
+					<div class="btn btn-primary" title="Sharing Article To Facebook" 	onclick="javascript:share('fb', '${contentInfo.articleId}', '');" >f</div>
+					<div class="btn btn-info" 	 title="Sharing Article To Twitter" 	onclick="javascript:share('tw', '${contentInfo.articleId}', '${contentInfo.title}');" >t</div>					
 				</div>
 			</div>	
 		</div>
