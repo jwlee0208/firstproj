@@ -48,3 +48,7 @@ function goClub(menuId){
 function goBoardConfig(){
 	location.href = "/board/list/7";
 }
+
+function goConfig(){
+	location.href = "/config/main"
+}

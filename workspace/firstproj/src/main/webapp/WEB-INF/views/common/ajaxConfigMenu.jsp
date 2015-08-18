@@ -1,0 +1,44 @@
+<%@page import="org.springframework.web.bind.annotation.SessionAttributes"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="tag" %>
+<%@ page session="false" contentType="text/html; charset=UTF-8"%>
+<%@ page import="com.firstproj.user.dto.UserDto"%>
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/config/config.js"></script>
+<%
+	UserDto userInfo = (UserDto)request.getSession().getAttribute("userInfo");
+%>
+<c:set var="userInfo" value="<%=userInfo%>"/>
+<c:if test="${null ne userInfo}">
+<nav class="navbar navbar-inverse" role="navigation">
+	<input type="hidden" id="menuId" name="menuId" value="${param.menuId}"/>
+    <div class="container-fluid">
+    	<!-- mobile menu list button -->   
+    	<div class="navbar-header">
+		    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse-player-menu-list" aria-expanded="false" aria-controls="nav-collapse-player-menu-list">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		    </button>
+    		<a class="navbar-brand" href="javascript:;"><span style="color:white; font-size: 25px; ">Configuration Page</span></a>
+    	</div>
+		<div class="collapse navbar-collapse" id="nav-collapse-player-menu-list">
+			<ul class="nav navbar-nav">
+		        <li class="dropdown">
+		        	<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">게시판 관리<span class="caret"></span></a>
+		        	<ul class="dropdown-menu" role="menu">
+		        		<li><a href="javascript:;" onclick="javascript:configBoard();">리스트 관리</a></li>
+		        		<li><a href="javascript:;" onclick="javascript:configBoardCategory();">카테고리 관리</a></li>
+		        	</ul>
+		        </li>
+<!-- 		        <li> -->
+<!-- 		        	<a href="javascript:;" onclick="javascript:configCategory();" >카테고리 관리</a> -->
+<!-- 		        </li>				 -->
+<!-- 		        <li> -->
+<!-- 		        	<a href="javascript:;" onclick="javascript:configPrivInfo();" >개인정보 관리</a> -->
+<!-- 		        </li> -->
+			</ul>
+		</div>
+	</div>
+</nav>
+</c:if>	

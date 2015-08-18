@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-<script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/boardView.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/config/boardView.js"></script>
 </head>
 <body>
 	<form id="viewFrm" name="viewForm" method="post">

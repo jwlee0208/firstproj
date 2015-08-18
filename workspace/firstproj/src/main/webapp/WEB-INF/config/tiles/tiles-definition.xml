@@ -18,6 +18,19 @@
           <put-attribute name="footer" 			value="/WEB-INF/views/layout/board/footer.jsp" />     
      </definition>
 
+     <definition name="config/*/*" template="/WEB-INF/views/layout/config/main.jsp">
+          <put-attribute name="title" 			value="firstproj" type="string" />
+          <put-attribute name="menu" 			value="/WEB-INF/views/layout/config/menu.jsp" />
+          <put-attribute name="body" 			value="/WEB-INF/views/config/{1}/{2}.jsp" />
+     </definition>
+
+     <definition name="config/*" template="/WEB-INF/views/layout/config/main.jsp">
+          <put-attribute name="title" 			value="firstproj" type="string" />
+          <put-attribute name="menu" 			value="/WEB-INF/views/layout/config/menu.jsp" />
+          <put-attribute name="body" 			value="/WEB-INF/views/config/{1}.jsp" />
+     </definition>
+
+
      <definition name="default" template="/WEB-INF/views/layout/default/main.jsp">
           <put-attribute name="title" 	value="firstproj" type="string" />
           <put-attribute name="header" 	value="/WEB-INF/views/layout/default/header.jsp" />

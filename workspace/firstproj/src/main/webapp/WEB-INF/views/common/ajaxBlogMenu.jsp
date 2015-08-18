@@ -51,7 +51,7 @@
 			
 			</c:if>	
 			<c:if test="${null ne userInfo}">
-			<span style="color: white;">Welcome</span> <a href="#" class="navbar-link">"${userInfo.userNm}"</a>&nbsp;<a onclick="javascript:logout();"		class="btn btn-default"><tag:message code="logout"/></a>
+			<span style="color: white;">Welcome</span> <a href="#" class="navbar-link" onclick="javascript:goConfig();">"${userInfo.userNm}"</a>&nbsp;<a onclick="javascript:logout();"		class="btn btn-default"><tag:message code="logout"/></a>
 			</c:if>
 			</form>
 <!-- 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> -->

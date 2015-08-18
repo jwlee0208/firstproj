@@ -12,7 +12,7 @@
 <meta name="keywords" 			content="blog, baseball, link, player, profile"/>
 <title>::: Create Boards :::</title>
 
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/create.js"></script>
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/config/create.js"></script>
 
 </head>
 <body>

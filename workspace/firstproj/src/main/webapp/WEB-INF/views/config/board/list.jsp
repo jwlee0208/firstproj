@@ -91,7 +91,7 @@
 	<c:set var="totalListCnt" value="${pagedResult.totalListCnt}"/>
 	<c:set var="totalPageCnt" value="${pagedResult.totalPageCnt}"/>
 	                                                                                                      
-	<jsp:include page="../common/paging.jsp" flush="false">
+	<jsp:include page="../../common/paging.jsp" flush="false">
 	    <jsp:param value="${totalPageCnt}"            name="totalPageCnt"/>
 	    <jsp:param value="${pagedResult.pageNo}"      name="pageNo"/>
 	    <jsp:param value="${pagedResult.startPageNo}" name="startPageNo"/>

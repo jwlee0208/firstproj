@@ -14,7 +14,7 @@ $(document).on("ready", function(){
 	
 	$("#goToModify").on("click", function(){
 		var frm = $("#viewFrm");
-		frm.attr("action", "/board/modify");
+		frm.attr("action", "/config/board/modify");
 		frm.attr("method", "get");
 		frm.submit();		
 	});
@@ -27,13 +27,13 @@ function goBoardView(boardId){
 	$("#selectedBoardId").val(boardId);
 	
 	var frm = $("#viewFrm");
-	frm.attr("action", "/board/view");
+	frm.attr("action", "/config/board/view");
 	frm.attr("method", "get");
 	frm.submit();
 }
 
 function goBoardList(){	
-	location.href = "/board/list/1/1";
+	location.href = "/config/board/list/1/1";
 }
 
 function goBoardModify(boardId){
@@ -41,7 +41,7 @@ function goBoardModify(boardId){
 	$("#selectedBoardId").val(boardId);
 	
 	var frm = $("#viewFrm");
-	frm.attr("action", "/board/modifyBoard");
+	frm.attr("action", "/config/board/modifyBoard");
 	frm.attr("method", "post");
 	frm.submit();		
 }

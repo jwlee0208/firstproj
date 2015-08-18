@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/boardList.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/config/boardList.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
 
@@ -160,7 +160,7 @@
 	<c:set var="totalListCnt" value="${pagedResult.totalListCnt}"/>
 	<c:set var="totalPageCnt" value="${pagedResult.totalPageCnt}"/>
 	                                                                                                      
-	<jsp:include page="../common/paging.jsp" flush="false">
+	<jsp:include page="../../common/paging.jsp" flush="false">
 	    <jsp:param value="${totalPageCnt}"            name="totalPageCnt"/>
 	    <jsp:param value="${pagedResult.pageNo}"      name="pageNo"/>
 	    <jsp:param value="${pagedResult.startPageNo}" name="startPageNo"/>

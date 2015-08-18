@@ -61,7 +61,7 @@ $(function(){
 
 
 function goBoardList(){
-	location.href =  "/board/list";
+	location.href =  "/config/board/list";
 } 
 
 function goBoardCreate(){
@@ -91,7 +91,7 @@ function goBoardCreate(){
 function goBoardModify(){
 	// 썸네일 파일 업로드 안할 때 저장
 	$.ajax({
-		url : '/board/modifyBoardAction.json',
+		url : '/config/board/modifyBoardAction.json',
 		type : 'post',
 		data : $('form').serialize(),
 		dataType : 'json',

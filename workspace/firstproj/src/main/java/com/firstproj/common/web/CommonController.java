@@ -37,7 +37,10 @@ public class CommonController {
         if(menuType.equals("blog")){
             model.addAttribute("boardCategoryList", this.boardService.getBoardCategoryAndBoardList());
             sb.append("ajaxBlogMenu");
-        }else{
+        }else if(menuType.equals("config")){
+            model.addAttribute("boardList", this.boardService.getBoardList());
+            sb.append("ajaxConfigMenu");
+        }else{    
             sb.append("ajaxMenu");
         }
         return sb.toString();
