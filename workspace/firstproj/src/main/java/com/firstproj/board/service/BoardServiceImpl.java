@@ -105,13 +105,13 @@ public class BoardServiceImpl implements BoardService{
 	 * @throws Exception
 	 */
 	@Override
-	public List<BoardCategoryDto> getBoardCategoryList() throws Exception{
-	    return this.boardDao.selectBoardCategoryList();
+	public List<BoardCategoryDto> getBoardCategoryList(BoardCategoryDto boardCategoryDto) throws Exception{
+	    return this.boardDao.selectBoardCategoryList(boardCategoryDto);
 	}
 	
 	@Override
-	public List<BoardCategoryPortalDto> getBoardCategoryAndBoardList() throws Exception{
-	    return this.boardDao.selectBoardCategoryAndBoardList();
+	public List<BoardCategoryPortalDto> getBoardCategoryAndBoardList(BoardCategoryPortalDto boardCategoryPortalDto) throws Exception{
+	    return this.boardDao.selectBoardCategoryAndBoardList(boardCategoryPortalDto);
 	}
 
 	@Override

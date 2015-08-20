@@ -51,7 +51,7 @@ public class ConfigController {
            UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
             
             if(null != sessionInfo){
-                        
+                boardDto.setCreateUserId(sessionInfo.getUserId());        
             }else{
                 return "redirect:/login?redirectPage=" + request.getRequestURI();
                 
@@ -78,12 +78,15 @@ public class ConfigController {
 
         int    listRowCnt      = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
 
+        String createUserId    = boardDto.getCreateUserId();
+        
         Map<String, Object> paramMap = new HashMap<String, Object>();
         // searching condition setting
         paramMap.put("searchCondition", searchCondition);
         paramMap.put("searchText"     , searchText);
         paramMap.put("startDate"      , startDate);
         paramMap.put("endDate"        , endDate);
+        paramMap.put("createUserId"   , createUserId);
 
         int    totalListCnt    = boardService.getListCnt(paramMap);
 
@@ -102,13 +105,13 @@ public class ConfigController {
     public String createBoard(HttpServletRequest request, Model model, BoardDto boardDto, HttpSession session) throws Exception{
         
         UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
-        
+        BoardCategoryDto boardCategoryDto = new BoardCategoryDto();
         if(null != sessionInfo){
-                    
+            boardCategoryDto.setCreateUserId(sessionInfo.getUserId());
         }else{
             return "redirect:/login?redirectPage=" + request.getRequestURI();
         }
-        model.addAttribute("categoryList", this.boardService.getBoardCategoryList());
+        model.addAttribute("categoryList", this.boardService.getBoardCategoryList(boardCategoryDto));
         
         return "config/board/write";
     }
@@ -179,9 +182,9 @@ public class ConfigController {
         
         UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
         BoardDto boardInfo = null;
-        
+        BoardCategoryDto boardCategoryDto = new BoardCategoryDto();
         if(null != sessionInfo){
-            
+            boardCategoryDto.setCreateUserId(sessionInfo.getUserId());
             if(selectedBoardId > 0){
                 boardDto.setBoardId(selectedBoardId);
             }
@@ -192,7 +195,7 @@ public class ConfigController {
             return "redirect:/login?redirectPage=" + request.getRequestURI();
         }
 
-        model.addAttribute("categoryList", this.boardService.getBoardCategoryList());
+        model.addAttribute("categoryList", this.boardService.getBoardCategoryList(boardCategoryDto));
         model.addAttribute("boardInfo"   , boardInfo);
         return "config/board/write";
     }
@@ -231,8 +234,15 @@ public class ConfigController {
     }   
     
     @RequestMapping(value="/board/categoryList")
-    public String getCategoryList(Model model) throws Exception{
-        List<BoardCategoryDto> boardCategoryList = this.boardCategoryService.getBoardCategoryList();
+    public String getCategoryList(Model model, HttpSession session) throws Exception{
+        BoardCategoryDto boardCategoryDto = new BoardCategoryDto();
+        List<BoardCategoryDto> boardCategoryList = null;
+        UserDto    sessionInfo    = (UserDto)session.getAttribute("userInfo");
+        if(sessionInfo != null){
+            boardCategoryDto.setCreateUserId(sessionInfo.getUserId());
+            boardCategoryList = this.boardCategoryService.getBoardCategoryList(boardCategoryDto); 
+        }
+        
         model.addAttribute("boardCategoryList", boardCategoryList);
         return "config/board/categoryList";
     }

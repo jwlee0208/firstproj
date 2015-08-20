@@ -24,5 +24,5 @@ public interface BoardArticleService {
 	public BoardArticleDto selectNextBoardArticle(BoardArticleDto boardArticleDto) throws Exception; 
 	
 	public List<BoardArticleDto> selectBoardArticleFive(BoardArticleDto boardArticleDto) throws Exception;
-	public List<SideBoardListDto> selectSideBoardList() throws Exception;
+	public List<SideBoardListDto> selectSideBoardList(SideBoardListDto sideBoardListDto) throws Exception;
 }

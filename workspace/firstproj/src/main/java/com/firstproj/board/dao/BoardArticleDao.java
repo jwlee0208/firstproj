@@ -142,8 +142,8 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 	 * @return
 	 * @throws Exception
 	 */
-	public List<SideBoardListDto> selectSideBoardList() throws Exception{
-	    return getSqlSession().selectList("sql.boardArticle.selectSideBoardList");
+	public List<SideBoardListDto> selectSideBoardList(SideBoardListDto sideBoardListDto) throws Exception{
+	    return getSqlSession().selectList("sql.boardArticle.selectSideBoardList", sideBoardListDto);
 	}
 	
 }

@@ -199,6 +199,23 @@
 			<beans:bean class="com.firstproj.interceptor.BaseInterceptor" />
 		</interceptor>
 		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/img/**"/>
+			<exclude-mapping path="/css/**"/>
+			<exclude-mapping path="/js/**"/>
+			<exclude-mapping path="/lib/**"/>
+			<beans:bean class="com.firstproj.interceptor.MenuInterceptor" />
+		</interceptor>
+		<interceptor>
+			<mapping path="/**/*"/>
+			<exclude-mapping path="/img/**"/>
+			<exclude-mapping path="/css/**"/>
+			<exclude-mapping path="/js/**"/>
+			<exclude-mapping path="/lib/**"/>
+			<beans:bean class="com.firstproj.interceptor.MenuInterceptor" />
+		</interceptor>
+
+		<interceptor>
 			<mapping path="/board/article/**"/>
 			<beans:bean class="com.firstproj.interceptor.BoardArticleInterceptor" />
 		</interceptor>

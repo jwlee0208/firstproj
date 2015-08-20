@@ -45,6 +45,14 @@
 												<th><div class="form-group">카테고리 이름</div></th>
 												<td><div class="form-group">${boardCat.boardCategoryName }</div></td>
 											</tr>
+											<tr>
+												<th><div class="form-group">생성자 아이디</div></th>
+												<td><div class="form-group">${boardCat.createUserId }</div></td>
+											</tr>
+											<tr>
+												<th><div class="form-group">생성일</div></th>
+												<td><div class="form-group">${fn:substring(boardCat.createDate, 0, 10) }</div></td>
+											</tr>
 										</tbody>
 									</table>
 								</div>		
@@ -76,12 +84,16 @@
 		<table style="width: 100%;" class="table table-hover">
 			<colgroup>
 				<col width="20%" />
-				<col width="90%" />
+				<col width="40%" />
+				<col width="20%" />
+				<col width="20%" />
 			</colgroup>
 			<thead>
 				<tr>
 					<th style="text-align : center;">게시판 카테고리 아이디</th>
 					<th>제목</th>
+					<th>생성자 아이디</th>
+					<th>생성일</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -91,12 +103,14 @@
 							<tr>
 								<td style="text-align : center;">${boardCat.boardCategoryId}</td>	
 								<td onclick="javascript:goBoardCategoryView('${boardCat.boardCategoryId}');">${boardCat.boardCategoryName}</td>
+								<td>${boardCat.createUserId}</td>	
+								<td>${fn:substring(boardCat.createDate, 0, 10)}</td>	
 							</tr>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<td colspan="2">작성된 내용이 없습니다.</td>
+							<td colspan="4">작성된 내용이 없습니다.</td>
 						</tr>
 					</c:otherwise>
 				</c:choose>

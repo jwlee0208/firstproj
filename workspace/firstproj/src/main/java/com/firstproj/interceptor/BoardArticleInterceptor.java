@@ -23,6 +23,19 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mav) throws Exception{
         
+        // create meta tag info's dynamically
+        // it is for searching portal like google, naver etc,.
+        this.createMetaTag(request, response, handler, mav);
+    }
+    
+    /**
+     * @brief create meta tag info's dynamically
+     * @param request
+     * @param response
+     * @param handler
+     * @param mav
+     */
+    public void createMetaTag(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mav) {
         String title        = "Developer's Blog - Nevertheless Keep Going";
         String description  = "Developer's Blog";
         String content      = "Developer's Blog";
@@ -73,6 +86,6 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
         request.setAttribute("description"  , description);
         request.setAttribute("authorNm"     , authorNm);
         request.setAttribute("filePath"     , filePath);
-        request.setAttribute("url"          , url);
+        request.setAttribute("url"          , url);        
     }
 }

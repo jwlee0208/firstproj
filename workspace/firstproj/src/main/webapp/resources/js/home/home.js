@@ -1,6 +1,11 @@
 function goList(boardId){	
 	var menuId = boardId;
-	location.href = "/board/article/list/" + boardId + "/" + menuId;
+	var userId = $("#userId").val();
+	var url = "/board/article/list/" + boardId + "/" + menuId;
+	if(userId != null && userId != ''){
+		url = "/share/" + userId +"/list/" + boardId + "/" + menuId;
+	} 
+	location.href = url;
 }
 function goHome(){
 	location.href = "/home3/0";

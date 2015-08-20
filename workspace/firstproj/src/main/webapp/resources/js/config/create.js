@@ -67,7 +67,7 @@ function goBoardList(){
 function goBoardCreate(){
 	// 썸네일 파일 업로드 안할 때 저장
 	$.ajax({
-		url : '/board/insertBoardAction.json',
+		url : '/config/board/insertBoardAction.json',
 		type : 'post',
 		data : $("form").serialize(),
 		dataType : 'json',

@@ -32,9 +32,9 @@ public interface BoardService {
 
 	int                          modifyBoardInfo(BoardDto boardDto) throws Exception;
 
-    List<BoardCategoryDto>       getBoardCategoryList() throws Exception;
+    List<BoardCategoryDto>       getBoardCategoryList(BoardCategoryDto boardCategoryDto) throws Exception;
 
-    List<BoardCategoryPortalDto> getBoardCategoryAndBoardList() throws Exception;
+    List<BoardCategoryPortalDto> getBoardCategoryAndBoardList(BoardCategoryPortalDto boardCategoryPortalDto) throws Exception;
 
     BoardDto                     getBoardCategoryAndBoardInfo(BoardDto boardDto) throws Exception;
 

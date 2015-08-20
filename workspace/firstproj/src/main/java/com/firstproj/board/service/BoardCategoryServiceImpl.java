@@ -16,9 +16,9 @@ public class BoardCategoryServiceImpl implements BoardCategoryService{
     private BoardCategoryDao boardCategoryDao;
 
     @Override
-    public List<BoardCategoryDto> getBoardCategoryList() throws Exception {
+    public List<BoardCategoryDto> getBoardCategoryList(BoardCategoryDto boardCategoryDto) throws Exception {
         // TODO Auto-generated method stub
-        return this.boardCategoryDao.selectBoardCategoryList();
+        return this.boardCategoryDao.selectBoardCategoryList(boardCategoryDto);
     }
 
     @Override

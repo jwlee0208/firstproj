@@ -34,6 +34,7 @@ public class BoardDao extends SqlSessionDaoSupport{
 	       searchCondition.setSearchText((String)param.get("searchText"));
 	       searchCondition.setStartDate((String)param.get("startDate"));
 	       searchCondition.setEndDate((String)param.get("endDate"));
+	       searchCondition.setCreateUserId((String)param.get("createUserId"));
 		
 		return getSqlSession().selectList("sql.board.selectBoardList", param);
 	}
@@ -45,7 +46,8 @@ public class BoardDao extends SqlSessionDaoSupport{
 	       searchCondition.setSearchText((String)param.get("searchText"));
 	       searchCondition.setStartDate((String)param.get("startDate"));
 	       searchCondition.setEndDate((String)param.get("endDate"));
-	 
+	       searchCondition.setCreateUserId((String)param.get("createUserId"));
+	       
 	       int result = getSqlSession().selectOne("sql.board.selectListCount", searchCondition);                
 	       return result;
 	} 
@@ -119,16 +121,16 @@ public class BoardDao extends SqlSessionDaoSupport{
 	 * @return
 	 * @throws Exception
 	 */
-	public List<BoardCategoryDto> selectBoardCategoryList() throws Exception{
-	    return getSqlSession().selectList("sql.board.selectBoardCategoryList");
+	public List<BoardCategoryDto> selectBoardCategoryList(BoardCategoryDto boardCategoryDto) throws Exception{
+	    return getSqlSession().selectList("sql.board.selectBoardCategoryList", boardCategoryDto);
 	}
 	/**
 	 * 게시판 카테고리 & 게시판 목록 조회
 	 * @return
 	 * @throws Exception
 	 */
-	public List<BoardCategoryPortalDto> selectBoardCategoryAndBoardList() throws Exception{
-	    return getSqlSession().selectList("sql.board.selectBoardCategoryAndBoardList");
+	public List<BoardCategoryPortalDto> selectBoardCategoryAndBoardList(BoardCategoryPortalDto boardCategoryPortalDto) throws Exception{
+	    return getSqlSession().selectList("sql.board.selectBoardCategoryAndBoardList", boardCategoryPortalDto);
 	}
     /**
      * 게시판 카테고리 & 게시판 정보 조회

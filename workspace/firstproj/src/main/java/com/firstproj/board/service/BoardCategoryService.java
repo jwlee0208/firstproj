@@ -5,7 +5,7 @@ import java.util.List;
 import com.firstproj.board.dto.BoardCategoryDto;
 
 public interface BoardCategoryService {
-    public List<BoardCategoryDto> getBoardCategoryList() throws Exception;
+    public List<BoardCategoryDto> getBoardCategoryList(BoardCategoryDto boardCategoryDto) throws Exception;
     
     public int insertBoardCategory(BoardCategoryDto boardCategoryDto) throws Exception;
     

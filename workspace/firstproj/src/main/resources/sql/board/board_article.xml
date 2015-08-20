@@ -107,6 +107,9 @@
 				<if test="boardId > 0">
 				and ba.board_id = #{boardId}    
 				</if>
+				<if test="createUserId != null and createUserId != ''">
+					   and bc.create_user_id = #{createUserId} 
+				</if>
 				<if test="searchCondition != null and searchCondition != ''">
 					<if test="searchCondition == 'title'">
 						<if test="searchText != null and searchText != ''">
@@ -133,6 +136,9 @@
 		</sql> 
 		<sql id="searchContentSql">
 		    <where>
+		    <if test="createUserId != null and createUserId != ''">
+		    	and bc.create_user_id = #{createUserId}
+		    </if>
 		    <if test="articleId > 0">
 		        and ba.article_id = #{articleId}
 		    </if>
@@ -182,7 +188,7 @@
 <!-- 		</delete> -->
 
 		<!-- 우측 게시판 목록 조회 -->
-		<select id="selectSideBoardList" resultType="board.sideBoardListDto">
+		<select id="selectSideBoardList" parameterType="board.sideBoardListDto" resultType="board.sideBoardListDto">
 			SELECT 
 				   b.board_id
 				 , b.board_name
@@ -194,6 +200,11 @@
 			FROM 			TB_BOARD 			b
 			INNER 	JOIN 	TB_BOARD_CATEGORY 	bc ON b.board_category_id = bc.board_category_id
 			LEFT 	JOIN 	TB_BOARD_ARTICLE 	ba ON ba.board_id 		  = b.board_id AND ba.status = 1
+			<if test="createUserId != null and createUserId != ''">
+			<where>
+				bc.create_user_id = #{createUserId}
+			</where>
+			</if>
 			GROUP BY b.board_id
 			ORDER BY bc.board_category_id ASC, b.board_id DESC
 		</select>

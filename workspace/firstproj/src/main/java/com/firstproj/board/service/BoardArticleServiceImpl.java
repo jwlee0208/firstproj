@@ -135,8 +135,8 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	 * @return
 	 * @throws Exception
 	 */
-	public List<SideBoardListDto> selectSideBoardList() throws Exception {
-	    return this.boardArticleDao.selectSideBoardList();
+	public List<SideBoardListDto> selectSideBoardList(SideBoardListDto sideBoardListDto) throws Exception {
+	    return this.boardArticleDao.selectSideBoardList(sideBoardListDto);
 	}
 	
 }

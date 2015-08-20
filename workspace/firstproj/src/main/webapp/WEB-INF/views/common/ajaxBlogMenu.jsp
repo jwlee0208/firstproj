@@ -11,6 +11,8 @@
 
 <nav class="navbar navbar-inverse" role="navigation">
 	<input type="hidden" id="menuId" name="menuId" value="${param.menuId}"/>
+	<input type="hidden" id="userId" name="userId" value="${userId}"/>
+	
     <div class="container-fluid">
     	<div class="navbar-header">
 			<!-- mobile menu list button -->    	

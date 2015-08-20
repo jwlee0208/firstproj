@@ -39,12 +39,19 @@
 	</properties>
 
     <repositories>
-    <!-- dynamic-tiles2 -->
-      <repository>
-        <id>springbyexample.org</id>
-        <name>Spring by Example</name>
-        <url>http://www.springbyexample.org/maven/repo</url>
-      </repository>
+    	<!-- dynamic-tiles2 -->
+	    <repository>
+	        <id>springbyexample.org</id>
+	        <name>Spring by Example</name>
+	        <url>http://www.springbyexample.org/maven/repo</url>
+	    </repository>
+		<!-- slideshare -->
+		<repository>
+		    <id>parancoe-org-repository</id>
+		    <name>Parancoe Repository for Maven</name>
+		    <url>http://maven2.parancoe.org/repo</url>
+		    <layout>default</layout>
+		</repository>      
     </repositories> 	
 
 	

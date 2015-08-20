@@ -7,6 +7,7 @@ public class SearchCondition {
 	private String 	startDate;
 	private String 	endDate;
 	private int 	boardId;
+	private String  createUserId;
 
 	// 페이징을 위한 파라미터
 	private int startRow;
@@ -69,5 +70,22 @@ public class SearchCondition {
 	public void setEndRow(int endRow) {
 		this.endRow = endRow;
 	}
+
+    public String getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(String createUserId) {
+        this.createUserId = createUserId;
+    }
+
+    @Override
+    public String toString() {
+        return "SearchCondition [searchCondition=" + searchCondition
+                + ", searchText=" + searchText + ", startDate=" + startDate
+                + ", endDate=" + endDate + ", boardId=" + boardId
+                + ", createUserId=" + createUserId + ", startRow=" + startRow
+                + ", endRow=" + endRow + "]";
+    }
 
 }

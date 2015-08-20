@@ -10,8 +10,8 @@ import com.firstproj.board.dto.BoardCategoryDto;
 @Repository("BoardCategoryDao")
 public class BoardCategoryDao extends SqlSessionDaoSupport{
     
-    public List<BoardCategoryDto> selectBoardCategoryList() throws Exception{
-        return getSqlSession().selectList("sql.boardcategory.selectBoardCategoryList");
+    public List<BoardCategoryDto> selectBoardCategoryList(BoardCategoryDto boardCategoryDto) throws Exception{
+        return getSqlSession().selectList("sql.boardcategory.selectBoardCategoryList", boardCategoryDto);
     }
     
     public int insertBoardCategory(BoardCategoryDto boardCategoryDto) throws Exception{

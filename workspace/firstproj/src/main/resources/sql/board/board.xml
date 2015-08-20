@@ -100,18 +100,28 @@
 		<sql id="searchConditionSql">
 		    WHERE 1 = 1
 		    <if test="boardId > 0">
-		        AND board_id = #{boardId}
+		      AND board_id = #{boardId}
+		    </if>
+		    <if test="createUserId != null and createUserId != ''">
+		      AND create_user_id = #{createUserId}
 		    </if>
 		    
 		</sql>
 		
-		<select id="selectBoardCategoryList" resultType="board.boardCategoryDto">
+		<select id="selectBoardCategoryList" parameterType="board.boardCategoryDto" resultType="board.boardCategoryDto">
 			SELECT board_category_id
-				 , board_category_name 
-			FROM TB_BOARD_CATEGORY		
+				 , board_category_name
+				 , create_user_id
+				 , create_date 
+			FROM TB_BOARD_CATEGORY					
+			<if test="createUserId != null and createUserId != ''">
+			<where>
+				create_user_id = #{createUserId}
+			</where>
+			</if>
 		</select>
 				
-		<select id="selectBoardCategoryAndBoardList" resultMap="selectBoardCategoryAndBoardList">
+		<select id="selectBoardCategoryAndBoardList" parameterType="board.boardCategoryPortalDto" resultMap="selectBoardCategoryAndBoardList">
 			SELECT	bc.board_category_id
 				  , bc.board_category_name
 				  , b.board_id
@@ -126,6 +136,11 @@
 				  , b.modify_date
 			FROM		TB_BOARD_CATEGORY bc
 			INNER JOIN	TB_BOARD 		  b 	ON b.board_category_id = bc.board_category_id
+			<if test="createUserId != null and createUserId != ''">
+			<where>
+				b.create_user_id = #{createUserId} 
+			</where>		
+			</if>
 			ORDER BY bc.board_category_id, b.board_id ASC
 		</select>
 		

@@ -32,7 +32,7 @@ import com.firstproj.common.web.EditorController;
 import com.firstproj.user.dto.UserDto;
 
 @Controller
-@RequestMapping(value = "/board/article")
+@RequestMapping(value = {"/board/article", "/share"})
 public class BoardArticleController {
 
 	public static final int 	DEFAULT_PAGE_NO 				= 1;
@@ -87,6 +87,21 @@ public class BoardArticleController {
 	}
 	
 	/**
+	 * @brief 게시글 목록 조회
+	 * @param request
+	 * @param model
+	 * @param boardArticleDto
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = {"/main/{userId}", "/{userId}"}, method = {RequestMethod.POST, RequestMethod.GET})
+	public String getBoardArticleList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable String userId) throws Exception{
+	    boardArticleDto.setCreateUserId(userId);
+        return this.getCommonBoardArticleList(request, model, boardArticleDto);
+    }
+	
+	/**
 	 * 게시글 목록 조회
 	 * @param request
 	 * @param model
@@ -98,6 +113,14 @@ public class BoardArticleController {
 	public String getBoardArticleList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int boardId, @PathVariable int menuId) throws Exception {
 		return this.getCommonBoardArticleList(request, model, boardArticleDto);
 	}
+
+	
+    @RequestMapping(value = {"{userId}/list/{boardId}/{menuId}"}, method = {RequestMethod.POST, RequestMethod.GET})
+    public String getBoardArticleList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int boardId, @PathVariable int menuId, @PathVariable String userId) throws Exception {
+        boardArticleDto.setCreateUserId(userId);
+        return this.getCommonBoardArticleList(request, model, boardArticleDto);
+    }
+
 	
 	private String getCommonBoardArticleList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
 	    
@@ -300,6 +323,39 @@ public class BoardArticleController {
 		return "board/article/view";
 	}
 
+	
+    @RequestMapping(value = "{userId}/view/{selectedArticleId}")
+    public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int selectedArticleId, @PathVariable String userId, HttpSession session) throws Exception{
+        
+        BoardArticleDto contentInfo     = null;
+        BoardArticleDto prevContentInfo = null;
+        BoardArticleDto nextContentInfo = null;
+        
+        if(selectedArticleId > 0){
+            boardArticleDto.setArticleId(selectedArticleId);
+            boardArticleDto.setCreateUserId(userId);
+            // 글 조회
+            contentInfo     = this.boardArticleService.selectBoardArticle(boardArticleDto);
+            // 이전 글 조회
+            prevContentInfo = this.boardArticleService.selectPrevBoardArticle(boardArticleDto);
+            // 다음 글 조회
+            nextContentInfo = this.boardArticleService.selectNextBoardArticle(boardArticleDto);
+        }
+                
+        UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+            
+        model.addAttribute("contentInfo"    , contentInfo);
+        model.addAttribute("prevContentInfo", prevContentInfo);
+        model.addAttribute("nextContentInfo", nextContentInfo);
+        
+        model.addAttribute("boardId"        , contentInfo.getBoardId());
+        model.addAttribute("boardList"      , this.boardService.getBoardList());
+        model.addAttribute("userInfo"       , sessionInfo);
+        
+        return "board/article/view";
+    }
+	
+	
 	/**
 	 * 게시글 입력 화면 출력
 	 * @param model

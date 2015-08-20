@@ -20,3 +20,6 @@ ALTER TABLE `tb_player_info` CHANGE COLUMN `introduce` `introduce` LONGTEXT NULL
 
 
 ALTER TABLE `TB_BOARD_ARTICLE` CHANGE COLUMN `content` `content` LONGTEXT NULL DEFAULT NULL COMMENT '게시글 내용\n' ;
+
+
+ALTER TABLE `TB_BOARD_CATEGORY` ADD COLUMN `create_user_id` VARCHAR(45) NULL AFTER `board_category_name`, ADD COLUMN `create_date` TIMESTAMP NULL AFTER `create_user_id`;
