@@ -147,7 +147,12 @@ $(function(){
 
 
 function goList(){
-	location.href =  "/board/article/list/"+$("#boardId").val()+"/"+$("#boardId").val();
+	var url 	= "/board/article/list/" + $("#boardId").val();
+	var userId 	= $("#userId").val();
+	if(userId != null && userId != ''){
+		url 	= "/share/" + userId + "/list/" + $("#boardId").val();
+	}
+	location.href =  url;	//"/board/article/list/"+$("#boardId").val()+"/"+$("#boardId").val();
 } 
 
 function toggleThumbImage(className){

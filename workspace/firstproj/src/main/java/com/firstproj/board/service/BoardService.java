@@ -16,7 +16,7 @@ public interface BoardService {
 
 	int                          updateBoardInfo(BoardDto boardDto) throws Exception;
 
-	List<BoardDto>               getBoardList() throws Exception;
+	List<BoardDto>               getBoardList(BoardDto boardDto) throws Exception;
 	
 	List<BoardDto>               getBoardList(Map<String, Object> paramMap) throws Exception;
 

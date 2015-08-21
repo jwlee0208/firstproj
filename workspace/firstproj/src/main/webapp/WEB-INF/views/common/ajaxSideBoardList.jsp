@@ -2,7 +2,11 @@
 		  <div class="list-group">
     <c:if test="${sideBoardList ne null}">	
     	<c:forEach var="boardInfo" items="${sideBoardList}">
-			<a href="/board/article/list/${boardInfo.boardId}/1" class="list-group-item">${boardInfo.boardName} <span class="badge"> ${boardInfo.boardArticleCnt} </span></a>
+    		<c:set var="url" value="/board/article/list/${boardInfo.boardId}"/>
+    		<c:if test="${userId ne null && userId ne ''}">
+    		<c:set var="url" value="/share/${userId}/list/${boardInfo.boardId}"/>
+    		</c:if>
+			<a href="${url}" class="list-group-item">${boardInfo.boardName} <span class="badge"> ${boardInfo.boardArticleCnt} </span></a>
     	</c:forEach>
     </c:if>			  
           </div>

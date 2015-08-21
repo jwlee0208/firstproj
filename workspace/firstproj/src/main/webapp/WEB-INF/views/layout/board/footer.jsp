@@ -24,7 +24,7 @@
 
 </script>
 <footer class="footer">
-	  <p><a href="https://www.facebook.com/jwlee0208" target="_blank" class="btn btn-primary">Facebook</a>
+	  <p><a href="https://www.facebook.com/jwlee0524" target="_blank" class="btn btn-primary">Facebook</a>
 <!-- 	  &nbsp;&nbsp;&nbsp;<a href="https://twitter.com/jwlee0208" target="_blank" class="btn btn-primary">Twitter</a> -->
 <!-- 	  &nbsp;&nbsp;&nbsp;<a href="http://blog.naver.com/jwlee0208" target="_blank" class="btn btn-primary">Blog</a> -->
 	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/aboutUs/5">contact</a>&nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/">LinkedNest</a></p>

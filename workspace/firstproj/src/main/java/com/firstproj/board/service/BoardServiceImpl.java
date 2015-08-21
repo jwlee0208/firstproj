@@ -21,8 +21,8 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDao boardDao;
 	
 	@Override
-	public List<BoardDto> getBoardList() throws Exception{
-	    return this.boardDao.getBoardList();
+	public List<BoardDto> getBoardList(BoardDto boardDto) throws Exception{
+	    return this.boardDao.getBoardList(boardDto);
 	}
 	
 	@Override

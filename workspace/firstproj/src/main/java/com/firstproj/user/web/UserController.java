@@ -28,10 +28,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.firstproj.common.CommonConstant;
 import com.firstproj.common.dto.CodeDto;
 import com.firstproj.common.dto.MailDto;
+import com.firstproj.common.dto.ShareDto;
 import com.firstproj.common.service.impl.CommonServiceImpl;
+import com.firstproj.common.util.AES256Util;
 import com.firstproj.common.validate.JsonResponse;
+import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;
 import com.firstproj.user.service.UserServiceImpl;
 import com.firstproj.user.validate.UserValidator;
@@ -44,21 +48,20 @@ public class UserController {
     Log log = LogFactory.getLog(this.getClass());
     
 	@Resource(name="UserServiceImpl")
-	private UserServiceImpl    userService;
+	private UserServiceImpl         userService;
 	
 	@Resource(name="CommonServiceImpl")
-	private CommonServiceImpl  commonService;
+	private CommonServiceImpl       commonService;
+	
+	@Resource(name="ShareServiceImpl")
+	private ShareServiceImpl        shareService;
 	
     @Inject
-    private VelocityEngine velocityEngine;
+    private VelocityEngine          velocityEngine;
     
     @Inject
-    private MessageSourceAccessor messageSource;
+    private MessageSourceAccessor   messageSource;
 
-	
-	
-	
-	
 	@RequestMapping(value="/regist/{boardId}")
 	public String registUser(Model model, HttpServletRequest request, @PathVariable int boardId) throws Exception{
 	    
@@ -153,10 +156,21 @@ public class UserController {
                     resultCode  = "REGIST_0000";
                     resultMsg   = "complelted";       
                     
+                    // create share(blog) 
+                    ShareDto shareDto = new ShareDto();
+                    shareDto.setUserId(userDto.getUserId());
+                    shareDto.setShareName(userDto.getUserNm() +"'s Share");
+                    shareDto.setIntroduce("Please, fill out your introduce.");
+                    shareDto.setShareType("1");
+                    
+                    this.shareService.insertShareInfo(shareDto);
+                    
                     // Sending Mail
+                    AES256Util aes256util  = new AES256Util(CommonConstant.IV);
+                    
                     MailDto mailInfo = new MailDto();
                     mailInfo.setContentType("text/html; charset=utf-8");
-                    mailInfo.setMailTo(userDto.getEmail());
+                    mailInfo.setMailTo(aes256util.decrypt(userDto.getEmail()));
                     mailInfo.setMailFrom("jwlee0208@gmail.com");
                     mailInfo.setMailSubject("[Tryout.com] Congraturation! Happy join us!!");
                     mailInfo.setTemplateName("welcomeJoinningTemplate.vm");
@@ -189,7 +203,6 @@ public class UserController {
                     // setting content
                     String body = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "./mailTemplates/welcomeJoinningTemplate.vm", "UTF-8", mailInfo.getModel());
                     mailInfo.setMailContent(body);
-                    
                     
                     // mail 발송
                     try{

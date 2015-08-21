@@ -12,10 +12,10 @@
 </script>
 <footer class="footer">
 	<div class="container">
-	  <p><a href="https://www.facebook.com/jwlee0208" target="_blank" class="btn btn-primary">Facebook</a>
+	  <p><a href="https://www.facebook.com/jwlee0524" target="_blank" class="btn btn-primary">Facebook</a>
 <!-- 	  &nbsp;&nbsp;&nbsp;<a href="https://twitter.com/jwlee0208" target="_blank" class="btn btn-primary">Twitter</a> -->
 <!-- 	  &nbsp;&nbsp;&nbsp;<a href="http://blog.naver.com/jwlee0208" target="_blank" class="btn btn-primary">Blog</a> -->
-	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/aboutUs/5">contact</a>&nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/board/article/main">developer's blog</a></p>
+	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/aboutUs/5">contact</a>&nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/share/jwlee">developer's blog</a></p>
 	  <p>Copyrightⓒ2014 All right reserved by leejinwon</p>
       <p><a href="#">Back to top</a></p>
     </div>  

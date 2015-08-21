@@ -1,21 +1,33 @@
 $(document).on("ready", function() {
 	$("input[name='goToWrite']").on("click", function() {
-		location.href = "/board/article/write.page?boardId="+$("#boardId").val();
+		var url 	= '';	//"/board/article/write.page?boardId="+$("#boardId").val();
+		var userId 	= $("#userId").val();
+		if(userId != null && userId != ''){
+			url = "/share/" + userId + "/write/" + $("#boardId").val();
+		}else{
+			url = "/board/article/write/" + $("#boardId").val();
+		}
+		location.href = url;
 	});
 });
 // 페이지 이동
 function goPage(pageNo) {
 	$("#pageNo").val(pageNo);
+	var url 	= '/board/article/list';
+	var userId 	= $("#userId").val();
+	if(userId != null && userId != ''){
+		url = "/share/" + userId + "/list/" + $("#boardId").val();
+	}
 	
 	$.ajax({
-		async : false,
-		type : 'POST',
-		dataType : 'html',
-		url : '/board/article/list.page',
-		data : $("#boardFrm").serialize(),
+		async 		: false,
+		type 		: 'POST',
+		dataType 	: 'html',
+		url 		: url ,				//'/board/article/list.page',
+		data 		: $("#boardFrm").serialize(),
 		processData : true,
-		cache : false,
-		success : function(data) {
+		cache 		: false,
+		success 	: function(data) {
 
 			if (data != null && data != undefined) {
 				var listDiv = $(data).find("#listDiv").html();
@@ -71,7 +83,15 @@ function goPage(pageNo) {
 //}
 // 게시글 조회
 function goView(articleId){
-	location.href = "/board/article/view/"+articleId;	
+	var url 	= '';	
+	var userId 	= $("#userId").val();
+	if(userId != null && userId != ''){
+		url = "/share/" + userId + "/view/" + articleId;
+	}else{
+		url = "/board/article/view/" + articleId;
+	}
+
+	location.href = url;		//"/board/article/view/"+articleId;	
 //	$("#selectedArticleId").val(articleId);
 //	
 //	var frm = $("#boardFrm");
@@ -82,13 +102,21 @@ function goView(articleId){
 
 $(function(){
 	$("#searchText").keypress(function(event){
-		
+				
 		if(event.which == 13){
 			event.preventDefault();
 
+			var url 	= '';	
+			var userId 	= $("#userId").val();
+			if(userId != null && userId != ''){
+				url = "/share/" + userId + "/list/" + $("#boardId").val();
+			}else{
+				url = "/board/article/list";
+			}
+
 			var frm = $("#boardFrm");
-			frm.attr("url", "/board/article/list");
-			frm.attr("method", "post");
+			frm.attr("url"		, url);
+			frm.attr("method"	, "post");
 			frm.submit();
 		}
 	});

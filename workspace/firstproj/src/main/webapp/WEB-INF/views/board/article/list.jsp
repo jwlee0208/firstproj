@@ -16,7 +16,7 @@
 
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/common/paging.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleList.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
+<link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/pagination.css">
 </head>
 <body>
 <!-- <div class="container"> -->
@@ -34,7 +34,10 @@
 	
 	<!-- 리스트에서 선택된 게시글 아이디 -->
 	<input type="hidden" id="selectedArticleId" name="selectedArticleId" />
-	<input type="hidden" id="boardId" name="boardId" value="${boardInfo.boardId}"/>
+	<input type="hidden" id="boardId" 			name="boardId" value="${boardInfo.boardId}"/>
+
+
+	<input type="hidden" id="userId"  			name="userId"  value="${userId}"/>
 
 	<!-- 검색 영역 -->	
 	<div class="form-group" role="search">

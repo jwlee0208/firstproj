@@ -148,3 +148,14 @@ CREATE TABLE `test`.`TB_BOARD_CATEGORY` (
   `board_category_id` INT NOT NULL,
   `board_category_name` VARCHAR(50) NULL,
   PRIMARY KEY (`board_category_id`));  
+  
+-- tb_share table creation
+CREATE TABLE `TB_SHARE` (
+  `share_id` int(11) NOT NULL AUTO_INCREMENT,
+  `share_name` varchar(200) NOT NULL,
+  `share_type` char(1) DEFAULT '1' COMMENT '''쉐어 타입(블로그 타입을 구분) : default는 1''',
+  `introduce` longtext,
+  `user_id` varchar(45) DEFAULT NULL,
+  `create_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`share_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='쉐어(블로그) 정보'; 

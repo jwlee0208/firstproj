@@ -7,7 +7,12 @@
 
 		<select id="selectBoardListAll" resultType="board.boardDto">
 			<include refid="selectBoard"/>
-			ORDER BY board_category_id , board_id asc
+			<if test="createUserId != null and createUserId != ''">
+			<where>
+				create_user_id = #{createUserId}
+			</where>
+			</if>
+			ORDER BY board_category_id , board_id ASC
 		</select>
 		<select id="selectBoardList" parameterType="searchCondition" resultType="board.boardDto">
 			<include refid="selectBoard"/>

@@ -9,9 +9,10 @@
 <div>
 	<form id="writeFrm" name="writeFrm" method="post" role="form" enctype="multipart/form-data">
 	
-	<input type="hidden" id="authorId" name="authorId" value="jwlee"/>
-	<input type="hidden" id="authorNm" name="authorNm" value="jinwon"/>
-	<input type="hidden" id="articleId" name="articleId" value="${articleInfo.articleId}"/>
+	<input type="hidden" id="authorId" 	name="authorId" 	value="${sessionInfo.userId}"/>
+	<input type="hidden" id="authorNm" 	name="authorNm" 	value="${sessionInfo.userNm}"/>
+	<input type="hidden" id="articleId" name="articleId" 	value="${articleInfo.articleId}"/>
+	<input type="hidden" id="userId"	name="userId"		value="${userId}" />
 	<div class="wrap">
 	<h1 id="btn-groups" class="page-header">Write Content</h1>
 	
@@ -51,7 +52,7 @@
 								<c:otherwise>
 								<c:if test="${!empty boardList}">
 									<c:forEach var="boardInfo" items="${boardList}">
-									<option <c:if test='${articleInfo.boardId eq boardInfo.boardId}'>selected</c:if> value="${boardInfo.boardId}">${boardInfo.boardName}</option>
+									<option <c:if test='${boardId eq boardInfo.boardId}'>selected</c:if> value="${boardInfo.boardId}">${boardInfo.boardName}</option>
 									</c:forEach>
 								</c:if>								
 								</c:otherwise>

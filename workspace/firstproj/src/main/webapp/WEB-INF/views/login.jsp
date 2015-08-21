@@ -98,7 +98,7 @@ function loginAction(){
 			<input type="button" class="btn btn-primary btn-lg btn-block" name="signinSubmit" value="<tag:message code="signin"/>">
 			<div class="row" style="text-align: center;">
 				<div title="Sign up" class="btn btn-link"><a href="/user/regist/6" style="font-size: 30px;">Sign up</a></div>
-				<div title="Go to home" class="btn btn-link"><a href="/board/article/main" style="font-size: 30px;">Home</a></div>
+				<div title="Go to home" class="btn btn-link"><a href="/share/main" style="font-size: 30px;">Home</a></div>
 			</div>
 		</form>
 		</div>

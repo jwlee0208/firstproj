@@ -9,6 +9,7 @@
 %>
 <c:set var="userInfo" value="<%=userInfo%>"/>
 
+
 <nav class="navbar navbar-inverse" role="navigation">
 	<input type="hidden" id="menuId" name="menuId" value="${param.menuId}"/>
 	<input type="hidden" id="userId" name="userId" value="${userId}"/>
@@ -22,7 +23,28 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		    </button>
-    		<a class="navbar-brand" href="/board/article/main"><span style="color:white; font-size: 25px; font-weight: bold;">D</span>eveloper's <span style="color:white; font-size: 25px; font-weight: bold;">B</span>log &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+		    
+		    <c:set var="url" value=""/>
+	<c:choose>
+		<c:when test="${url ne '' && url ne null}">
+		    <c:set var="url" value='/share/${userId}'/>
+		    
+		</c:when>
+		<c:otherwise>
+			<c:set var="url" value='/share/main'/>
+		</c:otherwise>
+	</c:choose>		    
+    		<a class="navbar-brand" href="${url}">
+    		<c:choose>
+    			<c:when test="${shareInfo ne null && userId ne null}">
+    		${shareInfo.shareName}		
+<!--     		<span style="color:white; font-size: 25px; font-weight: bold;">D</span>eveloper's <span style="color:white; font-size: 25px; font-weight: bold;">B</span>log &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	 -->
+    			</c:when>
+    			<c:otherwise>
+    		LinkedNest Share	
+    			</c:otherwise>
+    		</c:choose>    		
+    		</a>
     	</div>
 		<div class="navbar-collapse collapse" id="nav-collapse-blog-menu-list">
 			<ul class="nav navbar-nav">

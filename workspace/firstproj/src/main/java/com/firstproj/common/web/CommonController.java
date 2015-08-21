@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.firstproj.board.dto.BoardCategoryPortalDto;
+import com.firstproj.board.dto.BoardDto;
 import com.firstproj.board.dto.SideBoardListDto;
 import com.firstproj.board.service.BoardArticleService;
 import com.firstproj.board.service.BoardService;
+import com.firstproj.common.dto.ShareDto;
+import com.firstproj.share.service.ShareService;
 
 @Controller
 @RequestMapping(value="/common")
@@ -23,7 +26,10 @@ public class CommonController {
     
     @Resource(name = "BoardServiceImpl")
     private BoardService    boardService;
-    
+
+    @Resource(name = "ShareServiceImpl")
+    private ShareService shareService;
+
     @RequestMapping(value = "/sideBoardList")
     public String getSideBoardList(Model model) throws Exception{
         /*
@@ -78,21 +84,33 @@ public class CommonController {
         
         BoardCategoryPortalDto boardCategoryPortalDto = new BoardCategoryPortalDto();
         
+        
         if(!StringUtils.isEmpty(userId)){
             boardCategoryPortalDto.setCreateUserId(userId);
         }
         model.addAttribute("userId", userId);
-        
+/*        
         System.out.println("ccon uri : " + request.getRequestURI());
         System.out.println("ccon url : " + request.getRequestURL());
-        
+*/        
         StringBuffer sb = new StringBuffer();
         sb.append("common/");
         if(menuType.equals("blog")){
-            model.addAttribute("boardCategoryList", this.boardService.getBoardCategoryAndBoardList(boardCategoryPortalDto));
+            ShareDto shareDto = new ShareDto();
+            
+            if(StringUtils.isEmpty(userId)){
+                shareDto.setUserId("all");
+            }else{
+                shareDto.setUserId(userId);
+                shareDto = this.shareService.getShareInfo(shareDto);
+            }
+            
+            model.addAttribute("boardCategoryList"  , this.boardService.getBoardCategoryAndBoardList(boardCategoryPortalDto));
+            model.addAttribute("shareInfo"          , shareDto);
             sb.append("ajaxBlogMenu");
         }else if(menuType.equals("config")){
-            model.addAttribute("boardList", this.boardService.getBoardList());
+            BoardDto boardDto = new BoardDto();
+            model.addAttribute("boardList", this.boardService.getBoardList(boardDto));
             sb.append("ajaxConfigMenu");
         }else{    
             sb.append("ajaxMenu");

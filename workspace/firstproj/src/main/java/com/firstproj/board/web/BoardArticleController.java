@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,14 +65,14 @@ public class BoardArticleController {
 	
 	@Resource(name = "EditorController")
 	private EditorController editorController;
-	
+	/*	
 	// spring-data-redis 사용.
-//	@Autowired
-//	private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
+	@Autowired
+	private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
 	// spring-data-redis 사용.
-//	@Resource(name="redisTemplate")
-//	private ValueOperations<String, List<BoardArticleDto>> valueOps;
-
+	@Resource(name="redisTemplate")
+	private ValueOperations<String, List<BoardArticleDto>> valueOps;
+	 */
 	
 	/**
 	 * 게시글 목록 조회
@@ -109,14 +110,23 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = {"/list/{boardId}/{menuId}"}, method = {RequestMethod.POST, RequestMethod.GET})
-	public String getBoardArticleList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int boardId, @PathVariable int menuId) throws Exception {
+	@RequestMapping(value = {"/list/{boardId}"}, method = {RequestMethod.POST, RequestMethod.GET})
+	public String getBoardArticleList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int boardId) throws Exception {
 		return this.getCommonBoardArticleList(request, model, boardArticleDto);
 	}
 
-	
-    @RequestMapping(value = {"{userId}/list/{boardId}/{menuId}"}, method = {RequestMethod.POST, RequestMethod.GET})
-    public String getBoardArticleList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int boardId, @PathVariable int menuId, @PathVariable String userId) throws Exception {
+	/**
+	 * 게시글 목록 조회
+	 * @param request
+	 * @param model
+	 * @param boardArticleDto
+	 * @param boardId
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+    @RequestMapping(value = {"/{userId}/list/{boardId}"}, method = {RequestMethod.POST, RequestMethod.GET})
+    public String getBoardArticleList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int boardId, @PathVariable String userId) throws Exception {
         boardArticleDto.setCreateUserId(userId);
         return this.getCommonBoardArticleList(request, model, boardArticleDto);
     }
@@ -179,34 +189,34 @@ public class BoardArticleController {
 
 		List<BoardArticleDto> boardArticleList;	
 		int totalListCnt = 0;
-
-//		try{
-//			
-//			boardArticleList = valueOps.get("selectBoardArticle"+boardId+"ListAll");
-//			totalListCnt = boardArticleList.size();
-//			
-//			System.out.println(">>> redis pagedList print");
-//			
-//		}catch(Exception e){
+/*
+		try{
+			
+			boardArticleList = valueOps.get("selectBoardArticle"+boardId+"ListAll");
+			totalListCnt = boardArticleList.size();
+			
+			System.out.println(">>> redis pagedList print");
+			
+		}catch(Exception e){
 			BoardArticleDto boardArticleObj = new BoardArticleDto();
 			if(boardId > 0){
 			    boardArticleObj.setBoardId(boardId);    
 			}
-			
+*/			
 			boardArticleList = boardArticleService.getBoardArticleList(boardArticleDto);
 			totalListCnt = boardArticleList.size();	
-			
-//			valueOps.set("selectBoardArticle"+boardId+"ListAll", boardArticleList);
-//			System.out.println(">>> redis pagedList setted");
-			
+/*			
+			valueOps.set("selectBoardArticle"+boardId+"ListAll", boardArticleList);
+			System.out.println(">>> redis pagedList setted");
+*/			
 			model = this.getBoardCommonList(request, model, boardArticleDto);
+/*			
+			return model;
 			
-//			return model;
-//			
-//		}finally{
-//			
-//		}
-		
+		}finally{
+			
+		}
+*/		
 		int startRow = (pageNo - 1) * listRowCnt;
 		int endRow 	 = pageNo * listRowCnt;
 		
@@ -224,8 +234,6 @@ public class BoardArticleController {
 		}
 		
 		PagedList pagedList = new PagedList(pagedArticleList, pageNo, pageSize, totalListCnt, startRow, endRow, listRowCnt);
-		
-//		System.out.println("pagedList Data : " + pagedList.toString());		
 		
 		model.addAttribute("pagedResult", pagedList);
 		model.addAttribute("boardId", boardId);
@@ -249,7 +257,7 @@ public class BoardArticleController {
 		String searchText = request.getParameter("searchText");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
-//System.out.println(">>> searchCondition : " + searchCondition + ", searchText : " + searchText);
+
 		int boardId = boardArticleDto.getBoardId();
 		
 		int pageNo = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
@@ -269,7 +277,6 @@ public class BoardArticleController {
 		paramMap.put("endDate", endDate);
 
 		int totalListCnt = boardArticleService.selectArticleListCnt(paramMap);
-//System.out.println("totalListCnt : " + totalListCnt);
 		
 		// paging condition setting
 		paramMap.put("pageNo", pageNo);
@@ -299,6 +306,7 @@ public class BoardArticleController {
 		BoardArticleDto contentInfo 	= null;
 		BoardArticleDto prevContentInfo = null;
 		BoardArticleDto nextContentInfo = null;
+		BoardDto        boardDto        = new BoardDto();
 		
 		if(selectedArticleId > 0){
 			boardArticleDto.setArticleId(selectedArticleId);
@@ -317,19 +325,20 @@ public class BoardArticleController {
 		model.addAttribute("nextContentInfo", nextContentInfo);
 		
 		model.addAttribute("boardId"		, contentInfo.getBoardId());
-		model.addAttribute("boardList"		, this.boardService.getBoardList());
+		model.addAttribute("boardList"		, this.boardService.getBoardList(boardDto));
 		model.addAttribute("userInfo"       , sessionInfo);
 		
 		return "board/article/view";
 	}
 
 	
-    @RequestMapping(value = "{userId}/view/{selectedArticleId}")
+    @RequestMapping(value = "/{userId}/view/{selectedArticleId}")
     public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int selectedArticleId, @PathVariable String userId, HttpSession session) throws Exception{
         
         BoardArticleDto contentInfo     = null;
         BoardArticleDto prevContentInfo = null;
         BoardArticleDto nextContentInfo = null;
+        BoardDto        boardDto        = new BoardDto();
         
         if(selectedArticleId > 0){
             boardArticleDto.setArticleId(selectedArticleId);
@@ -349,7 +358,7 @@ public class BoardArticleController {
         model.addAttribute("nextContentInfo", nextContentInfo);
         
         model.addAttribute("boardId"        , contentInfo.getBoardId());
-        model.addAttribute("boardList"      , this.boardService.getBoardList());
+        model.addAttribute("boardList"      , this.boardService.getBoardList(boardDto));
         model.addAttribute("userInfo"       , sessionInfo);
         
         return "board/article/view";
@@ -365,20 +374,55 @@ public class BoardArticleController {
 	 */
 	@RequestMapping(value = "/write")
 	public String writeBoard(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session) throws Exception{
-		
-		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
-		
-		if(null != sessionInfo){
-			model.addAttribute("boardId", boardArticleDto.getBoardId());			
-		}else{
-		    return "redirect:/login?redirectPage=" + request.getRequestURI();
-		}
-		
-		model.addAttribute("boardList", this.boardService.getBoardList());
-		
-		return "board/article/write";
+	    return this.writeBoard(request, model, boardArticleDto, session, null);
 	}
 
+	/**
+	 * 게시글 입력 화면 출력
+	 * @param request
+	 * @param model
+	 * @param boardArticleDto
+	 * @param session
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+    @RequestMapping(value = "/{userId}/write")
+    public String writeBoard(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @PathVariable String userId) throws Exception{
+        return this.writeBoard(request, model, boardArticleDto, session, userId, null);
+    }
+	/**
+	 * 게시글 입력 화면 출력
+	 * @param request
+	 * @param model
+	 * @param boardArticleDto
+	 * @param session
+	 * @param userId
+	 * @param boardId
+	 * @return
+	 * @throws Exception
+	 */
+    @RequestMapping(value = "/{userId}/write/{boardId}")
+    public String writeBoard(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @PathVariable String userId, @PathVariable String boardId) throws Exception{
+        
+        UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+        BoardDto boardDto = new BoardDto();
+        if(null != sessionInfo){
+            if(!StringUtils.isEmpty(boardId)){
+                model.addAttribute("boardId", boardId);    
+            }else{
+                model.addAttribute("boardId", boardArticleDto.getBoardId());
+            }
+            boardDto.setCreateUserId(userId);
+        }else{
+            return "redirect:/login?redirectPage=" + request.getRequestURI();
+        }
+        
+        model.addAttribute("boardList"  , this.boardService.getBoardList(boardDto));
+        model.addAttribute("userId"     , userId);
+        return "board/article/write";
+    }
+	
 	/**
 	 * 게시글 입력(json타입 : 업로드 파일 없을 때)
 	 * @param boardArticleDto
@@ -585,30 +629,49 @@ public class BoardArticleController {
 	 */
 	@RequestMapping(value = "/modify")
 	public String modifyBoardArticlePage(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @Param int selectedArticleId, @Param int selectedBoardId) throws Exception{
-		
-		UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
-		
-		if(null != sessionInfo){
-			model.addAttribute("boardId", selectedBoardId);	
-			
-			BoardArticleDto articleInfo = null;
-			
-			if(selectedArticleId > 0){
-				boardArticleDto.setArticleId(selectedArticleId);
-				// 글 조회
-				articleInfo = this.boardArticleService.selectBoardArticle(boardArticleDto);
-			}
-			
-			model.addAttribute("articleInfo"	, articleInfo);		
-			model.addAttribute("boardList"		, this.boardService.getBoardList());
-			
-		}else{
-//		    System.out.println("URL : " + request.getRequestURL() +", URI : " + request.getRequestURI());
-		    return "redirect:/login?redirectPage=" + request.getRequestURI();
-		}
-		
-		return "board/article/write";
+	    return this.modifyBoardArticlePage(request, model, boardArticleDto, session, selectedArticleId, selectedBoardId, null);
 	}
+	
+	/**
+	 * 게시글 수정 화면 출력
+	 * @param request
+	 * @param model
+	 * @param boardArticleDto
+	 * @param session
+	 * @param selectedArticleId
+	 * @param selectedBoardId
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/{userId}/modify")
+    public String modifyBoardArticlePage(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @Param int selectedArticleId, @Param int selectedBoardId, @PathVariable String userId) throws Exception{
+        
+        UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+        BoardDto        boardDto        = new BoardDto();
+        if(null != sessionInfo){
+            model.addAttribute("boardId", selectedBoardId); 
+            
+            BoardArticleDto articleInfo = null;
+            
+            if(selectedArticleId > 0){
+                boardArticleDto.setArticleId(selectedArticleId);
+                // 글 조회
+                articleInfo = this.boardArticleService.selectBoardArticle(boardArticleDto);
+            }
+            
+            model.addAttribute("articleInfo"    , articleInfo);     
+            model.addAttribute("boardList"      , this.boardService.getBoardList(boardDto));
+            model.addAttribute("userId"         , userId);
+            
+        }else{
+//          System.out.println("URL : " + request.getRequestURL() +", URI : " + request.getRequestURI());
+            return "redirect:/login?redirectPage=" + request.getRequestURI();
+        }
+        
+        return "board/article/write";
+    }	
+	
 	
 	/**
 	 * 게시글 삭제

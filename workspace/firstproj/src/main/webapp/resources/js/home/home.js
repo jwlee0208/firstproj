@@ -1,9 +1,9 @@
 function goList(boardId){	
 	var menuId = boardId;
 	var userId = $("#userId").val();
-	var url = "/board/article/list/" + boardId + "/" + menuId;
+	var url = "/board/article/list/" + boardId;
 	if(userId != null && userId != ''){
-		url = "/share/" + userId +"/list/" + boardId + "/" + menuId;
+		url = "/share/" + userId +"/list/" + boardId;
 	} 
 	location.href = url;
 }

@@ -66,9 +66,12 @@
 					<div class="panel-body">
 						<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
 						${contentInfo.content} <br/><br/>
+						<div class="row" style="float: left; padding-left:10px;">
+							<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardName}</div>			
+						</div>				
 						<div class="row" style="float: right; padding-right:10px;">
-							<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div>
-							<div class="btn btn-primary" onclick="share('fb', '${contentInfo.articleId}');" title="Sharing Article To Facebook">f</div>
+							<div class="btn btn-primary" title="Sharing Article To Facebook"	onclick="share('fb', '${contentInfo.articleId}');" >f</div>
+							<div class="btn btn-info" 	 title="Sharing Article To Twitter" 	onclick="javascript:share('tw', '${contentInfo.articleId}', '${contentInfo.title}');" >t</div>
 						</div>
 						
 					</div>
