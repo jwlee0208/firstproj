@@ -551,9 +551,9 @@
 				 player_info_id = #{playerInfoId}
 		</update>
 		
-		<select id="selectPlayerListRecently" resultMap="playerListMap">
+		<select id="selectPlayerListRecently" parameterType="player.playerInfoDto" resultMap="playerListMap">
 			<include refid="selectPlayerListDefault"/>			
-			WHERE pi.cat_id1 = 1 
+			WHERE pi.cat_id1 = #{catId1} 
 			GROUP BY pi.player_info_id
 			ORDER BY pi.player_info_id ASC	
 			LIMIT 3  	

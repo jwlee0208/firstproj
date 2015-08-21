@@ -51,11 +51,11 @@ public interface PlayerService {
     
     public int 							deletePlayerInfo(PlayerInfoDto playerInfoDto) 								throws Exception;
     
-    public int updatePlayerInfoDetail(PlayerInfoDetail playerInfoDetail, UserDto userInfo) 							throws Exception;
+    public int                          updatePlayerInfoDetail(PlayerInfoDetail playerInfoDetail, UserDto userInfo) throws Exception;
 
-    public List<PlayerInfoDto> selectPlayerList(SearchPlayerDto searchPlayerDto, HttpSession session) throws Exception;
+    public List<PlayerInfoDto>          selectPlayerList(SearchPlayerDto searchPlayerDto, HttpSession session)      throws Exception;
     
-    public int selectPlayerCnt(SearchPlayerDto searchPlayerDto, HttpSession session) throws Exception;
+    public int                          selectPlayerCnt(SearchPlayerDto searchPlayerDto, HttpSession session)       throws Exception;
     
-    public List<PlayerInfoDto> getPlayerListRecently() throws Exception;
+    public List<PlayerInfoDto>          getPlayerListRecently(PlayerInfoDto playerInfoDto)                          throws Exception;
 }

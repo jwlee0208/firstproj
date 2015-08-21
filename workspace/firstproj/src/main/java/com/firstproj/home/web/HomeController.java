@@ -106,9 +106,17 @@ public class HomeController {
 		model.addAttribute("articleFive02", getBoardArticleFive02);
 		*/
 	    
-	    List<PlayerInfoDto>    recentPlayerList    = this.playerService.getPlayerListRecently();
+	    PlayerInfoDto playerInfoDto = new PlayerInfoDto();
+	    playerInfoDto.setCatId1(1);
+	    List<PlayerInfoDto>    recentPlayerList  = this.playerService.getPlayerListRecently(playerInfoDto);
+
+	    PlayerInfoDto teamInfoDto = new PlayerInfoDto();
+	    teamInfoDto.setCatId1(5);
+
+	    List<PlayerInfoDto>    recentTeamList    = this.playerService.getPlayerListRecently(teamInfoDto);
 	    
-	    model.addAttribute("recentPlayerList", recentPlayerList);
+	    model.addAttribute("recentPlayerList"  , recentPlayerList);
+	    model.addAttribute("recentTeamList"    , recentTeamList);
 	    
 		return "home3";
 	}	

@@ -284,7 +284,7 @@ public class PlayerServiceImpl implements PlayerService{
     }
 	
     @Override
-    public List<PlayerInfoDto> getPlayerListRecently() throws Exception{
-        return this.playerDao.selectPlayerListRecently();
+    public List<PlayerInfoDto> getPlayerListRecently(PlayerInfoDto playerInfoDto) throws Exception{
+        return this.playerDao.selectPlayerListRecently(playerInfoDto);
     }
 }
