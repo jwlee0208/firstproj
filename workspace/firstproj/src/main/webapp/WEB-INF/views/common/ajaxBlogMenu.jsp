@@ -26,7 +26,7 @@
 		    
 		    <c:set var="url" value=""/>
 	<c:choose>
-		<c:when test="${url ne '' && url ne null}">
+		<c:when test="${userId ne '' && userId ne null}">
 		    <c:set var="url" value='/share/${userId}'/>
 		    
 		</c:when>

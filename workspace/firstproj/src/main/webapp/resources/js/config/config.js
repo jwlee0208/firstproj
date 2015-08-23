@@ -17,3 +17,11 @@ function configBoardCategory(){
 function configCategory(){
 	
 }
+
+function configDefaultPriv(){
+	
+}
+
+function configProfileInfo(){
+	location.href = "/config/priv/modifyShareProfile";
+}

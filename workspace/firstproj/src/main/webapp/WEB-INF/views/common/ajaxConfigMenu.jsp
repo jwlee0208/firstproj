@@ -27,16 +27,20 @@
 		        <li class="dropdown">
 		        	<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">게시판 관리<span class="caret"></span></a>
 		        	<ul class="dropdown-menu" role="menu">
-		        		<li><a href="javascript:;" onclick="javascript:configBoard();">리스트 관리</a></li>
-		        		<li><a href="javascript:;" onclick="javascript:configBoardCategory();">카테고리 관리</a></li>
+		        		<li><a href="javascript:;" onclick="javascript:configBoard();">게시판 목록 관리</a></li>
+		        		<li><a href="javascript:;" onclick="javascript:configBoardCategory();">게시판 카테고리 관리</a></li>
 		        	</ul>
 		        </li>
 <!-- 		        <li> -->
 <!-- 		        	<a href="javascript:;" onclick="javascript:configCategory();" >카테고리 관리</a> -->
 <!-- 		        </li>				 -->
-<!-- 		        <li> -->
-<!-- 		        	<a href="javascript:;" onclick="javascript:configPrivInfo();" >개인정보 관리</a> -->
-<!-- 		        </li> -->
+		        <li>
+		        	<a href="javascript:;" onclick="javascript:configPrivInfo();" data-toggle="dropdown">개인정보 관리<span class="caret"></span></a>
+		        	<ul class="dropdown-menu" role="menu">
+		        		<li><a href="javascript:;" onclick="javascript:configDefaultPriv();">기본 정보 관리</a></li>
+		        		<li><a href="javascript:;" onclick="javascript:configProfileInfo();">Share 프로파일 관리</a></li>
+		        	</ul>
+		        </li>
 			</ul>
 		</div>
 	</div>

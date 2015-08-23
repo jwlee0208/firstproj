@@ -1,4 +1,4 @@
-package com.firstproj;
+package com.firstproj.config.web;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,8 +27,10 @@ import com.firstproj.board.dto.BoardDto;
 import com.firstproj.board.service.BoardCategoryServiceImpl;
 import com.firstproj.board.service.BoardServiceImpl;
 import com.firstproj.common.util.PagedList;
+import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;
 
+import com.firstproj.common.dto.ShareDto;
 @Controller
 @RequestMapping(value="/config")
 public class ConfigController {
@@ -36,10 +38,13 @@ public class ConfigController {
     public static final int DEFAULT_PAGE_SIZE  = 10;
 
     @Resource(name="BoardServiceImpl")
-    private BoardServiceImpl boardService;
+    private BoardServiceImpl 		 boardService;
     
     @Resource(name="BoardCategoryServiceImpl")
     private BoardCategoryServiceImpl boardCategoryService;
+    
+	@Resource(name="ShareServiceImpl")
+	private ShareServiceImpl         shareService;
 
     @RequestMapping(value="/main")
     public String getConfig() throws Exception{
@@ -54,7 +59,6 @@ public class ConfigController {
                 boardDto.setCreateUserId(sessionInfo.getUserId());        
             }else{
                 return "redirect:/login?redirectPage=" + request.getRequestURI();
-                
             }
 
             model = this.getBoardCommonList(request, model, boardDto);
@@ -245,5 +249,21 @@ public class ConfigController {
         
         model.addAttribute("boardCategoryList", boardCategoryList);
         return "config/board/categoryList";
+    }
+    
+    @RequestMapping(value="/priv/modifyShareProfile")
+    public String getShareProfileInfo(Model model, HttpSession session) throws Exception{
+    	UserDto    	sessionInfo    	= (UserDto)session.getAttribute("userInfo");
+        ShareDto	shareDto 		= new ShareDto();
+        ShareDto	shareInfo		= null;
+        
+    	if(sessionInfo != null){
+    		shareDto.setUserId(sessionInfo.getUserId());
+        	shareInfo = this.shareService.getShareInfo(shareDto);
+        }
+    	
+    	model.addAttribute("shareInfo"	, shareInfo);
+    	model.addAttribute("userInfo"	, sessionInfo);
+    	return "config/share/write";
     }
 }

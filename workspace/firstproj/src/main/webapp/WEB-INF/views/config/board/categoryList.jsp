@@ -8,12 +8,13 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
 
 	<div class="page-header">
- 	  <h1>Board's Category List</h1>
+ 	  <h1>Configuration&nbsp;&nbsp;&nbsp;<small>Board's Category List</small></h1>
 	</div>	
 	
 	<ol class="breadcrumb">
-	  <li><a>Admin</a></li>
-	  <li><a>Board's Category List</a></li>
+	  <li><a>configuration</a></li>
+	  <li><a>board</a></li>
+	  <li><a>Category List</a></li>
 	</ol>		
 	
 	<form id="boardFrm" name="boardFrm" method="post">

@@ -8,11 +8,12 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
 
 	<div class="page-header">
- 	  <h1>BOARD LIST</h1>
+ 	  <h1>Configuration&nbsp;&nbsp;&nbsp;<small>Board List</small></h1>
 	</div>	
 	
 	<ol class="breadcrumb">
-	  <li><a>Admin</a></li>
+	  <li><a>configuration</a></li>
+	  <li><a>board</a></li>
 	  <li><a>Board List</a></li>
 	</ol>		
 	
