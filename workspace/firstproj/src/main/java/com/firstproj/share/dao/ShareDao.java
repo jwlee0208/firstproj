@@ -15,4 +15,8 @@ public class ShareDao extends SqlSessionDaoSupport{
     public int insertShareInfo(ShareDto shareDto) throws Exception{
         return getSqlSession().insert("sql.share.insertShareInfo", shareDto);
     }
+    
+    public int updateShareInfo(ShareDto shareDto) throws Exception{
+        return getSqlSession().update("sql.share.updateShareInfo", shareDto);
+    }
 }

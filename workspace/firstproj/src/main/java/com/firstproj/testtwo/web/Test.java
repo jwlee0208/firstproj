@@ -1,5 +1,6 @@
 package com.firstproj.testtwo.web;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -62,7 +63,22 @@ public class Test {
 
 	}
 	
-	
+	private static void getDate(){
+	    
+        Calendar calendar = Calendar.getInstance();
+        
+        
+        StringBuffer startSb    = new StringBuffer();
+        StringBuffer endSb      = new StringBuffer();
+        String year      = String.valueOf(calendar.get(calendar.YEAR));
+        String prevMonth = String.format("%02d", calendar.get(calendar.MONTH));
+        
+        
+        String startDate = startSb.append(year).append(prevMonth).append(String.format("%02d", 1)).toString();
+        String endDate = endSb.append(year).append(prevMonth).append(String.format("%02d", calendar.getMaximum(calendar.DAY_OF_MONTH))).toString();
+        
+        System.out.println(startDate +"\n" + endDate);
+	}
 	
 	
 	public static void main(String[] args) throws Exception{
@@ -72,5 +88,8 @@ public class Test {
 	    String mail = new String(Base64.encodeBase64("jwlee0208@gmail.com".getBytes()));
 //		System.out.println(mail +", " + new String(Base64.decodeBase64(Base64.encodeBase64("jwlee0208@gmail.com".getBytes())))+", " + new String(Base64.decodeBase64(Base64.encodeBase64("andsZWUwMjA4QGdtYWlsLmNvbQ=="))));
 //		System.out.println(Base64.encodeBase64("jw22642912".getBytes()));
+	    
+	    Test.getDate();
+	    
 	}	
 }

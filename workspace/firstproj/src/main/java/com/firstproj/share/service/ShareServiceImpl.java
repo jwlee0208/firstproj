@@ -22,4 +22,9 @@ public class ShareServiceImpl implements ShareService{
     public int insertShareInfo(ShareDto shareDto) throws Exception{
         return this.shareDao.insertShareInfo(shareDto);
     }
+    
+    @Override
+    public int updateShareInfo(ShareDto shareDto) throws Exception{
+        return this.shareDao.updateShareInfo(shareDto);
+    }
 }

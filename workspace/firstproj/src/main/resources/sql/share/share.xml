@@ -21,4 +21,16 @@
     		VALUES 
     			(#{shareName}, #{shareType}, #{introduce}, #{userId}, now())	
     	</insert>
+
+    	<update id="updateShareInfo" parameterType="common.shareDto">
+    		UPDATE TB_SHARE 
+    			SET share_name 	= #{shareName}
+    			, 	share_type	= #{shareType}
+    			, 	introduce	= #{introduce}
+    			, 	user_id		= #{userId}
+    			, 	create_date	= now()
+			WHERE share_id 	= #{shareId}
+			  AND user_id	= #{userId}
+    	</update>
+
     </mapper>

@@ -27,9 +27,11 @@ import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.board.dto.BoardDto;
 import com.firstproj.board.service.BoardArticleServiceImpl;
 import com.firstproj.board.service.BoardServiceImpl;
+import com.firstproj.common.dto.ShareDto;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.web.EditorController;
+import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;
 
 @Controller
@@ -65,6 +67,10 @@ public class BoardArticleController {
 	
 	@Resource(name = "EditorController")
 	private EditorController editorController;
+	
+    @Resource(name = "ShareServiceImpl")
+    private ShareServiceImpl               shareService;        
+
 	/*	
 	// spring-data-redis 사용.
 	@Autowired
@@ -700,4 +706,18 @@ public class BoardArticleController {
 		return jsonObj;
 	}
 	
+	@RequestMapping(value="/profile/{userId}")
+	public String goProfile(@PathVariable String userId, Model model) throws Exception{
+	    ShareDto shareDto  = new ShareDto();
+	    ShareDto shareInfo = null;
+	        
+	    if(!StringUtils.isEmpty(userId)){
+	        shareDto.setUserId(userId);         
+	        shareInfo = this.shareService.getShareInfo(shareDto);
+	    }
+	        
+	    model.addAttribute("shareInfo", shareInfo);
+	    return "board/article/profile";
+	}
+
 }

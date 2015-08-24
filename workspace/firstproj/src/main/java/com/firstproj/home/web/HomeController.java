@@ -15,7 +15,6 @@ import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.board.service.BoardArticleRedisServiceImpl;
 import com.firstproj.board.service.BoardArticleServiceImpl;
 import com.firstproj.player.dto.PlayerInfoDto;
-import com.firstproj.player.dto.SearchPlayerDto;
 import com.firstproj.player.service.PlayerServiceImpl;
 
 
@@ -26,13 +25,14 @@ public class HomeController {
 	private static final Log logger = LogFactory.getLog(HomeController.class);
 	
 	@Resource(name = "BoardArticleServiceImpl")
-	private BoardArticleServiceImpl boardArticleService;	
+	private BoardArticleServiceImpl        boardArticleService;	
 
 	@Resource(name = "BoardArticleRedisServiceImpl")
-	private BoardArticleRedisServiceImpl boardArticleRedisService;	
+	private BoardArticleRedisServiceImpl   boardArticleRedisService;	
 
 	@Resource(name = "PlayerServiceImpl")
-	private PlayerServiceImpl playerService;    
+	private PlayerServiceImpl              playerService;    
+
 	// spring-data-redis 사용.
 //	@Autowired
 //	private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
@@ -214,9 +214,10 @@ logger.info("is Null : " + (null == getBoardArticleFive01));
 	
 	
 	@RequestMapping(value="/aboutUs/{menuId}")
-	public String goAboutUs(@PathVariable int menuId) throws Exception{
+	public String goAboutUs() throws Exception{
 		return "/info/aboutUs";
 	}
+	    
 //	@RequestMapping(value="/getFiveArticle")
 //	public String getBoardArticle(Model model) throws Exception{
 //		

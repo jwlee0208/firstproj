@@ -12,7 +12,13 @@ function goHome(){
 }
 
 function goInfo(){
-	location.href = "/aboutUs/5";
+	var userId = $("#userId").val();
+	var url = "/aboutUs";
+	if(userId != null && userId != ''){
+		url = "/share/profile/" + userId;
+	} 
+
+	location.href = url;
 }
 
 function goRegist(boardId){

@@ -266,4 +266,33 @@ public class ConfigController {
     	model.addAttribute("userInfo"	, sessionInfo);
     	return "config/share/write";
     }
+    
+    @RequestMapping(value="/priv/modifyShareProfileAction")
+    public JSONObject modifyShareProfileInfo(HttpServletRequest request, Model model, HttpSession session, ShareDto shareDto) throws Exception{
+        JSONObject resultObj       = new JSONObject();
+        UserDto    sessionInfo     = (UserDto)session.getAttribute("userInfo");
+        
+        if(sessionInfo != null){
+
+            if(shareDto != null){
+                int updateResult = this.shareService.updateShareInfo(shareDto);
+                if(updateResult > 0){
+                    resultObj.put("code"    , "ok");
+                    resultObj.put("message" , "success");                    
+                }else{
+                    resultObj.put("code"    , "error");
+                    resultObj.put("message" , "not updated");
+                }
+            }else{
+                resultObj.put("code"    , "error");
+                resultObj.put("message" , "invalid object(null)");
+            }
+
+        }else{
+            resultObj.put("code"    , "error");
+            resultObj.put("message" , "invalid session");
+        }
+            
+        return resultObj;
+    }
 }

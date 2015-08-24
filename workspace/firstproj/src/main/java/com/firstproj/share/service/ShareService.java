@@ -6,5 +6,7 @@ public interface ShareService {
     public ShareDto  getShareInfo(ShareDto shareDto)    throws Exception;
     
     public int       insertShareInfo(ShareDto shareDto) throws Exception;
+
+    public int       updateShareInfo(ShareDto shareDto) throws Exception;
     
 }
