@@ -2,23 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<!DOCTYPE HTML>
-<html lang="ko">
-<head>
-<!-- <meta charset="UTF-8"> -->
-<!-- <meta http-equiv="X-UA-Compatible" 	content="IE=Edge" /> -->
-<!-- <meta name="viewport" 				content="width=device-width, initial-scale=1"> -->
-<!-- <meta name="title" 					content="Developer's Blog"/> -->
-<!-- <meta name="author" 				content="Lee Jinwon"/> -->
-<!-- <meta name="description" 			content="Welcome to enter here. Here is developer's blog"/> -->
-<!-- <meta name="robots" 				content="index,follow" />  -->
-<!-- <meta name="keywords" 				content="blog, baseball, link, player, profile"/> -->
-
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/common/paging.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleList.js"></script>
 <link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/pagination.css">
-</head>
-<body>
 	<div class="blog-header">
 	  <h1>BOARD&nbsp;&nbsp;<small>ALL</small></h1>
 	</div>	
@@ -33,7 +19,7 @@
 	
 	<!-- 리스트에서 선택된 게시글 아이디 -->
 <!-- 	<input type="hidden" id="selectedArticleId" name="selectedArticleId" /> -->
-<%-- 	<input type="hidden" id="boardId" name="boardId" value="${boardInfo.boardId}"/> --%>
+	<input type="hidden" id="boardId" name="boardId" value="0"/>
 
 	<!-- 검색 영역 -->	
 	<div class="form-group" role="search">
@@ -65,7 +51,7 @@
 				<div id="collapse${index.count}" class="collapse in">
 					<div class="panel-body">
 						<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
-						${contentInfo.content} <br/><br/>
+						<c:out value="${contentInfo.content}" escapeXml="false"/> <br/><br/>
 						<div class="row" style="float: left; padding-left:10px;">
 							<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardName}</div>			
 						</div>				
@@ -91,22 +77,14 @@
 	<!-- paging area -->                                                
 	<c:set var="totalListCnt" value="${pagedResult.totalListCnt}"/>
 	<c:set var="totalPageCnt" value="${pagedResult.totalPageCnt}"/>
-	                                                                                                      
-	<jsp:include page="../../common/paging.jsp" flush="false">
-	    <jsp:param value="${totalPageCnt}"            name="totalPageCnt"/>
-	    <jsp:param value="${pagedResult.pageNo}"      name="pageNo"/>
-	    <jsp:param value="${pagedResult.startPageNo}" name="startPageNo"/>
-	    <jsp:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
-	</jsp:include>
+	<c:import url="/common/paging">
+		<c:param value="${totalPageCnt}"            name="totalPageCnt"/>
+	    <c:param value="${pagedResult.pageNo}"      name="pageNo"/>
+	    <c:param value="${pagedResult.startPageNo}" name="startPageNo"/>
+	    <c:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
+	</c:import>                                                                                                      
 
-
-<!-- 	<div class="btn-group btn-group-justified" style="padding-bottom: 20px;"> -->
-<!-- 		<div class="btn-group"> -->
-<!-- 			<input type="submit" class="btn btn-default pull-right" value="글쓰기" name="goToWrite" /> -->
-<!-- 		</div> -->
-<!-- 	</div>	 -->
-</body>
-<script>
+<script type="text/javascript">
 $(document).ready(function() {
 	$("div img").addClass("media-object");
 	$("div img").attr("width", "100%");
@@ -130,12 +108,6 @@ $(document).ready(function() {
 			$(this).children("a").text($(this).children("a").text().replace("∨ ", "∧ "));
 				
 		}
-// 		if($($(this).children("a").attr("href")).attr("height")){
-// 			$(this).children("a").text($(this).children("a").text().replace(" > 열기", " > 닫기"));
-// 		}else{
-// 			$(this).children("a").text($(this).children("a").text().replace(" > 닫기", " > 열기"));
-// 		}	
 	});
 });
 </script>
-</html>

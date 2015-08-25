@@ -15,8 +15,12 @@ function goPage(pageNo) {
 	$("#pageNo").val(pageNo);
 	var url 	= '/board/article/list';
 	var userId 	= $("#userId").val();
+	var boardId	= $("#boardId").val();
 	if(userId != null && userId != ''){
-		url = "/share/" + userId + "/list/" + $("#boardId").val();
+		url = "/share/" + userId + "/list";
+		if(boardId > 0){
+			url += "/" + boardId; 
+		}
 	}
 	
 	$.ajax({

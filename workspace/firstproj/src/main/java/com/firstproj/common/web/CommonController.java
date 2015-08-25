@@ -127,5 +127,10 @@ public class CommonController {
     public String getUseRule() throws Exception{
         return "common/useRule";
     }
+    
+    @RequestMapping(value = "/paging")
+    public String getPaging(HttpServletRequest request, Model model) throws Exception{
+        return "common/ajaxPaging";
+    }
 
 }

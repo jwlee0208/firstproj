@@ -162,12 +162,12 @@
 		$("head meta[name=description]").attr("content", '<c:out value="${content}"/>');
 		$("head meta[name=author]").attr("content", '${contentInfo.authorNm}');
 		$("title").text('${contentInfo.title}');
-		*/
+		
 		$("#meta_title").attr("content", '${contentInfo.title}');	
 		$("#meta_desc").attr("content", '<c:out value="${content}"/>');
 		$("#meta_author").attr("content", '${contentInfo.authorNm}');
 		$("title").text('${contentInfo.title}');
-		
+		*/
 	}
 	function chkNoImage(){
 		$("div img").addClass("media-object");

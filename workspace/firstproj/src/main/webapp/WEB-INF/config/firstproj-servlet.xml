@@ -217,9 +217,10 @@
 
 		<interceptor>
 			<mapping path="/board/article/**"/>
+			<mapping path="/share/**"/>
 			<beans:bean class="com.firstproj.interceptor.BoardArticleInterceptor" />
 		</interceptor>
-		
+
 <!-- 		<interceptor>   -->
 <!-- 			<mapping path="/**/*" /> -->
 <!-- 			<exclude-mapping path="/img/**"/> -->

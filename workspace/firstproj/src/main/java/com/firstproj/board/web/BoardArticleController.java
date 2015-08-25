@@ -122,6 +122,12 @@ public class BoardArticleController {
 		return this.getCommonBoardArticleList(request, model, boardArticleDto);
 	}
 
+    @RequestMapping(value = {"/{userId}/list"}, method = {RequestMethod.POST, RequestMethod.GET})
+    public String getBoardArticleMainList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable String userId) throws Exception {
+        boardArticleDto.setCreateUserId(userId);
+        return this.getCommonBoardArticleList(request, model, boardArticleDto);
+    }
+
 	/**
 	 * 게시글 목록 조회
 	 * @param request
@@ -138,7 +144,6 @@ public class BoardArticleController {
         return this.getCommonBoardArticleList(request, model, boardArticleDto);
     }
 
-	
 	private String getCommonBoardArticleList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
 	    
         model = this.getBoardCommonListForJson(request, model, boardArticleDto);

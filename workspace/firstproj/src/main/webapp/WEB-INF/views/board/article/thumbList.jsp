@@ -5,14 +5,6 @@
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
-<!-- <meta charset="UTF-8"> -->
-<!-- <meta http-equiv="X-UA-Compatible" 	content="IE=Edge" /> -->
-<!-- <meta name="viewport" 				content="width=device-width, initial-scale=1"> -->
-<!-- <meta name="title" 					content="Developer's Blog"/> -->
-<!-- <meta name="author" 				content="Lee Jinwon"/> -->
-<!-- <meta name="description" 			content="Welcome to enter here. Here is developer's blog"/> -->
-<!-- <meta name="robots" 				content="index,follow" />  -->
-<!-- <meta name="keywords" 				content="blog, baseball, link, player, profile"/> -->
 
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleList.js"></script>
 <link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/pagination.css">
@@ -84,12 +76,12 @@
 	<c:set var="totalListCnt" value="${pagedResult.totalListCnt}"/>
 	<c:set var="totalPageCnt" value="${pagedResult.totalPageCnt}"/>
 	                                                                                                      
-	<jsp:include page="../../common/paging.jsp" flush="false">
-	    <jsp:param value="${totalPageCnt}"            name="totalPageCnt"/>
-	    <jsp:param value="${pagedResult.pageNo}"      name="pageNo"/>
-	    <jsp:param value="${pagedResult.startPageNo}" name="startPageNo"/>
-	    <jsp:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
-	</jsp:include>
+	<c:import url="/common/paging">
+		<c:param value="${totalPageCnt}"            name="totalPageCnt"/>
+	    <c:param value="${pagedResult.pageNo}"      name="pageNo"/>
+	    <c:param value="${pagedResult.startPageNo}" name="startPageNo"/>
+	    <c:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
+	</c:import>                                                                                                      
 
 	<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
 		<div class="btn-group">

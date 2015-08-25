@@ -18,9 +18,9 @@ public class BoardArticleDto extends SearchCondition {
 	private String			thumbnailSize;
 	
 	
-	private int	   			articleId;
+	private int	   			articleId = 0;
 	@NotNull @Min(0)
-	private int				boardId;
+	private int				boardId = 0;
 	@NotNull @NotEmpty
 	private String 			title;
 	@NotNull @NotEmpty
@@ -31,8 +31,8 @@ public class BoardArticleDto extends SearchCondition {
 	private MultipartFile 	thumbImg;
 	private String			filePath;	
 	private String			originalFileName;
-	private int 			status;
-	private int             boardCategoryId;
+	private int 			status = 0;
+	private int             boardCategoryId = 0;
 	private String          boardCategoryName;
 	private String			boardName;
 	

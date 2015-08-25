@@ -224,12 +224,12 @@
 		<c:set var="totalListCnt" value="${pagedResult.totalListCnt}"/>
 		<c:set var="totalPageCnt" value="${pagedResult.totalPageCnt}"/>
 		                                                                                                      
-		<jsp:include page="../common/paging.jsp" flush="false">
-		    <jsp:param value="${totalPageCnt}"            name="totalPageCnt"/>
-		    <jsp:param value="${pagedResult.pageNo}"      name="pageNo"/>
-		    <jsp:param value="${pagedResult.startPageNo}" name="startPageNo"/>
-		    <jsp:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
-		</jsp:include>
+		<c:import url="/common/paging">
+			<c:param value="${totalPageCnt}"            name="totalPageCnt"/>
+		    <c:param value="${pagedResult.pageNo}"      name="pageNo"/>
+		    <c:param value="${pagedResult.startPageNo}" name="startPageNo"/>
+		    <c:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
+		</c:import>                                                                                                      
 	
 	<c:if test="${!isRegisted}">
 		<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
