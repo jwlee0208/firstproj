@@ -159,3 +159,14 @@ CREATE TABLE `TB_SHARE` (
   `create_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`share_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='쉐어(블로그) 정보'; 
+
+-- tb_slideshare_link table creation
+CREATE TABLE `TB_SLIDESHARE_LINK` (
+  `slide_id` int(11) NOT NULL AUTO_INCREMENT,
+  `article_id` int(11) NOT NULL,
+  `slideshare_link_url` varchar(2000) COLLATE utf8_bin NOT NULL,
+  `create_user_id` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `create_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`slide_id`),
+  UNIQUE KEY `slide_id_UNIQUE` (`slide_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='slideshare link table';

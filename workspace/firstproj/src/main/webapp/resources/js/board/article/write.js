@@ -76,7 +76,7 @@ $(function(){
 						}
 					},
 					error : function(xhr, textStatus, thrownError){
-//						console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
+						console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
 					}
 				});
 				

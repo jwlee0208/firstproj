@@ -11,7 +11,7 @@
 	
 	<input type="hidden" id="authorId" 	name="authorId" 	value="${sessionInfo.userId}"/>
 	<input type="hidden" id="authorNm" 	name="authorNm" 	value="${sessionInfo.userNm}"/>
-	<input type="hidden" id="articleId" name="articleId" 	value="${articleInfo.articleId}"/>
+	<input type="hidden" id="articleId" name="articleId" 	value="${(articleInfo eq null) ? 0 : articleInfo.articleId}"/>
 	<input type="hidden" id="userId"	name="userId"		value="${userId}" />
 	<div class="wrap">
 	<h1 id="btn-groups" class="page-header">Write Content</h1>
@@ -68,7 +68,25 @@
 					<tr>
 						<th><div class="form-group">내용</div></th>
 						<td><div class="form-group"><textarea class="form-control tinymce" id="content" name="content"><c:out value="${articleInfo.content}"/></textarea></div></td>				
-					</tr>
+					</tr>					
+					<tr>
+						<th><div class="form-group">SlideShare 공유 링크</div></th>
+						<td>
+							<div class="form-group">
+						<c:choose>	
+							<c:when test="${articleInfo.slideshareLinkInfos ne null}">
+								<c:forEach var="slideshareLinkInfo" items="${articleInfo.slideshareLinkInfos}" varStatus="index">
+								<input type="hidden" class="form-control" id="slideId_${index.count-1}" name="slideshareLinkInfos[${index.count-1}].slideId" value='<c:out value="${slideshareLinkInfo.slideId}"/>'/>
+								<input type="text" class="form-control" id="slideshareLinkUrl_${index.count-1}" name="slideshareLinkInfos[${index.count-1}].slideshareLinkUrl" value='<c:out value="${slideshareLinkInfo.slideshareLinkUrl}"/>'/>
+								</c:forEach>								
+							</c:when>
+							<c:otherwise>
+								<input type="text" class="form-control" id="slideshareLinkUrl" name="slideshareLinkInfos[0].slideshareLinkUrl" />
+							</c:otherwise>
+						</c:choose>		
+							</div>
+						</td>				
+					</tr>					
 					<tr>
 						<td><div class="form-group">썸네일 업로드</div></td>
 						<td>

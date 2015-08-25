@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.board.dto.SideBoardListDto;
+import com.firstproj.board.dto.SlideshareLinkDto;
 import com.firstproj.common.util.SearchCondition;
 
 @Repository("BoardArticleDao")
@@ -59,9 +60,14 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 	 */
 	public int insertBoardArticle(BoardArticleDto boardArticleDto) throws Exception{
 		
-//		System.out.println(">>> In Dao : " + boardArticleDto.toString());
-		
-		return getSqlSession().insert("sql.boardArticle.insertArticleInfo", boardArticleDto);
+		int articleId     = 0;
+	    int inputResult   = getSqlSession().insert("sql.boardArticle.insertArticleInfo", boardArticleDto);
+	    
+	    if(inputResult > 0){
+	        articleId = boardArticleDto.getArticleId();
+	    }
+	    
+		return articleId;
 	}
 	
 	/**
@@ -138,7 +144,8 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 	}
 	
 	/**
-	 * 
+	 * @brief 우측 가장자리의 게시글 목록 조회
+	 * @param sideBoardListDto
 	 * @return
 	 * @throws Exception
 	 */
@@ -146,4 +153,23 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 	    return getSqlSession().selectList("sql.boardArticle.selectSideBoardList", sideBoardListDto);
 	}
 	
+	/**
+	 * @brief slideshare 공유 링크 정보 입력
+	 * @param slideshareLinkDto
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertSlideshareInfo(SlideshareLinkDto slideshareLinkDto) throws Exception{
+	    return getSqlSession().insert("sql.boardArticle.insertSlideshareLinkInfo", slideshareLinkDto);
+	}
+	
+	/**
+	 * @brief slideshare 공유 링크 정보 수정
+	 * @param slideshareLinkDto
+	 * @return
+	 * @throws Exception
+	 */
+    public int updateSlideshareInfo(SlideshareLinkDto slideshareLinkDto) throws Exception{
+        return getSqlSession().update("sql.boardArticle.updateSlideshareLinkInfo", slideshareLinkDto);
+    }	
 }

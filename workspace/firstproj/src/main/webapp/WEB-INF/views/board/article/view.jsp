@@ -77,6 +77,16 @@
 			<div class="panel-body">
 				<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
 				<div style="min-height: 400px;"><c:out value="${contentInfo.content}" escapeXml="false"/></div>
+				<div class="embed-responsive embed-responsive-16by9">
+					<c:set var="slideshareLinkInfos" value="${contentInfo.slideshareLinkInfos}"/>
+					
+					<c:if test="${!empty slideshareLinkInfos}">
+						<c:forEach var="slideshareLinkInfo" items="${slideshareLinkInfos}">
+							<c:out value="${slideshareLinkInfo.slideshareLinkUrl}" escapeXml="false"/><br/>
+						</c:forEach>
+					</c:if>				
+				</div>
+				
 			<c:if test="${contentInfo.filePath ne null && contentInfo.filePath ne ''}">	
 				<div class="thumbImg unset" style="padding-top : 20px; ">
 					썸네일 : 
@@ -96,6 +106,9 @@
 					</ul>	
 				</div>										
 			</c:if>
+			
+			
+
 				<div class="row" style="float: left; padding-left:10px;">
 					<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div><br/>
 				</div>			
@@ -140,6 +153,8 @@
 		
 		// Check out noImage
 		chkNoImage();
+
+		$("iframe").addClass("embed-responsive-item");
 	});
 	function initMetaData(){
 		/*

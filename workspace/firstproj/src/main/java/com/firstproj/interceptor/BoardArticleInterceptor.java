@@ -45,7 +45,7 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
         
         String uri          = request.getRequestURI();
         
-        if(!mav.isEmpty()){
+        if(mav!= null && !mav.isEmpty()){
             Map<String, Object> model = mav.getModel();
             
             if(uri.indexOf("view") > 0){

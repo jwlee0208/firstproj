@@ -1,20 +1,22 @@
 package com.firstproj.testtwo.web;
 
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+import org.springframework.beans.factory.annotation.Value;
 
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.JedisSentinelPool;
-import redis.clients.jedis.Protocol;
+import com.benfante.jslideshare.SlideShareAPI;
+import com.benfante.jslideshare.SlideShareAPIFactory;
+import com.benfante.jslideshare.messages.Tag;
 
 public class Test {
+    
+    @Value("${slideshare.api.key}")
+    private static String apiKey;
+    
+    @Value("${slideshare.shared.secret}")
+    private static String sharedSecret;
+    
 	public static String solution(String S) {
         String shiftedStr = "";
         System.out.println("S : " + S);
@@ -91,5 +93,13 @@ public class Test {
 	    
 	    Test.getDate();
 	    
+	    System.out.println("apiKey : " + Test.apiKey +", secret : " + Test.sharedSecret);
+	    
+	    SlideShareAPI ssapi = SlideShareAPIFactory.getSlideShareAPI("EzdnlXer", "2PFQEaHV");
+
+	    
+	    
+	    Tag tag = ssapi.getSlideshowByTag("baseball");
+	    System.out.println(tag.getName());
 	}	
 }

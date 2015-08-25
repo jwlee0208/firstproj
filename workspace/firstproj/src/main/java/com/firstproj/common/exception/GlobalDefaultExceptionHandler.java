@@ -16,7 +16,8 @@ public class GlobalDefaultExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-    	System.out.println("globalDefaultExceptionHandler : " + req.getRequestURI() +", exception : " + e.getMessage());
+    	System.out.println("globalDefaultExceptionHandler : " + req.getRequestURI() +", exception : " + e.getMessage() + ", ");
+    	e.printStackTrace();
         // If the exception is annotated with @ResponseStatus rethrow it and let
         // the framework handle it - like the OrderNotFoundException example
         // at the start of this post.

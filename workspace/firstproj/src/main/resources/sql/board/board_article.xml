@@ -4,6 +4,31 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
     <mapper namespace="sql.boardArticle">
+    
+    	<resultMap id="boardArticleMap" type="board.boardArticleDto">
+			<id 	column="article_id" 			property="articleId"/>
+			<result column="board_id" 				property="boardId"/>
+			<result column="title" 					property="title"/>
+			<result column="content" 				property="content"/>
+			<result column="file_path" 				property="filePath"/>
+			<result column="original_file_name" 	property="originalFileName"/>
+			<result column="author_id" 				property="authorId"/>
+			<result column="author_nm" 				property="authorNm"/>
+			<result column="create_date" 			property="createDate"/>
+			<result column="board_category_id" 		property="boardCategoryId"/>
+			<result column="board_category_name" 	property="boardCategoryName"/>
+			<result column="board_name" 			property="boardName"/>
+			<collection property="slideshareLinkInfos" ofType="board.slideshareLinkDto">
+				<id 	column="slide_id" 				property="slideId"/>
+				<result column="article_id" 			property="articleId"/>
+				<result column="slideshare_link_url" 	property="slideshareLinkUrl"/>
+				<result column="create_user_id" 		property="createUserId"/>
+				<result column="create_date" 			property="createDate"/>
+			</collection>
+		</resultMap> 
+    	
+    
+    
         <insert id="insertArticleInfo" parameterType="board.boardArticleDto" useGeneratedKeys="true" keyProperty="articleId">
             INSERT INTO TB_BOARD_ARTICLE
 				(
@@ -18,16 +43,20 @@
 				status)
 			VALUES (
 				#{boardId},
-				#{title },
-				#{content },
+				#{title},
+				#{content},
 				#{filePath},
 				#{originalFileName},
-				#{authorId },
-				#{authorNm },
+				#{authorId},
+				#{authorNm},
 				CURRENT_TIMESTAMP(),
 				#{status})
+			<selectKey keyProperty="articleId" resultType="int" order="AFTER">
+				 SELECT last_insert_id()	as articleId
+			</selectKey>
+				
         </insert>
-        <select id="selectList" parameterType="board.boardArticleDto" resultType="board.boardArticleDto">
+        <select id="selectList" parameterType="board.boardArticleDto" resultMap="boardArticleMap">
             <include refid="searchSql"/>   
             <where>
 				<include refid="searchConditionSql"/>
@@ -44,7 +73,7 @@
 		</select>      
 		
 		<!-- 리스트 조회 -->    
-		<select id="selectBoardList" resultType="board.boardArticleDto" parameterType="searchCondition">                      
+		<select id="selectBoardList" resultMap="boardArticleMap" parameterType="searchCondition">                      
 			<include refid="searchSql"/>  
 			<where>                    
 				<include refid="searchConditionSql"/>
@@ -54,12 +83,12 @@
 		</select>		
 		
 		<!--  게시글 조회 -->
-		<select id="selectBoardContent" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">
+		<select id="selectBoardContent" resultMap="boardArticleMap" parameterType="board.boardArticleDto">
 		    <include refid="searchSql"/>
 		    <include refid="searchContentSql"/>
 		</select>
 		<!-- 이전 글 조회 -->
-		<select id="selectPrevBoardContent" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">
+		<select id="selectPrevBoardContent" resultMap="boardArticleMap" parameterType="board.boardArticleDto">
 		 	 <include refid="searchSql"/>  
 				where
 					ba.board_id = ${boardId}	
@@ -71,7 +100,7 @@
 				limit 1	 	 		    
 		</select>
 		<!-- 다음 글 조회 -->
-		<select id="selectNextBoardContent" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">
+		<select id="selectNextBoardContent" resultMap="boardArticleMap" parameterType="board.boardArticleDto">
 		 	 <include refid="searchSql"/>  
 				where 
 					ba.board_id = ${boardId}
@@ -98,10 +127,13 @@
 			    ba.create_date,
 			    bc.board_category_id,
 			    bc.board_category_name,
-			    b.board_name 
+			    b.board_name,
+			    sl.slide_id,
+			    sl.slideshare_link_url 
 			FROM TB_BOARD_ARTICLE ba
-			INNER JOIN TB_BOARD b 			ON b.board_id = ba.board_id
-			INNER JOIN TB_BOARD_CATEGORY bc ON b.board_category_id = bc.board_category_id
+			INNER JOIN TB_BOARD 			b  ON b.board_id 			= ba.board_id
+			INNER JOIN TB_BOARD_CATEGORY 	bc ON b.board_category_id 	= bc.board_category_id
+			LEFT  JOIN TB_SLIDESHARE_LINK 	sl ON sl.article_id 		= ba.article_id
 		</sql>
 		<sql id="searchConditionSql">
 				<if test="boardId > 0">
@@ -148,7 +180,7 @@
 		
 		
 		<!-- 5개의 게시글 조회 -->    
-		<select id="selectArticleFive" resultType="board.boardArticleDto" parameterType="board.boardArticleDto">                      
+		<select id="selectArticleFive" resultMap="boardArticleMap" parameterType="board.boardArticleDto">                      
 			<include refid="searchSql"/>              
 			<where>
 				<if test="boardId > 0">
@@ -208,4 +240,27 @@
 			GROUP BY b.board_id
 			ORDER BY bc.board_category_id ASC, b.board_id DESC
 		</select>
+		
+		<insert id="insertSlideshareLinkInfo" parameterType="board.slideshareLinkDto" useGeneratedKeys="true" keyProperty="slideId">
+			INSERT INTO TB_SLIDESHARE_LINK
+			(
+				article_id,
+				slideshare_link_url,
+				create_user_id,
+				create_date)
+			VALUES
+			(
+				#{articleId},
+				#{slideshareLinkUrl},
+				#{createUserId},
+				now())		
+		</insert>
+		<update id="updateSlideshareLinkInfo" parameterType="board.slideshareLinkDto">
+			UPDATE TB_SLIDESHARE_LINK
+			SET 
+				article_id = #{articleId},
+				slideshare_link_url = #{slideshareLinkUrl}
+			WHERE slide_id = #{slideId}			
+		</update>
+
     </mapper>

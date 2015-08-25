@@ -5,12 +5,14 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.firstproj.board.dao.BoardArticleDao;
 import com.firstproj.board.dao.BoardArticleRedisDao;
 import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.board.dto.SideBoardListDto;
+import com.firstproj.board.dto.SlideshareLinkDto;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.util.PagingUtil;
 
@@ -78,9 +80,17 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	 * 게시글 입력
 	 */
 	@Override
-	public int insertBoardArticle(BoardArticleDto boardArticleDto) throws Exception{
+	public int insertBoardArticle(BoardArticleDto boardArticleDto){
 //		System.out.println(">>> In ServiceImpl insertBoardArticle : " + boardArticleDto.toString());
-		return this.boardArticleDao.insertBoardArticle(boardArticleDto);
+	    int articleId = 0;
+        try {
+            articleId = this.boardArticleDao.insertBoardArticle(boardArticleDto);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+		return articleId;
 	}
 	/**
 	 * 게시글 수정
@@ -139,4 +149,34 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	    return this.boardArticleDao.selectSideBoardList(sideBoardListDto);
 	}
 	
+	/**
+	 * @brief 슬라이드쉐어 
+	 * @param slideshareLinkDto
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public int insertSlideshareInfo(SlideshareLinkDto slideshareLinkDto){
+	    int insertResult = 0;
+	    try {
+	        insertResult = this.boardArticleDao.insertSlideshareInfo(slideshareLinkDto);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+	    return insertResult;
+	}
+
+    @Override
+    public int updateSlideshareInfo(SlideshareLinkDto slideshareLinkDto){
+        int updateResult = 0;
+        try {
+            updateResult = this.boardArticleDao.updateSlideshareInfo(slideshareLinkDto);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return updateResult;
+    }
+
 }

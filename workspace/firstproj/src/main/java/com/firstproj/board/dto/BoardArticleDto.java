@@ -1,5 +1,7 @@
 package com.firstproj.board.dto;
 
+import java.util.List;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -9,12 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.firstproj.common.util.SearchCondition;
 
-
-@SuppressWarnings("serial")
 @Alias("board.boardArticleDto")
-public class BoardArticleDto extends SearchCondition
-//implements Serializable
-{
+public class BoardArticleDto extends SearchCondition {
     
 	// 입력 파라미터
 	private String			thumbnailSize;
@@ -37,6 +35,8 @@ public class BoardArticleDto extends SearchCondition
 	private int             boardCategoryId;
 	private String          boardCategoryName;
 	private String			boardName;
+	
+	private List<SlideshareLinkDto>          slideshareLinkInfos;
 	
 	public int getArticleId() {
 		return articleId;
@@ -135,13 +135,25 @@ public class BoardArticleDto extends SearchCondition
 		this.boardName = boardName;
 	}
 	
-	@Override
-	public String toString() {
-		return "BoardArticleDto [thumbnailSize=" + thumbnailSize + ", articleId=" + articleId + ", boardId=" + boardId
-				+ ", title=" + title + ", content=" + content + ", authorId=" + authorId + ", authorNm=" + authorNm
-				+ ", createDate=" + createDate + ", thumbImg=" + thumbImg + ", filePath=" + filePath
-				+ ", originalFileName=" + originalFileName + ", status=" + status + ", boardCategoryId="
-				+ boardCategoryId + ", boardCategoryName=" + boardCategoryName + ", boardName=" + boardName + "]";
-	}
-	
+	public List<SlideshareLinkDto> getSlideshareLinkInfos() {
+        return slideshareLinkInfos;
+    }
+    public void setSlideshareLinkInfos(List<SlideshareLinkDto> slideshareLinkInfos) {
+        this.slideshareLinkInfos = slideshareLinkInfos;
+    }
+    
+    @Override
+    public String toString() {
+        return "BoardArticleDto [thumbnailSize=" + thumbnailSize
+                + ", articleId=" + articleId + ", boardId=" + boardId
+                + ", title=" + title + ", content=" + content + ", authorId="
+                + authorId + ", authorNm=" + authorNm + ", createDate="
+                + createDate + ", thumbImg=" + thumbImg + ", filePath="
+                + filePath + ", originalFileName=" + originalFileName
+                + ", status=" + status + ", boardCategoryId=" + boardCategoryId
+                + ", boardCategoryName=" + boardCategoryName + ", boardName="
+                + boardName + ", slideshareLinkInfos=" + slideshareLinkInfos
+                + "]";
+    }
+
 }
