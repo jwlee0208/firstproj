@@ -1,13 +1,30 @@
 package com.firstproj.testtwo.web;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.benfante.jslideshare.SlideShareAPI;
 import com.benfante.jslideshare.SlideShareAPIFactory;
-import com.benfante.jslideshare.messages.Tag;
+import com.benfante.jslideshare.messages.Slideshow;
+import com.flickr4java.flickr.Flickr;
+import com.flickr4java.flickr.REST;
+import com.flickr4java.flickr.auth.Auth;
+import com.flickr4java.flickr.galleries.GalleriesInterface;
+import com.flickr4java.flickr.galleries.Gallery;
+import com.flickr4java.flickr.groups.Group;
+import com.flickr4java.flickr.groups.GroupsInterface;
+import com.flickr4java.flickr.people.User;
+import com.flickr4java.flickr.photos.Photo;
+import com.flickr4java.flickr.photos.PhotoList;
+import com.flickr4java.flickr.photos.PhotosInterface;
+import com.flickr4java.flickr.photos.SearchParameters;
+import com.flickr4java.flickr.test.TestInterface;
 
 public class Test {
     
@@ -82,6 +99,78 @@ public class Test {
         System.out.println(startDate +"\n" + endDate);
 	}
 	
+	public static void testFlickr() throws Exception{
+        Flickr f = new Flickr("df1e5e194de94bb405b2ce898db83b90", "ed6088a596f20afd", new REST());
+        Auth auth = new Auth();
+        User user = new User();
+        user.setId("jwlee208");
+        auth.setUser(user);
+        f.setAuth(auth);
+        
+        
+        
+        
+        GroupsInterface     groups       = f.getGroupsInterface();
+
+        // search group
+        Collection<Group> searchedGroups = groups.search("jwlee208", 10, 10);
+        
+        if(!searchedGroups.isEmpty()){
+            for(Group group : searchedGroups){
+                System.out.println(group.getName());
+            }
+        }
+        
+        System.out.println(groups.search("[jQuery] window.onload와 ready()", 1, 1));
+        
+        
+        
+        PhotosInterface     photos       = f.getPhotosInterface();
+        SearchParameters params = new SearchParameters();
+        params.setText("jquery");
+        
+        
+        
+        PhotoList<Photo> photoList = photos.search(params, 10, 1); 
+//                photos.getContactsPhotos(10, true, true, true);
+        
+        if(!photoList.isEmpty()){
+            for(Photo photo : photoList){
+                System.out.println("photo.getTitle() : " + photo.getTitle() +"\nphoto.getLargeUrl() : " + photo.getLargeUrl() + "\nphoto.getLicense() : " + photo.getLicense() +"\nphoto.getUrls() : " + photo.getUrls() +"\nphoto.getTags() : " + photo.getTags() +"\n photo.getPhotoUrl() : " + photo.getPhotoUrl() +"\nphoto.getPermissions() : " + photo.getPermissions() +"\nphoto.getThumbnailUrl() : " + photo.getThumbnailUrl());
+                System.out.println("\n----------------------------------");
+            }
+        }
+        
+        
+        GalleriesInterface  galleries    = f.getGalleriesInterface();
+        /*
+        List<Gallery> galleries2 = galleries.getList("jwlee208", 1, 1);
+        
+        if(!galleries2.isEmpty()){
+            for(Gallery gallery : galleries2){
+                System.out.println(gallery.getId() + ", " + gallery.getTitle());
+            }
+        }
+        */
+        TestInterface testInterface = f.getTestInterface();
+        Collection results = testInterface.echo(Collections.EMPTY_MAP);
+        
+        System.out.println(results);
+        List<Gallery> list = new ArrayList<Gallery>();
+        
+        System.out.println(list.size());
+        if(list.size() > 0){
+            for(Gallery gallery : list){
+                System.out.println(gallery.getTitle());        
+            }
+        }	    
+	}
+	
+	public static void testSlideShare() throws Exception{
+        SlideShareAPI ssapi = SlideShareAPIFactory.getSlideShareAPI("EzdnlXer", "2PFQEaHV");
+        Slideshow slideInfo = ssapi.getSlideshow("jquery");
+        System.out.println(slideInfo.getTitle());	    
+	}
 	
 	public static void main(String[] args) throws Exception{
 		// Testing compareTo method
@@ -93,13 +182,9 @@ public class Test {
 	    
 	    Test.getDate();
 	    
-	    System.out.println("apiKey : " + Test.apiKey +", secret : " + Test.sharedSecret);
+	    Test.testFlickr();
 	    
-	    SlideShareAPI ssapi = SlideShareAPIFactory.getSlideShareAPI("EzdnlXer", "2PFQEaHV");
-
+	    Test.testSlideShare();
 	    
-	    
-	    Tag tag = ssapi.getSlideshowByTag("baseball");
-	    System.out.println(tag.getName());
 	}	
 }

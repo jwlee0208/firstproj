@@ -32,8 +32,11 @@ import com.firstproj.common.dto.ShareDto;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.web.EditorController;
+import com.firstproj.openapi.service.impl.FlickrAPIServiceImpl;
 import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;
+import com.flickr4java.flickr.photos.Photo;
+import com.flickr4java.flickr.photos.PhotoList;
 
 @Controller
 @RequestMapping(value = {"/board/article", "/share"})
@@ -58,19 +61,22 @@ public class BoardArticleController {
 	private static final int 	THUMBNAIL_IMAGE_HEIGHT_LARGE 	= 400;
 
 	@Resource(name = "BoardServiceImpl")
-	private BoardServiceImpl boardService;
+	private BoardServiceImpl        boardService;
 
 	@Resource(name = "BoardArticleServiceImpl")
 	private BoardArticleServiceImpl boardArticleService;
 
 	@Resource(name="fileUpload")
-	private FileUpload fileUpload;
+	private FileUpload              fileUpload;
 	
 	@Resource(name = "EditorController")
-	private EditorController editorController;
+	private EditorController        editorController;
 	
     @Resource(name = "ShareServiceImpl")
-    private ShareServiceImpl               shareService;        
+    private ShareServiceImpl        shareService;     
+    
+    @Resource(name = "FlickrAPIServiceImpl")
+    private FlickrAPIServiceImpl    flickrAPIService;
 
 	/*	
 	// spring-data-redis 사용.
@@ -314,7 +320,7 @@ public class BoardArticleController {
 	 */
 	@RequestMapping(value = "/view/{selectedArticleId}")
 	public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int selectedArticleId, HttpSession session) throws Exception{
-		
+		/*
 		BoardArticleDto contentInfo 	= null;
 		BoardArticleDto prevContentInfo = null;
 		BoardArticleDto nextContentInfo = null;
@@ -341,6 +347,8 @@ public class BoardArticleController {
 		model.addAttribute("userInfo"       , sessionInfo);
 		
 		return "board/article/view";
+		*/
+	    return this.getBoardContent(request, model, boardArticleDto, selectedArticleId, null, session);
 	}
 
 	
@@ -351,6 +359,7 @@ public class BoardArticleController {
         BoardArticleDto prevContentInfo = null;
         BoardArticleDto nextContentInfo = null;
         BoardDto        boardDto        = new BoardDto();
+        PhotoList<Photo> photoList      = null;
         
         if(selectedArticleId > 0){
             boardArticleDto.setArticleId(selectedArticleId);
@@ -361,6 +370,9 @@ public class BoardArticleController {
             prevContentInfo = this.boardArticleService.selectPrevBoardArticle(boardArticleDto);
             // 다음 글 조회
             nextContentInfo = this.boardArticleService.selectNextBoardArticle(boardArticleDto);
+            
+            // flickr 연관 이미지 파일 조회
+            photoList       = this.flickrAPIService.getPhotoList(contentInfo.getTitle());
         }
                 
         UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
@@ -368,6 +380,7 @@ public class BoardArticleController {
         model.addAttribute("contentInfo"    , contentInfo);
         model.addAttribute("prevContentInfo", prevContentInfo);
         model.addAttribute("nextContentInfo", nextContentInfo);
+        model.addAttribute("photoList"      , photoList);
         
         model.addAttribute("boardId"        , contentInfo.getBoardId());
         model.addAttribute("boardList"      , this.boardService.getBoardList(boardDto));

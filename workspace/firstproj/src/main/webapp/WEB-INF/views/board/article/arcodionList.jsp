@@ -52,6 +52,17 @@
 					<div class="panel-body">
 						<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
 						<c:out value="${contentInfo.content}" escapeXml="false"/> <br/><br/>
+
+						<div class="embed-responsive embed-responsive-16by9">
+							<c:set var="slideshareLinkInfos" value="${contentInfo.slideshareLinkInfos}"/>
+							
+							<c:if test="${!empty slideshareLinkInfos}">
+								<c:forEach var="slideshareLinkInfo" items="${slideshareLinkInfos}">
+									<c:out value="${slideshareLinkInfo.slideshareLinkUrl}" escapeXml="false"/><br/>
+								</c:forEach>
+							</c:if>				
+						</div>
+						
 						<div class="row" style="float: left; padding-left:10px;">
 							<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardName}</div>			
 						</div>				
