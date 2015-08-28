@@ -521,14 +521,16 @@
 			<artifactId>commons-net</artifactId>
 			<version>3.3</version>
 		</dependency>		
-		
+		<!-- jslideshare -->		
+		<!-- 
 		<dependency>
 		    <groupId>com.benfante</groupId>
 		    <artifactId>JSlideShare</artifactId>
 		    <version>0.7</version>
 		    <scope>compile</scope>
 		</dependency>
-
+ 		-->
+ 		
 		<!-- filckr -->		
 		<dependency>
 		  <groupId>com.flickr4java</groupId>
@@ -536,6 +538,20 @@
 		  <version>2.13</version>
 		</dependency>		
 		
+		<!-- slideshare -->
+		<dependency>
+		  <groupId>net.ttddyy</groupId>
+		  <artifactId>spring-social-slideshare</artifactId>
+		  <version>1.0.1</version>
+		</dependency>	
+		
+		<!-- spring-web -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+
 	</dependencies>	
 	
 

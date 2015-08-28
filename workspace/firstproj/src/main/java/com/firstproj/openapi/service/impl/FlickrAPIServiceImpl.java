@@ -21,6 +21,7 @@ public class FlickrAPIServiceImpl implements FlickrAPIService{
     @Value("${flickr.shared.secret}")
     private String sharedSecret;
     
+    @Override
     public PhotoList<Photo> getPhotoList(String searchText){
         Flickr f = new Flickr(apiKey, sharedSecret, new REST());
         PhotosInterface  photos = f.getPhotosInterface();

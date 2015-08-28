@@ -176,6 +176,16 @@
 					</div>				
 				</div>
 			</c:if>
+			
+			
+			<c:if test="${!empty slideList}">
+				<h3>Related Slides&nbsp;<small>in Slideshare</small></h3>
+				<div class="embed-responsive embed-responsive-16by9">
+				<c:forEach var="slideInfo" items="${slideList}">
+					<c:out value="${slideInfo.embded}" escapeXml="false"/>	
+				</c:forEach>
+				</div>
+			</c:if>
 				
 			<c:if test="${contentInfo.filePath ne null && contentInfo.filePath ne ''}">	
 				<div class="thumbImg unset" style="padding-top : 20px; ">

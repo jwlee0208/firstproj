@@ -8,10 +8,12 @@ import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.social.slideshare.api.SlideShare;
+import org.springframework.social.slideshare.api.SlideshowOperations;
+import org.springframework.social.slideshare.api.domain.SearchSlideshowsResponse;
+import org.springframework.social.slideshare.api.domain.Slideshow;
+import org.springframework.social.slideshare.api.impl.SlideShareTemplate;
 
-import com.benfante.jslideshare.SlideShareAPI;
-import com.benfante.jslideshare.SlideShareAPIFactory;
-import com.benfante.jslideshare.messages.Slideshow;
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.REST;
 import com.flickr4java.flickr.auth.Auth;
@@ -166,10 +168,18 @@ public class Test {
         }	    
 	}
 	
-	public static void testSlideShare() throws Exception{
-        SlideShareAPI ssapi = SlideShareAPIFactory.getSlideShareAPI("EzdnlXer", "2PFQEaHV");
-        Slideshow slideInfo = ssapi.getSlideshow("jquery");
-        System.out.println(slideInfo.getTitle());	    
+	public static void testSlideShare(){
+	    
+	    SlideShare slideshare = new SlideShareTemplate("EzdnlXer", "2PFQEaHV");
+	    SlideshowOperations slideshowOperations = slideshare.slideshowOperations();
+	    SearchSlideshowsResponse searchSlideshowsResponse = slideshowOperations.searchSlideshows("jquery", 10);
+	    if(searchSlideshowsResponse.getNumResults() > 0){
+	        List<Slideshow> slideshows = searchSlideshowsResponse.getSlideshows();
+	        for(Slideshow slideshow : slideshows){
+	            System.out.println(slideshow.getTitle() +", " + slideshow.getEmbed() +", " + slideshow.getUrl() +", " + slideshow.getDownloadUrl());
+	        }
+	    }
+        
 	}
 	
 	public static void main(String[] args) throws Exception{
@@ -182,7 +192,7 @@ public class Test {
 	    
 	    Test.getDate();
 	    
-	    Test.testFlickr();
+//	    Test.testFlickr();
 	    
 	    Test.testSlideShare();
 	    

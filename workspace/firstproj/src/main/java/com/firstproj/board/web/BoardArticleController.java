@@ -14,6 +14,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Param;
+import org.springframework.social.slideshare.api.domain.Slideshow;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +34,8 @@ import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.web.EditorController;
 import com.firstproj.openapi.service.impl.FlickrAPIServiceImpl;
+import com.firstproj.openapi.service.impl.SlideshareAPIServiceImpl;
+//import com.firstproj.openapi.service.impl.SlideshareAPIServiceImpl;
 import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;
 import com.flickr4java.flickr.photos.Photo;
@@ -61,22 +64,25 @@ public class BoardArticleController {
 	private static final int 	THUMBNAIL_IMAGE_HEIGHT_LARGE 	= 400;
 
 	@Resource(name = "BoardServiceImpl")
-	private BoardServiceImpl        boardService;
+	private BoardServiceImpl         boardService;
 
 	@Resource(name = "BoardArticleServiceImpl")
-	private BoardArticleServiceImpl boardArticleService;
+	private BoardArticleServiceImpl  boardArticleService;
 
-	@Resource(name="fileUpload")
-	private FileUpload              fileUpload;
+	@Resource(name = "fileUpload")
+	private FileUpload               fileUpload;
 	
 	@Resource(name = "EditorController")
-	private EditorController        editorController;
+	private EditorController         editorController;
 	
     @Resource(name = "ShareServiceImpl")
-    private ShareServiceImpl        shareService;     
+    private ShareServiceImpl         shareService;     
     
     @Resource(name = "FlickrAPIServiceImpl")
-    private FlickrAPIServiceImpl    flickrAPIService;
+    private FlickrAPIServiceImpl     flickrAPIService;
+    
+    @Resource(name = "SlideshareAPIServiceImpl")
+    private SlideshareAPIServiceImpl slideshareAPIService;
 
 	/*	
 	// spring-data-redis 사용.
@@ -355,13 +361,15 @@ public class BoardArticleController {
     @RequestMapping(value = "/{userId}/view/{selectedArticleId}")
     public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int selectedArticleId, @PathVariable String userId, HttpSession session) throws Exception{
         
-        BoardArticleDto contentInfo     = null;
-        BoardArticleDto prevContentInfo = null;
-        BoardArticleDto nextContentInfo = null;
-        BoardDto        boardDto        = new BoardDto();
-        PhotoList<Photo> photoList      = null;
+        BoardArticleDto     contentInfo     = null;
+        BoardArticleDto     prevContentInfo = null;
+        BoardArticleDto     nextContentInfo = null;
+        BoardDto            boardDto        = new BoardDto();
+        PhotoList<Photo>    photoList       = null;
+        List<Slideshow>     slideList       = null;
         
         if(selectedArticleId > 0){
+            
             boardArticleDto.setArticleId(selectedArticleId);
             boardArticleDto.setCreateUserId(userId);
             // 글 조회
@@ -371,8 +379,13 @@ public class BoardArticleController {
             // 다음 글 조회
             nextContentInfo = this.boardArticleService.selectNextBoardArticle(boardArticleDto);
             
+            String title = contentInfo.getTitle();
+            
             // flickr 연관 이미지 파일 조회
-            photoList       = this.flickrAPIService.getPhotoList(contentInfo.getTitle());
+            photoList       = this.flickrAPIService.getPhotoList(title);
+            
+            // slideshare 연관 슬라이드 조회
+            slideList       = this.slideshareAPIService.searchSlideshowList(title);
         }
                 
         UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
@@ -381,6 +394,7 @@ public class BoardArticleController {
         model.addAttribute("prevContentInfo", prevContentInfo);
         model.addAttribute("nextContentInfo", nextContentInfo);
         model.addAttribute("photoList"      , photoList);
+        model.addAttribute("slideList"      , slideList);
         
         model.addAttribute("boardId"        , contentInfo.getBoardId());
         model.addAttribute("boardList"      , this.boardService.getBoardList(boardDto));
