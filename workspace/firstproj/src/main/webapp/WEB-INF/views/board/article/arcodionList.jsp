@@ -99,6 +99,7 @@
 $(document).ready(function() {
 	$("div img").addClass("media-object");
 	$("div img").attr("width", "100%");
+	$("div img").removeAttr("height");
 	$("div img").off("error");
 	$("div img").on("error", function(){
 		$(this).attr("src", '${pageContext.request.contextPath}/img/no_image.png');

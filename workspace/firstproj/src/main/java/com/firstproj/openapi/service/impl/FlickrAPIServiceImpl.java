@@ -23,14 +23,24 @@ public class FlickrAPIServiceImpl implements FlickrAPIService{
     
     @Override
     public PhotoList<Photo> getPhotoList(String searchText){
-        Flickr f = new Flickr(apiKey, sharedSecret, new REST());
-        PhotosInterface  photos = f.getPhotosInterface();
-        SearchParameters params = new SearchParameters();
+        PhotoList<Photo> photoList  = null;
+        Flickr           f          = new Flickr(apiKey, sharedSecret, new REST());
+        PhotosInterface  photos     = f.getPhotosInterface();
+        // setting search params
+        SearchParameters params     = new SearchParameters();
         params.setText(searchText);
-
-        PhotoList<Photo> photoList = null;
+        params.setPrivacyFilter(1);
+        params.setSort(SearchParameters.INTERESTINGNESS_DESC);
+        params.setSafeSearch(Flickr.SAFETYLEVEL_SAFE);
         try {
-            photoList = photos.search(params, 10, 1);
+            params.setMedia("photos");
+        } catch (FlickrException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        try {
+            photoList = photos.search(params, 16, 1);
         } catch (FlickrException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

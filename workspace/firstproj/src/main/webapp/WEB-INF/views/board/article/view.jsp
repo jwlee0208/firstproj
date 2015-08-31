@@ -83,7 +83,7 @@
 	<input type="hidden" id="nextArticleId" 		name="nextArticleId" 		value="${nextContentInfo.articleId}"/>
 
 	<h1 id="btn-groups" class="page-header">Article</h1>
-	
+	<c:set var="boardName" value=""/>
 	<ol class="breadcrumb">
 	  <li><a href="javascript:;" onclick="javascript:goHome();">Home</a></li>
 	  <li><a href="#" 			 onclick="javascript:goList();">Board</a></li>
@@ -91,7 +91,8 @@
 	  	  <a href="javascript:;">
 <c:if test="${!empty boardList}">
 	<c:forEach var="boardInfo" items="${boardList}">
-		<c:if test="${boardId eq boardInfo.boardId}">${boardInfo.boardName}</c:if>										
+		<c:if test="${boardId eq boardInfo.boardId}"><c:set var="boardName" value="${boardInfo.boardName}"/>${boardName}</c:if>
+												
 	</c:forEach>
 </c:if>		  
 		  </a>		  
@@ -100,9 +101,11 @@
 	</ol>		
 
 		<div class="panel panel-primary" role="main">	
+					
 			<div class="panel-heading">
 				<h4 class="panel-title"><c:out value="${contentInfo.title}"/></h4>
 			</div>
+		
 			<div class="panel-body">
 				<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
 				<div style="min-height: 400px;"><c:out value="${contentInfo.content}" escapeXml="false"/></div>
@@ -190,13 +193,13 @@
 					<c:if test="${slideListSize > 1}">
 						<c:if test="${index.count eq 1}">
 					<input type="button" id="seeMoreSlideBtn" class="btn btn-success" value="See More Slides"/>	
-					<div class="collapse" id="slideListDiv" aria-expanded="${expandedYn}">
+					<div class="collapse" id="slideListDiv" >
 						</c:if>
 						<c:if test="${index.count > 1}">
 					<c:set var="expandedYn" value="false"/>
 						</c:if>
 					</c:if>
-					<c:if test="${index.count eq slideListSize}">
+					<c:if test="${slideListSize > 1 && index.count eq slideListSize}">
 					</div>	
 					</c:if>
 				</c:forEach>
@@ -274,6 +277,7 @@
 	function chkNoImage(){
 		$("div img").addClass("media-object");
 		$("div img").attr("width", "95%");
+		$("div img").removeAttr("height");
 		$("div img").off("error");
 		$("div img").on("error", function(){
 			$(this).attr("src", '${pageContext.request.contextPath}/img/no_image.png');
@@ -282,7 +286,14 @@
 
 	$(function(){
 		$("#seeMoreSlideBtn").click(function(){
+			if($("#slideListDiv").hasClass("in")){
+				$("#seeMoreSlideBtn").val("See More Slides");
+			}else{
+				$("#seeMoreSlideBtn").val("Hide Slides");
+			}
+
 			$(".collapse").collapse("toggle");
+					
 		});
 	});
 </script>

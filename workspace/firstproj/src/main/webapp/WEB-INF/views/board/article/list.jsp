@@ -78,7 +78,7 @@
 							<tr>
 								<td>${content.articleId}</td>	
 								<td onclick="javascript:goView('${content.articleId}');">${content.title}</td>
-								<td>${fn:substring(content.createDate, 0, 10)}</td>
+								<td>${fn:substring(content.createDate, 0, 10)}...</td>
 								<td>${content.authorNm}</td>
 							</tr>
 						</c:forEach>

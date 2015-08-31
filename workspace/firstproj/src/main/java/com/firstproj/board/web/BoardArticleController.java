@@ -35,7 +35,6 @@ import com.firstproj.common.util.PagedList;
 import com.firstproj.common.web.EditorController;
 import com.firstproj.openapi.service.impl.FlickrAPIServiceImpl;
 import com.firstproj.openapi.service.impl.SlideshareAPIServiceImpl;
-//import com.firstproj.openapi.service.impl.SlideshareAPIServiceImpl;
 import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;
 import com.flickr4java.flickr.photos.Photo;
@@ -326,34 +325,6 @@ public class BoardArticleController {
 	 */
 	@RequestMapping(value = "/view/{selectedArticleId}")
 	public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int selectedArticleId, HttpSession session) throws Exception{
-		/*
-		BoardArticleDto contentInfo 	= null;
-		BoardArticleDto prevContentInfo = null;
-		BoardArticleDto nextContentInfo = null;
-		BoardDto        boardDto        = new BoardDto();
-		
-		if(selectedArticleId > 0){
-			boardArticleDto.setArticleId(selectedArticleId);
-			// 글 조회
-			contentInfo 	= this.boardArticleService.selectBoardArticle(boardArticleDto);
-			// 이전 글 조회
-			prevContentInfo = this.boardArticleService.selectPrevBoardArticle(boardArticleDto);
-			// 다음 글 조회
-			nextContentInfo = this.boardArticleService.selectNextBoardArticle(boardArticleDto);
-		}
-				
-	    UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
-	        
-		model.addAttribute("contentInfo"	, contentInfo);
-		model.addAttribute("prevContentInfo", prevContentInfo);
-		model.addAttribute("nextContentInfo", nextContentInfo);
-		
-		model.addAttribute("boardId"		, contentInfo.getBoardId());
-		model.addAttribute("boardList"		, this.boardService.getBoardList(boardDto));
-		model.addAttribute("userInfo"       , sessionInfo);
-		
-		return "board/article/view";
-		*/
 	    return this.getBoardContent(request, model, boardArticleDto, selectedArticleId, null, session);
 	}
 

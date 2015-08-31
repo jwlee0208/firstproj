@@ -5,8 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.slideshare.api.SlideShare;
 import org.springframework.social.slideshare.api.SlideshowOperations;
+import org.springframework.social.slideshare.api.domain.SearchOptions.FileFormat;
+import org.springframework.social.slideshare.api.domain.SearchOptions.FileType;
+import org.springframework.social.slideshare.api.domain.SearchOptions.SearchType;
+import org.springframework.social.slideshare.api.domain.SearchOptions.Sort;
+import org.springframework.social.slideshare.api.domain.SearchOptions.UploadDate;
 import org.springframework.social.slideshare.api.domain.SearchSlideshowsResponse;
 import org.springframework.social.slideshare.api.domain.Slideshow;
+import org.springframework.social.slideshare.api.domain.SearchOptions.Language;
 import org.springframework.social.slideshare.api.impl.SlideShareTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -32,7 +38,7 @@ public class SlideshareAPIServiceImpl implements SlideshareAPIService{
         List<Slideshow>             slideshowList            = null;
 
         if(!StringUtils.isEmpty(searchText)){
-            SearchSlideshowsResponse    searchSlideshowsResponse = slideshowOperations.searchSlideshows(searchText, 5);
+            SearchSlideshowsResponse    searchSlideshowsResponse = slideshowOperations.searchSlideshows(searchText, 1, 5, Language.KOREAN, Sort.MOSTVIEWED, UploadDate.YEAR, SearchType.TEXT, true, FileFormat.PPT, FileType.ALL, false, false, false, false, false);
             
             if(searchSlideshowsResponse.getNumResults() > 0){
                 slideshowList = searchSlideshowsResponse.getSlideshows();

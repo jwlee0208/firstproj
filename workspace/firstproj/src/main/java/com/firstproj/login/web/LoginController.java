@@ -43,24 +43,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/login/{menuId}")
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable int menuId) throws Exception{
-		
 		model = this.login(request, model);
-		
-		/*
-		String referer = request.getHeader("Referer");
-		
-		if(null != request.getParameter("redirectPage")){
-		    referer = request.getParameter("redirectPage");
-		}
-		
-		if(StringUtils.isEmpty(referer)){
-			referer="/";
-		}
-		
-		log.info(" >>> REFER : " + referer);				
-
-		model.addAttribute("prevPage", referer);
-		*/
 		return "/login";
 	}
 	

@@ -70,7 +70,7 @@
 						<p class="content_${index.count}" style="text-overflow:ellipsis; overflow:hidden;">
 							<c:if test="${content.content eq null || content.content eq ''}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11</c:if>
 							<c:if test="${content.content ne null && content.content ne ''}">
-								<span onclick="javascript:goArticleView('${content.articleId}', 'noPopup');" data-toggle="modal" data-target="#myModal">${fn:substring(content.contentText, 0, 31)}...</span>
+								<span onclick="javascript:goArticleView('${content.articleId}', 'noPopup');">${fn:substring(content.contentText, 0, 31)}...</span>
 							</c:if>
 						</p>
 						<p><span class="btn btn-default" role="button" onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal">상세보기</span></p>

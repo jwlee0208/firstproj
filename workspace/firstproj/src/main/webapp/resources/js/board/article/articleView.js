@@ -1,6 +1,5 @@
 var frm = $("#viewFrm");
 
-//$(document).on("ready", function(){
 $(function(){
 	/**
 	 * 게시글 목록으로 이동
@@ -26,7 +25,6 @@ $(function(){
 	 * 게시글 수정
 	 */
 	$("#goToModify").on("click", function(){
-//		location.href = "/board/article/modify?selectedArticleId=" + $("#selectedArticleId").val() +"&selectedBoardId=" + $("#boardId").val();
 		location.href = "/board/article/modify/" + $("#selectedArticleId").val() +"/" + $("#boardId").val();
 	});
 	/**
@@ -40,7 +38,6 @@ $(function(){
 			dataType : 'json',
 			success : function(data){
 				if(data.result){
-//					location.href = "/board/article/list.page?boardId="+$("#boardId").val();
 					location.href = "/board/article/list/" + $("#boardId").val() + "/" + $("#boardId").val();
 				}else{
 					alert(data.validate);
@@ -55,13 +52,5 @@ $(function(){
 
 //게시글 조회
 function goView(articleId){
-	
-	location.href = "/board/article/view/"+articleId;
-	
-//	$("#selectedArticleId").val(articleId);
-	
-//	var frm = $("#viewFrm");
-//	frm.attr("action", "/board/article/view/"+articleId);
-//	frm.attr("method", "get");
-//	frm.submit();
+	location.href = "/board/article/view/"+articleId;	
 }
