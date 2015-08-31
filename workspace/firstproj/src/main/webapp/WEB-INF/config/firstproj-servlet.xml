@@ -42,7 +42,7 @@
    
 
     <!-- jsonView -->
-    <beans:bean id="jsonViewer" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+    <beans:bean id="jsonViewer" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
         <beans:property name="extractValueFromSingleKeyModel" value="true" />
     </beans:bean>
     
@@ -106,17 +106,17 @@
         
         <beans:property name="defaultViews">
             <beans:list>
-                <beans:bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+                <beans:bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
                    <beans:property name="extractValueFromSingleKeyModel" value="true" />
                    <beans:property name="contentType" value="application/json" />
                 </beans:bean> 
                  
-                <beans:bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+                <beans:bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
                    <beans:property name="extractValueFromSingleKeyModel" value="true" />
                    <beans:property name="contentType" value="application/javascript" />
                 </beans:bean>
                 
-                <beans:bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+                <beans:bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
                     <beans:property name="contentType" value="application/xml" />
                 </beans:bean>
             </beans:list>
@@ -253,7 +253,18 @@
     <beans:bean id="messageSourceAccessor" class="org.springframework.context.support.MessageSourceAccessor">
         <beans:constructor-arg index="0" ref="messageSource"/>
     </beans:bean>    
-    
+	<!-- 
+    <beans:bean id="jacksonMessageConverter"
+        class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></beans:bean>
+    <beans:bean
+        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <beans:property name="messageConverters">
+            <beans:list>
+                <beans:ref bean="jacksonMessageConverter" />
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+    -->
     <!-- 다국어 처리 -->
     <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
 <!--     <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver"/> -->

@@ -359,7 +359,7 @@ public class BoardArticleController {
 
 	
     @RequestMapping(value = "/{userId}/view/{selectedArticleId}")
-    public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int selectedArticleId, @PathVariable String userId, HttpSession session) throws Exception{
+    public String getBoardContent(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, @PathVariable int selectedArticleId, @PathVariable String userId, HttpSession session){
         
         BoardArticleDto     contentInfo     = null;
         BoardArticleDto     prevContentInfo = null;
@@ -367,17 +367,33 @@ public class BoardArticleController {
         BoardDto            boardDto        = new BoardDto();
         PhotoList<Photo>    photoList       = null;
         List<Slideshow>     slideList       = null;
+        List<BoardDto>      boardList       = null;
         
         if(selectedArticleId > 0){
             
             boardArticleDto.setArticleId(selectedArticleId);
             boardArticleDto.setCreateUserId(userId);
             // 글 조회
-            contentInfo     = this.boardArticleService.selectBoardArticle(boardArticleDto);
+            try {
+                contentInfo     = this.boardArticleService.selectBoardArticle(boardArticleDto);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             // 이전 글 조회
-            prevContentInfo = this.boardArticleService.selectPrevBoardArticle(boardArticleDto);
+            try {
+                prevContentInfo = this.boardArticleService.selectPrevBoardArticle(boardArticleDto);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             // 다음 글 조회
-            nextContentInfo = this.boardArticleService.selectNextBoardArticle(boardArticleDto);
+            try {
+                nextContentInfo = this.boardArticleService.selectNextBoardArticle(boardArticleDto);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             
             String title = contentInfo.getTitle();
             
@@ -386,6 +402,13 @@ public class BoardArticleController {
             
             // slideshare 연관 슬라이드 조회
             slideList       = this.slideshareAPIService.searchSlideshowList(title);
+            
+            try {
+                boardList       = this.boardService.getBoardList(boardDto);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
                 
         UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
@@ -397,7 +420,7 @@ public class BoardArticleController {
         model.addAttribute("slideList"      , slideList);
         
         model.addAttribute("boardId"        , contentInfo.getBoardId());
-        model.addAttribute("boardList"      , this.boardService.getBoardList(boardDto));
+        model.addAttribute("boardList"      , boardList);
         model.addAttribute("userInfo"       , sessionInfo);
         
         return "board/article/view";

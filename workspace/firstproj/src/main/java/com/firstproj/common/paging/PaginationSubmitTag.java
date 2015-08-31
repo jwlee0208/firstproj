@@ -427,13 +427,14 @@ public class PaginationSubmitTag extends TagSupport {
         private final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
         /** A ServletOutputStream we convey, tied to this Writer. */
+        /*
         private final ServletOutputStream sos = new ServletOutputStream() {
             @Override
             public void write(int b) {
                 bos.write(b);
             }
         };
-
+        */
         /** 'True' if getWriter() was called; false otherwise. */
         private boolean isWriterUsed;
 
@@ -461,6 +462,7 @@ public class PaginationSubmitTag extends TagSupport {
         }
 
         /** Returns a ServletOutputStream designed to buffer the output. */
+        /*
         @Override
         public ServletOutputStream getOutputStream() {
             if (isWriterUsed) {
@@ -469,7 +471,7 @@ public class PaginationSubmitTag extends TagSupport {
             isStreamUsed = true;
             return sos;
         }
-
+        */
         /** Has no effect. */
         @Override
         public void setContentType(String x) {

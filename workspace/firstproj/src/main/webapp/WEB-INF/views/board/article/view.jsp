@@ -181,8 +181,24 @@
 			<c:if test="${!empty slideList}">
 				<h3>Related Slides&nbsp;<small>in Slideshare</small></h3>
 				<div class="embed-responsive embed-responsive-16by9">
-				<c:forEach var="slideInfo" items="${slideList}">
-					<c:out value="${slideInfo.embded}" escapeXml="false"/>	
+				<c:set var="slideListSize" value="${fn:length(slideList)}"/>
+				<c:set var="expandedYn" value="true"/>
+				<c:forEach var="slideInfo" items="${slideList}" varStatus="index">
+					
+					<h4>title : <small>${slideInfo.title}</small></h4>
+					<c:out value="${slideInfo.embed}" escapeXml="false"/>
+					<c:if test="${slideListSize > 1}">
+						<c:if test="${index.count eq 1}">
+					<input type="button" id="seeMoreSlideBtn" class="btn btn-success" value="See More Slides"/>	
+					<div class="collapse" id="slideListDiv" aria-expanded="${expandedYn}">
+						</c:if>
+						<c:if test="${index.count > 1}">
+					<c:set var="expandedYn" value="false"/>
+						</c:if>
+					</c:if>
+					<c:if test="${index.count eq slideListSize}">
+					</div>	
+					</c:if>
 				</c:forEach>
 				</div>
 			</c:if>
@@ -209,7 +225,7 @@
 			
 			
 
-				<div class="row" style="float: left; padding-left:10px;">
+				<div class="row" style="float: left; padding-left:10px; padding-top:20px;">
 					<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div><br/>
 				</div>			
 				<div class="row" style="float: right; padding-right:10px;">
@@ -263,6 +279,12 @@
 			$(this).attr("src", '${pageContext.request.contextPath}/img/no_image.png');
 		});
 	}
+
+	$(function(){
+		$("#seeMoreSlideBtn").click(function(){
+			$(".collapse").collapse("toggle");
+		});
+	});
 </script>
 
 </html>

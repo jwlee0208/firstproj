@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.springframework.samples.service.service</groupId>
   <artifactId>firstproj</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>war</packaging>
   
     <properties>
@@ -18,11 +18,14 @@
 		<!-- Web -->
 		<jsp.version>2.2</jsp.version>
 		<jstl.version>1.2</jstl.version>
-		<servlet.version>2.5</servlet.version>
+		<servlet.version>3.1.0</servlet.version>
+<!-- 		<servlet.version>2.5</servlet.version> -->
+		
 		
 
 		<!-- Spring -->
-		<spring-framework.version>3.2.3.RELEASE</spring-framework.version>
+		<spring-framework.version>4.1.4.RELEASE</spring-framework.version>
+<!-- 		<spring-framework.version>3.2.3.RELEASE</spring-framework.version> -->
 
 		<!-- Hibernate / JPA -->
 		<hibernate.version>4.2.1.Final</hibernate.version>
@@ -76,23 +79,29 @@
 		</dependency>
 		
 		<!-- Other Web dependencies -->
+
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
+			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		 		
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>${jsp.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		
 	
 		<!-- Spring and Transactions -->
 		<dependency>
@@ -252,15 +261,17 @@
 		</dependency>
 
 		<!-- HttpClient 라이브러리 -->
+		<!--  
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.2.5</version>
+			<version>4.3.4</version>
 		</dependency>
 		
 		<!-- HttpCore 라이브러리 -->
@@ -269,6 +280,13 @@
 			<artifactId>httpcore</artifactId>
 			<version>4.3.2</version>
 		</dependency>		
+	
+	    <dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+	
 		
 		<!-- mybatis -->
         <dependency>
@@ -339,18 +357,18 @@
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-jsp</artifactId>
-			<version>3.0.4</version>
+			<version>3.0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-core</artifactId>
-			<version>3.0.4</version>
+			<version>3.0.5</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-extras</artifactId>
-			<version>3.0.4</version>
+			<version>3.0.5</version>
 		</dependency>        
       <!--  tiles2 -->  
 <!--         <dependency> -->

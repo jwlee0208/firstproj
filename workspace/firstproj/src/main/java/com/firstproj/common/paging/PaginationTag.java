@@ -226,11 +226,13 @@ public class PaginationTag extends TagSupport {
         public static final String DEFAULT_ENCODING = "ISO-8859-1";
         private final StringWriter sw = new StringWriter();
         private final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        /*
         private final ServletOutputStream sos = new ServletOutputStream() {
             public void write(int b) {
                 PaginationTag.ImportResponseWrapper.this.bos.write(b);
             }
         };
+        */
         private boolean isWriterUsed;
         private boolean isStreamUsed;
         private int status = 200;
@@ -246,7 +248,7 @@ public class PaginationTag extends TagSupport {
             this.isWriterUsed = true;
             return new PrintWriter(this.sw);
         }
-
+        /*
         public ServletOutputStream getOutputStream() {
             if (this.isWriterUsed) {
                 throw new RuntimeException("import_illegal writer");
@@ -254,7 +256,7 @@ public class PaginationTag extends TagSupport {
             this.isStreamUsed = true;
             return this.sos;
         }
-
+        */
         public void setContentType(String x) {
         }
 

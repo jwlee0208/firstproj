@@ -32,7 +32,7 @@ public class SlideshareAPIServiceImpl implements SlideshareAPIService{
         List<Slideshow>             slideshowList            = null;
 
         if(!StringUtils.isEmpty(searchText)){
-            SearchSlideshowsResponse    searchSlideshowsResponse = slideshowOperations.searchSlideshows(searchText, 10);
+            SearchSlideshowsResponse    searchSlideshowsResponse = slideshowOperations.searchSlideshows(searchText, 5);
             
             if(searchSlideshowsResponse.getNumResults() > 0){
                 slideshowList = searchSlideshowsResponse.getSlideshows();

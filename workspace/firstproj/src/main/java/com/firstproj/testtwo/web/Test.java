@@ -7,12 +7,15 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.slideshare.api.SlideShare;
 import org.springframework.social.slideshare.api.SlideshowOperations;
 import org.springframework.social.slideshare.api.domain.SearchSlideshowsResponse;
 import org.springframework.social.slideshare.api.domain.Slideshow;
 import org.springframework.social.slideshare.api.impl.SlideShareTemplate;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.REST;
