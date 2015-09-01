@@ -8,6 +8,7 @@
      This is a blank Tiles definition file with a commented example.
 -->
 <tiles-definitions>
+
      <definition name="board/article/*" template="/WEB-INF/views/layout/board/main.jsp">
           <put-attribute name="title" 			value="firstproj" type="string" />
           <put-attribute name="metatag" 		value="/WEB-INF/views/layout/board/metatag.jsp" />
@@ -45,6 +46,10 @@
 
      <definition name="*/ajax*" extends="none">
           <put-attribute name="body" 	value="/WEB-INF/views/{1}/ajax{2}.jsp" />
+     </definition>    
+
+     <definition name="*/*/ajax*" extends="none">
+          <put-attribute name="body" 	value="/WEB-INF/views/{1}/{2}/ajax{3}.jsp" />
      </definition>    
 
      <definition name="/login" template="/WEB-INF/views/layout/login/main.jsp">

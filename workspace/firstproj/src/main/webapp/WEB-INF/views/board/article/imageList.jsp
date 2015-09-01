@@ -73,7 +73,7 @@
 								<span onclick="javascript:goArticleView('${content.articleId}', 'noPopup');">${fn:substring(content.contentText, 0, 31)}...</span>
 							</c:if>
 						</p>
-						<p><span class="btn btn-default" role="button" onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal">상세보기</span></p>
+						<p><span class="btn btn-default" role="button" onclick="javascript:goArticleView('${content.articleId}');">상세보기</span></p>
 					</div>
 
 				</div>	

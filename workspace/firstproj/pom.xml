@@ -539,15 +539,6 @@
 			<artifactId>commons-net</artifactId>
 			<version>3.3</version>
 		</dependency>		
-		<!-- jslideshare -->		
-		<!-- 
-		<dependency>
-		    <groupId>com.benfante</groupId>
-		    <artifactId>JSlideShare</artifactId>
-		    <version>0.7</version>
-		    <scope>compile</scope>
-		</dependency>
- 		-->
  		
 		<!-- filckr -->		
 		<dependency>
@@ -562,6 +553,13 @@
 		  <artifactId>spring-social-slideshare</artifactId>
 		  <version>1.0.1</version>
 		</dependency>	
+
+		<!-- youtube -->
+		<dependency>
+	      <groupId>com.google.apis</groupId>
+	      <artifactId>google-api-services-youtube</artifactId>
+	      <version>v3-rev144-1.20.0</version>
+	    </dependency>		
 		
 		<!-- spring-web -->
 		<dependency>

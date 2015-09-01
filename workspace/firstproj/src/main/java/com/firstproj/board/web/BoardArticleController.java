@@ -14,7 +14,6 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Param;
-import org.springframework.social.slideshare.api.domain.Slideshow;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,12 +32,8 @@ import com.firstproj.common.dto.ShareDto;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.web.EditorController;
-import com.firstproj.openapi.service.impl.FlickrAPIServiceImpl;
-import com.firstproj.openapi.service.impl.SlideshareAPIServiceImpl;
 import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;
-import com.flickr4java.flickr.photos.Photo;
-import com.flickr4java.flickr.photos.PhotoList;
 
 @Controller
 @RequestMapping(value = {"/board/article", "/share"})
@@ -77,12 +72,6 @@ public class BoardArticleController {
     @Resource(name = "ShareServiceImpl")
     private ShareServiceImpl         shareService;     
     
-    @Resource(name = "FlickrAPIServiceImpl")
-    private FlickrAPIServiceImpl     flickrAPIService;
-    
-    @Resource(name = "SlideshareAPIServiceImpl")
-    private SlideshareAPIServiceImpl slideshareAPIService;
-
 	/*	
 	// spring-data-redis 사용.
 	@Autowired
@@ -336,8 +325,6 @@ public class BoardArticleController {
         BoardArticleDto     prevContentInfo = null;
         BoardArticleDto     nextContentInfo = null;
         BoardDto            boardDto        = new BoardDto();
-        PhotoList<Photo>    photoList       = null;
-        List<Slideshow>     slideList       = null;
         List<BoardDto>      boardList       = null;
         
         if(selectedArticleId > 0){
@@ -366,14 +353,6 @@ public class BoardArticleController {
                 e.printStackTrace();
             }
             
-            String title = contentInfo.getTitle();
-            
-            // flickr 연관 이미지 파일 조회
-            photoList       = this.flickrAPIService.getPhotoList(title);
-            
-            // slideshare 연관 슬라이드 조회
-            slideList       = this.slideshareAPIService.searchSlideshowList(title);
-            
             try {
                 boardList       = this.boardService.getBoardList(boardDto);
             } catch (Exception e) {
@@ -387,8 +366,6 @@ public class BoardArticleController {
         model.addAttribute("contentInfo"    , contentInfo);
         model.addAttribute("prevContentInfo", prevContentInfo);
         model.addAttribute("nextContentInfo", nextContentInfo);
-        model.addAttribute("photoList"      , photoList);
-        model.addAttribute("slideList"      , slideList);
         
         model.addAttribute("boardId"        , contentInfo.getBoardId());
         model.addAttribute("boardList"      , boardList);

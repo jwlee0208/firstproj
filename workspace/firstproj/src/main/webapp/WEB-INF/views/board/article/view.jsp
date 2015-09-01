@@ -81,6 +81,8 @@
 	<input type="hidden" id="boardId" 				name="boardId" 				value="${contentInfo.boardId}"/>
 	<input type="hidden" id="prevArticleId" 		name="prevArticleId" 		value="${prevContentInfo.articleId}"/>
 	<input type="hidden" id="nextArticleId" 		name="nextArticleId" 		value="${nextContentInfo.articleId}"/>
+	<!-- flickr / slideshare /etc,.'s search keyword parameter -->
+	<input type="hidden" id="keyword" 				name="keyword" 				value="${contentInfo.title}"/>
 
 	<h1 id="btn-groups" class="page-header">Article</h1>
 	<c:set var="boardName" value=""/>
@@ -100,7 +102,7 @@
 	  <li class="active">Article</li>
 	</ol>		
 
-		<div class="panel panel-primary" role="main">	
+		<div class="panel panel-info" role="main">	
 					
 			<div class="panel-heading">
 				<h4 class="panel-title"><c:out value="${contentInfo.title}"/></h4>
@@ -125,11 +127,7 @@
 					</c:if>				
 				</div>
 				
-				
-				
-				
-				
-				
+			<!--  	
 			<c:if test="${!empty photoList}">
 				<h3>Related Images&nbsp;<small>in Flickr</small></h3>
 				<div class="row" style="padding:0 10px 0 10px;">
@@ -179,8 +177,8 @@
 					</div>				
 				</div>
 			</c:if>
-			
-			
+			-->
+			<!--  
 			<c:if test="${!empty slideList}">
 				<h3>Related Slides&nbsp;<small>in Slideshare</small></h3>
 				<div class="embed-responsive embed-responsive-16by9">
@@ -205,7 +203,8 @@
 				</c:forEach>
 				</div>
 			</c:if>
-				
+			-->
+			<!--  	
 			<c:if test="${contentInfo.filePath ne null && contentInfo.filePath ne ''}">	
 				<div class="thumbImg unset" style="padding-top : 20px; ">
 					썸네일 : 
@@ -225,9 +224,9 @@
 					</ul>	
 				</div>										
 			</c:if>
+			-->
 			
-			
-
+				<!--  
 				<div class="row" style="float: left; padding-left:10px; padding-top:20px;">
 					<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div><br/>
 				</div>			
@@ -235,9 +234,39 @@
 					<div class="btn btn-primary" title="Sharing Article To Facebook" 	onclick="javascript:share('fb', '${contentInfo.articleId}', '');" >f</div>
 					<div class="btn btn-info" 	 title="Sharing Article To Twitter" 	onclick="javascript:share('tw', '${contentInfo.articleId}', '${contentInfo.title}');" >t</div>					
 				</div>
+				-->
 			</div>	
+			<div class="panel-footer">
+			<c:if test="${contentInfo.filePath ne null && contentInfo.filePath ne ''}">	
+				<div class="thumbImg unset" style="padding-top : 20px; ">
+					썸네일 : 
+					<ul class="media-list">					
+						<li class="media">
+							<a class="pull-left" href="javascript:;">
+								<img data-src="holder.js/64x64" src="http://jwlee0208.cdn3.cafe24.com/${contentInfo.filePath}" 
+									 alt="" class="media-object" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  
+									 onclick="javascript:goView('${contentInfo.articleId}');" 
+									 data-toggle="modal" data-target="#myModal" 
+									 width="64px" height="64px"/>
+							</a>
+							<div class="media-body" onclick="javascript:goView('${contentInfo.articleId}');">
+								<p>파일명 : ${contentInfo.originalFileName}</p>			 	
+							</div>
+						</li>							
+					</ul>	
+				</div>										
+			</c:if>
+				<div class="row">
+					<div class="col-xs-12 col-md-8">
+						<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div>
+					</div>			
+					<div class="col-xs-6 col-md-4">
+						<div class="btn btn-primary" title="Sharing Article To Facebook" 	onclick="javascript:share('fb', '${contentInfo.articleId}', '');" >f</div>
+						<div class="btn btn-info" 	 title="Sharing Article To Twitter" 	onclick="javascript:share('tw', '${contentInfo.articleId}', '${contentInfo.title}');" >t</div>					
+					</div>
+				</div>	
+			</div>
 		</div>
-
 
 		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
 			<div class="btn-group" role="button">
@@ -262,6 +291,25 @@
 			</div>			
 			</c:if>
 		</div>
+		
+		<div class="panel panel-success" role="main">
+			<div class="panel-heading">
+				<h4 class="panel-title"><a data-toggle="collapse" href="#collapseFlickr">Related Images&nbsp;<small>in Flickr</small></a></h4>
+			</div>	
+			<div id="collapseFlickr" class="panel-body">
+				<div id="flickrImageListDiv"></div>
+			</div>		
+		</div>
+
+		<div class="panel panel-danger" role="main">
+			<div class="panel-heading">
+				<h4 class="panel-title"><a data-toggle="collapse" href="#collapseSlide">Related Slides&nbsp;<small>in Slideshare</small></a></h4>
+			</div>
+			<div id="collapseSlide" class="panel-body">
+				<div id="slideListDiv"></div>
+			</div>		
+		</div>
+		
 	</form>
 </div>
 </body>
@@ -272,6 +320,14 @@
 		chkNoImage();
 
 		$("iframe").addClass("embed-responsive-item");
+
+		var title = $("#title").val();
+
+		// load to flickr image list 
+		$("#flickrImageListDiv").load("/api/flickr/photoList", $("#viewFrm").serialize());
+
+		// load to slideshare list
+		$("#slideListDiv").load("/api/slideshare/slideList", $("#viewFrm").serialize());
 	});
 
 	function chkNoImage(){
@@ -284,18 +340,18 @@
 		});
 	}
 
-	$(function(){
-		$("#seeMoreSlideBtn").click(function(){
-			if($("#slideListDiv").hasClass("in")){
-				$("#seeMoreSlideBtn").val("See More Slides");
-			}else{
-				$("#seeMoreSlideBtn").val("Hide Slides");
-			}
+// 	$(function(){
+// 		$("#seeMoreSlideBtn").click(function(){
+// 			if($("#slideListDiv").hasClass("in")){
+// 				$("#seeMoreSlideBtn").val("See More Slides");
+// 			}else{
+// 				$("#seeMoreSlideBtn").val("Hide Slides");
+// 			}
 
-			$(".collapse").collapse("toggle");
+// 			$(".collapse").collapse("toggle");
 					
-		});
-	});
+// 		});
+// 	});
 </script>
 
 </html>
