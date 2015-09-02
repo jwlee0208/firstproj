@@ -20,6 +20,7 @@
 
 <title><c:out value="${contentInfo.title}"/></title>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleView.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/image_slider.css">
 <style>
 #myCarousel .thumbnail {
 	margin-bottom: 0;
@@ -112,8 +113,6 @@
 				<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
 				<div style="min-height: 400px;"><c:out value="${contentInfo.content}" escapeXml="false"/></div>
 				<!-- slideshare iframe area -->
-				
-				
 				<div class="embed-responsive embed-responsive-16by9">
 					<c:set var="slideshareLinkInfos" value="${contentInfo.slideshareLinkInfos}"/>
 					
@@ -126,115 +125,6 @@
 						</c:forEach>
 					</c:if>				
 				</div>
-				
-			<!--  	
-			<c:if test="${!empty photoList}">
-				<h3>Related Images&nbsp;<small>in Flickr</small></h3>
-				<div class="row" style="padding:0 10px 0 10px;">
-					<div class="well">
-						<div id="myCarousel" class="carousel slide">
-							<div class="carousel-inner" style="padding-bottom: 20px;">
-								<c:set var="photoListSize" value="${fn:length(photoList)}"/>
-								<c:set var="loopIdx" value="${0}"/>
-								<c:forEach var="relatedPhoto" items="${photoList}" varStatus="index">
-									<c:set var="loopIdx" value="${index.count}"/>
-									
-									<c:if test="${(loopIdx % 4) eq 1}">
-									<c:choose>
-										<c:when test="${loopIdx eq 1}">
-								<div class="item active">		
-										</c:when>
-										<c:otherwise>
-								<div class="item">				
-										</c:otherwise>
-									</c:choose>			
-									<div class="row">			
-									</c:if>
-										<div class="col-xs-6 col-md-3">
-										  <a href="${relatedPhoto.largeUrl}" class="thumbnail" data-flickr-embed="true" target="_blank" title="${relatedPhoto.title}">
-										    <img src="${relatedPhoto.thumbnailUrl}" alt="${relatedPhoto.title}" class="img-responsive" title="${relatedPhoto.title}">
-										  </a>
-										</div>
-				  					<c:if test="${(loopIdx % 4) eq 0 || loopIdx eq photoListSize}">
-				  					</div>
-				  				</div>		
-				  					</c:if>		
-								</c:forEach> 
-							</div>
-							<c:if test="${photoListSize > 4}">
-							<a class="left carousel-control" href="#myCarousel" data-slide="prev"><c:out value="<"/></a>
-				            <a class="right carousel-control" href="#myCarousel" data-slide="next"><c:out value=">"/></a>
-				            <c:set var="indicatorCnt" value="${photoListSize/4}"/>
-					            <c:if test="${indicatorCnt > 0}">
-			                <ol class="carousel-indicators" style="padding:0 0 10px 0;">
-								<c:forEach var="indicator" begin="0" end="${indicatorCnt}" varStatus="index">
-			                    <li data-target="#myCarousel" data-slide-to="${index.count - 1}" <c:if test="${index.count eq 1}">class="active"</c:if>></li>
-								</c:forEach>												            
-			                </ol>                
-					            </c:if>		            
-				            </c:if>					
-						</div>			
-					</div>				
-				</div>
-			</c:if>
-			-->
-			<!--  
-			<c:if test="${!empty slideList}">
-				<h3>Related Slides&nbsp;<small>in Slideshare</small></h3>
-				<div class="embed-responsive embed-responsive-16by9">
-				<c:set var="slideListSize" value="${fn:length(slideList)}"/>
-				<c:set var="expandedYn" value="true"/>
-				<c:forEach var="slideInfo" items="${slideList}" varStatus="index">
-					
-					<h4>title : <small>${slideInfo.title}</small></h4>
-					<c:out value="${slideInfo.embed}" escapeXml="false"/>
-					<c:if test="${slideListSize > 1}">
-						<c:if test="${index.count eq 1}">
-					<input type="button" id="seeMoreSlideBtn" class="btn btn-success" value="See More Slides"/>	
-					<div class="collapse" id="slideListDiv" >
-						</c:if>
-						<c:if test="${index.count > 1}">
-					<c:set var="expandedYn" value="false"/>
-						</c:if>
-					</c:if>
-					<c:if test="${slideListSize > 1 && index.count eq slideListSize}">
-					</div>	
-					</c:if>
-				</c:forEach>
-				</div>
-			</c:if>
-			-->
-			<!--  	
-			<c:if test="${contentInfo.filePath ne null && contentInfo.filePath ne ''}">	
-				<div class="thumbImg unset" style="padding-top : 20px; ">
-					썸네일 : 
-					<ul class="media-list">					
-						<li class="media">
-							<a class="pull-left" href="javascript:;">
-								<img data-src="holder.js/64x64" src="http://jwlee0208.cdn3.cafe24.com/${contentInfo.filePath}" 
-									 alt="" class="media-object" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  
-									 onclick="javascript:goView('${contentInfo.articleId}');" 
-									 data-toggle="modal" data-target="#myModal" 
-									 width="64px" height="64px"/>
-							</a>
-							<div class="media-body" onclick="javascript:goView('${contentInfo.articleId}');">
-								<p>파일명 : ${contentInfo.originalFileName}</p>			 	
-							</div>
-						</li>							
-					</ul>	
-				</div>										
-			</c:if>
-			-->
-			
-				<!--  
-				<div class="row" style="float: left; padding-left:10px; padding-top:20px;">
-					<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div><br/>
-				</div>			
-				<div class="row" style="float: right; padding-right:10px;">
-					<div class="btn btn-primary" title="Sharing Article To Facebook" 	onclick="javascript:share('fb', '${contentInfo.articleId}', '');" >f</div>
-					<div class="btn btn-info" 	 title="Sharing Article To Twitter" 	onclick="javascript:share('tw', '${contentInfo.articleId}', '${contentInfo.title}');" >t</div>					
-				</div>
-				-->
 			</div>	
 			<div class="panel-footer">
 			<c:if test="${contentInfo.filePath ne null && contentInfo.filePath ne ''}">	
@@ -292,21 +182,30 @@
 			</c:if>
 		</div>
 		
-		<div class="panel panel-success" role="main">
+		<div class="panel panel-danger" role="main" id="streamDiv">
 			<div class="panel-heading">
-				<h4 class="panel-title"><a data-toggle="collapse" href="#collapseFlickr">Related Images&nbsp;<small>in Flickr</small></a></h4>
-			</div>	
-			<div id="collapseFlickr" class="panel-body">
-				<div id="flickrImageListDiv"></div>
+				<h4 class="panel-title"><a data-toggle="collapse" href="#collapseStream" class="collapsed">Related Streams&nbsp;<small>in Youtube</small></a></h4>
+			</div>
+			<div id="collapseStream" class="panel-body collapse">
+				<div id="youtubeListDiv"></div>
 			</div>		
 		</div>
 
-		<div class="panel panel-danger" role="main">
+		<div class="panel panel-primary" role="main" id="slideDiv">
 			<div class="panel-heading">
-				<h4 class="panel-title"><a data-toggle="collapse" href="#collapseSlide">Related Slides&nbsp;<small>in Slideshare</small></a></h4>
+				<h4 class="panel-title"><a data-toggle="collapse" href="#collapseSlide" class="collapsed">Related Slides&nbsp;<small>in Slideshare</small></a></h4>
 			</div>
-			<div id="collapseSlide" class="panel-body">
-				<div id="slideListDiv"></div>
+			<div id="collapseSlide" class="panel-body collapse">
+				<div id="slideshareListDiv"></div>
+			</div>		
+		</div>
+
+		<div class="panel panel-success" role="main" id="photoDiv">
+			<div class="panel-heading">
+				<h4 class="panel-title"><a data-toggle="collapse" href="#collapseFlickr" class="collapsed">Related Images&nbsp;<small>in Flickr</small></a></h4>
+			</div>	
+			<div id="collapseFlickr" class="panel-body collapse">
+				<div id="flickrImageListDiv"></div>
 			</div>		
 		</div>
 		
@@ -321,13 +220,15 @@
 
 		$("iframe").addClass("embed-responsive-item");
 
-		var title = $("#title").val();
-
 		// load to flickr image list 
 		$("#flickrImageListDiv").load("/api/flickr/photoList", $("#viewFrm").serialize());
 
 		// load to slideshare list
-		$("#slideListDiv").load("/api/slideshare/slideList", $("#viewFrm").serialize());
+		$("#slideshareListDiv").load("/api/slideshare/slideList", $("#viewFrm").serialize());
+
+		// load to youtube list
+		$("#youtubeListDiv").load("/api/youtube/streamList", $("#viewFrm").serialize());
+
 	});
 
 	function chkNoImage(){
@@ -340,18 +241,9 @@
 		});
 	}
 
-// 	$(function(){
-// 		$("#seeMoreSlideBtn").click(function(){
-// 			if($("#slideListDiv").hasClass("in")){
-// 				$("#seeMoreSlideBtn").val("See More Slides");
-// 			}else{
-// 				$("#seeMoreSlideBtn").val("Hide Slides");
-// 			}
-
-// 			$(".collapse").collapse("toggle");
-					
-// 		});
-// 	});
+	function hideDiv(type){
+		$("#"+type+"Div").hide();
+	}
 </script>
 
 </html>

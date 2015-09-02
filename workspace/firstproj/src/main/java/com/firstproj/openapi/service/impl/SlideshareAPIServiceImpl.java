@@ -41,7 +41,7 @@ public class SlideshareAPIServiceImpl implements SlideshareAPIService{
             SearchSlideshowsResponse    searchSlideshowsResponse = slideshowOperations.searchSlideshows(searchText, 1, 5, Language.KOREAN, Sort.MOSTVIEWED, UploadDate.YEAR, SearchType.TEXT, true, FileFormat.PPT, FileType.PRESENTATIONS, false, false, false, false, false);
             
             if(searchSlideshowsResponse.getNumResults() > 0){
-                slideshowList = searchSlideshowsResponse.getSlideshows();
+                slideshowList   = searchSlideshowsResponse.getSlideshows();
             }            
         }
     
