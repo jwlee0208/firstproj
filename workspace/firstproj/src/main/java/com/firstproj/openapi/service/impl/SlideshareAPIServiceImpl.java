@@ -38,7 +38,7 @@ public class SlideshareAPIServiceImpl implements SlideshareAPIService{
         List<Slideshow>             slideshowList            = null;
 
         if(!StringUtils.isEmpty(searchText)){
-            SearchSlideshowsResponse    searchSlideshowsResponse = slideshowOperations.searchSlideshows(searchText, 1, 5, Language.KOREAN, Sort.MOSTVIEWED, UploadDate.YEAR, SearchType.TEXT, true, FileFormat.PPT, FileType.PRESENTATIONS, false, false, false, false, false);
+            SearchSlideshowsResponse    searchSlideshowsResponse = slideshowOperations.searchSlideshows(searchText, 1, 5, Language.All, Sort.MOSTVIEWED, UploadDate.YEAR, SearchType.TEXT, true, FileFormat.PPT, FileType.PRESENTATIONS, false, false, false, false, false);
             
             if(searchSlideshowsResponse.getNumResults() > 0){
                 slideshowList   = searchSlideshowsResponse.getSlideshows();

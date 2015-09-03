@@ -73,15 +73,23 @@
 						</c:forEach>
 		          	</c:if>		        
 			</ul>
+			<c:if test="${null ne userInfo}">
+		<ul class="nav navbar-nav navbar-right">
+        	<li class="dropdown">
+          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi, "${userInfo.userNm}" <span class="caret"></span></a>
+          		<ul class="dropdown-menu">
+		            <li><a href="#" onclick="javascript:logout();"><tag:message code="logout"/></a></li>
+		            <li role="separator" class="divider"></li>
+		            <li><a href="#" onclick="javascript:goConfig();">config</a></li>
+          		</ul>
+        	</li>
+      	</ul>			
+			</c:if>
 			<form class="navbar-form navbar-right" role="search">
 			<c:if test="${null eq userInfo}">
 				<a onclick="javascript:goRegist(6);" 	class="btn btn-primary"><tag:message code="signup"/></a>
 				<a onclick="javascript:goLogin(7);" 	class="btn btn-default"><tag:message code="signin"/></a>
 			</c:if>	
-			<c:if test="${null ne userInfo}">
-			<span style="color: white;">Welcome</span> <a href="#" class="navbar-link" onclick="javascript:goConfig();">"${userInfo.userNm}"</a>&nbsp;
-			<a onclick="javascript:logout();"		class="btn btn-default"><tag:message code="logout"/></a>&nbsp;
-			</c:if>
 			</form>
 		</div>
 	</div>

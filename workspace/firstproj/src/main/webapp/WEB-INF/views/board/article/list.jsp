@@ -65,7 +65,7 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th>게시글 번호</th>
+					<th>게시글#</th>
 					<th>제목</th>
 					<th>작성일자</th>
 					<th>작성자</th>
@@ -78,7 +78,7 @@
 							<tr>
 								<td>${content.articleId}</td>	
 								<td onclick="javascript:goView('${content.articleId}');">${content.title}</td>
-								<td>${fn:substring(content.createDate, 0, 10)}...</td>
+								<td>${fn:substring(content.createDate, 0, 10)}</td>
 								<td>${content.authorNm}</td>
 							</tr>
 						</c:forEach>

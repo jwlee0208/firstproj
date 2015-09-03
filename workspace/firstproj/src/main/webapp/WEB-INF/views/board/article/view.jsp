@@ -21,56 +21,6 @@
 <title><c:out value="${contentInfo.title}"/></title>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleView.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/image_slider.css">
-<style>
-#myCarousel .thumbnail {
-	margin-bottom: 0;
-}
-.carousel-control.left, .carousel-control.right {
-	background-image:none !important;
-}
-.carousel-control {
-	color:#fff;
-	top:40%;
-	color:#428BCA;
-	bottom:auto;
-	padding-top:4px;
-	width:30px;
-	height:30px;
-	text-shadow:none;
-	opacity:1;
-}
-.carousel-control:hover {
-	color: #d9534f;
-}
-.carousel-control.left, .carousel-control.right {
-	background-image:none !important;
-}
-.carousel-control.right {
-	left:auto;
-	right:-32px;
-}
-.carousel-control.left {
-	right:auto;
-	left:-32px;
-}
-.carousel-indicators {
-	bottom:-30px;
-}
-.carousel-indicators li {
-	border-radius:0;
-	width:10px;
-	height:10px;
-	background:#ccc;
-	border:1px solid #ccc;
-}
-.carousel-indicators .active {
-	width:12px;
-	height:12px;
-	background:#3276b1;
-	border-color:#3276b1;
-}
-
-</style>
 </head>
 <body>
 
@@ -129,7 +79,7 @@
 			<div class="panel-footer">
 			<c:if test="${contentInfo.filePath ne null && contentInfo.filePath ne ''}">	
 				<div class="thumbImg unset" style="padding-top : 20px; ">
-					썸네일 : 
+					<span class="glyphicon glyphicon-picture" aria-hidden="true"></span> 
 					<ul class="media-list">					
 						<li class="media">
 							<a class="pull-left" href="javascript:;">
@@ -160,24 +110,24 @@
 
 		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
 			<div class="btn-group" role="button">
-				<input type="button" class="btn btn-default" id="goToList" value="목록"/>
+				<input type="button" class="btn btn-default" id="goToList" value="list"/>
 			</div>
 			<c:if test="${prevContentInfo.articleId ne null}">
 			<div class="btn-group" role="button">
-				<input type="button" class="btn btn-default" id="previous" value="Previous"/>			
+				<input type="button" class="btn btn-default" id="previous" value="previous"/>			
 			</div>
 			</c:if>
 			<c:if test="${nextContentInfo.articleId ne null}">
 			<div class="btn-group" role="button">
-				<input type="button" class="btn btn-default" id="next" value="Next"/>		
+				<input type="button" class="btn btn-default" id="next" value="next"/>		
 			</div>
 			</c:if>
 			<c:if test="${userInfo ne null && userInfo.userId eq contentInfo.authorId}">
 			<div class="btn-group" role="button">
-				<input type="button" class="btn btn-default pull-right" id="goToModify" value="수정"/>
+				<input type="button" class="btn btn-default pull-right" id="goToModify" value="modify"/>
 			</div>			
 			<div class="btn-group" role="button">
-				<input type="button" class="btn btn-default pull-right" id="goToDelete" value="삭제"/>
+				<input type="button" class="btn btn-default pull-right" id="goToDelete" value="delete"/>
 			</div>			
 			</c:if>
 		</div>

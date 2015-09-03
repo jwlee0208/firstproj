@@ -49,8 +49,8 @@
 				<tiles:insertAttribute name="quickBoardList"/>
 			</div>	
 		</div>
-		<a class="go_to_top btn" href="#" title="go to top of page">Top</a>
-		<a class="go_to_down btn" href="#scrollDown" title="go to down of page">Down</a>
+		<a class="go_to_top btn" href="#" title="go to top of page"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></a>
+		<a class="go_to_down btn" href="#scrollDown" title="go to down of page"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
 	</div>	
 
 	<div id="scrollDown"></div>

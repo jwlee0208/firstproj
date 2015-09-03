@@ -32,7 +32,7 @@
 	</ol>
 		<div class="writeArea list-group-item" role="main">
 			<table class="table table-condensed">
-				<colgroup><col width="10%"/><col width="90%"/></colgroup>
+				<colgroup><col width="15%"/><col width="85%"/></colgroup>
 				<tbody>
 					<tr>
 						<th><div class="form-group">게시판</div></th>
@@ -62,15 +62,15 @@
 						</td>
 					</tr>
 					<tr>
-						<th><div class="form-group">제목</div></th>
+						<th><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;<span class="glyphicon-class">제목</span></th>
 						<td><div class="form-group"><input type="text" class="form-control" id="title" name="title" value='<c:out value="${articleInfo.title}"/>'/></div></td>
 					</tr>
 					<tr>
-						<th><div class="form-group">내용</div></th>
+						<th><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;<span class="glyphicon-class">내용</span></th>
 						<td><div class="form-group"><textarea class="form-control tinymce" id="content" name="content"><c:out value="${articleInfo.content}"/></textarea></div></td>				
 					</tr>					
 					<tr>
-						<th><div class="form-group">SlideShare 공유 링크</div></th>
+						<th><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>&nbsp;<span class="glyphicon-class">SlideShare</span></th>
 						<td>
 							<div class="form-group">
 						<c:choose>	
@@ -88,7 +88,7 @@
 						</td>				
 					</tr>					
 					<tr>
-						<td><div class="form-group">썸네일 업로드</div></td>
+						<td><span class="glyphicon glyphicon-picture" aria-hidden="true"></span>&nbsp;<span class="glyphicon-class">썸네일</span></td>
 						<td>
 							<div class="form-group">
 	
