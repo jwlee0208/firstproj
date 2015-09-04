@@ -109,7 +109,7 @@ $(function(){
 				
 		if(event.which == 13){
 			event.preventDefault();
-			alert('2');
+			
 			var url 	= '';	
 			var userId 	= $("#userId").val();
 			if(userId != null && userId != ''){
