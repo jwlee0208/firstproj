@@ -3,7 +3,35 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="tag" %>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
 <%@ page import="com.firstproj.user.dto.UserDto"%>
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/home/home.js"></script>
+<script>
+// $(function(){
+// 	$("#totSearchText").keypress(function(event){
+				
+// 		if(event.which == 13){
+// 			event.preventDefault();
+
+// 			goTotSearch();
+			
+// 		}
+// 	});
+// });
+
+// function goTotSearch(){
+// 	var url 	= '';	
+// 	var userId 	= $("#userId").val();
+	
+// 	if(userId != null && userId != ''){
+// 		url = "/share/list";
+// 	}else{
+// 		url = "/board/article/list";
+// 	}
+
+// 	var frm = $("#totSearchFrm");
+// 	frm.attr("action"	, url);
+// 	frm.attr("method"	, "post");
+// 	frm.submit();
+// }
+</script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css">
 <%
 	UserDto userInfo = (UserDto)request.getSession().getAttribute("userInfo");
@@ -78,6 +106,7 @@
         	<li class="dropdown">
           		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi, "${userInfo.userNm}" <span class="caret"></span></a>
           		<ul class="dropdown-menu">
+          			<li><a href="/share/${userInfo.userId}" >My Share</a></li>
 		            <li><a href="#" onclick="javascript:logout();"><tag:message code="logout"/></a></li>
 		            <li role="separator" class="divider"></li>
 		            <li><a href="#" onclick="javascript:goConfig();">config</a></li>
@@ -85,7 +114,11 @@
         	</li>
       	</ul>			
 			</c:if>
-			<form class="navbar-form navbar-right" role="search">
+			<form class="navbar-form navbar-right" role="search" id="totSearchFrm" name="totSearchFrm">
+				<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" 	/>
+				<input type="hidden" 	id="boardId" 		 name="boardId" 		value="0" 	/>
+				<input type="text" 		id="totSearchText"	 name="searchText"		class="form-control" placeholder="Search Shared Info." style="background-image: none; background-position: 0% 0%; background-repeat: repeat;">
+				<input type="button" class="btn" onclick="javascript:goTotSearch();" value="Search"/>
 			<c:if test="${null eq userInfo}">
 				<a onclick="javascript:goRegist(6);" 	class="btn btn-primary"><tag:message code="signup"/></a>
 				<a onclick="javascript:goLogin(7);" 	class="btn btn-default"><tag:message code="signin"/></a>

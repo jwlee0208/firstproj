@@ -4,8 +4,8 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="tag"%>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
 <%@ page import="com.firstproj.user.dto.UserDto"%>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/home/home.js"></script>
+<!-- <script type="text/javascript" -->
+<%-- 	src="${pageContext.request.contextPath}/js/home/home.js"></script> --%>
 <%
     UserDto userInfo = (UserDto) request.getSession().getAttribute(
             "userInfo");
@@ -38,9 +38,6 @@
 							code="menu.player" /></a></li>
 				<li><a href="javascript:;" onclick="javascript:goPortal(6, 5);"><tag:message
 							code="menu.club" /></a></li>
-				<!-- 		        <li> -->
-				<!-- 		        	<a href="javascript:;" onclick="javascript:alert('준비중입니다.');" >트라이아웃 정보</a> -->
-				<!-- 		        </li>				 -->
 			</ul>
 			<c:if test="${null ne userInfo}">
 		<ul class="nav navbar-nav navbar-right">
@@ -48,6 +45,7 @@
           		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi, "${userInfo.userNm}" <span class="caret"></span></a>
           		<ul class="dropdown-menu">
 		            <li><a href="#" onclick="javascript:logout();"><tag:message code="logout"/></a></li>
+		            <li><a href="/share/${userInfo.userId}" >My Share</a></li>
 		            <li role="separator" class="divider"></li>
 		            <li><a href="#" onclick="javascript:goConfig();">config</a></li>
           		</ul>

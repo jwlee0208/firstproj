@@ -150,16 +150,16 @@ public class Test {
         
         
         
-        PhotoList<Photo> photoList = photos.search(params, 10, 1); 
+//        PhotoList<Photo> photoList = photos.search(params, 10, 1); 
 //                photos.getContactsPhotos(10, true, true, true);
-        
+/*        
         if(!photoList.isEmpty()){
             for(Photo photo : photoList){
                 System.out.println("photo.getTitle() : " + photo.getTitle() +"\nphoto.getLargeUrl() : " + photo.getLargeUrl() + "\nphoto.getLicense() : " + photo.getLicense() +"\nphoto.getUrls() : " + photo.getUrls() +"\nphoto.getTags() : " + photo.getTags() +"\n photo.getPhotoUrl() : " + photo.getPhotoUrl() +"\nphoto.getPermissions() : " + photo.getPermissions() +"\nphoto.getThumbnailUrl() : " + photo.getThumbnailUrl());
                 System.out.println("\n----------------------------------");
             }
         }
-        
+*/        
         
         GalleriesInterface  galleries    = f.getGalleriesInterface();
         
@@ -235,11 +235,11 @@ public class Test {
 	    
 	    Test.getDate();
 	    
-//	    Test.testFlickr();
+	    Test.testFlickr();
 	    
 //	    Test.testSlideShare();
 	    
-	    Test.testYoutube();
+//	    Test.testYoutube();
 	    
 	}	
 }

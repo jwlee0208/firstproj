@@ -33,7 +33,7 @@ public class YoutubeAPIServiceImpl implements YoutubeAPIService{
     private static final JsonFactory JSON_FACTORY = new JacksonFactory();
     
     /** Global instance of the max number of videos we want returned. */
-    private static final long NUMBER_OF_VIDEOS_RETURNED = 10;    
+    private static final long NUMBER_OF_VIDEOS_RETURNED = 5;    
     
     /**
      * @brief Youtube 키워드 검색

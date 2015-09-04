@@ -61,5 +61,33 @@ function goBoardConfig(){
 }
 
 function goConfig(){
-	location.href = "/config/main"
+	location.href = "/config/main";
+}
+
+$(function(){
+	$("#totSearchText").keypress(function(event){
+				
+		if(event.which == 13){
+			event.preventDefault();
+
+			goTotSearch();
+			
+		}
+	});
+});
+
+function goTotSearch(){
+	var url 	= '';	
+	var userId 	= $("#userId").val();
+	
+	if(userId != null && userId != ''){
+		url = "/share/list";
+	}else{
+		url = "/board/article/list";
+	}
+
+	var frm = $("#totSearchFrm");
+	frm.attr("action"	, url);
+	frm.attr("method"	, "post");
+	frm.submit();
 }
