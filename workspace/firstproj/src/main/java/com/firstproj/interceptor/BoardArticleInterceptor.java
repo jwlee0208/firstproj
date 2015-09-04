@@ -65,7 +65,7 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
                         description = content;
                     }
                 }else{
-                    System.out.println("N/A");
+//                    System.out.println("N/A");
                 }                
             }else if(uri.indexOf("list") > 0){
                 if((!model.isEmpty()) && model.containsKey("boardInfo")){
@@ -77,7 +77,7 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
                         description = boardInfo.getBoardName();
                     }
                 }else{
-                    System.out.println("N/A");
+//                    System.out.println("N/A");
                 }
             }
         }

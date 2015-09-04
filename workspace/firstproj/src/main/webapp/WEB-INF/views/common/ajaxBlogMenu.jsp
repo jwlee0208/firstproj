@@ -118,7 +118,6 @@
 				<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" 	/>
 				<input type="hidden" 	id="boardId" 		 name="boardId" 		value="0" 	/>
 				<input type="text" 		id="totSearchText"	 name="searchText"		class="form-control" placeholder="Search Shared Info." style="background-image: none; background-position: 0% 0%; background-repeat: repeat;">
-				<input type="button" class="btn" onclick="javascript:goTotSearch();" value="Search"/>
 			<c:if test="${null eq userInfo}">
 				<a onclick="javascript:goRegist(6);" 	class="btn btn-primary"><tag:message code="signup"/></a>
 				<a onclick="javascript:goLogin(7);" 	class="btn btn-default"><tag:message code="signin"/></a>

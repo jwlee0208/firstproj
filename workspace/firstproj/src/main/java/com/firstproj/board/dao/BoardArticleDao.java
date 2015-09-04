@@ -7,7 +7,8 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.firstproj.board.dto.BoardArticleDto;
-import com.firstproj.board.dto.SideBoardListDto;
+import com.firstproj.board.dto.BoardDto;
+import com.firstproj.board.dto.SideBoardCategoryPortalDto;
 import com.firstproj.board.dto.SlideshareLinkDto;
 import com.firstproj.common.util.SearchCondition;
 
@@ -149,8 +150,8 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 	 * @return
 	 * @throws Exception
 	 */
-	public List<SideBoardListDto> selectSideBoardList(SideBoardListDto sideBoardListDto) throws Exception{
-	    return getSqlSession().selectList("sql.boardArticle.selectSideBoardList", sideBoardListDto);
+	public List<SideBoardCategoryPortalDto> selectSideBoardList(BoardDto boardDto) throws Exception{
+	    return getSqlSession().selectList("sql.boardArticle.selectSideBoardList", boardDto);
 	}
 	
 	/**

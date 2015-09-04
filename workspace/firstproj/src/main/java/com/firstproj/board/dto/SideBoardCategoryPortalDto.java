@@ -4,41 +4,43 @@ import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("board.boardCategoryPortalDto")
-public class BoardCategoryPortalDto extends BoardCategoryDto{
-    
+@Alias("board.sideBoardCategoryPortalDto")
+public class SideBoardCategoryPortalDto {
     private int              boardCategoryId = 0;
     private String           boardCategoryName;
-    
-    private List<BoardDto>   boardList;
-    
-    
+
+    private List<SideBoardListDto>  sideBoardList;
+
     public int getBoardCategoryId() {
         return boardCategoryId;
     }
+
     public void setBoardCategoryId(int boardCategoryId) {
         this.boardCategoryId = boardCategoryId;
     }
+
     public String getBoardCategoryName() {
         return boardCategoryName;
     }
+
     public void setBoardCategoryName(String boardCategoryName) {
         this.boardCategoryName = boardCategoryName;
     }
-    public List<BoardDto> getBoardList() {
-        return boardList;
+
+    public List<SideBoardListDto> getSideBoardList() {
+        return sideBoardList;
     }
-    public void setBoardList(List<BoardDto> boardList) {
-        this.boardList = boardList;
+
+    public void setSideBoardList(List<SideBoardListDto> sideBoardList) {
+        this.sideBoardList = sideBoardList;
     }
-    
+
     @Override
     public String toString() {
-        return "BoardCategoryPortalDto [boardCategoryId=" + boardCategoryId
-                + ", boardCategoryName=" + boardCategoryName + ", boardList="
-                + boardList + "]";
+        return "SideBoardCategoryPortalDto [boardCategoryId=" + boardCategoryId
+                + ", boardCategoryName=" + boardCategoryName
+                + ", sideBoardList=" + sideBoardList + "]";
     }
-    
     
     
 }

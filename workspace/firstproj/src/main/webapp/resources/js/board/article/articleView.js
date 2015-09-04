@@ -5,7 +5,7 @@ $(function(){
 	 * 게시글 목록으로 이동
 	 */
 	$("#goToList").on("click", function(){
-		goList($("#boardId").val());
+		goList($("#viewFrm #boardId").val());
 	});
 	/**
 	 * 이전 글 조회
@@ -25,7 +25,7 @@ $(function(){
 	 * 게시글 수정
 	 */
 	$("#goToModify").on("click", function(){
-		location.href = "/board/article/modify/" + $("#selectedArticleId").val() +"/" + $("#boardId").val();
+		location.href = "/board/article/modify/" + $("#selectedArticleId").val() +"/" + $("#viewFrm #boardId").val();
 	});
 	/**
 	 * 게시글 삭제
@@ -38,7 +38,7 @@ $(function(){
 			dataType : 'json',
 			success : function(data){
 				if(data.result){
-					location.href = "/board/article/list/" + $("#boardId").val() + "/" + $("#boardId").val();
+					location.href = "/board/article/list/" + $("#viewFrm #boardId").val() + "/" + $("#viewFrm #boardId").val();
 				}else{
 					alert(data.validate);
 				}

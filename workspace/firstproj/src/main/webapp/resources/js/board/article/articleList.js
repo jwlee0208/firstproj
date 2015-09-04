@@ -9,6 +9,12 @@ $(document).on("ready", function() {
 		}
 		location.href = url;
 	});
+	
+	var boardId = $("#boardFrm #boardId").val();
+	$(".list-group .list-group-item").removeClass("active");
+	if(boardId > 0){
+		$("#sideBoardMenu_" + boardId).addClass("active");
+	}
 });
 // 페이지 이동
 function goPage(pageNo) {

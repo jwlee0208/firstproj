@@ -5,13 +5,13 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.firstproj.board.dao.BoardArticleDao;
 import com.firstproj.board.dao.BoardArticleRedisDao;
 import com.firstproj.board.dto.BoardArticleDto;
-import com.firstproj.board.dto.SideBoardListDto;
+import com.firstproj.board.dto.BoardDto;
+import com.firstproj.board.dto.SideBoardCategoryPortalDto;
 import com.firstproj.board.dto.SlideshareLinkDto;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.common.util.PagingUtil;
@@ -145,8 +145,8 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	 * @return
 	 * @throws Exception
 	 */
-	public List<SideBoardListDto> selectSideBoardList(SideBoardListDto sideBoardListDto) throws Exception {
-	    return this.boardArticleDao.selectSideBoardList(sideBoardListDto);
+	public List<SideBoardCategoryPortalDto> selectSideBoardList(BoardDto boardDto) throws Exception {
+	    return this.boardArticleDao.selectSideBoardList(boardDto);
 	}
 	
 	/**

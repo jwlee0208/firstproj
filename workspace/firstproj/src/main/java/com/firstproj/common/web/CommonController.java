@@ -41,11 +41,11 @@ public class CommonController {
 
     @RequestMapping(value = "/sideBoardList/{userId}")
     public String getSideBoardList(Model model, @PathVariable String userId) throws Exception{
-        SideBoardListDto sideBoardListDto = new SideBoardListDto();
+        BoardDto boardDto = new BoardDto();
         if(!StringUtils.isEmpty(userId)){
-            sideBoardListDto.setCreateUserId(userId);    
+            boardDto.setCreateUserId(userId);    
         }
-        model.addAttribute("sideBoardList", this.boardArticleService.selectSideBoardList(sideBoardListDto));
+        model.addAttribute("sideBoardList", this.boardArticleService.selectSideBoardList(boardDto));
         return "common/ajaxSideBoardList";
     }
 

@@ -220,9 +220,11 @@
 <!-- 		</delete> -->
 
 		<!-- 우측 게시판 목록 조회 -->
-		<select id="selectSideBoardList" parameterType="board.sideBoardListDto" resultType="board.sideBoardListDto">
+		<select id="selectSideBoardList" parameterType="board.boardDto" resultMap="selectSideBoardListMap">
 			SELECT 
-				   b.board_id
+				   bc.board_category_id
+				 , bc.board_category_name	
+				 , b.board_id
 				 , b.board_name
 				 , b.board_type
 				 , b.create_user_id
@@ -240,6 +242,31 @@
 			GROUP BY b.board_id
 			ORDER BY bc.board_category_id ASC, b.board_id DESC
 		</select>
+		
+		
+		<resultMap id="selectSideBoardListMap" type="board.sideBoardCategoryPortalDto">
+			<id		column="board_category_id" 		property="boardCategoryId"/>
+			<result column="board_category_name" 	property="boardCategoryName"/>
+			<collection property="sideBoardList" ofType="board.sideBoardListDto">
+				<id		column="board_id" 			property="boardId"/>
+				<result column="boardArticleCnt" 	property="boardArticleCnt"/>
+				<association property="boardInfo" javaType="board.boardDto">
+					<id		column="board_id" 				property="boardId"/>
+					<result column="board_category_id" 		property="boardCategoryId"/>
+					<result column="board_name"		 		property="boardName"/>
+					<result column="board_type"		 		property="boardType"/>
+					<result column="create_user_id"	 		property="createUserId"/>
+					<result column="create_user_name"	 	property="createUserName"/>
+					<result column="create_date"		 	property="createDate"/>
+					<result column="modify_user_id"	 		property="modifyUserId"/>
+					<result column="modify_user_name"	 	property="modifyUserName"/>
+					<result column="modify_date"		 	property="modifyDate"/>				
+				</association>
+			</collection>
+		</resultMap>
+		
+		
+		
 		
 		<insert id="insertSlideshareLinkInfo" parameterType="board.slideshareLinkDto" useGeneratedKeys="true" keyProperty="slideId">
 			INSERT INTO TB_SLIDESHARE_LINK
