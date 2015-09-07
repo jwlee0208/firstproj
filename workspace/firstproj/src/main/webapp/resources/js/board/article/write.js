@@ -68,7 +68,6 @@ $(function(){
 				
 					},
 					success 	: function(data){
-//						console.log("data : " + data.result);
 						if(data.result){
 							goList();
 						}else{
@@ -147,10 +146,10 @@ $(function(){
 
 
 function goList(){
-	var url 	= "/board/article/list/" + $("#boardId").val();
+	var url 	= "/board/article/list/" + $("#writeFrm #boardId").val();
 	var userId 	= $("#userId").val();
 	if(userId != null && userId != ''){
-		url 	= "/share/" + userId + "/list/" + $("#boardId").val();
+		url 	= "/share/" + userId + "/list/" + $("#writeFrm #boardId").val();
 	}
 	location.href =  url;	//"/board/article/list/"+$("#boardId").val()+"/"+$("#boardId").val();
 } 

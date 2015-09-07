@@ -20,7 +20,19 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		    </button>
-    		<a class="navbar-brand" href="javascript:;"><span style="color:white; font-size: 25px; ">Configuration Page</span></a>
+		    
+	<c:set var="url" value=""/>
+	<c:choose>
+		<c:when test="${userId ne '' && userId ne null}"><c:set var="url" value='/share/${userId}'/></c:when>
+		<c:otherwise><c:set var="url" value='/share/main'/></c:otherwise>
+	</c:choose>		    
+    		<a class="navbar-brand" href="${url}" style="font-weight: bold; cursor: pointer;">
+    		<c:choose>
+    			<c:when test="${shareInfo ne null && userId ne null}">${shareInfo.shareName}</c:when>
+    			<c:otherwise>LinkedNest Share</c:otherwise>
+    		</c:choose>
+    		<span style="color:white; ">Configuration Page</span>    				    
+			</a>
     	</div>
 		<div class="collapse navbar-collapse" id="nav-collapse-player-menu-list">
 			<ul class="nav navbar-nav">

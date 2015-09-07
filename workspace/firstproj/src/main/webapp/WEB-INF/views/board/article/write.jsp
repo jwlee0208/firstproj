@@ -35,9 +35,11 @@
 				<colgroup><col width="15%"/><col width="85%"/></colgroup>
 				<tbody>
 					<tr>
-						<th><div class="form-group">게시판</div></th>
+						<th><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;<span class="glyphicon-class">게시판</span></th>
 						<td>
 							<div class="form-group">
+						<c:choose>
+							<c:when test="${fn:length(boardList) > 0}">
 								<select class="form-control" id="boardId" name="boardId">								
 							<c:choose>
 								<c:when test="${articleInfo ne null && articleInfo ne ''}">
@@ -57,7 +59,13 @@
 								</c:if>								
 								</c:otherwise>
 							</c:choose>								
-								</select>
+								</select>								
+							</c:when>
+							<c:otherwise>
+								<input type="hidden" id="boardId" name="boardId" value="-1"/>
+								<input type="text" class="form-control" id="boardName" name="boardName" placeholder="Please, Insert Board's Title What You Want."/>
+							</c:otherwise>						
+						</c:choose>	
 							</div>
 						</td>
 					</tr>

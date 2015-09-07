@@ -17,12 +17,15 @@
 			
 		</select>
 		
-		<insert id="insertBoardCategory" parameterType="board.boardCategoryDto">
-			INSERT TB_BOARD_CATEGORY 
-			INTO
-				(board_category_name)
+		<insert id="insertBoardCategory" parameterType="board.boardCategoryDto" useGeneratedKeys="true" keyProperty="boardCategoryId">
+			INSERT INTO TB_BOARD_CATEGORY 
+				(board_category_name, create_user_id, create_date)
 			VALUES
-				(#(boardCategoryName)) 	
+				(#{boardCategoryName}, #{createUserId}, #{createDate}) 	
+			<selectKey keyProperty="boardCategoryId" resultType="int" order="AFTER">
+				 SELECT last_insert_id()	as boardCategoryId
+			</selectKey>
+				
 		</insert>
 		
 		<update id="updateBoardCategory" parameterType="board.boardCategoryDto">

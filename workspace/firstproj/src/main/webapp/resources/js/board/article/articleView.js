@@ -38,7 +38,7 @@ $(function(){
 			dataType : 'json',
 			success : function(data){
 				if(data.result){
-					location.href = "/board/article/list/" + $("#viewFrm #boardId").val() + "/" + $("#viewFrm #boardId").val();
+					location.href = "/board/article/list/" + $("#viewFrm #boardId").val();
 				}else{
 					alert(data.validate);
 				}

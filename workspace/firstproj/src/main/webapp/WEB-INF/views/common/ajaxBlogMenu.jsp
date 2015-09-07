@@ -3,35 +3,6 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="tag" %>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
 <%@ page import="com.firstproj.user.dto.UserDto"%>
-<script>
-// $(function(){
-// 	$("#totSearchText").keypress(function(event){
-				
-// 		if(event.which == 13){
-// 			event.preventDefault();
-
-// 			goTotSearch();
-			
-// 		}
-// 	});
-// });
-
-// function goTotSearch(){
-// 	var url 	= '';	
-// 	var userId 	= $("#userId").val();
-	
-// 	if(userId != null && userId != ''){
-// 		url = "/share/list";
-// 	}else{
-// 		url = "/board/article/list";
-// 	}
-
-// 	var frm = $("#totSearchFrm");
-// 	frm.attr("action"	, url);
-// 	frm.attr("method"	, "post");
-// 	frm.submit();
-// }
-</script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css">
 <%
 	UserDto userInfo = (UserDto)request.getSession().getAttribute("userInfo");

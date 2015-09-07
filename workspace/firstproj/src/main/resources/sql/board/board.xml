@@ -44,6 +44,10 @@
 			, #{createUserId} 
 			, #{createUserName} 
 			, CURRENT_TIMESTAMP())
+			<selectKey keyProperty="boardId" resultType="int" order="AFTER">
+				 SELECT last_insert_id()	as boardId
+			</selectKey>
+			
 		</insert>
 		
 		<update id="updateBoardInfo" parameterType="board.boardDto">

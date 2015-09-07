@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 import net.sf.json.JSONObject;
 
+import org.apache.axis.utils.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,11 +27,13 @@ import com.firstproj.board.dto.BoardCategoryDto;
 import com.firstproj.board.dto.BoardDto;
 import com.firstproj.board.service.BoardCategoryServiceImpl;
 import com.firstproj.board.service.BoardServiceImpl;
+import com.firstproj.common.CommonConstant;
+import com.firstproj.common.dto.ShareDto;
+import com.firstproj.common.util.AES256Util;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;
-
-import com.firstproj.common.dto.ShareDto;
+import com.firstproj.user.service.UserServiceImpl;
 @Controller
 @RequestMapping(value="/config")
 public class ConfigController {
@@ -45,9 +48,19 @@ public class ConfigController {
     
 	@Resource(name="ShareServiceImpl")
 	private ShareServiceImpl         shareService;
+	
+	@Resource(name="UserServiceImpl")
+	private UserServiceImpl          userService;
 
     @RequestMapping(value="/main")
-    public String getConfig() throws Exception{
+    public String getConfig(HttpServletRequest request, Model model, HttpSession session) throws Exception{
+        UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+        if(null != sessionInfo){
+            
+        }else{
+            return "redirect:/login?redirectPage=" + request.getRequestURI();
+        }
+        model.addAttribute("userInfo", sessionInfo);
         return "config/config";
     }
     
@@ -239,17 +252,34 @@ public class ConfigController {
     
     @RequestMapping(value="/board/categoryList")
     public String getCategoryList(Model model, HttpSession session) throws Exception{
+        model = this.setBoardCategoryInfo(model, session);
+        return "config/board/categoryList";
+    }
+
+    @RequestMapping(value="/board/ajaxCategoryList")
+    public String getAjaxCategoryList(Model model, HttpSession session) throws Exception{
+        model = this.setBoardCategoryInfo(model, session);
+        return "config/board/ajaxCategoryList";
+    }
+    
+    private Model setBoardCategoryInfo(Model model, HttpSession session){
         BoardCategoryDto boardCategoryDto = new BoardCategoryDto();
         List<BoardCategoryDto> boardCategoryList = null;
         UserDto    sessionInfo    = (UserDto)session.getAttribute("userInfo");
         if(sessionInfo != null){
             boardCategoryDto.setCreateUserId(sessionInfo.getUserId());
-            boardCategoryList = this.boardCategoryService.getBoardCategoryList(boardCategoryDto); 
+            try {
+                boardCategoryList = this.boardCategoryService.getBoardCategoryList(boardCategoryDto);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } 
         }
-        
         model.addAttribute("boardCategoryList", boardCategoryList);
-        return "config/board/categoryList";
+        return model;
     }
+    
+    
     
     @RequestMapping(value="/priv/modifyShareProfile")
     public String getShareProfileInfo(Model model, HttpSession session) throws Exception{
@@ -294,5 +324,28 @@ public class ConfigController {
         }
             
         return resultObj;
+    }
+    
+    @RequestMapping(value="/priv/privInfo")
+    public String getPrivateInfo(HttpServletRequest request, Model model, HttpSession session) throws Exception{
+        
+        UserDto sessionInfo     = (UserDto)session.getAttribute("userInfo");
+        UserDto userInfo        = null; 
+        if(sessionInfo != null){
+            AES256Util aes256util  = new AES256Util(CommonConstant.IV);
+            userInfo = sessionInfo;
+            
+            String phoneNo = userInfo.getPhoneNo();
+            String email = userInfo.getEmail();
+            if(!StringUtils.isEmpty(phoneNo)){
+                userInfo.setPhoneNo(aes256util.decrypt(phoneNo));
+            }
+            if(!StringUtils.isEmpty(email)){
+                userInfo.setEmail(aes256util.decrypt(email));
+            }
+            
+        }
+        model.addAttribute("userInfo", userInfo);
+        return "user/ajaxPrivateInfo";
     }
 }

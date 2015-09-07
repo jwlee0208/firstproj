@@ -23,10 +23,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.firstproj.board.dao.BoardCategoryDao;
 import com.firstproj.board.dto.BoardArticleDto;
+import com.firstproj.board.dto.BoardCategoryDto;
 import com.firstproj.board.dto.BoardDto;
 import com.firstproj.board.dto.SlideshareLinkDto;
 import com.firstproj.board.service.BoardArticleServiceImpl;
+import com.firstproj.board.service.BoardCategoryServiceImpl;
 import com.firstproj.board.service.BoardServiceImpl;
 import com.firstproj.common.dto.ShareDto;
 import com.firstproj.common.util.FileUpload;
@@ -62,6 +65,9 @@ public class BoardArticleController {
 
 	@Resource(name = "BoardArticleServiceImpl")
 	private BoardArticleServiceImpl  boardArticleService;
+	
+	@Resource(name = "BoardCategoryServiceImpl")
+	private BoardCategoryServiceImpl boardCategoryService;
 
 	@Resource(name = "fileUpload")
 	private FileUpload               fileUpload;
@@ -144,16 +150,24 @@ public class BoardArticleController {
         return this.getCommonBoardArticleList(request, model, boardArticleDto);
     }
 
+    /**
+     * 기스글 목록 조회(공통 메서드)
+     * @param request
+     * @param model
+     * @param boardArticleDto
+     * @return
+     * @throws Exception
+     */
 	private String getCommonBoardArticleList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
 	    
         model = this.getBoardCommonListForJson(request, model, boardArticleDto);
         
-        int boardId = boardArticleDto.getBoardId();
-        String boardType = null;
+        int     boardId     = boardArticleDto.getBoardId();
+        String  boardType   = null;
         if(boardId > 0){
-            BoardDto boardDto = new BoardDto();
+            BoardDto boardDto   = new BoardDto();
             boardDto.setBoardId(boardArticleDto.getBoardId());
-            BoardDto boardInfo = boardService.getBoardCategoryAndBoardInfo(boardDto);
+            BoardDto boardInfo  = boardService.getBoardCategoryAndBoardInfo(boardDto);
             model.addAttribute("boardInfo", boardInfo);            
             
             boardType = boardInfo.getBoardType();
@@ -384,7 +398,7 @@ public class BoardArticleController {
 	 */
 	@RequestMapping(value = "/write")
 	public String writeBoard(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session) throws Exception{
-	    return this.writeBoard(request, model, boardArticleDto, session, null);
+	    return this.writeBoard(request, model, boardArticleDto, session, null, null);
 	}
 
 	/**
@@ -398,9 +412,26 @@ public class BoardArticleController {
 	 * @throws Exception
 	 */
     @RequestMapping(value = "/{userId}/write")
-    public String writeBoard(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @PathVariable String userId) throws Exception{
+    public String writeBoardAsUserId(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @PathVariable String userId) throws Exception{
         return this.writeBoard(request, model, boardArticleDto, session, userId, null);
     }
+    
+    
+    /**
+     * @brief 게시글 입력 화면 출력
+     * @param request
+     * @param model
+     * @param boardArticleDto
+     * @param session
+     * @param boardId
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/write/{boardId}")
+    public String writeBoardAsBoardId(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @PathVariable String boardId) throws Exception{
+        return this.writeBoard(request, model, boardArticleDto, session, null, boardId);
+    }
+    
 	/**
 	 * 게시글 입력 화면 출력
 	 * @param request
@@ -428,7 +459,8 @@ public class BoardArticleController {
             return "redirect:/login?redirectPage=" + request.getRequestURI();
         }
         
-        model.addAttribute("boardList"  , this.boardService.getBoardList(boardDto));
+        List<BoardDto> boardList = this.boardService.getBoardList(boardDto);
+        model.addAttribute("boardList"  , boardList);
         model.addAttribute("userId"     , userId);
         return "board/article/write";
     }
@@ -453,6 +485,36 @@ public class BoardArticleController {
 		
 		if(null != sessionInfo){
 
+		    int       boardId = boardArticleDto.getBoardId();
+		    String    boardName = boardArticleDto.getBoardName();
+		    
+		    if(boardId < 0 && !StringUtils.isEmpty(boardName)){
+		        // board_category 생성
+		        BoardCategoryDto boardCategoryDto = new BoardCategoryDto();
+		        boardCategoryDto.setBoardCategoryName("default");
+		        boardCategoryDto.setCreateUserId(sessionInfo.getUserId());
+		        
+		        int createdCategoryId = this.boardCategoryService.insertBoardCategory(boardCategoryDto);
+		        
+		        // board 생성
+		        BoardDto boardDto = new BoardDto();
+		        boardDto.setBoardCategoryId(createdCategoryId);
+		        boardDto.setBoardCategoryName(boardCategoryDto.getBoardCategoryName());
+		        boardDto.setBoardName(boardName);
+		        boardDto.setCreateUserId(sessionInfo.getUserId());
+		        boardDto.setCreateUserName(sessionInfo.getUserNm());
+		        boardDto.setBoardType("0");
+		        
+		        int createdBoardId = this.boardService.insertBoardInfo(boardDto);
+		        
+		        // 생성된 board 정보 설정
+		        boardArticleDto.setBoardCategoryId(createdCategoryId);
+		        boardArticleDto.setBoardId(createdBoardId);
+		        
+		    }
+		    
+            System.out.println((boardArticleDto.getBoardId())  + ", " + StringUtils.isEmpty(boardArticleDto.getBoardName()) +", " + boardArticleDto.getBoardName());
+            
 			boardArticleDto.setAuthorId(sessionInfo.getUserId());
 			boardArticleDto.setAuthorNm(sessionInfo.getUserNm());
 			boardArticleDto.setStatus(1);
@@ -521,6 +583,16 @@ public class BoardArticleController {
         
         if(null != sessionInfo){
 
+            // if boardId가 없고, boardName이 입력되어 넘어오는 경우
+            // 1. default boardCategory 를 생성
+            // 2. 새로운 board를 생성
+            
+            System.out.println((boardId == 0)  + ", " + StringUtils.isEmpty(boardArticleDto.getBoardName()));
+            
+            
+            
+            
+            
             boardArticleDto.setAuthorId(sessionInfo.getUserId());
             boardArticleDto.setAuthorNm(sessionInfo.getUserNm());
             boardArticleDto.setStatus(1);
@@ -560,7 +632,7 @@ public class BoardArticleController {
                         if(!StringUtils.isEmpty(slideshareLinkObj.getSlideshareLinkUrl())){
                             slideshareLinkObj.setCreateUserId(sessionInfo.getUserId());
                             slideshareLinkObj.setArticleId(insertedArticleId);
-                            this.boardArticleService.insertSlideshareInfo(slideshareLinkObj);                                   
+//                            this.boardArticleService.insertSlideshareInfo(slideshareLinkObj);                                   
                         }
                     }
                 }

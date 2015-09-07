@@ -172,12 +172,9 @@ public class PlayerDao extends SqlSessionDaoSupport{
     public int insertPlayerInfo(PlayerInfoDto param) throws Exception{
     	int insertResult = getSqlSession().insert("sql.player.insertPlayerInfo", param);
     	
-    	System.out.println("insertResult : " + insertResult);
-    	
     	int playerInfoId = 0;
     	if(insertResult > 0){
     		playerInfoId = param.getPlayerInfoId();
-    		System.out.println("playerInfoId : " + playerInfoId);
     	}
     	return playerInfoId;
     }

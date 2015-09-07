@@ -15,7 +15,13 @@ public class BoardCategoryDao extends SqlSessionDaoSupport{
     }
     
     public int insertBoardCategory(BoardCategoryDto boardCategoryDto) throws Exception{
-        return getSqlSession().insert("sql.boardcategory.insertBoardCategory", boardCategoryDto);
+        
+        int insertResult = getSqlSession().insert("sql.boardcategory.insertBoardCategory", boardCategoryDto);
+        int boardCategoryId = 0;
+        if(insertResult > 0){
+            boardCategoryId = boardCategoryDto.getBoardCategoryId();
+        }
+        return boardCategoryId;
     }
 
     public int updateBoardCategory(BoardCategoryDto boardCategoryDto) throws Exception{

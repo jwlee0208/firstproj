@@ -68,7 +68,13 @@ public class BoardDao extends SqlSessionDaoSupport{
 	 * @throws Exception
 	 */
 	public int insertBoardInfo(BoardDto boardDto) throws Exception{
-		return getSqlSession().insert("sql.board.insertBoardInfo", boardDto);
+		int insertResult = getSqlSession().insert("sql.board.insertBoardInfo", boardDto);
+        int boardId = 0;
+        if(insertResult > 0){
+            boardId = boardDto.getBoardId();
+        }
+        return boardId;
+
 	}
 	/**
 	 * 게시판 정보 수정

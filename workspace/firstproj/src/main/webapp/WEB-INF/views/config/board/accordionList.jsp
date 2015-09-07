@@ -55,7 +55,7 @@
 											</tr>
 						
 											<tr>
-												<th><div class="form-group">카테고리</div></th>
+												<th><div class="form-group">게시판 유형</div></th>
 												<td>
 													<div class="form-group">
 														<c:if test="${board.boardType eq 0}">기본 게시판</c:if>

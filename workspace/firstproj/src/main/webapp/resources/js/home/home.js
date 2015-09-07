@@ -8,7 +8,7 @@ function goList(boardId){
 	location.href = url;
 }
 function goHome(){
-	location.href = "/home3/0";
+	location.href = "/home/0";
 }
 
 function goInfo(){

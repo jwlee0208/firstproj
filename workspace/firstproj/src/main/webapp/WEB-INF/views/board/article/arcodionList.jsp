@@ -18,7 +18,7 @@
 	<form id="boardFrm" name="boardFrm" method="post">
 	
 	<!-- 리스트에서 선택된 게시글 아이디 -->
-<!-- 	<input type="hidden" id="selectedArticleId" name="selectedArticleId" /> -->
+	<!-- 	<input type="hidden" id="selectedArticleId" name="selectedArticleId" /> -->
 	<input type="hidden" id="boardId" name="boardId" value="0"/>
 
 	<!-- 검색 영역 -->	
@@ -41,7 +41,6 @@
 				<c:choose>
 					<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
 						<c:forEach var="contentInfo" items="${pagedResult.list}" varStatus="index">
-		
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4 class="panel-title">
@@ -77,12 +76,10 @@
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-		
-							<div style="text-align: center;">작성된 내용이 없습니다.</div>
-						
+			<div style="text-align: center; min-height : 450px;">작성된 내용이 없습니다.</div>
 					</c:otherwise>
 				</c:choose>
-		</div>				
+		</div>	
 	</div>
 	</form>
 	<!-- paging area -->                                                
@@ -94,6 +91,11 @@
 	    <c:param value="${pagedResult.startPageNo}" name="startPageNo"/>
 	    <c:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
 	</c:import>                                                                                                      
+	<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
+		<div class="btn-group">
+			<input type="submit" class="btn btn-default pull-right" value="글쓰기" name="goToWrite" />
+		</div>
+	</div>	
 
 <script type="text/javascript">
 $(document).ready(function() {

@@ -1,16 +1,22 @@
 $(document).on("ready", function() {
+	var boardId = $("#boardFrm #boardId").val();
+	
 	$("input[name='goToWrite']").on("click", function() {
 		var url 	= '';	//"/board/article/write.page?boardId="+$("#boardId").val();
 		var userId 	= $("#userId").val();
 		if(userId != null && userId != ''){
-			url = "/share/" + userId + "/write/" + $("#boardId").val();
+			url = "/share/" + userId + "/write";
 		}else{
-			url = "/board/article/write/" + $("#boardId").val();
+			url = "/board/article/write";
+		}
+
+		if(boardId > 0){
+			url += "/" + boardId;
 		}
 		location.href = url;
 	});
 	
-	var boardId = $("#boardFrm #boardId").val();
+	
 	$(".list-group .list-group-item").removeClass("active");
 	if(boardId > 0){
 		$("#sideBoardMenu_" + boardId).addClass("active");
@@ -21,7 +27,7 @@ function goPage(pageNo) {
 	$("#pageNo").val(pageNo);
 	var url 	= '/board/article/list';
 	var userId 	= $("#userId").val();
-	var boardId	= $("#boardId").val();
+	var boardId	= $("#boardFrm #boardId").val();
 	if(userId != null && userId != ''){
 		url = "/share/" + userId + "/list";
 		if(boardId > 0){
@@ -119,7 +125,7 @@ $(function(){
 			var url 	= '';	
 			var userId 	= $("#userId").val();
 			if(userId != null && userId != ''){
-				url = "/share/" + userId + "/list/" + $("#boardId").val();
+				url = "/share/" + userId + "/list/" + $("#boardFrm #boardId").val();
 			}else{
 				url = "/board/article/list";
 			}
