@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import net.sf.json.JSONObject;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.firstproj.common.CommonConstant;
 import com.firstproj.common.dto.CodeDto;
@@ -62,9 +64,14 @@ public class UserController {
     @Inject
     private MessageSourceAccessor   messageSource;
 
+    @RequestMapping(value="/regist")
+    public String registUser(Model model, HttpServletRequest request) throws Exception{
+        return this.registUser(model, request, 0);
+    }
+    
 	@RequestMapping(value="/regist/{boardId}")
 	public String registUser(Model model, HttpServletRequest request, @PathVariable int boardId) throws Exception{
-	    
+	    /*
         String        referer       = request.getHeader("Referer");
         log.info("[ REFER ] : " + referer);           
         
@@ -81,7 +88,29 @@ public class UserController {
         model.addAttribute("prevPage"       , referer);
 	    model.addAttribute("nationList"     , nationList);
 	    model.addAttribute("languageList"   , languageList);
+	    */
+	    this.setRequiredInfos(model, request);
 		return "/user/regist";
+	}
+	
+	private void setRequiredInfos(Model model, HttpServletRequest request) throws Exception{
+        String        referer       = request.getHeader("Referer");
+        log.info("[ REFER ] : " + referer);           
+        
+        // Nation List 
+        CodeDto       nationCodeDto = new CodeDto();
+        nationCodeDto.setCodeType("01");
+        List<CodeDto> nationList    = this.commonService.selectCodeList(nationCodeDto);
+        
+        // Language List 
+        CodeDto       langCodeDto   = new CodeDto();
+        langCodeDto.setCodeType("02");
+        List<CodeDto> languageList  = this.commonService.selectCodeList(langCodeDto);
+        
+        model.addAttribute("prevPage"       , referer);
+        model.addAttribute("nationList"     , nationList);
+        model.addAttribute("languageList"   , languageList);
+	    
 	}
 	
 	@RequestMapping(value="/regist.json")
@@ -236,4 +265,62 @@ public class UserController {
     public String registOk(HttpServletRequest request) throws Exception{
         return "/user/registOk";
     }
+    
+    @RequestMapping(value="/modify/{userId}")
+    public String modifyUser(HttpServletRequest request, Model model, HttpSession session, @PathVariable String userId) throws Exception{
+        this.commonService.getPrivateInfo(request, model, session);
+        this.setRequiredInfos(model, request);
+        return "/user/ajaxRegistForm";
+    }
+    
+    
+    @RequestMapping(value="/modifyAction")
+    @ResponseBody   
+    public JsonResponse modifyUser(Model model, HttpServletRequest request, HttpSession session, SessionStatus status, @ModelAttribute UserDto userDto, BindingResult result) throws Exception{
+                
+        log.info("[ UserController.registAction() ][ userDto.toString() ] : " + userDto.toString()); 
+        
+        JsonResponse returnObj = new JsonResponse();
+        
+        UserValidator.updateValidate(result, userDto);
+        
+        String resultCode   = "REGIST_0000";
+        String resultMsg    = "";
+        
+        int    updateResult = 0;
+        
+        if(result.hasErrors()){
+            resultCode = "REGIST_0001";     
+            
+            returnObj.setStatus(resultCode);
+            returnObj.setResult(result.getAllErrors());
+        }else{
+            
+            updateResult = this.userService.modifyUserInfo(userDto);
+            
+            if(updateResult > 0){  
+                log.info("[ UserController.registAction() ][ userDto.toString() ][ 2nd ] : " + userDto.toString()); 
+                    
+                resultCode  = "REGIST_0000";
+                resultMsg   = "complelted";
+                
+                session.removeAttribute("userInfo");
+                session.setAttribute("userInfo", this.userService.selectUserInfo(userDto));
+                
+                // 다국어 설정 필요.
+                
+                
+             }else{
+                resultCode  = "REGIST_0002";
+                resultMsg   = "insert_error";
+                }
+            
+            returnObj.setStatus(resultCode);
+            returnObj.setResult(resultMsg);
+
+        }
+
+        return returnObj;
+    }    
+    
 }

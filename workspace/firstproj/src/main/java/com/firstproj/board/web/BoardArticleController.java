@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.firstproj.board.dao.BoardCategoryDao;
 import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.board.dto.BoardCategoryDto;
 import com.firstproj.board.dto.BoardDto;
@@ -37,6 +36,7 @@ import com.firstproj.common.util.PagedList;
 import com.firstproj.common.web.EditorController;
 import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;
+import com.firstproj.user.service.UserServiceImpl;
 
 @Controller
 @RequestMapping(value = {"/board/article", "/share"})
@@ -77,6 +77,9 @@ public class BoardArticleController {
 	
     @Resource(name = "ShareServiceImpl")
     private ShareServiceImpl         shareService;     
+
+    @Resource(name = "UserServiceImpl")
+    private UserServiceImpl          userService;   
     
 	/*	
 	// spring-data-redis 사용.
@@ -183,6 +186,18 @@ public class BoardArticleController {
             }            
         }else{
             page = "board/article/arcodionList";
+        }
+        
+        if(!StringUtils.isEmpty(boardArticleDto.getCreateUserId())){
+            UserDto userParam = new UserDto();
+            userParam.setUserId(boardArticleDto.getCreateUserId());
+            UserDto userDto = this.userService.selectUserInfo(userParam);
+            if(userDto == null){
+                model.addAttribute("isWritable", false);
+                page = "board/article/arcodionList";
+            }else{
+                model.addAttribute("isWritable", true);
+            }
         }
         
         return page;

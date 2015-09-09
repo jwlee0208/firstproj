@@ -49,7 +49,16 @@ public class UserValidator extends BaseValidator{
      * @param userDto
      */
     public static void updateValidate(BindingResult result, UserDto userDto){
+        ValidationUtil.rejectIfEmpty(result, "userNm", "user.regist.userNm.empty", "이름이 입력되지 않았습니다.");        
         
+        if(StringUtils.hasLength(userDto.getPhoneNo())){
+            ValidationUtil.rejectIfNotRegEx(result, "phoneNo", "user.regist.phoneNo.regex", "전화번호 형식에 맞지 않습니다.", ValidationUtil.REG_EX_CELL_PHONE_NO);
+        }
+        
+        if(!StringUtils.isEmpty(userDto.getEmail())){
+            ValidationUtil.rejectIfEmpty(result, "email", "user.regist.email.empty", "이메일이 입력되지 않았습니다.");
+            ValidationUtil.rejectIfNotRegEx(result, "email", "user.regist.email.regex", "이메일 형식에 맞지 않습니다.", ValidationUtil.REG_EX_EMAIL);
+        }        
     }
     
     /**

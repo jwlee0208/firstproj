@@ -5,7 +5,7 @@
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/common-editor.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/article/write.js"></script>
-<!-- <div class="container"> -->
+
 <div>
 	<form id="writeFrm" name="writeFrm" method="post" role="form" enctype="multipart/form-data">
 	

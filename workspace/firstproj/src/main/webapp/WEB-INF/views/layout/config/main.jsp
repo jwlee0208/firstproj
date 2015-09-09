@@ -6,23 +6,27 @@
 <!--[if IE 9 ]>		 <html class="no-js ie ie9 lte9>" lang="ko-KR"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="ko-KR"> <!--<![endif]-->
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" 		content="IE=Edge" />
-<meta http-equiv="Pragma" 				content="no-cache">
-<meta http-equiv="expires" 				content="-1" >
-<meta name="viewport" 					content="width=device-width, initial-scale=1">
-<link rel="icon" href="/img/common/favicon_ln.ico">
+<link rel="icon" href="${pageContext.request.contextPath}/img/common/favicon_blog.ico">
 <title>::: Config :::</title>
-
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
-
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/config/config.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/offcanvas.css">
 </head>
 <body>
+	<tiles:insertAttribute name="header"/>
 	<tiles:insertAttribute name="menu"/>
-	
-	<div class="container" role="main">
-		<tiles:insertAttribute name="body"/>
-	</div>	
+	<div class="container" role="application">
+		<div class="row row-offcanvas row-offcanvas-right">
+			<div class="col-xs-12 col-sm-9" role="main">			
+				<tiles:insertAttribute name="body"/>
+					
+			</div>
+			<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="complementary">	
+				<tiles:insertAttribute name="quickConfigList"/>
+			</div>	
+		</div>
+	</div>
+	<tiles:insertAttribute name="footer"/>		
 </body>
 
 </html>

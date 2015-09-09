@@ -13,7 +13,6 @@ import javax.validation.Valid;
 
 import net.sf.json.JSONObject;
 
-import org.apache.axis.utils.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,20 +21,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.firstproj.board.dto.BoardCategoryDto;
 import com.firstproj.board.dto.BoardDto;
 import com.firstproj.board.service.BoardCategoryServiceImpl;
 import com.firstproj.board.service.BoardServiceImpl;
-import com.firstproj.common.CommonConstant;
 import com.firstproj.common.dto.ShareDto;
-import com.firstproj.common.util.AES256Util;
+import com.firstproj.common.service.impl.CommonServiceImpl;
 import com.firstproj.common.util.PagedList;
 import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;
 import com.firstproj.user.service.UserServiceImpl;
 @Controller
 @RequestMapping(value="/config")
+@SessionAttributes("userInfo")
 public class ConfigController {
     public static final int DEFAULT_PAGE_NO    = 1;
     public static final int DEFAULT_PAGE_SIZE  = 10;
@@ -51,6 +51,9 @@ public class ConfigController {
 	
 	@Resource(name="UserServiceImpl")
 	private UserServiceImpl          userService;
+	
+	@Resource(name="CommonServiceImpl")
+	private CommonServiceImpl        commonService;
 
     @RequestMapping(value="/main")
     public String getConfig(HttpServletRequest request, Model model, HttpSession session) throws Exception{
@@ -281,19 +284,10 @@ public class ConfigController {
     
     
     
+    
     @RequestMapping(value="/priv/modifyShareProfile")
     public String getShareProfileInfo(Model model, HttpSession session) throws Exception{
-    	UserDto    	sessionInfo    	= (UserDto)session.getAttribute("userInfo");
-        ShareDto	shareDto 		= new ShareDto();
-        ShareDto	shareInfo		= null;
-        
-    	if(sessionInfo != null){
-    		shareDto.setUserId(sessionInfo.getUserId());
-        	shareInfo = this.shareService.getShareInfo(shareDto);
-        }
-    	
-    	model.addAttribute("shareInfo"	, shareInfo);
-    	model.addAttribute("userInfo"	, sessionInfo);
+        this.shareService.setShareInfo(model, session);
     	return "config/share/write";
     }
     
@@ -326,26 +320,19 @@ public class ConfigController {
         return resultObj;
     }
     
-    @RequestMapping(value="/priv/privInfo")
-    public String getPrivateInfo(HttpServletRequest request, Model model, HttpSession session) throws Exception{
-        
-        UserDto sessionInfo     = (UserDto)session.getAttribute("userInfo");
-        UserDto userInfo        = null; 
-        if(sessionInfo != null){
-            AES256Util aes256util  = new AES256Util(CommonConstant.IV);
-            userInfo = sessionInfo;
-            
-            String phoneNo = userInfo.getPhoneNo();
-            String email = userInfo.getEmail();
-            if(!StringUtils.isEmpty(phoneNo)){
-                userInfo.setPhoneNo(aes256util.decrypt(phoneNo));
-            }
-            if(!StringUtils.isEmpty(email)){
-                userInfo.setEmail(aes256util.decrypt(email));
-            }
-            
-        }
-        model.addAttribute("userInfo", userInfo);
+    @RequestMapping(value="/priv/info")
+    public String getPrivateInfo(HttpServletRequest request, Model model, HttpSession session){
+        this.commonService.getPrivateInfo(request, model, session);
         return "user/ajaxPrivateInfo";
     }
+    @RequestMapping(value="/priv/modifyUserInfo")
+    public String modifyRegistInfo(HttpServletRequest request, Model model, HttpSession session) throws Exception{
+        UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+        if(sessionInfo == null){
+            return "redirect:/board/article/arcodionList";
+        }
+        model.addAttribute("userInfo", sessionInfo);
+        return "config/priv/write";
+    }
+    
 }

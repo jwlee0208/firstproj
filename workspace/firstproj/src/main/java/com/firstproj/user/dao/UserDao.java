@@ -28,4 +28,15 @@ public class UserDao extends SqlSessionDaoSupport{
 	public int insertUserInfo(UserDto userDto) throws Exception{
 		return getSqlSession().insert("sql.user.insertUserInfo", userDto);
 	}	
+	/**
+	 * @brief 사용자 정보 수정
+	 * @param userDto
+	 * @return
+	 * @throws Exception
+	 */
+    public int modifyUserInfo(UserDto userDto) throws Exception{
+        return getSqlSession().update("sql.user.updateUserInfo", userDto);
+    }   
+
+
 }

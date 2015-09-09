@@ -19,7 +19,7 @@ function configCategory(){
 }
 
 function configDefaultPriv(){
-	
+	location.href = "/config/priv/modifyUserInfo";
 }
 
 function configProfileInfo(){

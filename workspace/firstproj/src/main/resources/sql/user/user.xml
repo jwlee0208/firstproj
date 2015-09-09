@@ -51,4 +51,14 @@
 		    WHERE user_id = #{userId}
 		</select>
 		
+		<update id="updateUserInfo" parameterType="user.userDto">
+			UPDATE TB_USER 
+			   SET user_nm  = #{userNm}
+			     , email    = #{email}
+			     , phone_no = #{phoneNo}
+			     , nationality = LOWER(#{nationality})
+			     , language    = LOWER(#{language})
+			WHERE user_id = #{userId}     
+		</update>
+		
     </mapper>

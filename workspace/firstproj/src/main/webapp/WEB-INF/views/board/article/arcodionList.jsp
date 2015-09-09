@@ -37,7 +37,7 @@
 		<input type="hidden" id="totalPageCnt" 	name="totalPageCnt" value="${pagedResult.totalPageCnt}" /> 
 		<input type="hidden" id="startPageNo" 	name="startPageNo" 	value="${pagedResult.startPageNo}" /> 
 		<input type="hidden" id="pageSize" 		name="pageSize" 	value="${pagedResult.pageSize}" />
-		<div class="panel-group" id="accordion">
+		<div class="panel-group" id="accordion" style="min-height: 300px;">
 				<c:choose>
 					<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
 						<c:forEach var="contentInfo" items="${pagedResult.list}" varStatus="index">
@@ -90,13 +90,15 @@
 	    <c:param value="${pagedResult.pageNo}"      name="pageNo"/>
 	    <c:param value="${pagedResult.startPageNo}" name="startPageNo"/>
 	    <c:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
-	</c:import>                                                                                                      
+	</c:import>     
+	
+<c:if test="${isWritable}">	                                                                                                 
 	<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
 		<div class="btn-group">
 			<input type="submit" class="btn btn-default pull-right" value="글쓰기" name="goToWrite" />
 		</div>
 	</div>	
-
+</c:if>
 <script type="text/javascript">
 $(document).ready(function() {
 	$("div img").addClass("media-object");

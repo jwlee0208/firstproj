@@ -12,7 +12,7 @@
 
 </head>
 <body>
-<div class="container">
+
 	<div class="page-header">
  	  <h1>Configuration&nbsp;&nbsp;&nbsp;<small>My Share Profile</small></h1>
 	</div>	
@@ -74,6 +74,5 @@
 	
 	
 	</form>
-</div>	
 </body>
 </html>

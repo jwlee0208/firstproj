@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
-<!DOCTYPE>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>::: Registration :::</title>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>    
 <!-- jQuery -->
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery-validate.min.js"></script>
@@ -17,29 +12,42 @@
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css"/>
-</head>
-<body>
-<div class="container">
-	
 	<input type="hidden" id="prevPage" name="prevPage" value="${prevPage}"/>
 	
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form">
-		<h1 id="btn-groups" class="page-header">Sign up</h1>
+		<h1 id="btn-groups" class="page-header">
+<c:choose>
+	<c:when test="${userInfo ne null}">
+		Modification
+	</c:when>		
+	<c:otherwise>
+		Sign up
+	</c:otherwise>
+</c:choose>
+		</h1>
 		<h2>Required</h2>
 		<div class="form-group">
 			<label for="userId" class="col-sm-2 control-label">Userid</label>
 			<div class="col-sm-10">
+<c:choose>
+	<c:when test="${userInfo ne null}">
+				<input type="hidden" id="userId" name="userId" value="${userInfo.userId}"/>
+				<input type="text" class="form-control" value="${userInfo.userId}" <c:if test="${userInfo ne null}">readonly</c:if>/>
+	</c:when>		
+	<c:otherwise>
 				<input type="text" class="form-control" id="userId" name="userId"/><span id="userIdErr" class="errorMsg" style="display: none;"></span>
+	</c:otherwise>
+</c:choose>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="userNm" class="col-sm-2 control-label">Username</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="userNm" name="userNm" style="ime-mode: active"/><span id="userNmErr" class="errorMsg" style="display: none;"></span>
+				<input type="text" class="form-control" id="userNm" name="userNm" style="ime-mode: active" value="${userInfo.userNm}"/><span id="userNmErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
-		
+<c:if test="${userInfo eq null}">  		
 		<div class="form-group">
 			<label for="passwd" class="col-sm-2 control-label">Password</label>
 			<div class="col-sm-10">
@@ -53,18 +61,18 @@
 				<input type="password" class="form-control" id="passwdChk" name="passwdChk" minlength="8" maxlength="15"/><span id="passwdChkErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
-
+</c:if>
 		<div class="form-group">
 			<label for="email" class="col-sm-2 control-label">Email Address</label>
 			<div class="col-sm-10">
-				<input type="email" class="form-control" id="email" name="email"/><span id="emailErr" class="errorMsg" style="display: none;"></span>
+				<input type="email" class="form-control" id="email" name="email" value="${userInfo.email}"/><span id="emailErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="phoneNo" class="col-sm-2 control-label">Cellphone no.</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="phoneNo" name="phoneNo"/><span id="phoneNoErr" class="errorMsg" style="display: none;"></span>
+				<input type="text" class="form-control" id="phoneNo" name="phoneNo" value="${userInfo.phoneNo}"/><span id="phoneNoErr" class="errorMsg" style="display: none;"></span>
 			</div>
 		</div>
 		<h2>Optional</h2>
@@ -75,7 +83,7 @@
 					<option value="">국가를 선택해주세요.</option>
 			<c:if test="${!empty nationList}">		
 				<c:forEach var="nationInfo" items="${nationList}">
-					<option value="${nationInfo.codeValue}">${nationInfo.codeName}</option>
+					<option value="${fn:toLowerCase(nationInfo.codeValue)}" <c:if test="${fn:toLowerCase(nationInfo.codeValue) eq userInfo.nationality}">selected</c:if>>${nationInfo.codeName}</option>
 				</c:forEach>		
 			</c:if>
 				</select>			
@@ -90,7 +98,7 @@
 					<option value="">언어를 선택해주세요.</option>
 			<c:if test="${!empty languageList}">		
 				<c:forEach var="langInfo" items="${languageList}">
-					<option value="${langInfo.codeValue}">${langInfo.codeName}</option>
+					<option value="${fn:toLowerCase(langInfo.codeValue)}" <c:if test="${fn:toLowerCase(langInfo.codeValue) eq userInfo.language}">selected</c:if>>${langInfo.codeName}</option>
 				</c:forEach>	
 			</c:if>		
 				</select>			
@@ -104,12 +112,17 @@
 				<input type="button" class="btn btn-default" value="Cancel" id="cancelBtn">
 			</div>
 			<div class="btn-group">
+<c:choose>
+	<c:when test="${userInfo ne null}">
+				<input type="button" class="btn btn-primary pull-right" value="Modify an account" id="modifyBtn">	
+	</c:when>		
+	<c:otherwise>
 				<input type="button" class="btn btn-primary pull-right" value="Create an account" id="registBtn">
+	</c:otherwise>
+</c:choose>
 			</div>					
 		</div>
 	</form>
-</div>
-</body>
 <script>
 $().ready(function() {
 	
@@ -146,16 +159,15 @@ $().ready(function() {
 
 			if(isValid){
 				$.ajax({
-// 					url : '/user/regist.json',
-					url : '/user/registAction',
-					data : $("#actionFrm").serialize(),
-					dataType : 'json',
-					method : 'post',
-					success : function(data){
+					url 		: '/user/registAction',
+					data 		: $("#actionFrm").serialize(),
+					dataType 	: 'json',
+					method 		: 'post',
+					success 	: function(data){
 						var status = data.status;
 						
 						if(status == 'REGIST_0000'){
-							location.replace('/user/registOk');	//$("#prevPage").val();
+							location.replace('/user/registOk');
 						}else{
 							var result = data.result;
 							console.log(result);
@@ -175,79 +187,47 @@ $().ready(function() {
 					}
 				});
 			}
-		});		
-	});
+		});	
 
+		$("#modifyBtn").on("click", function(){
+			var isValid = $("form").valid();
+
+			if(isValid){
+				$.ajax({
+					url 		: '/user/modifyAction',
+					data 		: $("#actionFrm").serialize(),
+					dataType 	: 'json',
+					method 		: 'post',
+					success 	: function(data){
+						var status = data.status;
+						
+						if(status == 'REGIST_0000'){
+							location.replace('/config/main');
+						}else{
+							var result = data.result;
+							console.log(result);
+							var length = result.length;
+							if(result != null && length > 0){
+
+								for(var i = 0 ; i < length ; i++){
+									$("#" + result[i].field+"Err").html(result[i].defaultMessage);
+									$("#" + result[i].field+"Err").show();
+								}
+							}
+						}
+						
+					},
+					error : function(data){
+
+					}
+				});
+			}
+		});				
+	});
 
 	$("input[type=text]").on("click", function(e){
 		$("#" +e.target.id + "Err").hide();
 		$("#" +e.target.id + "Err").html('');
 	});
-	/*
-	$("form").validate({
-		rules: {
-			userId: {
-				required 	: true,
-				minlength 	: 8,
-				maxlength 	: 15
-			},
-			userNm: {
-				required 	: true,
-				minlength 	: 2,
-				maxlength 	: 10
-			},
-			passwd: {
-				required 	: true,
-				minlength 	: 8,
-				maxlength 	: 15
-			},
-			passwdChk: {
-				required 	: true,
-				minlength 	: 8,
-				maxlength 	: 15,
-				equalTo 	: "#passwd"				
-			},
-			email : {
-				email : true
-			},
-			phoneNo : {
-				number : true
-			}
-		},
-		messages : {
-			userId : {
-				required 	: "사용자 아이디 입력은 필수 입니다.",
-				minlength 	: "길이는 최소 8자 이상이어야 합니다.",
-				maxlength 	: "길이는 최대 15자까지 허용합니다."				
-			},
-			userNm : {
-				required 	: "사용자 이름 입력은 필수 입니다.",
-				minlength 	: "길이는 최소 2자 이상이어야 합니다.",
-				maxlength 	: "길이는 최대 10자까지 허용합니다."
-			},
-			passwd : {
-				required 	: "패스워드를 입력해 주세요.",
-				minlength 	: "길이는 최소 8자 이상이어야 합니다.",
-				maxlength 	: "길이는 최대 15자까지 허용합니다."									
-			},
-			passwdChk: {
-				required  	: "패스워드를 한번 더 입력해 주세요.",
-				minlength 	: "길이는 최소 8자 이상이어야 합니다.",
-				maxlength 	: "길이는 최대 15자까지 허용합니다.",
-				equalTo 	: "위의 패스워드와 동일해야 합니다."				
-			},			
-			email : {
-				email : "이메일 형식에 맞게 입력해 주셔야 합니다."
-			},
-			phoneNo : {
-				number : "숫자만 입력이 가능합니다."
-			} 
-		}
-	});
-	*/
 });
-
-
-
 </script>
-</html>

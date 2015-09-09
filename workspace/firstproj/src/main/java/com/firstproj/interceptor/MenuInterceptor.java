@@ -27,6 +27,8 @@ public class MenuInterceptor  extends HandlerInterceptorAdapter {
             String[] str = p.split(uri);
             request.setAttribute("userId", str[str.length - 1]);
         }else if(uri.indexOf("/config") > 0){
+            String[] str = p.split(uri);
+            request.setAttribute("userId", str[str.length - 1]);
             
         }else{
             

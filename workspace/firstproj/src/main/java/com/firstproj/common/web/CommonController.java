@@ -2,6 +2,7 @@ package com.firstproj.common.web;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -11,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.firstproj.board.dto.BoardCategoryPortalDto;
 import com.firstproj.board.dto.BoardDto;
-import com.firstproj.board.dto.SideBoardListDto;
 import com.firstproj.board.service.BoardArticleService;
 import com.firstproj.board.service.BoardService;
 import com.firstproj.common.dto.ShareDto;
 import com.firstproj.share.service.ShareService;
+import com.firstproj.user.dto.UserDto;
 
 @Controller
 @RequestMapping(value="/common")
@@ -51,26 +52,6 @@ public class CommonController {
 
     @RequestMapping(value = "/menu/{menuType}")
     public String getMenu(HttpServletRequest request, Model model, @PathVariable String menuType) throws Exception{
-        /*
-        model.addAttribute("boardCategoryList", this.boardService.getBoardCategoryList());
-        model.addAttribute("boardList", this.boardService.getBoardList());
-        */
-        /*
-        System.out.println("ccon uri : " + request.getRequestURI());
-        System.out.println("ccon url : " + request.getRequestURL());
-        
-        StringBuffer sb = new StringBuffer();
-        sb.append("common/");
-        if(menuType.equals("blog")){
-            model.addAttribute("boardCategoryList", this.boardService.getBoardCategoryAndBoardList());
-            sb.append("ajaxBlogMenu");
-        }else if(menuType.equals("config")){
-            model.addAttribute("boardList", this.boardService.getBoardList());
-            sb.append("ajaxConfigMenu");
-        }else{    
-            sb.append("ajaxMenu");
-        }
-        return sb.toString();*/
         return this.getMenu(request, model, menuType, null);
     }
     
@@ -132,5 +113,15 @@ public class CommonController {
     public String getPaging(HttpServletRequest request, Model model) throws Exception{
         return "common/ajaxPaging";
     }
+    
+    @RequestMapping(value = "/sideConfigList")
+    public String getSideConfigList(Model model, HttpSession session) throws Exception{
+        
+        UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+        
+        model.addAttribute("userInfo", sessionInfo);
+        return "common/ajaxSideConfigList";
+    }
+    
 
 }

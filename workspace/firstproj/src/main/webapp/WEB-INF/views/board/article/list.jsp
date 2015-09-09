@@ -35,7 +35,7 @@
 	</div>
 	
 	<c:set var="list" value="${boardList}" />	
-	<div class="table-responsive" id="listDiv" role="main">
+	<div class="table-responsive" id="listDiv" role="main" style="min-height: 300px;">
 		<!-- paging에 필요한 파라미터 -->
 		<input type="hidden" id="pageNo" 		name="pageNo" 		value="${pagedResult.pageNo}" /> 
 		<input type="hidden" id="totalListCnt" 	name="totalListCnt" value="${pagedResult.totalListCnt}" /> 

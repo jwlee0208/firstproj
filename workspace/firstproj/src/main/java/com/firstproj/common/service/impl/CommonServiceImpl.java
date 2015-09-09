@@ -88,6 +88,9 @@ public class CommonServiceImpl implements CommonService{
 */
 package com.firstproj.common.service.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -99,17 +102,25 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.axis.utils.StringUtils;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import com.firstproj.common.CommonConstant;
 import com.firstproj.common.dao.CommonDao;
 import com.firstproj.common.dto.CodeDto;
 import com.firstproj.common.dto.MailDto;
 import com.firstproj.common.service.CommonService;
+import com.firstproj.common.util.AES256Util;
+import com.firstproj.user.dto.UserDto;
+import com.firstproj.user.service.UserServiceImpl;
 
 @Service("CommonServiceImpl")
 public class CommonServiceImpl implements CommonService{
@@ -134,6 +145,9 @@ public class CommonServiceImpl implements CommonService{
     
     @Value("${mail.smtp.port}")
     private int         smtpServerPort;
+    
+    @Resource(name="UserServiceImpl")
+    private UserServiceImpl userService;
     
     
     @Override
@@ -178,4 +192,58 @@ public class CommonServiceImpl implements CommonService{
         
     }
     
+    @Override
+    public void getPrivateInfo(HttpServletRequest request, Model model, HttpSession session){
+        
+        UserDto sessionInfo     =  
+                (UserDto)session.getAttribute("userInfo");
+        UserDto userInfo        = null; 
+        if(sessionInfo != null){
+            AES256Util aes256util;
+            try {
+                aes256util = new AES256Util(CommonConstant.IV);
+                try {
+                    userInfo = this.userService.selectUserInfo(sessionInfo);
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                
+                String phoneNo = userInfo.getPhoneNo();
+                String email = userInfo.getEmail();
+                if(!StringUtils.isEmpty(phoneNo)){
+                    try {
+                        userInfo.setPhoneNo(aes256util.decrypt(phoneNo));
+                    } catch (NoSuchAlgorithmException e) {
+                        // TODO Auto-generated catch block
+                        // e.printStackTrace();
+                        userInfo.setPhoneNo(phoneNo);
+                    } catch (GeneralSecurityException e) {
+                        // TODO Auto-generated catch block
+                        // e.printStackTrace();
+                        userInfo.setPhoneNo(phoneNo);
+                    }
+                }
+                if(!StringUtils.isEmpty(email)){
+                    try {
+                        userInfo.setEmail(aes256util.decrypt(email));
+                    } catch (NoSuchAlgorithmException e) {
+                        // TODO Auto-generated catch block
+                        // e.printStackTrace();
+                        userInfo.setEmail(email);
+                    } catch (GeneralSecurityException e) {
+                        // TODO Auto-generated catch block
+                        // e.printStackTrace();
+                        userInfo.setEmail(email);
+                    }
+                }
+     
+            } catch (UnsupportedEncodingException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            
+        }
+        model.addAttribute("userInfo", userInfo);
+    }    
 }
