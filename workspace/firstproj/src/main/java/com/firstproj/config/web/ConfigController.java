@@ -121,6 +121,7 @@ public class ConfigController {
         return model;
 
     }
+
     @RequestMapping(value = "/board/write")
     public String createBoard(HttpServletRequest request, Model model, BoardDto boardDto, HttpSession session) throws Exception{
         
@@ -282,8 +283,124 @@ public class ConfigController {
         return model;
     }
     
+    @RequestMapping(value = "/board/writeCategory")
+    public String createBoardCategory(HttpServletRequest request, Model model, HttpSession session) throws Exception{
+        
+        UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+        if(null != sessionInfo){
+
+        }else{
+            return "redirect:/login?redirectPage=" + request.getRequestURI();
+        }
+        
+        return "config/board/writeCategory";
+    }
+
+    
+    @SuppressWarnings("serial")
+    @RequestMapping(value = "/board/insertBoardCategoryAction.json", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject insertBoardCategoryAction(@Valid BoardCategoryDto boardCategoryDto, BindingResult bindingResult, HttpSession session) throws Exception {
+
+        JSONObject    jsonObj         = new JSONObject();
+        int           insertResult    = 0;
+
+        UserDto       sessionInfo     = (UserDto)session.getAttribute("userInfo");
+        
+        if(null != sessionInfo){
+
+            boardCategoryDto.setCreateUserId(sessionInfo.getUserId());
+    
+            if(bindingResult.hasErrors()){
+                jsonObj.put("validate", false);
+            }                       
+        }
+        
+        insertResult = this.boardCategoryService.insertBoardCategory(boardCategoryDto);
+    
+        jsonObj.put("result", (insertResult > 0) ? true : false);
+        return jsonObj;
+    }  
+    
+    @RequestMapping(value = "/board/viewCategory")
+    public String getBoardCategoryContent(HttpServletRequest request, Model model, BoardCategoryDto boardCategoryDto, @RequestParam(value="selectedBoardCategoryId", required=false) int selectedBoardCategoryId) throws Exception{
+        
+        BoardCategoryDto boardCategoryInfo      = null;
+        BoardCategoryDto prevBoardCategoryInfo  = null;
+        BoardCategoryDto nextBoardCategoryInfo  = null;
+        
+        if(selectedBoardCategoryId > 0){
+            boardCategoryDto.setBoardCategoryId(selectedBoardCategoryId);
+            // 글 조회
+            boardCategoryInfo     = this.boardCategoryService.getBoardCategoryInfo(boardCategoryDto);
+            // 이전 글 조회
+            prevBoardCategoryInfo = this.boardCategoryService.getPrevBoardCategoryInfo(boardCategoryDto);
+            // 다음 글 조회
+            nextBoardCategoryInfo = this.boardCategoryService.getNextBoardCategoryInfo(boardCategoryDto);
+        }
+        
+        model.addAttribute("boardCategoryInfo"    , boardCategoryInfo);
+        model.addAttribute("prevBoardCategoryInfo", prevBoardCategoryInfo);
+        model.addAttribute("nextBoardCategoryInfo", nextBoardCategoryInfo);
+        
+        model.addAttribute("boardCategoryId"      , boardCategoryDto.getBoardCategoryId());
+        
+        return "config/board/viewCategory";
+    }
     
     
+    
+    
+    @RequestMapping(value = "/board/modifyCategory")
+    public String modifyBoardCategory(HttpServletRequest request, Model model, BoardCategoryDto boardCategoryDto, HttpSession session, @RequestParam(value="selectedBoardCategoryId", required=false) int selectedBoardCategoryId) throws Exception{
+        
+        UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+        BoardCategoryDto boardCategoryInfo = new BoardCategoryDto();
+        if(null != sessionInfo){
+            boardCategoryDto.setCreateUserId(sessionInfo.getUserId());
+            if(selectedBoardCategoryId > 0){
+                boardCategoryDto.setBoardCategoryId(selectedBoardCategoryId);
+            }
+
+            boardCategoryInfo = boardCategoryService.getBoardCategoryInfo(boardCategoryDto);
+            
+        }else{
+            return "redirect:/login?redirectPage=" + request.getRequestURI();
+        }
+
+        model.addAttribute("boardCategoryInfo"   , boardCategoryInfo);
+        return "config/board/writeCategory";
+    }
+    
+    @SuppressWarnings("serial")
+    @RequestMapping(value = "/board/modifyBoardCategoryAction.json", method = {RequestMethod.POST})
+    @ResponseBody
+    public JSONObject modifyBoardCategoryAction(
+               Locale locale
+                , Model model
+                , HttpServletRequest request
+                , HttpServletResponse response
+                , HttpSession session
+                , BoardCategoryDto boardCategoryDto
+                , BindingResult bindingResult) throws Exception {
+        
+        JSONObject jsonObj        = new JSONObject();
+        int        modifyResult   = 0;
+
+        UserDto    sessionInfo    = (UserDto)session.getAttribute("userInfo");
+        
+        if(null != sessionInfo){
+
+            if(bindingResult.hasErrors()){
+                jsonObj.put("validate", false);
+            }                       
+        }
+
+        modifyResult = this.boardCategoryService.updateBoardCategory(boardCategoryDto);
+                
+        jsonObj.put("result", (modifyResult > 0) ? true : false);
+        return jsonObj;
+    }     
     
     @RequestMapping(value="/priv/modifyShareProfile")
     public String getShareProfileInfo(Model model, HttpSession session) throws Exception{

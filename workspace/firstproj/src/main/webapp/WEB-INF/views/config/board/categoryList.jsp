@@ -17,8 +17,9 @@
 	  <li><a>Category List</a></li>
 	</ol>		
 	
-	<form id="boardFrm" name="boardFrm" method="post">
+	<form id="boardCategoryFrm" name="boardCategoryFrm" method="post">
 	
+	<input type="hidden" id="selectedBoardCategoryId" name="selectedBoardCategoryId" />
 	
 	<c:set var="list" value="${boardCategoryList}" />
 	<div class="table-responsive" id="listDiv">

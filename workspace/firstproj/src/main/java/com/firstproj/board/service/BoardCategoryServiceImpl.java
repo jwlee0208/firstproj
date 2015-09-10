@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.firstproj.board.dao.BoardCategoryDao;
 import com.firstproj.board.dto.BoardCategoryDto;
+import com.firstproj.board.dto.BoardDto;
 
 @Service("BoardCategoryServiceImpl")
 public class BoardCategoryServiceImpl implements BoardCategoryService{
@@ -19,6 +20,12 @@ public class BoardCategoryServiceImpl implements BoardCategoryService{
     public List<BoardCategoryDto> getBoardCategoryList(BoardCategoryDto boardCategoryDto) throws Exception {
         // TODO Auto-generated method stub
         return this.boardCategoryDao.selectBoardCategoryList(boardCategoryDto);
+    }
+
+    @Override
+    public BoardCategoryDto getBoardCategoryInfo(BoardCategoryDto boardCategoryDto) throws Exception {
+        // TODO Auto-generated method stub
+        return this.boardCategoryDao.selectBoardCategoryInfo(boardCategoryDto);
     }
 
     @Override
@@ -42,5 +49,19 @@ public class BoardCategoryServiceImpl implements BoardCategoryService{
         return this.boardCategoryDao.deleteBoardCategory(boardCategoryDto);
     }
     
-    
+    /**
+     * 이전 글 조회
+     */
+    @Override
+    public BoardCategoryDto getPrevBoardCategoryInfo(BoardCategoryDto boardCategoryDto) throws Exception {
+        return this.boardCategoryDao.selectPrevBoardCategoryInfo(boardCategoryDto);
+    }
+    /**
+     * 다음 글 조회
+     */
+    @Override
+    public BoardCategoryDto getNextBoardCategoryInfo(BoardCategoryDto boardCategoryDto) throws Exception {
+        return this.boardCategoryDao.selectNextBoardCategoryInfo(boardCategoryDto);
+    }
+
 }

@@ -13,6 +13,18 @@ public class BoardCategoryDao extends SqlSessionDaoSupport{
     public List<BoardCategoryDto> selectBoardCategoryList(BoardCategoryDto boardCategoryDto) throws Exception{
         return getSqlSession().selectList("sql.boardcategory.selectBoardCategoryList", boardCategoryDto);
     }
+
+    public BoardCategoryDto selectBoardCategoryInfo(BoardCategoryDto boardCategoryDto) throws Exception{
+        return getSqlSession().selectOne("sql.boardcategory.selectBoardCategoryInfo", boardCategoryDto);
+    }
+    
+    public BoardCategoryDto selectPrevBoardCategoryInfo(BoardCategoryDto boardCategoryDto) throws Exception{
+        return getSqlSession().selectOne("sql.boardcategory.selectPrevBoardCategoryInfo", boardCategoryDto);
+    }
+
+    public BoardCategoryDto selectNextBoardCategoryInfo(BoardCategoryDto boardCategoryDto) throws Exception{
+        return getSqlSession().selectOne("sql.boardcategory.selectNextBoardCategoryInfo", boardCategoryDto);
+    }
     
     public int insertBoardCategory(BoardCategoryDto boardCategoryDto) throws Exception{
         
