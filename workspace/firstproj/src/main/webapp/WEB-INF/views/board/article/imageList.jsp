@@ -5,15 +5,6 @@
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
-<!-- <meta charset="UTF-8"> -->
-<!-- <meta http-equiv="X-UA-Compatible" 	content="IE=Edge" /> -->
-<!-- <meta name="viewport" 				content="width=device-width, initial-scale=1"> -->
-<!-- <meta name="title" 					content="Developer's Blog"/> -->
-<!-- <meta name="author" 				content="Lee Jinwon"/> -->
-<!-- <meta name="description" 			content="Welcome to enter here. Here is developer's blog"/> -->
-<!-- <meta name="robots" 				content="index,follow" />  -->
-<!-- <meta name="keywords" 				content="blog, baseball, link, player, profile"/> -->
-
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleList.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
@@ -41,7 +32,7 @@
 	<div class="form-group" role="search">		
 		<div>
 			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" />
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control" placeholder="검색어를 입력해 주세요." value="${boardArticleDto.searchText}"/>
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control" placeholder="Enter Your Search Keyword." value="${boardArticleDto.searchText}"/>
 		</div>						
 	</div>	
 	
@@ -59,7 +50,6 @@
 		<c:forEach var="content" items="${pagedResult.list}" varStatus="index">		
 			<div class="">
 				<div class="thumbnail">
-					
 			<c:choose>
 				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img data-src="holder.js/250x250?auto=yes&theme=social" src="http://jwlee0208.cdn3.cafe24.com/${content.filePath}" alt="" class="img-rounded" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal" style="width: 700px; height: 450px;"/></c:when>
 				<c:otherwise><img data-src="holder.js/250x250?auto=yes&theme=social" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="img-rounded" onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal" style="width: 800px; height: 450px;"/></c:otherwise>
@@ -73,7 +63,7 @@
 								<span onclick="javascript:goArticleView('${content.articleId}', 'noPopup');">${fn:substring(content.contentText, 0, 31)}...</span>
 							</c:if>
 						</p>
-						<p><span class="btn btn-default" role="button" onclick="javascript:goArticleView('${content.articleId}');">상세보기</span></p>
+						<p><span class="btn btn-primary" role="button" onclick="javascript:goArticleView('${content.articleId}');">Detail View</span></p>
 					</div>
 
 				</div>	
@@ -81,7 +71,7 @@
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
-			<div style="min-height: 400px;">작성된 내용이 없습니다.</div>					
+			<div style="min-height: 400px;">There is no article.</div>					
 	</c:otherwise>
 </c:choose>
 		</div>

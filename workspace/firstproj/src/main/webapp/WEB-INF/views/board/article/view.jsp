@@ -21,6 +21,7 @@
 <title><c:out value="${contentInfo.title}"/></title>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleView.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/image_slider.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/modal.css">
 </head>
 <body>
 
@@ -131,7 +132,7 @@
 			</div>			
 			</c:if>
 		</div>
-		
+<!--  	
 		<div class="panel panel-danger" role="main" id="streamDiv">
 			<div class="panel-heading">
 				<h4 class="panel-title"><a data-toggle="collapse" href="#collapseStream" class="collapsed">Related Streams&nbsp;<small>in Youtube</small></a></h4>
@@ -158,7 +159,82 @@
 				<div id="flickrImageListDiv"></div>
 			</div>		
 		</div>
+-->		
+
+		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
+			<div class="btn-group" role="button" id="streamDiv">
+				<!-- Trigger the modal with a button -->
+				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#youtubeList">Related Streams</button>
+			</div>	
+			<div class="btn-group" role="button" id="slideDiv">
+				<!-- Trigger the modal with a button -->
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#slideList">Related Slides</button>
+			</div>
+			<div class="btn-group" role="button" id="photoDiv">
+				<!-- Trigger the modal with a button -->
+		    	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photoList">Related Photos</button>
+		    </div>	
+		</div>
+
+		  
+		  
 		
+		  <!-- Modal -->
+		  <div class="modal fade" id="youtubeList" role="dialog">
+		    <div class="modal-dialog modal-lg">
+		      <div class="modal-content">
+		        <div class="modal-header modal-header-danger">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Related Streams&nbsp;<small>in Youtube</small></h4>
+		        </div>
+		        <div class="modal-body">
+		          <div id="youtubeListDiv"></div>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		  
+		
+		  <!-- Modal -->
+		  <div class="modal fade" id="slideList" role="dialog">
+		    <div class="modal-dialog modal-lg">
+		      <div class="modal-content">
+		        <div class="modal-header modal-header-info">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Related Slides&nbsp;<small>in Slideshare</small></h4>
+		        </div>
+		        <div class="modal-body">
+		          <div id="slideshareListDiv"></div>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+
+		
+		  <!-- Modal -->
+		  <div class="modal fade" id="photoList" role="dialog">
+		    <div class="modal-dialog modal-lg">
+		      <div class="modal-content">
+		        <div class="modal-header modal-header-primary">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Related Photos&nbsp;<small>in Flickr</small></h4>
+		        </div>
+		        <div class="modal-body">
+		          <div id="flickrImageListDiv"></div>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		  	
 	</form>
 </div>
 </body>
@@ -170,6 +246,8 @@
 
 		$("iframe").addClass("embed-responsive-item");
 
+		$.ajaxSetup({ scriptCharset: "utf-8" , contentType: "application/json; charset=utf-8"});
+		
 		// load to flickr image list 
 		$("#flickrImageListDiv").load("/api/flickr/photoList", $("#viewFrm").serialize());
 

@@ -1,6 +1,7 @@
 package com.firstproj.testtwo.web;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -8,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.net.imap.IMAPClient.SEARCH_CRITERIA;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.slideshare.api.SlideShare;
 import org.springframework.social.slideshare.api.SlideshowOperations;
@@ -35,8 +37,10 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
+import com.google.api.services.youtube.YouTube.Subscriptions;
 import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
+import com.google.api.services.youtube.model.Subscription;
 
 public class Test {
     
@@ -206,10 +210,15 @@ public class Test {
 	        .build();
 	    YouTube.Search.List search = youtube.search().list("id,snippet");
 	    search.setKey("AIzaSyAJiDR0oG8Sg7wPASRUO1lGBXMdKbqnSBo");
-	    search.setQ("jwlee0208");
+//	    search.setQ(URLEncoder.encode("4할타자 백인천", "UTF-8"));
+	    search.setQ("타이완 여행");
 	    search.setType("video");
+	    search.setVideoType("any");
 	    search.setFields("items(id/kind,id/videoId,snippet/title,snippet/thumbnails/default/url)");
 	    search.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);
+	    search.setOrder("viewCount");
+	    search.setSafeSearch("moderate");
+	    
 	    SearchListResponse searchResponse = search.execute();
 
 	    List<SearchResult> searchResultList = searchResponse.getItems();
@@ -225,6 +234,10 @@ public class Test {
 	    }
 	}
 	
+	public static void testKorean() throws Exception{
+	    System.out.println(URLEncoder.encode("\"한글의 위대함\"", "UTF-8"));    // 8859_1
+	}
+	
 	public static void main(String[] args) throws Exception{
 		// Testing compareTo method
 //		Test.checkoutCompareWay();
@@ -233,13 +246,15 @@ public class Test {
 //		System.out.println(mail +", " + new String(Base64.decodeBase64(Base64.encodeBase64("jwlee0208@gmail.com".getBytes())))+", " + new String(Base64.decodeBase64(Base64.encodeBase64("andsZWUwMjA4QGdtYWlsLmNvbQ=="))));
 //		System.out.println(Base64.encodeBase64("jw22642912".getBytes()));
 	    
-	    Test.getDate();
+//	    Test.getDate();
 	    
-	    Test.testFlickr();
+//	    Test.testKorean();
+	    
+//	    Test.testFlickr();
 	    
 //	    Test.testSlideShare();
 	    
-//	    Test.testYoutube();
+	    Test.testYoutube();
 	    
 	}	
 }

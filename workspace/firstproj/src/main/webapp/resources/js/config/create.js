@@ -69,7 +69,7 @@ function goBoardCreate(){
 	$.ajax({
 		url : '/config/board/insertBoardAction.json',
 		type : 'post',
-		data : $("form").serialize(),
+		data : $("#writeFrm").serialize(),
 		dataType : 'json',
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 //		contentType: "application/json; charset=UTF-8",
@@ -93,7 +93,7 @@ function goBoardModify(){
 	$.ajax({
 		url : '/config/board/modifyBoardAction.json',
 		type : 'post',
-		data : $('form').serialize(),
+		data : $('#writeFrm').serialize(),
 		dataType : 'json',
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		success : function(data){

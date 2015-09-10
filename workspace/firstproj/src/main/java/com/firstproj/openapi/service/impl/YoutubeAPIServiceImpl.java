@@ -1,6 +1,7 @@
 package com.firstproj.openapi.service.impl;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -44,8 +45,9 @@ public class YoutubeAPIServiceImpl implements YoutubeAPIService{
     public List<SearchResult> searchStreamList(String keyword){
         YouTube youtube = new YouTube.Builder(HTTP_TRANSPORT, JSON_FACTORY, new HttpRequestInitializer() {
             public void initialize(HttpRequest request) throws IOException {}})
-          .setApplicationName("LinkedNest")
+          .setApplicationName("LinkedNest's Share")
           .build();
+        
         YouTube.Search.List search = null;
         List<SearchResult>  searchResultList = null;
         
@@ -57,11 +59,15 @@ public class YoutubeAPIServiceImpl implements YoutubeAPIService{
                 search.setKey(apiKey);
                 search.setQ(keyword);
                 search.setType("video");
+                search.setVideoType("any");
                 search.setOrder("viewCount");
-                search.setSafeSearch("strict");
+                search.setSafeSearch("moderate");
                 search.setFields("items(id/kind,id/videoId,snippet/title,snippet/thumbnails/default/url)");
                 search.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);
-
+                //search.setRegionCode("KR");
+                //search.setRelevanceLanguage("KR");
+                //search.setQ(URLEncoder.encode(keyword, "UTF-8"));
+                
                 SearchListResponse searchResponse = search.execute();
 
                 searchResultList = searchResponse.getItems();

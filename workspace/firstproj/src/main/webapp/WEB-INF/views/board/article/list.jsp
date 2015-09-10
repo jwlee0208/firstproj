@@ -30,7 +30,7 @@
 	<div class="form-group" role="search">
 		<div class="">
 			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" 	/>
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control" placeholder="검색어를 입력해 주세요." value="${boardArticleDto.searchText}" />		
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control" placeholder="Enter Your Search Keyword." value="${boardArticleDto.searchText}" />		
 		</div>
 	</div>
 	
