@@ -54,7 +54,16 @@
     	</div>
 		<div class="navbar-collapse collapse" id="nav-collapse-blog-menu-list">
 			<ul class="nav navbar-nav">
-				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();">Profile</a></li>
+    		<c:choose>
+    			<c:when test="${shareInfo ne null && userId ne null}">
+				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();">Profile</a></li>    			
+    			</c:when>
+    			<c:otherwise>
+				    			
+    			</c:otherwise>
+    		</c:choose>    		
+
+<%-- 				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();">Profile</a></li> --%>
 		          	<c:if test="${!empty boardCategoryList}">
 		          		<c:forEach var="boardCategoryInfo" items="${boardCategoryList}">
  				<li class="dropdown">
