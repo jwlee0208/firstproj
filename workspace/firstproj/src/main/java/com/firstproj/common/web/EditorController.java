@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.firstproj.board.service.BoardArticleService;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.FileUtil;
+import com.firstproj.openapi.service.FlickrAPIService;
 
 @Controller("EditorController")
 public class EditorController extends BaseController {
@@ -33,6 +34,8 @@ public class EditorController extends BaseController {
 	@Autowired
 	private BoardArticleService boardService;
 	
+	@Autowired
+	private FlickrAPIService   flickrService;
 	
 	@Resource(name="fileUpload")
 	private FileUpload fileUpload;
@@ -45,7 +48,7 @@ public class EditorController extends BaseController {
 	
 	@RequestMapping(value = {"/{path}/imageuploadaction", "/{path1}/{path2}/imageuploadaction", "/{path1}/{path2}/{path3}/imageuploadaction", "/{path1}/{path2}/{path3}/{path4}/imageuploadaction"}, method={RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
-    public StringBuffer imageadd(MultipartFile imageFile) throws Exception {
+    public String imageadd(MultipartFile imageFile) throws Exception {
 		
 		System.out.println("imageadd");
 		System.out.println("" + imageFile.getOriginalFilename());
@@ -53,7 +56,7 @@ public class EditorController extends BaseController {
 		System.out.println("" + imageFile.getSize());
 		System.out.println("" + imageFile.getBytes());
     	StringBuffer sb = this.fileUploadByEditor(imageFile);
-		return sb;
+		return sb.toString();
     }
 	
 	private StringBuffer fileUploadByEditor(MultipartFile imageFile) throws Exception {
@@ -118,4 +121,12 @@ public class EditorController extends BaseController {
     	//model.addAttribute("fileList", fileListStrArr);
     	return message;
     }
+	
+	
+    @RequestMapping(value = {"/{path}/popImageSelector/{userId}", "/{path1}/{path2}/popImageSelector/{userId}", "/{path1}/{path2}/{path3}/popImageSelector/{userId}", "/{path1}/{path2}/{path3}/{path4}/popImageSelector/{userId}"}, method = RequestMethod.GET)
+    public String imageSelectorForm(HttpServletRequest request, Model model, HttpSession session, @PathVariable String userId) throws Exception {
+        model.addAttribute("photoList", this.flickrService.getPhotoListByUserId(userId));
+        return "/common/popFlickrImageSelector"; 
+    }
+		
 }

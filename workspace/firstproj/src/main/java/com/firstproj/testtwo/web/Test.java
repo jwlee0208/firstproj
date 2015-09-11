@@ -27,9 +27,11 @@ import com.flickr4java.flickr.groups.GroupsInterface;
 import com.flickr4java.flickr.people.User;
 import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
+import com.flickr4java.flickr.photos.Photocount;
 import com.flickr4java.flickr.photos.PhotosInterface;
 import com.flickr4java.flickr.photos.SearchParameters;
 import com.flickr4java.flickr.test.TestInterface;
+import com.flickr4java.flickr.uploader.UploadMetaData;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.HttpTransport;
@@ -138,6 +140,7 @@ public class Test {
         Collection<Group> searchedGroups = groups.search("jwlee208", 10, 10);
         
         if(!searchedGroups.isEmpty()){
+            System.out.println("SearchBroups > ");
             for(Group group : searchedGroups){
                 System.out.println(group.getName());
             }
@@ -149,31 +152,25 @@ public class Test {
         
         PhotosInterface     photos       = f.getPhotosInterface();
         SearchParameters params = new SearchParameters();
-//        params.setUserId("jwlee208@yahoo.co.kr");
-        params.setText("jquery");
+        params.setUserId("jwlee208");
+        params.setSafeSearch(Flickr.SAFETYLEVEL_SAFE);
+//        params.setText("jquery");
         
         
-        
-//        PhotoList<Photo> photoList = photos.search(params, 10, 1); 
+        PhotoList<Photo> photoList = photos.search(params, 100, 1); 
+        Collection<Photocount> photoCount = photos.getCounts(null, null);
+        System.out.println(photoCount.size());
 //                photos.getContactsPhotos(10, true, true, true);
-/*        
+        
         if(!photoList.isEmpty()){
             for(Photo photo : photoList){
                 System.out.println("photo.getTitle() : " + photo.getTitle() +"\nphoto.getLargeUrl() : " + photo.getLargeUrl() + "\nphoto.getLicense() : " + photo.getLicense() +"\nphoto.getUrls() : " + photo.getUrls() +"\nphoto.getTags() : " + photo.getTags() +"\n photo.getPhotoUrl() : " + photo.getPhotoUrl() +"\nphoto.getPermissions() : " + photo.getPermissions() +"\nphoto.getThumbnailUrl() : " + photo.getThumbnailUrl());
                 System.out.println("\n----------------------------------");
             }
         }
-*/        
         
-        GalleriesInterface  galleries    = f.getGalleriesInterface();
         
-        List<Gallery> galleries2 = galleries.getList("jwlee208", 1, 1);
         
-        if(!galleries2.isEmpty()){
-            for(Gallery gallery : galleries2){
-                System.out.println(gallery.getId() + ", " + gallery.getTitle());
-            }
-        }
         
         TestInterface testInterface = f.getTestInterface();
         Collection results = testInterface.echo(Collections.EMPTY_MAP);
@@ -250,11 +247,11 @@ public class Test {
 	    
 //	    Test.testKorean();
 	    
-//	    Test.testFlickr();
+	    Test.testFlickr();
 	    
 //	    Test.testSlideShare();
 	    
-	    Test.testYoutube();
+//	    Test.testYoutube();
 	    
 	}	
 }

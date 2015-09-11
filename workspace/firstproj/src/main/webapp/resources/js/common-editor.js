@@ -6,7 +6,7 @@ tinyMCE.init({
              "searchreplace wordcount codemirror insertdatetime media nonbreaking",
              "table contextmenu directionality textcolor paste textcolor image youTube"
      ],
-     toolbar1				 : "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | cut copy paste | bullist numlist | link unlink | inserttime | table | hr | charmap | image media | youTube imagepop | code",
+     toolbar1				 : "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | cut copy paste | bullist numlist | link unlink | inserttime | table | hr | charmap | image media | youTube imagepop | code | imagepop2",
 //     toolbar2: "youTube imagepop ", 
      menubar				 : true,
      resize 				 : true,
@@ -81,6 +81,14 @@ tinyMCE.init({
 	               cmdImgUploadPop();
 	            }
 	         });
+	         
+	         tinyMCE.addButton('imagepop2', {
+		            title 	: 'Image Selector', 
+		            image 	:  '/img/editor_icon_file.png',
+		            onclick : function() {
+		               cmdImgSelectorPop();
+		            }
+		     });
 	   },
 	   init_instance_callback : function() { 
 		  contentsMakeEditorInit();
@@ -101,6 +109,13 @@ function cmdImgUploadPop(){
  win.focus();  
 }
 
+function cmdImgSelectorPop(){
+	 var win = window.open("popImageSelector/jwlee208",
+	       "editor_win",
+	       "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,width=700,height=500,left=50,top=50"
+	  );
+	 win.focus();  
+}
 //파일업로드 완료후 opener.editorImgUploadComplete함수호출 되는 방식 
 /*
 function editorImgUploadComplete(fileStr, dir){
@@ -126,12 +141,21 @@ function editorImgUploadComplete(fileStr, dir){
 function editorImgUploadComplete(fileStr){
 	var hostname = "jwlee0208.cdn3.cafe24.com";	//location.host;
 	
-	  if( fileStr.length > 0 ){	   
+	if( fileStr.length > 0 ){	   
 	   var strImg = "<br><img src='http://" + hostname + fileStr + "' border=0 width=100%>";
 	   var contents = tinyMCE.activeEditor.getDoc().body.innerHTML;	   
 	   tinyMCE.activeEditor.setContent( contents + strImg);
-	  }
+	}
 }
+
+function editorImgSelectorComplete(fileStr){
+	if( fileStr.length > 0 ){	   
+	   var strImg = "<br/><img src='" + fileStr + "' border=0 width=100%><br/>";
+	   var contents = tinyMCE.activeEditor.getDoc().body.innerHTML;	   
+	   tinyMCE.activeEditor.setContent( contents + strImg);
+	}
+}
+
 
 $("#addfile").on("click",function(){
 	if($('.addfile').length < 5){ //5개 이상 생성금지

@@ -62,7 +62,7 @@ public class FlickrAPIServiceImpl implements FlickrAPIService{
         
         params.setUserId(userId);
         params.setPrivacyFilter(1);
-        params.setSort(SearchParameters.INTERESTINGNESS_DESC);
+        params.setSort(SearchParameters.DATE_POSTED_ASC);
         params.setSafeSearch(Flickr.SAFETYLEVEL_SAFE);
         try {
             params.setMedia("photos");
@@ -72,7 +72,7 @@ public class FlickrAPIServiceImpl implements FlickrAPIService{
         }
 
         try {
-            photoList = photos.search(params, 16, 1);
+            photoList = photos.search(params, 1000, 1);
         } catch (FlickrException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
