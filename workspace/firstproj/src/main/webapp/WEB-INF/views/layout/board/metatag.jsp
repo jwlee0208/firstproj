@@ -16,6 +16,7 @@
 <meta property="fb:app_id" 			content="413877918810589" />
 <meta property="og:type" 			content="website" />
 <meta property="og:title" 			content="<c:out value='${title}'/>" />
+<meta property="og:site_name" 		content="${shareName}" />
 <meta property="og:url" 			content="${url}" />
 <%-- <meta property="og:url" 			content="http://jwlee0208.cafe24.com/board/article/view/${articleId}" /> --%>
 <meta property="og:description" 	content="<c:out value='${content}'/>" />

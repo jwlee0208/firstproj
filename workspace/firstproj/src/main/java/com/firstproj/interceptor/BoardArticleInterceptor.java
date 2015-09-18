@@ -11,6 +11,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.board.dto.BoardDto;
+import com.firstproj.common.dto.ShareDto;
 
 @Component
 public class BoardArticleInterceptor extends HandlerInterceptorAdapter {    
@@ -42,6 +43,7 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
         String authorNm     = "lee jinwon";
         String filePath     = "";
         String url          = "";
+        String shareName    = "";
         
         String uri          = request.getRequestURI();
         
@@ -59,6 +61,7 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
                         filePath    = contentInfo.getFilePath();
                         url         = request.getRequestURL().toString();
                         
+                        
                         if(!content.isEmpty() && content.length() > 50){
                             content = content.substring(0, 50);
                         }
@@ -66,7 +69,14 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
                     }
                 }else{
 //                    System.out.println("N/A");
-                }                
+                }  
+                
+                if((!model.isEmpty()) && model.containsKey("shareInfo")){
+                   ShareDto shareInfo = (ShareDto)model.get("shareInfo");
+                   if(shareInfo != null){
+                       shareName = shareInfo.getShareName();
+                   }
+                }
             }else if(uri.indexOf("list") > 0){
                 if((!model.isEmpty()) && model.containsKey("boardInfo")){
                     BoardDto boardInfo = (BoardDto)model.get("boardInfo");
@@ -86,6 +96,7 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
         request.setAttribute("description"  , description);
         request.setAttribute("authorNm"     , authorNm);
         request.setAttribute("filePath"     , filePath);
-        request.setAttribute("url"          , url);        
+        request.setAttribute("url"          , url);  
+        request.setAttribute("shareName"    , shareName);  
     }
 }

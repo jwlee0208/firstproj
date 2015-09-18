@@ -399,6 +399,17 @@ public class BoardArticleController {
         model.addAttribute("boardId"        , contentInfo.getBoardId());
         model.addAttribute("boardList"      , boardList);
         model.addAttribute("userInfo"       , sessionInfo);
+        ShareDto shareInfo = null;
+        ShareDto shareDto = new ShareDto();
+        shareDto.setUserId(userId);
+        try {
+            shareInfo = this.shareService.getShareInfo(shareDto);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        model.addAttribute("shareInfo", shareInfo);
+        
         
         return "board/article/view";
     }
