@@ -10,8 +10,8 @@
 	</div>	
 	
 	<ol class="breadcrumb">
-	  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
-	  <li><a>Board</a></li>
+	  <li><a href="javascript:;">Home</a></li>
+	  <li><a href="javascript:;">Board</a></li>
 	  <li class="secondBranch active">ALL</li>
 	</ol>		
 	
@@ -49,7 +49,7 @@
 				</div>
 				<div id="collapse${index.count}" class="collapse in">
 					<div class="panel-body">
-						<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
+						<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="javascript:;" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">${contentInfo.authorNm}</a></p>
 						<c:out value="${contentInfo.content}" escapeXml="false"/> <br/><br/>
 
 						<div class="embed-responsive embed-responsive-16by9">
@@ -63,7 +63,7 @@
 						</div>
 						
 						<div class="row" style="float: left; padding-left:10px;">
-							<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardName}</div>			
+							<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">${contentInfo.shareInfo.shareName}</div>			
 						</div>				
 						<div class="row" style="float: right; padding-right:10px;">
 							<div class="btn btn-primary" title="Sharing Article To Facebook"	onclick="share('fb', '${contentInfo.articleId}');" >f</div>

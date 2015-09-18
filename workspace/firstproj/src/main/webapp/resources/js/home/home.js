@@ -1,5 +1,4 @@
 function goList(boardId){	
-	var menuId = boardId;
 	var userId = $("#userId").val();
 	var url = "/board/article/list/" + boardId;
 	if(userId != null && userId != ''){
@@ -90,4 +89,12 @@ function goTotSearch(){
 	frm.attr("action"	, url);
 	frm.attr("method"	, "post");
 	frm.submit();
+}
+
+function goShare(){
+	location.href = "/share/main";
+}
+
+function goMyShare(userId){
+	location.href = "/share/" + userId;
 }

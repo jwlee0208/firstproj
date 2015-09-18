@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/footer.css"/>
 <input type="hidden" id="buildType" value="${buildType}"/>
 <style>
@@ -26,9 +27,19 @@ if($("#buildType").val()=='prod'){
 }
 </script>
 <footer class="footer">
+<c:choose>
+	  <c:when test="${userId ne '' && userId ne null}">	
+	  <p><a href="https://www.facebook.com/${userId}" target="_blank" class="btn btn-primary">Facebook</a>
+	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/share/profile/${userId}">profile</a>
+	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/share/${userId}">${userId}'s Share</a></p>
+	  </c:when>
+	  <c:otherwise>
 	  <p><a href="https://www.facebook.com/jwlee0524" target="_blank" class="btn btn-primary">Facebook</a>
-	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/aboutUs/5">contact</a>&nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/">LinkedNest</a></p>
-	  <p>Copyrightⓒ2014 All right reserved by leejinwon</p>
+	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/aboutUs/5">contact</a>
+	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/share/main">Share</a></p>
+	  </c:otherwise>
+</c:choose>
+	  <p>Copyrightⓒ2014 All right reserved by LinkedNest</p>
       <p>|&nbsp;<a href="/common/privateRule" class="btn btn_link" target="_blank">개인정보취급방침</a>&nbsp;|&nbsp;<a href="/common/useRule" class="btn btn_link" target="_blank">이용약관</a>&nbsp;|</p>
       <p><a href="#">Back to top</a></p>
 </footer>

@@ -39,17 +39,17 @@
 	<h1 id="btn-groups" class="page-header">Article</h1>
 	<c:set var="boardName" value=""/>
 	<ol class="breadcrumb">
-	  <li><a href="javascript:;" onclick="javascript:goHome();">Home</a></li>
-	  <li><a href="#" 			 onclick="javascript:goList();">Board</a></li>
+	  <li><a href="javascript:;" onclick="javascript:goMyShare('${shareInfo.userId}');">Home</a></li>
+	  <li><a href="javascript:;" onclick="javascript:goList('${contentInfo.boardId}');">Board</a></li>
 	  <li>
-	  	  <a href="javascript:;">
 <c:if test="${!empty boardList}">
 	<c:forEach var="boardInfo" items="${boardList}">
-		<c:if test="${boardId eq boardInfo.boardId}"><c:set var="boardName" value="${boardInfo.boardName}"/>${boardName}</c:if>
-												
+		<c:if test="${boardId eq boardInfo.boardId}">
+			<c:set var="boardName" value="${boardInfo.boardName}"/>
+			<a href="javascript:;" onclick="javascript:goList('${boardId}');">${boardName}</a>
+		</c:if>									  
 	</c:forEach>
 </c:if>		  
-		  </a>		  
 	  </li>
 	  <li class="active">Article</li>
 	</ol>		
@@ -99,7 +99,7 @@
 			</c:if>
 				<div class="row">
 					<div class="col-xs-12 col-md-8">
-						<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div>
+						<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}" onclick="javascript:goList('${contentInfo.boardId}');">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div>
 					</div>			
 					<div class="col-xs-6 col-md-4">
 						<div class="btn btn-primary" title="Sharing Article To Facebook" 	onclick="javascript:share('fb', '${contentInfo.articleId}', '');" >f</div>

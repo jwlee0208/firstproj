@@ -1,5 +1,6 @@
 package com.firstproj.interceptor;
 
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.firstproj.board.dto.BoardArticleDto;
 
 public class MenuInterceptor  extends HandlerInterceptorAdapter {
     
@@ -29,9 +32,8 @@ public class MenuInterceptor  extends HandlerInterceptorAdapter {
         }else if(uri.indexOf("/config") > 0){
             String[] str = p.split(uri);
             request.setAttribute("userId", str[str.length - 1]);
-            
         }else{
             
-        }
+        }        
     }
 }

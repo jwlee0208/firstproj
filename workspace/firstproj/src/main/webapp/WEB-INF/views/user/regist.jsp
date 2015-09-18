@@ -147,18 +147,18 @@ $().ready(function() {
 			if(isValid){
 				$.ajax({
 // 					url : '/user/regist.json',
-					url : '/user/registAction',
-					data : $("#actionFrm").serialize(),
+					url 	 : '/user/registAction',
+					data 	 : $("#actionFrm").serialize(),
 					dataType : 'json',
-					method : 'post',
-					success : function(data){
+					method 	 : 'post',
+					success  : function(data){
 						var status = data.status;
+						var result = data.result;
 						
 						if(status == 'REGIST_0000'){
 							location.replace('/user/registOk');	//$("#prevPage").val();
-						}else{
-							var result = data.result;
-							console.log(result);
+						}else if(status == 'REGIST_0001'){
+							
 							var length = result.length;
 							if(result != null && length > 0){
 
@@ -167,6 +167,10 @@ $().ready(function() {
 									$("#" + result[i].field+"Err").show();
 								}
 							}
+						}else{
+							alert(result);
+							$("#userId").focus();
+							return false;
 						}
 						
 					},

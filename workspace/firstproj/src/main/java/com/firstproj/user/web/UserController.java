@@ -183,7 +183,7 @@ public class UserController {
                     log.info("[ UserController.registAction() ][ userDto.toString() ][ 2nd ] : " + userDto.toString()); 
                     
                     resultCode  = "REGIST_0000";
-                    resultMsg   = "complelted";       
+                    resultMsg   = "completed";       
                     
                     // create share(blog) 
                     ShareDto shareDto = new ShareDto();
@@ -240,24 +240,21 @@ public class UserController {
                         e.printStackTrace();
                         log.info("[ 메일 발송 오류 ]");
                     }
-                    
-
                 }else{
                     resultCode  = "REGIST_0002";
-                    resultMsg   = "insert_error";
+                    resultMsg   = "Occurred Error during registration process.\nPlease, Try again process.\nAnd Please, Send Email To Administrator, If This Error Occurred Again.\nEmail Address : jwlee0208@gmail.com";
                 }
 
             }else{
                 resultCode  = "REGIST_0003";
-                resultMsg   = "duplicated_user";
+                resultMsg   = "This User Id is Already Used.\nPlease, Try Another User Id.";
             }
             
-            returnObj.setStatus(resultCode);
+            returnObj.setStatus(resultCode);   
             returnObj.setResult(resultMsg);
 
         }
 
-//        model.addAttribute("userInfo", this.userService.selectUserInfo(userDto));
         return returnObj;
     }
 	

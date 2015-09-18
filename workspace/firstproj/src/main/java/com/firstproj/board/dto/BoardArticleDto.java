@@ -2,6 +2,7 @@ package com.firstproj.board.dto;
 
 import java.util.List;
 
+import javax.mail.internet.SharedInputStream;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -9,6 +10,7 @@ import org.apache.ibatis.type.Alias;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.firstproj.common.dto.ShareDto;
 import com.firstproj.common.util.SearchCondition;
 
 @Alias("board.boardArticleDto")
@@ -37,6 +39,8 @@ public class BoardArticleDto extends SearchCondition {
 	private String			boardName;
 	
 	private List<SlideshareLinkDto>          slideshareLinkInfos;
+	
+	private ShareDto       shareInfo;
 	
 	public int getArticleId() {
 		return articleId;
@@ -142,6 +146,13 @@ public class BoardArticleDto extends SearchCondition {
         this.slideshareLinkInfos = slideshareLinkInfos;
     }
     
+    public ShareDto getShareInfo() {
+        return shareInfo;
+    }
+    public void setShareInfo(ShareDto shareInfo) {
+        this.shareInfo = shareInfo;
+    }
+    
     @Override
     public String toString() {
         return "BoardArticleDto [thumbnailSize=" + thumbnailSize
@@ -153,7 +164,7 @@ public class BoardArticleDto extends SearchCondition {
                 + ", status=" + status + ", boardCategoryId=" + boardCategoryId
                 + ", boardCategoryName=" + boardCategoryName + ", boardName="
                 + boardName + ", slideshareLinkInfos=" + slideshareLinkInfos
-                + "]";
+                + ", shareInfo=" + shareInfo + "]";
     }
-
+    
 }

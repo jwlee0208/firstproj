@@ -18,6 +18,10 @@
 			<result column="board_category_id" 		property="boardCategoryId"/>
 			<result column="board_category_name" 	property="boardCategoryName"/>
 			<result column="board_name" 			property="boardName"/>
+			<association property="shareInfo" javaType="common.shareDto">
+				<id		column="user_id" 		property="userId"/>
+				<result column="share_name" 	property="shareName"/>
+			</association>
 			<collection property="slideshareLinkInfos" ofType="board.slideshareLinkDto">
 				<id 	column="slide_id" 				property="slideId"/>
 				<result column="article_id" 			property="articleId"/>
@@ -25,6 +29,7 @@
 				<result column="create_user_id" 		property="createUserId"/>
 				<result column="create_date" 			property="createDate"/>
 			</collection>
+			
 		</resultMap> 
     	
     
@@ -129,11 +134,14 @@
 			    bc.board_category_name,
 			    b.board_name,
 			    sl.slide_id,
-			    sl.slideshare_link_url 
+			    sl.slideshare_link_url,
+			    s.user_id,
+			    s.share_name 
 			FROM TB_BOARD_ARTICLE ba
 			INNER JOIN TB_BOARD 			b  ON b.board_id 			= ba.board_id
 			INNER JOIN TB_BOARD_CATEGORY 	bc ON b.board_category_id 	= bc.board_category_id
 			LEFT  JOIN TB_SLIDESHARE_LINK 	sl ON sl.article_id 		= ba.article_id
+			INNER JOIN TB_SHARE 			s  ON s.user_id 			= bc.create_user_id
 		</sql>
 		<sql id="searchConditionSql">
 				<if test="boardId > 0">
