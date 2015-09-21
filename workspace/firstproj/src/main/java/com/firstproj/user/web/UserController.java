@@ -193,7 +193,7 @@ public class UserController {
                     shareDto.setShareType("1");
                     
                     this.shareService.insertShareInfo(shareDto);
-                    
+                    /*
                     // Sending Mail
                     AES256Util aes256util  = new AES256Util(CommonConstant.IV);
                     
@@ -240,6 +240,7 @@ public class UserController {
                         e.printStackTrace();
                         log.info("[ 메일 발송 오류 ]");
                     }
+                    */
                 }else{
                     resultCode  = "REGIST_0002";
                     resultMsg   = "Occurred Error during registration process.\nPlease, Try again process.\nAnd Please, Send Email To Administrator, If This Error Occurred Again.\nEmail Address : jwlee0208@gmail.com";

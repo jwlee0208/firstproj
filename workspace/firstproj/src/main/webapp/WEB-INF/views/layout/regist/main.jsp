@@ -10,7 +10,7 @@
 <meta name="description" content="player registration page">
 <meta name="keywords" content="regist">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/img/common/favicon.ico">
+<link rel="icon" href="/img/common/favicon_ln.ico">
 <title>LinkedNest - Link Between Player With Club</title>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
 </head>

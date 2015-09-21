@@ -56,7 +56,7 @@
 			</c:choose>					
 					
 					<div class="caption">
-						<h3><span onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal">${content.title}</span></h3>
+						<h3><span onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal"><c:out value="${content.title}"/></span></h3>
 						<p class="content_${index.count}" style="text-overflow:ellipsis; overflow:hidden;">
 							<c:if test="${content.content eq null || content.content eq ''}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11</c:if>
 							<c:if test="${content.content ne null && content.content ne ''}">

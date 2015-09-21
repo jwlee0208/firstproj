@@ -16,6 +16,11 @@ public class ShareController {
     @Resource(name="ShareServiceImpl")
     private ShareServiceImpl shareService;
     
+    @RequestMapping(value={"/", ""})
+    public String getShareRoot(){
+        return "redirect:/share/main";
+    }
+    
     @RequestMapping(value="/info")
     public String getShareInfo(Model model, HttpSession session){
         this.shareService.setShareInfo(model, session);

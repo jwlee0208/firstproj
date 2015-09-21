@@ -64,7 +64,7 @@
 						<c:forEach var="content" items="${pagedResult.list}">
 							<tr>
 								<td>${content.articleId}</td>	
-								<td><a href="javascript:;" onclick="javascript:goView('${content.articleId}');">${content.title}</a></td>
+								<td><a href="javascript:;" onclick="javascript:goView('${content.articleId}');"><c:out value="${content.title}"/></a></td>
 								<td>${fn:substring(content.createDate, 0, 10)}</td>
 								<td>${content.authorNm}</td>
 							</tr>

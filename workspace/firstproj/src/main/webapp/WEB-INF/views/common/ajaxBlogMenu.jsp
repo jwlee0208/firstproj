@@ -57,12 +57,6 @@
     		<c:choose>
     			<c:when test="${shareInfo ne null && userId ne null}">
 				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();">Profile</a></li>    			
-    			</c:when>
-    			<c:otherwise>
-				    			
-    			</c:otherwise>
-    		</c:choose>    		
-
 <%-- 				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();">Profile</a></li> --%>
 		          	<c:if test="${!empty boardCategoryList}">
 		          		<c:forEach var="boardCategoryInfo" items="${boardCategoryList}">
@@ -79,7 +73,14 @@
 		          </c:if>
 		        </li>
 						</c:forEach>
-		          	</c:if>		        
+		          	</c:if>	  
+    			</c:when>
+    			<c:otherwise>
+				    			
+    			</c:otherwise>
+    		</c:choose>    		
+
+	        
 			</ul>
 			<c:if test="${null ne userInfo}">
 		<ul class="nav navbar-nav navbar-right">

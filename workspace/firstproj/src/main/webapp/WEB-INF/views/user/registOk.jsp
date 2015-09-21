@@ -2,7 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="tag" %>
 <div class="container">
 	<div class="loginWrap" style="padding-top : 170px; padding-left : 200px; padding-right : 200px; ">
-	    <div class="loginArea">
+	    <div class="loginArea" style="min-height:400px;">
 			<h1 id="btn-groups" class="page-header"><tag:message code="welcome.joinning"/></h1>
 		
 			<div class="form-group">

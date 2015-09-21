@@ -1,26 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
-<!DOCTYPE>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>::: Registration :::</title>
-<!-- jQuery -->
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery-validate.min.js"></script>
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery.form.min.js"></script>
-
-<!-- bootstrap -->
-<link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-theme.min.css">
-<link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css">
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
-
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css"/>
-</head>
-<body>
-<div class="container">
-	
+<div class="container" style="min-height: 800px;">
+	<div class="card"></div>
 	<input type="hidden" id="prevPage" name="prevPage" value="${prevPage}"/>
 	
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form">
@@ -109,7 +91,6 @@
 		</div>
 	</form>
 </div>
-</body>
 <script>
 $().ready(function() {
 	
@@ -119,6 +100,7 @@ $().ready(function() {
 	var specialCharRegExg 	= /[~!@\#$%^&*\()\-=+_']/gi;
 
 	$(function(){
+		
 		$("#phoneNo").on("keyup", function(){
 			$(this).val($(this).val().replace(unNumberRegExg,""));
 		});
@@ -152,6 +134,10 @@ $().ready(function() {
 					dataType : 'json',
 					method 	 : 'post',
 					success  : function(data){
+
+						// ajax loading...
+						loading();
+
 						var status = data.status;
 						var result = data.result;
 						
@@ -251,7 +237,15 @@ $().ready(function() {
 	*/
 });
 
-
+function loading(){
+    $(document).ajaxStart(function(){
+        $(".pull-right").attr("id", "loading");
+        $(".pull-right").val("Processing...");
+    });
+    $(document).ajaxStop(function(){
+    	$(".pull-right").attr("id", "registBtn");
+        $(".pull-right").attr("value", "Create an account");
+    });	
+}
 
 </script>
-</html>

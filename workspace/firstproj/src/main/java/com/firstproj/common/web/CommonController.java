@@ -1,5 +1,7 @@
 package com.firstproj.common.web;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.firstproj.board.dto.BoardCategoryPortalDto;
 import com.firstproj.board.dto.BoardDto;
+import com.firstproj.board.dto.SideBoardCategoryPortalDto;
 import com.firstproj.board.service.BoardArticleService;
 import com.firstproj.board.service.BoardService;
 import com.firstproj.common.dto.ShareDto;
@@ -42,11 +45,15 @@ public class CommonController {
 
     @RequestMapping(value = "/sideBoardList/{userId}")
     public String getSideBoardList(Model model, @PathVariable String userId) throws Exception{
-        BoardDto boardDto = new BoardDto();
+        BoardDto                         boardDto                    = new BoardDto();
+        List<SideBoardCategoryPortalDto> sideBoardCategoryPortalList = null;
+        
         if(!StringUtils.isEmpty(userId)){
-            boardDto.setCreateUserId(userId);    
+            boardDto.setCreateUserId(userId);
+            sideBoardCategoryPortalList = this.boardArticleService.selectSideBoardList(boardDto);
         }
-        model.addAttribute("sideBoardList", this.boardArticleService.selectSideBoardList(boardDto));
+        
+        model.addAttribute("sideBoardList", sideBoardCategoryPortalList);
         return "common/ajaxSideBoardList";
     }
 
