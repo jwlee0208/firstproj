@@ -77,10 +77,7 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 	 * @return
 	 * @throws Exception
 	 */
-	public int updateBoardArticle(BoardArticleDto boardArticleDto) throws Exception{
-		
-//		System.out.println(">>> In Dao : " + boardArticleDto.toString());
-		
+	public int updateBoardArticle(BoardArticleDto boardArticleDto) throws Exception{		
 		return getSqlSession().update("sql.boardArticle.updateArticleInfo", boardArticleDto);
 	}
 	

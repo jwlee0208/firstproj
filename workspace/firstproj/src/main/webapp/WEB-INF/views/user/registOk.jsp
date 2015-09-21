@@ -6,11 +6,11 @@
 			<h1 id="btn-groups" class="page-header"><tag:message code="welcome.joinning"/></h1>
 		
 			<div class="form-group">
-				Welcome!!!
+				<tag:message code="common.welcome"/>!!!
 			</div>
 			<div class="btn-group btn-group-justified">
 				<div class="btn-group">
-			      <input type="button" class="btn btn-primary" name="goToHome" value="<tag:message code="button.home"/>">
+			      <input type="button" class="btn btn-primary" name="goToHome" value="<tag:message code="common.home"/>">
 			    </div> 
 			</div>
 		</div>

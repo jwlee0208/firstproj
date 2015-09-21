@@ -42,12 +42,12 @@
 			<c:if test="${null ne userInfo}">
 		<ul class="nav navbar-nav navbar-right">
         	<li class="dropdown">
-          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi, "${userInfo.userNm}" <span class="caret"></span></a>
+          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><tag:message code="menu.hi"/>, "${userInfo.userNm}" <span class="caret"></span></a>
           		<ul class="dropdown-menu">
-		            <li><a href="#" onclick="javascript:logout();"><tag:message code="logout"/></a></li>
-		            <li><a href="/share/${userInfo.userId}" >My Share</a></li>
+          			<li><a href="/share/${userInfo.userId}" ><tag:message code="common.myshare"/></a></li>
+		            <li><a href="#" onclick="javascript:goConfig();"><tag:message code="common.config"/></a></li>
 		            <li role="separator" class="divider"></li>
-		            <li><a href="#" onclick="javascript:goConfig();">config</a></li>
+		            <li><a href="#" onclick="javascript:logout();"><tag:message code="logout"/></a></li>		            
           		</ul>
         	</li>
       	</ul>			

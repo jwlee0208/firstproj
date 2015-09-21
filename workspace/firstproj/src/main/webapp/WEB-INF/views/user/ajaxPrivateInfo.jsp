@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag" %>
 <%
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Cache-Control", "no-cache");
@@ -10,13 +11,13 @@
 %>   
 <c:choose>
 	<c:when test="${userInfo ne null}">
-		이름 :  ${userInfo.userNm}</br>
-		아이디 : ${userInfo.userId}</br>
-		이메일 : ${userInfo.email}</br>
-		핸드폰 번호 : ${userInfo.phoneNo}</br>
-		국적 : ${userInfo.nationality}</br>
-		언어 : ${userInfo.language}</br>
-		가입일자 : ${fn:substring(userInfo.joinDate, 0, 10)}</br>
+		<tag:message code="common.username"/> :  ${userInfo.userNm}</br>
+		<tag:message code="common.userid"/> : ${userInfo.userId}</br>
+		<tag:message code="common.email"/> : ${userInfo.email}</br>
+		<tag:message code="common.cellphone"/> : ${userInfo.phoneNo}</br>
+		<tag:message code="common.nationality"/> : ${userInfo.nationality}</br>
+		<tag:message code="common.language"/> : ${userInfo.language}</br>
+		<tag:message code="common.joindate"/> : ${fn:substring(userInfo.joinDate, 0, 10)}</br>
 	</c:when>
 </c:choose>	
 	

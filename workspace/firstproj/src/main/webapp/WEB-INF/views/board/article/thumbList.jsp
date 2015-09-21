@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag" %>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -48,7 +49,6 @@
 <c:choose>
 	<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
 		<c:forEach var="content" items="${pagedResult.list}">
-		
 			<li class="media">
 				<a class="pull-left" href="javascript:;">
 			<c:choose>
@@ -85,7 +85,7 @@
 
 	<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
 		<div class="btn-group">
-			<input type="submit" class="btn btn-default pull-right" value="글쓰기" name="goToWrite" />
+			<input type="submit" class="btn btn-default pull-right" value="<tag:message code="common.write"/>" name="goToWrite" />
 		</div>
 	</div>	
 </body>

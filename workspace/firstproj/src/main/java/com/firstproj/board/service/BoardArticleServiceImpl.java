@@ -37,7 +37,7 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	@Override
 	public PagedList getBoardArticlePagedList(Map<String, Object> paramMap) throws Exception {                              
         List<?> articleList = this.getBoardArticleList(paramMap);
- 
+       
         int pageNo       = (Integer) paramMap.get("pageNo");    
         int listRowCnt   = (Integer) paramMap.get("listRowCnt");
         int totalListCnt = (Integer) paramMap.get("totalListCnt");
@@ -46,6 +46,7 @@ public class BoardArticleServiceImpl implements BoardArticleService{
         int endRow       = (Integer) paramMap.get("endRow");       
  
         PagedList pagedList = new PagedList(articleList, pageNo, pageSize, totalListCnt, startRow, endRow, listRowCnt);
+       
 	    return pagedList;
 	}   
 	@Override
@@ -72,6 +73,7 @@ public class BoardArticleServiceImpl implements BoardArticleService{
         int endRow       = (Integer) paramMap.get("endRow");       
  
         PagedList pagedList = new PagedList(articleList, pageNo, pageSize, totalListCnt, startRow, endRow, listRowCnt);
+        
 	    return pagedList;
 	}   
 

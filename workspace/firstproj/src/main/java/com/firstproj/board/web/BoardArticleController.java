@@ -30,9 +30,12 @@ import com.firstproj.board.dto.SlideshareLinkDto;
 import com.firstproj.board.service.BoardArticleServiceImpl;
 import com.firstproj.board.service.BoardCategoryServiceImpl;
 import com.firstproj.board.service.BoardServiceImpl;
+import com.firstproj.common.CommonConstant;
 import com.firstproj.common.dto.ShareDto;
+import com.firstproj.common.paging.PageParam;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.PagedList;
+import com.firstproj.common.util.PagingUtil;
 import com.firstproj.common.web.EditorController;
 import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;
@@ -258,6 +261,7 @@ public class BoardArticleController {
 			
 		}
 */		
+/*			
 		int startRow = (pageNo - 1) * listRowCnt;
 		int endRow 	 = pageNo * listRowCnt;
 		
@@ -277,6 +281,7 @@ public class BoardArticleController {
 		PagedList pagedList = new PagedList(pagedArticleList, pageNo, pageSize, totalListCnt, startRow, endRow, listRowCnt);
 		
 		model.addAttribute("pagedResult", pagedList);
+*/		
 		model.addAttribute("boardId", boardId);
 		
 		return model;
@@ -305,9 +310,9 @@ public class BoardArticleController {
 
 		int listRowCnt = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
 
-		if(boardArticleDto.getBoardId() == 1){
-			listRowCnt = 9;
-		}
+//		if(boardArticleDto.getBoardId() == 1){
+//			listRowCnt = 9;
+//		}
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// searching condition setting
@@ -894,7 +899,7 @@ public class BoardArticleController {
 		return jsonObj;
 	}
 	
-	@RequestMapping(value="/profile/{userId}")
+	@RequestMapping(value="/{userId}/profile")
 	public String goProfile(@PathVariable String userId, Model model) throws Exception{
 	    ShareDto shareDto  = new ShareDto();
 	    ShareDto shareInfo = null;

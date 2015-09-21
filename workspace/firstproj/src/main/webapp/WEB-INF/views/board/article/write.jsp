@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag" %>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/common-editor.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/article/write.js"></script>
@@ -197,15 +198,15 @@
 		
 		<div class="btn-group btn-group-justified" style="padding-top : 20px; padding-bottom : 20px;">
 			<div class="btn-group">
-				<input type="button" class="btn btn-default" id="cancelToWrite" value="취소"/>           
+				<input type="button" class="btn btn-default" id="cancelToWrite" value="<tag:message code="common.cancel"/>"/>           
 		    </div>
 		    <div class="btn-group">
 <c:choose>
 	<c:when test="${articleInfo ne null && articleInfo ne ''}">
-				<input type="button" class="btn btn-default pull-right" id="saveToModify" value="저장"/>
+				<input type="button" class="btn btn-default pull-right" id="saveToModify" value="<tag:message code="common.save"/>"/>
 	</c:when>
 	<c:otherwise>
-				<input type="button" class="btn btn-default pull-right" id="saveToWrite" value="저장"/>	
+				<input type="button" class="btn btn-default pull-right" id="saveToWrite" value="<tag:message code="common.save"/>"/>	
 	</c:otherwise>
 </c:choose>	
 

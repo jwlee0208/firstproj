@@ -14,7 +14,7 @@ function goInfo(){
 	var userId = $("#userId").val();
 	var url = "/aboutUs";
 	if(userId != null && userId != ''){
-		url = "/share/profile/" + userId;
+		url = "/share/" + userId + "/profile";
 	} 
 
 	location.href = url;
