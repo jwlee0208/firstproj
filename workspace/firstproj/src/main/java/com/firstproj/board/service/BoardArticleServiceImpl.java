@@ -83,7 +83,6 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	 */
 	@Override
 	public int insertBoardArticle(BoardArticleDto boardArticleDto){
-//		System.out.println(">>> In ServiceImpl insertBoardArticle : " + boardArticleDto.toString());
 	    int articleId = 0;
         try {
             articleId = this.boardArticleDao.insertBoardArticle(boardArticleDto);
@@ -99,7 +98,6 @@ public class BoardArticleServiceImpl implements BoardArticleService{
 	 */
 	@Override
 	public int updateBoardArticle(BoardArticleDto boardArticleDto) throws Exception{
-//		System.out.println(">>> In ServiceImpl updateBoardArticle : " + boardArticleDto.toString());
 		return this.boardArticleDao.updateBoardArticle(boardArticleDto);
 	}
 	/**

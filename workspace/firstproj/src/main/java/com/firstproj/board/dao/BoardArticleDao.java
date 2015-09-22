@@ -24,33 +24,37 @@ public class BoardArticleDao extends SqlSessionDaoSupport{
 		return getSqlSession().selectList("sql.boardArticle.selectList", boardArticleDto);
 	}
 	
+    private SearchCondition setSearchConditionParams(Map<String, Object> param){
+        SearchCondition searchCondition = new SearchCondition();
+                                   
+        searchCondition.setBoardId((int)param.get("boardId"));
+        searchCondition.setSearchCondition((String)param.get("searchCondition"));
+        searchCondition.setSearchText((String)param.get("searchText"));
+        searchCondition.setStartDate((String)param.get("startDate"));
+        searchCondition.setEndDate((String)param.get("endDate"));
+        searchCondition.setCreateUserId((String)param.get("createUserId"));
+        
+        return searchCondition;
+	}
+	
+	
 	public List<BoardArticleDto> selectBoardArticleList(Map<String, Object> param) throws Exception {                          
-	       SearchCondition searchCondition = new SearchCondition();             
-	       searchCondition.setStartRow((Integer)param.get("startRow"));
-	       searchCondition.setEndRow((Integer)param.get("endRow"));
-	                          
-	       searchCondition.setBoardId((int)param.get("boardId"));
-	       searchCondition.setSearchCondition((String)param.get("searchCondition"));
-	       searchCondition.setSearchText((String)param.get("searchText"));
-	       searchCondition.setStartDate((String)param.get("startDate"));
-	       searchCondition.setEndDate((String)param.get("endDate"));
-	 
-	       List<BoardArticleDto> list =  getSqlSession().selectList("sql.boardArticle.selectBoardList", searchCondition);
 	       
-	       return list;   
+	    SearchCondition searchCondition = this.setSearchConditionParams(param);
+	    searchCondition.setStartRow((Integer)param.get("startRow"));
+	    searchCondition.setEndRow((Integer)param.get("endRow"));
+
+	    List<BoardArticleDto> list =  getSqlSession().selectList("sql.boardArticle.selectBoardList", searchCondition);
+	       
+	    return list;   
 	}
 	
 	public int selectArticleListCnt(Map<String, Object> param) throws Exception {
-	       SearchCondition searchCondition = new SearchCondition();
-	        
-	       searchCondition.setBoardId((int)param.get("boardId"));
-	       searchCondition.setSearchCondition((String)param.get("searchCondition"));
-	       searchCondition.setSearchText((String)param.get("searchText"));
-	       searchCondition.setStartDate((String)param.get("startDate"));
-	       searchCondition.setEndDate((String)param.get("endDate"));
-	 
-	       int result = getSqlSession().selectOne("sql.boardArticle.selectListCount", searchCondition);                
-	       return result;
+	       
+	    SearchCondition searchCondition = this.setSearchConditionParams(param);
+	       
+	    int result = getSqlSession().selectOne("sql.boardArticle.selectListCount", searchCondition);                
+	    return result;
 	} 
 	
 	/**

@@ -157,7 +157,7 @@ public class BoardArticleController {
     }
 
     /**
-     * 기스글 목록 조회(공통 메서드)
+     * 게시글 목록 조회(공통 메서드)
      * @param request
      * @param model
      * @param boardArticleDto
@@ -216,13 +216,12 @@ public class BoardArticleController {
 		String endDate         = request.getParameter("endDate");
 		
 		int    boardId         = boardArticleDto.getBoardId();
-		
+		// 페이징 관련 params
 		int    pageNo          = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
-
 		int    listRowCnt      = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
-		
 		int    pageSize        = (request.getParameter("pageSize") != null) ? Integer.parseInt(request.getParameter("pageSize")) : DEFAULT_PAGE_SIZE;
-
+		int    totalListCnt    = 0;
+		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// searching condition setting
 		paramMap.put("boardId"        , boardId);
@@ -232,7 +231,7 @@ public class BoardArticleController {
 		paramMap.put("endDate"        , endDate);
 
 		List<BoardArticleDto> boardArticleList;	
-		int totalListCnt = 0;
+		
 /*
 		try{
 			
@@ -300,40 +299,37 @@ public class BoardArticleController {
 	private Model getBoardCommonList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
 		// 검색 조건
 		String searchCondition = request.getParameter("searchCondition");
-		String searchText = request.getParameter("searchText");
-		String startDate = request.getParameter("startDate");
-		String endDate = request.getParameter("endDate");
+		String searchText      = request.getParameter("searchText");
+		String startDate       = request.getParameter("startDate");
+		String endDate         = request.getParameter("endDate");
+		String createUserId    = (!StringUtils.isEmpty(boardArticleDto.getCreateUserId())) ? boardArticleDto.getCreateUserId() : "";
 
-		int boardId = boardArticleDto.getBoardId();
-		
-		int pageNo = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
+		int    boardId         = boardArticleDto.getBoardId();
+		// 페이징 관련 params
+		int    pageNo          = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
+		int    listRowCnt      = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
 
-		int listRowCnt = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
-
-//		if(boardArticleDto.getBoardId() == 1){
-//			listRowCnt = 9;
-//		}
-		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// searching condition setting
-		paramMap.put("boardId", boardId);
+		paramMap.put("boardId"        , boardId);
 		paramMap.put("searchCondition", searchCondition);
-		paramMap.put("searchText", searchText);
-		paramMap.put("startDate", startDate);
-		paramMap.put("endDate", endDate);
+		paramMap.put("searchText"     , searchText);
+		paramMap.put("startDate"      , startDate);
+		paramMap.put("endDate"        , endDate);
+		paramMap.put("createUserId"   , createUserId);
 
 		int totalListCnt = boardArticleService.selectArticleListCnt(paramMap);
 		
 		// paging condition setting
-		paramMap.put("pageNo", pageNo);
-		paramMap.put("listRowCnt", listRowCnt);
-		paramMap.put("totalListCnt", totalListCnt);
-		paramMap.put("pageSize", DEFAULT_PAGE_SIZE);
+		paramMap.put("pageNo"         , pageNo);
+		paramMap.put("listRowCnt"     , listRowCnt);
+		paramMap.put("totalListCnt"   , totalListCnt);
+		paramMap.put("pageSize"       , DEFAULT_PAGE_SIZE);
 
 		PagedList result = boardArticleService.getBoardArticlePagedList(paramMap);
 
-		model.addAttribute("pagedResult", result);
-		model.addAttribute("boardId", boardId);
+		model.addAttribute("pagedResult"  , result);
+		model.addAttribute("boardId"      , boardId);
 		return model;
 	}
 	
@@ -508,7 +504,7 @@ public class BoardArticleController {
 	@RequestMapping(value = "/insertBoardArticle.json", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject insertBoardArticleJSON(@Valid BoardArticleDto boardArticleDto, BindingResult bindingResult, HttpSession session) throws Exception {
-//System.out.println("boardArticleDto 1 : " + boardArticleDto.toString());	
+	
 		JSONObject jsonObj = new JSONObject();
 		int insertedArticleId = 0;
 
@@ -544,8 +540,6 @@ public class BoardArticleController {
 		        
 		    }
 		    
-            System.out.println((boardArticleDto.getBoardId())  + ", " + StringUtils.isEmpty(boardArticleDto.getBoardName()) +", " + boardArticleDto.getBoardName());
-            
 			boardArticleDto.setAuthorId(sessionInfo.getUserId());
 			boardArticleDto.setAuthorNm(sessionInfo.getUserNm());
 			boardArticleDto.setStatus(1);
@@ -617,12 +611,6 @@ public class BoardArticleController {
             // if boardId가 없고, boardName이 입력되어 넘어오는 경우
             // 1. default boardCategory 를 생성
             // 2. 새로운 board를 생성
-            
-            System.out.println((boardId == 0)  + ", " + StringUtils.isEmpty(boardArticleDto.getBoardName()));
-            
-            
-            
-            
             
             boardArticleDto.setAuthorId(sessionInfo.getUserId());
             boardArticleDto.setAuthorNm(sessionInfo.getUserNm());
@@ -789,8 +777,6 @@ public class BoardArticleController {
     			boardArticleDto.setFilePath(filePath);
     			boardArticleDto.setOriginalFileName(imageFile.getOriginalFilename());
     
-    //System.out.println("boardArticleDto : " + boardArticleDto.toString());			
-    			
     			updateResult = this.boardArticleService.updateBoardArticle(boardArticleDto);
     			
     			if(updateResult > 0){
@@ -864,7 +850,6 @@ public class BoardArticleController {
             model.addAttribute("userId"         , userId);
             
         }else{
-//          System.out.println("URL : " + request.getRequestURL() +", URI : " + request.getRequestURI());
             return "redirect:/login?redirectPage=" + request.getRequestURI();
         }
         

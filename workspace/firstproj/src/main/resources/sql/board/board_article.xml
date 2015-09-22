@@ -71,7 +71,9 @@
 		<!-- 페이징 위한 리스트 갯수 조회 -->    
 		<select id="selectListCount" resultType="Integer" parameterType="searchCondition">        
 			SELECT count(*) AS totalCnt         
-			FROM TB_BOARD_ARTICLE ba   
+			FROM 	   TB_BOARD_ARTICLE 	ba  
+			INNER JOIN TB_BOARD 			b  ON b.board_id 		  = ba.board_id
+			INNER JOIN TB_BOARD_CATEGORY    bc ON b.board_category_id = bc.board_category_id 
 			<where>     
 				<include refid="searchConditionSql"/>    
 			</where>
