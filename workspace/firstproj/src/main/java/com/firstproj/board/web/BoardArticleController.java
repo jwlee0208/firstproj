@@ -865,22 +865,21 @@ public class BoardArticleController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/deleteBoardArticle.json", method = RequestMethod.POST)
-	public JSONObject deleteBoardArticleJSON(Model model, HttpSession session, @Param int selectedArticleId) throws Exception{
-		BoardArticleDto boardArticleDto = new BoardArticleDto();
-		JSONObject jsonObj = new JSONObject();
+	@RequestMapping(value = "/deleteBoardArticle/{selectedArticleId}", method = RequestMethod.POST)
+	public JSONObject deleteBoardArticleJSON(Model model, HttpSession session, @PathVariable int selectedArticleId) throws Exception{
+		BoardArticleDto   boardArticleDto = new BoardArticleDto();
+		JSONObject        jsonObj         = new JSONObject();
 
-		int deleteResult = 0;
+		int               deleteResult    = 0;
 		
 		if(selectedArticleId > 0){
 			boardArticleDto.setArticleId(selectedArticleId);
 			// 글 삭제 - 논리적 삭제
 			deleteResult = boardArticleService.deleteBoardArticle(boardArticleDto);
-
 		}
 			
-		jsonObj.put("result", (deleteResult > 0) ? true : false);
-		jsonObj.put("selectedArticleId", selectedArticleId);
+		jsonObj.put("result"              , (deleteResult > 0) ? true : false);
+		jsonObj.put("selectedArticleId"   , selectedArticleId);
 		return jsonObj;
 	}
 	

@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.firstproj.common.CommonConstant;
 import com.firstproj.common.util.AES256Util;
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService{
                 String     encEmail    = aes256util.encrypt(email);    
                 userDto.setEmail(encEmail);
             }
-            if(!phoneNo.isEmpty()){
+            if(!StringUtils.isEmpty(phoneNo)){
                 String     encPhoneNo  = aes256util.encrypt(phoneNo);
                 userDto.setPhoneNo(encPhoneNo);             
             }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/footer.css"/>
 <input type="hidden" id="buildType" value="${buildType}"/>
 <style>
@@ -40,6 +41,6 @@ if($("#buildType").val()=='prod'){
 	  </c:otherwise>
 </c:choose>
 	  <p>Copyrightⓒ2014 All right reserved by LinkedNest</p>
-      <p>|&nbsp;<a href="/common/privateRule" class="btn btn_link" target="_blank">개인정보취급방침</a>&nbsp;|&nbsp;<a href="/common/useRule" class="btn btn_link" target="_blank">이용약관</a>&nbsp;|</p>
-      <p><a href="#">Back to top</a></p>
+      <p>|&nbsp;<a href="/common/privateRule" class="btn btn_link" target="_blank"><tag:message code='text.privatepolicy'/></a>&nbsp;|&nbsp;<a href="/common/useRule" class="btn btn_link" target="_blank"><tag:message code='text.termsofuse'/></a>&nbsp;|</p>
+      <p><a href="#"><tag:message code='text.backtotop'/></a></p>
 </footer>

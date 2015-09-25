@@ -18,8 +18,8 @@
 	<h1 id="btn-groups" class="page-header">Write Content</h1>
 	
 	<ol class="breadcrumb">
-	  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
-	  <li><a href="#" onclick="javascript:goList();">Board</a></li>
+	  <li><a href="#" onclick="javascript:goHome();"><tag:message code='text.home'/></a></li>
+	  <li><a href="#" onclick="javascript:goList();"><tag:message code='text.board'/></a></li>
 	  <li>
 	  	<a href="javascript:;"> 
 <c:if test="${!empty boardList}">
@@ -36,7 +36,7 @@
 				<colgroup><col width="15%"/><col width="85%"/></colgroup>
 				<tbody>
 					<tr>
-						<th><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;<span class="glyphicon-class">게시판</span></th>
+						<th><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;<span class="glyphicon-class"><tag:message code='text.board'/></span></th>
 						<td>
 							<div class="form-group">
 						<c:choose>
@@ -71,11 +71,11 @@
 						</td>
 					</tr>
 					<tr>
-						<th><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;<span class="glyphicon-class">제목</span></th>
+						<th><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;<span class="glyphicon-class"><tag:message code='text.title'/></span></th>
 						<td><div class="form-group"><input type="text" class="form-control" id="title" name="title" value='<c:out value="${articleInfo.title}"/>'/></div></td>
 					</tr>
 					<tr>
-						<th><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;<span class="glyphicon-class">내용</span></th>
+						<th><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;<span class="glyphicon-class"><tag:message code='text.content'/></span></th>
 						<td><div class="form-group"><textarea class="form-control tinymce" id="content" name="content"><c:out value="${articleInfo.content}"/></textarea></div></td>				
 					</tr>					
 					<tr>
@@ -97,7 +97,7 @@
 						</td>				
 					</tr>					
 					<tr>
-						<td><span class="glyphicon glyphicon-picture" aria-hidden="true"></span>&nbsp;<span class="glyphicon-class">썸네일</span></td>
+						<td><span class="glyphicon glyphicon-picture" aria-hidden="true"></span>&nbsp;<span class="glyphicon-class"><tag:message code='text.thumbnail'/></span></td>
 						<td>
 							<div class="form-group">
 	

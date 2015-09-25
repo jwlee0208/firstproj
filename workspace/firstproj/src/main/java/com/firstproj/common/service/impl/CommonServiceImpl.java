@@ -172,7 +172,7 @@ public class CommonServiceImpl implements CommonService{
         Session session = Session.getInstance(properties,
                 new javax.mail.Authenticator() {
                   protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                      return new javax.mail.PasswordAuthentication(new String(Base64.decodeBase64(Base64.encodeBase64(adminMailId.getBytes()))), new String(Base64.decodeBase64(Base64.encodeBase64(adminMailPw.getBytes()))));
+                      return new javax.mail.PasswordAuthentication(new String(Base64.decodeBase64(Base64.encodeBase64(adminMailId.getBytes()))), new String(Base64.decodeBase64(adminMailPw)));
                   }
                 });
         

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/footer.css"/>
 <input type="hidden" id="buildType" value="${buildType}"/>
 <script>
@@ -17,6 +18,6 @@ if($("#buildType").val()=='prod'){
 	  <p><a href="https://www.facebook.com/jwlee0524" target="_blank" class="btn btn-primary">Facebook</a>
 	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/aboutUs/5">contact</a>&nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/share/jwlee">developer's blog</a></p>
 	  <p>Copyrightⓒ2014 All right reserved by leejinwon</p>
-      <p><a href="#">Back to top</a></p>
+      <p><a href="#"><tag:message code='text.backtotop'/></a></p>
     </div>  
 </footer>

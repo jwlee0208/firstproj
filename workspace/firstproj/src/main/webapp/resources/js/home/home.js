@@ -73,6 +73,25 @@ $(function(){
 			
 		}
 	});
+	
+	$("#locale").on("change", function(){
+		var selectedLocale = $(this).val();
+		if(selectedLocale != ''){
+			$.ajax({ 
+				url 	 : '/ajaxChangeLocale/' + selectedLocale,
+				dataType : 'json',
+				type 	 : 'post',
+				success  : function(data){
+					if(data.code == 'ok'){
+						location.reload();
+					}
+				},
+				error 	 : function(){
+					
+				}
+			});			
+		}
+	});
 });
 
 function goTotSearch(){

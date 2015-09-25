@@ -14,12 +14,12 @@
 <body>
 
 	<div class="page-header">
-	  <h1>BOARD&nbsp;&nbsp;<small>${boardInfo.boardName}</small></h1>
+	  <h1><tag:message code='text.board'/>&nbsp;&nbsp;<small>${boardInfo.boardName}</small></h1>
 	</div>	
 	
 	<ol class="breadcrumb">
-	  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
-	  <li><a>${boardInfo.boardCategoryName} Board</a></li>
+	  <li><a href="#" onclick="javascript:goHome();"><tag:message code='text.home'/></a></li>
+	  <li><a>${boardInfo.boardCategoryName} <tag:message code='text.board'/></a></li>
 	  <li class="secondBranch active">${boardInfo.boardName}</li>
 	</ol>		
 		
@@ -33,7 +33,7 @@
 	<div class="form-group" role="search">		
 		<div>
 			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" />
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control" placeholder="Enter Your Search Keyword." value="${boardArticleDto.searchText}"/>
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control" placeholder="<tag:message code='text.request.insert.search.keyword'/>" value="${boardArticleDto.searchText}"/>
 		</div>						
 	</div>	
 	
@@ -59,12 +59,12 @@
 					<div class="caption">
 						<h3><span onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal"><c:out value="${content.title}"/></span></h3>
 						<p class="content_${index.count}" style="text-overflow:ellipsis; overflow:hidden;">
-							<c:if test="${content.content eq null || content.content eq ''}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11</c:if>
+							<c:if test="${content.content eq null || content.content eq ''}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
 							<c:if test="${content.content ne null && content.content ne ''}">
 								<span onclick="javascript:goArticleView('${content.articleId}', 'noPopup');">${fn:substring(content.contentText, 0, 31)}...</span>
 							</c:if>
 						</p>
-						<p><span class="btn btn-primary" role="button" onclick="javascript:goArticleView('${content.articleId}');">Detail View</span></p>
+						<p><span class="btn btn-primary" role="button" onclick="javascript:goArticleView('${content.articleId}');"><tag:message code='button.detailview'/></span></p>
 					</div>
 
 				</div>	
@@ -72,7 +72,7 @@
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
-			<div style="min-height: 400px;">There is no article.</div>					
+			<div style="min-height: 400px;"><tag:message code='text.noarticle'/></div>					
 	</c:otherwise>
 </c:choose>
 		</div>

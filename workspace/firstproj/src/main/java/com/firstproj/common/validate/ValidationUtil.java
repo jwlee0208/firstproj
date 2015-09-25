@@ -89,10 +89,10 @@ public class ValidationUtil extends ValidationUtils{
      * @param defaultMessage
      * @param minLength
      */
-    public void rejectIfNotMinLength(Errors errors, String field, String errorCode, String defaultMessage, int minLength){
+    public static void rejectIfNotMinLength(Errors errors, String field, String errorCode, String defaultMessage, int minLength){
         Object value = errors.getFieldValue(field);
         if (value != null && StringUtils.hasLength(value.toString())) {
-            if(value.toString().length() <= minLength){
+            if(value.toString().length() < minLength){
                 errors.rejectValue(field, errorCode, defaultMessage);
             }
         }
@@ -110,7 +110,7 @@ public class ValidationUtil extends ValidationUtils{
     public static void rejectIfNotMaxLength(Errors errors, String field, String errorCode, String defaultMessage, int maxLength){
         Object value = errors.getFieldValue(field);
         if (value != null && StringUtils.hasLength(value.toString())) {
-            if(value.toString().length() >= maxLength){
+            if(value.toString().length() > maxLength){
                 errors.rejectValue(field, errorCode, defaultMessage);
             }
         }

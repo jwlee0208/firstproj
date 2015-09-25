@@ -1,5 +1,4 @@
-<%@page
-	import="org.springframework.web.bind.annotation.SessionAttributes"%>
+<%@page import="org.springframework.web.bind.annotation.SessionAttributes"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="tag"%>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
@@ -53,6 +52,14 @@
       	</ul>			
 			</c:if>			
 			<form class="navbar-form navbar-right" role="search">
+				<select class="form-control" id="locale" name="locale">
+					<option value="">::: Language :::</option>
+					<option value="kr">한국어</option>
+					<option value="en">English</option>
+					<option value="zh">中国</option>
+					<option value="ja">日本語</option>
+				</select>
+			
 				<c:if test="${null eq userInfo}">
 					<a onclick="javascript:goRegist(6);" class="btn btn-primary"><tag:message
 							code="signup" /></a>

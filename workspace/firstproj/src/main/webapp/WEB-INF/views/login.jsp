@@ -95,11 +95,15 @@ function loginAction(){
 					<input type="password" class="form-control" id="passwd" name="passwd" placeholder="Input your password"/>
 			</div>
 			<div class="alert alert-danger"></div>
+			
 			<input type="button" class="btn btn-primary btn-lg btn-block" name="signinSubmit" value="<tag:message code="signin"/>">
-			<div class="row" style="text-align: center;">
-				<div title="Sign up" class="btn btn-link"><a href="/user/regist/6" style="font-size: 30px;"><tag:message code="signup"/></a></div>
-				<div title="Go to home" class="btn btn-link"><a href="/share/main" style="font-size: 30px;"><tag:message code="common.home"/></a></div>
+			
+			<div class="btn-group btn-group-justified" style="text-align: center; padding-top:20px;" role="group">
+				<div title="Sign up" class="btn btn-default"><a href="/user/regist/6" ><tag:message code="signup"/></a></div>
+				<div title="Go to home" class="btn btn-default"><a href="/share/main" ><tag:message code="common.home"/></a></div>
+				<div title="Forgot password" class="btn btn-default"><a href="/user/forgotPassword" ><tag:message code="common.forgotpassword"/></a></div>
 			</div>
+			
 		</form>
 		</div>
 	</div>	

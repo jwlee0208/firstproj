@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -62,6 +63,8 @@ public class LoginController {
 
 		if(StringUtils.isEmpty(referer)){
 			referer="/";
+		}else if(referer.indexOf("/resetPassword") > 0){
+		    referer="/share";
 		}
 		
 		log.info(" >>> REFER : " + referer);				
@@ -126,5 +129,18 @@ public class LoginController {
 		session.removeAttribute("userInfo");
 		
 		return "redirect:/home/0";
+	}
+	
+	@RequestMapping(value="/ajaxChangeLocale/{locale}")
+	public JSONObject setLocale(@PathVariable String locale, HttpSession session){
+	    
+	    // User의 사용 language 설정 값에 따른 Locale 설정
+        session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, LocaleUtils.toLocale(locale));
+        
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code"   , "ok");
+        jsonObject.put("message", "success");
+        
+        return jsonObject;
 	}
 }

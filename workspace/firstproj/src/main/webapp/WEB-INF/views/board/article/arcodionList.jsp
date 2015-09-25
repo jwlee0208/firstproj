@@ -2,17 +2,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag" %>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/common/paging.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleList.js"></script>
 <link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/pagination.css">
 	<div class="blog-header">
-	  <h1>BOARD&nbsp;&nbsp;<small>ALL</small></h1>
+	  <h1><tag:message code='text.board'/>&nbsp;&nbsp;<small><tag:message code='text.all'/></small></h1>
 	</div>	
 	
 	<ol class="breadcrumb">
-	  <li><a href="javascript:;">Home</a></li>
-	  <li><a href="javascript:;">Board</a></li>
-	  <li class="secondBranch active">ALL</li>
+	  <li><a href="javascript:;"><tag:message code='text.home'/></a></li>
+	  <li><a href="javascript:;"><tag:message code='text.board'/></a></li>
+	  <li class="secondBranch active"><tag:message code='text.all'/></li>
 	</ol>		
 	
 	<form id="boardFrm" name="boardFrm" method="post">
@@ -25,7 +26,7 @@
 	<div class="form-group" role="search">
 		<div class="">
 			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" 	/>
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control" placeholder="검색어를 입력해 주세요." value="${boardArticleDto.searchText}" />		
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control" placeholder="<tag:message code='text.request.insert.search.keyword'/>" value="${boardArticleDto.searchText}" />		
 		</div>
 	</div>
 	
@@ -76,7 +77,7 @@
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-			<div style="text-align: center; min-height : 450px;">작성된 내용이 없습니다.</div>
+			<div style="text-align: center; min-height : 450px;"><tag:message code='text.noarticle'/></div>
 					</c:otherwise>
 				</c:choose>
 		</div>	
@@ -95,7 +96,7 @@
 <c:if test="${isWritable}">	                                                                                                 
 	<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
 		<div class="btn-group">
-			<input type="submit" class="btn btn-default pull-right" value="글쓰기" name="goToWrite" />
+			<input type="submit" class="btn btn-default pull-right" value="<tag:message code='common.write'/>" name="goToWrite" />
 		</div>
 	</div>	
 </c:if>

@@ -1,5 +1,8 @@
 package com.firstproj.user.web;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -21,11 +24,13 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.velocity.VelocityEngineUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -40,6 +45,7 @@ import com.firstproj.common.validate.JsonResponse;
 import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;
 import com.firstproj.user.service.UserServiceImpl;
+import com.firstproj.user.validate.PasswordValidator;
 import com.firstproj.user.validate.UserValidator;
 
 @Controller
@@ -193,6 +199,8 @@ public class UserController {
                     shareDto.setShareType("1");
                     
                     this.shareService.insertShareInfo(shareDto);
+                                        
+                    this.sendWelcomeMail(userDto);
                     /*
                     // Sending Mail
                     AES256Util aes256util  = new AES256Util(CommonConstant.IV);
@@ -311,7 +319,7 @@ public class UserController {
              }else{
                 resultCode  = "REGIST_0002";
                 resultMsg   = "insert_error";
-                }
+             }
             
             returnObj.setStatus(resultCode);
             returnObj.setResult(resultMsg);
@@ -319,6 +327,226 @@ public class UserController {
         }
 
         return returnObj;
-    }    
+    }  
     
+    @RequestMapping(value="/forgotPassword")
+    public String forgotPasswordView(){
+        return "/user/forgotPassword";
+    }
+    
+    @RequestMapping(value="/resetPassword")
+    public String resetPasswordView(@RequestParam("v") String encryptMail, Model model){
+        
+        String decryptedEmail = "";
+        AES256Util aes256util = null;
+        try {
+
+            aes256util = new AES256Util(CommonConstant.IV);
+            
+            try {
+                decryptedEmail = aes256util.decrypt(encryptMail);
+            } catch (NoSuchAlgorithmException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+                decryptedEmail = encryptMail;
+            } catch (GeneralSecurityException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+                decryptedEmail = encryptMail;
+            }    
+        }catch (UnsupportedEncodingException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+        }
+        model.addAttribute("email", decryptedEmail);
+        return "/user/resetPassword";
+    }
+    
+    @RequestMapping(value="/sendForgotPwMail")
+    public JSONObject sendResetPwMail(UserDto userDto){
+        JSONObject result = new JSONObject();
+        
+        if(!StringUtils.isEmpty(userDto.getEmail())){
+            // email을 이용, userInfo를 조회
+            UserDto userInfo = null;
+            try {
+                userInfo = this.userService.selectUserInfo(userDto);
+
+                if(userInfo != null){
+                    // 메일 발송
+                    this.sendForgotPwMail(userInfo);    
+                    result.put("code"   , "ok");
+                    result.put("message", "check out your mail box!");                
+                }else{
+                    result.put("code"   , "error");
+                    result.put("message", "No registed user's email address.");                
+                }
+
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }else{
+            result.put("code"   , "error");
+            result.put("message", "Occurred Error.");
+        }
+        
+        return result;
+    }
+    
+    @RequestMapping(value="resetPasswordAction")
+    @ResponseBody
+    public JsonResponse resetPasswordAction(UserDto userDto, BindingResult result){
+        JsonResponse returnObj = new JsonResponse();
+        int        updateResult = 0;
+        // 1. validation
+        PasswordValidator.updateValidate(result, userDto);
+        
+        String resultCode   = "UPDATE_PW_0000";
+
+        if(result.hasErrors()){
+            resultCode = "UPDATE_PW_0001";     
+            
+            returnObj.setStatus(resultCode);
+            returnObj.setResult(result.getAllErrors());
+        }else{
+            // 2. update password
+            String hashedPassword = BCrypt.hashpw(userDto.getPasswd(), BCrypt.gensalt());
+            userDto.setPasswd(hashedPassword);
+            
+            try {
+                updateResult = userService.modifyUserInfo(userDto);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            
+            if(updateResult < 1){
+                returnObj.setStatus("UPDATE_PW_0002");
+                returnObj.setResult("Error occurred");
+            }else{
+                returnObj.setStatus("UPDATE_PW_0000");
+                returnObj.setResult("Your password successfully updated.");
+            }            
+        }
+
+        return returnObj;
+    }
+    private void sendWelcomeMail(UserDto userDto){
+        // 메시지 다국어 처리
+        String welcomeMsg = null;
+        
+        try{
+            welcomeMsg = messageSource.getMessage("welcome.joinning", new Locale(userDto.getLanguage())); 
+        }catch(Exception e){
+            e.printStackTrace();
+            log.error("[ UserController.registAction() ][ welcomeMsg ] Error Occured...");
+            welcomeMsg = "Welcome!!!";
+        }
+
+        // Velocity Template 에 Mapping할 Data Map
+        Map<String, Object> contentMap = new HashMap<String, Object>();
+        contentMap.put("mailTo"         , userDto.getUserNm());
+        contentMap.put("welcomeMessage" , welcomeMsg);
+
+        // Sending Mail
+        this.commonSendMailTemplate(userDto, "[linkedNest.net] Congraturation! Happy join us!!", "./mailTemplates/welcomeJoinningTemplate.vm", contentMap);
+    }
+    
+    private void sendForgotPwMail(UserDto userDto){
+        // 메시지 다국어 처리
+        String forgotMsg = "";
+        
+        try{
+            forgotMsg = messageSource.getMessage("forgot.password", new Locale(userDto.getLanguage())); 
+        }catch(Exception e){
+            e.printStackTrace();
+            log.error("[ UserController.registAction() ][ forgotMsg ] Error Occured...");
+            forgotMsg = "Welcome!!!";
+        }
+
+        // Sending Mail
+        AES256Util aes256util = null;
+        String encryptedEmail = null;
+        try {
+
+            aes256util = new AES256Util(CommonConstant.IV);
+            
+            try {
+                encryptedEmail = aes256util.encrypt(userDto.getEmail());
+            } catch (NoSuchAlgorithmException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+                encryptedEmail = userDto.getEmail();
+            } catch (GeneralSecurityException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+                encryptedEmail = userDto.getEmail();
+            }    
+        }catch (UnsupportedEncodingException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+        }
+        
+        if(!StringUtils.isEmpty(encryptedEmail)){
+            // Velocity Template 에 Mapping할 Data Map
+            Map<String, Object> contentMap = new HashMap<String, Object>();
+            contentMap.put("userId"         , userDto.getUserId());
+            contentMap.put("forgotMessage"  , forgotMsg);
+            contentMap.put("encryptedMail"  , encryptedEmail);
+
+            // Sending Mail
+            this.commonSendMailTemplate(userDto, "[linkedNest.net] Reset your password!!", "./mailTemplates/forgotPassword.vm", contentMap);
+            
+        }
+    }
+    
+    private void commonSendMailTemplate(UserDto userDto, String title, String mailTemplateUrl, Map<String, Object> contentMap){
+        // Sending Mail
+        AES256Util aes256util = null;
+        try {
+            aes256util = new AES256Util(CommonConstant.IV);
+            
+            String decryptedEmail = null;
+            try {
+                decryptedEmail = aes256util.decrypt(userDto.getEmail());
+            } catch (NoSuchAlgorithmException e1) {
+                // TODO Auto-generated catch block
+//                e1.printStackTrace();
+                decryptedEmail = userDto.getEmail();
+            } catch (GeneralSecurityException e1) {
+                // TODO Auto-generated catch block
+//                e1.printStackTrace();
+                decryptedEmail = userDto.getEmail();
+            } finally{
+                MailDto mailInfo = new MailDto();
+                mailInfo.setContentType("text/html; charset=utf-8");
+                mailInfo.setMailFrom("jwlee0208@gmail.com");
+                mailInfo.setMailTo(decryptedEmail);
+                mailInfo.setMailSubject(title);
+                mailInfo.setTemplateName(mailTemplateUrl);
+                
+                log.info("[ UserController.registAction() ][ userDto.getLanguage() ] : " + userDto.getLanguage());
+                log.info("[ UserController.registAction() ][ new Locale(userDto.getLanguage()) ] : " + new Locale(userDto.getLanguage()));
+                                
+                // Velocity Template 에 Mapping할 Data Map
+                mailInfo.setModel(contentMap);
+                
+                // setting content
+                String body = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, mailTemplateUrl, "UTF-8", mailInfo.getModel());
+                mailInfo.setMailContent(body);
+                
+                // mail 발송
+                try{
+                    commonService.sendMail(mailInfo);    
+                }catch(Exception e){
+                    e.printStackTrace();
+                    log.info("[ 메일 발송 오류 ]");
+                }                       
+            }         
+        } catch (UnsupportedEncodingException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+    }
 }

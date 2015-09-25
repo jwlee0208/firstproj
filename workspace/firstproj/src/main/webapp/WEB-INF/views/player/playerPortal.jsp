@@ -53,7 +53,7 @@
 			<div class="row" role="search">
 				<input type="hidden" 	id="searchCondition" 	name="searchCondition" value="userName"/>
 				<input type="hidden" 	id="searchText" 		name="searchText" />
-				<input type="text" 		id="searchTextStr" 		name="searchTextStr" class="form-control ui-autocomplete-input" placeholder="Try to search using keywords. And push enter key."/>
+				<input type="text" 		id="searchTextStr" 		name="searchTextStr" class="form-control ui-autocomplete-input" placeholder="<tag:message code='text.request.insert.search.keyword'/>"/>
 				<input type="hidden"	id="parentCatId"		name="categoryInfo.parentCatId" value="${searchPlayerInfo.categoryInfo.parentCatId}"/>	
 			</div>
 			<!-- 			

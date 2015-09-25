@@ -13,12 +13,12 @@
 <body>
 
 	<div class="page-header">
-	  <h1>BOARD&nbsp;&nbsp;<small>${boardInfo.boardName}</small></h1>
+	  <h1><tag:message code='text.board'/>&nbsp;&nbsp;<small>${boardInfo.boardName}</small></h1>
 	</div>	
 	
 	<ol class="breadcrumb">
-	  <li><a href="#" onclick="javascript:goHome();">Home</a></li>
-	  <li><a>${boardInfo.boardCategoryName} Board</a></li>
+	  <li><a href="#" onclick="javascript:goHome();"><tag:message code='text.home'/></a></li>
+	  <li><a>${boardInfo.boardCategoryName} <tag:message code='text.board'/></a></li>
 	  <li class="secondBranch active">${boardInfo.boardName}</li>
 	</ol>		
 	
@@ -32,7 +32,7 @@
 	<div class="form-group" role="search">		
 		<div>
 			<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent"/>
-			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control" placeholder="Enter Your Search Keyword." value="${boardArticleDto.searchText}" />		
+			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control" placeholder="<tag:message code='text.request.insert.search.keyword'/>" value="${boardArticleDto.searchText}" />		
 		</div>
 	</div>	
 	
@@ -65,7 +65,7 @@
 	</c:when>
 	<c:otherwise>
 			<li class="media" style="text-align: center; min-height: 400px;">	
-				<h4 class="media-heading">등록된 내용이 없습니다.</h4>
+				<h4 class="media-heading"><tag:message code='text.noarticle'/></h4>
 			</li>			
 	</c:otherwise>
 </c:choose>						

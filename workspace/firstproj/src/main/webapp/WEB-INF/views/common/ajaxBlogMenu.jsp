@@ -56,7 +56,8 @@
 			<ul class="nav navbar-nav">
     		<c:choose>
     			<c:when test="${shareInfo ne null && userId ne null}">
-				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();">Profile</a></li>    			
+    			<li><a href="/share"><tag:message code="text.home"/></a></li>
+				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();"><tag:message code="text.profile"/></a></li>    			
 <%-- 				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();">Profile</a></li> --%>
 		          	<c:if test="${!empty boardCategoryList}">
 		          		<c:forEach var="boardCategoryInfo" items="${boardCategoryList}">
@@ -94,11 +95,20 @@
           		</ul>
         	</li>
       	</ul>			
-			</c:if>
+			</c:if>			
 			<form class="navbar-form navbar-right" role="search" id="totSearchFrm" name="totSearchFrm">
 				<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" 	/>
 				<input type="hidden" 	id="boardId" 		 name="boardId" 		value="0" 	/>
-				<input type="text" 		id="totSearchText"	 name="searchText"		class="form-control" placeholder="Search Shared Info." style="background-image: none; background-position: 0% 0%; background-repeat: repeat;">
+				<input type="text" 		id="totSearchText"	 name="searchText"		class="form-control" placeholder="<tag:message code='text.request.insert.search.keyword'/>" style="background-image: none; background-position: 0% 0%; background-repeat: repeat;">
+				
+				<select class="form-control" id="locale" name="locale">
+					<option value="">::: Language :::</option>
+					<option value="kr">한국어</option>
+					<option value="en">English</option>
+					<option value="zh">中国</option>
+					<option value="ja">日本語</option>
+				</select>&nbsp;&nbsp;
+				
 			<c:if test="${null eq userInfo}">
 				<a onclick="javascript:goRegist(6);" 	class="btn btn-primary"><tag:message code="signup"/></a>
 				<a onclick="javascript:goLogin(7);" 	class="btn btn-default"><tag:message code="signin"/></a>

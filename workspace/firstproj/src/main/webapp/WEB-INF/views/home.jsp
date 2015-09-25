@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag" %>
 <style>
 .jumbotron {
     position: relative;
@@ -17,15 +18,14 @@
 <form id="mainFrm" name="mainFrm" method="post">
 </form>
 	<div class="jumbotron">
-		<h1>Keep Going Your Way</h1>
-		<p>Why don't you just go one step more?</p>
-		<p>Do not afraid of yourself. You are the player.</p>
-		<p>Never ever give up.</p>
-		<p><strong>"It ain't over till it's over."</strong> - 'Yogi' Lawrence Peter Berra</p>
-<!-- 		<p class="btn btn-primary btn-lg" role="button">Regist Profile&nbsp;>></p> -->
+		<h1><tag:message code='main.text1'/></h1>
+		<p><tag:message code='sub.text1'/></p>
+		<p><tag:message code='sub.text2'/></p>
+		<p><tag:message code='sub.text3'/></p>
+		<p><strong>"<tag:message code='sub.text4'/>"</strong> - 'Yogi' Lawrence Peter Berra</p>
 	</div>
 
-	<h4>Recently Registered Players&nbsp;&nbsp;<small><a href="/player/playerPortal/6">more</a></small></h4>
+	<h4><tag:message code='text.recentregistplayers'/>&nbsp;&nbsp;<small><a href="/player/playerPortal/6"><tag:message code='button.more'/></a></small></h4>
 	<div class="row">
 	<c:choose>
 		<c:when test="${!empty recentPlayerList}">
@@ -57,7 +57,7 @@
 								<div class="row"><div class="col-xs-6">Position</div><div class="col-xs-6">${list.catNm2Str}</div></div>
 							</p>
 							<p>
-								<span class="btn btn-info" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">Detail View</span>
+								<span class="btn btn-info" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.detailview'/></span>
 							</p>
 						</div>
 	
@@ -68,7 +68,7 @@
 		</c:when>
 		<c:otherwise>
 			<div style="text-align:center; min-height : 70px;vertical-align: middle;">
-			<h3>We are look forward to your registration. There's no registed player.</h3>
+			<h3><tag:message code='text.noregistplayer'/></h3>
 			</div>
 		</c:otherwise>	
 	</c:choose>
@@ -76,7 +76,7 @@
 	</div>
 	
 	
-	<h4>Recently Registered Clubs&nbsp;&nbsp;<small><a href="/team/teamPortal/6">more</a></small></h4>
+	<h4><tag:message code='text.recentregistteams'/>&nbsp;&nbsp;<small><a href="/team/teamPortal/6"><tag:message code='button.more'/></a></small></h4>
 	<div class="row">
 	<c:choose>
 		<c:when test="${!empty recentTeamList}">
@@ -108,7 +108,7 @@
 								<div class="row"><div class="col-xs-6">Position</div><div class="col-xs-6">${list.catNm2Str}</div></div>
 							</p>
 							<p>
-								<span class="btn btn-info" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">Detail View</span>
+								<span class="btn btn-info" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.detailview'/></span>
 							</p>
 						</div>
 	
@@ -119,7 +119,7 @@
 		</c:when>
 		<c:otherwise>
 			<div style="text-align:center; min-height : 70px;vertical-align: middle;">
-			<h3>We are look forward to your registration. There's no registed Team.</h3>
+			<h3><tag:message code='text.noregistplayer'/></h3>
 			</div>
 		</c:otherwise>	
 	</c:choose>
@@ -177,45 +177,9 @@
 				</div>
 			</div>	
 		</div>
-		<!-- center area -->
-<!-- 		<div class="row">	 -->
-<!-- 			<div class="embed-responsive embed-responsive-16by9"> -->
-<!-- 				<iframe class="embed-responsive-item" width="420" height="255" src="//www.youtube.com/embed/7X9QYfwTuE8" frameborder="0" allowfullscreen></iframe> -->
-<!-- 			</div> -->
-<!-- 		</div>	 -->
-		<!-- right area -->
-<!-- 		<div class="row" ng-controller="SubCtrl">	 -->
-<!-- 			 <div class="slider2"> -->
-<!-- 			    <img ng-repeat="slide in slides" class="slide slide-animation nonDraggableImage" -->
-<!-- 			         ng-swipe-right="nextSlide()" ng-swipe-left="prevSlide()" -->
-<!-- 			         ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}"> -->
-			
-<!-- 			    <a class="arrow prev" href="#" ng-click="nextSlide()"></a> -->
-<!-- 			    <a class="arrow next" href="#" ng-click="prevSlide()"></a> -->
-<!-- 			    <nav class="nav-slide"> -->
-<!-- 			        <div class="wrapper"> -->
-<!-- 			            <ul class="dots"> -->
-<!-- 			                <li class="dot" ng-repeat="slide in slides"> -->
-<!-- 			                    <a href="#"  -->
-<!-- 			                    	ng-class="{'active':isCurrentSlideIndex($index)}" -->
-<!-- 			                       	ng-click="setCurrentSlideIndex($index);">{{slide.description}}</a> -->
-<!-- 			                </li> -->
-<!-- 			            </ul> -->
-<!-- 			        </div> -->
-<!-- 			    </nav> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
+
 	</div>
 	
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script> -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-animate.min.js"></script> -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-touch.min.js"></script> -->
-<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script> -->
-
-<%-- <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/angular/slide/slideshow.js"></script> --%>
-
-
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 			prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" 	prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 			prefix="fmt"%>
-
+<%@ taglib uri="http://www.springframework.org/tags" 		prefix="tag"%>
 <c:choose>
 	<c:when test="${empty playerList}">
 		<div class="table-responsive" style="text-align: center; height: 100%;">
@@ -15,7 +15,7 @@
 			<c:forEach var="list" items="${playerList}">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail">
-						<span class="label <c:choose><c:when test="${list.catNm2 eq 'hitter'}">label-success</c:when><c:when test="${list.catNm2 eq 'pitcher'}">label-info</c:when><c:otherwise>label-warning</c:otherwise></c:choose> position">${list.catNm2Str}</span>
+						<span class="label <c:choose><c:when test="${list.catNm2 eq 'hitter'}">label-success</c:when><c:when test="${list.catNm2 eq 'pitcher'}">label-info</c:when><c:otherwise>label-warning</c:otherwise></c:choose> position"><tag:message code='text.${list.catNm2}'/></span>
 				<c:choose>
 					<c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">
 						<img src="http://jwlee0208.cdn3.cafe24.com/${list.profileImgFilePath}" 
@@ -45,7 +45,7 @@
 <%-- 								</c:if> --%>
 							</p>
 							<p>
-								<span class="btn btn-info" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">Detail View</span>
+								<span class="btn btn-info" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.detailview'/></span>
 <%-- 								<span class="btn btn-primary" 	role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">LIKE</span> --%>
 							</p>
 						</div>

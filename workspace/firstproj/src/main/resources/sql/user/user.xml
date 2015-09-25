@@ -48,17 +48,42 @@
 		    	language,
 		    	join_date 
 		    FROM TB_USER
-		    WHERE user_id = #{userId}
+		    <where>
+		    	<if test="userId != null and userId != ''">
+		    	user_id = #{userId}
+		    	</if>
+		    	<if test="email != null and email != ''">
+		    	and email = #{email}
+		    	</if>
+		    </where>
+		    LIMIT 1
 		</select>
 		
 		<update id="updateUserInfo" parameterType="user.userDto">
 			UPDATE TB_USER 
-			   SET user_nm  = #{userNm}
-			     , email    = #{email}
-			     , phone_no = #{phoneNo}
+			   SET 
+			   <if test="userId != null and userId != ''">
+			   	   user_nm     = #{userNm}
+			     , email       = #{email}
+			     , phone_no    = #{phoneNo}
 			     , nationality = LOWER(#{nationality})
 			     , language    = LOWER(#{language})
-			WHERE user_id = #{userId}     
+			   </if>  
+			   <if test="email != null and email != ''">
+			       passwd	   = #{passwd}
+			   </if>  
+			<where>
+				<choose>
+					<when test="userId != null and userId != ''">
+					user_id = #{userId}
+					</when>
+					<when test="email != null and email != ''">
+					email = #{email}
+					</when>
+				</choose>
+				
+			</where>
+			     
 		</update>
 		
     </mapper>

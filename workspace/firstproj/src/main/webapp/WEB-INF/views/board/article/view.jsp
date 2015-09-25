@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag" %>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -36,11 +37,11 @@
 	<!-- flickr / slideshare /etc,.'s search keyword parameter -->
 	<input type="hidden" id="keyword" 				name="keyword" 				value="${contentInfo.title}"/>
 
-	<h1 id="btn-groups" class="page-header">Article</h1>
+	<h1 id="btn-groups" class="page-header"><tag:message code='text.article'/></h1>
 	<c:set var="boardName" value=""/>
 	<ol class="breadcrumb">
-	  <li><a href="javascript:;" onclick="javascript:goMyShare('${shareInfo.userId}');">Home</a></li>
-	  <li><a href="javascript:;" onclick="javascript:goList('${contentInfo.boardId}');">Board</a></li>
+	  <li><a href="javascript:;" onclick="javascript:goMyShare('${shareInfo.userId}');"><tag:message code='text.home'/></a></li>
+	  <li><a href="javascript:;" onclick="javascript:goList('${contentInfo.boardId}');"><tag:message code='text.board'/></a></li>
 	  <li>
 <c:if test="${!empty boardList}">
 	<c:forEach var="boardInfo" items="${boardList}">
@@ -51,7 +52,7 @@
 	</c:forEach>
 </c:if>		  
 	  </li>
-	  <li class="active">Article</li>
+	  <li class="active"><tag:message code='text.article'/></li>
 	</ol>		
 
 		<div class="panel panel-info" role="main">	
@@ -111,7 +112,7 @@
 
 		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
 			<div class="btn-group" role="button">
-				<input type="button" class="btn btn-default" id="goToList" value="list"/>
+				<input type="button" class="btn btn-default" id="goToList" value="<tag:message code="common.list"/>"/>
 			</div>
 			<c:if test="${prevContentInfo.articleId ne null}">
 			<div class="btn-group" role="button">
@@ -125,10 +126,10 @@
 			</c:if>
 			<c:if test="${userInfo ne null && userInfo.userId eq contentInfo.authorId}">
 			<div class="btn-group" role="button">
-				<input type="button" class="btn btn-default pull-right" id="goToModify" value="modify"/>
+				<input type="button" class="btn btn-default pull-right" id="goToModify" value="<tag:message code="common.modify"/>"/>
 			</div>			
 			<div class="btn-group" role="button">
-				<input type="button" class="btn btn-default pull-right" id="goToDelete" value="delete"/>
+				<input type="button" class="btn btn-default pull-right" id="goToDelete" value="<tag:message code="common.delete"/>"/>
 			</div>			
 			</c:if>
 		</div>

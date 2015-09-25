@@ -31,22 +31,24 @@ $(function(){
 	 * 게시글 삭제
 	 */
 	$("#goToDelete").on("click", function(){
-		$.ajax({
-			url : '/board/article/deleteBoardArticle.json',
-			type : 'post',
-			data : {selectedArticleId : $("#selectedArticleId").val()},
-			dataType : 'json',
-			success : function(data){
-				if(data.result){
-					location.href = "/board/article/list/" + $("#viewFrm #boardId").val();
-				}else{
-					alert(data.validate);
+		var result = confirm('진짜 삭제하시겠습니까?');
+		if(result){
+			$.ajax({
+				url 		: '/board/article/deleteBoardArticle/'+$("#selectedArticleId").val(),
+				type 		: 'post',
+				dataType 	: 'json',
+				success 	: function(data){
+					if(data.result){
+						goList($("#viewFrm #boardId").val());
+					}else{
+						alert('삭제되지 않았습니다.');
+					}
+				},
+				error : function(xhr, textStatus, thrownError){
+					console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
 				}
-			},
-			error : function(xhr, textStatus, thrownError){
-				console.log("error : " + xhr.status + ", " + textStatus + ", " + thrownError);
-			}
-		});
+			});			
+		}
 	});	
 });
 
