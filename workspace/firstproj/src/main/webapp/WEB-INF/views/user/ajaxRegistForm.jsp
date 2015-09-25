@@ -65,7 +65,15 @@
 		<div class="form-group">
 			<label for="email" class="col-sm-2 control-label">Email Address</label>
 			<div class="col-sm-10">
+<c:choose>
+	<c:when test="${userInfo ne null}">
+				<input type="hidden" id="email" name="email" value="${userInfo.email}"/>
+				<input type="text" class="form-control" value="${userInfo.email}" <c:if test="${userInfo ne null}">readonly</c:if>/>
+	</c:when>		
+	<c:otherwise>
 				<input type="email" class="form-control" id="email" name="email" value="${userInfo.email}"/><span id="emailErr" class="errorMsg" style="display: none;"></span>
+	</c:otherwise>
+</c:choose>
 			</div>
 		</div>
 

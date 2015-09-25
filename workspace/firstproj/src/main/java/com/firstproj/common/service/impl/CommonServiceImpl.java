@@ -195,8 +195,7 @@ public class CommonServiceImpl implements CommonService{
     @Override
     public void getPrivateInfo(HttpServletRequest request, Model model, HttpSession session){
         
-        UserDto sessionInfo     =  
-                (UserDto)session.getAttribute("userInfo");
+        UserDto sessionInfo     = (UserDto)session.getAttribute("userInfo");
         UserDto userInfo        = null; 
         if(sessionInfo != null){
             AES256Util aes256util;
@@ -204,40 +203,41 @@ public class CommonServiceImpl implements CommonService{
                 aes256util = new AES256Util(CommonConstant.IV);
                 try {
                     userInfo = this.userService.selectUserInfo(sessionInfo);
+                    
+                    String phoneNo = userInfo.getPhoneNo();
+                    String email = userInfo.getEmail();
+                    
+                    if(!StringUtils.isEmpty(phoneNo)){
+                        try {
+                            userInfo.setPhoneNo(aes256util.decrypt(phoneNo));
+                        } catch (NoSuchAlgorithmException e) {
+                            // TODO Auto-generated catch block
+                            // e.printStackTrace();
+                            userInfo.setPhoneNo(phoneNo);
+                        } catch (GeneralSecurityException e) {
+                            // TODO Auto-generated catch block
+                            // e.printStackTrace();
+                            userInfo.setPhoneNo(phoneNo);
+                        }
+                    }
+                    if(!StringUtils.isEmpty(email)){
+                        try {
+                            userInfo.setEmail(aes256util.decrypt(email));
+                        } catch (NoSuchAlgorithmException e) {
+                            // TODO Auto-generated catch block
+                            // e.printStackTrace();
+                            userInfo.setEmail(email);
+                        } catch (GeneralSecurityException e) {
+                            // TODO Auto-generated catch block
+                            // e.printStackTrace();
+                            userInfo.setEmail(email);
+                        }
+                    }
                 } catch (Exception e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
                 
-                String phoneNo = userInfo.getPhoneNo();
-                String email = userInfo.getEmail();
-                if(!StringUtils.isEmpty(phoneNo)){
-                    try {
-                        userInfo.setPhoneNo(aes256util.decrypt(phoneNo));
-                    } catch (NoSuchAlgorithmException e) {
-                        // TODO Auto-generated catch block
-                        // e.printStackTrace();
-                        userInfo.setPhoneNo(phoneNo);
-                    } catch (GeneralSecurityException e) {
-                        // TODO Auto-generated catch block
-                        // e.printStackTrace();
-                        userInfo.setPhoneNo(phoneNo);
-                    }
-                }
-                if(!StringUtils.isEmpty(email)){
-                    try {
-                        userInfo.setEmail(aes256util.decrypt(email));
-                    } catch (NoSuchAlgorithmException e) {
-                        // TODO Auto-generated catch block
-                        // e.printStackTrace();
-                        userInfo.setEmail(email);
-                    } catch (GeneralSecurityException e) {
-                        // TODO Auto-generated catch block
-                        // e.printStackTrace();
-                        userInfo.setEmail(email);
-                    }
-                }
-     
             } catch (UnsupportedEncodingException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

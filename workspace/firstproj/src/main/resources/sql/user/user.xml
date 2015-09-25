@@ -31,8 +31,11 @@
 				LOWER(#{language}),
 			</if>	
 				CURRENT_TIMESTAMP())
-<!-- 			WHERE user_id != #{userId}	 -->
-			
+<!-- 			<where> -->
+<!-- 				user_id != #{userId} -->
+<!-- 			or  email   != #{email} -->
+<!-- 			</where> -->
+							
         </insert>
         <select id="selectUserList" parameterType="user.userDto" resultType="user.userDto">
         </select>
@@ -49,12 +52,18 @@
 		    	join_date 
 		    FROM TB_USER
 		    <where>
-		    	<if test="userId != null and userId != ''">
-		    	user_id = #{userId}
-		    	</if>
-		    	<if test="email != null and email != ''">
-		    	and email = #{email}
-		    	</if>
+		    <choose>
+		    	<when test="userId != null and userId != ''">
+		    	 user_id = #{userId}
+		    		<if test="email != null and email != ''">
+		      OR email = #{email}	
+		    		</if>
+		    	</when>
+		    	<when test="email != null and email != ''">
+		    	email = #{email}
+		    	</when>
+		    </choose>
+		    	
 		    </where>
 		    LIMIT 1
 		</select>
@@ -62,16 +71,18 @@
 		<update id="updateUserInfo" parameterType="user.userDto">
 			UPDATE TB_USER 
 			   SET 
-			   <if test="userId != null and userId != ''">
+			<choose>   
+			   <when test="userId != null and userId != ''">
 			   	   user_nm     = #{userNm}
 			     , email       = #{email}
 			     , phone_no    = #{phoneNo}
 			     , nationality = LOWER(#{nationality})
 			     , language    = LOWER(#{language})
-			   </if>  
-			   <if test="email != null and email != ''">
+			   </when>  
+			   <when test="email != null and email != ''">
 			       passwd	   = #{passwd}
-			   </if>  
+			   </when>
+			</choose>     
 			<where>
 				<choose>
 					<when test="userId != null and userId != ''">

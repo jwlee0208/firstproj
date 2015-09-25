@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public int insertUserInfo(UserDto userDto) throws Exception{
-	    this.setEncryptInfo(userDto);	    
+//	    this.setEncryptInfo(userDto);	    
 		return this.userDao.insertUserInfo(userDto);
 	}
 	
