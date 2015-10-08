@@ -62,8 +62,8 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
                         url         = request.getRequestURL().toString();
                         
                         
-                        if(!content.isEmpty() && content.length() > 100){
-                            content = content.substring(0, 100);
+                        if(!content.isEmpty() && content.length() > 250){
+                            content = content.substring(0, 250);
                         }
                         description = content;
                     }

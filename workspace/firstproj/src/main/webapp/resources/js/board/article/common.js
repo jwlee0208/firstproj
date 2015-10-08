@@ -9,12 +9,21 @@ function editorImgUploadComplete(fileStr){
 	  }
 }
 
-function share(type, articleId, content){
-	var url = "";
+function share(type, articleId, content, shareId){
+	var url 	= "";
+	var userId 	= shareId
+	
 	if(type == 'fb'){
-		url = "http://www.facebook.com/sharer/sharer.php?u=http://jwlee0208.cafe24.com/board/article/view/" + articleId;
+		url = "http://www.facebook.com/sharer/sharer.php?u=http://linkednest.net";
+		
 	}else if(type == 'tw'){
-		url = "https://twitter.com/intent/tweet?text=" + content + "&url=http://jwlee0208.cafe24.com/board/article/view/" + articleId;
+		url = "https://twitter.com/intent/tweet?text=" + content + "&url=http://linkednest.net";
+	}
+	
+	if(userId != undefined && userId != null && userId != ''){
+		url += "/share/"+ userId +"/view/" + articleId; 
+	}else{
+		url += "/board/article/view/" + articleId;
 	}
 	window.open(url);
 }

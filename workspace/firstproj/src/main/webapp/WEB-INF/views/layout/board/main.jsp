@@ -6,7 +6,7 @@
 <!--[if IE 9 ]>		 <html class="no-js ie ie9 lte9>" lang="ko-KR"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="ko-KR"> <!--<![endif]-->
 <head>
-<link rel="icon" href="${pageContext.request.contextPath}/img/common/favicon_blog.ico">
+<link rel="icon" href="${pageContext.request.contextPath}/img/common/favicon_ln.ico">
 <tiles:insertAttribute name="metatag"/>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/common.js"></script>
