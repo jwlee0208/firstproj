@@ -37,9 +37,9 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
      * @param mav
      */
     public void createMetaTag(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mav) {
-        String title        = "Developer's Blog - Nevertheless Keep Going";
-        String description  = "Developer's Blog";
-        String content      = "Developer's Blog";
+        String title        = "Share - Nevertheless Keep Going";
+        String description  = "To share your experiences, knowledge, information.";
+        String content      = "Share's Main page";
         String authorNm     = "lee jinwon";
         String filePath     = "";
         String url          = "";
@@ -62,8 +62,8 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
                         url         = request.getRequestURL().toString();
                         
                         
-                        if(!content.isEmpty() && content.length() > 50){
-                            content = content.substring(0, 50);
+                        if(!content.isEmpty() && content.length() > 100){
+                            content = content.substring(0, 100);
                         }
                         description = content;
                     }

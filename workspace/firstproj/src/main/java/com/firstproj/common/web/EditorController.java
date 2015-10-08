@@ -41,7 +41,7 @@ public class EditorController extends BaseController {
 	private FileUpload fileUpload;
 	
 	
-	@RequestMapping(value = {"/{path}/popImageUpload/{cmd}", "/{path1}/{path2}/popImageUpload/{cmd}", "/{path1}/{path2}/{path3}/popImageUpload/{cmd}", "/{path1}/{path2}/{path3}/{path4}/popImageUpload/{cmd}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/{path}/popImageUpload/{cmd}", "/{path1}/{path2}/popImageUpload/{cmd}", "/{path1}/{path2}/{path3}/popImageUpload/{cmd}", "/{path1}/{path2}/{path3}/{path4}/popImageUpload/{cmd}"}, method = {RequestMethod.POST, RequestMethod.GET})
 	public String imageUploadForm(HttpServletRequest request, Model model, HttpSession session, @PathVariable String cmd) throws Exception {
 		return "/common/popImageUpload"; 
 	}
