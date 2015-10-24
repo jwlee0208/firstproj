@@ -94,4 +94,31 @@ public class FlickrAPIServiceImpl implements FlickrAPIService{
         } 
         return galList;
     }
+    
+    public PhotoList<Photo> getPhotoList(SearchParameters params){
+        PhotoList<Photo> photoList  = null;
+        Flickr           f          = new Flickr(apiKey, sharedSecret, new REST());
+        PhotosInterface  photos     = f.getPhotosInterface();
+        // setting search params
+//        SearchParameters params     = new SearchParameters();
+        
+//        params.setUserId(userId);
+        params.setPrivacyFilter(1);
+        params.setSort(SearchParameters.DATE_POSTED_ASC);
+        params.setSafeSearch(Flickr.SAFETYLEVEL_SAFE);
+        try {
+            params.setMedia("photos");
+        } catch (FlickrException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        try {
+            photoList = photos.search(params, 1000, 1);
+        } catch (FlickrException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
+        return photoList;
+    }
 }

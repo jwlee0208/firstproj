@@ -8,9 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form id="actionFrm" name="actionFrm" method="post">
 <c:choose>
 <c:when test="${!empty photoList}">
 	<div class="container-fluid">
+		<div style="padding-top:10px; padding-bottom:10px;">
+			<input type="text" class="form-control" id="searchKeyword" name="searchKeyword" placeholder="Insert search keyword."/>
+		</div>
+
 	<c:forEach var="relatedPhoto" items="${photoList}" varStatus="index">
 		<div class="well" style="padding:0 10px 0 10px;">
 			<div class="row">
@@ -31,11 +36,25 @@
 
 </c:otherwise>
 </c:choose>
+</form>
 </body>
 <script>
-function imgAdd(fileUrl) {
+function imgAdd
+(fileUrl) {
 	opener.editorImgSelectorComplete(fileUrl);
 }
 
+$(function(){
+	$("input[name=searchKeyword]").keypress(function(event){
+		if(event.which == 13){
+			event.preventDefault();
+			var frm = $("#actionFrm");
+			frm.attr("action", location.pathname);
+			frm.attr("method", "post");
+			frm.submit();
+			
+		}
+	});
+});
 </script>
 </html>

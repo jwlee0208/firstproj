@@ -13,13 +13,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import antlr.StringUtils;
 
 import com.firstproj.board.service.BoardArticleService;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.FileUtil;
 import com.firstproj.openapi.service.FlickrAPIService;
+import com.flickr4java.flickr.photos.SearchParameters;
 
 @Controller("EditorController")
 public class EditorController extends BaseController {
@@ -122,11 +126,22 @@ public class EditorController extends BaseController {
     	return message;
     }
 	
-	
+	/*
     @RequestMapping(value = {"/{path}/popImageSelector/{userId}", "/{path1}/{path2}/popImageSelector/{userId}", "/{path1}/{path2}/{path3}/popImageSelector/{userId}", "/{path1}/{path2}/{path3}/{path4}/popImageSelector/{userId}"}, method = RequestMethod.GET)
     public String imageSelectorForm(HttpServletRequest request, Model model, HttpSession session, @PathVariable String userId) throws Exception {
         model.addAttribute("photoList", this.flickrService.getPhotoListByUserId(userId));
         return "/common/popFlickrImageSelector"; 
     }
-		
+	*/
+    @RequestMapping(value = {"/{path}/popImageSelector/{userId}", "/{path1}/{path2}/popImageSelector/{userId}", "/{path1}/{path2}/{path3}/popImageSelector/{userId}", "/{path1}/{path2}/{path3}/{path4}/popImageSelector/{userId}"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String imageSelectorForm(HttpServletRequest request, Model model, HttpSession session, @PathVariable String userId, @RequestParam(value="searchKeyword", required=false) String searchKeyword) throws Exception {
+    System.out.println("searchKeyword for flickr ; " + searchKeyword);
+    	SearchParameters params = new SearchParameters();
+    	if(searchKeyword != null && searchKeyword != ""){
+    		params.setText(searchKeyword);
+    	}
+    	params.setUserId(userId);
+        model.addAttribute("photoList", this.flickrService.getPhotoList(params));
+        return "/common/popFlickrImageSelector"; 
+    }
 }

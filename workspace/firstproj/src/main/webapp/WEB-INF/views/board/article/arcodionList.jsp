@@ -49,7 +49,7 @@
 					</h4>
 				</div>
 				<div id="collapse${index.count}" class="collapse in">
-					<div class="panel-body">
+					<div class="panel-body" style="padding-left: 15px;">
 						<p style="text-align: right;"><a href="http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}</a></p>
 						<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="javascript:;" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">${contentInfo.authorNm}</a></p>
 						 

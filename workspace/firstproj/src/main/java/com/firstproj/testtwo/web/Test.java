@@ -140,7 +140,7 @@ public class Test {
         Collection<Group> searchedGroups = groups.search("jwlee208", 10, 10);
         
         if(!searchedGroups.isEmpty()){
-            System.out.println("SearchBroups > ");
+            System.out.println("SearchGroups > ");
             for(Group group : searchedGroups){
                 System.out.println(group.getName());
             }

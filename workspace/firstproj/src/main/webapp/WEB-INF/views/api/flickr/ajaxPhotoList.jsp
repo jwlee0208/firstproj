@@ -62,9 +62,13 @@
 	</c:otherwise>
 </c:choose>
 -->
+
 <c:choose>
 <c:when test="${!empty photoList}">
 	<div class="container-fluid">
+<!-- 		<div style="padding-top:20px; paddong-bottom:20px;"> -->
+<!-- 			<input type="text" class="form-control" id="searchFlicker" name="searchFlickr" placeholder="insert keyword"/> -->
+<!-- 		</div> -->
 	<c:forEach var="relatedPhoto" items="${photoList}" varStatus="index">
 		<div class="row" style="padding:0 10px 0 10px;">
 			<div class="well">
@@ -85,3 +89,12 @@
 
 </c:otherwise>
 </c:choose>
+<script>
+	$(function(){
+		$("input[name=searchFlickr]").keypress(function(event){
+			if(event.which == 13){
+				event.preventDefault();				
+			}
+		});
+	});
+</script>

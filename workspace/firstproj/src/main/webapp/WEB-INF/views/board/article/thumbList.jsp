@@ -58,7 +58,7 @@
 				</a>
 				 <div class="media-body" onclick="javascript:goView('${content.articleId}');">
 				 	<h4 class="media-heading"><small>${fn:substring(content.createDate, 0, 10)}</small>&nbsp;&nbsp;&nbsp;<c:out value="${content.title}"/></h4>
-				 	<p>${fn:substring(content.contentText, 0, 250)}...</p>
+				 	<p>${fn:substring(content.contentText, 0, 200)}...</p>
 				 </div>
 			</li>
 		</c:forEach>

@@ -5,6 +5,7 @@ import java.util.List;
 import com.flickr4java.flickr.galleries.Gallery;
 import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
+import com.flickr4java.flickr.photos.SearchParameters;
 
 public interface FlickrAPIService {
 
@@ -13,5 +14,7 @@ public interface FlickrAPIService {
     public PhotoList<Photo> getPhotoListByUserId(String userId);
 
     public List<Gallery> getGalleryListByUserId(String userId);
+    
+    public PhotoList<Photo> getPhotoList(SearchParameters params);
 
 }

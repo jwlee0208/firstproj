@@ -61,7 +61,7 @@
 				<h4 class="panel-title"><c:out value="${contentInfo.title}"/></h4>
 			</div>
 		
-			<div class="panel-body">
+			<div class="panel-body" style="padding-left: 15px;">
 				<p style="text-align: right;"><a href="http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}</a></p>
 				<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
 				<div style="min-height: 400px;"><c:out value="${contentInfo.content}" escapeXml="false"/></div>
