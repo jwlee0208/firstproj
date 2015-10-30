@@ -28,6 +28,22 @@
 		<input type="hidden" id="playerInfoId" name="playerInfoId" value="${playerDetailInfo.playerInfoId}"/>
 		<h1 id="btn-groups" class="page-header">Player Information</h1>
 		<div class="form-group">
+			<label for="linkUrl" class="col-sm-4">Checkout My Play Streamming</label>
+			<div class="col-sm-8">
+				<div class="embed-responsive embed-responsive-16by9">
+					${playerDetailInfo.playerVideoLinkList[0].linkUrl}
+				</div>
+				
+<%-- 			<c:set var="playerVideoLinkList" value="${playerDetailInfo.playerVideoLinkList}"/> --%>
+<%-- 			<c:if test="${playerVideoLinkList ne '' or playerVideoLinkList ne null}"> --%>
+<%-- 				<c:forEach var="playerVideoLinkInfo" items="${playerVideoLinkList}" varStatus="idx"> --%>
+<%-- 					<iframe class="embed-responsive-item" width="420" height="255" src="${palyerVideoLinkInfo.linkUrl}" frameborder="0" allowfullscreen></iframe><br/> --%>
+<%-- 				</c:forEach> --%>
+<%-- 			</c:if> --%>
+			</div>
+		</div>
+		
+		<div class="form-group">
 			<label for="profileImgFilePath" class="col-sm-4">Profile Image</label>
 			<div class="col-sm-8"><img data-src="holder.js/300x200" src="http://jwlee0208.cdn3.cafe24.com/${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" width="300px" height="200px" /></div>
 		</div>
@@ -59,23 +75,6 @@
 			</c:if>
 			</div>
 		</div>
-
-		<div class="form-group">
-			<label for="linkUrl" class="col-sm-4">Checkout Play Streamming</label>
-			<div class="col-sm-8">
-				<div class="embed-responsive embed-responsive-16by9">
-					${playerDetailInfo.playerVideoLinkList[0].linkUrl}
-				</div>
-				
-<%-- 			<c:set var="playerVideoLinkList" value="${playerDetailInfo.playerVideoLinkList}"/> --%>
-<%-- 			<c:if test="${playerVideoLinkList ne '' or playerVideoLinkList ne null}"> --%>
-<%-- 				<c:forEach var="playerVideoLinkInfo" items="${playerVideoLinkList}" varStatus="idx"> --%>
-<%-- 					<iframe class="embed-responsive-item" width="420" height="255" src="${palyerVideoLinkInfo.linkUrl}" frameborder="0" allowfullscreen></iframe><br/> --%>
-<%-- 				</c:forEach> --%>
-<%-- 			</c:if> --%>
-			</div>
-		</div>
-		
 
 		<div class="form-group">
 			<label for="introduce" class="col-sm-4">Introduce Yourself!</label>

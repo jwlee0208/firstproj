@@ -138,6 +138,11 @@
 				<result 	column="phone_no" 	property="phoneNo"/>
 				<result 	column="join_date" 	property="joinDate"/>
 			</association>
+			<collection property="playerVideoLinkList" 	ofType="player.playerVideoLinkDto">
+				<id 	column="player_info_id" property="playerInfoId"/>
+				<result column="link_url" 		property="linkUrl"/>
+			</collection>
+			
 		</resultMap>
 		
 		
@@ -391,6 +396,7 @@
 				  , c2.cat_name as catNm2 
 				  , pi.profile_img_file_path as profileImgFilePath
 				  , pi.introduce
+				  , pvd.link_url
 			FROM TB_PLAYER_INFO 		pi
 			LEFT JOIN TB_USER 			u 		ON pi.user_id 		= u.user_id	
 			LEFT JOIN TB_CATEGORY 		c1 		ON pi.cat_id1 		= c1.CAT_ID
@@ -398,6 +404,7 @@
 			LEFT JOIN TB_ATTR_ELEM 		ae 		ON pi.cat_id2 		= ae.cat_id
 			LEFT JOIN TB_ATTR_ELEM_MAP 	aem 	ON ae.attr_elem_id 	= aem.attr_elem_id 
 										  	   and pi.user_id 		= aem.user_id
+			LEFT JOIN TB_PLAYER_VIDEO_LINK pvd  ON pvd.player_info_id = pi.player_info_id							  	   
 		</sql>
 		
 		<insert id="insertPlayerInfo" parameterType="player.playerInfoDto" useGeneratedKeys="true" keyProperty="playerInfoId">
