@@ -48,7 +48,7 @@
     		<a class="navbar-brand" href="${url}" style="font-weight: bold;">
     		<c:choose>
     			<c:when test="${shareInfo ne null && userId ne null}">${shareInfo.shareName}</c:when>
-    			<c:otherwise>LinkedNest <tag:message code="common.share"/></c:otherwise>
+    			<c:otherwise><tag:message code="common.share"/></c:otherwise>
     		</c:choose>    		
     		</a>
     	</div>

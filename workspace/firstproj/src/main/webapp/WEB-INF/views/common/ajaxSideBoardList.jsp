@@ -7,10 +7,12 @@
     border-color: #ddd;
 }
 </style>
-		<div class="list-group">  
-    <c:if test="${sideBoardList ne null}">	
+		
+<c:choose>		  
+    <c:when test="${sideBoardList ne null}">	
     	<c:set var="classInfo" value="collapse in"/>	
     	<c:forEach var="categoryInfo" items="${sideBoardList}" varStatus="index">
+    		<div class="list-group">
     		<a href="#sideCategoryDiv${categoryInfo.boardCategoryId}" class="list-group-item list-group-item-category" style="font-weight: bold;" data-toggle="collapse" aria-controls="sideCategoryDiv${categoryInfo.boardCategoryId}">${categoryInfo.boardCategoryName}</a>
     		<div id="sideCategoryDiv${categoryInfo.boardCategoryId}" class="${classInfo}">
     		<c:set var="boardList" value="${categoryInfo.sideBoardList}"/>
@@ -25,7 +27,13 @@
     			</c:forEach>
     		</c:if>
     		</div>
-    	
+    		</div>
     	</c:forEach>
-    </c:if>			  
-        </div>  
+    </c:when>
+    <c:otherwise>
+    	<div class="list-group">
+    	Construction..
+    	</div>
+    </c:otherwise>	
+</c:choose>    		  
+          

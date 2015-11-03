@@ -78,6 +78,14 @@
 						</c:forEach>
 					</c:if>				
 				</div>
+				<div class="row" style="float: left; padding-left:10px;">
+					<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">${contentInfo.shareInfo.shareName}</div>			
+				</div>				
+				<div class="row" style="float: right; padding-right:10px;">
+					<div class="btn btn-primary" title="Sharing Article To Facebook"	onclick="javascript:share('fb', '${contentInfo.articleId}', '', '${contentInfo.shareInfo.userId}');" >f</div>
+					<div class="btn btn-info" 	 title="Sharing Article To Twitter" 	onclick="javascript:share('tw', '${contentInfo.articleId}', '${contentInfo.title}', '${contentInfo.shareInfo.userId}');" >t</div>
+				</div>
+				
 			</div>	
 			<div class="panel-footer">
 			<c:if test="${contentInfo.filePath ne null && contentInfo.filePath ne ''}">	
@@ -99,15 +107,18 @@
 					</ul>	
 				</div>										
 			</c:if>
-				<div class="row">
-					<div class="col-xs-12 col-md-8">
-						<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}" onclick="javascript:goList('${contentInfo.boardId}');">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div>
-					</div>			
-					<div class="col-xs-6 col-md-4">
-						<div class="btn btn-primary" title="Sharing Article To Facebook" 	onclick="javascript:share('fb', '${contentInfo.articleId}', '', '${contentInfo.shareInfo.userId}');" >f</div>
-						<div class="btn btn-info" 	 title="Sharing Article To Twitter" 	onclick="javascript:share('tw', '${contentInfo.articleId}', '${contentInfo.title}', '${contentInfo.shareInfo.userId}');" >t</div>					
-					</div>
-				</div>	
+			<c:if test="${contentInfo.filePath eq null || contentInfo.filePath eq ''}">
+				&nbsp;
+			</c:if>
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col-xs-12 col-md-8"> -->
+<%-- 						<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}" onclick="javascript:goList('${contentInfo.boardId}');">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div> --%>
+<!-- 					</div>			 -->
+<!-- 					<div class="col-xs-6 col-md-4"> -->
+<%-- 						<div class="btn btn-primary" title="Sharing Article To Facebook" 	onclick="javascript:share('fb', '${contentInfo.articleId}', '', '${contentInfo.shareInfo.userId}');" >f</div> --%>
+<%-- 						<div class="btn btn-info" 	 title="Sharing Article To Twitter" 	onclick="javascript:share('tw', '${contentInfo.articleId}', '${contentInfo.title}', '${contentInfo.shareInfo.userId}');" >t</div>					 --%>
+<!-- 					</div> -->
+<!-- 				</div>	 -->
 			</div>
 		</div>
 

@@ -42,10 +42,11 @@
 				<c:choose>
 					<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
 						<c:forEach var="contentInfo" items="${pagedResult.list}" varStatus="index">
-			<div class="panel panel-default">
+			<div class="panel panel-info">
 				<div class="panel-heading">
 					<h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse${index.count}"><c:out value="${contentInfo.title}"/> </a>
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse${index.count}"><c:out value="${contentInfo.title}"/> </a>
+						&nbsp;&nbsp;<small> | &nbsp;&nbsp;${contentInfo.boardName} <tag:message code='text.board'/></small>
 					</h4>
 				</div>
 				<div id="collapse${index.count}" class="collapse in">
