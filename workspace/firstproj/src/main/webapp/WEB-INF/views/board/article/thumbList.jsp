@@ -57,8 +57,8 @@
 			</c:choose>									
 				</a>
 				 <div class="media-body" onclick="javascript:goView('${content.articleId}');">
-				 	<h4 class="media-heading"><small>${fn:substring(content.createDate, 0, 10)}</small>&nbsp;&nbsp;&nbsp;<c:out value="${content.title}"/></h4>
-				 	<p>${fn:substring(content.contentText, 0, 200)}...</p>
+				 	<h4 class="media-heading" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><small>${fn:substring(content.createDate, 0, 10)}</small>&nbsp;&nbsp;&nbsp;<c:out value="${content.title}"/></h4>
+				 	<p style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${fn:substring(content.contentText, 0, 200)}...</p>
 				 </div>
 			</li>
 		</c:forEach>

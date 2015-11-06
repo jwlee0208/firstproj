@@ -32,7 +32,16 @@
     </c:when>
     <c:otherwise>
     	<div class="list-group">
-    	Construction..
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- blank ad -->
+			<ins class="adsbygoogle"
+			     style="display:block"
+			     data-ad-client="ca-pub-1796756460113850"
+			     data-ad-slot="6927570007"
+			     data-ad-format="auto"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
     	</div>
     </c:otherwise>	
 </c:choose>    		  
