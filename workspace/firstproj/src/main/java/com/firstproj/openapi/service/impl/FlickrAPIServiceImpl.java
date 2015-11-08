@@ -72,7 +72,7 @@ public class FlickrAPIServiceImpl implements FlickrAPIService{
         }
 
         try {
-            photoList = photos.search(params, 1000, 1);
+            photoList = photos.search(params, 10, 1);
         } catch (FlickrException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -114,7 +114,7 @@ public class FlickrAPIServiceImpl implements FlickrAPIService{
         }
 
         try {
-            photoList = photos.search(params, 1000, 1);
+            photoList = photos.search(params, 10, 1);
         } catch (FlickrException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
