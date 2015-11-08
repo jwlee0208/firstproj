@@ -47,7 +47,10 @@
 		<input type="hidden" id="selectedAttrId" 		name="selectedAttrId" />
 		<input type="hidden" id="selectedCatId" 		name="selectedCatId" />
 		<input type="hidden" id="page"					name="page"	/>
-
+		<c:set var="target" value=""/>
+		<c:if test="${searchPlayerInfo.categoryInfo.parentCatId eq 1}"><c:set var="target" value="Player"/></c:if>
+		<c:if test="${searchPlayerInfo.categoryInfo.parentCatId eq 5}"><c:set var="target" value="Team"/></c:if>
+		<h1 id="btn-groups" class="page-header">${target}s&nbsp;&nbsp;&nbsp;<small>${target} List</small></h1>
 		<div class="form-group">
 	
 			<div class="row" role="search">

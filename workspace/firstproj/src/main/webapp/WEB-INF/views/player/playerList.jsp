@@ -9,107 +9,26 @@
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
 <link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/pagination.css">
-
-
-<style>
-/* 		.ui-autocomplete { */
-/* 			background-color: white; */
-/* 			border-color: red; */
-/* 			border: 1px; */
-/* 		} */
-		.ui-autocomplete .highlight {
-			font-weight : bold;
-			color : red;
-			text-decoration: underline;
-		}
-		
-		.table-responsive .table.table-hover tr td {vertical-align : middle; }
-		
-		
-/* .ui-autocomplete { */
-/*   position: absolute; */
-/*   top: 100%; */
-/*   left: 0; */
-/*   z-index: 1000; */
-/*   float: left; */
-/*   display: none; */
-/*   min-width: 160px; */
-/*   _width: 160px; */
-/*   padding: 4px 0; */
-/*   margin: 2px 0 0 0; */
-/*   list-style: none; */
-/*   background-color: #ffffff; */
-/*   border-color: #ccc; */
-/*   border-color: rgba(0, 0, 0, 0.2); */
-/*   border-style: solid; */
-/*   border-width: 1px; */
-/*   -webkit-border-radius: 5px; */
-/*   -moz-border-radius: 5px; */
-/*   border-radius: 5px; */
-/*   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); */
-/*   -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); */
-/*   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); */
-/*   -webkit-background-clip: padding-box; */
-/*   -moz-background-clip: padding; */
-/*   background-clip: padding-box; */
-/*   *border-right-width: 2px; */
-/*   *border-bottom-width: 2px; */
- 
-/*   .ui-menu-item > a.ui-corner-all { */
-/*     display: block; */
-/*     padding: 3px 15px; */
-/*     clear: both; */
-/*     font-weight: normal; */
-/*     line-height: 18px; */
-/*     color: #555555; */
-/*     white-space: nowrap; */
- 
-/*     &.ui-state-hover, &.ui-state-active { */
-/*       color: #ffffff; */
-/*       text-decoration: none; */
-/*       background-color: #0088cc; */
-/*       border-radius: 0px; */
-/*       -webkit-border-radius: 0px; */
-/*       -moz-border-radius: 0px; */
-/*       background-image: none; */
-/*     } */
-/*   } */
-/* }		 */
-	.position {
-	  float: right;
-	  font-size: 18px;
-	  margin-top: -5px;
-	  margin-right: -5px;
-	}
-</style>
-
+<style>.ui-autocomplete .highlight { font-weight : bold; color : red; text-decoration: underline;}		.table-responsive .table.table-hover tr td {vertical-align : middle; }.position { float: right; font-size: 18px; margin-top: -5px; margin-right: -5px;}</style>
 <div class="container">
 <form 	id="listFrm" name="listFrm" method="post">
-<!-- paging에 필요한 파라미터 -->
-<input 	type="hidden" id="pageNo" 			name="pageNo" 		value="${pagedResult.pageNo}" /> 
-<input 	type="hidden" id="totalListCnt" 	name="totalListCnt" value="${pagedResult.totalListCnt}" /> 
-<input 	type="hidden" id="totalPageCnt" 	name="totalPageCnt" value="${pagedResult.totalPageCnt}" /> 
-<input 	type="hidden" id="startPageNo" 		name="startPageNo" 	value="${pagedResult.startPageNo}" /> 
-<input 	type="hidden" id="pageSize" 		name="pageSize" 	value="${pagedResult.pageSize}" />
-
-
-<input type="hidden" id="selectedAttrElemId" 	name="selectedAttrElemId" />
-<input type="hidden" id="selectedAttrId" 		name="selectedAttrId" />
-<input type="hidden" id="selectedCatId" 		name="selectedCatId" />
+	<!-- paging에 필요한 파라미터 -->
+	<input 	type="hidden" id="pageNo" 			name="pageNo" 		value="${pagedResult.pageNo}" /> 
+	<input 	type="hidden" id="totalListCnt" 	name="totalListCnt" value="${pagedResult.totalListCnt}" /> 
+	<input 	type="hidden" id="totalPageCnt" 	name="totalPageCnt" value="${pagedResult.totalPageCnt}" /> 
+	<input 	type="hidden" id="startPageNo" 		name="startPageNo" 	value="${pagedResult.startPageNo}" /> 
+	<input 	type="hidden" id="pageSize" 		name="pageSize" 	value="${pagedResult.pageSize}" />
+	
+	
+	<input type="hidden" id="selectedAttrElemId" 	name="selectedAttrElemId" />
+	<input type="hidden" id="selectedAttrId" 		name="selectedAttrId" />
+	<input type="hidden" id="selectedCatId" 		name="selectedCatId" />
 
 	<div class="form-group">
 		<div class="row">
-<!-- 			<div class="col-md-10"> -->
 			<input type="hidden" 	id="searchCondition" name="searchCondition" value="userName"/>
 			<input type="text" 		id="searchText" 	 name="searchText" 		class="form-control ui-autocomplete-input" placeholder="Try to search using keywords. And push enter key."/>	
-<!-- 			</div> -->
-<!-- 			<div class="col-md-2">	 -->
-<!-- 			<input type="button" onclick="javascript: goSearch();" class="btn btn-default" value="검색"/> -->
-<!-- 			</div> -->
-		</div>
-		
-		
-		
+		</div>		
 		<div class="row"  style="padding-top: 10px; ">
 				<!-- 첫번째 카테고리 -->
 				<select id="cat1" name="cat1" onchange="javascript:setChildCategory();" class="form-control">
@@ -151,96 +70,65 @@
 		</div>
 		
 	
-	<div class="row">
-		<div class="table-responsive" id="listDiv">
-	<%-- 		<div>Total :  ${pagedResult.totalListCnt} (Players)</div> --%>
-			 
-			
-	<!-- 		<table class="table table-hover"> -->
-	<!-- 			<tr> -->
-	<!-- 				<th>Profile Image</th> -->
-	<!-- 				<th>Name</th> -->
-	<!-- 				<th>Type</th> -->
-	<!-- 				<th>Detail Type</th> -->
-	<!-- 				<th>Detail View</th> -->
-	<!-- 			</tr> -->
-			
-	<%-- 		<c:forEach var="list" items="${pagedResult.list}" varStatus="index"> --%>
-	<!-- 			<tr> -->
-	<%-- 				<td><img data-src="holder.js/128x128" src="${pageContext.request.contextPath}<c:choose><c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">${list.profileImgFilePath}</c:when><c:otherwise>/img/no_image.png</c:otherwise></c:choose>"/></td> --%>
-	<%-- 				<td onclick="javascript:goDetail('${list.userInfo.userId}');">${list.userInfo.userNm}(${list.userInfo.userId})</td> --%>
-	<%-- 				<td>${list.catNm1}</td> --%>
-	<%-- 				<td>${list.catNm2}</td> --%>
-	<!-- 				<td><input type="button" class="btn btn-info" value="Detail Info." name="viewDetail" /></td> -->
-	<!-- 			</tr> -->
-				
-	<%-- 		</c:forEach> --%>
-	<!-- 		</table> -->
-	
-			<c:forEach var="list" items="${pagedResult.list}">
-				<div class="col-sm-6 col-md-4">
-					<div class="thumbnail">
-						<span class="label <c:choose><c:when test="${list.catNm2 eq 'hitter'}">label-success</c:when><c:when test="${list.catNm2 eq 'pitcher'}">label-info</c:when><c:otherwise>label-warning</c:otherwise></c:choose> position">${list.catNm2Str}</span>
-				<c:choose>
-					<c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">
-						<img src="${pageContext.request.contextPath}${list.profileImgFilePath}" 
-							 data-src="holder.js/400x400" alt="image" class="img-rounded" 
-							 onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  
-							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
-							 data-toggle="modal" data-target="#myModal" 
-							 style="padding-top:10px; cursor:pointer;"/>
-					</c:when>
-					<c:otherwise>
-						<img src="${pageContext.request.contextPath}/img/no_image.png" 
-							 data-src="holder.js/400x400" alt="image" class="img-rounded" 
-							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
-							 data-toggle="modal" data-target="#myModal" 
-							 style="padding-top:10px; cursor:pointer;"/>
-					</c:otherwise>
-				</c:choose>					
-						
-						<div class="caption" style="cursor:pointer;">
-							<h3><span onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">${list.userInfo.userNm}</span></h3>
-							<p class="content_${index.count}" style="text-overflow:ellipsis; overflow:hidden;">
-								<div class="row"><div class="col-xs-6">Type</div><div class="col-xs-6">${list.catNm1Str}</div></div>
-								<div class="row"><div class="col-xs-6">Position</div><div class="col-xs-6">${list.catNm2Str}</div></div>
-<%-- 								<c:if test="${list.introduce eq null || list.introduce eq ''}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if> --%>
-<%-- 								<c:if test="${list.introduce ne null && list.introduce ne ''}"> --%>
-<%-- 									<span onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">${fn:substring(list.introduce, 0, 10)}...</span> --%>
-<%-- 								</c:if> --%>
-							</p>
-							<p>
-								<span class="btn btn-info" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">Detail View</span>
-								<span class="btn btn-primary" 	role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">LIKE</span>
-							</p>
-						</div>
-	
-					</div>	
-				</div>
-			
-			</c:forEach>
-		</div>
-		<!-- paging area -->                                                
-		<c:set var="totalListCnt" value="${pagedResult.totalListCnt}"/>
-		<c:set var="totalPageCnt" value="${pagedResult.totalPageCnt}"/>
-		                                                                                                      
-		<c:import url="/common/paging">
-			<c:param value="${totalPageCnt}"            name="totalPageCnt"/>
-		    <c:param value="${pagedResult.pageNo}"      name="pageNo"/>
-		    <c:param value="${pagedResult.startPageNo}" name="startPageNo"/>
-		    <c:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
-		</c:import>                                                                                                      
-	
-	<c:if test="${!isRegisted}">
-		<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
-			<div class="btn-group">
-				<input type="button" class="btn btn-default pull-right" value="프로필쓰기" name="goToRegist" />
+		<div class="row">
+			<div class="table-responsive" id="listDiv">	
+				<c:forEach var="list" items="${pagedResult.list}">
+					<div class="col-sm-6 col-md-4">
+						<div class="thumbnail">
+							<span class="label <c:choose><c:when test="${list.catNm2 eq 'hitter'}">label-success</c:when><c:when test="${list.catNm2 eq 'pitcher'}">label-info</c:when><c:otherwise>label-warning</c:otherwise></c:choose> position">${list.catNm2Str}</span>
+					<c:choose>
+						<c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">
+							<img src="${pageContext.request.contextPath}${list.profileImgFilePath}" 
+								 data-src="holder.js/400x400" alt="image" class="img-rounded" 
+								 onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  
+								 onclick="javascript:goDetail('${list.userInfo.userId}');" 
+								 data-toggle="modal" data-target="#myModal" 
+								 style="padding-top:10px; cursor:pointer;"/>
+						</c:when>
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}/img/no_image.png" 
+								 data-src="holder.js/400x400" alt="image" class="img-rounded" 
+								 onclick="javascript:goDetail('${list.userInfo.userId}');" 
+								 data-toggle="modal" data-target="#myModal" 
+								 style="padding-top:10px; cursor:pointer;"/>
+						</c:otherwise>
+					</c:choose>					
+							
+							<div class="caption" style="cursor:pointer;">
+								<h3><span onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">${list.userInfo.userNm}</span></h3>
+								<p class="content_${index.count}" style="text-overflow:ellipsis; overflow:hidden;">
+									<div class="row"><div class="col-xs-6">Type</div><div class="col-xs-6">${list.catNm1Str}</div></div>
+									<div class="row"><div class="col-xs-6">Position</div><div class="col-xs-6">${list.catNm2Str}</div></div>
+								</p>
+								<p>
+									<span class="btn btn-info" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">Detail View</span>
+									<span class="btn btn-primary" 	role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">LIKE</span>
+								</p>
+							</div>	
+						</div>	
+					</div>
+				</c:forEach>
 			</div>
-		</div>		
-	</c:if>
-	</div>
-</div>
-	
+			<!-- paging area -->                                                
+			<c:set var="totalListCnt" value="${pagedResult.totalListCnt}"/>
+			<c:set var="totalPageCnt" value="${pagedResult.totalPageCnt}"/>
+			                                                                                                      
+			<c:import url="/common/paging">
+				<c:param value="${totalPageCnt}"            name="totalPageCnt"/>
+			    <c:param value="${pagedResult.pageNo}"      name="pageNo"/>
+			    <c:param value="${pagedResult.startPageNo}" name="startPageNo"/>
+			    <c:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
+			</c:import>                                                                                                      
+		
+		<c:if test="${!isRegisted}">
+			<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
+				<div class="btn-group">
+					<input type="button" class="btn btn-default pull-right" value="프로필쓰기" name="goToRegist" />
+				</div>
+			</div>		
+		</c:if>
+		</div>
+	</div>	
 </form>
 </div>
 <script>
@@ -272,21 +160,22 @@ $(function() {
     $( "#searchText" ).autocomplete({
 //       source: availableTags
 		source : function(request, response){
-			$.ajax({
-				url : '/player/autoComplete.json',
-				data : $("#listFrm").serialize(),
-				dataType : 'json',
-				method : 'post',
-				success : function (data) {
-					var searchResult = data.searchResult;
-					console.log(searchResult);
-					response(searchResult);
-				}
-			});
+			searchArea.autoComplete();
+// 			$.ajax({
+// 				url : '/player/autoComplete.json',
+// 				data : $("#listFrm").serialize(),
+// 				dataType : 'json',
+// 				method : 'post',
+// 				success : function (data) {
+// 					var searchResult = data.searchResult;
+// 					console.log(searchResult);
+// 					response(searchResult);
+// 				}
+// 			});
 		}
     }).data("ui-autocomplete")._renderItem = function(ul, item) {
 		var $a = $("<a></a>").text(item.label);
-		highlightText(this.term, $a);
+		searchArea.highlightText(this.term, $a);
 		return $("<li></li>").append($a).appendTo(ul);
 	};
     
@@ -295,17 +184,17 @@ $(function() {
   
 // autoComplete highlight 
 // REf.] http://salman-w.blogspot.kr/2013/12/jquery-ui-autocomplete-examples.html?m=1#example-2
-function highlightText(text, $node) {
-	var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
-	while ((matchIndex = currentNode.data.toLowerCase().indexOf(searchText)) >= 0) {
-		newTextNode = currentNode.splitText(matchIndex);
-		currentNode = newTextNode.splitText(searchText.length);
-		newSpanNode = document.createElement("span");
-		newSpanNode.className = "highlight";
-		currentNode.parentNode.insertBefore(newSpanNode, currentNode);
-		newSpanNode.appendChild(newTextNode);
-	}
-}
+// function highlightText(text, $node) {
+// 	var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
+// 	while ((matchIndex = currentNode.data.toLowerCase().indexOf(searchText)) >= 0) {
+// 		newTextNode = currentNode.splitText(matchIndex);
+// 		currentNode = newTextNode.splitText(searchText.length);
+// 		newSpanNode = document.createElement("span");
+// 		newSpanNode.className = "highlight";
+// 		currentNode.parentNode.insertBefore(newSpanNode, currentNode);
+// 		newSpanNode.appendChild(newTextNode);
+// 	}
+// }
 
 function goDetail(userId){
 	
@@ -313,6 +202,33 @@ function goDetail(userId){
 	frm.attr("action", "/player/playerDetailView?userId=" + userId);
 	frm.attr("method", "post");
 	frm.submit();
+}
+
+var searchArea = {
+	autoComplete : function(){
+		$.ajax({
+			url : '/player/autoComplete.json',
+			data : $("#listFrm").serialize(),
+			dataType : 'json',
+			method : 'post',
+			success : function (data) {
+				var searchResult = data.searchResult;
+				console.log(searchResult);
+				response(searchResult);
+			}
+		});
+	},
+	highlightText : function(text, $node)  {
+		var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
+		while ((matchIndex = currentNode.data.toLowerCase().indexOf(searchText)) >= 0) {
+			newTextNode = currentNode.splitText(matchIndex);
+			currentNode = newTextNode.splitText(searchText.length);
+			newSpanNode = document.createElement("span");
+			newSpanNode.className = "highlight";
+			currentNode.parentNode.insertBefore(newSpanNode, currentNode);
+			newSpanNode.appendChild(newTextNode);
+		}
+	}
 }
 
 </script>

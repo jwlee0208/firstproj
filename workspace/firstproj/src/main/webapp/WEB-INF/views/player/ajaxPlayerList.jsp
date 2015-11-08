@@ -6,6 +6,50 @@
 <%@ taglib uri="http://www.springframework.org/tags" 		prefix="tag"%>
 <style>
 	iframe {width : 250px; height : 200px; align:center;}
+	
+	.circle {
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 50%;
+	width: 40%;
+	position: relative;
+	}
+	
+	.circle-border {
+	border: 1px solid black;
+	}
+	
+	.circle-solid{
+	background-color: whitesmoke;
+	}
+	
+	.circle:before {
+	content: "";
+	display: block;
+	padding-top: 100%;
+	}
+	
+	.circle-inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+	}
+	
+	.score-text {
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	height: 1em;
+	line-height: 1em;
+	font-size: 1em;
+	}
+		
 </style>
 <c:choose>
 	<c:when test="${empty playerList}">
@@ -18,10 +62,12 @@
 			<c:forEach var="list" items="${playerList}">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail">
-						<span class="label <c:choose><c:when test="${list.catNm2 eq 'hitter'}">label-success</c:when><c:when test="${list.catNm2 eq 'pitcher'}">label-info</c:when><c:otherwise>label-warning</c:otherwise></c:choose> position"><tag:message code='text.${list.catNm2}'/></span>
+<%-- 						<span class="label <c:choose><c:when test="${list.catNm2 eq 'hitter'}">label-success</c:when><c:when test="${list.catNm2 eq 'pitcher'}">label-info</c:when><c:otherwise>label-warning</c:otherwise></c:choose> position"><tag:message code='text.${list.catNm2}'/></span> --%>
 				<c:choose>
 					<c:when test="${list.playerVideoLinkList[0].linkUrl ne null && list.playerVideoLinkList[0].linkUrl ne ''}">
+						<div style="width:100%; margin:auto;">
 						<c:out value="${list.playerVideoLinkList[0].linkUrl}" escapeXml="false"/>
+						</div>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
@@ -29,15 +75,13 @@
 						<img src="http://jwlee0208.cdn3.cafe24.com/${list.profileImgFilePath}" 
 							 data-src="holder.js/250x200" alt="image" class="img-thumbnail" 
 							 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
-							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
-							 data-toggle="modal" data-target="#myModal" 
+							 onclick="javascript:goDetail('${list.userInfo.userId}');"  
 							 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
 							</c:when>
 							<c:otherwise>
 						<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
 							 data-src="holder.js/250x200" alt="image" class="img-thumbnail"
 							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
-							 data-toggle="modal" data-target="#myModal" 
 							 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
 							</c:otherwise>
 						</c:choose>					
@@ -63,13 +107,34 @@
 				</c:choose>					
 -->						
 						<div class="caption" style="cursor:pointer;">
-							<h3><span onclick="javascript:goDetail('${list.userInfo.userId}');">${list.userInfo.userNm}</span></h3>
+							<h3 style="background: #efefef; padding:5px 0 5px 0px; text-align:center;"><span onclick="javascript:goDetail('${list.userInfo.userId}');">${list.userInfo.userNm}</span></h3>
 							<p class="content_${index.count}" style="text-overflow:ellipsis; overflow:hidden;">
-								<div class="row"><div class="col-xs-6">Type</div><div class="col-xs-6">${list.catNm1Str}</div></div>
-								<div class="row"><div class="col-xs-6">Position</div><div class="col-xs-6">${list.catNm2Str}</div></div>
+								<div class="row">
+									<div class="col-xs-6">
+										<div class="circle circle-border">
+										     <div class="circle-inner">
+										         <div class="score-text">
+										            ${list.catNm1}
+										          </div>
+										     </div>
+										</div>	
+									</div>
+									<div class="col-xs-6">
+										<div class="circle circle-border">
+										     <div class="circle-inner">
+										         <div class="score-text">
+										            ${list.catNm2}
+										          </div>
+										     </div>
+										</div>									
+									</div>
+								</div>
+
+<%-- 								<div class="row"><div class="col-xs-6">Type</div><div class="col-xs-6">${list.catNm1Str}</div></div> --%>
+<%-- 								<div class="row"><div class="col-xs-6">Position</div><div class="col-xs-6">${list.catNm2Str}</div></div> --%>
 							</p>
 							<p>
-								<span class="btn btn-danger" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');"><tag:message code='button.watchme'/></span>
+								<span class="btn btn-danger btn-block" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');"><tag:message code='button.watchme'/></span>
 <%-- 								<span class="btn btn-primary" 	role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">LIKE</span> --%>
 							</p>
 						</div>

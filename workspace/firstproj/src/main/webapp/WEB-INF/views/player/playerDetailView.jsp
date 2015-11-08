@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>I'm ${playerDetailInfo.userInfo.userNm} ::: LinkedNest.net</title>
 <!-- bootstrap -->
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-theme.min.css">
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css">
@@ -26,10 +26,10 @@
 <div class="container">
 	<form id="viewFrm" name="viewFrm" method="post" class="form-horizontal" role="form">
 		<input type="hidden" id="playerInfoId" name="playerInfoId" value="${playerDetailInfo.playerInfoId}"/>
-		<h1 id="btn-groups" class="page-header">Player Information</h1>
+		<h1 id="btn-groups" class="page-header">I'm ${playerDetailInfo.userInfo.userNm}&nbsp;&nbsp;&nbsp;<small>Player Information</small></h1>
 		<div class="form-group">
-			<label for="linkUrl" class="col-sm-4">Checkout My Play Streamming</label>
-			<div class="col-sm-8">
+			<label for="linkUrl" class="col-sm-2">Checkout My Play Streamming</label>
+			<div class="col-sm-10">
 				<div class="embed-responsive embed-responsive-16by9">
 					${playerDetailInfo.playerVideoLinkList[0].linkUrl}
 				</div>
@@ -44,27 +44,29 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="profileImgFilePath" class="col-sm-4">Profile Image</label>
-			<div class="col-sm-8"><img data-src="holder.js/300x200" src="http://jwlee0208.cdn3.cafe24.com/${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" width="300px" height="200px" /></div>
+			<label for="profileImgFilePath" class="col-sm-2">Profile Image</label>
+			<div class="col-sm-10"><img data-src="holder.js/300x200" src="http://jwlee0208.cdn3.cafe24.com/${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" width="300px" height="200px" /></div>
 		</div>
+<!-- 
 		<div class="form-group">
-			<label for="userNm" class="col-sm-4">My Name is</label>
-			<div class="col-sm-8">
+			<label for="userNm" class="col-sm-2">My Name is</label>
+			<div class="col-sm-10">
 				<input type="hidden" id="userId" name="userId" value="${playerDetailInfo.userInfo.userId}"/>
 				${playerDetailInfo.userInfo.userNm}
 			</div>
 		</div>
+ -->		
 		<div class="form-group">
-			<label for="catNm1" class="col-sm-4">My type is</label>
-			<div class="col-sm-8">${playerDetailInfo.catNm1}</div>
+			<label for="catNm1" class="col-sm-2">My type is</label>
+			<div class="col-sm-10">${playerDetailInfo.catNm1}</div>
 		</div>
 		<div class="form-group">
-			<label for="catNm2" class="col-sm-4">My Position is</label>
-			<div class="col-sm-8">${playerDetailInfo.catNm2}</div>
+			<label for="catNm2" class="col-sm-2">My Position is</label>
+			<div class="col-sm-10">${playerDetailInfo.catNm2}</div>
 		</div>
 		<div class="form-group">
-			<label for="phoneNo" class="col-sm-4">Detail Type</label>
-			<div class="col-sm-8" id="attrElemList">
+			<label for="phoneNo" class="col-sm-2">Detail Type</label>
+			<div class="col-sm-10" id="attrElemList">
 			<c:set var="categoryAttrElemList" value="${playerDetailInfo.categoryAttrElemList}"/>
 			<c:if test="${categoryAttrElemList ne null or categoryAttrElemList ne ''}">
 				<c:forEach var="attrElemInfo" items="${playerDetailInfo.categoryAttrElemList}">
@@ -77,9 +79,9 @@
 		</div>
 
 		<div class="form-group">
-			<label for="introduce" class="col-sm-4">Introduce Yourself!</label>
-			<div class="col-sm-8">
-				${playerDetailInfo.introduce}
+			<label for="introduce" class="col-sm-2">Introduce Yourself!</label>
+			<div class="col-sm-10">
+				<c:out value="${playerDetailInfo.introduce}" escapeXml="false"/>
 			</div>
 		</div>
 
