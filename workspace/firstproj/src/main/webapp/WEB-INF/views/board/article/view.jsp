@@ -55,16 +55,16 @@
 	  <li class="active"><tag:message code='text.article'/></li>
 	</ol>		
 
-		<div class="panel panel-info" role="main">	
+		<div class="panel panel-default" role="main">	
 					
 			<div class="panel-heading">
-				<h4 class="panel-title"><c:out value="${contentInfo.title}"/></h4>
+				<h4 class="panel-title" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><c:out value="${contentInfo.title}"/></h4>
 			</div>
 		
 			<div class="panel-body" style="padding-left: 15px;">
 				<p style="text-align: right;"><a href="http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}</a></p>
 				<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
-				<div style="min-height: 400px;"><c:out value="${contentInfo.content}" escapeXml="false"/></div>
+				<div style="min-height: 400px; white-space: normal; white-break: break-all;"><c:out value="${contentInfo.content}" escapeXml="false"/></div>
 				<!-- slideshare iframe area -->
 				<div class="embed-responsive embed-responsive-16by9">
 					<c:set var="slideshareLinkInfos" value="${contentInfo.slideshareLinkInfos}"/>
@@ -110,32 +110,10 @@
 			<c:if test="${contentInfo.filePath eq null || contentInfo.filePath eq ''}">
 				&nbsp;
 			</c:if>
-<!-- 				<div class="row"> -->
-<!-- 					<div class="col-xs-12 col-md-8"> -->
-<%-- 						<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}" onclick="javascript:goList('${contentInfo.boardId}');">${contentInfo.boardCategoryName} > ${contentInfo.boardName}</div> --%>
-<!-- 					</div>			 -->
-<!-- 					<div class="col-xs-6 col-md-4"> -->
-<%-- 						<div class="btn btn-primary" title="Sharing Article To Facebook" 	onclick="javascript:share('fb', '${contentInfo.articleId}', '', '${contentInfo.shareInfo.userId}');" >f</div> --%>
-<%-- 						<div class="btn btn-info" 	 title="Sharing Article To Twitter" 	onclick="javascript:share('tw', '${contentInfo.articleId}', '${contentInfo.title}', '${contentInfo.shareInfo.userId}');" >t</div>					 --%>
-<!-- 					</div> -->
-<!-- 				</div>	 -->
 			</div>
 		</div>
-
+		
 		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
-			<div class="btn-group" role="button">
-				<input type="button" class="btn btn-default" id="goToList" value="<tag:message code="common.list"/>"/>
-			</div>
-			<c:if test="${prevContentInfo.articleId ne null}">
-			<div class="btn-group" role="button">
-				<input type="button" class="btn btn-default" id="previous" value="previous"/>			
-			</div>
-			</c:if>
-			<c:if test="${nextContentInfo.articleId ne null}">
-			<div class="btn-group" role="button">
-				<input type="button" class="btn btn-default" id="next" value="next"/>		
-			</div>
-			</c:if>
 			<c:if test="${userInfo ne null && userInfo.userId eq contentInfo.authorId}">
 			<div class="btn-group" role="button">
 				<input type="button" class="btn btn-default pull-right" id="goToModify" value="<tag:message code="common.modify"/>"/>
@@ -145,34 +123,24 @@
 			</div>			
 			</c:if>
 		</div>
-<!--  	
-		<div class="panel panel-danger" role="main" id="streamDiv">
-			<div class="panel-heading">
-				<h4 class="panel-title"><a data-toggle="collapse" href="#collapseStream" class="collapsed">Related Streams&nbsp;<small>in Youtube</small></a></h4>
+			
+		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
+			<c:if test="${prevContentInfo.articleId ne null}">
+			<div class="btn-group" role="button">
+<!-- 				<input type="button" class="btn btn-default" id="previous" value="previous"/>			 -->
+				<input type="button" class="btn btn-default btn-lg" id="previous" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" value="[Prev]&nbsp;${prevContentInfo.title}"/>
 			</div>
-			<div id="collapseStream" class="panel-body collapse">
-				<div id="youtubeListDiv"></div>
-			</div>		
-		</div>
-
-		<div class="panel panel-primary" role="main" id="slideDiv">
-			<div class="panel-heading">
-				<h4 class="panel-title"><a data-toggle="collapse" href="#collapseSlide" class="collapsed">Related Slides&nbsp;<small>in Slideshare</small></a></h4>
+			</c:if>
+			<div class="btn-group" role="button">
+				<input type="button" class="btn btn-default btn-lg" id="goToList" value="<tag:message code="common.list"/>"/>
 			</div>
-			<div id="collapseSlide" class="panel-body collapse">
-				<div id="slideshareListDiv"></div>
-			</div>		
+			<c:if test="${nextContentInfo.articleId ne null}">
+			<div class="btn-group" role="button">
+<!-- 				<input type="button" class="btn btn-default" id="next" value="next"/>		 -->
+				<input type="button" class="btn btn-default btn-lg" id="next" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" value="[Next]&nbsp;${nextContentInfo.title}"/>
+			</div>
+			</c:if>
 		</div>
-
-		<div class="panel panel-success" role="main" id="photoDiv">
-			<div class="panel-heading">
-				<h4 class="panel-title"><a data-toggle="collapse" href="#collapseFlickr" class="collapsed">Related Images&nbsp;<small>in Flickr</small></a></h4>
-			</div>	
-			<div id="collapseFlickr" class="panel-body collapse">
-				<div id="flickrImageListDiv"></div>
-			</div>		
-		</div>
--->		
 
 		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
 			<div class="btn-group" role="button" id="streamDiv">

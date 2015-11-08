@@ -57,14 +57,14 @@
 			</c:choose>					
 					
 					<div class="caption">
-						<h3><span onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal"><c:out value="${content.title}"/></span></h3>
+						<h3 style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span onclick="javascript:goArticleView('${content.articleId}');" data-toggle="modal" data-target="#myModal"><c:out value="${content.title}"/></span></h3>
 						<p class="content_${index.count}" style="text-overflow:ellipsis; overflow:hidden;">
 							<c:if test="${content.content eq null || content.content eq ''}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
 							<c:if test="${content.content ne null && content.content ne ''}">
-								<span onclick="javascript:goArticleView('${content.articleId}', 'noPopup');">${fn:substring(content.contentText, 0, 250)}...</span>
+								<span onclick="javascript:goArticleView('${content.articleId}', 'noPopup');" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${fn:substring(content.contentText, 0, 250)}...</span>
 							</c:if>
 						</p>
-						<p><span class="btn btn-primary" role="button" onclick="javascript:goArticleView('${content.articleId}');"><tag:message code='button.detailview'/></span></p>
+						<p><span class="btn btn-primary btn-block" role="button" onclick="javascript:goArticleView('${content.articleId}');"><tag:message code='button.detailview'/></span></p>
 					</div>
 
 				</div>	

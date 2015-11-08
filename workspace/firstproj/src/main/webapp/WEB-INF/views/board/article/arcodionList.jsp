@@ -42,19 +42,19 @@
 				<c:choose>
 					<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
 						<c:forEach var="contentInfo" items="${pagedResult.list}" varStatus="index">
-			<div class="panel panel-info">
+			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h4 class="panel-title">
+					<h4 class="panel-title" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
 						<a data-toggle="collapse" data-parent="#accordion" href="#collapse${index.count}"><c:out value="${contentInfo.title}"/> </a>
-						&nbsp;&nbsp;<small> | &nbsp;&nbsp;${contentInfo.boardName} <tag:message code='text.board'/></small>
+						&nbsp;&nbsp;<small> | &nbsp;&nbsp;${contentInfo.boardName}</small>
 					</h4>
 				</div>
 				<div id="collapse${index.count}" class="collapse in">
-					<div class="panel-body" style="padding-left: 15px;">
+					<div class="panel-body" style="padding-left: 15px; white-space:normal; white-break:break-word;">
 						<p style="text-align: right;"><a href="http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}</a></p>
 						<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="javascript:;" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">${contentInfo.authorNm}</a></p>
 						 
-						<c:out value="${contentInfo.content}" escapeXml="false"/> <br/><br/>
+						<c:out value="${contentInfo.content}" escapeXml="false"/><br/><br/>
 
 						<div class="embed-responsive embed-responsive-16by9">
 							<c:set var="slideshareLinkInfos" value="${contentInfo.slideshareLinkInfos}"/>

@@ -134,6 +134,7 @@ font-size: 1em;
 --%>
 							</p>
 							<p>
+
 								<span class="btn btn-danger btn-block" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');"><tag:message code='button.watchme'/></span>
 							</p>
 						</div>

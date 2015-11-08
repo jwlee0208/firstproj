@@ -368,6 +368,10 @@ public class BoardArticleController {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+            
+            if(contentInfo != null){
+                boardArticleDto.setBoardId(contentInfo.getBoardId());
+            }
             // 이전 글 조회
             try {
                 prevContentInfo = this.boardArticleService.selectPrevBoardArticle(boardArticleDto);
