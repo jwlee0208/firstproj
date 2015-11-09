@@ -16,6 +16,7 @@
 }
 
 </style>
+<!-- google analytics -->
 <script>
 if($("#buildType").val()=='prod'){
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -27,6 +28,14 @@ if($("#buildType").val()=='prod'){
 	ga('send', 'pageview');
 }
 </script>
+<!-- naver analytics -->
+<script type="text/javascript" src="http://wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+	if(!wcs_add) var wcs_add = {};
+	wcs_add["wa"] = "47918035f92e80";
+	wcs_do();
+</script>
+
 <footer class="footer">
 <c:choose>
 	  <c:when test="${userId ne '' && userId ne null}">	
