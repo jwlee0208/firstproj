@@ -221,6 +221,11 @@
 			<beans:bean class="com.firstproj.interceptor.BoardArticleInterceptor" />
 		</interceptor>
 
+		<interceptor>
+			<mapping path="/**/popImageSelector"/>
+			<mapping path="/share/**"/>
+			<beans:bean class="com.firstproj.interceptor.EditorInterceptor" />
+		</interceptor>
 <!-- 		<interceptor>   -->
 <!-- 			<mapping path="/**/*" /> -->
 <!-- 			<exclude-mapping path="/img/**"/> -->

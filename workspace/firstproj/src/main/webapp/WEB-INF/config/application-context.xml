@@ -11,6 +11,10 @@
 	<import resource = "classpath:spring/redis-config.xml" />
 	
 	<import resource = "firstproj-mail.xml" />
+	<import resource = "firstproj-security.xml"/>
+	
+	
+	
 <!-- 	<bean id="fileUpload" class="com.firstproj.common.util.FileUpload"> -->
 <!-- 		<property name="destinationUrl" value="/uploadfiles" /> -->
 <!-- 		<constructor-arg> -->

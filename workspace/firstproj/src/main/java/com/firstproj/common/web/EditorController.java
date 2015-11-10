@@ -126,16 +126,18 @@ public class EditorController extends BaseController {
     	return message;
     }
 	
-	/*
-    @RequestMapping(value = {"/{path}/popImageSelector/{userId}", "/{path1}/{path2}/popImageSelector/{userId}", "/{path1}/{path2}/{path3}/popImageSelector/{userId}", "/{path1}/{path2}/{path3}/{path4}/popImageSelector/{userId}"}, method = RequestMethod.GET)
-    public String imageSelectorForm(HttpServletRequest request, Model model, HttpSession session, @PathVariable String userId) throws Exception {
-        model.addAttribute("photoList", this.flickrService.getPhotoListByUserId(userId));
-        return "/common/popFlickrImageSelector"; 
-    }
-	*/
-    @RequestMapping(value = {"/{path}/popImageSelector", "/{path1}/{path2}/popImageSelector", "/{path1}/{path2}/{path3}/popImageSelector", "/{path1}/{path2}/{path3}/{path4}/popImageSelector"}, method = {RequestMethod.GET, RequestMethod.POST})
+//	@RequestMapping(value = {"/{path}/{boardId}/popImageSelector", "/{path1}/{path2}/{boardId}/popImageSelector", "/{path1}/{path2}/{path3}/{boardId}/popImageSelector", "/{path1}/{path2}/{path3}/{path4}/{boardId}/popImageSelector"}, method = {RequestMethod.GET, RequestMethod.POST})
+//    public String imageSelectorForm(HttpServletRequest request, Model model, HttpSession session, @RequestParam(value="userId", required=false) String userId, @RequestParam(value="searchKeyword", required=false) String searchKeyword, @PathVariable int boardId) throws Exception {
+//	    return this.imageSelectorForm(request, model, session, userId, searchKeyword);
+//	}
+//
+//    @RequestMapping(value = {"/{path}/{articleId}/{boardId}/popImageSelector", "/{path1}/{path2}/{articleId}/{boardId}/popImageSelector", "/{path1}/{path2}/{path3}/{articleId}/{boardId}/popImageSelector", "/{path1}/{path2}/{path3}/{path4}/{articleId}/{boardId}/popImageSelector"}, method = {RequestMethod.GET, RequestMethod.POST})
+//    public String imageSelectorForm(HttpServletRequest request, Model model, HttpSession session, @RequestParam(value="userId", required=false) String userId, @RequestParam(value="searchKeyword", required=false) String searchKeyword, @PathVariable int articleId, @PathVariable int boardId) throws Exception {
+//        return this.imageSelectorForm(request, model, session, userId, searchKeyword);
+//    }
+	
+	@RequestMapping(value = {"/{path}/popImageSelector", "/{path1}/{path2}/popImageSelector", "/{path1}/{path2}/{path3}/popImageSelector", "/{path1}/{path2}/{path3}/{path4}/popImageSelector"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String imageSelectorForm(HttpServletRequest request, Model model, HttpSession session, @RequestParam(value="userId", required=false) String userId, @RequestParam(value="searchKeyword", required=false) String searchKeyword) throws Exception {
-//    System.out.println("searchKeyword for flickr ; " + searchKeyword);
     	SearchParameters params = new SearchParameters();
     	if(searchKeyword != null && searchKeyword != ""){
     		params.setText(searchKeyword);
@@ -155,6 +157,23 @@ public class EditorController extends BaseController {
     	model.addAttribute("searchKeyword"	, searchKeyword);
     	model.addAttribute("userId"			, userId);
         model.addAttribute("photoList"		, photoList);
+        System.out.println("request.getRequestURI() : " + request.getRequestURI());
+        System.out.println("request.getRequestURL() : " + request.getRequestURL());
         return "/common/popFlickrImageSelector"; 
+    }
+	
+	@RequestMapping(value = {"/{path}/imageUploadActionToFlickr", "/{path1}/{path2}/imageUploadActionToFlickr", "/{path1}/{path2}/{path3}/imageUploadActionToFlickr", "/{path1}/{path2}/{path3}/{path4}/imageUploadActionToFlickr"}, method={RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public String imageaddToFlickr(MultipartFile imageFile) throws Exception {
+        
+        System.out.println("imageadd");
+        System.out.println("" + imageFile.getOriginalFilename());
+        System.out.println("" + imageFile.getName());
+        System.out.println("" + imageFile.getSize());
+        System.out.println("" + imageFile.getBytes());
+        String title = "test";
+        String responseStr = this.flickrService.uploadPhotoList(imageFile, title, title);
+        System.out.println(responseStr);
+        return responseStr;
     }
 }

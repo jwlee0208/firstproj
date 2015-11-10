@@ -100,7 +100,7 @@
 				where
 					ba.board_id = ${boardId}	
 				<![CDATA[ 
-					and ba.article_id > ${articleId}
+					and ba.article_id < ${articleId}
 				]]>
 					and ba.status = 1
 				order by ba.article_id asc
@@ -112,7 +112,7 @@
 				where 
 					ba.board_id = ${boardId}
 				<![CDATA[ 
-					and ba.article_id < ${articleId}
+					and ba.article_id > ${articleId}
 				]]>	
 					and ba.status = 1
 				order by ba.article_id desc
