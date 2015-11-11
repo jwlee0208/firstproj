@@ -69,56 +69,56 @@ $(function(){
 });
 
 
-//ajax error check
-$(document).ajaxError(function(event, request){
-   if(request.status==500)
-      alert("파일 업로드를 실패하였습니다. \n업로드할 파일을 확인하세요.(파일 최대용량: 20MB)");
-   	  return;
-   }
-);
+// //ajax error check
+// $(document).ajaxError(function(event, request){
+//    if(request.status==500)
+//       alert("파일 업로드를 실패하였습니다. \n업로드할 파일을 확인하세요.(파일 최대용량: 20MB)");
+//    	  return;
+//    }
+// );
 
-//파일전송 후 콜백 함수
-function FileuploadCallback(data, state){
+// //파일전송 후 콜백 함수
+// function FileuploadCallback(data, state){
 	
-// 	console.log('data : ' + data + ", state : " + state);
+// // 	console.log('data : ' + data + ", state : " + state);
 	
-   if (data=="error"){
-      alert("파일전송중 에러 발생!!");
-      return false;
-   } else if (data == "fileSizeError") {
-	  alert("파일용량은 20MB 이하 이어야 합니다.");
-	  return false;
-   } else if (data == "fileExtensionError") {
-	   alert("이미지 파일을 업로드 하셔야 합니다.\n(업로드 가능한 확장자: jpg, jpeg, gif, png, bmp)");
-	   return false;
-   }
+//    if (data=="error"){
+//       alert("파일전송중 에러 발생!!");
+//       return false;
+//    } else if (data == "fileSizeError") {
+// 	  alert("파일용량은 20MB 이하 이어야 합니다.");
+// 	  return false;
+//    } else if (data == "fileExtensionError") {
+// 	   alert("이미지 파일을 업로드 하셔야 합니다.\n(업로드 가능한 확장자: jpg, jpeg, gif, png, bmp)");
+// 	   return false;
+//    }
    
-}
+// }
 
-$(function(){
-   //비동기 파일 전송
-   var frm=$('#actionFrm'); 
-   frm.ajaxForm(FileuploadCallback); 
-   frm.submit(function(){
-	   return false;
-   }); 
-});
+// $(function(){
+//    //비동기 파일 전송
+//    var frm=$('#actionFrm'); 
+//    frm.ajaxForm(FileuploadCallback); 
+//    frm.submit(function(){
+// 	   return false;
+//    }); 
+// });
 
-// 파일업로드 이벤트
-function fileUploadFlickr(){
-	var imageFile = $.trim($("#imageFile").val());
-   if(!imageFile){
-      alert("파일을 선택하세요.");
-      $("#imageFile").focus();
-      return;
-   }
+// // 파일업로드 이벤트
+// function fileUploadFlickr(){
+// 	var imageFile = $.trim($("#imageFile").val());
+//    if(!imageFile){
+//       alert("파일을 선택하세요.");
+//       $("#imageFile").focus();
+//       return;
+//    }
  
-   //파일전송
-   var frm = $('#actionFrm'); 
-   frm.attr("action","imageUploadActionToFlickr");
-   frm.attr("method","post");
-   frm.submit(); 
-}
+//    //파일전송
+//    var frm = $('#actionFrm'); 
+//    frm.attr("action","imageUploadActionToFlickr");
+//    frm.attr("method","post");
+//    frm.submit(); 
+// }
 
 
 
