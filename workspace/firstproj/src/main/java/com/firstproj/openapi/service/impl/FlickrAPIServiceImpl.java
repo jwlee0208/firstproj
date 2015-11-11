@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import org.apache.tika.Tika;
+import org.scribe.model.Token;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,10 @@ import com.firstproj.openapi.service.FlickrAPIService;
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.REST;
+import com.flickr4java.flickr.RequestContext;
+import com.flickr4java.flickr.auth.Auth;
+import com.flickr4java.flickr.auth.AuthInterface;
+import com.flickr4java.flickr.auth.Permission;
 import com.flickr4java.flickr.galleries.GalleriesInterface;
 import com.flickr4java.flickr.galleries.Gallery;
 import com.flickr4java.flickr.photos.Photo;
@@ -120,7 +125,7 @@ public class FlickrAPIServiceImpl implements FlickrAPIService{
         }
 
         try {
-            photoList = photos.search(params, 10, 1);
+            photoList = photos.search(params, 100, 1);
         } catch (FlickrException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -134,6 +139,16 @@ public class FlickrAPIServiceImpl implements FlickrAPIService{
         InputStream is = null;
         String responseStr = "";
         Flickr f = new Flickr(apiKey, sharedSecret, new REST());
+//        Auth auth = new Auth();
+//        auth.setPermission(Permission.WRITE);
+//        AuthInterface ai = f.getAuthInterface();
+//        Token token = ai.getRequestToken();
+//        
+//        auth.setToken(token.getToken());
+//        auth.setTokenSecret(token.getSecret());
+//        RequestContext.getRequestContext().setAuth(auth);
+//        f.setAuth(auth);
+
         try {
             is = attachFile.getInputStream();
             
@@ -141,7 +156,6 @@ public class FlickrAPIServiceImpl implements FlickrAPIService{
             String chkFileExtStr = "";
             try {
                 chkFileExtStr = chkFileExt.detect(is).toLowerCase();
-        
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -161,7 +175,7 @@ public class FlickrAPIServiceImpl implements FlickrAPIService{
             metaData.setFamilyFlag(false);
             metaData.setFriendFlag(true);
             metaData.setTags(null);
-            Uploader uploader = f.getUploader();
+            Uploader uploader = new Uploader(apiKey, sharedSecret);
             
             try {
                 responseStr = uploader.upload(is, metaData);

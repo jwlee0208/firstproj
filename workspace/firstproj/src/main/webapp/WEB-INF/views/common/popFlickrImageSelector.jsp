@@ -10,7 +10,7 @@
 <body>
 <form id="actionFrm" name="actionFrm" method="post">
 	<div class="container">
-		<h1 id="btn-groups" class="page-header">Flickr Image</h1>
+		<h1 id="btn-groups" class="page-header">Flickr Image Selector&nbsp;<small>Usable your flickr's images</small></h1>
 		<div style="padding:10px 10px 10px 10px;" class="row">
 			<input type="text" class="form-control" id="searchKeyword" name="searchKeyword" placeholder="Insert Search Keyword." value="${searchKeyword}"/>
 		</div>
@@ -18,8 +18,8 @@
 			<input type="text" class="form-control" id="userId" name="userId" placeholder="Insert Your Flickr's UserId" value="${userId}"/>
 		</div>	
 		<hr/>
-		<input type="file" name="imageFile" id="imageFile" class="form-control" accept="image/*"/>
-		<input type="button" class="btn btn-default" name="uploadBtn" id="uploadBtn" value="파일 업로드" onclick="fileUploadFlickr()"/>
+<!-- 		<input type="file" name="imageFile" id="imageFile" class="form-control" accept="image/*"/> -->
+<!-- 		<input type="button" class="btn btn-default" name="uploadBtn" id="uploadBtn" value="파일 업로드" onclick="fileUploadFlickr()"/> -->
 <c:choose>
 <c:when test="${!empty photoList}">
 
@@ -80,7 +80,7 @@ $(document).ajaxError(function(event, request){
 //파일전송 후 콜백 함수
 function FileuploadCallback(data, state){
 	
-	console.log('data : ' + data + ", state : " + state);
+// 	console.log('data : ' + data + ", state : " + state);
 	
    if (data=="error"){
       alert("파일전송중 에러 발생!!");
@@ -116,6 +116,7 @@ function fileUploadFlickr(){
    //파일전송
    var frm = $('#actionFrm'); 
    frm.attr("action","imageUploadActionToFlickr");
+   frm.attr("method","post");
    frm.submit(); 
 }
 
