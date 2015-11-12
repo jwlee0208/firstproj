@@ -12,7 +12,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
 </head>
 <body>
-
+<c:if test="${boardInfo.boardId eq 15}">
+	<%@ include file="/WEB-INF/views/common/registPlayer.jsp"%>	
+</c:if>	
 	<div class="page-header">
 	  <h1><tag:message code='text.board'/>&nbsp;&nbsp;<small>${boardInfo.boardName}</small></h1>
 	</div>	

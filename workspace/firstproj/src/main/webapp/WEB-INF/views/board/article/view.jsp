@@ -26,8 +26,6 @@
 </head>
 <body>
 
-<!-- <div class="container"> -->
-
 <div>
 	<form id="viewFrm" name="viewForm" method="post" role="form">
 	<input type="hidden" id="selectedArticleId" 	name="selectedArticleId" 	value="${contentInfo.articleId}"/>
@@ -36,7 +34,10 @@
 	<input type="hidden" id="nextArticleId" 		name="nextArticleId" 		value="${nextContentInfo.articleId}"/>
 	<!-- flickr / slideshare /etc,.'s search keyword parameter -->
 	<input type="hidden" id="keyword" 				name="keyword" 				value="${contentInfo.title}"/>
-
+<!-- <div class="container"> -->
+<c:if test="${contentInfo.boardId eq 15}">
+	<%@ include file="/WEB-INF/views/common/registPlayer.jsp"%>	
+</c:if>	
 	<h1 id="btn-groups" class="page-header"><tag:message code='text.article'/></h1>
 	<c:set var="boardName" value=""/>
 	<ol class="breadcrumb">
@@ -123,23 +124,24 @@
 			</div>			
 			</c:if>
 		</div>
+		
+		<div class="btn-group btn-group-justified" style="padding: 0 15px 20px 15px;">
+			<c:if test="${nextContentInfo.articleId ne null}">
+			<div class="row">
+				<input type="button" class="btn btn-link btn-block btn-lg" id="next" style="text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" value="[Next]&nbsp;${nextContentInfo.title}"/>
+			</div>
+			</c:if>
+			<c:if test="${prevContentInfo.articleId ne null}">
+			<div class="row">
+				<input type="button" class="btn btn-link btn-block btn-lg" id="previous" style="text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" value="[Prev]&nbsp;${prevContentInfo.title}"/>
+			</div>
+			</c:if>		
+		</div>
 			
 		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
-			<c:if test="${prevContentInfo.articleId ne null}">
 			<div class="btn-group" role="button">
-<!-- 				<input type="button" class="btn btn-default" id="previous" value="previous"/>			 -->
-				<input type="button" class="btn btn-default btn-lg" id="previous" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" value="[Prev]&nbsp;${prevContentInfo.title}"/>
+				<input type="button" class="btn btn-default btn-block" id="goToList" value="<tag:message code="common.list"/>"/>
 			</div>
-			</c:if>
-			<div class="btn-group" role="button">
-				<input type="button" class="btn btn-default btn-lg" id="goToList" value="<tag:message code="common.list"/>"/>
-			</div>
-			<c:if test="${nextContentInfo.articleId ne null}">
-			<div class="btn-group" role="button">
-<!-- 				<input type="button" class="btn btn-default" id="next" value="next"/>		 -->
-				<input type="button" class="btn btn-default btn-lg" id="next" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" value="[Next]&nbsp;${nextContentInfo.title}"/>
-			</div>
-			</c:if>
 		</div>
 
 		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
@@ -238,6 +240,9 @@
 		// load to youtube list
 		$("#youtubeListDiv").load("/api/youtube/streamList", $("#viewFrm").serialize());
 
+		$("#registPlayer").click(function(){
+			location.href = "/player/write";	
+		});	
 	});
 
 	function chkNoImage(){

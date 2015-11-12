@@ -25,16 +25,32 @@ $(function(){
 	 * 게시글 수정
 	 */
 	$("#goToModify").on("click", function(){
-		location.href = "/board/article/modify/" + $("#selectedArticleId").val() +"/" + $("#viewFrm #boardId").val();
+		var userId 	= $("#userId").val();
+		var url = "";
+		if(userId != null && userId != ''){
+			url += "/share/modify/";
+		}else{
+			url += "/board/article/modify/";
+		}
+		url += $("#selectedArticleId").val() +"/" + $("#viewFrm #boardId").val();
+		location.href = url;
 	});
 	/**
 	 * 게시글 삭제
 	 */
 	$("#goToDelete").on("click", function(){
+		var userId 	= $("#userId").val();
+		var url = "";
+		if(userId != null && userId != ''){
+			url += "/share/deleteBoardArticle/";
+		}else{
+			url += "/board/article/deleteBoardArticle/";
+		}
+		
 		var result = confirm('진짜 삭제하시겠습니까?');
 		if(result){
 			$.ajax({
-				url 		: '/board/article/deleteBoardArticle/'+$("#selectedArticleId").val(),
+				url 		: url + $("#selectedArticleId").val(),
 				type 		: 'post',
 				dataType 	: 'json',
 				success 	: function(data){
@@ -54,5 +70,12 @@ $(function(){
 
 //게시글 조회
 function goView(articleId){
-	location.href = "/board/article/view/"+articleId;	
+	var userId 	= $("#userId").val();
+	var url = "";
+	if(userId != null && userId != ''){
+		url += "/share/view/";
+	}else{
+		url += "/board/article/view/";
+	}	
+	location.href = url + articleId;	
 }

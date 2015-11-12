@@ -6,6 +6,10 @@
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/common/paging.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleList.js"></script>
 <link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/pagination.css">
+<c:if test="${boardInfo.boardId eq 15}">
+	<%@ include file="/WEB-INF/views/common/registPlayer.jsp"%>	
+</c:if>	
+	
 <!-- <div class="container"> -->
 	<div class="page-header">
 	  <h1><tag:message code='text.board'/>&nbsp;&nbsp;<small>${boardInfo.boardName}</small></h1>

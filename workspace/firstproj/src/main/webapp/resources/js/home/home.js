@@ -34,11 +34,6 @@ function logout(){
 
 function goPortal(menuId, catId){
 	var baseUrl = "";
-	/*
-	if(menuId == 6){
-		baseUrl = "/player/playerPortal";
-	}
-	*/
 	if(catId == 1){
 		baseUrl = "/player/playerPortal";
 	}else{
@@ -116,4 +111,17 @@ function goShare(){
 
 function goMyShare(userId){
 	location.href = "/share/" + userId;
+}
+
+function goShareHome(userId){
+	if(userId != null && userId != '' && userId != 'undefined'){
+		goMyShare(userId);
+	}else{
+		if(confirm('로그인 하시겠습니까?')){
+			location.href = "/login";
+		}else{
+			goShare();
+		}
+		
+	}
 }

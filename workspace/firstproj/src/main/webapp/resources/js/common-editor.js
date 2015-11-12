@@ -110,7 +110,7 @@ function cmdImgUploadPop(){
 }
 
 function cmdImgSelectorPop(){
-	 var win = window.open("popImageSelector",
+	 var win = window.open("popImageSelector/selectorImg",
 	       "editor_win",
 	       "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,width=980,height=500,left=50,top=50"
 	  );

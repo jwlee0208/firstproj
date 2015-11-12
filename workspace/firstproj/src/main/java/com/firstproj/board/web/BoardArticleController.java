@@ -360,7 +360,7 @@ public class BoardArticleController {
         if(selectedArticleId > 0){
             
             boardArticleDto.setArticleId(selectedArticleId);
-            boardArticleDto.setCreateUserId(userId);
+//            boardArticleDto.setCreateUserId(userId);
             // 글 조회
             try {
                 contentInfo     = this.boardArticleService.selectBoardArticle(boardArticleDto);

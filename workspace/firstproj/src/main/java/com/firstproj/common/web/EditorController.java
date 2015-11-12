@@ -136,7 +136,7 @@ public class EditorController extends BaseController {
 //        return this.imageSelectorForm(request, model, session, userId, searchKeyword);
 //    }
 	
-	@RequestMapping(value = {"/{path}/popImageSelector", "/{path1}/{path2}/popImageSelector", "/{path1}/{path2}/{path3}/popImageSelector", "/{path1}/{path2}/{path3}/{path4}/popImageSelector"}, method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = {"/{path}/popImageSelector/{cmd}", "/{path1}/{path2}/popImageSelector/{cmd}", "/{path1}/{path2}/{path3}/popImageSelector/{cmd}", "/{path1}/{path2}/{path3}/{path4}/popImageSelector/{cmd}"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String imageSelectorForm(HttpServletRequest request, Model model, HttpSession session, @RequestParam(value="userId", required=false) String userId, @RequestParam(value="searchKeyword", required=false) String searchKeyword) throws Exception {
     	SearchParameters params = new SearchParameters();
     	if(searchKeyword != null && searchKeyword != ""){

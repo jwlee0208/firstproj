@@ -77,7 +77,7 @@
 		          	</c:if>	  
     			</c:when>
     			<c:otherwise>
-				    			
+				<li><a href="javascript:;" onclick="javascript:goShareHome('${userInfo.userId}');" ><tag:message code="common.myshare"/></a></li>    			
     			</c:otherwise>
     		</c:choose>    		
 
