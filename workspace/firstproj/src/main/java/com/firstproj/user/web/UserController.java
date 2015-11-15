@@ -518,6 +518,7 @@ public class UserController {
         Map<String, Object> contentMap = new HashMap<String, Object>();
         contentMap.put("mailTo"         , userDto.getUserNm());
         contentMap.put("welcomeMessage" , welcomeMsg);
+        contentMap.put("userId"			, userDto.getUserId());
 
         // Sending Mail
         this.commonSendMailTemplate(userDto, "[linkedNest.net] Congraturation! Happy join us!!", "mailTemplates/welcomeJoinningTemplate.vm", contentMap);
