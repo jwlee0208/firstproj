@@ -141,7 +141,7 @@
 				<input type="button" class="btn btn-default pull-right" value="Modify" id="modifyBtn">
 			</c:when>
 			<c:otherwise>
-				<input type="button" class="btn btn-default pull-right" value="Regist" id="registBtn">
+				<input type="button" class="btn btn-default pull-right" value="Regist" id="registBtn" data-loading-text="Processing...">
 			</c:otherwise>
 		</c:choose>		
 				

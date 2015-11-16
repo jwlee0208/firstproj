@@ -56,7 +56,7 @@
 			<ul class="nav navbar-nav">
     		<c:choose>
     			<c:when test="${shareInfo ne null && userId ne null}">
-    			<li><a href="/share"><tag:message code="text.home"/></a></li>
+    			<li><a href="/share/main"><tag:message code="text.home"/></a></li>
 				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();"><tag:message code="text.profile"/></a></li>    			
 <%-- 				<li <c:if test="${param.menuId eq 5}">class="active"</c:if>><a href="javascript:void(0);" onclick="javascript:goInfo();">Profile</a></li> --%>
 		          	<c:if test="${!empty boardCategoryList}">

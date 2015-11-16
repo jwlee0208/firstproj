@@ -48,7 +48,7 @@
 					if(attrElementList != null){
 						var attrElementListLength = attrElementList.length;
 						var prevAttrId = 0;
-						var innerHtml = "<div style=\"padding-top: 10px;padding-left: 10px;padding-bottom: 10px; background-color: #333; text-align: center; color: white; \">Filtering Detail Information</div><div style=\"padding-top: 10px;padding-left: 10px;padding-bottom: 10px;\">";
+						var innerHtml = "<div style=\"padding-top: 10px;padding-left: 10px;padding-bottom: 10px; background-color: #333; text-align: center; color: white; \" data-toggle=\"buttons\">Filtering Detail Information</div><div style=\"padding-top: 10px;padding-left: 10px;padding-bottom: 10px;\">";
 						for(var i = 0 ; i < attrElementListLength ; i++){
 							var attrId = attrElementList[i].attrId;
 
@@ -63,11 +63,10 @@
 							if(categoryAttrElemListLength > 0){
 								for(var j = 0; j < categoryAttrElemListLength ; j++){
 									var catAttrElemObj = categoryAttrElemList[j];
-									innerHtml += "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"attrElem_" + catAttrElemObj.attrElemId +"\" " + " name=\"catAttrElemInfos[" + i + "].childCatAttrElemInfos[" + j + "].attrElemId\" class=\"attrElemChkBox\" value=\"" + catAttrElemObj.attrElemId + "\"/>" + catAttrElemObj.attrElemNameStr + "</label>";										
+//									innerHtml += "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"attrElem_" + catAttrElemObj.attrElemId +"\" " + " name=\"catAttrElemInfos[" + i + "].childCatAttrElemInfos[" + j + "].attrElemId\" class=\"attrElemChkBox\" value=\"" + catAttrElemObj.attrElemId + "\"/>" + catAttrElemObj.attrElemNameStr + "</label>";
+									innerHtml += "<label class=\"btn btn-primary\" style=\"margin:5px 5px 5px 0px;\"><input type=\"checkbox\" id=\"attrElem_" + catAttrElemObj.attrElemId +"\" " + " name=\"catAttrElemInfos[" + i + "].childCatAttrElemInfos[" + j + "].attrElemId\" class=\"attrElemChkBox\" value=\"" + catAttrElemObj.attrElemId + "\" style=\"display:none;\"/>" + catAttrElemObj.attrElemNameStr + "</label>";
 								}
 							}
-							
-							
 
 							prevAttrId = attrId;
 						}

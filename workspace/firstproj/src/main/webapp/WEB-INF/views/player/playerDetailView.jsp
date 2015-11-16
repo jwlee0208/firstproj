@@ -18,6 +18,9 @@
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css"/>
+<!-- chart.js -->
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/chart.js/Chart.min.js"></script>
+
 <style type="text/css">
 	.form-group .col-sm-10 {vertical-align : middle;}
 </style>
@@ -77,7 +80,14 @@
 			</c:if>
 			</div>
 		</div>
-
+		<div class="form-group">
+			<label for="batChart" class="col-sm-2">Batting Factor</label>
+			<canvas id="batChart" width="400" height="400"></canvas>
+		</div>	
+		<div class="form-group">
+			<label for="fieldChart" class="col-sm-2">Fielding Factor</label>
+			<canvas id="fieldChart" width="400" height="400"></canvas>
+		</div>	
 		<div class="form-group">
 			<label for="introduce" class="col-sm-2">Introduce Yourself!</label>
 			<div class="col-sm-10">
@@ -146,6 +156,118 @@ $(function(){
 		frm.attr("method","get");
 		frm.submit();
 // 		location.href = "/player/modify";
+	});
+
+
+	// chart.js
+	var batCtx = document.getElementById("batChart").getContext("2d");
+	var batData = {
+		    labels: ["타율", "출루율", "장타율", "OPS"],
+		    datasets: [
+		        {
+		            label: "2014 League",
+		            fillColor: "rgba(220,220,220,0.2)",
+		            strokeColor: "rgba(220,220,220,1)",
+		            pointColor: "rgba(220,220,220,1)",
+		            pointStrokeColor: "#fff",
+		            pointHighlightFill: "#fff",
+		            pointHighlightStroke: "rgba(220,220,220,1)",
+		            data: [0.330, 0.421, 0.459, 0.976]
+		        },
+		        {
+		            label: "2015 League",
+		            fillColor: "rgba(151,187,205,0.2)",
+		            strokeColor: "rgba(151,187,205,1)",
+		            pointColor: "rgba(151,187,205,1)",
+		            pointStrokeColor: "#fff",
+		            pointHighlightFill: "#fff",
+		            pointHighlightStroke: "rgba(151,187,205,1)",
+		            data: [0.278, 0.433, 0.360, 0.593]
+		        }
+		    ]
+		};	
+		
+	new Chart(batCtx).Radar(batData, {
+	    //Boolean - Whether to show lines for each scale point
+	    scaleShowLine : true,
+
+	    //Boolean - Whether we show the angle lines out of the radar
+	    angleShowLineOut : true,
+
+	    //Boolean - Whether to show labels on the scale
+	    scaleShowLabels : false,
+
+	    // Boolean - Whether the scale should begin at zero
+	    scaleBeginAtZero : true,
+
+	    //String - Colour of the angle line
+	    angleLineColor : "rgba(0,0,0,.1)",
+
+	    //Number - Pixel width of the angle line
+	    angleLineWidth : 1,
+
+	    //String - Point label font declaration
+	    pointLabelFontFamily : "'Arial'",
+
+	    //String - Point label font weight
+	    pointLabelFontStyle : "normal",
+
+	    //Number - Point label font size in pixels
+	    pointLabelFontSize : 10,
+
+	    //String - Point label font colour
+	    pointLabelFontColor : "#666",
+
+	    //Boolean - Whether to show a dot for each point
+	    pointDot : true,
+
+	    //Number - Radius of each point dot in pixels
+	    pointDotRadius : 3,
+
+	    //Number - Pixel width of point dot stroke
+	    pointDotStrokeWidth : 1,
+
+	    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+	    pointHitDetectionRadius : 20,
+
+	    //Boolean - Whether to show a stroke for datasets
+	    datasetStroke : true,
+
+	    //Number - Pixel width of dataset stroke
+	    datasetStrokeWidth : 2,
+
+	    //Boolean - Whether to fill the dataset with a colour
+	    datasetFill : true    
+	});
+
+	var fieldCtx = document.getElementById("fieldChart").getContext("2d");
+	var fieldData = {
+		    labels: ["수비율", "출루율", "장타율", "OPS"],
+		    datasets: [
+		        {
+		            label: "2014 League",
+		            fillColor: "rgba(220,220,220,0.2)",
+		            strokeColor: "rgba(220,220,220,1)",
+		            pointColor: "rgba(220,220,220,1)",
+		            pointStrokeColor: "#fff",
+		            pointHighlightFill: "#fff",
+		            pointHighlightStroke: "rgba(220,220,220,1)",
+		            data: [65, 59, 90, 81]
+		        },
+		        {
+		            label: "2015 League",
+		            fillColor: "rgba(151,187,205,0.2)",
+		            strokeColor: "rgba(151,187,205,1)",
+		            pointColor: "rgba(151,187,205,1)",
+		            pointStrokeColor: "#fff",
+		            pointHighlightFill: "#fff",
+		            pointHighlightStroke: "rgba(151,187,205,1)",
+		            data: [28, 48, 40, 19]
+		        }
+		    ]
+		};	
+	new Chart(fieldCtx).Line(fieldData, {
+	    pointDot: false
 	});
 });
 </script>

@@ -15,11 +15,13 @@
 	<div><h4><span class="label label-default">[${attrId}]${attrElementInfo.attrNameStr}</span></h4>
 		<span>	
 		<c:if test="${categoryAttrElemListLength > 0}">
-			<div class="row">
+			<div class="row" data-toggle="buttons">
 				<input type="hidden" id="attrElemMapList[${index.count-1}].attrId${attrId}" name="attrElemMapList[${index.count-1}].attrId" value="${attrId}" />
 			<c:forEach var="categoryAttrElemInfo" items="${categoryAttrElemList}">
-				<div class="col-md-2">				
-					<input type="radio" id="attrElemMapList[${index.count-1}].attrElemId${categoryAttrElemInfo.attrElemId}" name="attrElemMapList[${index.count-1}].attrElemId" value="${categoryAttrElemInfo.attrElemId}" class="attrElemRadio"/>${categoryAttrElemInfo.attrElemNameStr}
+				<div class="col-md-2">		
+					<label class="btn btn-danger" style="margin:5px 5px 5px 0px;">		
+						<input type="radio" id="attrElemMapList[${index.count-1}].attrElemId${categoryAttrElemInfo.attrElemId}" name="attrElemMapList[${index.count-1}].attrElemId" value="${categoryAttrElemInfo.attrElemId}" class="attrElemRadio"  style="display:none;"/>${categoryAttrElemInfo.attrElemNameStr}
+					</label>
 				</div>
 			</c:forEach>
 			</div>

@@ -142,6 +142,12 @@
 				<id 	column="player_info_id" property="playerInfoId"/>
 				<result column="link_url" 		property="linkUrl"/>
 			</collection>
+			<collection property="categoryAttrElemList" ofType="player.categoryAttrElemDto">
+				<id		column="attr_elem_id"	property="attrElemId"/>
+				<id		column="attr_id"		property="attrId"/>
+				<result column="attr_elem_name" property="attrElemName"/>
+				<result column="attr_name" 		property="attrName"/>
+			</collection>
 			
 		</resultMap>
 		
@@ -381,7 +387,7 @@
 <!-- 					        #{item} -->
 <!-- 					</foreach> -->
 <!-- 				</if>  -->
-				GROUP BY pi.user_id
+				GROUP BY pi.user_id, ae.attr_elem_id
 <!-- 				GROUP BY pi.player_info_id, U.user_nm, pi.cat_id1, c1.cat_name, c2.cat_id, c2.cat_name	    	     -->
 		</sql> 
 
@@ -397,13 +403,17 @@
 				  , pi.profile_img_file_path as profileImgFilePath
 				  , pi.introduce
 				  , pvd.link_url
-			FROM TB_PLAYER_INFO 		pi
-			LEFT JOIN TB_USER 			u 		ON pi.user_id 		= u.user_id	
-			LEFT JOIN TB_CATEGORY 		c1 		ON pi.cat_id1 		= c1.CAT_ID
-			LEFT JOIN TB_CATEGORY 		c2 		ON pi.CAT_ID2 		= c2.CAT_ID
-			LEFT JOIN TB_ATTR_ELEM 		ae 		ON pi.cat_id2 		= ae.cat_id
-			LEFT JOIN TB_ATTR_ELEM_MAP 	aem 	ON ae.attr_elem_id 	= aem.attr_elem_id 
-										  	   and pi.user_id 		= aem.user_id
+				  , a.attr_id
+				  , a.attr_name
+				  , ae.attr_elem_id
+				  , ae.attr_elem_name
+			FROM  TB_PLAYER_INFO 		 pi
+			LEFT  JOIN TB_USER 			 u 		ON pi.user_id 		 = u.user_id	
+			LEFT  JOIN TB_ATTR_ELEM_MAP  aem 	ON pi.user_id 		 = aem.user_id
+			INNER JOIN TB_CATEGORY 		 c1 	ON pi.cat_id1 		 = c1.cat_id
+			INNER JOIN TB_CATEGORY 		 c2 	ON pi.cat_id2 		 = c2.cat_id
+			INNER JOIN TB_ATTR_ELEM 	 ae  	ON aem.attr_elem_id  = ae.attr_elem_id
+			INNER JOIN TB_ATTR			 a		ON aem.attr_id		 = a.attr_id
 			LEFT JOIN TB_PLAYER_VIDEO_LINK pvd  ON pvd.player_info_id = pi.player_info_id							  	   
 		</sql>
 		

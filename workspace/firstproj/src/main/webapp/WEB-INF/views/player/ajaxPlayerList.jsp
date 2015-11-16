@@ -86,52 +86,15 @@
 							</c:otherwise>
 						</c:choose>					
 					</c:otherwise>
-				</c:choose>					
-<!--  
-				<c:choose>
-					<c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">
-						<img src="http://jwlee0208.cdn3.cafe24.com/${list.profileImgFilePath}" 
-							 data-src="holder.js/250x200" alt="image" class="img-thumbnail" 
-							 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
-							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
-							 data-toggle="modal" data-target="#myModal" 
-							 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
-					</c:when>
-					<c:otherwise>
-						<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
-							 data-src="holder.js/250x200" alt="image" class="img-thumbnail"
-							 onclick="javascript:goDetail('${list.userInfo.userId}');" 
-							 data-toggle="modal" data-target="#myModal" 
-							 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
-					</c:otherwise>
-				</c:choose>					
--->						
+				</c:choose>								
 						<div class="caption" style="cursor:pointer;">
 							<h3 style="background: #efefef; padding:5px 0 5px 0px; text-align:center;"><span onclick="javascript:goDetail('${list.userInfo.userId}');">${list.userInfo.userNm}</span></h3>
-							<p class="content_${index.count}" style="text-overflow:ellipsis; overflow:hidden;">
-								<div class="row">
-									<div class="col-xs-6">
-										<div class="circle circle-border">
-										     <div class="circle-inner">
-										         <div class="score-text">
-										            ${list.catNm1}
-										          </div>
-										     </div>
-										</div>	
-									</div>
-									<div class="col-xs-6">
-										<div class="circle circle-border">
-										     <div class="circle-inner">
-										         <div class="score-text">
-										            ${list.catNm2}
-										          </div>
-										     </div>
-										</div>									
-									</div>
+								<div class="btn-group btn-group-lg" width="100%">
+								<c:forEach var="attrElemInfo" items="${list.categoryAttrElemList}">
+									<div class="btn btn-default">${attrElemInfo.attrElemNameStr}</div>
+								</c:forEach>				
 								</div>
-
-<%-- 								<div class="row"><div class="col-xs-6">Type</div><div class="col-xs-6">${list.catNm1Str}</div></div> --%>
-<%-- 								<div class="row"><div class="col-xs-6">Position</div><div class="col-xs-6">${list.catNm2Str}</div></div> --%>
+							<p class="content_${index.count}">
 							</p>
 							<p>
 								<span class="btn btn-danger btn-block" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');"><tag:message code='button.watchme'/></span>

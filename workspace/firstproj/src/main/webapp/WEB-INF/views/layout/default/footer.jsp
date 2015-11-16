@@ -27,7 +27,7 @@ if($("#buildType").val()=='prod'){
 <c:choose>
 	  <c:when test="${userId ne '' && userId ne null}">	
 	  <p><a href="https://www.facebook.com/${userId}" target="_blank" class="btn btn-primary">Facebook</a>
-	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/share/profile/${userId}">profile</a>
+	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/share/${userId}/profile">profile</a>
 	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/share/${userId}">${userId}'s Share</a></p>
 	  </c:when>
 	  <c:otherwise>

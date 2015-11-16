@@ -92,7 +92,12 @@ public class BoardArticleController {
 	@Resource(name="redisTemplate")
 	private ValueOperations<String, List<BoardArticleDto>> valueOps;
 	 */
-	
+
+    @RequestMapping(value={"/", ""})
+    public String getShareRoot(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
+        return this.getBoardArticleList(request, model, boardArticleDto);
+    }
+    
 	/**
 	 * 게시글 목록 조회
 	 * @param request
@@ -901,4 +906,10 @@ public class BoardArticleController {
 	    return "board/article/profile";
 	}
 
+    @RequestMapping(value="/info")
+    public String getShareInfo(Model model, HttpSession session){
+        this.shareService.setShareInfo(model, session);
+        return "common/ajaxShareInfo";
+    }    
+    
 }
