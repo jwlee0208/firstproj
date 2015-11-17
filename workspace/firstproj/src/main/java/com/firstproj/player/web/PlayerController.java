@@ -446,7 +446,7 @@ public class PlayerController {
     @RequestMapping(value="/modify", method = {RequestMethod.POST, RequestMethod.GET})
     public String getPlayerDetailForModify(HttpServletRequest request, Model model, UserDto userDto, HttpSession session) throws Exception{
     	UserDto myInfo   = (UserDto)session.getAttribute("userInfo");
-    	log.info("[ PlayerController.getPlayerDetailForModify() ][ Param ] myInfo : " + myInfo.toString());
+    	log.error("[ PlayerController.getPlayerDetailForModify() ][ Param ] myInfo : " + myInfo.toString());
     	
     	if(null == myInfo){
     	    return "redirect:/login?redirectPage=" + request.getRequestURI();
@@ -597,14 +597,14 @@ public class PlayerController {
         PageHolder          pageHolder = null;
         int                 playerCnt  = 0;
         
-        searchPlayerDto.setListSize(9);
+        searchPlayerDto.setListSize(9*3);
         
         try {
             playerList = playerService.selectPlayerList(searchPlayerDto , session);
             playerCnt  = playerService.selectPlayerCnt(searchPlayerDto  , session);
 
             if(playerCnt > 0){
-                pageHolder = new PageHolder(playerCnt, searchPlayerDto.getPage(), 9); //searchPlayerDto.getListSize()   
+                pageHolder = new PageHolder(playerCnt, searchPlayerDto.getPage(), 9*3); //searchPlayerDto.getListSize()   
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block

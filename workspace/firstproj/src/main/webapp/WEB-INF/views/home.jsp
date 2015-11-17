@@ -103,38 +103,17 @@ font-size: 1em;
 						</c:choose>	
 							
 					</c:otherwise>
-				</c:choose>	
-									
+				</c:choose>			
 						<div class="caption" style="cursor:pointer;">
 							<h3 style="background: #efefef; padding:5px 0 5px 0px; text-align:center;"><span onclick="javascript:goDetail('${list.userInfo.userId}');">${list.userInfo.userNm}</span></h3>
-							<p class="content_${index.count}" style="text-overflow:ellipsis; overflow:hidden;">
-								<div class="row">
-									<div class="col-xs-6">
-										<div class="circle circle-border">
-										     <div class="circle-inner">
-										         <div class="score-text">
-										            ${list.catNm1}
-										          </div>
-										     </div>
-										</div>	
-									</div>
-									<div class="col-xs-6">
-										<div class="circle circle-border">
-										     <div class="circle-inner">
-										         <div class="score-text">
-										            ${list.catNm2}
-										          </div>
-										     </div>
-										</div>									
-									</div>
-								</div>
-<%-- 								
-								<div class="row"><div class="col-xs-6">Type</div><div class="col-xs-6">${list.catNm1}</div></div>
-								<div class="row"><div class="col-xs-6">Position</div><div class="col-xs-6">${list.catNm2}</div></div> 
---%>
-							</p>
-							<p>
+							<div class="btn-group btn-group-lg btn-group-justified">
+								<c:forEach var="attrElemInfo" items="${list.categoryAttrElemList}">
+								<div class="btn btn-default">${attrElemInfo.attrElemNameStr}</div>
+								</c:forEach>				
+							</div>
 
+							<p class="content_${index.count}"></p>
+							<p>
 								<span class="btn btn-danger btn-block" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');"><tag:message code='button.watchme'/></span>
 							</p>
 						</div>
@@ -180,15 +159,17 @@ font-size: 1em;
 						
 						<div class="caption" style="cursor:pointer;">
 							<h3><span onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">${list.userInfo.userNm}</span></h3>
-							<p class="content_${index.count}" style="text-overflow:ellipsis; overflow:hidden;">
-								<div class="row"><div class="col-xs-6">Type</div><div class="col-xs-6">${list.catNm1Str}</div></div>
-								<div class="row"><div class="col-xs-6">Position</div><div class="col-xs-6">${list.catNm2Str}</div></div>
-							</p>
+								<div class="btn-group btn-group-lg btn-group-justified">
+								<c:forEach var="attrElemInfo" items="${list.categoryAttrElemList}">
+									<div class="btn btn-default">${attrElemInfo.attrElemNameStr}</div>
+								</c:forEach>				
+								</div>
+
+							<p class="content_${index.count}"></p>
 							<p>
 								<span class="btn btn-info" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.detailview'/></span>
 							</p>
 						</div>
-	
 					</div>
 				</div>
 			

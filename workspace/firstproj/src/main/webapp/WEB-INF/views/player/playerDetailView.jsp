@@ -28,7 +28,8 @@
 <body>
 <div class="container">
 	<form id="viewFrm" name="viewFrm" method="post" class="form-horizontal" role="form">
-		<input type="hidden" id="playerInfoId" name="playerInfoId" value="${playerDetailInfo.playerInfoId}"/>
+		<input type="hidden" id="userId" 		name="userId" 		value="${playerDetailInfo.userInfo.userId}"/>
+		<input type="hidden" id="playerInfoId" 	name="playerInfoId" value="${playerDetailInfo.playerInfoId}"/>
 		<h1 id="btn-groups" class="page-header">I'm ${playerDetailInfo.userInfo.userNm}&nbsp;&nbsp;&nbsp;<small>Player Information</small></h1>
 		<div class="form-group">
 			<label for="linkUrl" class="col-sm-2">Checkout My Play Streamming</label>

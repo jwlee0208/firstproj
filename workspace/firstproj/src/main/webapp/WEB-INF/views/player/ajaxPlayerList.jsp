@@ -89,7 +89,7 @@
 				</c:choose>								
 						<div class="caption" style="cursor:pointer;">
 							<h3 style="background: #efefef; padding:5px 0 5px 0px; text-align:center;"><span onclick="javascript:goDetail('${list.userInfo.userId}');">${list.userInfo.userNm}</span></h3>
-								<div class="btn-group btn-group-lg" width="100%">
+								<div class="btn-group btn-group-lg btn-group-justified">
 								<c:forEach var="attrElemInfo" items="${list.categoryAttrElemList}">
 									<div class="btn btn-default">${attrElemInfo.attrElemNameStr}</div>
 								</c:forEach>				

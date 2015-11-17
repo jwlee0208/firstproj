@@ -14,7 +14,7 @@
 				  , parent_cat_id
 				  , cat_name
 			FROM TB_CATEGORY 
-			WHERE 1 = 1
+			<where>
 			 <choose>
 			 	<when test="parentCatId > 0">
 			  AND parent_cat_id = #{parentCatId}
@@ -23,6 +23,7 @@
 			  AND parent_cat_id = 0	
 				</otherwise>			 
 			 </choose>
+			</where> 
 		</select>	
 
 		
@@ -164,13 +165,14 @@
 			LEFT JOIN TB_USER 		u 	ON u.user_id = pi.user_id 
 			LEFT JOIN TB_CATEGORY 	c1 	ON c1.cat_id = pi.cat_id1
 			LEFT JOIN TB_CATEGORY 	c2 	ON c2.cat_id = pi.cat_id2
-			WHERE 1 = 1
+			<where>
 			<if test='searchCondition == "userName"'>
 				<if test='searchText != null and searchText != ""'>
 			  and u.user_nm like CONCAT('%', #{searchText}, '%')
 <!-- 				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode) -->
 			  	</if>
-			</if>  	
+			</if>  
+			</where>	
 			GROUP BY c1.cat_id, c1.cat_name, c2.cat_id, c2.cat_name
 			ORDER BY u.user_nm
 		</select>
@@ -182,9 +184,10 @@
 			FROM TB_USER u
 			LEFT JOIN TB_PLAYER_INFO pi ON pi.user_id = u.user_id
 			INNER JOIN TB_ATTR_ELEM_MAP aem ON aem.user_id = u.user_id
-			where 1 = 1
+			<where>
 			and u.user_nm like concat('%', #{searchText}, '%')
 <!-- 				AND MATCH(u.user_nm) AGAINST(CONCAT('*', #{searchText}, '*') in boolean mode) -->
+			</where>
 			GROUP BY u.user_id
 			ORDER BY user_nm
 		</select>
@@ -209,7 +212,7 @@
 		
 				<!-- 페이징 처리를 위한 검색 조건 -->
 		<sql id="searchConditionSql">
-			WHERE 1 = 1
+			<where>
 				<if test='searchCondition == "userName"'>
 					<if test='searchText != null and searchText != ""'>
 				AND aem.user_name 	LIKE CONCAT('%', #{searchText}, '%')
@@ -237,25 +240,13 @@
 					
 					</if>
 				</foreach>
-			</if>					
-				
-<!-- 				<if test="attrId > 0"> -->
-<!-- 				and a.attr_id = #{attrId}     -->
-<!-- 				</if> -->
-<!-- 				<if test="attrElemId != null"> -->
-<!-- 				and ae.attr_elem_id in  -->
-				
-<!-- 					<foreach item="item" index="index" collection="attrElemId" -->
-<!-- 					      open="(" separator="," close=")"> -->
-<!-- 					        #{item} -->
-<!-- 					</foreach>				     -->
-<!-- 				</if>    -->
-<!-- 				and aem.attr_elem_map_id > 0  	     -->
+			</if>
+			</where>					
 		</sql> 
 		
 		<!-- 페이징 처리를 위한 검색 조건2 -->
 		<sql id="searchConditionSql2">
-			WHERE 1 = 1
+			<where>
 				<if test='searchCondition == "userName"'>
 					<if test='searchText != null and searchText != ""'>
 					AND aem.user_name 	like CONCAT('%', #{searchText}, '%')
@@ -267,23 +258,12 @@
 				<if test="catId2 > 0">
 				AND a.cat_id = #{catId2}    
 				</if>
-				
-<!-- 				<if test="attrId > 0"> -->
-<!-- 				and a.attr_id = #{attrId}     -->
-<!-- 				</if> -->
-<!-- 				<if test="attrElemId != null"> -->
-<!-- 				and ae.attr_elem_id in  -->
-				
-<!-- 					<foreach item="item" index="index" collection="attrElemId" -->
-<!-- 					      open="(" separator="," close=")"> -->
-<!-- 					        #{item} -->
-<!-- 					</foreach>				     -->
-<!-- 				</if>    -->
-				AND aem.attr_elem_map_id > 0  	    
+				AND aem.attr_elem_map_id > 0
+			</where>	  	    
 		</sql> 
 
 		<sql id="searchConditionPlayerSql">
-			WHERE 1 = 1
+			<where>
 					<if test='searchCondition == "userName"'>
 						<if test='searchText != null and searchText != ""'>
 						and aem.user_name 	like CONCAT('%', #{searchText}, '%')
@@ -319,21 +299,9 @@
 					
 					</if>
 				</foreach>
-			</if>				
-				
-				
-<!-- 				<if test="attrId > 0"> -->
-<!-- 				and a.attr_id = #{attrId}     -->
-<!-- 				</if> -->
-<!-- 				<if test="attrElemId != null"> -->
-<!-- 					   and aem.attr_elem_id in  -->
-<!-- 					<foreach item="item" index="index" collection="attrElemId" -->
-<!-- 					      open="(" separator="," close=")"> -->
-<!-- 					        #{item} -->
-<!-- 					</foreach> -->
-<!-- 				</if>  -->
+			</if>					
+			</where>	
 				GROUP BY pi.user_id
-<!-- 				GROUP BY pi.player_info_id, U.user_nm, pi.cat_id1, c1.cat_name, c2.cat_id, c2.cat_name	    	     -->
 		</sql> 
 
 		<!-- playerInfo 페이징 처리를 위한 검색 조건 -->
@@ -377,18 +345,7 @@
 				</foreach>
 			</if>				
 			</where>		
-<!-- 				<if test="attrId > 0"> -->
-<!-- 				and a.attr_id = #{attrId}     -->
-<!-- 				</if> -->
-<!-- 				<if test="attrElemId != null"> -->
-<!-- 					   and aem.attr_elem_id in  -->
-<!-- 					<foreach item="item" index="index" collection="attrElemId" -->
-<!-- 					      open="(" separator="," close=")"> -->
-<!-- 					        #{item} -->
-<!-- 					</foreach> -->
-<!-- 				</if>  -->
 				GROUP BY pi.user_id, ae.attr_elem_id
-<!-- 				GROUP BY pi.player_info_id, U.user_nm, pi.cat_id1, c1.cat_name, c2.cat_id, c2.cat_name	    	     -->
 		</sql> 
 
 		<sql id="selectPlayerListDefault">
@@ -571,8 +528,8 @@
 		<select id="selectPlayerListRecently" parameterType="player.playerInfoDto" resultMap="playerListMap">
 			<include refid="selectPlayerListDefault"/>			
 			WHERE pi.cat_id1 = #{catId1} 
-			GROUP BY pi.player_info_id
+			GROUP BY pi.player_info_id, ae.attr_elem_id
 			ORDER BY pi.player_info_id ASC	
-			LIMIT 3  	
+			LIMIT 9  	
 		</select>
     </mapper>
