@@ -4,52 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" 	prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 			prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" 		prefix="tag"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/circle.css"/>
 <style>
 	iframe {width : 250px; height : 200px; align:center;}
-	
-	.circle {
-	margin-left: auto;
-	margin-right: auto;
-	border-radius: 50%;
-	width: 40%;
-	position: relative;
-	}
-	
-	.circle-border {
-	border: 1px solid black;
-	}
-	
-	.circle-solid{
-	background-color: whitesmoke;
-	}
-	
-	.circle:before {
-	content: "";
-	display: block;
-	padding-top: 100%;
-	}
-	
-	.circle-inner {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	text-align: center;
-	}
-	
-	.score-text {
-	margin: auto;
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	height: 1em;
-	line-height: 1em;
-	font-size: 1em;
-	}
-		
 </style>
 <c:choose>
 	<c:when test="${empty playerList}">

@@ -232,54 +232,7 @@ public class UserController {
                     this.shareService.insertShareInfo(shareDto);
                                         
                     this.sendWelcomeMail(userDto);
-                    /*
-                    // Sending Mail
-                    AES256Util aes256util  = new AES256Util(CommonConstant.IV);
                     
-                    MailDto mailInfo = new MailDto();
-                    mailInfo.setContentType("text/html; charset=utf-8");
-                    mailInfo.setMailTo(aes256util.decrypt(userDto.getEmail()));
-                    mailInfo.setMailFrom("jwlee0208@gmail.com");
-                    mailInfo.setMailSubject("[Tryout.com] Congraturation! Happy join us!!");
-                    mailInfo.setTemplateName("welcomeJoinningTemplate.vm");
-                    
-                    log.info("[ UserController.registAction() ][ userDto.getLanguage() ] : " + userDto.getLanguage());
-                    log.info("[ UserController.registAction() ][ new Locale(userDto.getLanguage()) ] : " + new Locale(userDto.getLanguage()));
-                    
-                    
-                    // 메시지 다국어 처리
-                    String welcomeMsg = null;
-                    
-                    try{
-                        welcomeMsg = messageSource.getMessage("welcome.joinning", new Locale(userDto.getLanguage())); 
-                    }catch(Exception e){
-                        e.printStackTrace();
-                        log.error("[ UserController.registAction() ][ welcomeMsg ] Error Occured...");
-                        welcomeMsg = "Welcome!!!";
-                    }
-                            //new String(resourceBundle.getString("welcome.joinning").getBytes("8859_1"), "UTF-8");
-                    
-                    log.info("[ UserController.registAction() ][ welcomeMsg ] : " + welcomeMsg);
-                    
-                    // Velocity Template 에 Mapping할 Data Map
-                    Map<String, Object> contentMap = new HashMap<String, Object>();
-                    contentMap.put("mailTo"         , mailInfo.getMailTo());
-                    contentMap.put("welcomeMessage" , welcomeMsg);
-                    mailInfo.setModel(contentMap);
-                    
-                    
-                    // setting content
-                    String body = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "./mailTemplates/welcomeJoinningTemplate.vm", "UTF-8", mailInfo.getModel());
-                    mailInfo.setMailContent(body);
-                    
-                    // mail 발송
-                    try{
-                        commonService.sendMail(mailInfo);    
-                    }catch(Exception e){
-                        e.printStackTrace();
-                        log.info("[ 메일 발송 오류 ]");
-                    }
-                    */
                 }else{
                     resultCode  = "REGIST_0002";
                     resultMsg   = "Occurred Error during registration process.\nPlease, Try again process.\nAnd Please, Send Email To Administrator, If This Error Occurred Again.\nEmail Address : jwlee0208@gmail.com";

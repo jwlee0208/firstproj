@@ -3,9 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <script type="text/javascript" src="http://apis.daum.net/maps/maps2.js?apikey=98f284673f90ce9e7af4fa2aa4776e3465dc16f3"></script>
-
-<!-- <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=98f284673f90ce9e7af4fa2aa4776e3465dc16f3" charset="utf-8"></script>  -->
-<!-- <script charset="UTF-8" src="http://apis.daum.net/maps/real/maps3.70.js"></script> -->
 <script>
 	function goToAUTab(index){
 		$(".li").removeClass("active");
@@ -139,21 +136,4 @@
 $(document).on("ready", function(){
 	goToAUTab(1);
 });
-
-// var map;
-// function init() {
-// 	map =  new daum.maps.Map(document.getElementById('map'), {
-// 		center: new daum.maps.LatLng(37.537123, 127.005523)
-// 	});
-// 	var zoomControl = new daum.maps.ZoomControl();
-// 	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-// 	var mapTypeControl = new daum.maps.MapTypeControl();
-// 	map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
-// }
-// var map = new DMap("map",{width:700,height:400});
-// 	map.setCenter(new DLatLng(37.50696024199666, 127.06154455833864), 2);
-// 	 var iw = new DInfoWindow("http://local.daum.net/localn/include/cms_map.html", {width:270, height:160});
-// 	var m = new DMark(new DLatLng(37.50696024199666, 127.06154455833864));
-// 	map.addOverlay(m);
-
 </script>	  	  

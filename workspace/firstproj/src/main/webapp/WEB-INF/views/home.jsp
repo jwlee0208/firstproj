@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag" %>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/circle.css"/>
 <style>
 .jumbotron {
     position: relative;
@@ -15,49 +16,6 @@
     color: white; 
 }
 iframe {width : 250px; height : 200px; align:center;}
-
-.circle {
-margin-left: auto;
-margin-right: auto;
-border-radius: 50%;
-width: 40%;
-position: relative;
-}
-
-.circle-border {
-border: 1px solid black;
-}
-
-.circle-solid{
-background-color: whitesmoke;
-}
-
-.circle:before {
-content: "";
-display: block;
-padding-top: 100%;
-}
-
-.circle-inner {
-position: absolute;
-top: 0;
-left: 0;
-bottom: 0;
-right: 0;
-text-align: center;
-}
-
-.score-text {
-margin: auto;
-position: absolute;
-top: 0;
-left: 0;
-bottom: 0;
-right: 0;
-height: 1em;
-line-height: 1em;
-font-size: 1em;
-}
 </style>
 <form id="mainFrm" name="mainFrm" method="post">
 </form>
@@ -83,7 +41,6 @@ font-size: 1em;
 					</div>	
 					</c:when>
 					<c:otherwise>
-					
 						<c:choose>
 							<c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">
 						<img src="http://jwlee0208.cdn3.cafe24.com/${list.profileImgFilePath}" 
@@ -101,7 +58,6 @@ font-size: 1em;
 							 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
 							</c:otherwise>
 						</c:choose>	
-							
 					</c:otherwise>
 				</c:choose>			
 						<div class="caption" style="cursor:pointer;">
@@ -111,7 +67,6 @@ font-size: 1em;
 								<div class="btn btn-default">${attrElemInfo.attrElemNameStr}</div>
 								</c:forEach>				
 							</div>
-
 							<p class="content_${index.count}"></p>
 							<p>
 								<span class="btn btn-danger btn-block" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');"><tag:message code='button.watchme'/></span>
@@ -119,18 +74,15 @@ font-size: 1em;
 						</div>
 					</div>		
 				</div>
-			
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
 			<div style="text-align:center; min-height : 70px;vertical-align: middle;">
-			<h3><tag:message code='text.noregistplayer'/></h3>
+				<h3><tag:message code='text.noregistplayer'/></h3>
 			</div>
 		</c:otherwise>	
 	</c:choose>
-	
-	</div>
-	
+	</div>	
 	
 	<h4><tag:message code='text.recentregistteams'/>&nbsp;&nbsp;<small><a href="/team/teamPortal/6"><tag:message code='button.more'/></a></small></h4>
 	<div class="row">
@@ -156,7 +108,6 @@ font-size: 1em;
 							 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
 					</c:otherwise>
 				</c:choose>					
-						
 						<div class="caption" style="cursor:pointer;">
 							<h3><span onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">${list.userInfo.userNm}</span></h3>
 								<div class="btn-group btn-group-lg btn-group-justified">
@@ -167,12 +118,11 @@ font-size: 1em;
 
 							<p class="content_${index.count}"></p>
 							<p>
-								<span class="btn btn-info" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.detailview'/></span>
+								<span class="btn btn-primary btn-block" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.detailview'/></span>
 							</p>
 						</div>
 					</div>
 				</div>
-			
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
@@ -181,78 +131,47 @@ font-size: 1em;
 			</div>
 		</c:otherwise>	
 	</c:choose>
-	
 	</div>	
 	
-	
-	
-
-	<div class="row" style="padding-left: 20px; padding-right: 20px; display: none;">
-		<!-- left area -->
-		<div class="row">
-			<ul class="nav nav-tabs" role="tablist" id="boardTab">
-				<li id="li_1" class="li"><a>개발 관련&nbsp;&nbsp;<span class="btn btn-default" onclick="javascript:goList(1);">more+</span></a></li>
-				<li id="li_2" class="li"><a>여행 관련&nbsp;&nbsp;<span class="btn btn-default" onclick="javascript:goList(2);">more+</span></a></li>
-			</ul>
-			<div class="boardDiv li_1_board" style="display:none; padding-top : 10px;">
-				<div class="table-responsive">
-					<table class="table table-striped">
-						<colgroup><col width="30%"/><col width="70%"/></colgroup>
+	<h4><tag:message code='text.recenttryoutinfo'/>&nbsp;&nbsp;<small><a href="/share/jwlee/list/15"><tag:message code='button.more'/></a></small></h4>
+	<div class="row" style="padding-left: 10px; padding-right: 10px;">
+		<div class="boardDiv li_1_board" style="padding-top : 10px;">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<colgroup><col width="10%"/><col width="90%"/></colgroup>
 				<c:choose>		
-					<c:when test="${null ne articleFive01 && articleFive01.size() > 0}">
-						<c:forEach var="article" items="${articleFive01}">
-						<tr>
-							<td>${fn:substring(article.createDate, 0, 10)}</td>
-							<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal">${article.title }</span></td>
-						</tr>	
+					<c:when test="${null ne recentTryoutList && recentTryoutList.size() > 0}">
+						<c:forEach var="article" items="${recentTryoutList}">
+					<tr>
+						<td>${fn:substring(article.createDate, 0, 10)}</td>
+						<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal" style="cursor:pointer;">${article.title }</span></td>
+					</tr>	
 						</c:forEach> 
 					</c:when>
 					<c:otherwise>
-						<tr><td colspan="2">데이터가 없습니다.</td></tr>
+					<tr><td colspan="2">데이터가 없습니다.</td></tr>
 					</c:otherwise>	
 				</c:choose>		
-					</table>
-				</div>
+				</table>
 			</div>
-			<div class="boardDiv li_2_board" style="display:none; padding-top : 10px;">
-				<div class="table-responsive">
-					<table class="table table-striped">
-						<colgroup><col width="30%"/><col width="70%"/></colgroup>
-				<c:choose>		
-					<c:when test="${null ne articleFive02 && articleFive02.size() > 0}">
-						<c:forEach var="article" items="${articleFive02}">
-						<tr>
-							<td>${fn:substring(article.createDate, 0, 10)}</td>
-							<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal" >${article.title}</span></td>
-						</tr>
-						</c:forEach> 
-					</c:when>	
-					<c:otherwise>
-						<tr><td colspan="2">데이터가 없습니다.</td></tr>
-					</c:otherwise>
-				</c:choose>	
-					</table>		
-				</div>
-			</div>	
 		</div>
+	</div>	
 
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content" style="width : 700px;">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	      </div>
+	      <div class="modal-body" style="height : 500px; overflow-y:scroll; "></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
 	</div>
-	
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content" style="width : 700px;">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body" style="height : 500px; overflow-y:scroll; "></div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 <script>
 	$().ready(function(){
 		$("#li_1").addClass("active");
@@ -271,7 +190,7 @@ font-size: 1em;
 
 	function goArticleView(articleId){
 		$.ajax({
-			url : '/board/article/view/' + articleId,
+			url : '/share/view/' + articleId,
 			data : {selectedArticleId : articleId},
 			dataType : 'html',
 			success : function(data){

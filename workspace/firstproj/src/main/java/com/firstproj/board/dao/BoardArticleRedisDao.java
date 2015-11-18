@@ -2,10 +2,6 @@ package com.firstproj.board.dao;
 
 import javax.inject.Named;
 
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
-
 @Named(value="BoardArticleRedisDao")
 public class BoardArticleRedisDao {
 	// jedis test

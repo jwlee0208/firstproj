@@ -50,14 +50,8 @@ public class HomeController {
 	    return this.goHome3(model, 0);
 	}
 	
-	/*
-	@RequestMapping(value="/home/{menuId}")
-	public String goHome(Model model, @PathVariable int menuId) throws Exception{
-	    model = goHomeDefault(model);
-		return "home";
-	}
-    */
-	private Model goHomeDefault(Model model) throws Exception{
+	@SuppressWarnings("unused")
+    private Model goHomeDefault(Model model) throws Exception{
 	    BoardArticleDto boardDto01 = new BoardArticleDto();
 	    boardDto01.setBoardId(1);
 	        
@@ -83,18 +77,27 @@ public class HomeController {
 
 	    PlayerInfoDto teamInfoDto = new PlayerInfoDto();
 	    teamInfoDto.setCatId1(5);
-
 	    List<PlayerInfoDto>    recentTeamList    = this.playerService.getPlayerListRecently(teamInfoDto);
 	    
+	    BoardArticleDto boardDto01 = new BoardArticleDto();
+	    boardDto01.setBoardId(15);
+	            
+	    List<BoardArticleDto> recentTryoutList = this.boardArticleService.selectBoardArticleFive(boardDto01);
+
 	    model.addAttribute("recentPlayerList"  , recentPlayerList);
 	    model.addAttribute("recentTeamList"    , recentTeamList);
-	    
+	    model.addAttribute("recentTryoutList"  , recentTryoutList);
 		return "home";
 	}	
 	
 	@RequestMapping(value="/aboutUs/{menuId}")
 	public String goAboutUs() throws Exception{
 		return "/info/aboutUs";
+	}
+	
+	@RequestMapping(value="/sitemap")
+	public String goSitemap() throws Exception{
+	    return "/info/sitemap";
 	}
 	    
 }

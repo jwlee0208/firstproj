@@ -1,17 +1,8 @@
 package com.firstproj.testtwo.web;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.JedisSentinelPool;
-import redis.clients.jedis.Protocol;
 
 public class RedisTest {
+    /*
 	@SuppressWarnings("unused")
 	private static void useJedisPool() throws InterruptedException{
 		
@@ -57,7 +48,7 @@ public class RedisTest {
 		
 		pool.returnResource(jedis);		
 	}
-	
+	*/
 	public static void main(String[] args) throws Exception{
 		// JedisPool
 //		RedisTest.useJedisPool();
