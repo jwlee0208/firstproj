@@ -1,14 +1,14 @@
 firstproj
 =========
 
-1. master
+1. Master
 
 
-2. developer
+2. Developer
 
 
-3. feature
-==========
+3. Feature
+
 3.1. editorFileUpload
 
 3.2. jQuery_validate
