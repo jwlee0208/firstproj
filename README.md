@@ -1,8 +1,6 @@
 firstproj
 =========
 
-예제 프로젝트
-
 1. master
 
 
@@ -31,8 +29,9 @@ firstproj
 ----------------------------
 3.6.1.1.1.1. Go to http://redis.io/download , download and execute to install redis
 
-3.6.1.1.1.2. set about redis into pom.xml(maven dependency) and update maven dependency following this : 
-3.6.1.1.1.2.1. set about redis into pom.xml
+3.6.1.1.1.2. Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
+
+3.6.1.1.1.2.1. Set about redis into pom.xml
 
 		<!-- redis -->
 		<dependency>
@@ -48,7 +47,7 @@ firstproj
 		</dependency>
 
 
-3.6.1.1.2. update maven dependency
+3.6.1.1.2. Update maven dependency
 --------------------------------
 if you use to eclipse, 
 - Select to project
@@ -97,7 +96,6 @@ if you use to eclipse,
 		<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
 		    <property name="connectionFactory" ref="connectionFactory" />
 		</bean>
-<!-- 		 -->
 		 
 </beans>			
 
@@ -129,10 +127,6 @@ if you use to eclipse,
 	 */
 	@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
 	public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception {
-//System.out.println(">>> getBoardList()");
-//		List<boardArticleDto> boardList = boardArticleService.getBoardList();
-
-//		model = this.getBoardCommonList(request, model, boardArticleDto);
 		model = this.getBoardCommonListForJson(request, model, boardArticleDto);
 		
 		String page = "board/article/list";
@@ -143,8 +137,6 @@ if you use to eclipse,
 			page = "board/article/imageList2";
 		}
 		
-//		model.addAttribute("boardList", boardList);
-//		return "board/list";
 		return page;
 	}
 
