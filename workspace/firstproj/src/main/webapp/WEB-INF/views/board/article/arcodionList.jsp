@@ -6,6 +6,7 @@
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/common/paging.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleList.js"></script>
 <link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/pagination.css">
+
 	<div class="blog-header">
 	  <h1><tag:message code='text.board'/>&nbsp;&nbsp;<small><tag:message code='text.all'/></small></h1>
 	</div>	
@@ -43,7 +44,7 @@
 					<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
 						<c:forEach var="contentInfo" items="${pagedResult.list}" varStatus="index">
 			<div class="panel panel-default">
-				<div class="panel-heading">
+				<div class="panel-heading" style=" background: white;">
 					<h4 class="panel-title" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
 						<a data-toggle="collapse" data-parent="#accordion" href="#collapse${index.count}"><c:out value="${contentInfo.title}"/> </a>
 						&nbsp;&nbsp;<small> | &nbsp;&nbsp;${contentInfo.boardName}</small>
@@ -51,8 +52,7 @@
 				</div>
 				<div id="collapse${index.count}" class="collapse in">
 					<div class="panel-body" style="padding-left: 15px; white-space:normal; white-break:break-word;">
-						<p style="text-align: right;"><a href="http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}</a></p>
-						<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="javascript:;" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">${contentInfo.authorNm}</a></p>
+						<p style="text-align: left;"><a href="http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}</a></p>						
 						 
 						<c:out value="${contentInfo.content}" escapeXml="false"/><br/><br/>
 
@@ -64,6 +64,10 @@
 									<c:out value="${slideshareLinkInfo.slideshareLinkUrl}" escapeXml="false"/><br/>
 								</c:forEach>
 							</c:if>				
+						</div>
+						<div class="row">
+							<div class="btn btn-link" style="float:left; color:#999;">${fn:substring(contentInfo.createDate, 0, 10)}</div>
+							<div class="btn btn-link" style="float:right; color:#999;" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">Posted by <a href="javascript:;">${contentInfo.authorNm}</a></div>	
 						</div>
 						
 						<div class="row" style="float: left; padding-left:10px;">

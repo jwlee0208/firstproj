@@ -19,3 +19,13 @@ if($("#buildType").val()=='prod'){
 	wcs_add["wa"] = "47918035f92e80";
 	wcs_do();
 </script>
+<!-- baidu analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1bd314db72ba2d5b15923340a7f3d05f";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>

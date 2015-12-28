@@ -1,6 +1,5 @@
 package com.firstproj.board.web;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,12 +29,9 @@ import com.firstproj.board.dto.SlideshareLinkDto;
 import com.firstproj.board.service.BoardArticleServiceImpl;
 import com.firstproj.board.service.BoardCategoryServiceImpl;
 import com.firstproj.board.service.BoardServiceImpl;
-import com.firstproj.common.CommonConstant;
 import com.firstproj.common.dto.ShareDto;
-import com.firstproj.common.paging.PageParam;
 import com.firstproj.common.util.FileUpload;
 import com.firstproj.common.util.PagedList;
-import com.firstproj.common.util.PagingUtil;
 import com.firstproj.common.web.EditorController;
 import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;

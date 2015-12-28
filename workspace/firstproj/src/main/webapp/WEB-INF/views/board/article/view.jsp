@@ -58,14 +58,16 @@
 
 		<div class="panel panel-default" role="main">	
 					
-			<div class="panel-heading">
+			<div class="panel-heading" style="background: white;">
 				<h4 class="panel-title" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><c:out value="${contentInfo.title}"/></h4>
 			</div>
 		
 			<div class="panel-body" style="padding-left: 15px;">
 				<p style="text-align: right;"><a href="http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}</a></p>
-				<p style="color:#999; text-align:right;">${fn:substring(contentInfo.createDate, 0, 10)} by <a href="#">${contentInfo.authorNm}</a></p>
-				<div style="min-height: 400px; white-space: normal; white-break: break-all;"><c:out value="${contentInfo.content}" escapeXml="false"/></div>
+				
+				<div style="min-height: 400px; white-space: normal; white-break: break-all;">
+					<c:out value="${contentInfo.content}" escapeXml="false"/>
+				</div>
 				<!-- slideshare iframe area -->
 				<div class="embed-responsive embed-responsive-16by9">
 					<c:set var="slideshareLinkInfos" value="${contentInfo.slideshareLinkInfos}"/>
@@ -79,12 +81,17 @@
 						</c:forEach>
 					</c:if>				
 				</div>
+				<div class="row">
+					<div class="btn btn-link" style="float:left; color:#999;">${fn:substring(contentInfo.createDate, 0, 10)}</div>
+					<div class="btn btn-link" style="float:right; color:#999;" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">Posted by <a href="javascript:;">${contentInfo.authorNm}</a></div>	
+				</div>
+				
 				<div class="row" style="float: left; padding-left:10px;">
 					<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">${contentInfo.shareInfo.shareName}</div>			
 				</div>				
 				<div class="row" style="float: right; padding-right:10px;">
 					<div class="btn btn-primary" title="Sharing Article To Facebook"	onclick="javascript:share('fb', '${contentInfo.articleId}', '', '${contentInfo.shareInfo.userId}');" >f</div>
-					<div class="btn btn-info" 	 title="Sharing Article To Twitter" 	onclick="javascript:share('tw', '${contentInfo.articleId}', '${contentInfo.title}', '${contentInfo.shareInfo.userId}');" >t</div>
+					<div class="btn btn-info" 	title="Sharing Article To Twitter" 	onclick="javascript:share('tw', '${contentInfo.articleId}', '${contentInfo.title}', '${contentInfo.shareInfo.userId}');" >t</div>
 				</div>
 				
 			</div>	
@@ -259,5 +266,4 @@
 		$("#"+type+"Div").hide();
 	}
 </script>
-
 </html>

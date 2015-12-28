@@ -83,7 +83,8 @@
 
 	        
 			</ul>
-			<c:if test="${null ne userInfo}">
+		<c:choose>
+			<c:when test="${null ne userInfo}">
 		<ul class="nav navbar-nav navbar-right">
         	<li class="dropdown">
           		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><tag:message code="menu.hi"/>, "${userInfo.userNm}" <span class="caret"></span></a>
@@ -95,25 +96,14 @@
           		</ul>
         	</li>
       	</ul>			
-			</c:if>			
-			<form class="navbar-form navbar-right" role="search" id="totSearchFrm" name="totSearchFrm">
-				<input type="hidden" 	id="searchCondition" name="searchCondition" value="titleNcontent" 	/>
-				<input type="hidden" 	id="boardId" 		 name="boardId" 		value="0" 	/>
-				<input type="text" 		id="totSearchText"	 name="searchText"		class="form-control" placeholder="<tag:message code='text.request.insert.search.keyword'/>" style="background-image: none; background-position: 0% 0%; background-repeat: repeat;">
-				
-				<select class="form-control" id="locale" name="locale">
-					<option value="">::: Language :::</option>
-					<option value="kr">한국어</option>
-					<option value="en">English</option>
-					<option value="zh">中国</option>
-					<option value="ja">日本語</option>
-				</select>&nbsp;&nbsp;
-				
-			<c:if test="${null eq userInfo}">
-				<a onclick="javascript:goRegist(6);" 	class="btn btn-primary"><tag:message code="signup"/></a>
-				<a onclick="javascript:goLogin(7);" 	class="btn btn-default"><tag:message code="signin"/></a>
-			</c:if>	
-			</form>
+			</c:when>
+			<c:otherwise>
+				<form class="navbar-form navbar-right">
+					<a onclick="javascript:goRegist(6);" 	class="btn btn-primary" ><tag:message code="signup"/></a>&nbsp;
+					<a onclick="javascript:goLogin(7);" 	class="btn btn-default" style="float:right;"><tag:message code="signin"/></a>&nbsp;
+				</form>
+			</c:otherwise>				
+		</c:choose>	
 		</div>
 	</div>
 </nav>	
