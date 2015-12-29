@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthStyle;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +51,7 @@ public class EditorController extends BaseController {
 		return "/common/popImageUpload"; 
 	}
 	
-	@RequestMapping(value = {"/{path}/imageuploadaction", "/{path1}/{path2}/imageuploadaction", "/{path1}/{path2}/{path3}/imageuploadaction", "/{path1}/{path2}/{path3}/{path4}/imageuploadaction"}, method={RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = {"/{path}/imageuploadaction", "/{path1}/{path2}/imageuploadaction", "/{path1}/{path2}/{path3}/imageuploadaction", "/{path1}/{path2}/{path3}/{path4}/imageuploadaction", "/{path1}/{path2}/{path3}/{path4}/{path5}/imageuploadaction"}, method={RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public String imageadd(MultipartFile imageFile) throws Exception {
 		
@@ -60,6 +61,7 @@ public class EditorController extends BaseController {
 		System.out.println("" + imageFile.getSize());
 		System.out.println("" + imageFile.getBytes());
     	StringBuffer sb = this.fileUploadByEditor(imageFile);
+    	System.out.println("image upload result : " + sb.toString());
 		return sb.toString();
     }
 	

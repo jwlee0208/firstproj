@@ -10,8 +10,8 @@ function editorImgUploadComplete(fileStr){
 }
 
 function share(type, articleId, content, shareId){
-	var url 	= "";
-	var userId 	= shareId
+	var url 	= "/share";
+	var userId 	= shareId;
 	
 	if(type == 'fb'){
 		url = "http://www.facebook.com/sharer/sharer.php?u=http://linkednest.net";
@@ -21,9 +21,11 @@ function share(type, articleId, content, shareId){
 	}
 	
 	if(userId != undefined && userId != null && userId != ''){
-		url += "/share/"+ userId +"/view/" + articleId; 
-	}else{
-		url += "/board/article/view/" + articleId;
+		url += "/"+ userId; 
 	}
+	url += "/view/" + articleId;
+//	else{
+//		url += "/board/article/view/" + articleId;
+//	}
 	window.open(url);
 }

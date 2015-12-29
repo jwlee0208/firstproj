@@ -127,7 +127,7 @@ function goArticleView(articleId, type){
 	
 	if(type == 'popup'){
 		$.ajax({
-			url : '/board/article/view/' + articleId,
+			url : '/share/view/' + articleId, //'/board/article/view/' + articleId,
 			data : {selectedArticleId : articleId},
 			dataType : 'html',
 			success : function(data){

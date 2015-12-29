@@ -35,7 +35,8 @@ function FileuploadCallback(data, state){
    }
    alert("정상적으로 등록 되었습니다.");
    // 정상 등록 후 목록 화면으로 이동.
-   goList();
+   //goList();
+   goView();
 
 }
 
@@ -57,7 +58,7 @@ $(function(){
 			if(thumbImg.length == 0){
 				// 썸네일 파일 업로드 안할 때 저장
 				$.ajax({
-					url 		: '/board/article/insertBoardArticle.json',
+					url 		: '/share/insertBoardArticle.json', // '/board/article/insertBoardArticle.json',
 					type 		: 'post',
 					data 		: $("#writeFrm").serialize(),
 					dataType 	: 'json',
@@ -69,7 +70,8 @@ $(function(){
 					},
 					success 	: function(data){
 						if(data.result){
-							goList();
+//							goList();
+							goView();
 						}else{
 							alert(data.validate);
 						}
@@ -82,7 +84,7 @@ $(function(){
 			}else{
 				// 썸네일 파일 업로드 할 때 저장
 				var frm = $("#writeFrm");
-				frm.attr("action", '/board/article/insertBoardArticle');
+				frm.attr("action", '/share/insertBoardArticle'); // '/board/article/insertBoardArticle'
 				frm.attr("method", "post");
 				frm.ajaxForm(FileuploadCallback); 
 				frm.submit();
@@ -105,7 +107,7 @@ $(function(){
 			if(thumbImg.length == 0){
 				// 썸네일 파일 업로드 안할 때 저장
 				$.ajax({
-					url 		: '/board/article/modifyBoardArticle.json',
+					url 		: '/share/modifyBoardArticle.json', // '/board/article/modifyBoardArticle.json',
 					type 		: 'post',
 					data 		: $("#writeFrm").serialize(),
 					dataType 	: 'json',
@@ -118,7 +120,7 @@ $(function(){
 					success 	: function(data){
 //						console.log("data : " + data.result);
 						if(data.result){
-							goList();
+							goView();
 						}else{
 							alert(data.validate);
 						}
@@ -131,7 +133,7 @@ $(function(){
 			}else{
 				// 썸네일 파일 업로드 할 때 저장
 				var frm = $("#writeFrm");
-				frm.attr("action", '/board/article/modifyBoardArticle');
+				frm.attr("action", '/share/modifyBoardArticle');	// '/board/article/modifyBoardArticle'
 				frm.attr("method", "post");
 				frm.ajaxForm(FileuploadCallback); 
 //				frm.beforeSubmit(function(){
@@ -146,12 +148,31 @@ $(function(){
 
 
 function goList(){
-	var url 	= "/board/article/list/" + $("#writeFrm #boardId").val();
+	var boardId = $("#writeFrm #boardId").val();
+	var url 	= "/share"; // "/board/article/list/" + boardId;
 	var userId 	= $("#userId").val();
 	if(userId != null && userId != ''){
-		url 	= "/share/" + userId + "/list/" + $("#writeFrm #boardId").val();
+		url 	+= "/" + userId;
 	}
-	location.href =  url;	//"/board/article/list/"+$("#boardId").val()+"/"+$("#boardId").val();
+	url 	+= "/list/" + boardId;
+	location.href =  url;
+} 
+
+function goView(){
+	var boardId = $("#writeFrm #boardId").val();
+	var articleId = $("#writeFrm #articleId").val();
+	var url 	= "/share";
+	var userId 	= $("#userId").val();
+	if(userId != null && userId != ''){
+		url 	+= "/" + userId;
+	}
+	if(articleId > 0){
+		url 	+= "/view/" + articleId;	
+	}else{
+		url 	+= "/list/" + boardId; 
+	}
+	
+	location.href =  url;
 } 
 
 function toggleThumbImage(className){

@@ -75,6 +75,11 @@
 		        </li>
 						</c:forEach>
 		          	</c:if>	  
+		          	<c:if test="${null ne userInfo}">
+		        <li>
+		        	<a href="#" onclick="javascript:goConfig();"><tag:message code="common.config"/></a>
+		        </li>   	
+		          	</c:if>
     			</c:when>
     			<c:otherwise>
 				<li><a href="javascript:;" onclick="javascript:goShareHome('${userInfo.userId}');" ><tag:message code="common.myshare"/></a></li>    			

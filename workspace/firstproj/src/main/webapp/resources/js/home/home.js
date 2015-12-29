@@ -1,9 +1,10 @@
 function goList(boardId){	
 	var userId = $("#userId").val();
-	var url = "/board/article/list/" + boardId;
+	var url = "/share"; // "/board/article/list/" + boardId;
 	if(userId != null && userId != ''){
-		url = "/share/" + userId +"/list/" + boardId;
+		url += "/" + userId;
 	} 
+	url += "/list/" + boardId;
 	location.href = url;
 }
 function goHome(){
@@ -63,9 +64,7 @@ $(function(){
 				
 		if(event.which == 13){
 			event.preventDefault();
-
 			goTotSearch();
-			
 		}
 	});
 	
@@ -90,14 +89,16 @@ $(function(){
 });
 
 function goTotSearch(){
-	var url 	= '';	
+	var url 	= '/share';	
 	var userId 	= $("#userId").val();
 	
 	if(userId != null && userId != ''){
-		url = "/share/list";
-	}else{
-		url = "/board/article/list";
+		url += "/" + userId;
 	}
+	url += "/list";
+//	else{
+//		url = "/board/article/list";
+//	}
 
 	var frm = $("#totSearchFrm");
 	frm.attr("action"	, url);

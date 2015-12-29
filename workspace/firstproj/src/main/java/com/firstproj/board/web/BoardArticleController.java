@@ -740,6 +740,22 @@ public class BoardArticleController {
 	 * @param bindingResult
 	 * @param session
 	 * @param model
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/{userId}/modifyBoardArticle")
+	@ResponseBody
+	public String modifyBoardArticle(@Valid BoardArticleDto boardArticleDto, BindingResult bindingResult, HttpSession session, Model model, @PathVariable String userId) throws Exception {
+	    return this.modifyBoardArticle(boardArticleDto, bindingResult, session, model);
+	}
+	
+	/**
+	 * 게시글 수정(업로드 파일 있을 때)
+	 * @param boardArticleDto
+	 * @param bindingResult
+	 * @param session
+	 * @param model
 	 * @return
 	 * @throws Exception
 	 */
@@ -820,6 +836,23 @@ public class BoardArticleController {
 	@RequestMapping(value = "/modify/{selectedArticleId}/{selectedBoardId}")
 	public String modifyBoardArticlePage(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @PathVariable int selectedArticleId, @PathVariable int selectedBoardId) throws Exception{
 	    return this.modifyBoardArticlePage(request, model, boardArticleDto, session, selectedArticleId, selectedBoardId, null);
+	}
+	
+	/**
+	 * 게시글 수정 화면 출력
+	 * @param request
+	 * @param model
+	 * @param boardArticleDto
+	 * @param session
+	 * @param selectedArticleId
+	 * @param selectedBoardId
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/{userId}/modify/{selectedArticleId}/{selectedBoardId}")
+	public String modifyBoardArticlePage2(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto, HttpSession session, @PathVariable int selectedArticleId, @PathVariable int selectedBoardId, @PathVariable String userId) throws Exception{
+	    return this.modifyBoardArticlePage(request, model, boardArticleDto, session, selectedArticleId, selectedBoardId, userId);
 	}
 	
 	/**

@@ -19,10 +19,14 @@
     		
     		<c:if test="${boardList ne null}">
     			<c:forEach var="boardInfos" items="${boardList}">
-	    		<c:set var="url" value="/board/article/list/${boardInfos.boardInfo.boardId}"/>
+	    		<c:set var="url" value="/share/list/${boardInfos.boardInfo.boardId}"/>
 	    		<c:if test="${userId ne null && userId ne ''}">
 	    		<c:set var="url" value="/share/${userId}/list/${boardInfos.boardInfo.boardId}"/>
 	    		</c:if>
+<%-- 	    		<c:set var="url" value="/board/article/list/${boardInfos.boardInfo.boardId}"/> --%>
+<%-- 	    		<c:if test="${userId ne null && userId ne ''}"> --%>
+<%-- 	    		<c:set var="url" value="/share/${userId}/list/${boardInfos.boardInfo.boardId}"/> --%>
+<%-- 	    		</c:if> --%>
 				<a href="${url}" class="list-group-item" id="sideBoardMenu_${boardInfos.boardInfo.boardId}">&nbsp;&nbsp;&nbsp;${boardInfos.boardInfo.boardName} <span class="badge"> ${boardInfos.boardArticleCnt} </span></a>    			    			
     			</c:forEach>
     		</c:if>

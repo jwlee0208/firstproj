@@ -13,7 +13,7 @@
 
 <!-- design -->
 <div id="image_upload" data-provides="fileinput">
-	<form id="imageForm" action="popImgUpload" method="post" enctype="multipart/form-data">
+	<form id="imageForm" method="post" enctype="multipart/form-data"> <!-- action="popImgUpload" -->
 	<input type="hidden" name="folderId" id="folderId" value="" />
 	<input type="hidden" name="job" id="job" value="" />
 	<!-- body -->

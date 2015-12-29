@@ -6,8 +6,7 @@
 <!-- <script type="text/javascript" -->
 <%-- 	src="${pageContext.request.contextPath}/js/home/home.js"></script> --%>
 <%
-    UserDto userInfo = (UserDto) request.getSession().getAttribute(
-            "userInfo");
+    UserDto userInfo = (UserDto) request.getSession().getAttribute("userInfo");
 %>
 <c:set var="userInfo" value="<%=userInfo%>" />
 
@@ -51,15 +50,7 @@
         	</li>
       	</ul>			
 			</c:if>			
-			<form class="navbar-form navbar-right" role="search">
-				<select class="form-control" id="locale" name="locale">
-					<option value="">::: Language :::</option>
-					<option value="kr">한국어</option>
-					<option value="en">English</option>
-					<option value="zh">中国</option>
-					<option value="ja">日本語</option>
-				</select>
-			
+			<form class="navbar-form navbar-right" role="search">			
 				<c:if test="${null eq userInfo}">
 					<a onclick="javascript:goRegist(6);" class="btn btn-primary"><tag:message
 							code="signup" /></a>

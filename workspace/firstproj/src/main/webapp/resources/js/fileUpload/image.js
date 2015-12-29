@@ -30,7 +30,7 @@ function FileuploadCallback(data, state){
    dataList += "</div>";
    $('#imageUploadList').empty();
    $('#imageUploadList').append(dataList);
-   console.log(data);
+
    var btn_footerList = ""; // "<footer class=\"footer btn_bx border0\">";
    btn_footerList += "<div class=\"btn-group\"><button type=\"button\" class=\"btn  btn-default btn-lg\" onclick='deleteImg(\"" + data + "\")'>삭제</button></div>";
    btn_footerList += "<div class=\"btn-group\"><button type=\"button\" class=\"btn  btn-default btn-lg\" onclick='imgSelect(\"" + data + "\")'>사용</button></div>";

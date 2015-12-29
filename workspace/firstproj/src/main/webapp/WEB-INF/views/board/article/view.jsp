@@ -32,6 +32,7 @@
 	<input type="hidden" id="boardId" 				name="boardId" 				value="${contentInfo.boardId}"/>
 	<input type="hidden" id="prevArticleId" 		name="prevArticleId" 		value="${prevContentInfo.articleId}"/>
 	<input type="hidden" id="nextArticleId" 		name="nextArticleId" 		value="${nextContentInfo.articleId}"/>
+	<input type="hidden" id="userId"				name="userId"				value="${shareInfo.userId}"/>
 	<!-- flickr / slideshare /etc,.'s search keyword parameter -->
 	<input type="hidden" id="keyword" 				name="keyword" 				value="${contentInfo.title}"/>
 <!-- <div class="container"> -->

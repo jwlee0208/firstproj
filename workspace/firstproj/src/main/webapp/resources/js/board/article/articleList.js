@@ -2,13 +2,15 @@ $(document).on("ready", function() {
 	var boardId = $("#boardFrm #boardId").val();
 	
 	$("input[name='goToWrite']").on("click", function() {
-		var url 	= '';	//"/board/article/write.page?boardId="+$("#boardId").val();
+		var url 	= '/share';	//"/board/article/write.page?boardId="+$("#boardId").val();
 		var userId 	= $("#userId").val();
 		if(userId != null && userId != ''){
-			url = "/share/" + userId + "/write";
-		}else{
-			url = "/board/article/write";
+			url += "/" + userId;
 		}
+		url +=  "/write";
+//		else{
+//			url = "/board/article/write";
+//		}
 
 		if(boardId > 0){
 			url += "/" + boardId;
@@ -25,16 +27,19 @@ $(document).on("ready", function() {
 // 페이지 이동
 function goPage(pageNo) {
 	$("#pageNo").val(pageNo);
-	var url 	= '/board/article/list';
+	var url 	= '/share';		// '/board/article/list';
 	var userId 	= $("#userId").val();
 	var boardId	= $("#boardFrm #boardId").val();
 	if(userId != null && userId != ''){
-		url = "/share/" + userId + "/list";
-		if(boardId > 0){
-			url += "/" + boardId; 
-		}
+		url += "/" + userId;
+		
 	}
 	
+	url += "/list";
+	
+	if(boardId > 0){
+		url += "/" + boardId; 
+	}
 	$.ajax({
 		async 		: false,
 		type 		: 'POST',
@@ -99,13 +104,15 @@ function goPage(pageNo) {
 //}
 // 게시글 조회
 function goView(articleId){
-	var url 	= '';	
+	var url 	= '/share';	
 	var userId 	= $("#userId").val();
 	if(userId != null && userId != ''){
-		url = "/share/" + userId + "/view/" + articleId;
-	}else{
-		url = "/board/article/view/" + articleId;
+		url += "/" + userId;
 	}
+	url += "/view/" + articleId;
+//	else{
+//		url = "/board/article/view/" + articleId;
+//	}
 
 	location.href = url;		//"/board/article/view/"+articleId;	
 //	$("#selectedArticleId").val(articleId);
@@ -121,14 +128,22 @@ $(function(){
 				
 		if(event.which == 13){
 			event.preventDefault();
-			
-			var url 	= '';	
+			var boardId	= $("#boardFrm #boardId").val();	
+			var url 	= '/share/';	
 			var userId 	= $("#userId").val();
 			if(userId != null && userId != ''){
-				url = "/share/" + userId + "/list/" + $("#boardFrm #boardId").val();
-			}else{
-				url = "/board/article/list";
+				url += userId;
 			}
+			
+			url += "/list";
+			
+			if(boardId > 0){
+				url += "/" + boardId; 
+			}
+
+//			else{
+//				url = "/board/article/list";
+//			}
 
 			var frm = $("#boardFrm");
 			frm.attr("url"		, url);
