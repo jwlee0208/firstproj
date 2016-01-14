@@ -86,9 +86,7 @@ function loginAction(){
 		
 			<div class="form-group">
 				<label for="userId" class="sr-only"><tag:message code="userid"/></label>
-				
 				<input type="text" class="form-control" id="userId" name="userId" placeholder="Input your user ID" required autofocus/>
-				
 			</div>
 			<div class="form-group">
 				<label for="passwd" class="sr-only"><tag:message code="passwd"/></label>

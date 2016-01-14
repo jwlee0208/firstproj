@@ -4,8 +4,8 @@ import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthStyle;
 
+import org.scribe.model.Token;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +25,8 @@ import com.firstproj.openapi.service.FlickrAPIService;
 import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.SearchParameters;
+
+import net.sf.json.JSONObject;
 
 @Controller("EditorController")
 public class EditorController extends BaseController {
@@ -164,9 +166,9 @@ public class EditorController extends BaseController {
         return "/common/popFlickrImageSelector"; 
     }
 	
-	@RequestMapping(value = {"/{path}/imageUploadActionToFlickr", "/{path1}/{path2}/imageUploadActionToFlickr", "/{path1}/{path2}/{path3}/imageUploadActionToFlickr", "/{path1}/{path2}/{path3}/{path4}/imageUploadActionToFlickr"}, method={RequestMethod.POST, RequestMethod.GET})
-    @ResponseBody
-    public String imageaddToFlickr(MultipartFile imageFile) throws Exception {
+	@RequestMapping(value = {"/{path}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}", "/{path1}/{path2}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}", "/{path1}/{path2}/{path3}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}", "/{path1}/{path2}/{path3}/{path4}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}"}, method={RequestMethod.POST, RequestMethod.GET})
+//    @ResponseBody
+    public JSONObject imageaddToFlickr(MultipartFile imageFile, @PathVariable String tokenKey, @PathVariable String token, @PathVariable String secret) throws Exception {
         
         System.out.println("imageadd");
         System.out.println("" + imageFile.getOriginalFilename());
@@ -174,8 +176,6 @@ public class EditorController extends BaseController {
         System.out.println("" + imageFile.getSize());
         System.out.println("" + imageFile.getBytes());
         String title = "test";
-        String responseStr = this.flickrService.uploadPhotoList(imageFile, title, title);
-        System.out.println(responseStr);
-        return responseStr;
+        return this.flickrService.uploadPhotoList(imageFile, title, title, tokenKey, new Token(token, secret));
     }
 }

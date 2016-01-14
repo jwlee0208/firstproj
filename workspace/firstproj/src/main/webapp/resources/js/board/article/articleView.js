@@ -75,12 +75,13 @@ $(function(){
 //게시글 조회
 function goView(articleId){
 	var userId 	= $("#userId").val();
-	var url = "/share";
+	var url = "/share/";
 	if(userId != null && userId != ''){
-		url += "/view/";
+		url += userId + "/";
 	}
 //	else{
 //		url += "/board/article/view/";
 //	}	
+	url += "view/";
 	location.href = url + articleId;	
 }

@@ -1,7 +1,5 @@
 package com.firstproj.interceptor;
 
-import java.util.regex.Pattern;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

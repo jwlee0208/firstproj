@@ -18,8 +18,19 @@
 			<input type="text" class="form-control" id="userId" name="userId" placeholder="Insert Your Flickr's UserId" value="${userId}"/>
 		</div>	
 		<hr/>
-<!-- 		<input type="file" name="imageFile" id="imageFile" class="form-control" accept="image/*"/> -->
-<!-- 		<input type="button" class="btn btn-default" name="uploadBtn" id="uploadBtn" value="파일 업로드" onclick="fileUploadFlickr()"/> -->
+		<div id="1stepUpload">
+			<input type="button" class="btn btn-success" id="chkAuthBtn" name="chkAuthBtn" value="파일 업로드를 하시겠습니까?"/> 
+		</div>
+		
+		<div id="2stepUpload" style="display:none;">
+		<input type="hidden" name="token"  />
+		<input type="hidden" name="secret"  />
+		<input type="text" name="tokenKey" class="form-control" maxlength="11" placeholder="Insert Flickr's Auth Code."/>
+		<input type="file" name="imageFile" id="imageFile" class="form-control" accept="image/*"/>
+		
+		<input type="button" class="btn btn-default" name="uploadBtn" id="uploadBtn" value="파일 업로드" onclick="fileUploadFlickr()"/>
+		</div>
+
 <c:choose>
 <c:when test="${!empty photoList}">
 
@@ -40,7 +51,7 @@
 		
 </c:when>
 <c:otherwise>
-	<div class="row" style="text-align:center;">
+	<div class="row photoList" style="text-align:center;">
 		There is no searched images.
 	</div>
 </c:otherwise>
@@ -69,58 +80,104 @@ $(function(){
 });
 
 
-// //ajax error check
-// $(document).ajaxError(function(event, request){
-//    if(request.status==500)
-//       alert("파일 업로드를 실패하였습니다. \n업로드할 파일을 확인하세요.(파일 최대용량: 20MB)");
-//    	  return;
-//    }
-// );
+//ajax error check
+$(document).ajaxError(function(event, request){
+   if(request.status==500)
+      alert("파일 업로드를 실패하였습니다. \n업로드할 파일을 확인하세요.(파일 최대용량: 20MB)");
+   	  return;
+   }
+);
 
-// //파일전송 후 콜백 함수
-// function FileuploadCallback(data, state){
-	
-// // 	console.log('data : ' + data + ", state : " + state);
-	
-//    if (data=="error"){
-//       alert("파일전송중 에러 발생!!");
-//       return false;
-//    } else if (data == "fileSizeError") {
-// 	  alert("파일용량은 20MB 이하 이어야 합니다.");
-// 	  return false;
-//    } else if (data == "fileExtensionError") {
-// 	   alert("이미지 파일을 업로드 하셔야 합니다.\n(업로드 가능한 확장자: jpg, jpeg, gif, png, bmp)");
-// 	   return false;
-//    }
+//파일전송 후 콜백 함수
+function FileuploadCallback(data, state){
+// 	console.log('data : ' + data + ", state : " + state);
+		
+	makePhotoHtml(data.smallUrl, data.midUrl);
+/*	
+   if (data=="error"){
+      alert("파일전송중 에러 발생!!");
+      return false;
+   } else if (data == "fileSizeError") {
+	  alert("파일용량은 20MB 이하 이어야 합니다.");
+	  return false;
+   } else if (data == "fileExtensionError") {
+	   alert("이미지 파일을 업로드 하셔야 합니다.\n(업로드 가능한 확장자: jpg, jpeg, gif, png, bmp)");
+	   return false;
+   }
+*/   
+}
+
+$(function(){
+   //비동기 파일 전송
+   var frm=$('#actionFrm'); 
+   frm.ajaxForm(FileuploadCallback); 
+   frm.submit(function(){
+	   return false;
+   }); 
    
-// }
+   $("input[name=chkAuthBtn]").click(function(){
+	   // 1. authentication  
+	   callCheckAuthPop();
+   });
+});
 
-// $(function(){
-//    //비동기 파일 전송
-//    var frm=$('#actionFrm'); 
-//    frm.ajaxForm(FileuploadCallback); 
-//    frm.submit(function(){
-// 	   return false;
-//    }); 
-// });
+// 파일업로드 이벤트
+function fileUploadFlickr(){
+	var imageFile = $.trim($("#imageFile").val());
+   if(!imageFile){
+      alert("파일을 선택하세요.");
+      $("#imageFile").focus();
+      return;
+   }
+   
+   	// 2. sending file
+	if($("input[name=tokenKey]").val() != ''){
+		sendFile();
+	}else{
+		alert('flickr 인증 코드를 입력해야 합니다.');
+		return false;
+	}
+}
 
-// // 파일업로드 이벤트
-// function fileUploadFlickr(){
-// 	var imageFile = $.trim($("#imageFile").val());
-//    if(!imageFile){
-//       alert("파일을 선택하세요.");
-//       $("#imageFile").focus();
-//       return;
-//    }
- 
-//    //파일전송
-//    var frm = $('#actionFrm'); 
-//    frm.attr("action","imageUploadActionToFlickr");
-//    frm.attr("method","post");
-//    frm.submit(); 
-// }
+function callCheckAuthPop(){
+	$.ajax({
+		url 		: "/api/flickr/checkAuth/write",
+		async 		: false,
+		dataType 	: "json",
+		method 		: "post",
+		success 	: function(data){
+			$("input[name=token]").val(data.token);
+			$("input[name=secret]").val(data.secret);
 
+			$("#1stepUpload").hide();
+			$("#2stepUpload").show();
 
+			window.open(data.authUrl, '', '');
+		}
+	});
+}
+
+function sendFile(){
+// 	alert($("input[name=tokenKey]").val());	
+	var frm = $('#actionFrm'); 
+	frm.attr("action","imageUploadActionToFlickr/" + $("input[name=tokenKey]").val() +"/" + $("input[name=token]").val() +"/" + $("input[name=secret]").val());
+	frm.attr("method","post");
+	frm.submit(); 
+}
+
+function makePhotoHtml(smallUrl, largeUrl){
+	var html = "";
+	html += "<div class=\"row\" style=\"margin: 0 0px 5px 0px;\">";
+	html += "	<div class=\"col-xs-6 col-sm-3 well\">";
+	html += "		<a href=\"javascript:;\" data-flickr-embed=\"true\" title=\"${relatedPhoto.title}\" alt=\"choice picture if you want to add.\" id=\"${relatedPhoto.largeUrl}\">";
+	html += "			<img src=\""+ smallUrl + "\" alt=\"test\" class=\"img-thumbnail\" title=\"test\" >";
+	html += "		</a>";
+	html += "		<input type=\"button\" class=\"btn btn-info btn-block img1\" onclick=\"javascript:imgAdd('" + largeUrl + "','1');\" style=\"float:right; padding-top: 3px;\" value=\"select\" />"
+	html += "	</div>";
+	html += "</div>";
+	
+	$(".photoList").html(html);
+}
 
 </script>
 </html>

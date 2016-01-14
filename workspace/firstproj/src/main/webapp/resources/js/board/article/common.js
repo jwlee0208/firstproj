@@ -10,7 +10,7 @@ function editorImgUploadComplete(fileStr){
 }
 
 function share(type, articleId, content, shareId){
-	var url 	= "/share";
+	var url 	= "";
 	var userId 	= shareId;
 	
 	if(type == 'fb'){
@@ -19,7 +19,7 @@ function share(type, articleId, content, shareId){
 	}else if(type == 'tw'){
 		url = "https://twitter.com/intent/tweet?text=" + content + "&url=http://linkednest.net";
 	}
-	
+	url += "/share";
 	if(userId != undefined && userId != null && userId != ''){
 		url += "/"+ userId; 
 	}

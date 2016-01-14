@@ -37,8 +37,8 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
      * @param mav
      */
     public void createMetaTag(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mav) {
-        String title        = "Share - Nevertheless Keep Going";
-        String description  = "To share your experiences, knowledge, information.";
+        String title        = "::: Share Yours :::  ";
+        String description  = "Share your experiences, knowledge, information.";
         String content      = "Share's Main page";
         String authorNm     = "lee jinwon";
         String filePath     = "";
@@ -55,7 +55,7 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
                     BoardArticleDto contentInfo = (BoardArticleDto)model.get("contentInfo");
                     
                     if(contentInfo != null){
-                        title       = contentInfo.getTitle();
+                        title       += contentInfo.getTitle();
                         content     = contentInfo.getContentText();
                         authorNm    = contentInfo.getAuthorNm();
                         filePath    = contentInfo.getFilePath();
@@ -81,7 +81,7 @@ public class BoardArticleInterceptor extends HandlerInterceptorAdapter {
                 if((!model.isEmpty()) && model.containsKey("boardInfo")){
                     BoardDto boardInfo = (BoardDto)model.get("boardInfo");
                     if(boardInfo != null){
-                        title       = boardInfo.getBoardName();
+                        title       += boardInfo.getBoardName();
                         content     = boardInfo.getBoardName();
                         url         = request.getRequestURL().toString();
                         description = boardInfo.getBoardName();
