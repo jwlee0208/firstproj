@@ -8,56 +8,57 @@
 <title>Flickr Image Popup</title>
 </head>
 <body>
-<form id="actionFrm" name="actionFrm" method="post">
 	<div class="container">
 		<h1 id="btn-groups" class="page-header">Flickr Image Selector&nbsp;<small>Usable your flickr's images</small></h1>
-		<div style="padding:10px 10px 10px 10px;" class="row">
-			<input type="text" class="form-control" id="searchKeyword" name="searchKeyword" placeholder="Insert Search Keyword." value="${searchKeyword}"/>
-		</div>
-		<div style="padding:10px 10px 10px 10px;" class="row">
-			<input type="text" class="form-control" id="userId" name="userId" placeholder="Insert Your Flickr's UserId" value="${userId}"/>
-		</div>	
+		
+		<form id="searchFlickrFrm" name="searchFlickrFrm" method="post">
+			<div style="padding:10px 10px 10px 10px;" class="row">
+				<input type="text" class="form-control" id="searchKeyword" name="searchKeyword" placeholder="Insert Search Keyword." value="${searchKeyword}"/>
+			</div>
+			<div style="padding:10px 10px 10px 10px;" class="row">
+				<input type="text" class="form-control" id="userId" name="userId" placeholder="Insert Your Flickr's UserId" value="${userId}"/>
+			</div>	
+		</form>
 		<hr/>
-		<div id="1stepUpload">
-			<input type="button" class="btn btn-success" id="chkAuthBtn" name="chkAuthBtn" value="파일 업로드를 하시겠습니까?"/> 
-		</div>
+		<form id="uploadFlickrFrm" name="uploadFlickrFrm" method="post">
+			<div id="1stepUpload">
+				<input type="button" class="btn btn-success" id="chkAuthBtn" name="chkAuthBtn" value="파일 업로드를 하시겠습니까?"/> 
+			</div>
+			
+			<div id="2stepUpload" style="display:none;">
+			<input type="hidden" name="token"  />
+			<input type="hidden" name="secret"  />
+			<input type="text" name="tokenKey" class="form-control" maxlength="11" placeholder="Insert Flickr's Auth Code."/>
+			<input type="file" name="imageFile" id="imageFile" class="form-control" accept="image/*" multiple/>
+			
+			<input type="button" class="btn btn-default" name="uploadBtn" id="uploadBtn" value="파일 업로드" onclick="fileUploadFlickr()"/>
+			</div>
 		
-		<div id="2stepUpload" style="display:none;">
-		<input type="hidden" name="token"  />
-		<input type="hidden" name="secret"  />
-		<input type="text" name="tokenKey" class="form-control" maxlength="11" placeholder="Insert Flickr's Auth Code."/>
-		<input type="file" name="imageFile" id="imageFile" class="form-control" accept="image/*" multiple/>
-		
-		<input type="button" class="btn btn-default" name="uploadBtn" id="uploadBtn" value="파일 업로드" onclick="fileUploadFlickr()"/>
-		</div>
-
+		</form>
 <c:choose>
-<c:when test="${!empty photoList}">
-
-	<c:forEach var="relatedPhoto" items="${photoList}" varStatus="index">
-		<c:if test="${index.count % 4 eq 1}">
+	<c:when test="${!empty photoList}">
+		<c:forEach var="relatedPhoto" items="${photoList}" varStatus="index">
+			<c:if test="${index.count % 4 eq 1}">
 			<div class="row" style="margin: 0 0px 5px 0px;">
-		</c:if>	
+			</c:if>	
 				<div class="col-xs-6 col-sm-3 well">
 					<a href="javascript:;" data-flickr-embed="true" title="${relatedPhoto.title}" alt="choice picture if you want to add." id="${relatedPhoto.largeUrl}">
 						<img src="${relatedPhoto.smallUrl}" alt="${relatedPhoto.title}" class="img-thumbnail" title="${relatedPhoto.title}" >
 					</a>						
 					<input type="button" class="btn btn-info btn-block img${index.count}" onclick="javascript:imgAdd('${relatedPhoto.largeUrl}',${index.count});" style="float:right; padding-top: 3px;" value="select" />
 				</div>
-		<c:if test="${index.count % 4 eq 0}">
+			<c:if test="${index.count % 4 eq 0}">
 			</div>
-		</c:if>	
-	</c:forEach>		
-		
-</c:when>
-<c:otherwise>
+			</c:if>	
+		</c:forEach>		
+	</c:when>
+	<c:otherwise>
 	<div class="row photoList" style="text-align:center;">
 		There is no searched images.
 	</div>
-</c:otherwise>
+	</c:otherwise>
 </c:choose>
-</div>
-</form>
+	</div>
 </body>
 <script>
 function imgAdd(fileUrl, count) {
@@ -71,7 +72,7 @@ $(function(){
 	$("input[name=searchKeyword],input[name=userId]").keypress(function(event){
 		if(event.which == 13){
 			event.preventDefault();
-			var frm = $("#actionFrm");
+			var frm = $("#searchFlickrFrm");
 			frm.attr("action", location.pathname);
 			frm.attr("method", "post");
 			frm.submit();
@@ -125,7 +126,7 @@ function FileuploadCallback(data, state){
 
 $(function(){
    //비동기 파일 전송
-   var frm=$('#actionFrm'); 
+   var frm=$('#uploadFlickrFrm'); 
    frm.ajaxForm(FileuploadCallback); 
    frm.submit(function(){
 	   return false;
@@ -175,7 +176,7 @@ function callCheckAuthPop(){
 
 function sendFile(){
 // 	alert($("input[name=tokenKey]").val());	
-	var frm = $('#actionFrm'); 
+	var frm = $('#uploadFlickrFrm'); 
 	frm.attr("action","imageUploadActionToFlickr/" + $("input[name=tokenKey]").val() +"/" + $("input[name=token]").val() +"/" + $("input[name=secret]").val());
 	frm.attr("method","post");
 	frm.submit(); 
