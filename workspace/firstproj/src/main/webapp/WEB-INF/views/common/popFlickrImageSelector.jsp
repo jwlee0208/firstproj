@@ -89,14 +89,15 @@ $(document).ajaxError(function(event, request){
 );
 
 //파일전송 후 콜백 함수
-function FileuploadCallback(data, state, err){
+function FileuploadCallback(data, state){
 // 	console.log('data : ' + data + ", state : " + state);
-		
+// 	console.log('data : ' + data.code);	
+
 	if(data.code == 'ok'){
 		makePhotoHtmlList(data.uploadFileList);	
 	}else{
 		var msg = data.message;
-		if(msg != 'undefined'){
+		if(msg != undefined){
 			alert(msg);	
 		}else{
 			alert('오류가 발생했습니다. 파일 용량이 너무 크거나 적절하지 않은 파일 타입인지 확인해주세요.');

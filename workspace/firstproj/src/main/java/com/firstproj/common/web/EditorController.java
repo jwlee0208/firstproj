@@ -202,7 +202,6 @@ public class EditorController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = {"/{path}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}", "/{path1}/{path2}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}", "/{path1}/{path2}/{path3}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}", "/{path1}/{path2}/{path3}/{path4}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}"}, method={RequestMethod.POST, RequestMethod.GET})
-    @ResponseBody
     public JSONObject imageaddToFlickr(MultipartHttpServletRequest request, @PathVariable String tokenKey, @PathVariable String token, @PathVariable String secret) throws Exception {
         String title = "test";        
         return this.flickrService.uploadPhotoList(request, title, title, tokenKey, new Token(token, secret));
