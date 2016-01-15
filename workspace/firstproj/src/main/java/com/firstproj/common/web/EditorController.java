@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.firstproj.board.service.BoardArticleService;
 import com.firstproj.common.util.FileUpload;
@@ -165,17 +166,46 @@ public class EditorController extends BaseController {
         System.out.println("request.getRequestURL() : " + request.getRequestURL());
         return "/common/popFlickrImageSelector"; 
     }
-	
+	/**
+	 * 단일 업로드 : Single Image File Upload
+	 * @param imageFile
+	 * @param tokenKey
+	 * @param token
+	 * @param secret
+	 * @return
+	 * @throws Exception
+	 */
+	/*
 	@RequestMapping(value = {"/{path}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}", "/{path1}/{path2}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}", "/{path1}/{path2}/{path3}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}", "/{path1}/{path2}/{path3}/{path4}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}"}, method={RequestMethod.POST, RequestMethod.GET})
-//    @ResponseBody
+    @ResponseBody
     public JSONObject imageaddToFlickr(MultipartFile imageFile, @PathVariable String tokenKey, @PathVariable String token, @PathVariable String secret) throws Exception {
         
         System.out.println("imageadd");
         System.out.println("" + imageFile.getOriginalFilename());
         System.out.println("" + imageFile.getName());
         System.out.println("" + imageFile.getSize());
-        System.out.println("" + imageFile.getBytes());
+        System.out.println("" + imageFile.getBytes());        
+        
         String title = "test";
-        return this.flickrService.uploadPhotoList(imageFile, title, title, tokenKey, new Token(token, secret));
+        
+        return this.flickrService.uploadPhoto(imageFile, title, title, tokenKey, new Token(token, secret));
     }
+	*/
+	
+	/**
+	 * 멀티 업로드 : Multi Image Files Upload
+	 * @param request
+	 * @param tokenKey
+	 * @param token
+	 * @param secret
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = {"/{path}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}", "/{path1}/{path2}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}", "/{path1}/{path2}/{path3}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}", "/{path1}/{path2}/{path3}/{path4}/imageUploadActionToFlickr/{tokenKey}/{token}/{secret}"}, method={RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public JSONObject imageaddToFlickr(MultipartHttpServletRequest request, @PathVariable String tokenKey, @PathVariable String token, @PathVariable String secret) throws Exception {
+        String title = "test";        
+        return this.flickrService.uploadPhotoList(request, title, title, tokenKey, new Token(token, secret));
+    }
+
 }

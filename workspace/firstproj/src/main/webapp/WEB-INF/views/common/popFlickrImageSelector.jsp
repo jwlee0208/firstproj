@@ -26,7 +26,7 @@
 		<input type="hidden" name="token"  />
 		<input type="hidden" name="secret"  />
 		<input type="text" name="tokenKey" class="form-control" maxlength="11" placeholder="Insert Flickr's Auth Code."/>
-		<input type="file" name="imageFile" id="imageFile" class="form-control" accept="image/*"/>
+		<input type="file" name="imageFile" id="imageFile" class="form-control" accept="image/*" multiple/>
 		
 		<input type="button" class="btn btn-default" name="uploadBtn" id="uploadBtn" value="파일 업로드" onclick="fileUploadFlickr()"/>
 		</div>
@@ -89,10 +89,25 @@ $(document).ajaxError(function(event, request){
 );
 
 //파일전송 후 콜백 함수
-function FileuploadCallback(data, state){
+function FileuploadCallback(data, state, err){
 // 	console.log('data : ' + data + ", state : " + state);
 		
-	makePhotoHtml(data.smallUrl, data.midUrl);
+	if(data.code == 'ok'){
+		makePhotoHtmlList(data.uploadFileList);	
+	}else{
+		var msg = data.message;
+		if(msg != 'undefined'){
+			alert(msg);	
+		}else{
+			alert('오류가 발생했습니다. 파일 용량이 너무 크거나 적절하지 않은 파일 타입인지 확인해주세요.');
+		}
+		
+		$("#1stepUpload").show();
+		$("#2stepUpload").hide();
+
+		return false;
+	}	
+// 	makePhotoHtml(data.smallUrl, data.midUrl);
 /*	
    if (data=="error"){
       alert("파일전송중 에러 발생!!");
@@ -177,6 +192,35 @@ function makePhotoHtml(smallUrl, largeUrl){
 	html += "</div>";
 	
 	$(".photoList").html(html);
+}
+
+function makePhotoHtmlList(uploadFileList){
+	// 1. add to image list 
+	var listSize = uploadFileList.length;
+	var html = "";
+	html += "		<div class=\"row\" style=\"margin: 0 0px 5px 0px;\">";
+	
+	if(listSize > 0){
+		for(var i = 0 ; i < listSize ; i++){
+			html += "	<div class=\"col-xs-6 col-sm-3 well\">";
+			html += "		<a href=\"javascript:;\" data-flickr-embed=\"true\" title=\"${relatedPhoto.title}\" alt=\"choice picture if you want to add.\" id=\"" + uploadFileList[i].photoId + "\">";
+			html += "			<img src=\""+ uploadFileList[i].smallUrl + "\" alt=\"test\" class=\"img-thumbnail\" title=\"" + uploadFileList[i].fileName + "\" >";
+			html += "		</a>";
+			html += "		<input type=\"button\" class=\"btn btn-info btn-block img"+uploadFileList[i].photoId+"\" onclick=\"javascript:imgAdd('" + uploadFileList[i].midUrl + "','" + uploadFileList[i].photoId + "');\" style=\"float:right; padding-top: 3px;\" value=\"select\" />";
+			html += "	</div>";
+		}
+	}
+	html += "		</div>";
+
+	$(".photoList").prepend(html);
+	// 2. reset authentication
+	$("input[name=token]").val("");
+	$("input[name=secret]").val("");
+	$("input[name=tokenKey]").val("");
+
+	$("#1stepUpload").show();
+	$("#2stepUpload").hide();
+
 }
 
 </script>
