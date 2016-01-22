@@ -56,8 +56,7 @@ if you use to eclipse,
 
 3.6.1.1.3. Create to redis_config.xml into "src/main/resources/spring" directory following this : 
 ------------------------------------------------------------------------------------------------
-
-<?xml version="1.0" encoding="UTF-8"?>
+<code>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:p="http://www.springframework.org/schema/p"
 		xmlns:context="http://www.springframework.org/schema/context"
@@ -98,7 +97,7 @@ if you use to eclipse,
 		</bean>
 		 
 </beans>			
-
+</code>
 
 3.6.1.1.4. Import redis-config.xml into application-config.xml following this : 
 ------------------------------------------------------------------------------------------------
