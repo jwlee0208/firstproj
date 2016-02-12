@@ -248,9 +248,6 @@
 		// load to youtube list
 		$("#youtubeListDiv").load("/api/youtube/streamList", $("#viewFrm").serialize());
 
-		$("#registPlayer").click(function(){
-			location.href = "/player/write";	
-		});	
 	});
 
 	function chkNoImage(){

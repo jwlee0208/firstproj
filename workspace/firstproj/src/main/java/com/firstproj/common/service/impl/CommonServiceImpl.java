@@ -154,7 +154,9 @@ public class CommonServiceImpl implements CommonService{
     public List<CodeDto> selectCodeList(CodeDto codeDto) throws Exception{
         return this.commonDao.selectCodeList(codeDto);
     }
-    
+    /**
+     * @brief : sending mail
+     */
     @Override
     public void sendMail(MailDto mailInfo) throws Exception{
         
@@ -191,7 +193,9 @@ public class CommonServiceImpl implements CommonService{
         }
         
     }
-    
+    /**
+     * @brief : searching private info
+     */
     @Override
     public void getPrivateInfo(HttpServletRequest request, Model model, HttpSession session){
         

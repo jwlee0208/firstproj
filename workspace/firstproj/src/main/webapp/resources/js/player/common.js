@@ -49,3 +49,9 @@
 		// 선택된 속성 항목을 초기화
 		$("#selectedAttrElemId").val('');
 	}
+
+	$(function(){
+		$("#registPlayer").click(function(){
+			location.href = "/player/write";	
+		});			
+	});

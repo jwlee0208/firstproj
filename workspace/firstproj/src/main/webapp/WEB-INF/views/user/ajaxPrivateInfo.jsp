@@ -11,13 +11,15 @@
 %>   
 <c:choose>
 	<c:when test="${userInfo ne null}">
-		<tag:message code="common.username"/> :  ${userInfo.userNm}</br>
-		<tag:message code="common.userid"/> : ${userInfo.userId}</br>
-		<tag:message code="common.email"/> : ${userInfo.email}</br>
-		<tag:message code="common.cellphone"/> : ${userInfo.phoneNo}</br>
-		<tag:message code="common.nationality"/> : ${userInfo.nationality}</br>
-		<tag:message code="common.language"/> : ${userInfo.language}</br>
-		<tag:message code="common.joindate"/> : ${fn:substring(userInfo.joinDate, 0, 10)}</br>
+	<dl class="dl-horizontal">
+		<dt><tag:message code="common.username"/></dt><dd>  ${userInfo.userNm}</dd>
+		<dt><tag:message code="common.userid"/></dt><dd>${userInfo.userId}</dd>
+		<dt><tag:message code="common.email"/></dt><dd>${userInfo.email}</dd>
+		<dt><tag:message code="common.cellphone"/></dt><dd>${userInfo.phoneNo}</dd>
+		<dt><tag:message code="common.nationality"/></dt><dd>${userInfo.nationality}</dd>
+		<dt><tag:message code="common.language"/></dt><dd>${userInfo.language}</dd>
+		<dt><tag:message code="common.joindate"/></dt><dd>${fn:substring(userInfo.joinDate, 0, 10)}</dd>
+	</dl>		
 	</c:when>
 </c:choose>	
 	
