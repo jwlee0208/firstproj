@@ -20,6 +20,7 @@ import com.firstproj.board.service.BoardService;
 import com.firstproj.common.dto.ShareDto;
 import com.firstproj.share.service.ShareService;
 import com.firstproj.user.dto.UserDto;
+import com.firstproj.user.service.UserService;
 
 @Controller
 @RequestMapping(value="/common")
@@ -34,6 +35,10 @@ public class CommonController {
     @Resource(name = "ShareServiceImpl")
     private ShareService shareService;
 
+    @Resource(name = "UserServiceImpl")
+    private UserService  userService;
+    
+    
     @RequestMapping(value = "/sideBoardList")
     public String getSideBoardList(Model model) throws Exception{
         /*
@@ -128,6 +133,24 @@ public class CommonController {
         
         model.addAttribute("userInfo", sessionInfo);
         return "common/ajaxSideConfigList";
+    }
+    
+    @RequestMapping(value = "/footer/{userId}")
+    public String getFooterInfo(Model model, @PathVariable String userId) throws Exception{
+        UserDto userInfo = null;
+        
+        if(!StringUtils.isEmpty(userId)){
+            UserDto searchUserInfo = new UserDto();
+            searchUserInfo.setUserId(userId);
+            userInfo = this.userService.selectUserInfo(searchUserInfo);
+        }
+        
+        model.addAttribute("userInfo", userInfo);
+        return "common/ajaxFooter";
+    }
+    @RequestMapping(value = "/footer")
+    public String getFooterInfo(Model model) throws Exception{
+        return this.getFooterInfo(model, null);
     }
     
 

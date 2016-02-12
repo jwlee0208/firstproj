@@ -11,6 +11,12 @@
 				passwd,
 				email,
 				phone_no,
+			<if test="fbUserId != null and fbUserId != ''">
+				fb_user_id,
+			</if>
+			<if test="twUserId != null and twUserId != ''">
+				tw_user_id,
+			</if>
 			<if test="nationality != null and nationality != ''">
 				nationality,
 			</if>
@@ -24,6 +30,12 @@
 				#{passwd},
 				#{email},
 				#{phoneNo},
+			<if test="fbUserId != null and fbUserId != ''">
+				#{fbUserId},
+			</if>
+			<if test="twUserId != null and twUserId != ''">
+				#{twUserId},
+			</if>				
 			<if test="nationality != null and nationality != ''">
 				LOWER(#{nationality}),
 			</if>	
@@ -47,6 +59,8 @@
 		    	passwd,
 		    	email,
 		    	phone_no,
+		    	fb_user_id,
+		    	tw_user_id,
 		    	nationality,
 		    	language,
 		    	join_date 
@@ -78,6 +92,13 @@
 			     , phone_no    = #{phoneNo}
 			     , nationality = LOWER(#{nationality})
 			     , language    = LOWER(#{language})
+				<if test="fbUserId != null and fbUserId != ''">
+				 , fb_user_id  = #{fbUserId}
+				</if>
+				<if test="twUserId != null and twUserId != ''">
+				 , tw_user_id  = #{twUserId}
+				</if>				
+			     
 			   </when>  
 			   <when test="email != null and email != ''">
 			       passwd	   = #{passwd}

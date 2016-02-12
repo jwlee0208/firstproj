@@ -17,12 +17,12 @@ public class MenuInterceptor  extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mav) throws Exception{
-        System.out.println("inter uri : " + request.getRequestURI());
-        System.out.println("inter url : " + request.getRequestURL());
-        System.out.println("inter remote port : " + request.getRemotePort() +", server port : " + request.getServerPort());
+//        System.out.println("inter uri : " + request.getRequestURI());
+//        System.out.println("inter url : " + request.getRequestURL());
+//        System.out.println("inter remote port : " + request.getRemotePort() +", server port : " + request.getServerPort());
         
         String uri = request.getRequestURI(); 
-        String url = request.getRequestURL().toString(); 
+//        String url = request.getRequestURL().toString(); 
         Pattern p = Pattern.compile("[/+]");
         if(uri.indexOf("/board/article/main") > 0 || uri.indexOf("/share") > 0){
             
@@ -34,6 +34,5 @@ public class MenuInterceptor  extends HandlerInterceptorAdapter {
         }else{
             
         }
-        
     }
 }

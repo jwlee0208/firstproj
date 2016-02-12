@@ -23,6 +23,10 @@ public class UserDto implements Serializable{
 	private String nationality;
 	
 	private String language;
+
+	private String fbUserId;
+	
+	private String twUserId;
 	
 	public String getUserId() {
 		return userId;
@@ -79,12 +83,27 @@ public class UserDto implements Serializable{
     public void setLanguage(String language) {
         this.language = language;
     }
+    
+    public String getFbUserId() {
+        return fbUserId;
+    }
+    public void setFbUserId(String fbUserId) {
+        this.fbUserId = fbUserId;
+    }
+    public String getTwUserId() {
+        return twUserId;
+    }
+    public void setTwUserId(String twUserId) {
+        this.twUserId = twUserId;
+    }
+    
     @Override
     public String toString() {
         return "UserDto [userId=" + userId + ", userNm=" + userNm + ", passwd="
                 + passwd + ", passwdChk=" + passwdChk + ", email=" + email
                 + ", phoneNo=" + phoneNo + ", joinDate=" + joinDate
                 + ", nationality=" + nationality + ", language=" + language
-                + "]";
+                + ", fbUserId=" + fbUserId + ", twUserId=" + twUserId + "]";
     }
+
 }

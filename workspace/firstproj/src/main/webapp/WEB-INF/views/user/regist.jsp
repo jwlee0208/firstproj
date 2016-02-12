@@ -52,6 +52,19 @@
 		</div>
 		<h2><tag:message code="optional"/></h2>
 		<div class="form-group">
+			<label for="fbUserId" class="col-sm-2 control-label">Facebook UserId</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="fbUserId" name="fbUserId"/><span id="fbUserIdErr" class="errorMsg" style="display: none;"></span>
+			</div>
+		</div>		
+		<div class="form-group">
+			<label for="twUserId" class="col-sm-2 control-label">Twitter UserId</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="twUserId" name="twUserId"/><span id="twUserIdErr" class="errorMsg" style="display: none;"></span>
+			</div>
+		</div>		
+
+		<div class="form-group">
 			<label for="nationallity" class="col-sm-2 control-label"><tag:message code="common.nationality"/></label>
 			<div class="col-sm-10">
 				<select class="form-control" id="nationality" name="nationality">
