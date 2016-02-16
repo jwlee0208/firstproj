@@ -58,9 +58,14 @@
 				<c:otherwise><img data-src="holder.js/64x64" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="media-object img-thumbnail" onclick="javascript:goView('${content.articleId}');" data-toggle="modal" data-target="#myModal" width="64px" height="64px"/></c:otherwise>
 			</c:choose>									
 				</a>
-				 <div class="media-body" onclick="javascript:goView('${content.articleId}');">
-				 	<h4 class="media-heading" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><small>${fn:substring(content.createDate, 0, 10)}</small>&nbsp;&nbsp;&nbsp;<c:out value="${content.title}"/></h4>
-				 	<p style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${fn:substring(content.contentText, 0, 200)}...</p>
+				 <div class="media-body">
+				 	<h4 class="media-heading" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor: pointer;" onclick="javascript:goView('${content.articleId}');">&nbsp;&nbsp;&nbsp;<c:out value="${content.title}"/></h4>
+				 	<div class="row">	
+				 		<div class="btn btn-link" style="float:left; color:#999;" onclick="javascript:goMyShare('${content.shareInfo.userId}');">
+					 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Posted on ${fn:substring(content.createDate, 0, 10)} by <a href="javascript:;">${content.authorNm}</a>
+						</div>
+				 	</div>	
+<%-- 				 	<p style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${fn:substring(content.contentText, 0, 200)}...</p> --%>
 				 </div>
 			</li>
 		</c:forEach>

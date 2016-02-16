@@ -21,6 +21,7 @@
 
 <title><c:out value="${contentInfo.title}"/></title>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/articleView.js"></script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/image_slider.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/modal.css">
 </head>
@@ -64,7 +65,13 @@
 			</div>
 		
 			<div class="panel-body" style="padding-left: 15px;">
-				<p style="text-align: right;"><a href="http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}</a></p>
+				<div class="row">
+					<div class="btn btn-link" style="float:left; color:#999;" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">
+						<span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Posted on ${fn:substring(contentInfo.createDate, 0, 10)} by <a href="javascript:;">${contentInfo.authorNm}</a>
+					</div>	
+				</div>
+				
+<%-- 				<p style="text-align: right;"><a href="http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}</a></p> --%>
 				
 				<div style="min-height: 400px; white-space: normal; white-break: break-all;">
 					<c:out value="${contentInfo.content}" escapeXml="false"/>
@@ -83,16 +90,17 @@
 					</c:if>				
 				</div>
 				<div class="row">
-					<div class="btn btn-link" style="float:left; color:#999;">${fn:substring(contentInfo.createDate, 0, 10)}</div>
-					<div class="btn btn-link" style="float:right; color:#999;" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">Posted by <a href="javascript:;">${contentInfo.authorNm}</a></div>	
+					<div class="btn btn-link" style="float:left; color:#999;">
+						<span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Posted in <a href="/share/${contentInfo.shareInfo.userId}/list/${contentInfo.boardId}">${contentInfo.boardName}</a>
+					</div>	
 				</div>
-				
+								
 				<div class="row" style="float: left; padding-left:10px;">
 					<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">${contentInfo.shareInfo.shareName}</div>			
 				</div>				
 				<div class="row" style="float: right; padding-right:10px;">
 					<div class="btn btn-primary" title="Sharing Article To Facebook"	onclick="javascript:share('fb', '${contentInfo.articleId}', '', '${contentInfo.shareInfo.userId}');" >f</div>
-					<div class="btn btn-info" 	title="Sharing Article To Twitter" 	onclick="javascript:share('tw', '${contentInfo.articleId}', '${contentInfo.title}', '${contentInfo.shareInfo.userId}');" >t</div>
+					<div class="btn btn-info" 	 title="Sharing Article To Twitter" 	onclick="javascript:share('tw', '${contentInfo.articleId}', '${contentInfo.title}', '${contentInfo.shareInfo.userId}');" >t</div>
 				</div>
 				
 			</div>	
@@ -157,16 +165,35 @@
 				<!-- Trigger the modal with a button -->
 				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#youtubeList">Related Streams</button>
 			</div>	
+		</div>
+
+		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
 			<div class="btn-group" role="button" id="slideDiv">
 				<!-- Trigger the modal with a button -->
 				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#slideList">Related Slides</button>
 			</div>
+		</div>
+
+		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
 			<div class="btn-group" role="button" id="photoDiv">
 				<!-- Trigger the modal with a button -->
 		    	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photoList">Related Photos</button>
 		    </div>	
 		</div>
 
+		<div class="container-fluid">
+			<div class="row">
+				<!-- 상세 페이지 광고 -->
+				<ins class="adsbygoogle"
+				     style="display:block"
+				     data-ad-client="ca-pub-1796756460113850"
+				     data-ad-slot="2379272409"
+				     data-ad-format="auto"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>		
+			</div>		
+		</div>
 		  
 		  
 		
@@ -182,7 +209,7 @@
 		          <div id="youtubeListDiv"></div>
 		        </div>
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		          <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
 		        </div>
 		      </div>
 		    </div>
@@ -201,7 +228,7 @@
 		          <div id="slideshareListDiv"></div>
 		        </div>
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+		          <button type="button" class="btn btn-info btn-block" data-dismiss="modal">Close</button>
 		        </div>
 		      </div>
 		    </div>
@@ -220,13 +247,13 @@
 		          <div id="flickrImageListDiv"></div>
 		        </div>
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+		          <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
 		        </div>
 		      </div>
 		    </div>
 		  </div>
 		  	
-	</form>
+	</form>	
 </div>
 </body>
 <script>

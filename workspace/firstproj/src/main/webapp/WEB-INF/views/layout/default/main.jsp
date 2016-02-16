@@ -37,9 +37,9 @@
 	<tiles:insertAttribute name="header"/>
 	<tiles:insertAttribute name="menu"/>
 	
-	<div class="container" role="main">
+<!-- 	<div class="container" role="main"> -->
 		<tiles:insertAttribute name="body"/>
-	</div>	
+<!-- 	</div>	 -->
 	<tiles:insertAttribute name="footer"/>
 </body>
 

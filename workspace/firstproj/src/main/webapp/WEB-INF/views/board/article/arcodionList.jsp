@@ -47,12 +47,19 @@
 				<div class="panel-heading" style=" background: white;">
 					<h4 class="panel-title" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
 						<a data-toggle="collapse" data-parent="#accordion" href="#collapse${index.count}"><c:out value="${contentInfo.title}"/> </a>
-						&nbsp;&nbsp;<small> | &nbsp;&nbsp;${contentInfo.boardName}</small>
 					</h4>
 				</div>
 				<div id="collapse${index.count}" class="collapse in">
 					<div class="panel-body" style="padding-left: 15px; white-space:normal; white-break:break-word;">
-						<p style="text-align: left;"><a href="http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}</a></p>						
+						<div class="row">
+							<div class="btn btn-link" style="float:left; color:#999;" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">
+								<span class="glyphicon glyphicon-calendar"></span>&nbsp;Posted on ${fn:substring(contentInfo.createDate, 0, 10)} by <a href="javascript:;">${contentInfo.authorNm}</a>
+							</div>
+							<div class="btn btn-link" style="float:right; color:#999;">
+								<a href="/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">상세보기</a>
+							</div>
+						</div>		
+<%-- 						<p style="text-align: left;"><a href="/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}</a></p>						 --%>
 						 
 						<c:out value="${contentInfo.content}" escapeXml="false"/><br/><br/>
 
@@ -66,9 +73,15 @@
 							</c:if>				
 						</div>
 						<div class="row">
-							<div class="btn btn-link" style="float:left; color:#999;">${fn:substring(contentInfo.createDate, 0, 10)}</div>
-							<div class="btn btn-link" style="float:right; color:#999;" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">Posted by <a href="javascript:;">${contentInfo.authorNm}</a></div>	
+							<div class="btn btn-link" style="float:left; color:#999;">
+								<span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Posted in <a href="/share/${contentInfo.shareInfo.userId}/list/${contentInfo.boardId}">${contentInfo.boardName}</a>
+							</div>	
 						</div>
+						
+<!-- 						<div class="row"> -->
+<%-- 							<div class="btn btn-link" style="float:left; color:#999;">${fn:substring(contentInfo.createDate, 0, 10)}</div> --%>
+<%-- 							<div class="btn btn-link" style="float:right; color:#999;" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">Posted by <a href="javascript:;">${contentInfo.authorNm}</a></div>	 --%>
+<!-- 						</div> -->
 						
 						<div class="row" style="float: left; padding-left:10px;">
 							<div class="btn btn-success" title="${contentInfo.boardCategoryName} > ${contentInfo.boardName}" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">${contentInfo.shareInfo.shareName}</div>			

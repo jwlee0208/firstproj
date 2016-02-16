@@ -9,8 +9,7 @@
     UserDto userInfo = (UserDto) request.getSession().getAttribute("userInfo");
 %>
 <c:set var="userInfo" value="<%=userInfo%>" />
-
-<nav class="navbar navbar-inverse" role="navigation">
+<nav class="navbar navbar-inverse" role="navigation" style="margin-bottom:0px; border-radius:0px;">
 	<input type="hidden" id="menuId" name="menuId" value="${param.menuId}" />
 	<div class="container-fluid">
 		<!-- mobile menu list button -->
@@ -38,21 +37,21 @@
 							code="menu.club" /></a></li>
 			</ul>
 			<c:if test="${null ne userInfo}">
-		<ul class="nav navbar-nav navbar-right">
-        	<li class="dropdown">
-          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><tag:message code="menu.hi"/>, "${userInfo.userNm}" <span class="caret"></span></a>
-          		<ul class="dropdown-menu">
-          			<li><a href="/share/${userInfo.userId}" ><tag:message code="common.myshare"/></a></li>
-		            <li><a href="#" onclick="javascript:goConfig();"><tag:message code="common.config"/></a></li>
-		            <li role="separator" class="divider"></li>
-		            <li><a href="#" onclick="javascript:logout();"><tag:message code="logout"/></a></li>		            
-          		</ul>
-        	</li>
-      	</ul>			
+			<ul class="nav navbar-nav navbar-right">
+	        	<li class="dropdown">
+	          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><tag:message code="menu.hi"/>, "${userInfo.userNm}" <span class="caret"></span></a>
+	          		<ul class="dropdown-menu">
+	          			<li><a href="/share/${userInfo.userId}" ><tag:message code="common.myshare"/></a></li>
+			            <li><a href="#" onclick="javascript:goConfig();"><tag:message code="common.config"/></a></li>
+			            <li role="separator" class="divider"></li>
+			            <li><a href="#" onclick="javascript:logout();"><tag:message code="logout"/></a></li>		            
+	          		</ul>
+	        	</li>
+	      	</ul>			
 			</c:if>			
 			<form class="navbar-form navbar-right" role="search">			
 				<c:if test="${null eq userInfo}">
-					<a onclick="javascript:goRegist(6);" class="btn btn-primary"><tag:message
+					<a onclick="javascript:goRegist(6);" class="btn btn-danger"><tag:message
 							code="signup" /></a>
 					<a onclick="javascript:goLogin(7);" class="btn btn-default"><tag:message
 							code="signin" /></a>
