@@ -51,14 +51,20 @@ public class CommonController {
     @RequestMapping(value = "/sideBoardList/{userId}")
     public String getSideBoardList(Model model, @PathVariable String userId) throws Exception{
         BoardDto                         boardDto                    = new BoardDto();
+        ShareDto                         shareDto                    = new ShareDto();
         List<SideBoardCategoryPortalDto> sideBoardCategoryPortalList = null;
-        
+        ShareDto                         sideShareInfo               = null;
         if(!StringUtils.isEmpty(userId)){
+            // 게시판 목록 정보 조회
             boardDto.setCreateUserId(userId);
             sideBoardCategoryPortalList = this.boardArticleService.selectSideBoardList(boardDto);
+            // share 정보 조회
+            shareDto.setUserId(userId);
+            sideShareInfo = this.shareService.getShareInfo(shareDto);
         }
         
         model.addAttribute("sideBoardList", sideBoardCategoryPortalList);
+        model.addAttribute("sideShareInfo", sideShareInfo);
         return "common/ajaxSideBoardList";
     }
 

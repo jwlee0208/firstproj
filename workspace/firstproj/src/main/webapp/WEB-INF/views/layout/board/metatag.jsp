@@ -19,7 +19,6 @@
 <meta property="og:title" 				content="<c:out value='${title}'/>" />
 <meta property="og:site_name" 			content="${shareName}" />
 <meta property="og:url" 				content="${url}" />
-<%-- <meta property="og:url" 			content="http://jwlee0208.cafe24.com/board/article/view/${articleId}" /> --%>
 <meta property="og:description" 		content="<c:out value='${content}'/>" />
 <meta property="og:image" 				content="http://jwlee0208.cdn3.cafe24.com${filePath}" />
 

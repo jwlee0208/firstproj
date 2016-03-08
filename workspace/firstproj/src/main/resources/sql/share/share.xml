@@ -10,7 +10,7 @@
 				  , share_type
 				  , introduce
 				  , user_id
-				  , create_date
+				  , DATE_FORMAT(create_date, '%Y-%m-%d') AS create_date
 			FROM TB_SHARE
 			WHERE user_id = #{userId}
     	</select>
