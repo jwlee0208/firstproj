@@ -50,12 +50,15 @@
 
 <c:choose>
 	<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">
-		<c:forEach var="content" items="${pagedResult.list}" varStatus="index">		
-			<div class="">
+		<c:forEach var="content" items="${pagedResult.list}" varStatus="index">
+		<c:if test="${index.count % 2 eq 1}">
+		<div class="row">	
+		</c:if>		
+			<div class="col-sm-6">
 				<div class="thumbnail">
 			<c:choose>
-				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img data-src="holder.js/250x250?auto=yes&theme=social" src="http://jwlee0208.cdn3.cafe24.com/${content.filePath}" alt="" class="img-rounded" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal" style="width: 700px; height: 450px;"/></c:when>
-				<c:otherwise><img data-src="holder.js/250x250?auto=yes&theme=social" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="img-rounded" onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal" style="width: 800px; height: 450px;"/></c:otherwise>
+				<c:when test="${content.filePath ne null && content.filePath ne ''}"><img data-src="holder.js/250x250?auto=yes&theme=social" src="http://jwlee0208.cdn3.cafe24.com/${content.filePath}" alt="" class="img-rounded" onerror="this.src='${pageContext.request.contextPath}/img/no_image.png'"  onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal" style="max-width: 400px; max-height: 450px;"/></c:when>
+				<c:otherwise><img data-src="holder.js/250x250?auto=yes&theme=social" src="${pageContext.request.contextPath}/img/no_image.png" 	 alt="" class="img-rounded" onclick="javascript:goArticleView('${content.articleId}', 'popup');" data-toggle="modal" data-target="#myModal" style="max-width: 400px; max-height: 450px;"/></c:otherwise>
 			</c:choose>					
 					
 					<div class="caption">
@@ -71,6 +74,9 @@
 
 				</div>	
 			</div>
+		<c:if test="${index.count % 2 eq 0 || index.count eq pagedResult.list.size()}">
+		</div>
+		</c:if>	
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
@@ -99,7 +105,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
