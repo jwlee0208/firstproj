@@ -23,7 +23,7 @@
 		</c:if>	
 <c:choose>		  
     <c:when test="${sideBoardList ne null}">	
-    	<c:set var="classInfo" value="collapse in"/>	
+    	<c:set var="classInfo" value="collapse"/>	
     	<c:forEach var="categoryInfo" items="${sideBoardList}" varStatus="index">
     		<div class="list-group">
     		<a href="#sideCategoryDiv${categoryInfo.boardCategoryId}" class="list-group-item list-group-item-category" style="font-weight: bold;" data-toggle="collapse" aria-controls="sideCategoryDiv${categoryInfo.boardCategoryId}">${categoryInfo.boardCategoryName}</a>
