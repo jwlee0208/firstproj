@@ -159,28 +159,27 @@
 				<input type="button" class="btn btn-default btn-block" id="goToList" value="<tag:message code="common.list"/>"/>
 			</div>
 		</div>
-
+		  	
 		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
 			<div class="btn-group" role="button" id="streamDiv">
-				<!-- Trigger the modal with a button -->
 				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#youtubeList">Related Streams</button>
 			</div>	
 		</div>
-
+		
+		<!--  
 		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
 			<div class="btn-group" role="button" id="slideDiv">
-				<!-- Trigger the modal with a button -->
 				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#slideList">Related Slides</button>
 			</div>
 		</div>
-
+		-->
+		<!--
 		<div class="btn-group btn-group-justified" style="padding-bottom : 20px;">
 			<div class="btn-group" role="button" id="photoDiv">
-				<!-- Trigger the modal with a button -->
 		    	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photoList">Related Photos</button>
 		    </div>	
 		</div>
-
+		-->
 		<div class="container-fluid">
 			<div class="row">
 				<!-- 상세 페이지 광고 -->
@@ -217,6 +216,7 @@
 		  
 		
 		  <!-- Modal -->
+		  <!--  
 		  <div class="modal fade" id="slideList" role="dialog">
 		    <div class="modal-dialog modal-lg">
 		      <div class="modal-content">
@@ -233,9 +233,11 @@
 		      </div>
 		    </div>
 		  </div>
+		  -->
 
 		
 		  <!-- Modal -->
+		  <!-- 
 		  <div class="modal fade" id="photoList" role="dialog">
 		    <div class="modal-dialog modal-lg">
 		      <div class="modal-content">
@@ -252,7 +254,7 @@
 		      </div>
 		    </div>
 		  </div>
-		  	
+		   -->	
 	</form>	
 </div>
 </body>
@@ -267,10 +269,10 @@
 		$.ajaxSetup({ scriptCharset: "utf-8" , contentType: "application/json; charset=utf-8"});
 		
 		// load to flickr image list 
-		$("#flickrImageListDiv").load("/api/flickr/photoList", $("#viewFrm").serialize());
+		// $("#flickrImageListDiv").load("/api/flickr/photoList", $("#viewFrm").serialize());
 
 		// load to slideshare list
-		$("#slideshareListDiv").load("/api/slideshare/slideList", $("#viewFrm").serialize());
+		// $("#slideshareListDiv").load("/api/slideshare/slideList", $("#viewFrm").serialize());
 
 		// load to youtube list
 		$("#youtubeListDiv").load("/api/youtube/streamList", $("#viewFrm").serialize());

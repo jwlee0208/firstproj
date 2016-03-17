@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="tag" %>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
 <%@ page import="com.firstproj.user.dto.UserDto"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.min.css">
 <%
 	UserDto userInfo = (UserDto)request.getSession().getAttribute("userInfo");
 %>
