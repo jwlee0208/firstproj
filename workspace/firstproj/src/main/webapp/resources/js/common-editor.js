@@ -1,10 +1,12 @@
 // TinyMCE 사용을 위한 설정 정의
 tinyMCE.init({
 	 selector				 : ".tinymce",	//"textarea",
+//	 skin					 : 'lightgray',
+	 theme					 : 'modern',
      plugins				 : [
              "advlist autolink link lists charmap print preview hr pagebreak spellchecker",
              "searchreplace wordcount codemirror insertdatetime media nonbreaking",
-             "table contextmenu directionality textcolor paste textcolor image youTube"
+             "table contextmenu directionality textcolor paste textcolor image"
      ],
 //     toolbar1				 : "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | cut copy paste | bullist numlist | link unlink | inserttime | table | hr | charmap | image media | youTube imagepop | code | imagepop2",
 //     toolbar2				 : "youTube imagepop ", 
@@ -24,15 +26,15 @@ tinyMCE.init({
      extended_valid_elements : "iframe[src|width|height|name|align]",
      image_advtab			 : true,	//이미지 삽입시 고급설정 가능 하도록.
      forced_root_block 		 : false,	//IE에서 한글입력 문제 해결을 위해
-     style_formats			 : [
-             {title: 'Bold text'	, inline: 'b'},
-             {title: 'Red text'		, inline: 'span', styles: {color: '#ff0000'}},
-             {title: 'Red header'	, block: 'h1'	, styles: {color: '#ff0000'}},
-             {title: 'Example 1'	, inline: 'span', classes: 'example1'},
-             {title: 'Example 2'	, inline: 'span', classes: 'example2'},
-             {title: 'Table styles'},
-             {title: 'Table row 1'	, selector: 'tr', classes: 'tablerow1'}
-     ],
+//     style_formats			 : [
+//             {title: 'Bold text'	, inline: 'b'},
+//             {title: 'Red text'		, inline: 'span', styles: {color: '#ff0000'}},
+//             {title: 'Red header'	, block: 'h1'	, styles: {color: '#ff0000'}},
+//             {title: 'Example 1'	, inline: 'span', classes: 'example1'},
+//             {title: 'Example 2'	, inline: 'span', classes: 'example2'},
+//             {title: 'Table styles'},
+//             {title: 'Table row 1'	, selector: 'tr', classes: 'tablerow1'}
+//     ],
      
      templates				 : [
              {title: 'Test template 1', content: 'Test 1'},

@@ -2,14 +2,15 @@ package com.firstproj.testtwo.web;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.net.imap.IMAPClient.SEARCH_CRITERIA;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.slideshare.api.SlideShare;
 import org.springframework.social.slideshare.api.SlideshowOperations;
@@ -20,7 +21,6 @@ import org.springframework.social.slideshare.api.impl.SlideShareTemplate;
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.REST;
 import com.flickr4java.flickr.auth.Auth;
-import com.flickr4java.flickr.galleries.GalleriesInterface;
 import com.flickr4java.flickr.galleries.Gallery;
 import com.flickr4java.flickr.groups.Group;
 import com.flickr4java.flickr.groups.GroupsInterface;
@@ -31,7 +31,6 @@ import com.flickr4java.flickr.photos.Photocount;
 import com.flickr4java.flickr.photos.PhotosInterface;
 import com.flickr4java.flickr.photos.SearchParameters;
 import com.flickr4java.flickr.test.TestInterface;
-import com.flickr4java.flickr.uploader.UploadMetaData;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.HttpTransport;
@@ -39,10 +38,8 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
-import com.google.api.services.youtube.YouTube.Subscriptions;
 import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
-import com.google.api.services.youtube.model.Subscription;
 
 public class Test {
     
@@ -231,6 +228,14 @@ public class Test {
 	    }
 	}
 	
+	public static void getTodate() {
+	    Date d = new Date();
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	    System.out.println(sdf.format(d));
+	    System.out.println(Integer.parseInt(sdf.format(d)));
+	}
+	
+	
 	public static void testKorean() throws Exception{
 	    System.out.println(URLEncoder.encode("\"한글의 위대함\"", "UTF-8"));    // 8859_1
 	}
@@ -247,11 +252,11 @@ public class Test {
 	    
 //	    Test.testKorean();
 	    
-	    Test.testFlickr();
+//	    Test.testFlickr();
 	    
 //	    Test.testSlideShare();
 	    
 //	    Test.testYoutube();
-	    
+	    Test.getTodate();
 	}	
 }

@@ -69,7 +69,7 @@
 								<span onclick="javascript:goArticleView('${content.articleId}', 'noPopup');" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${fn:substring(content.contentText, 0, 250)}...</span>
 							</c:if>
 						</p>
-						<p><span class="btn btn-primary btn-block" role="button" onclick="javascript:goArticleView('${content.articleId}');"><tag:message code='button.detailview'/></span></p>
+						<p><span class="btn btn-link btn-block" role="button" onclick="javascript:goArticleView('${content.articleId}');"><tag:message code='button.detailview'/></span></p>
 					</div>
 
 				</div>	
