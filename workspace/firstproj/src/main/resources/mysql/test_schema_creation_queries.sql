@@ -170,3 +170,19 @@ CREATE TABLE `TB_SLIDESHARE_LINK` (
   PRIMARY KEY (`slide_id`),
   UNIQUE KEY `slide_id_UNIQUE` (`slide_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='slideshare link table';
+
+
+-- tb_web_bookmark table creation
+CREATE TABLE `test`.`TB_WEB_BOOKMARK` (
+  `web_bookmark_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` VARCHAR(50) NOT NULL,
+  `bookmark_url` VARCHAR(200) NOT NULL,
+  `bookmark_name` VARCHAR(100) NULL,
+  `bookmark_description` VARCHAR(45) NULL,
+  `create_date` TIMESTAMP NULL,
+  `modify_date` TIMESTAMP NULL,
+  PRIMARY KEY (`web_bookmark_id`),
+  UNIQUE INDEX `web_bookmark_id_UNIQUE` (`web_bookmark_id` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COMMENT = '웹 북마크 테이블';

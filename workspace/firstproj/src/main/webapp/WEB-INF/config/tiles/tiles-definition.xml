@@ -19,6 +19,17 @@
           <put-attribute name="footer" 			value="/WEB-INF/views/layout/board/footer.jsp" />     
      </definition>
 
+     <definition name="bookmark/*" template="/WEB-INF/views/layout/bookmark/main.jsp">
+          <put-attribute name="title" 			value="firstproj" type="string" />
+          <put-attribute name="metatag" 		value="/WEB-INF/views/layout/bookmark/metatag.jsp" />
+          <put-attribute name="header" 			value="/WEB-INF/views/layout/bookmark/header.jsp" />
+          <put-attribute name="menu" 			value="/WEB-INF/views/layout/bookmark/menu.jsp" />
+          <put-attribute name="body" 			value="/WEB-INF/views/bookmark/{1}.jsp" />
+          <put-attribute name="quickBoardList" 	value="/WEB-INF/views/layout/common/quickBoardList.jsp" />
+          <put-attribute name="footer" 			value="/WEB-INF/views/layout/bookmark/footer.jsp" />     
+     </definition>
+
+
      <definition name="config/*/*" template="/WEB-INF/views/layout/config/main.jsp">
           <put-attribute name="title" 			value="firstproj" type="string" />
           <put-attribute name="header" 			value="/WEB-INF/views/layout/board/header.jsp" />

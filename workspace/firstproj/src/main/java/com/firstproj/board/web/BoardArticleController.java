@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jboss.logging.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,10 +37,14 @@ import com.firstproj.share.service.ShareServiceImpl;
 import com.firstproj.user.dto.UserDto;
 import com.firstproj.user.service.UserServiceImpl;
 
+import net.sf.json.JSONObject;
+
 @Controller
 @RequestMapping(value = {"/board/article", "/share"})
 public class BoardArticleController {
 
+    Log log = LogFactory.getLog(this.getClass());
+    
 	public static final int 	DEFAULT_PAGE_NO 				= 1;
 	public static final int 	DEFAULT_PAGE_SIZE 				= 3;
 
@@ -378,21 +382,23 @@ public class BoardArticleController {
                 prevContentInfo = this.boardArticleService.selectPrevBoardArticle(boardArticleDto);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                log.error(e.getMessage());
+                
             }
             // 다음 글 조회
             try {
                 nextContentInfo = this.boardArticleService.selectNextBoardArticle(boardArticleDto);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
             
             try {
                 boardList       = this.boardService.getBoardList(boardDto);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                log.error(e.getMessage());
+                
             }
         }
                 

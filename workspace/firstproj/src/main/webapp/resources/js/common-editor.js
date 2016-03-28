@@ -11,7 +11,7 @@ tinyMCE.init({
 //     toolbar1				 : "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | cut copy paste | bullist numlist | link unlink | inserttime | table | hr | charmap | image media | youTube imagepop | code | imagepop2",
 //     toolbar2				 : "youTube imagepop ", 
      toolbar1				 : "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | link unlink" ,
-     toolbar2				 : "hr | charmap | image media imagepop | code | imagepop2",
+     toolbar2				 : "hr | charmap | bullist numlist outdent indent | image media imagepop | code | imagepop2",
      menubar				 : true,
      resize 				 : true,
      height 				 : 300,
