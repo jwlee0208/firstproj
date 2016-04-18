@@ -60,8 +60,9 @@
 							</div>
 						</div>		
 <%-- 						<p style="text-align: left;"><a href="/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">http://linkednest.net/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}</a></p>						 --%>
-						 
-						<c:out value="${contentInfo.content}" escapeXml="false"/><br/><br/>
+						<div style="white-space: normal; white-break: break-all;"> 
+							<c:out value="${contentInfo.content}" escapeXml="false"/><br/><br/>
+						</div>
 
 						<div class="embed-responsive embed-responsive-16by9">
 							<c:set var="slideshareLinkInfos" value="${contentInfo.slideshareLinkInfos}"/>
