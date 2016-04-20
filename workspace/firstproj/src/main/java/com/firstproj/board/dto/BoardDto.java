@@ -1,24 +1,19 @@
 package com.firstproj.board.dto;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
 import org.apache.ibatis.type.Alias;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Alias("board.boardDto")
-public class BoardDto {
-	
-	private int	   		boardId;
-	@NotNull @Min(0)
-	private int			boardCategory;
-	@NotNull @NotEmpty
-	private String 		title;
-	@NotNull @NotEmpty
-	private String 		content;
-	private String 		authorId;
-	private String 		authorNm;
-	private String 		createDate;
+public class BoardDto extends BoardCategoryDto{
+	private int 	boardId;
+	private int     boardCategoryId;
+	private String 	boardName;
+	private String 	boardType;
+	private String 	createUserId;
+	private String 	createUserName;
+	private String 	createDate;
+	private String 	modifyUserId;
+	private String 	modifyUserName;
+	private String 	modifyDate;
 	
 	public int getBoardId() {
 		return boardId;
@@ -26,35 +21,35 @@ public class BoardDto {
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
 	}
-	public int getBoardCategory() {
-		return boardCategory;
+	public int getBoardCategoryId() {
+        return boardCategoryId;
+    }
+    public void setBoardCategoryId(int boardCategoryId) {
+        this.boardCategoryId = boardCategoryId;
+    }
+    public String getBoardName() {
+		return boardName;
 	}
-	public void setBoardCategory(int boardCategory) {
-		this.boardCategory = boardCategory;
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
 	}
-	public String getTitle() {
-		return title;
+	public String getBoardType() {
+		return boardType;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setBoardType(String boardType) {
+		this.boardType = boardType;
 	}
-	public String getContent() {
-		return content;
+	public String getCreateUserId() {
+		return createUserId;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setCreateUserId(String createUserId) {
+		this.createUserId = createUserId;
 	}
-	public String getAuthorId() {
-		return authorId;
+	public String getCreateUserName() {
+		return createUserName;
 	}
-	public void setAuthorId(String authorId) {
-		this.authorId = authorId;
-	}
-	public String getAuthorNm() {
-		return authorNm;
-	}
-	public void setAuthorNm(String authorNm) {
-		this.authorNm = authorNm;
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
 	}
 	public String getCreateDate() {
 		return createDate;
@@ -62,69 +57,34 @@ public class BoardDto {
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((authorId == null) ? 0 : authorId.hashCode());
-		result = prime * result
-				+ ((authorNm == null) ? 0 : authorNm.hashCode());
-		result = prime * result + boardCategory;
-		result = prime * result + boardId;
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result
-				+ ((createDate == null) ? 0 : createDate.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
+	public String getModifyUserId() {
+		return modifyUserId;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BoardDto other = (BoardDto) obj;
-		if (authorId == null) {
-			if (other.authorId != null)
-				return false;
-		} else if (!authorId.equals(other.authorId))
-			return false;
-		if (authorNm == null) {
-			if (other.authorNm != null)
-				return false;
-		} else if (!authorNm.equals(other.authorNm))
-			return false;
-		if (boardCategory != other.boardCategory)
-			return false;
-		if (boardId != other.boardId)
-			return false;
-		if (content == null) {
-			if (other.content != null)
-				return false;
-		} else if (!content.equals(other.content))
-			return false;
-		if (createDate == null) {
-			if (other.createDate != null)
-				return false;
-		} else if (!createDate.equals(other.createDate))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
+	public void setModifyUserId(String modifyUserId) {
+		this.modifyUserId = modifyUserId;
 	}
-	@Override
-	public String toString() {
-		return "BoardDto [boardId=" + boardId + ", boardCategory="
-				+ boardCategory + ", title=" + title + ", content=" + content
-				+ ", authorId=" + authorId + ", authorNm=" + authorNm
-				+ ", createDate=" + createDate + "]";
+	public String getModifyUserName() {
+		return modifyUserName;
 	}
-
+	public void setModifyUserName(String modifyUserName) {
+		this.modifyUserName = modifyUserName;
+	}
+	public String getModifyDate() {
+		return modifyDate;
+	}
+	public void setModifyDate(String modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+	
+    @Override
+    public String toString() {
+        return "BoardDto [boardId=" + boardId + ", boardCategoryId="
+                + boardCategoryId + ", boardName=" + boardName + ", boardType="
+                + boardType + ", createUserId=" + createUserId
+                + ", createUserName=" + createUserName + ", createDate="
+                + createDate + ", modifyUserId=" + modifyUserId
+                + ", modifyUserName=" + modifyUserName + ", modifyDate="
+                + modifyDate + "]";
+    }
 	
 }

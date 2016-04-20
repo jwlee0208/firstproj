@@ -1,16 +1,26 @@
 body {
-    overflow: hidden;
-    background-color: #000000;
+/*     overflow: hidden; */
+    background-color: white;
 }
 
 .slider {
-    width: 800px;
-    height: 400px;
+    width: 100%;
+    height: 350px;
     overflow: hidden;
     position: relative;
     background: #e6e6e6;
     border: 20px solid #FFF;
     margin-top: 20px;
+}
+
+.slider2 {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    background: #e6e6e6;
+    border: 0px solid #FFF;
+    margin-top: 0px;
 }
 
 .slide {

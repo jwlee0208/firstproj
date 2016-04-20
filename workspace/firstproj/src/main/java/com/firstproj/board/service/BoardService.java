@@ -3,17 +3,39 @@ package com.firstproj.board.service;
 import java.util.List;
 import java.util.Map;
 
+import com.firstproj.board.dto.BoardCategoryDto;
+import com.firstproj.board.dto.BoardCategoryPortalDto;
 import com.firstproj.board.dto.BoardDto;
 import com.firstproj.common.util.PagedList;
 
 public interface BoardService {
-	public List<BoardDto> getBoardList() throws Exception;
-	public int selectListCnt(Map<String, Object> param) throws Exception;
-	public PagedList getBoardPagedList(Map<String, Object> paramMap) throws Exception;
-	public List<BoardDto> getBoardList(Map<String,Object> paramMap) throws Exception;
+
+	BoardDto                     getBoardInfo(BoardDto boardDto) throws Exception;
+
+	int                          insertBoardInfo(BoardDto boardDto) throws Exception;
+
+	int                          updateBoardInfo(BoardDto boardDto) throws Exception;
+
+	List<BoardDto>               getBoardList(BoardDto boardDto) throws Exception;
 	
-	public int insertBoard(BoardDto boardDto) throws Exception;
-	public BoardDto selectBoardContent(BoardDto boardDto) throws Exception;
-	public BoardDto selectPrevBoardContent(BoardDto boardDto) throws Exception;
-	public BoardDto selectNextBoardContent(BoardDto boardDto) throws Exception; 
+	List<BoardDto>               getBoardList(Map<String, Object> paramMap) throws Exception;
+
+	PagedList                    getBoardPagedList(Map<String, Object> paramMap) throws Exception;
+
+	int                          getListCnt(Map<String, Object> param) throws Exception;
+
+	BoardDto                     selectBoardInfo(BoardDto boardDto) throws Exception;
+
+	BoardDto                     getPrevBoardInfo(BoardDto boardDto) throws Exception;
+
+	BoardDto                     getNextBoardInfo(BoardDto boardDto) throws Exception;
+
+	int                          modifyBoardInfo(BoardDto boardDto) throws Exception;
+
+    List<BoardCategoryDto>       getBoardCategoryList(BoardCategoryDto boardCategoryDto) throws Exception;
+
+    List<BoardCategoryPortalDto> getBoardCategoryAndBoardList(BoardCategoryPortalDto boardCategoryPortalDto) throws Exception;
+
+    BoardDto                     getBoardCategoryAndBoardInfo(BoardDto boardDto) throws Exception;
+
 }

@@ -19,7 +19,7 @@ a:hover {
 
 h2 { padding-top: 20px; }
 h2:first-of-type { padding-top: 0; }
-ul { padding: 0; }
+/* ul { padding: 0; } */
 
 .pagination {
   width : 100%;	

@@ -13,15 +13,17 @@
 #contentsWrap {
 	position: absolute;
 	top: 0;
-	right: 50px;
+	right: 0;
 	bottom: 0;
-	left: 50px;
+	left: 0;
 	overflow: auto;
 	width: auto;
 }
 /* contents */
 .contents {
-	padding-top: 55px;
+/* 	padding-top: 55px; */
+	padding-left : 30px;
+	padding-right : 30px;
 	height: auto;
 }
 .contents.minimum {padding-top: 76px;}

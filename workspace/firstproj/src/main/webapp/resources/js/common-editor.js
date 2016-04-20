@@ -1,63 +1,102 @@
 // TinyMCE 사용을 위한 설정 정의
 tinyMCE.init({
-	 selector: ".tinymce",//"textarea",
-     plugins: [
-             "advlist autolink link lists charmap hr pagebreak spellchecker",
-             "searchreplace wordcount code insertdatetime media nonbreaking",
-             "table contextmenu directionality textcolor paste textcolor image youTube"
+	 selector				 : ".tinymce",	//"textarea",
+//	 skin					 : 'lightgray',
+	 theme					 : 'modern',
+     plugins				 : [
+             "advlist autolink link lists charmap print preview hr pagebreak spellchecker",
+             "searchreplace wordcount codemirror insertdatetime media nonbreaking",
+             "table contextmenu directionality textcolor paste textcolor image"
      ],
-     toolbar1: "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | cut copy paste | bullist numlist | link unlink | inserttime | table | hr | charmap | image media youTube",
-     menubar: false,
-     resize : true,
-    
-     toolbar_items_size: 'small',
-     theme_advanced_path : false,
-     entity_encoding : "raw",
-     remove_script_host : false,
-     convert_urls : false,
-     theme_advanced_fonts : "굴림=굴림;굴림체=굴림체;궁서=궁서;궁서체=궁서체;돋움=돋움;돋움체=돋움체;바탕=바탕;바탕체=바탕체;Arial=Arial; Comic Sans MS='Comic Sans MS';Courier New='Courier New';Tahoma=Tahoma;Times New Roman='Times New Roman';Verdana=Verdana",
-     statusbar : false,
+//     toolbar1				 : "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | cut copy paste | bullist numlist | link unlink | inserttime | table | hr | charmap | image media | youTube imagepop | code | imagepop2",
+//     toolbar2				 : "youTube imagepop ", 
+     toolbar1				 : "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | link unlink" ,
+     toolbar2				 : "hr | charmap | bullist numlist outdent indent | image media imagepop | code | imagepop2",
+     menubar				 : true,
+     resize 				 : true,
+     height 				 : 300,
+     toolbar_items_size		 : 'small',
+     theme_advanced_path	 : false,
+     theme_advanced_buttons1 : "code",
+     entity_encoding 		 : "raw",
+     remove_script_host 	 : false,
+     convert_urls 			 : false,
+     theme_advanced_fonts 	 : "굴림=굴림;굴림체=굴림체;궁서=궁서;궁서체=궁서체;돋움=돋움;돋움체=돋움체;바탕=바탕;바탕체=바탕체;Arial=Arial; Comic Sans MS='Comic Sans MS';Courier New='Courier New';Tahoma=Tahoma;Times New Roman='Times New Roman';Verdana=Verdana",
+     statusbar 				 : false,
      extended_valid_elements : "iframe[src|width|height|name|align]",
-      //IE에서 한글입력 문제 해결을 위해
-     forced_root_block : false,
-     style_formats: [
-             {title: 'Bold text', inline: 'b'},
-             {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
-             {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
-             {title: 'Example 1', inline: 'span', classes: 'example1'},
-             {title: 'Example 2', inline: 'span', classes: 'example2'},
-             {title: 'Table styles'},
-             {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
-     ],
+     image_advtab			 : true,	//이미지 삽입시 고급설정 가능 하도록.
+     forced_root_block 		 : false,	//IE에서 한글입력 문제 해결을 위해
+//     style_formats			 : [
+//             {title: 'Bold text'	, inline: 'b'},
+//             {title: 'Red text'		, inline: 'span', styles: {color: '#ff0000'}},
+//             {title: 'Red header'	, block: 'h1'	, styles: {color: '#ff0000'}},
+//             {title: 'Example 1'	, inline: 'span', classes: 'example1'},
+//             {title: 'Example 2'	, inline: 'span', classes: 'example2'},
+//             {title: 'Table styles'},
+//             {title: 'Table row 1'	, selector: 'tr', classes: 'tablerow1'}
+//     ],
      
-     templates: [
+     templates				 : [
              {title: 'Test template 1', content: 'Test 1'},
              {title: 'Test template 2', content: 'Test 2'}
      ],
-   language: "ko_KR", // 사용할 언어는 한국어로 지정
+     language				 : "ko_KR", // 사용할 언어는 한국어로 지정
    
-   // Replace values for the template plugin
-   template_replace_values : {
-    username : "Some User",
-    staffid : "991234"
-   },
-   
-   /*
-   에디터 파일업로드 이미지및 스크립트 설정 
-   위에서 설명한 에디터 아이콘명 추가. 사용할 아이콘명 아이콘 이미지 경로 클릭시 호출된 함수를 작성한다.
-   */
-   setup : function(tinyMCE) {
-         tinyMCE.addButton('imagepop', {
-            title : '이미지 업로드', 
-            image : getContextPath() + '/images/editor_icon_file.png',
-            onclick : function() {
-               cmdImgUploadPop();
-            }
-         });
-   },
-   init_instance_callback : function() { 
-	  contentsMakeEditorInit();
-   }
+     // Replace values for the template plugin
+     template_replace_values : {
+    	 username 	: "Some User",
+    	 staffid 	: "991234"
+     },
+     codemirror				 : {
+	    indentOnInit: true, // Whether or not to indent code on init.
+	    path: 'codemirror-4.8', // Path to CodeMirror distribution
+	    config: {           // CodeMirror config object
+	       //mode: 'application/x-httpd-php',
+	       mode				: "htmlmixed",
+	       lineNumbers		: true,
+	       lineWrapping 	: true,
+	       smartIndent 		: true,
+	       firstLineNumber 	: 1,
+	       enterMode 		: "flat",
+	       autofocus 		: true,
+	       foldGutter		: true,
+	       gutters			: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+	       extraKeys		: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+	       //killLine : true
+	    },
+	    jsFiles				 : [// Additional JS files to load
+	       'mode/clike/clike.js',
+	       'mode/php/php.js'
+	    ],
+	    cssFiles			 : [
+	               'theme/neat.css',
+	               'theme/elegant.css'
+	    ]
+	  },   
+	   /*
+	   에디터 파일업로드 이미지및 스크립트 설정 
+	   위에서 설명한 에디터 아이콘명 추가. 사용할 아이콘명 아이콘 이미지 경로 클릭시 호출된 함수를 작성한다.
+	   */
+	   setup 				 : function(tinyMCE) {
+	         tinyMCE.addButton('imagepop', {
+	            title 	: 'Image Upload', 
+	            image 	:  '/img/editor_icon_file.png',
+	            onclick : function() {
+	               cmdImgUploadPop();
+	            }
+	         });
+	         
+	         tinyMCE.addButton('imagepop2', {
+		            title 	: 'Image Selector', 
+		            image 	:  '/img/editor_icon_file.png',
+		            onclick : function() {
+		               cmdImgSelectorPop();
+		            }
+		     });
+	   },
+	   init_instance_callback : function() { 
+		  contentsMakeEditorInit();
+	   }
 });
 // 컨텐츠 수정 화면에서 에디터 사용하는 경우 에디터 초기화 하지 않도록 한다.
 function contentsMakeEditorInit(){
@@ -67,14 +106,22 @@ function contentsMakeEditorInit(){
 }
 //이미지 버튼 클릭시 팝업 실제 파일업로드를 구성하여 링크할 경로를 작성한다( 아이콘클릭시 이 함수가 호출됨)
 function cmdImgUploadPop(){
- var win = window.open("imageupload?cmd=editorImg",
+ var win = window.open("popImageUpload/editorImg",
        "editor_win",
-       "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,width=450,height=350,left=50,top=50"
+       "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,width=700,height=500,left=50,top=50"
   );
  win.focus();  
 }
 
+function cmdImgSelectorPop(){
+	 var win = window.open("popImageSelector/selectorImg",
+	       "editor_win",
+	       "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,width=980,height=500,left=50,top=50"
+	  );
+	 win.focus();  
+}
 //파일업로드 완료후 opener.editorImgUploadComplete함수호출 되는 방식 
+/*
 function editorImgUploadComplete(fileStr, dir){
   if( fileStr.length > 0 ){
    fileStr = fileStr.substring(0, fileStr.length-1);
@@ -94,6 +141,24 @@ function editorImgUploadComplete(fileStr, dir){
    tinyMCE.activeEditor.setContent( contents + strImg );
   }
  }
+*/
+function editorImgUploadComplete(fileStr){
+	var hostname = "jwlee0208.cdn3.cafe24.com";	//location.host;
+	
+	if( fileStr.length > 0 ){	   
+	   var strImg = "<br><img src='http://" + hostname + fileStr + "' border=0 width=100%>";
+	   var contents = tinyMCE.activeEditor.getDoc().body.innerHTML;	   
+	   tinyMCE.activeEditor.setContent( contents + strImg);
+	}
+}
+
+function editorImgSelectorComplete(fileStr){
+	if( fileStr.length > 0 ){	   
+	   var strImg = "<br/><img src='" + fileStr + "' border=0 width=100%><br/>";
+	   var contents = tinyMCE.activeEditor.getDoc().body.innerHTML;	   
+	   tinyMCE.activeEditor.setContent( contents + strImg);
+	}
+}
 
 
 $("#addfile").on("click",function(){
