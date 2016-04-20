@@ -9,7 +9,7 @@
 			<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 			<property name="url" value="jdbc:mysql://localhost:3306/jwlee0208?characterEncoding=UTF-8"/>
 			<property name="username" value="jwlee0208"/>
-			<property name="password" value="in2299out"/>
+			<property name="password" value=""/>
 			<property name="defaultAutoCommit" value="true"/>
 			<property name="poolPreparedStatements" value="true"/>
 			<property name="maxActive" value="15" />
