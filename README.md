@@ -1,24 +1,15 @@
-firstproj
+firstproj Project
 =========
 
+- branchs 
 1. Master
-
-
 2. Developer
-
-
 3. Feature
-
 3.1. editorFileUpload
-
 3.2. jQuery_validate
-
 3.3. login
-
 3.4. lucene
-
 3.5. map
-
 3.6. redis_N_jedis_jwlee0208
 ----------------------------
 3.6.1. 1st commit
@@ -32,7 +23,7 @@ firstproj
 3.6.1.1.1.2. Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
 
 3.6.1.1.1.2.1. Set about redis into pom.xml
-
+<pre>
 		<!-- redis -->
 		<dependency>
 			<groupId>redis.clients</groupId>
@@ -45,7 +36,7 @@ firstproj
 			<artifactId>spring-data-redis</artifactId>
 			<version>1.4.0.RELEASE</version>
 		</dependency>
-
+</pre>
 
 3.6.1.1.2. Update maven dependency
 --------------------------------
@@ -101,14 +92,14 @@ if you use to eclipse,
 
 3.6.1.1.4. Import redis-config.xml into application-config.xml following this : 
 ------------------------------------------------------------------------------------------------
-
+<pre>
 	<import resource = "classpath:spring/redis-config.xml" />
-
+</pre>
 
 3.6.1.1.5. Create to java source
 --------------------------------
 3.6.1.1.5.1. Into BoardArticleController.java
-
+<pre>
 	// spring-data-redis 사용.
 	@Autowired
 	private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
@@ -214,7 +205,7 @@ if you use to eclipse,
 		
 		return model;
 	}
-
+</pre>
 
 
 * This code is just for checking out to spring-data-redis. 
@@ -237,36 +228,36 @@ requirepass 123456
 
 
 3.6.1.1.7.1.2. Create to redis-slave.conf
-
+<pre>
 slaveof 127.0.0.1 6379
 masterauth 123456
 repl-ping-slave-period 10
 repl-timeout 60 
-
+</pre>
 
 3.6.1.1.7.1.3. Modify to sentinel.conf
-
+<pre>
 sentinel monitor mymaster 127.0.0.1 6379 1    
 sentinel auth-pass mymaster 123456            
 sentinel can-failover mymaster yes            
 sentinel parallel-syncs mymaster 1            
-
+</pre>
 
 3.6.1.1.7.1.4. Startup redis 
 3.6.1.1.7.1.4.1. Startup master redis
-
+<pre>
 ./src/redis-server redis-master.conf &
-
+</pre>
 
 3.6.1.1.7.1.4.2. Startup slave redis
-
+<pre>
 ./src/redis-server redis-slave.conf &
-
+</pre>
 
 3.6.1.1.7.1.4.3. Startup Sentinel
-
+<pre>
 $ ./redis-server ../sentinel.conf --sentinel
-
+</pre>
 
 3.6.1.1.8. Startup Tomcat Server
 --------------------------------
