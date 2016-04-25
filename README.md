@@ -24,6 +24,7 @@ firstproj Project
 
 3.6.1.1.1.2.1. Set about redis into pom.xml
 <pre>
+	<code>
 		<!-- redis -->
 		<dependency>
 			<groupId>redis.clients</groupId>
@@ -36,6 +37,7 @@ firstproj Project
 			<artifactId>spring-data-redis</artifactId>
 			<version>1.4.0.RELEASE</version>
 		</dependency>
+	<code>	
 </pre>
 
 3.6.1.1.2. Update maven dependency
@@ -47,6 +49,7 @@ if you use to eclipse,
 
 3.6.1.1.3. Create to redis_config.xml into "src/main/resources/spring" directory following this : 
 ------------------------------------------------------------------------------------------------
+<pre>
 <code>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:p="http://www.springframework.org/schema/p"
@@ -72,15 +75,7 @@ if you use to eclipse,
 		 	<property name="poolConfig" ref="redisPoolConfig"></property>		 	
 		 	 <property name="database" value="0"></property><!-- default 0 디비  dao영역에서 index 값 파라메터로 던져서 실시간으로 변경 감지 가능함.-->
 		 </bean>
-		 <!-- 
-		<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"  p:connection-factory-ref="connectionFactory"/>	
-		 -->
-		 
-<!-- 		<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"> -->
-<!-- 			<property name="connectionFactory" ref="connectionFactory"></property> -->
-<!-- 		</bean> -->
-		
-			 
+ 
 		<!-- redisTemplate 사용할 경우 아래 주석풀고 사용 -->
 		
 		<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
@@ -89,6 +84,7 @@ if you use to eclipse,
 		 
 </beans>			
 </code>
+</pre>
 
 3.6.1.1.4. Import redis-config.xml into application-config.xml following this : 
 ------------------------------------------------------------------------------------------------
