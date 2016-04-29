@@ -68,11 +68,11 @@ LinkedNest Project
 			</bean>
 		</beans>
 	- Import redis-config.xml into application-config.xml following this : 
-	
+		<code>		
 		<import resource = "classpath:spring/redis-config.xml" />
-
+		</code>	
 	- Create to java source
-			
+				
 		@Autowired
 		private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
 			
@@ -95,7 +95,7 @@ LinkedNest Project
 		}
 		
 		private Model getBoardCommonListForJson(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
-			// 검색 조건
+			
 			String searchCondition = request.getParameter("searchCondition");
 			String searchText = request.getParameter("searchText");
 			String startDate = request.getParameter("startDate");
@@ -108,7 +108,7 @@ LinkedNest Project
 			int listRowCnt = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
 				
 			Map<String, Object> paramMap = new HashMap<String, Object>();
-			// searching condition setting
+			
 			paramMap.put("boardId", boardId);
 			paramMap.put("searchCondition", searchCondition);
 			paramMap.put("searchText", searchText);
