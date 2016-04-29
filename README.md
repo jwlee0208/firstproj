@@ -77,6 +77,7 @@ Redis Installation And Configuration Guide
 		<import resource = "classpath:spring/redis-config.xml" />
 			
 - Create to java source
+
 		<pre><code>		
 		@Autowired
 		private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
@@ -173,6 +174,7 @@ Redis Installation And Configuration Guide
 			return model;
 		}
 		</code></pre>
+		
 		* This code is just for checking out to spring-data-redis. 
 		* I think it'll be better to create mvc pattern and to create source each class.  
 		 
