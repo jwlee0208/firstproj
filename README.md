@@ -18,23 +18,25 @@ LinkedNest Project
    	- Redis Installation & Configuration
 	- Go to http://redis.io/download , download and execute to install redis
 	- Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
-	  	<!-- redis -->
+
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>2.5.2</version>
 		</dependency>
-		<!-- spring-data-redis -->
+		
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
 			<version>1.4.0.RELEASE</version>
 		</dependency>
+		
 	- Update maven dependency
 		if you use to eclipse, 
 		- Select to project
 		- Click to right mouse
 		- Select 'Maven > Update Project'
+		
 	- Create to redis_config.xml into "src/main/resources/spring" directory following this : 
 		<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:p="http://www.springframework.org/schema/p"
@@ -66,27 +68,29 @@ LinkedNest Project
 			</bean>
 		</beans>
 	- Import redis-config.xml into application-config.xml following this : 
+	
 		<import resource = "classpath:spring/redis-config.xml" />
-	- Create to java source
 
+	- Create to java source
+			
 		@Autowired
 		private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
-
+			
 		@Resource(name="redisTemplate")
 		private ValueOperations<String, List<BoardArticleDto>> valueOps;
-
+			
 		@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
 		public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception {
 			model = this.getBoardCommonListForJson(request, model, boardArticleDto);
-			
+						
 			String page = "board/article/list";
-			
+							
 			if(boardArticleDto.getBoardId() == 1){
 				page = "board/article/imageList";
 			}else if(boardArticleDto.getBoardId() == 2){
 				page = "board/article/imageList2";
 			}
-			
+				
 			return page;
 		}
 		
@@ -102,7 +106,7 @@ LinkedNest Project
 			int pageNo = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : 	DEFAULT_PAGE_NO;
 			
 			int listRowCnt = (request.getParameter("listRowCnt") != null) ? Integer.parseInt(request.getParameter("listRowCnt")) : 10;
-
+				
 			Map<String, Object> paramMap = new HashMap<String, Object>();
 			// searching condition setting
 			paramMap.put("boardId", boardId);
@@ -135,12 +139,12 @@ LinkedNest Project
 				return model;
 				
 			}finally{
-			
+					
 			}
-			
+					
 			int startRow = (pageNo - 1) * listRowCnt;
 			int endRow 	 = pageNo * listRowCnt;
-			
+					
 			List<BoardArticleDto> pagedArticleList = new ArrayList<BoardArticleDto>();
 				
 			if(null != boardArticleList){
