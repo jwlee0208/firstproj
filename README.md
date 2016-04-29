@@ -19,7 +19,6 @@ Functions
 			
 
 Redis Installation And Configuration Guide
-		
 	- Go to http://redis.io/download , download and execute to install redis
 	- Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
 		
