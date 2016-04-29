@@ -40,6 +40,7 @@ LinkedNest Project
 		- Select 'Maven > Update Project'
 		
 	- Create to redis_config.xml into "src/main/resources/spring" directory following this : 
+		------------------------
 		<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:p="http://www.springframework.org/schema/p"
 		xmlns:context="http://www.springframework.org/schema/context"
@@ -69,10 +70,11 @@ LinkedNest Project
 		    		<property name="connectionFactory" ref="connectionFactory" />
 			</bean>
 		</beans>
+		------------------------
 	- Import redis-config.xml into application-config.xml following this : 
-		<code>		
+		------------------------	
 		<import resource = "classpath:spring/redis-config.xml" />
-		</code>	
+		------------------------
 	- Create to java source
 				
 		@Autowired
