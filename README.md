@@ -1,21 +1,21 @@
 LinkedNest Project
 
 1. Purpose 
-	1.1. Link Between Player With Club.
+	- Link Between Player With Club.
 		URL : http://linkednest.net
-   	1.2. Share Each Other's Knowledge, Experiences
+   	- Share Each Other's Knowledge, Experiences
 		http://linkednest.net/share
 2. Functions
-   	2.1. Membership
+   	- Membership
 		- Sign Up / Sign In / Configure To Private Informations	
-   	2.2. Upload Profile For Player
+   	- Upload Profile For Player
     		- Upload Image File To Cdn Server
     		- Upload Image File To Flickr Service
     		- Search Image Files Using Flickr Api Service
-   	2.3. Search Stream List Using Youtube Api
-   	2.4. Write Article Using TinyMCE(4.x ver.) WISIWIG Editor 
+   	- Search Stream List Using Youtube Api
+   	-  Write Article Using TinyMCE(4.x ver.) WISIWIG Editor 
 3. Installation Guide 
-   3.1. Redis Installation & Configuration
+   	- Redis Installation & Configuration
 	- Go to http://redis.io/download , download and execute to install redis
 	- Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
 	  	<!-- redis -->
@@ -66,8 +66,10 @@ LinkedNest Project
 			</bean>
 		</beans>
 	- Import redis-config.xml into application-config.xml following this : 
-		<import resource = "classpath:spring/redis-config.xml" />
-	- Create to java sourceCreate to java source
+		<pre>
+			<import resource = "classpath:spring/redis-config.xml" />
+		</pre>
+	- Create to java source
 		// spring-data-redis 사용.
 		@Autowired
 		private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
