@@ -17,7 +17,7 @@ Functions
 - Write Article Using WISIWIG Editor 
 	- TinyMCE(4.x ver.) 
 			
-Redis Redis Installation & Configuration Guide
+
 		
 		
 	- Go to http://redis.io/download , download and execute to install redis
