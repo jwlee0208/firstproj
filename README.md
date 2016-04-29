@@ -1,12 +1,12 @@
 # LinkedNest Project #
 
-## 1. Purpose ## 
+## Purpose ## 
 - Link Between Player With Club.
 	- URL : http://linkednest.net
 - Share Each Other's Knowledge, Experiences
 	- URL : http://linkednest.net/share
 
-## 2. Functions ##
+## Functions ##
 - Membership
 	- Sign Up / Sign In / Configure To Private Informations	
 - Upload Profile For Player
@@ -16,8 +16,8 @@
 	- Search Stream List Using Youtube Api
 - Write Article Using WISIWIG Editor 
 	- TinyMCE(4.x ver.) 
-
-## 3. Redis Redis Installation & Configuration Guide ##
+	
+## Redis Redis Installation & Configuration Guide ##
 		
 	- Go to http://redis.io/download , download and execute to install redis
 	- Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
