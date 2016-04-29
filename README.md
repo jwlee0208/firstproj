@@ -1,19 +1,19 @@
 LinkedNest Project
 
 1. Purpose 
-   1.1. Link Between Player With Club.
-	URL : http://linkednest.net
-   1.2. Share Each Other's Knowledge, Experiences
-	http://linkednest.net/share
+	1.1. Link Between Player With Club.
+		URL : http://linkednest.net
+   	1.2. Share Each Other's Knowledge, Experiences
+		http://linkednest.net/share
 2. Functions
-   2.1. Membership
-	- Sign Up / Sign In / Configure To Private Informations	
-   2.2. Upload Profile For Player
-    	- Upload Image File To Cdn Server
-    	- Upload Image File To Flickr Service
-    	- Search Image Files Using Flickr Api Service
-   2.3. Search Stream List Using Youtube Api
-   2.4. Write Article Using TinyMCE(4.x ver.) WISIWIG Editor 
+   	2.1. Membership
+		- Sign Up / Sign In / Configure To Private Informations	
+   	2.2. Upload Profile For Player
+    		- Upload Image File To Cdn Server
+    		- Upload Image File To Flickr Service
+    		- Search Image Files Using Flickr Api Service
+   	2.3. Search Stream List Using Youtube Api
+   	2.4. Write Article Using TinyMCE(4.x ver.) WISIWIG Editor 
 3. Installation Guide 
    3.1. Redis Installation & Configuration
 	- Go to http://redis.io/download , download and execute to install redis
