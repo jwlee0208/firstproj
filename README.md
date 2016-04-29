@@ -2,13 +2,11 @@ LinkedNest Project
 =====================
 
 1. Purpose 
-----------
 	- Link Between Player With Club.
 		URL : http://linkednest.net
    	- Share Each Other's Knowledge, Experiences
 		http://linkednest.net/share
 2. Functions
-----------
    	- Membership
 		- Sign Up / Sign In / Configure To Private Informations	
    	- Upload Profile For Player
@@ -18,11 +16,11 @@ LinkedNest Project
    	- Search Stream List Using Youtube Api
    	-  Write Article Using TinyMCE(4.x ver.) WISIWIG Editor 
 3. Installation Guide 
-----------
+
    	- Redis Installation & Configuration
 	- Go to http://redis.io/download , download and execute to install redis
 	- Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
-
+		----------------------------------------
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
@@ -34,7 +32,7 @@ LinkedNest Project
 			<artifactId>spring-data-redis</artifactId>
 			<version>1.4.0.RELEASE</version>
 		</dependency>
-		
+		-----------------------------------------
 	- Update maven dependency
 		if you use to eclipse, 
 		- Select to project
