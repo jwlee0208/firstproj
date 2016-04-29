@@ -2,24 +2,25 @@
 
 ##1. Purpose 
 - Link Between Player With Club.
-	URL : http://linkednest.net
+	- URL : http://linkednest.net
 - Share Each Other's Knowledge, Experiences
-	http://linkednest.net/share
+	- URL : http://linkednest.net/share
 
 ##2. Functions
 - Membership
-- 	Sign Up / Sign In / Configure To Private Informations	
+	- Sign Up / Sign In / Configure To Private Informations	
 - Upload Profile For Player
 	- Upload Image File To Cdn Server
 	- Upload Image File To Flickr Service
 	- Search Image Files Using Flickr Api Service
 	- Search Stream List Using Youtube Api
-- Write Article Using TinyMCE(4.x ver.) WISIWIG Editor 
+- Write Article Using WISIWIG Editor 
+	- TinyMCE(4.x ver.) 
 
 ##3. Redis Redis Installation & Configuration Guide 
 		
-	### - Go to http://redis.io/download , download and execute to install redis
-	### - Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
+	- Go to http://redis.io/download , download and execute to install redis
+	- Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
 		
 		<dependency>
 			<groupId>redis.clients</groupId>
@@ -33,13 +34,13 @@
 			<version>1.4.0.RELEASE</version>
 		</dependency>
 			
-	### - Update maven dependency
+	- Update maven dependency
 		if you use to eclipse, 
 		- Select to project
 		- Click to right mouse
 		- Select 'Maven > Update Project'
 		
-	### - Create to redis_config.xml into "src/main/resources/spring" directory following this : 
+	- Create to redis_config.xml into "src/main/resources/spring" directory following this : 
 		
 		<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:p="http://www.springframework.org/schema/p"
