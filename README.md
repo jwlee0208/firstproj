@@ -1,12 +1,12 @@
-# LinkedNest Project #
+LinkedNest Project
 
-## Purpose ## 
+Purpose
 - Link Between Player With Club.
 	- URL : http://linkednest.net
 - Share Each Other's Knowledge, Experiences
 	- URL : http://linkednest.net/share
 
-## Functions ##
+Functions
 - Membership
 	- Sign Up / Sign In / Configure To Private Informations	
 - Upload Profile For Player
@@ -17,24 +17,22 @@
 - Write Article Using WISIWIG Editor 
 	- TinyMCE(4.x ver.) 
 	
-## Redis Redis Installation & Configuration Guide ##
+Redis Redis Installation & Configuration Guide
 		
 	- Go to http://redis.io/download , download and execute to install redis
 	- Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
 		
-		<pre><code>	
-		&lt;dependency&gt;
-			&lt;groupId&gt;redis.clients&lt;/groupId&gt;
-			&lt;artifactId&gt;jedis&lt;/artifactId&gt;
-			&lt;version&gt;2.5.2&lt;/version&gt;
-		&lt;/dependency&gt;
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.5.2</version>
+		</dependency>
 		
-		&lt;dependency&gt;
-			&lt;groupId&gt;org.springframework.data</groupId&gt;
-			&lt;artifactId&gt;spring-data-redis</artifactId&gt;
-			&lt;version&gt;1.4.0.RELEASE</version&gt;
-		&lt;/dependency&gt;
-		</pre></code>	
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>1.4.0.RELEASE</version>
+		</dependency>
 			
 	- Update maven dependency
 		if you use to eclipse, 
@@ -44,43 +42,39 @@
 		
 	- Create to redis_config.xml into "src/main/resources/spring" directory following this : 
 		
-		<pre><code>	
-		&lt;beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:p="http://www.springframework.org/schema/p"
 		xmlns:context="http://www.springframework.org/schema/context"
 		xsi:schemaLocation="
 			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-			http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd"&gt;
+			http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 				 
-		 	&lt;bean id="redisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"&gt;
-		 		&lt;property name="minIdle" value="1"&gt;&lt;/property&gt;
-		 		&lt;property name="maxIdle" value="30"&gt;&lt;/property&gt;
-		 		&lt;property name="maxTotal" value="30"&gt;&lt;/property&gt;
-		 		&lt;property name="maxWaitMillis" value="10000"&gt;&lt;/property&gt;
-		 		&lt;property name="testOnBorrow" value="true"&gt;&lt;/property&gt;
-		 	&lt;/bean&gt;
+		 	<bean id="redisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		 		<property name="minIdle" value="1"></property>
+		 		<property name="maxIdle" value="30"></property>
+		 		<property name="maxTotal" value="30"></property>
+		 		<property name="maxWaitMillis" value="10000"></property>
+		 		<property name="testOnBorrow" value="true"></property>
+		 	</bean>
 				  
-		 	&lt;bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"&gt;
-		 		&lt;property name="hostName" value="127.0.0.1"&gt;&lt;/property&gt;
-		 		&lt;property name="port" value="6379"&gt;&lt;/property&gt;
-		 		&lt;property name="password" value="123456"&gt;&lt;/property&gt;
-		 		&lt;property name="usePool" value="yes"&gt;&lt;/property&gt; 
-			 	&lt;property name="poolConfig" ref="redisPoolConfig"&gt;&lt;/property&gt;		 	
-			 	&lt;property name="database" value="0"&gt;&lt;/property&gt;&lt;!-- default 0 디비  dao영역에서 index 값 파라메터로 던져서 실시간으로 변경 감지 가능함.--&gt;
-			&lt;/bean&gt;
+		 	<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		 		<property name="hostName" value="127.0.0.1"></property>
+		 		<property name="port" value="6379"></property>
+		 		<property name="password" value="123456"></property>
+		 		<property name="usePool" value="yes"></property> 
+			 	<property name="poolConfig" ref="redisPoolConfig"></property>		 	
+			 	<property name="database" value="0"></property><!-- default 0 디비  dao영역에서 index 값 파라메터로 던져서 실시간으로 변경 감지 가능함.-->
+			</bean>
  
-			&lt;bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"&gt;
-		    		&lt;property name="connectionFactory" ref="connectionFactory" /&gt;
-			&lt;/bean&gt;
-		&lt;/beans&gt;
-		</code></pre>
+			<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		    		<property name="connectionFactory" ref="connectionFactory" />
+			</bean>
+		</beans>
 	
 	###- Import redis-config.xml into application-config.xml following this : 
-		
-		<pre><code>	
-		&lt;import resource = "classpath:spring/redis-config.xml" /&gt;
-		</code></pre>
+			
+		<import resource = "classpath:spring/redis-config.xml" />
 			
 	###- Create to java source
 		<pre><code>		
