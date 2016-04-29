@@ -66,25 +66,15 @@ LinkedNest Project
 			</bean>
 		</beans>
 	- Import redis-config.xml into application-config.xml following this : 
-		<pre>
-			<import resource = "classpath:spring/redis-config.xml" />
-		</pre>
+		<import resource = "classpath:spring/redis-config.xml" />
 	- Create to java source
-		// spring-data-redis 사용.
+
 		@Autowired
 		private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
-		// spring-data-redis 사용.
+
 		@Resource(name="redisTemplate")
 		private ValueOperations<String, List<BoardArticleDto>> valueOps;
 
-		/**
-		 * 게시글 목록 조회
-		 * @param request
-		 * @param model
-		 * @param boardArticleDto
-		 * @return
-		 * @throws Exception
-		 */
 		@RequestMapping(value = "/list.page", method = {RequestMethod.POST, RequestMethod.GET})
 		public String getBoardList(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception {
 			model = this.getBoardCommonListForJson(request, model, boardArticleDto);
