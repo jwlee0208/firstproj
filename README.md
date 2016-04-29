@@ -8,16 +8,16 @@
 
 ##2. Functions
 - Membership
-- Sign Up / Sign In / Configure To Private Informations	
+- 	Sign Up / Sign In / Configure To Private Informations	
 - Upload Profile For Player
-- Upload Image File To Cdn Server
-- Upload Image File To Flickr Service
-- Search Image Files Using Flickr Api Service
-- Search Stream List Using Youtube Api
--  Write Article Using TinyMCE(4.x ver.) WISIWIG Editor 
+	- Upload Image File To Cdn Server
+	- Upload Image File To Flickr Service
+	- Search Image Files Using Flickr Api Service
+	- Search Stream List Using Youtube Api
+- Write Article Using TinyMCE(4.x ver.) WISIWIG Editor 
 
 ##3. Redis Redis Installation & Configuration Guide 
-
+		
 	### - Go to http://redis.io/download , download and execute to install redis
 	### - Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
 		
@@ -32,7 +32,7 @@
 			<artifactId>spring-data-redis</artifactId>
 			<version>1.4.0.RELEASE</version>
 		</dependency>
-	
+			
 	### - Update maven dependency
 		if you use to eclipse, 
 		- Select to project
@@ -48,7 +48,7 @@
 			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 			http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
-		 
+				 
 		 	<bean id="redisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		 		<property name="minIdle" value="1"></property>
 		 		<property name="maxIdle" value="30"></property>
@@ -56,7 +56,7 @@
 		 		<property name="maxWaitMillis" value="10000"></property>
 		 		<property name="testOnBorrow" value="true"></property>
 		 	</bean>
-		  
+				  
 		 	<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
 		 		<property name="hostName" value="127.0.0.1"></property>
 		 		<property name="port" value="6379"></property>
@@ -97,7 +97,7 @@
 				
 			return page;
 		}
-		
+			
 		private Model getBoardCommonListForJson(HttpServletRequest request, Model model, BoardArticleDto boardArticleDto) throws Exception{
 			
 			String searchCondition = request.getParameter("searchCondition");
