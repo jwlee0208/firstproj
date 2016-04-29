@@ -1,26 +1,26 @@
 LinkedNest Project
 
-Purpose
-- Link Between Player With Club.
+##Purpose
+###- Link Between Player With Club.
 	- URL : http://linkednest.net
-- Share Each Other's Knowledge, Experiences
+###- Share Each Other's Knowledge, Experiences
 	- URL : http://linkednest.net/share
 
-Functions
+##Functions
 - Membership
 	- Sign Up / Sign In / Configure To Private Informations	
-- Upload Profile For Player
+###- Upload Profile For Player
 	- Upload Image File To Cdn Server
 	- Upload Image File To Flickr Service
 	- Search Image Files Using Flickr Api Service
 	- Search Stream List Using Youtube Api
-- Write Article Using WISIWIG Editor 
+###- Write Article Using WISIWIG Editor 
 	- TinyMCE(4.x ver.) 
 			
 
-Redis Installation And Configuration Guide
-- Go to http://redis.io/download , download and execute to install redis
-- Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
+##Redis Installation And Configuration Guide
+###- Go to http://redis.io/download , download and execute to install redis
+###- Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
 		
 		<dependency>
 			<groupId>redis.clients</groupId>
@@ -34,13 +34,13 @@ Redis Installation And Configuration Guide
 			<version>1.4.0.RELEASE</version>
 		</dependency>
 			
-- Update maven dependency
+###- Update maven dependency
 		if you use to eclipse, 
 		- Select to project
 		- Click to right mouse
 		- Select 'Maven > Update Project'
 		
-- Create to redis_config.xml into "src/main/resources/spring" directory following this : 
+###- Create to redis_config.xml into "src/main/resources/spring" directory following this : 
 		
 		<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:p="http://www.springframework.org/schema/p"
@@ -72,13 +72,12 @@ Redis Installation And Configuration Guide
 			</bean>
 		</beans>
 	
-- Import redis-config.xml into application-config.xml following this : 
+###- Import redis-config.xml into application-config.xml following this : 
 			
 		<import resource = "classpath:spring/redis-config.xml" />
 			
-- Create to java source
+###- Create to java source
 
-		<pre><code>		
 		@Autowired
 		private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
 			
@@ -173,7 +172,6 @@ Redis Installation And Configuration Guide
 				
 			return model;
 		}
-		</code></pre>
 		
 		* This code is just for checking out to spring-data-redis. 
 		* I think it'll be better to create mvc pattern and to create source each class.  
