@@ -1,26 +1,26 @@
 LinkedNest Project
 =====================
 
-1. Purpose 
-	- Link Between Player With Club.
-		URL : http://linkednest.net
-   	- Share Each Other's Knowledge, Experiences
-		http://linkednest.net/share
-2. Functions
-   	- Membership
-		- Sign Up / Sign In / Configure To Private Informations	
-   	- Upload Profile For Player
-    		- Upload Image File To Cdn Server
-    		- Upload Image File To Flickr Service
-    		- Search Image Files Using Flickr Api Service
-   	- Search Stream List Using Youtube Api
-   	-  Write Article Using TinyMCE(4.x ver.) WISIWIG Editor 
-3. Installation Guide 
+#1. Purpose 
+- Link Between Player With Club.
+	URL : http://linkednest.net
+- Share Each Other's Knowledge, Experiences
+	http://linkednest.net/share
+#2. Functions
+- Membership
+- Sign Up / Sign In / Configure To Private Informations	
+- Upload Profile For Player
+- Upload Image File To Cdn Server
+- Upload Image File To Flickr Service
+- Search Image Files Using Flickr Api Service
+- Search Stream List Using Youtube Api
+-  Write Article Using TinyMCE(4.x ver.) WISIWIG Editor 
+#3. Installation Guide 
 
    	- Redis Installation & Configuration
 	- Go to http://redis.io/download , download and execute to install redis
 	- Set about redis into pom.xml(maven dependency) and update maven dependency following this : 
-		----------------------------------------
+		<pre><code>
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
@@ -32,6 +32,8 @@ LinkedNest Project
 			<artifactId>spring-data-redis</artifactId>
 			<version>1.4.0.RELEASE</version>
 		</dependency>
+		</code></pre>
+
 		-----------------------------------------
 	- Update maven dependency
 		if you use to eclipse, 
@@ -40,7 +42,7 @@ LinkedNest Project
 		- Select 'Maven > Update Project'
 		
 	- Create to redis_config.xml into "src/main/resources/spring" directory following this : 
-		------------------------
+		<pre><code>
 		<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:p="http://www.springframework.org/schema/p"
 		xmlns:context="http://www.springframework.org/schema/context"
@@ -70,13 +72,14 @@ LinkedNest Project
 		    		<property name="connectionFactory" ref="connectionFactory" />
 			</bean>
 		</beans>
+		</code></pre>
 		------------------------
 	- Import redis-config.xml into application-config.xml following this : 
-		------------------------	
+		<pre><code>	
 		<import resource = "classpath:spring/redis-config.xml" />
-		------------------------
+		</code></pre>
 	- Create to java source
-				
+		<pre><code>		
 		@Autowired
 		private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
 			
@@ -171,6 +174,7 @@ LinkedNest Project
 				
 			return model;
 		}
+		</code></pre>
 		* This code is just for checking out to spring-data-redis. 
 		* I think it'll be better to create mvc pattern and to create source each class.  
 		 
