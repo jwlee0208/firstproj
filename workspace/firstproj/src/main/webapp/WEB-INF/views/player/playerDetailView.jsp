@@ -21,6 +21,20 @@
 <!-- chart.js -->
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/chart.js/Chart.min.js"></script>
 
+<!-- resume resources -->
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/lib/assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/lib/assets/plugins/font-awesome/css/font-awesome.css">
+    
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="${pageContext.request.contextPath}/lib/assets/css/styles.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 <style type="text/css">
 	.form-group .col-sm-10 {vertical-align : middle;}
 </style>
@@ -30,71 +44,58 @@
 	<form id="viewFrm" name="viewFrm" method="post" class="form-horizontal" role="form">
 		<input type="hidden" id="userId" 		name="userId" 		value="${playerDetailInfo.userInfo.userId}"/>
 		<input type="hidden" id="playerInfoId" 	name="playerInfoId" value="${playerDetailInfo.playerInfoId}"/>
-		<h1 id="btn-groups" class="page-header">I'm ${playerDetailInfo.userInfo.userNm}&nbsp;&nbsp;&nbsp;<small>Player Information</small></h1>
-		<div class="form-group">
-			<label for="linkUrl" class="col-sm-2">Checkout My Play Streamming</label>
-			<div class="col-sm-10">
-				<div class="embed-responsive embed-responsive-16by9">
-					${playerDetailInfo.playerVideoLinkList[0].linkUrl}
-				</div>
-				
-<%-- 			<c:set var="playerVideoLinkList" value="${playerDetailInfo.playerVideoLinkList}"/> --%>
-<%-- 			<c:if test="${playerVideoLinkList ne '' or playerVideoLinkList ne null}"> --%>
-<%-- 				<c:forEach var="playerVideoLinkInfo" items="${playerVideoLinkList}" varStatus="idx"> --%>
-<%-- 					<iframe class="embed-responsive-item" width="420" height="255" src="${palyerVideoLinkInfo.linkUrl}" frameborder="0" allowfullscreen></iframe><br/> --%>
-<%-- 				</c:forEach> --%>
-<%-- 			</c:if> --%>
-			</div>
-		</div>
-		
-		<div class="form-group">
-			<label for="profileImgFilePath" class="col-sm-2">Profile Image</label>
-			<div class="col-sm-10"><img data-src="holder.js/300x200" src="http://jwlee0208.cdn3.cafe24.com/${playerDetailInfo.profileImgFilePath}" class="img-thumbnail" width="300px" height="200px" /></div>
-		</div>
-<!-- 
-		<div class="form-group">
-			<label for="userNm" class="col-sm-2">My Name is</label>
-			<div class="col-sm-10">
-				<input type="hidden" id="userId" name="userId" value="${playerDetailInfo.userInfo.userId}"/>
-				${playerDetailInfo.userInfo.userNm}
-			</div>
-		</div>
- -->		
-		<div class="form-group">
-			<label for="catNm1" class="col-sm-2">My type is</label>
-			<div class="col-sm-10">${playerDetailInfo.catNm1}</div>
-		</div>
-		<div class="form-group">
-			<label for="catNm2" class="col-sm-2">My Position is</label>
-			<div class="col-sm-10">${playerDetailInfo.catNm2}</div>
-		</div>
-		<div class="form-group">
-			<label for="phoneNo" class="col-sm-2">Detail Type</label>
-			<div class="col-sm-10" id="attrElemList">
+
+	    <div class="wrapper">
+	        <div class="sidebar-wrapper">
+	            <div class="profile-container">
+	                <img class="profile" src="http://jwlee0208.cdn3.cafe24.com/${playerDetailInfo.profileImgFilePath}" alt="" />
+	                <h1 class="name">${playerDetailInfo.userInfo.userNm}</h1>
+	                <h3 class="tagline">${playerDetailInfo.catNm1} / ${playerDetailInfo.catNm2}</h3>
+	            </div><!--//profile-container-->
+	            
+	            <div class="contact-container container-block">
+	                <ul class="list-unstyled contact-list">
+		               <c:if test="${playerDetailInfo.userInfo.email != null}"><li class="email"><i class="fa fa-envelope"></i><a href="mailto: ${playerDetailInfo.userInfo.email}">${playerDetailInfo.userInfo.email}</a></li></c:if>
+		               <c:if test="${playerDetailInfo.userInfo.phoneNo != null}"><li class="phone"><i class="fa fa-phone"></i><a href="tel:${playerDetailInfo.userInfo.phoneNo}">${playerDetailInfo.userInfo.phoneNo}</a></li></c:if>
+		               <c:if test="${playerDetailInfo.userInfo.fbUserId != null}"><li class="website"><i class="fa fa-globe"></i><a href="http://facebook.com/${playerDetailInfo.userInfo.fbUserId}" target="_blank">facebook.com/${playerDetailInfo.userInfo.fbUserId}</a></li></c:if>
+		               <c:if test="${playerDetailInfo.userInfo.twUserId != null}"><li class="twitter"><i class="fa fa-twitter"></i><a href="https://twitter.com/3rdwave_themes" target="_blank">@${playerDetailInfo.userInfo.twUserId}</a></li></c:if>
+	                </ul>
+	            </div><!--//contact-container-->
+	            
+	            <div class="languages-container container-block">
+	                <h2 class="container-block-title">Attributes</h2>
+	                <ul class="list-unstyled interests-list">                
 			<c:set var="categoryAttrElemList" value="${playerDetailInfo.categoryAttrElemList}"/>
 			<c:if test="${categoryAttrElemList ne null or categoryAttrElemList ne ''}">
 				<c:forEach var="attrElemInfo" items="${playerDetailInfo.categoryAttrElemList}">
-				<div>
-				<h4><span class="label label-default">${attrElemInfo.attrNameStr}</span></h4><span>${attrElemInfo.attrElemNameStr}</span>
-				</div>
+						<li>${attrElemInfo.attrNameStr} <span class="lang-desc">${attrElemInfo.attrElemNameStr}</span></li>
 				</c:forEach>	
 			</c:if>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="batChart" class="col-sm-2">Batting Factor</label>
-			<canvas id="batChart" width="400" height="400"></canvas>
-		</div>	
-		<div class="form-group">
-			<label for="fieldChart" class="col-sm-2">Fielding Factor</label>
-			<canvas id="fieldChart" width="400" height="400"></canvas>
-		</div>	
-		<div class="form-group">
-			<label for="introduce" class="col-sm-2">Introduce Yourself!</label>
-			<div class="col-sm-10">
-				<c:out value="${playerDetailInfo.introduce}" escapeXml="false"/>
-			</div>
-		</div>
+	                </ul>
+	            </div><!--//interests-->
+	            
+	        </div><!--//sidebar-wrapper-->
+	        
+	        <div class="main-wrapper"> 
+	            <section class="section summary-section">
+	                <h2 class="section-title"><i class="fa fa-user"></i>I Can Play Like This</h2>
+	                <div class="summary">
+						<div class="embed-responsive embed-responsive-16by9">
+							${playerDetailInfo.playerVideoLinkList[0].linkUrl}
+						</div>	                    
+	                </div><!--//summary-->
+	            </section><!--//section-->
+	            
+	            <section class="section projects-section">
+	                <h2 class="section-title"><i class="fa fa-archive"></i>Introduce</h2>
+	                <div class="intro">
+	                	<c:out value="${playerDetailInfo.introduce}" escapeXml="false"/>
+	                </div><!--//intro-->
+	            </section><!--//section-->
+	            
+	        </div><!--//main-body-->
+	    </div>
+	</form>
 
 		<div class="btn-group btn-group-justified" style="padding-top : 20px; padding-bottom : 20px;">
 			<div class="btn-group">
@@ -110,7 +111,6 @@
 			</div>					
 			</c:if>
 		</div>
-	</form>
 </div>
 
 </body>
