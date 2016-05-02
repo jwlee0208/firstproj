@@ -1,9 +1,9 @@
 #LinkedNest Project
 
 ##Purpose
-###- Link Between Player With Club.
+###- Link Between Player With Team(Club).
 	- URL : http://linkednest.net
-###- Share Each Other's Knowledge, Experiences
+###- Share Knowledge, Experiences
 	- URL : http://linkednest.net/share
 
 ##Functions
