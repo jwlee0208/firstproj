@@ -240,6 +240,73 @@ public class Test {
 	    System.out.println(URLEncoder.encode("\"한글의 위대함\"", "UTF-8"));    // 8859_1
 	}
 	
+	
+	public static void mysort(int[] arr, int nArraySize)
+	{
+	    if( nArraySize > 0 ) {
+	            int tempInt = 0;
+    	        for( int i = 0 ; i  < nArraySize -1 ; i++){
+    	                for(int j = 0 ; j < nArraySize - 1 - i ; j++){
+    	                    if( arr[ j ] > arr[ j+1 ] ){
+    	                        tempInt =arr[ j ];
+    	                        arr[ j ] = arr[ j + 1 ];
+    	                        arr[ j + 1 ] = tempInt; 
+    	                    }
+    	                }
+	            }
+	            System.out.println("mysort() Result : ");
+	            for( int i = 0 ; i < nArraySize ; i++ ) {
+	                System.out.println(arr[i]); 
+	            }
+	    }
+	}
+	
+	public static int[] mysort2(int[] arr, int nArraySize){
+        if( nArraySize > 0 ) {
+            int tempInt = 0;
+            for( int i = 0 ; i  < nArraySize -1 ; i++){
+                    for(int j = 0 ; j < nArraySize - 1 - i ; j++){
+                        if( arr[ j ] > arr[ j+1 ] ){
+                            tempInt =arr[ j ];
+                            arr[ j ] = arr[ j + 1 ];
+                            arr[ j + 1 ] = tempInt; 
+                        }
+                    }
+            }
+            System.out.println("mysort() Result : ");
+            for( int i = 0 ; i < nArraySize ; i++ ) {
+                System.out.println(arr[i]); 
+            }
+        }	
+        return arr;
+	}
+	
+	public static int mybsearch(int[] arr, int value)
+	{
+	    int endInt = arr.length;
+	    int[] sortedArr = Test.mysort2(arr, endInt);
+	    int i = 0;
+	    
+	    int devideInt = 0;
+	    if(endInt > 0){
+	    while(i <= endInt){
+	          devideInt = (i + endInt) / 2;
+	          System.out.println("devideInt : " + devideInt);
+	          System.out.println("arr[devideInt] : " + sortedArr[devideInt]);
+	          if( sortedArr[devideInt] == value ){
+	              return devideInt;
+	          }else{
+	              if( sortedArr[ devideInt ] < value ){
+	                  endInt = devideInt - 1; 
+	              } else {
+	                  i = devideInt + 1;
+	              } 
+	          }
+	      }
+	    }
+	    return -1;
+	  }
+	
 	public static void main(String[] args) throws Exception{
 		// Testing compareTo method
 //		Test.checkoutCompareWay();
@@ -257,6 +324,16 @@ public class Test {
 //	    Test.testSlideShare();
 	    
 //	    Test.testYoutube();
-	    Test.getTodate();
+	    
+	    int arr[] = { 34, 1, 9, 2, 10, 11, 45, 100, 80 , 84 , 99 };
+	    int nLength = arr.length;
+	    
+//	    Test.mysort(arr, nLength);
+	    
+	    
+	    Test.mybsearch(arr, 2);
+	    
+	    
+//	    Test.getTodate();
 	}	
 }

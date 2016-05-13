@@ -14,8 +14,8 @@ public class PlayerInfoDto implements Serializable
 //extends UserDto
 {
     private int 			          playerInfoId;
-    private int 			          catId1;
-    private int 			          catId2;
+    private String 			          catId1;
+    private String 			          catId2;
     private String 			          catNm1;
     private String 			          catNm2;
     private String 			          introduce;
@@ -34,17 +34,17 @@ public class PlayerInfoDto implements Serializable
     }
     public void setPlayerInfoId(int playerInfoId) {
         this.playerInfoId = playerInfoId;
-    }
-    public int getCatId1() {
+    } 
+    public String getCatId1() {
         return catId1;
     }
-    public void setCatId1(int catId1) {
+    public void setCatId1(String catId1) {
         this.catId1 = catId1;
     }
-    public int getCatId2() {
+    public String getCatId2() {
         return catId2;
     }
-    public void setCatId2(int catId2) {
+    public void setCatId2(String catId2) {
         this.catId2 = catId2;
     }
     public String getCatNm1() {

@@ -9,7 +9,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("player.categoryAttrDto")
 public class CategoryAttrDto extends CategoryDto implements Serializable{
     private int     attrId = 0;
-    private int     catId = 0;
+    private String  catId = "";
     private String  attrName;
     private String  createDate;
     private String  createUserId;
@@ -25,11 +25,11 @@ public class CategoryAttrDto extends CategoryDto implements Serializable{
     }
     public void setAttrId(int attrId) {
         this.attrId = attrId;
-    }
-    public int getCatId() {
+    }  
+    public String getCatId() {
         return catId;
     }
-    public void setCatId(int catId) {
+    public void setCatId(String catId) {
         this.catId = catId;
     }
     public String getAttrName() {

@@ -29,6 +29,10 @@ function goLogin(boardId){
 	location.href = "/login/" + boardId;
 }
 
+function goTargetList(catId){
+	location.href = "/list/" + catId;
+}
+
 function logout(){
 	location.href = "/logout";
 }

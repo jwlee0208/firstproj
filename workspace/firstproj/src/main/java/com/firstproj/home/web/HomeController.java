@@ -72,11 +72,11 @@ public class HomeController {
 	public String goHome3(Model model, @PathVariable int menuId) throws Exception{
 	    
 	    PlayerInfoDto playerInfoDto = new PlayerInfoDto();
-	    playerInfoDto.setCatId1(1);
+	    playerInfoDto.setCatId1("01010100");
 	    List<PlayerInfoDto>    recentPlayerList  = this.playerService.getPlayerListRecently(playerInfoDto);
 
 	    PlayerInfoDto teamInfoDto = new PlayerInfoDto();
-	    teamInfoDto.setCatId1(5);
+	    teamInfoDto.setCatId1("01010200");
 	    List<PlayerInfoDto>    recentTeamList    = this.playerService.getPlayerListRecently(teamInfoDto);
 	    
 	    BoardArticleDto boardDto01 = new BoardArticleDto();

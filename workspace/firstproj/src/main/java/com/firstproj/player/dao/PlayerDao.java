@@ -20,15 +20,15 @@ import com.firstproj.user.dto.UserDto;
 @Repository("PlayerDao")
 public class PlayerDao extends SqlSessionDaoSupport{
 
-    public List<CategoryAttrElemMapDto> getAttrMapList(CategoryAttrElemMapDto param) throws Exception{
+    public List<CategoryAttrElemMapDto> selectAttrMapList(CategoryAttrElemMapDto param) throws Exception{
         return getSqlSession().selectList("sql.player.selectCategoryAttrElemMapList", param);
     }
     
-    public List<CategoryDto> getCategoryList(CategoryDto param) throws Exception{
+    public List<CategoryDto> selectCategoryList(CategoryDto param) throws Exception{
         return getSqlSession().selectList("sql.player.selectCategoryList", param);
     }
     
-    public List<CategoryAttrDto> getAttrElemList(CategoryAttrDto param) throws Exception{
+    public List<CategoryAttrDto> selectAttrElemList(CategoryAttrDto param) throws Exception{
         return getSqlSession().selectList("sql.player.selectCategoryAttrElemList", param);
     }
     /**
@@ -271,7 +271,6 @@ public class PlayerDao extends SqlSessionDaoSupport{
     	return getSqlSession().update("sql.player.updateCategoryAttrElemMapInfo", param);
     }
     
-    
     public List<PlayerInfoDto> selectPlayerList(SearchPlayerDto searchPlayerDto) throws Exception{
         return getSqlSession().selectList("sql.player.selectPlayerList2", searchPlayerDto);
     }
@@ -282,6 +281,10 @@ public class PlayerDao extends SqlSessionDaoSupport{
 
     public List<PlayerInfoDto> selectPlayerListRecently(PlayerInfoDto playerInfoDto) throws Exception{
         return getSqlSession().selectList("sql.player.selectPlayerListRecently", playerInfoDto);
+    }
+    
+    public List<CategoryDto> selectCategoryTwoDepthList() throws Exception{
+        return getSqlSession().selectList("sql.player.selectCategoryTwoDepthList");
     }
 
 }

@@ -42,7 +42,7 @@ import com.firstproj.player.service.PlayerServiceImpl;
 import com.firstproj.user.dto.UserDto;
 
 @Controller
-@RequestMapping(value = {"/player","/team"})
+@RequestMapping(value = {"/player","/team", "/list"})
 public class PlayerController {
     	
     final Log log = LogFactory.getLog(this.getClass());
@@ -63,7 +63,7 @@ public class PlayerController {
      */
     @RequestMapping(value="/childCategoryList.json", method = {RequestMethod.POST})
     @ResponseBody
-    public JSONObject getChildCategoryList(HttpServletRequest request, Model model, @Param int parentCatId) throws Exception{
+    public JSONObject getChildCategoryList(HttpServletRequest request, Model model, @Param String parentCatId) throws Exception{
         
         JSONObject 			jsonObj 	 = new JSONObject();
         CategoryDto 		param 		 = new CategoryDto();
@@ -79,7 +79,7 @@ public class PlayerController {
 
     
     @RequestMapping(value="/ajaxChildCategoryList")
-    public String getChildCategoryList2(HttpServletRequest request, Model model, @Param int parentCatId, @Param int selectedCategoryId) throws Exception{
+    public String getChildCategoryList2(HttpServletRequest request, Model model, @Param String parentCatId, @Param String selectedCategoryId) throws Exception{
     	String referer = request.getHeader("Referer");
 //        System.out.println("selectedCategoryId : " + selectedCategoryId +", String referer = " + request.getHeader("Referer"));
         
@@ -119,7 +119,7 @@ public class PlayerController {
      */
     @RequestMapping(value="/attrElementList.json", method = {RequestMethod.POST})
     @ResponseBody
-    public JSONObject getAttrElementList(HttpServletRequest request, Model model, @Param int catId) throws Exception{
+    public JSONObject getAttrElementList(HttpServletRequest request, Model model, @Param String catId) throws Exception{
         
         JSONObject 				jsonObj 		= new JSONObject();
         CategoryAttrDto 		param 			= new CategoryAttrDto();
@@ -136,7 +136,7 @@ public class PlayerController {
     }
     
     @RequestMapping("/ajaxAttrElementList")
-    public String getAttrElementList2(HttpServletRequest request, Model model, @Param int catId) throws Exception{
+    public String getAttrElementList2(HttpServletRequest request, Model model, @Param String catId) throws Exception{
     	String referer = request.getHeader("Referer");
     	
         CategoryAttrDto param 					= new CategoryAttrDto();
@@ -310,7 +310,7 @@ public class PlayerController {
     			return "redirect:/player/playerDetailView/" + sessionInfo.getUserId();
     		}else{
     	        CategoryDto 		param 		  = new CategoryDto();
-    	        param.setParentCatId(0);
+    	        param.setParentCatId("-1");
     	        
     	        List<CategoryDto> 	parentCatList = this.playerService.getCategoryList(param);
     			
@@ -460,7 +460,7 @@ public class PlayerController {
     	}    	
     	
         CategoryDto 	  param 			= new CategoryDto();
-        param.setParentCatId(0);
+        param.setParentCatId("-1");
         
         List<CategoryDto> parentCatList 	= this.playerService.getCategoryList(param);
         PlayerInfoDto 	  playerDetailInfo 	= this.playerService.getPlayerInfoDetail(myInfo);
@@ -522,10 +522,10 @@ public class PlayerController {
     	return jsonObj;
     }
 
-    @RequestMapping(value={"/playerPortal","/teamPortal"})
-    public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session){
+    @RequestMapping(value={"{catagoryId}/all"})
+    public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session, @PathVariable String catagoryId){
         boolean isRegisted  = false;
-        boolean isLogon     = false; 
+        boolean isLogon     = false;
         UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
         
         if(sessionInfo != null){
@@ -546,11 +546,8 @@ public class PlayerController {
         
         CategoryDto categoryInfo = new CategoryDto();
         
-        if(requestUri.indexOf("playerPortal") > 0){
-            categoryInfo.setParentCatId(1);
-        }else{
-            categoryInfo.setParentCatId(5);
-        }
+        categoryInfo.setParentCatId("");
+
         searchPlayerDto.setCategoryInfo(categoryInfo);
         
         // 카테고리 목록 조회하는 부분
@@ -572,11 +569,12 @@ public class PlayerController {
         return "player/playerPortal";
 
     }
-    
+    /*
     @RequestMapping(value={"/playerPortal/{menuId}","/teamPortal/{menuId}"})
     public String getPlayerPortal(HttpServletRequest request, Model model, SearchPlayerDto searchPlayerDto, HttpSession session, @PathVariable int menuId){
     	return this.getPlayerPortal(request, model, searchPlayerDto, session);
     }
+    */
     /**
      * @brief Player List 조회 
      * @param request

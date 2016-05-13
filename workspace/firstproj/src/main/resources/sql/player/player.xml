@@ -20,7 +20,7 @@
 			  AND parent_cat_id = #{parentCatId}
 			 	</when>
 				<otherwise>
-			  AND parent_cat_id = 0	
+			  AND parent_cat_id = 01010000	
 				</otherwise>			 
 			 </choose>
 			</where> 
@@ -532,4 +532,32 @@
 			ORDER BY pi.player_info_id ASC	
 			LIMIT 9  	
 		</select>
+		
+		<!--  카테고리 조회 -->
+		<select id="selectCategoryTwoDepthList" parameterType="player.categoryDto" resultMap="selectCategoryTwoDepthListMap">
+			SELECT 	
+					one_depth.cat_id 			as oneDepthCatId
+				  , one_depth.parent_cat_id		as oneDepthParentCatId
+				  , one_depth.cat_name			as oneDepthCatName
+				  , two_depth.cat_id			as twoDepthCatId
+				  , two_depth.parent_cat_id		as twoDepthParentCatId
+				  , two_depth.cat_name			as twoDepthCatName
+			FROM TB_CATEGORY one_depth
+			LEFT JOIN TB_CATEGORY two_depth ON one_depth.cat_id = two_depth.parent_cat_id
+			<where>
+			  one_depth.parent_cat_id = 01000000	
+			</where> 
+		</select>			
+		
+		<resultMap id="selectCategoryTwoDepthListMap" type="player.categoryDto">
+			<id		column="oneDepthCatId" 			property="catId"/>
+			<result column="oneDepthParentCatId" 	property="parentCatId"/>
+			<result column="oneDepthCatName" 		property="catName"/>
+			<collection property="childCategoryList" ofType="player.categoryDto">
+				<id		column="twoDepthCatId" 			property="catId"/>
+				<result column="twoDepthParentCatId" 	property="parentCatId"/>
+				<result column="twoDepthCatName" 		property="catName"/>
+			</collection>
+		</resultMap>		
+		
     </mapper>

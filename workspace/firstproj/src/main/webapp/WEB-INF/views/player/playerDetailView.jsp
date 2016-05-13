@@ -161,6 +161,7 @@ $(function(){
 
 
 	// chart.js
+	/*
 	var batCtx = document.getElementById("batChart").getContext("2d");
 	var batData = {
 		    labels: ["타율", "출루율", "장타율", "OPS"],
@@ -270,6 +271,7 @@ $(function(){
 	new Chart(fieldCtx).Line(fieldData, {
 	    pointDot: false
 	});
+	*/
 });
 </script>
 </html>

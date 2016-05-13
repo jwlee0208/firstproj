@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="true" key="deleteOnExit"/>
+	<item value="/Users/leejinwon" key="defaultDialogPath"/>
+	<item value="/var/folders/55/4rpx_btd597c53f5qjbxy19w0000gq/T/" key="defaultDestinationPath"/>
+	<section name="downloadRuntimeSection">
+		<item value="true" key="org.jboss.tools.runtime.core.as.711"/>
+	</section>
+</section>

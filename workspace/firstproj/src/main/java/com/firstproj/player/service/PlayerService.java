@@ -22,6 +22,8 @@ public interface PlayerService {
     
     public List<CategoryDto> 			getCategoryList(CategoryDto param) 											throws Exception;
     
+    public List<CategoryDto>            getCategoryTwoDepthList()                                                   throws Exception;
+    
     public List<CategoryAttrDto> 		getAttrElementList(CategoryAttrDto param) 									throws Exception;
     
     public int	 						getCategoryAttrElemMapCnt(Map<String, Object> param) 						throws Exception;

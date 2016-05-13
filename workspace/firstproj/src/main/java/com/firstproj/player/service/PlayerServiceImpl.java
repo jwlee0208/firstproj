@@ -28,15 +28,19 @@ public class PlayerServiceImpl implements PlayerService{
     private PlayerDao playerDao;
     
     public List<CategoryAttrElemMapDto> getCategoryAttrElemMapList(CategoryAttrElemMapDto param) throws Exception{
-        return playerDao.getAttrMapList(param);
+        return playerDao.selectAttrMapList(param);
     }
     
     public List<CategoryDto> getCategoryList(CategoryDto param) throws Exception{
-        return playerDao.getCategoryList(param);
+        return playerDao.selectCategoryList(param);
+    }
+    
+    public List<CategoryDto> getCategoryTwoDepthList() throws Exception{
+        return playerDao.selectCategoryTwoDepthList();
     }
     
     public List<CategoryAttrDto> getAttrElementList(CategoryAttrDto param) throws Exception{
-        return playerDao.getAttrElemList(param);
+        return playerDao.selectAttrElemList(param);
     }
     
     @Override

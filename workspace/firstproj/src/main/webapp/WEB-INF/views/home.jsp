@@ -20,10 +20,15 @@ iframe {width : 250px; height : 200px; align:center;}
 
 	<div class="jumbotron" class="padding-top:0px;">
 		<h1><tag:message code='main.text1'/></h1>
-		<p><tag:message code='sub.text1'/></p>
-		<p><tag:message code='sub.text2'/></p>
-		<p><tag:message code='sub.text3'/></p>
+<%-- 		<p><tag:message code='sub.text1'/></p> --%>
+<%-- 		<p><tag:message code='sub.text2'/></p> --%>
+<%-- 		<p><tag:message code='sub.text3'/></p> --%>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
 		<p><strong>"<tag:message code='sub.text4'/>"</strong> - 'Yogi' Lawrence Peter Berra</p>
+		<p>&nbsp;</p>
 	</div>
 	<form id="mainFrm" name="mainFrm" method="post"></form>	
 	<div class="container" role="main">

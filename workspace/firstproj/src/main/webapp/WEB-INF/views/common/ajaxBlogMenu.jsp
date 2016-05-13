@@ -75,7 +75,12 @@
 		        </li>
 						</c:forEach>
 		          	</c:if>	  
-		          	<c:if test="${null ne userInfo}">
+		          	<c:if test="${null ne userId}">
+		        <li>
+		        	<a href="/share/bookmark/${userId}/list" target="_blank">bookmark</a>
+		        </li>  	
+		          	</c:if>
+		          	<c:if test="${null ne userInfo}">		          	
 		        <li>
 		        	<a href="#" onclick="javascript:goConfig();"><tag:message code="common.config"/></a>
 		        </li>   	

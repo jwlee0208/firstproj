@@ -7,10 +7,9 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("player.categoryDto")
 public class CategoryDto 
-//implements Serializable
 {
-    private int parentCatId = 0;
-    private int catId = 0;
+    private String parentCatId = "";
+    private String catId = "";
     
     private String catName;
     private String createDate;
@@ -21,16 +20,18 @@ public class CategoryDto
     
     private List<CategoryAttrDto> categoryAttrDtoList;
     
-    public int getParentCatId() {
+    private List<CategoryDto> childCategoryList;
+
+    public String getParentCatId() {
         return parentCatId;
     }
-    public void setParentCatId(int parentCatId) {
+    public void setParentCatId(String parentCatId) {
         this.parentCatId = parentCatId;
     }
-    public int getCatId() {
+    public String getCatId() {
         return catId;
     }
-    public void setCatId(int catId) {
+    public void setCatId(String catId) {
         this.catId = catId;
     }
     public String getCatName() {
@@ -76,32 +77,40 @@ public class CategoryDto
 	public void setCategoryAttrDtoList(List<CategoryAttrDto> categoryAttrDtoList) {
 		this.categoryAttrDtoList = categoryAttrDtoList;
 	}
-	public String getCategoryNameStr(){
+	
+	public List<CategoryDto> getChildCategoryList() {
+        return childCategoryList;
+    }
+    public void setChildCategoryList(List<CategoryDto> childCategoryList) {
+        this.childCategoryList = childCategoryList;
+    }
+    
+    public String getCategoryNameStr(){
         
         String categoryNameStr = "";
-        
-        if(this.catId == 1){
-            categoryNameStr = "선수";
-        }else if(this.catId == 2){
-            categoryNameStr = "감독";
-        }else if(this.catId == 3){
+        /*
+        if(this.catId == "01010000"){
+            categoryNameStr = "Baseball";
+        }else if(this.catId == "01020000"){
+            categoryNameStr = "";
+        }else if(this.catId == "01000000"){
             categoryNameStr = "코치";
-        }else if(this.catId == 4){
+        }else if(this.catId == "01000000"){
             categoryNameStr = "에이전트";
-        }else if(this.catId == 5){
+        }else if(this.catId == "01000000"){
             categoryNameStr = "팀";
-        }else if(this.catId == 6){
+        }else if(this.catId == "01000000"){
             categoryNameStr = "투수";
-        }else if(this.catId == 7){
+        }else if(this.catId == "01000000"){
             categoryNameStr = "타자";
-        }else if(this.catId == 8){
+        }else if(this.catId == "01000000"){
             categoryNameStr = "프로";
-        }else if(this.catId == 9){
+        }else if(this.catId == "01000000"){
             categoryNameStr = "세미프로";
         }else{
             categoryNameStr = "";
         }
-        
+        */
         return categoryNameStr;
     }
     
