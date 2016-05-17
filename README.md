@@ -8,7 +8,9 @@
 
 ##Functions
 - Membership
-	- Sign Up / Sign In / Configure To Private Informations	
+	- Sign Up 
+	- Sign In 
+	- Configure To Private Informations	
 - Upload Profile For Player
 	- Upload Image File To Cdn Server
 	- Upload Image File To Flickr Service
