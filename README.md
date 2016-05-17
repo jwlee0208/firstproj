@@ -9,11 +9,13 @@
 ##Functions
 - Membership
 	- Sign Up / Sign In / Configure To Private Informations	
+
 ###- Upload Profile For Player
 	- Upload Image File To Cdn Server
 	- Upload Image File To Flickr Service
 	- Search Image Files Using Flickr Api Service
 	- Search Stream List Using Youtube Api
+
 ###- Write Article Using WISIWIG Editor 
 	- TinyMCE(4.x ver.) 
 			
