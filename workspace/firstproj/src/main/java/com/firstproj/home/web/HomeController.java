@@ -8,7 +8,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.firstproj.board.dto.BoardArticleDto;
@@ -16,6 +15,8 @@ import com.firstproj.board.service.BoardArticleRedisServiceImpl;
 import com.firstproj.board.service.BoardArticleServiceImpl;
 import com.firstproj.player.dto.PlayerInfoDto;
 import com.firstproj.player.service.PlayerServiceImpl;
+import com.firstproj.profile.dto.ProfileDto;
+import com.firstproj.profile.service.ProfileServiceImpl;
 
 
 @Controller
@@ -31,52 +32,47 @@ public class HomeController {
 	private BoardArticleRedisServiceImpl   boardArticleRedisService;	
 
 	@Resource(name = "PlayerServiceImpl")
-	private PlayerServiceImpl              playerService;    
+	private PlayerServiceImpl   playerService;    
 
+	@Resource(name = "profileService")
+	private ProfileServiceImpl profileService;
+	
 	// spring-data-redis 사용.
 //	@Autowired
 //	private RedisTemplate<String, List<BoardArticleDto>> redisTemplate;
 	// spring-data-redis 사용.
 //	@Resource(name="redisTemplate")
 //	private ValueOperations<String, List<BoardArticleDto>> valueOps;
-
+	
 	
 	@RequestMapping(value="/home")
 	public String goHome(Model model) throws Exception{
-	    /*
-	    model = goHomeDefault(model);
-	    return "home";
-	    */
-	    return this.goHome3(model, 0);
-	}
-	
-	@SuppressWarnings("unused")
-    private Model goHomeDefault(Model model) throws Exception{
-	    BoardArticleDto boardDto01 = new BoardArticleDto();
-	    boardDto01.setBoardId(1);
-	        
-	    List<BoardArticleDto> getBoardArticleFive01 = this.boardArticleService.selectBoardArticleFive(boardDto01);
+		// 2016.06.14 이후 내용
+		ProfileDto profilePlayerDto = new ProfileDto();
+		profilePlayerDto.setCatId1("01010100");
+		profilePlayerDto.setProfileType("1");
+		List<ProfileDto> profilePlayerList = this.profileService.getProfileInfos(profilePlayerDto);
+		model.addAttribute("recentPlayerProfileList", profilePlayerList);
 
-	    BoardArticleDto boardDto02 = new BoardArticleDto();
-	    boardDto02.setBoardId(2);
-	        
-	    List<BoardArticleDto> getBoardArticleFive02 = this.boardArticleService.selectBoardArticleFive(boardDto02);
-
-	    model.addAttribute("articleFive01", getBoardArticleFive01);
-	    model.addAttribute("articleFive02", getBoardArticleFive02);
-
-	    return model;
-	}
-	
-	@RequestMapping(value="/home/{menuId}")
-	public String goHome3(Model model, @PathVariable int menuId) throws Exception{
-	    
+		ProfileDto profileTeamDto = new ProfileDto();
+		profileTeamDto.setCatId1("01010300");
+		profileTeamDto.setProfileType("3");
+		List<ProfileDto> profileTeamList = this.profileService.getProfileInfos(profileTeamDto);
+		model.addAttribute("recentTeamProfileList", profileTeamList);
+		
+		
+		//-- 2016.06.14 이후 내용
+		
+		
+		
+		
+		// 2016.06.14 이전 내용
 	    PlayerInfoDto playerInfoDto = new PlayerInfoDto();
 	    playerInfoDto.setCatId1("01010100");
 	    List<PlayerInfoDto>    recentPlayerList  = this.playerService.getPlayerListRecently(playerInfoDto);
-
+	    
 	    PlayerInfoDto teamInfoDto = new PlayerInfoDto();
-	    teamInfoDto.setCatId1("01010200");
+	    teamInfoDto.setCatId1("01010300");
 	    List<PlayerInfoDto>    recentTeamList    = this.playerService.getPlayerListRecently(teamInfoDto);
 	    
 	    BoardArticleDto boardDto01 = new BoardArticleDto();
@@ -87,10 +83,12 @@ public class HomeController {
 	    model.addAttribute("recentPlayerList"  , recentPlayerList);
 	    model.addAttribute("recentTeamList"    , recentTeamList);
 	    model.addAttribute("recentTryoutList"  , recentTryoutList);
-		return "home";
+	    // -- 2016.06.14 이전 내용
+	    
+	    return "home";
 	}	
 	
-	@RequestMapping(value="/aboutUs/{menuId}")
+	@RequestMapping(value="/aboutUs")
 	public String goAboutUs() throws Exception{
 		return "/info/aboutUs";
 	}

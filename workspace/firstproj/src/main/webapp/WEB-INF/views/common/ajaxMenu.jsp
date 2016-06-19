@@ -30,32 +30,13 @@
 		<div class="collapse navbar-collapse"
 			id="nav-collapse-player-menu-list">
 			<ul class="nav navbar-nav">
-			
-		<c:if test="${!empty categoryList}">
-			<c:forEach var="categoryInfo" items="${categoryList}">
-				<c:choose>	
-					<c:when test="${!empty categoryInfo.childCategoryList}">
-				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${categoryInfo.catName} <span class="caret"></span></a>
-					<c:if test="${!empty categoryInfo.childCategoryList}">
-					<ul class="dropdown-menu">
-						<c:forEach var="childCategoryInfo" items="${categoryInfo.childCategoryList}">
-						<li><a href="javascript:goTargetList(${childCategoryInfo.catId});">${childCategoryInfo.catName}</a></li>
-						</c:forEach>
-	          		</ul>
-	          		</c:if>			            		 
-				</li>
-					</c:when>
-					<c:otherwise>
-				<li>
-					<a href="javascript:goTargetList(${categoryInfo.catId});">${categoryInfo.catName}</a>
-				</li>					
-					</c:otherwise>
-				</c:choose>	
-			</c:forEach>	
-		</c:if>			
-				<li><a href="javascript:;" onclick="javascript:goPortal(6, 1);"><tag:message code="menu.player" /></a></li>
-				<li><a href="javascript:;" onclick="javascript:goPortal(6, 5);"><tag:message code="menu.club" /></a></li>
+				<li><a href="javascript:;" onclick="javascript:;">Home</a></li>
+				<li><a href="javascript:;" onclick="javascript:goProfileList(1, '01010100');"><tag:message code="menu.player" /></a></li>
+				<li><a href="javascript:;" onclick="javascript:goProfileList(2, '01010200');">코치 정보</a></li>
+				<li><a href="javascript:;" onclick="javascript:goProfileList(3, '01010300');"><tag:message code="menu.club" /></a></li>
+				<li><a href="javascript:;" onclick="javascript:;">리그 정보</a></li>
+				<li><a href="javascript:;" onclick="javascript:;">컨설팅 요청</a></li>
+				<li><a href="javascript:;" onclick="javascript:;">About Us</a></li>
 			</ul>
 			<c:if test="${null ne userInfo}">
 			<ul class="nav navbar-nav navbar-right">

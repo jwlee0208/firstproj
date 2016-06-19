@@ -3,7 +3,14 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-    <mapper namespace="sql.player">		
+    <mapper namespace="sql.player">	
+    	<!-- 2016.06.14 이후 작업 내용 -->
+    	<!-- // 2016.06.14 이후 작업 내용 -->
+    
+    
+    
+    
+		<!-- 2016.06.14 이전 작업 내용 -->    	
 		<select id="selectCategoryAttrElemMapList" parameterType="player.categoryAttrElemMapDto" resultType="player.categoryAttrElemMapDto">
 			<include refid="selectAttrElemMapDefault"/>
 		</select>
@@ -559,5 +566,5 @@
 				<result column="twoDepthCatName" 		property="catName"/>
 			</collection>
 		</resultMap>		
-		
+		<!-- // 2016.06.14 이전 작업 내용 -->
     </mapper>

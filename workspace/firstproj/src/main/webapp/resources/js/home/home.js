@@ -1,3 +1,8 @@
+function goProfileList(profileType, catId){
+	location.href="/profile/list/"+profileType+"/"+catId;
+}
+
+
 function goList(boardId){	
 	var userId = $("#userId").val();
 	var url = "/share"; // "/board/article/list/" + boardId;
@@ -8,7 +13,7 @@ function goList(boardId){
 	location.href = url;
 }
 function goHome(){
-	location.href = "/home/0";
+	location.href = "/home";
 }
 
 function goInfo(){

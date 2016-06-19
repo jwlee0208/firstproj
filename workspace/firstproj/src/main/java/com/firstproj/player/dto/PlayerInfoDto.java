@@ -121,17 +121,17 @@ public class PlayerInfoDto implements Serializable
         
         String categoryNameStr = "";
         
-        if(this.catId1 == 1){
-            categoryNameStr = "선수";
-        }else if(this.catId1 == 2){
-            categoryNameStr = "감독";
-        }else if(this.catId1 == 3){
-            categoryNameStr = "코치";
-        }else if(this.catId1 == 4){
-            categoryNameStr = "에이전트";
-        }else if(this.catId1 == 5){
-            categoryNameStr = "팀";
-        }
+//        if(this.catId1 == 1){
+//            categoryNameStr = "선수";
+//        }else if(this.catId1 == 2){
+//            categoryNameStr = "감독";
+//        }else if(this.catId1 == 3){
+//            categoryNameStr = "코치";
+//        }else if(this.catId1 == 4){
+//            categoryNameStr = "에이전트";
+//        }else if(this.catId1 == 5){
+//            categoryNameStr = "팀";
+//        }
         
         return categoryNameStr;
     }
@@ -140,15 +140,15 @@ public class PlayerInfoDto implements Serializable
         
         String categoryNameStr = "";
         
-        if(this.catId2 == 6){
-            categoryNameStr = "투수";
-        }else if(this.catId2 == 7){
-            categoryNameStr = "타자";
-        }else if(this.catId2 == 8){
-            categoryNameStr = "프로";
-        }else if(this.catId2 == 9){
-            categoryNameStr = "세미프로";
-        }
+//        if(this.catId2 == 6){
+//            categoryNameStr = "투수";
+//        }else if(this.catId2 == 7){
+//            categoryNameStr = "타자";
+//        }else if(this.catId2 == 8){
+//            categoryNameStr = "프로";
+//        }else if(this.catId2 == 9){
+//            categoryNameStr = "세미프로";
+//        }
         
         return categoryNameStr;
     }

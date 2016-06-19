@@ -164,5 +164,8 @@ public class CommonController {
         return this.getFooterInfo(model, null);
     }
     
-
+    @RequestMapping(value = "/modalPopup")
+    public String getModalPopup(){
+    	return "common/ajaxModalPopup";
+    }
 }

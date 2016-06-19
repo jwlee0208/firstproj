@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/circle.css"/>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/profile/profileView.js"></script>
 <style>
 .jumbotron {
     position: relative;
@@ -25,19 +26,126 @@ iframe {width : 250px; height : 200px; align:center;}
 <%-- 		<p><tag:message code='sub.text3'/></p> --%>
 		<p>&nbsp;</p>
 		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
 		<p><strong>"<tag:message code='sub.text4'/>"</strong> - 'Yogi' Lawrence Peter Berra</p>
-		<p>&nbsp;</p>
 	</div>
 	<form id="mainFrm" name="mainFrm" method="post"></form>	
 	<div class="container" role="main">
-		<h4><tag:message code='text.recentregistplayers'/>&nbsp;&nbsp;<small><a href="/player/playerPortal/6"><tag:message code='button.more'/></a></small></h4>
+		<h4><tag:message code='text.recentregistplayers'/>&nbsp;&nbsp;<small><a href="/profile/list/1/01010100"><tag:message code='button.more'/></a></small></h4>
+		
+		<div class="row">
+		<c:choose>
+			<c:when test="${!empty recentPlayerProfileList}">
+				<c:forEach var="recentPlayerProfileInfo" items="${recentPlayerProfileList}">
+					<div class="col-md-6">
+						<div class="thumbnail">
+							<c:choose>
+								<c:when test="${recentPlayerProfileInfo.profileImgPath ne null && recentPlayerProfileInfo.profileImgPath ne ''}">
+							<img src="http://jwlee0208.cdn3.cafe24.com/${recentPlayerProfileInfo.profileImgPath}" 
+								 data-src="holder.js/250x200" alt="image" class="img-thumbnail" 
+								 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
+								 onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');" 
+								 data-toggle="modal" data-target="#myModal" 
+								 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
+								</c:when>
+								<c:otherwise>
+							<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
+								 data-src="holder.js/250x200" alt="image" class="img-thumbnail"
+								 onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');" 
+								 data-toggle="modal" data-target="#myModal" 
+								 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
+								</c:otherwise>
+							</c:choose>	
+							<div class="caption" style="cursor:pointer;">
+								<h3 style="background: #efefef; padding:5px 0 5px 0px; text-align:center;"><span onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');">${recentPlayerProfileInfo.name}</span></h3>
+								<div class="btn-group btn-group-lg btn-group-justified">
+									<c:if test="${!empty recentPlayerProfileInfo.profileAttrList}">
+									<c:forEach var="profileAttrElemInfo" items="${recentPlayerProfileInfo.profileAttrList}">
+										<c:if test="${!empty profileAttrElemInfo.profileAttrElementMapList}">
+											<c:forEach var="profileAttrElemInfo" items="${profileAttrElemInfo.profileAttrElementMapList}">
+									<div class="btn btn-default">${profileAttrElemInfo.profileAttrElementMapName}</div>
+											</c:forEach>
+										</c:if>	
+									</c:forEach>				
+									</c:if>
+								</div>
+								<p class="content_${index.count}"></p>
+								<p>
+									<span class="btn btn-danger btn-block" 		role="button" onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.watchme'/></span>
+								</p>
+							</div>
+						</div>		
+					</div>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<div style="text-align:center; min-height : 70px;vertical-align: middle;">
+					<h3><tag:message code='text.noregistplayer'/></h3>
+				</div>
+			</c:otherwise>	
+		</c:choose>
+		</div>			
+		
+		<h4>Recent Registered Team List&nbsp;&nbsp;<small><a href="/profile/list/3/01010300"><tag:message code='button.more'/></a></small></h4>
+		<div class="row">
+		<c:choose>
+			<c:when test="${!empty recentTeamProfileList}">
+				<c:forEach var="recentTeamProfileInfo" items="${recentTeamProfileList}">
+					<div class="col-md-6">
+						<div class="thumbnail">
+							<c:choose>
+								<c:when test="${recentTeamProfileInfo.profileImgPath ne null && recentTeamProfileInfo.profileImgPath ne ''}">
+							<img src="http://jwlee0208.cdn3.cafe24.com/${recentTeamProfileInfo.profileImgPath}" 
+								 data-src="holder.js/250x200" alt="image" class="img-thumbnail" 
+								 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
+								 onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');" 
+								 data-toggle="modal" data-target="#myModal" 
+								 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
+								</c:when>
+								<c:otherwise>
+							<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
+								 data-src="holder.js/250x200" alt="image" class="img-thumbnail"
+								 onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');" 
+								 data-toggle="modal" data-target="#myModal" 
+								 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
+								</c:otherwise>
+							</c:choose>	
+							<div class="caption" style="cursor:pointer;">
+								<h3 style="background: #efefef; padding:5px 0 5px 0px; text-align:center;"><span onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');">${recentTeamProfileInfo.name}</span></h3>
+								<div class="btn-group btn-group-lg btn-group-justified">
+									<c:if test="${!empty recentTeamProfileInfo.profileAttrList}">
+									<c:forEach var="profileAttrElemInfo" items="${recentTeamProfileInfo.profileAttrList}">
+										<c:if test="${!empty profileAttrElemInfo.profileAttrElementMapList}">
+											<c:forEach var="profileAttrElemInfo" items="${profileAttrElemInfo.profileAttrElementMapList}">
+									<div class="btn btn-default">${profileAttrElemInfo.profileAttrElementMapName}</div>
+											</c:forEach>
+										</c:if>	
+									</c:forEach>				
+									</c:if>
+								</div>
+								<p class="content_${index.count}"></p>
+								<p>
+									<span class="btn btn-danger btn-block" 		role="button" onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.watchme'/></span>
+								</p>
+							</div>
+						</div>		
+					</div>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<div style="text-align:center; min-height : 70px;vertical-align: middle;">
+					<h3><tag:message code='text.noregistplayer'/></h3>
+				</div>
+			</c:otherwise>	
+		</c:choose>
+		
+		</div>
+<!-- // 2016.06.14 이후 작 --> 		
+<!-- 		
 		<div class="row">
 		<c:choose>
 			<c:when test="${!empty recentPlayerList}">
 				<c:forEach var="list" items="${recentPlayerList}">
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<div class="thumbnail">
 					<c:choose>
 						<c:when test="${list.playerVideoLinkList[0].linkUrl ne null && list.playerVideoLinkList[0].linkUrl ne ''}">
@@ -137,7 +245,7 @@ iframe {width : 250px; height : 200px; align:center;}
 			</c:otherwise>	
 		</c:choose>
 		</div>	
-		
+ -->		
 		<h4><tag:message code='text.recenttryoutinfo'/>&nbsp;&nbsp;<small><a href="/share/jwlee/list/15"><tag:message code='button.more'/></a></small></h4>
 		<div class="row" style="padding-left: 10px; padding-right: 10px;">
 			<div class="boardDiv li_1_board" style="padding-top : 10px;">
@@ -164,20 +272,21 @@ iframe {width : 250px; height : 200px; align:center;}
 	</div>
 	
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content" style="width : 700px;">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-	      </div>
-	      <div class="modal-body" style="height : 500px; overflow-y:scroll; "></div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+	<c:import url="/common/modalPopup"/>
+<!-- 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+<!-- 	  <div class="modal-dialog modal-lg"> -->
+<!-- 	    <div class="modal-content"> -->
+<!-- 	      <div class="modal-header"> -->
+<!-- 	        <button type="button" class="close" data-dismiss="modal" onclick="javascript:initModalHtml();"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+<!-- 	        <h4 class="modal-title" id="myModalLabel">Modal title</h4> -->
+<!-- 	      </div> -->
+<!-- 	      <div class="modal-body" style="height : 500px; overflow-y:scroll; "></div> -->
+<!-- 	      <div class="modal-footer"> -->
+<!-- 	        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:initModalHtml();">Close</button> -->
+<!-- 	      </div> -->
+<!-- 	    </div> -->
+<!-- 	  </div> -->
+<!-- 	</div> -->
 <script>
 	$().ready(function(){
 		$("#li_1").addClass("active");
@@ -212,7 +321,7 @@ iframe {width : 250px; height : 200px; align:center;}
 		frm.attr("method", "post");
 		frm.submit();		
 	}
-	
+		
 	var jumboHeight = $('.jumbotron').outerHeight();
 	function parallax(){
 	    var scrolled = $(window).scrollTop();
