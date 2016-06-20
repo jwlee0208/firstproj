@@ -4,41 +4,35 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("profile.profileStatPitcherDto")
 public class ProfileStatPitcherDto{
-	private int statPitcherId;
-	private int statId;
-	private String pTeamName;
-	private String pStatYear;
-	private float inn;
-	private int w;
-	private int l;
-	private float era;
-	private int g;
-	private int gs;
-	private int sv;
-	private int svo;
-	private float ip;
-	private int h;
-	private int r;
-	private int er;
-	private int hr;
-	private int bb;
-	private int so;
-	private float avg;
-	private float whip;
-	private int k;
-	private String etc;
+	private int 	statPitcherId;
+	private int		profileId;
+	private String 	pTeamName;
+	private String 	pStatYear;
+	private float 	inn;
+	private int 	w;
+	private int 	l;
+	private float 	era;
+	private int 	g;
+	private int 	gs;
+	private int 	sv;
+	private int 	svo;
+	private float 	ip;
+	private int 	h;
+	private int 	r;
+	private int 	er;
+	private int 	hr;
+	private int 	bb;
+	private int 	so;
+	private float 	avg;
+	private float 	whip;
+	private int 	k;
+	private String 	etc;
 	
 	public int getStatPitcherId() {
 		return statPitcherId;
 	}
 	public void setStatPitcherId(int statPitcherId) {
 		this.statPitcherId = statPitcherId;
-	}
-	public int getStatId() {
-		return statId;
-	}
-	public void setStatId(int statId) {
-		this.statId = statId;
 	}
 	public String getpTeamName() {
 		return pTeamName;
@@ -166,9 +160,15 @@ public class ProfileStatPitcherDto{
 	public void setEtc(String etc) {
 		this.etc = etc;
 	}
+	public int getProfileId() {
+		return profileId;
+	}
+	public void setProfileId(int profileId) {
+		this.profileId = profileId;
+	}
 	@Override
 	public String toString() {
-		return "ProfileStatPitcherDto [statPitcherId=" + statPitcherId + ", statId=" + statId + ", pTeamName="
+		return "ProfileStatPitcherDto [statPitcherId=" + statPitcherId + ", profileId=" + profileId + ", pTeamName="
 				+ pTeamName + ", pStatYear=" + pStatYear + ", inn=" + inn + ", w=" + w + ", l=" + l + ", era=" + era
 				+ ", g=" + g + ", gs=" + gs + ", sv=" + sv + ", svo=" + svo + ", ip=" + ip + ", h=" + h + ", r=" + r
 				+ ", er=" + er + ", hr=" + hr + ", bb=" + bb + ", so=" + so + ", avg=" + avg + ", whip=" + whip

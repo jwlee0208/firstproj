@@ -5,7 +5,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("profile.profileStatHitterDto")
 public class ProfileStatHitterDto{
 	private int 	statHitterId;
-	private int 	statId;
+	private int 	profileId;
 	private String 	hTeamName;
 	private String 	hStatYear;
 	
@@ -33,11 +33,11 @@ public class ProfileStatHitterDto{
 	public void setStatHitterId(int statHitterId) {
 		this.statHitterId = statHitterId;
 	}
-	public int getStatId() {
-		return statId;
+	public int getProfileId() {
+		return profileId;
 	}
-	public void setStatId(int statId) {
-		this.statId = statId;
+	public void setProfileId(int profileId) {
+		this.profileId = profileId;
 	}
 	public String gethTeamName() {
 		return hTeamName;
@@ -155,10 +155,11 @@ public class ProfileStatHitterDto{
 	}
 	@Override
 	public String toString() {
-		return "ProfileStatHitterDto [statHitterId=" + statHitterId + ", statId=" + statId + ", hTeamName=" + hTeamName
-				+ ", hStatYear=" + hStatYear + ", g=" + g + ", ab=" + ab + ", r=" + r + ", h=" + h + ", twoB=" + twoB
-				+ ", threeB=" + threeB + ", hr=" + hr + ", rbi=" + rbi + ", bb=" + bb + ", so=" + so + ", sb=" + sb
-				+ ", cs=" + cs + ", avg=" + avg + ", obp=" + obp + ", slg=" + slg + ", ops=" + ops + ", etc=" + etc
-				+ "]";
-	}	
+		return "ProfileStatHitterDto [statHitterId=" + statHitterId + ", profileId=" + profileId + ", hTeamName="
+				+ hTeamName + ", hStatYear=" + hStatYear + ", g=" + g + ", ab=" + ab + ", r=" + r + ", h=" + h
+				+ ", twoB=" + twoB + ", threeB=" + threeB + ", hr=" + hr + ", rbi=" + rbi + ", bb=" + bb + ", so=" + so
+				+ ", sb=" + sb + ", cs=" + cs + ", avg=" + avg + ", obp=" + obp + ", slg=" + slg + ", ops=" + ops
+				+ ", etc=" + etc + "]";
+	}
+
 }

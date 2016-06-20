@@ -113,191 +113,188 @@
 					</tr>
 			</c:forEach>		
 				</tbody>
-			</table>			
-						
+			</table>									
 		</c:if>
-		
+		<c:set var="profileStreamList" value="${profileInfo.profileStreamList}"/>
+		<c:if test="${!empty profileStreamList}">
+		<h3>Play Streamming</h3>
+		<hr/>
+		<c:forEach var="profileStreamInfo" items="${profileStreamList}">
+		<h3><small>${profileStreamInfo.streamTitle}</small></h3>	
+		<div class="embed-responsive embed-responsive-16by9">${profileStreamInfo.streamUrl}</div>
+		</c:forEach>
+		</c:if>
 		<h3>Statistics</h3>
 		<hr/>	
-		<c:set var="profileStatList" value="${profileInfo.profileStatList}"/>
-		<c:if test="${!empty profileStatList}">
-			<c:forEach var="profileStatInfo" items="${profileStatList}">
-				<c:set var="profileStatPitcherList" value="${profileStatInfo.profileStatPitcherList}"/>
-				<c:set var="profileStatHitterList" value="${profileStatInfo.profileStatHitterList}"/>
-				<c:set var="profileStatFielderList" value="${profileStatInfo.profileStatFielderList}"/>
+		<c:set var="profileStatPitcherList" value="${profileInfo.profileStatPitcherList}"/>
+		<c:set var="profileStatHitterList" value="${profileInfo.profileStatHitterList}"/>
+		<c:set var="profileStatFielderList" value="${profileInfo.profileStatFielderList}"/>
 				
-				<c:if test="${!empty profileStatPitcherList}">
-				<h3><small>Pitching Stat</small></h3>
+		<c:if test="${!empty profileStatPitcherList}">
+		<h3><small>Pitching Stat</small></h3>
 				
-					<table class="table">
-						<thead class="table-inverse">
-							<tr>
-								<th>Team</th>
-								<th>Year</th>
-								<th>INN</th>
-								<th>W</th>
-								<th>L</th>
-								<th>ERA</th>
-								<th>G</th>
-								<th>GS</th>
-								<th>SV</th>
-								<th>SVO</th>
-								<th>IP</th>
-								<th>H</th>
-								<th>R</th>
-								<th>ER</th>
-								<th>HR</th>
-								<th>BB</th>
-								<th>SO</th>
-								<th>AVG</th>
-								<th>WHIP</th>
-								<th>K</th>
-								<th>ETC</th>
-							</tr>
-						</thead>
-						<tbody>
-					<c:forEach var="profileStatPitcherInfo" items="${profileStatPitcherList}">
-							<tr>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.pTeamName}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.pStatYear}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.inn}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.w}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.l}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.era}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.g}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.gs}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.sv}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.svo}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.ip}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.h}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.r}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.er}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.hr}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.bb}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.so}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.avg}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.whip}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.k}</p></td>
-					    		<td><p class="form-control-static">${profileStatPitcherInfo.etc}</p></td>
-							</tr>					
-					</c:forEach>
-						</tbody>
-					</table>
+		<table class="table">
+			<thead class="table-inverse">
+				<tr>
+					<th>Team</th>
+					<th>Year</th>
+					<th>INN</th>
+					<th>W</th>
+					<th>L</th>
+					<th>ERA</th>
+					<th>G</th>
+					<th>GS</th>
+					<th>SV</th>
+					<th>SVO</th>
+					<th>IP</th>
+					<th>H</th>
+					<th>R</th>
+					<th>ER</th>
+					<th>HR</th>
+					<th>BB</th>
+					<th>SO</th>
+					<th>AVG</th>
+					<th>WHIP</th>
+					<th>K</th>
+					<th>ETC</th>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="profileStatPitcherInfo" items="${profileStatPitcherList}">
+				<tr>
+					<td><p class="form-control-static">${profileStatPitcherInfo.pTeamName}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.pStatYear}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.inn}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.w}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.l}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.era}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.g}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.gs}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.sv}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.svo}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.ip}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.h}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.r}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.er}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.hr}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.bb}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.so}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.avg}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.whip}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.k}</p></td>
+					<td><p class="form-control-static">${profileStatPitcherInfo.etc}</p></td>
+				</tr>					
+			</c:forEach>
+			</tbody>
+		</table>
 				
-				</c:if>
-				<c:if test="${!empty profileStatHitterList}">
-				<h3><small>Hitting Stat</small></h3>
-				
-					<table class="table">
-						<thead class="table-inverse">
-							<tr>
-								<th>Team</th>
-								<th>Year</th>
-								<th>G</th>
-								<th>AB</th>
-								<th>R</th>
-								<th>H</th>
-								<th>2B</th>
-								<th>3B</th>
-								<th>HR</th>
-								<th>RBI</th>
-								<th>BB</th>
-								<th>SO</th>
-								<th>SB</th>
-								<th>CS</th>
-								<th>AVG</th>
-								<th>OBP</th>
-								<th>SLG</th>
-								<th>OPS</th>
-								<th>ETC</th>
-							</tr>
-						</thead>
-						<tbody>
-					<c:forEach var="profileStatHitterInfo" items="${profileStatHitterList}">
-							<tr>
-						    	<td><p class="form-control-static">${profileStatHitterInfo.hTeamName}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.hStatYear}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.g}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.ab}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.r}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.h}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.twoB}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.threeB}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.hr}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.rbi}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.bb}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.so}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.sb}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.cs}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.avg}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.obp}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.slg}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.ops}</p></td>
-					    		<td><p class="form-control-static">${profileStatHitterInfo.etc}</p></td>
-					    	</tr>	
-					</c:forEach>
-						</tbody>
-					</table>	
-				
-				</c:if>
-				<c:if test="${!empty profileStatFielderList}">
-				<h3><small>Fielding Stat</small></h3>
-
-					<table class="table">
-						<thead class="table-inverse">
-							<tr>
-								<th>Team</th>
-								<th>Year</th>
-								<th>Position</th>
-								<th>G</th>
-								<th>GS</th>
-								<th>INN</th>
-								<th>TC</th>
-								<th>PO</th>
-								<th>A</th>
-								<th>E</th>
-								<th>DP</th>
-								<th>SB</th>
-								<th>CS</th>
-								<th>SBPCT</th>
-								<th>PB</th>
-								<th>C_WP</th>
-								<th>FPCT</th>
-								<th>PRF</th>
-								<th>ETC</th>
-							</tr>
-						</thead>
-						<tbody>
-					<c:forEach var="profileStatFielderInfo" items="${profileStatFielderList}">
-							<tr>
-								<th class="row"><p class="form-control-static">${profileStatFielderInfo.fTeamName}</p></th>								
-	    						<td><p class="form-control-static">${profileStatFielderInfo.fStatYear}</p></td>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.pos}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.g}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.gs}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.inn}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.tc}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.po}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.a}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.e}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.dp}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.sb}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.cs}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.sbpct}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.pb}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.cWp}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.fpct}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.rf}</p>
-	    						<td><p class="form-control-static">${profileStatFielderInfo.etc}</p>
-							</tr>
-					</c:forEach>						
-						</tbody>					
-					</table>
-				
-				</c:if>								
-			</c:forEach>				
 		</c:if>
-		  
+		<c:if test="${!empty profileStatHitterList}">
+		<h3><small>Hitting Stat</small></h3>		
+		<table class="table">
+			<thead class="table-inverse">
+				<tr>
+					<th>Team</th>
+					<th>Year</th>
+					<th>G</th>
+					<th>AB</th>
+					<th>R</th>
+					<th>H</th>
+					<th>2B</th>
+					<th>3B</th>
+					<th>HR</th>
+					<th>RBI</th>
+					<th>BB</th>
+					<th>SO</th>
+					<th>SB</th>
+					<th>CS</th>
+					<th>AVG</th>
+					<th>OBP</th>
+					<th>SLG</th>
+					<th>OPS</th>
+					<th>ETC</th>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="profileStatHitterInfo" items="${profileStatHitterList}">
+				<tr>
+					<td><p class="form-control-static">${profileStatHitterInfo.hTeamName}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.hStatYear}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.g}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.ab}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.r}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.h}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.twoB}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.threeB}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.hr}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.rbi}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.bb}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.so}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.sb}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.cs}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.avg}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.obp}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.slg}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.ops}</p></td>
+					<td><p class="form-control-static">${profileStatHitterInfo.etc}</p></td>
+				</tr>	
+			</c:forEach>
+			</tbody>
+		</table>	
+		</c:if>
+		<c:if test="${!empty profileStatFielderList}">
+		<h3><small>Fielding Stat</small></h3>
+		<table class="table">
+			<thead class="table-inverse">
+				<tr>
+					<th>Team</th>
+					<th>Year</th>
+					<th>Position</th>
+					<th>G</th>
+					<th>GS</th>
+					<th>INN</th>
+					<th>TC</th>
+					<th>PO</th>
+					<th>A</th>
+					<th>E</th>
+					<th>DP</th>
+					<th>SB</th>
+					<th>CS</th>
+					<th>SBPCT</th>
+					<th>PB</th>
+					<th>C_WP</th>
+					<th>FPCT</th>
+					<th>PRF</th>
+					<th>ETC</th>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="profileStatFielderInfo" items="${profileStatFielderList}">
+				<tr>
+					<th class="row"><p class="form-control-static">${profileStatFielderInfo.fTeamName}</p></th>								
+	    			<td><p class="form-control-static">${profileStatFielderInfo.fStatYear}</p></td>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.pos}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.g}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.gs}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.inn}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.tc}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.po}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.a}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.e}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.dp}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.sb}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.cs}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.sbpct}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.pb}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.cWp}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.fpct}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.rf}</p>
+	    			<td><p class="form-control-static">${profileStatFielderInfo.etc}</p>
+				</tr>
+			</c:forEach>						
+			</tbody>					
+		</table>
+		</c:if>										  
 	</c:when>
 	<c:when test="${profileInfo.profileType eq 2}">
 	

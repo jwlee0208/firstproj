@@ -25,11 +25,17 @@ public class ProfileDto {
 	// contact info dto
 	private ProfileContactInfoDto 	profileContactInfoDto;
 	// stat dto 
-	private List<ProfileStatDto>	profileStatList;
+	private List<ProfileStatHitterDto>	profileStatHitterList;
+	
+	private List<ProfileStatFielderDto>	profileStatFielderList;
+	
+	private List<ProfileStatPitcherDto>	profileStatPitcherList;
 	// career dto
 	private List<ProfileCareerDto>  profileCareerList;
 	// attribute & element map dto
 	private List<ProfileAttrDto> 	profileAttrList;
+	
+	private List<ProfileStreamDto>	profileStreamList;
 	
 	public int getProfileId() {
 		return profileId;
@@ -118,14 +124,25 @@ public class ProfileDto {
 	public void setLeagueInfoDto(LeagueInfoDto leagueInfoDto) {
 		this.leagueInfoDto = leagueInfoDto;
 	}
-	
-	public List<ProfileStatDto> getProfileStatList() {
-		return profileStatList;
+		
+	public List<ProfileStatHitterDto> getProfileStatHitterList() {
+		return profileStatHitterList;
 	}
-	public void setProfileStatList(List<ProfileStatDto> profileStatList) {
-		this.profileStatList = profileStatList;
+	public void setProfileStatHitterList(List<ProfileStatHitterDto> profileStatHitterList) {
+		this.profileStatHitterList = profileStatHitterList;
 	}
-	
+	public List<ProfileStatFielderDto> getProfileStatFielderList() {
+		return profileStatFielderList;
+	}
+	public void setProfileStatFielderList(List<ProfileStatFielderDto> profileStatFielderList) {
+		this.profileStatFielderList = profileStatFielderList;
+	}
+	public List<ProfileStatPitcherDto> getProfileStatPitcherList() {
+		return profileStatPitcherList;
+	}
+	public void setProfileStatPitcherList(List<ProfileStatPitcherDto> profileStatPitcherList) {
+		this.profileStatPitcherList = profileStatPitcherList;
+	}
 	public List<ProfileCareerDto> getProfileCareerList() {
 		return profileCareerList;
 	}
@@ -133,14 +150,21 @@ public class ProfileDto {
 		this.profileCareerList = profileCareerList;
 	}
 	
+	public List<ProfileStreamDto> getProfileStreamList() {
+		return profileStreamList;
+	}
+	public void setProfileStreamList(List<ProfileStreamDto> profileStreamList) {
+		this.profileStreamList = profileStreamList;
+	}
 	@Override
 	public String toString() {
 		return "ProfileDto [profileId=" + profileId + ", profileType=" + profileType + ", catId1=" + catId1
 				+ ", catId2=" + catId2 + ", title=" + title + ", name=" + name + ", profileImgPath=" + profileImgPath
 				+ ", introduce=" + introduce + ", createDate=" + createDate + ", profilePlayerDto=" + profilePlayerDto
 				+ ", leagueInfoDto=" + leagueInfoDto + ", profileTeamDto=" + profileTeamDto
-				+ ", profileContactInfoDto=" + profileContactInfoDto + ", profileStatList=" + profileStatList
-				+ ", profileCareerList=" + profileCareerList + ", profileAttrList=" + profileAttrList + "]";
+				+ ", profileContactInfoDto=" + profileContactInfoDto + ", profileStatHitterList="
+				+ profileStatHitterList + ", profileStatFielderList=" + profileStatFielderList
+				+ ", profileStatPitcherList=" + profileStatPitcherList + ", profileCareerList=" + profileCareerList
+				+ ", profileAttrList=" + profileAttrList + ", profileStreamList=" + profileStreamList + "]";
 	}
-	
 }

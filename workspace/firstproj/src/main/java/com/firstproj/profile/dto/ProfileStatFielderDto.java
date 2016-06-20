@@ -5,7 +5,6 @@ import org.apache.ibatis.type.Alias;
 @Alias("profile.profileStatFielderDto")
 public class ProfileStatFielderDto {
 	private int 	statFielderId;
-	private int 	statId;
 	private int		profileId;
 	private String 	fTeamName;
 	private String 	fStatYear;
@@ -33,12 +32,7 @@ public class ProfileStatFielderDto {
 	public void setStatFielderId(int statFielderId) {
 		this.statFielderId = statFielderId;
 	}
-	public int getStatId() {
-		return statId;
-	}
-	public void setStatId(int statId) {
-		this.statId = statId;
-	}
+
 	public String getfTeamName() {
 		return fTeamName;
 	}
@@ -162,11 +156,11 @@ public class ProfileStatFielderDto {
 	}
 	@Override
 	public String toString() {
-		return "ProfileStatFielderDto [statFielderId=" + statFielderId + ", statId=" + statId + ", profileId="
-				+ profileId + ", fTeamName=" + fTeamName + ", fStatYear=" + fStatYear + ", pos=" + pos + ", g=" + g
-				+ ", gs=" + gs + ", inn=" + inn + ", tc=" + tc + ", po=" + po + ", a=" + a + ", e=" + e + ", dp=" + dp
-				+ ", sb=" + sb + ", cs=" + cs + ", sbpct=" + sbpct + ", pb=" + pb + ", cWp=" + cWp + ", fpct=" + fpct
-				+ ", rf=" + rf + ", etc=" + etc + "]";
+		return "ProfileStatFielderDto [statFielderId=" + statFielderId + ", profileId=" + profileId + ", fTeamName="
+				+ fTeamName + ", fStatYear=" + fStatYear + ", pos=" + pos + ", g=" + g + ", gs=" + gs + ", inn=" + inn
+				+ ", tc=" + tc + ", po=" + po + ", a=" + a + ", e=" + e + ", dp=" + dp + ", sb=" + sb + ", cs=" + cs
+				+ ", sbpct=" + sbpct + ", pb=" + pb + ", cWp=" + cWp + ", fpct=" + fpct + ", rf=" + rf + ", etc=" + etc
+				+ "]";
 	}
 
 }
