@@ -36,7 +36,7 @@ iframe {width : 250px; height : 200px; align:center;}
 		<c:choose>
 			<c:when test="${!empty recentPlayerProfileList}">
 				<c:forEach var="recentPlayerProfileInfo" items="${recentPlayerProfileList}">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="thumbnail">
 							<c:choose>
 								<c:when test="${recentPlayerProfileInfo.profileImgPath ne null && recentPlayerProfileInfo.profileImgPath ne ''}">
@@ -57,17 +57,17 @@ iframe {width : 250px; height : 200px; align:center;}
 							</c:choose>	
 							<div class="caption" style="cursor:pointer;">
 								<h3 style="background: #efefef; padding:5px 0 5px 0px; text-align:center;"><span onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');">${recentPlayerProfileInfo.name}</span></h3>
-								<div class="btn-group btn-group-lg btn-group-justified">
-									<c:if test="${!empty recentPlayerProfileInfo.profileAttrList}">
-									<c:forEach var="profileAttrElemInfo" items="${recentPlayerProfileInfo.profileAttrList}">
-										<c:if test="${!empty profileAttrElemInfo.profileAttrElementMapList}">
-											<c:forEach var="profileAttrElemInfo" items="${profileAttrElemInfo.profileAttrElementMapList}">
-									<div class="btn btn-default">${profileAttrElemInfo.profileAttrElementMapName}</div>
-											</c:forEach>
-										</c:if>	
-									</c:forEach>				
-									</c:if>
-								</div>
+<!-- 								<div class="btn-group btn-group-lg btn-group-justified"> -->
+<%-- 									<c:if test="${!empty recentPlayerProfileInfo.profileAttrList}"> --%>
+<%-- 									<c:forEach var="profileAttrElemInfo" items="${recentPlayerProfileInfo.profileAttrList}"> --%>
+<%-- 										<c:if test="${!empty profileAttrElemInfo.profileAttrElementMapList}"> --%>
+<%-- 											<c:forEach var="profileAttrElemInfo" items="${profileAttrElemInfo.profileAttrElementMapList}"> --%>
+<%-- 									<div class="btn btn-default">${profileAttrElemInfo.profileAttrElementMapName}</div> --%>
+<%-- 											</c:forEach> --%>
+<%-- 										</c:if>	 --%>
+<%-- 									</c:forEach>				 --%>
+<%-- 									</c:if> --%>
+<!-- 								</div> -->
 								<p class="content_${index.count}"></p>
 								<p>
 									<span class="btn btn-danger btn-block" 		role="button" onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.watchme'/></span>

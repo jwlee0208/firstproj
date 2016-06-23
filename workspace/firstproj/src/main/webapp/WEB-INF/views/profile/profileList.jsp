@@ -131,5 +131,24 @@ $("input[name=attrElemId]").each(function(){
 		}
 	});
 });
+
+//리스트 페이징을 위한 메서드
+function ajaxPagination(page){
+    var newPage = isEmpty(page) ? "1" : page;
+    $("input[name=page]").val(newPage);
+
+    loadProfileList();
+}    
+
+function isEmpty(val){
+	var result = false;
+	
+	if(val == '' || val == null || val == 'undefined'){
+		result = true;
+	}
+	return result;
+	
+}
+
 </script>
 </html>

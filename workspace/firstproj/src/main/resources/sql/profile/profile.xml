@@ -147,38 +147,38 @@
 			SELECT 
 				<include refid="profileColumnSql"/>
 				<include refid="profilePlayerColumnSql"/>
-				<include refid="profileAttributeColumnSql"/>
-				<include refid="profileAttributeElementColumnSql"/>
+<!-- 				<include refid="profileAttributeColumnSql"/> -->
+<!-- 				<include refid="profileAttributeElementColumnSql"/> -->
 			FROM TB_PROFILE 						p
 			INNER JOIN TB_PROFILE_PLAYER 			pp 		ON p.profile_id = pp.profile_id
-			LEFT JOIN TB_PROFILE_ATTR 	  			pa		ON p.cat_id1 = pa.cat_id
-			LEFT JOIN TB_PROFILE_ATTR_ELEMENT_MAP 	paem 	ON p.profile_id = paem.profile_id AND pa.profile_attr_id = paem.profile_attr_id		    	
+<!-- 			LEFT JOIN TB_PROFILE_ATTR 	  			pa		ON p.cat_id1 = pa.cat_id -->
+<!-- 			LEFT JOIN TB_PROFILE_ATTR_ELEMENT_MAP 	paem 	ON p.profile_id = paem.profile_id AND pa.profile_attr_id = paem.profile_attr_id		    	 -->
     	</sql>
     	<sql id="selectProfileCoachListSql">
 			SELECT 
 				<include refid="profileColumnSql"/>
 				<include refid="leagueColumnSql"/>
 				<include refid="profileTeamColumnSql"/>
-				<include refid="profileAttributeColumnSql"/>
-				<include refid="profileAttributeElementColumnSql"/>
+<!-- 				<include refid="profileAttributeColumnSql"/> -->
+<!-- 				<include refid="profileAttributeElementColumnSql"/> -->
 			FROM TB_PROFILE 						p
 			INNER JOIN TB_PROFILE_TEAM 				pt 		ON p.profile_id = pt.profile_id
 			INNER JOIN TB_LEAGUE_INFO 				li 		ON li.league_id = pt.league_id
-			LEFT JOIN TB_PROFILE_ATTR 	  			pa		ON p.cat_id1 = pa.cat_id
-			LEFT JOIN TB_PROFILE_ATTR_ELEMENT_MAP 	paem 	ON p.profile_id = paem.profile_id AND pa.profile_attr_id = paem.profile_attr_id		
+<!-- 			LEFT JOIN TB_PROFILE_ATTR 	  			pa		ON p.cat_id1 = pa.cat_id -->
+<!-- 			LEFT JOIN TB_PROFILE_ATTR_ELEMENT_MAP 	paem 	ON p.profile_id = paem.profile_id AND pa.profile_attr_id = paem.profile_attr_id		 -->
     	</sql>
  		<sql id="selectProfileTeamListSql">
 			SELECT 
 				<include refid="profileColumnSql"/>
 				<include refid="leagueColumnSql"/>
 				<include refid="profileTeamColumnSql"/>
-				<include refid="profileAttributeColumnSql"/>
-				<include refid="profileAttributeElementColumnSql"/>
+<!-- 				<include refid="profileAttributeColumnSql"/> -->
+<!-- 				<include refid="profileAttributeElementColumnSql"/> -->
 			FROM TB_PROFILE 					  p
 			INNER JOIN TB_PROFILE_TEAM 			  pt 	ON p.profile_id = pt.profile_id
 			INNER JOIN TB_LEAGUE_INFO 			  li 	ON li.league_id = pt.league_id
-			LEFT JOIN TB_PROFILE_ATTR 	  		  pa	ON p.cat_id1 = pa.cat_id
-			LEFT JOIN TB_PROFILE_ATTR_ELEMENT_MAP paem 	ON p.profile_id = paem.profile_id AND pa.profile_attr_id = paem.profile_attr_id		
+<!-- 			LEFT JOIN TB_PROFILE_ATTR 	  		  pa	ON p.cat_id1 = pa.cat_id -->
+<!-- 			LEFT JOIN TB_PROFILE_ATTR_ELEMENT_MAP paem 	ON p.profile_id = paem.profile_id AND pa.profile_attr_id = paem.profile_attr_id		 -->
  		</sql>
      	<sql id="selectProfilePlayerInfoSql">
 			SELECT 
@@ -194,7 +194,7 @@
 				<include refid="profileStreamColumnSql"/>		
 			FROM TB_PROFILE 					  p
 			INNER JOIN TB_PROFILE_PLAYER 		  pp 		ON pp.profile_id		= p.profile_id
-			INNER JOIN TB_CONTACT_INFO 			  ci 		ON ci.profile_id 		= p.profile_id
+			LEFT JOIN TB_CONTACT_INFO 			  ci 		ON ci.profile_id 		= p.profile_id
 			LEFT JOIN TB_PROFILE_ATTR 	  		  pa		ON pa.cat_id 			= p.cat_id1
 			LEFT JOIN TB_PROFILE_ATTR_ELEMENT_MAP paem 		ON paem.profile_id 		= p.profile_id AND pa.profile_attr_id = paem.profile_attr_id		 
 			LEFT JOIN TB_PROFILE_STREAM			  pstream 	ON pstream.profile_id 	= p.profile_id 
@@ -216,7 +216,7 @@
 				<include refid="profileStatFielderColumnSql"/>	
 			FROM TB_PROFILE 					  p
 			INNER JOIN TB_PROFILE_PLAYER 		  pp 	ON p.profile_id 	= pp.profile_id
-			INNER JOIN TB_CONTACT_INFO 			  ci 	ON p.profile_id 	= ci.profile_id
+			LEFT JOIN TB_CONTACT_INFO 			  ci 	ON p.profile_id 	= ci.profile_id
 			LEFT JOIN TB_PROFILE_ATTR 	  		  pa	ON p.cat_id1 		= pa.cat_id
 			LEFT JOIN TB_PROFILE_ATTR_ELEMENT_MAP paem 	ON p.profile_id 	= paem.profile_id AND pa.profile_attr_id = paem.profile_attr_id
 			LEFT JOIN TB_PROFILE_STAT_FIELDER 	  psf 	ON psf.profile_id 	= p.profile_id
@@ -501,4 +501,295 @@
 				<result column="create_user_id"				property="createUserId"/>
 			</collection>
 		</resultMap>
+		
+		
+		<insert id="insertProfileInfo" parameterType="profile.profileDto" useGeneratedKeys="true" keyProperty="profileId">
+			INSERT INTO TB_PROFILE
+				(
+				 profile_type,
+				 cat_id1,
+				 cat_id2,
+				 title,
+				 name,
+				 profile_img_path,
+				 introduce,
+				 create_date,
+				 create_user_id)
+			VALUES
+				(
+				 #{profileType},
+				 #{catId1},
+				 #{catId2},
+				 #{title},
+				 #{name},
+				 #{profileImgPath},
+				 #{introduce},
+				 now(),
+				 'jwlee0208')
+		</insert>
+		
+		<insert id="insertProfilePlayerInfo" parameterType="profile.profilePlayerDto" useGeneratedKeys="true" keyProperty="profilePlayerId">
+			INSERT INTO TB_PROFILE_PLAYER
+				(
+				 profile_id,
+				 birth_date,
+				 height,
+				 weight,
+				 birth_place,
+				 education,
+				 hobbies,
+				 favorite_food,
+				 nationality,
+				 language)
+			VALUES
+				(
+				 #{profileId},
+				 #{birthDate},
+				 #{height},
+				 #{weight},
+				 #{birthPlace},
+				 #{education},
+				 #{hobbies},
+				 #{favoriteFood},
+				 #{nationality},
+				 #{language})
+		</insert>		
+		
+		<insert id="insertProfileContactInfo" parameterType="profile.profileContactInfoDto" useGeneratedKeys="true" keyProperty="contactInfoId">
+			INSERT INTO TB_CONTACT_INFO
+				(
+				profile_id,
+				phone_no,
+				cell_phone_no,
+				email,
+				website_url,
+				facebook_url,
+				twitter_url,
+				instagram_url,
+				address,
+				create_date,
+				create_user_id)
+			VALUES
+				(
+				#{profileId},
+				#{phoneNo},
+				#{cellPhoneNo},
+				#{email},
+				#{websiteUrl},
+				#{facebookUrl},
+				#{twitterUrl},
+				#{instagramUrl},
+				#{address},
+				now(),
+				'jwlee0208')
+
+		</insert>
+					
+		<insert id="insertProfileStatFielderInfo" parameterType="profile.profileStatFielderDto" useGeneratedKeys="true" keyProperty="statFielderId">
+			INSERT INTO TB_PROFILE_STAT_FIELDER
+				(profile_id,
+				 f_team_name,
+				 f_stat_year,
+				 pos,
+				 g,
+				 gs,
+				 inn,
+				 tc,
+				 po,
+				 a,
+				 e,
+				 dp,
+				 sb,
+				 cs,
+				 sbpct,
+				 pb,
+				 c_wp,
+				 fpct,
+				 rf,
+				 etc,
+				 create_date,
+				 create_user_id)
+			VALUES
+				(#{profileId},
+				 #{fTeamName},
+				 #{fStatYear},
+				 #{pos},
+				 #{g},
+				 #{gs},
+				 #{inn},
+				 #{tc},
+				 #{po},
+				 #{a},
+				 #{e},
+				 #{dp},
+				 #{sb},
+				 #{cs},
+				 #{sbpct},
+				 #{pb},
+				 #{cWp},
+				 #{fpct},
+				 #{rf},
+				 #{etc},
+				 now(),
+				 'jwlee0208')			
+		</insert>	
+		
+		<insert id="insertProfileStatHitterInfo" parameterType="profile.profileStatHitterDto" useGeneratedKeys="true" keyProperty="statHitterId">
+			INSERT INTO TB_PROFILE_STAT_HITTER
+				(profile_id,
+				 h_team_name,
+				 h_stat_year,
+				 g,
+				 ab,
+				 r,
+				 h,
+				 two_b,
+				 three_b,
+				 hr,
+				 rbi,
+				 bb,
+				 so,
+				 sb,
+				 cs,
+				 avg,
+				 obp,
+				 slg,
+				 ops,
+				 etc,
+				 create_date,
+				 create_user_id)
+			VALUES
+				(#{profileId},
+				 #{hTeamName},
+				 #{hStatYear},
+				 #{g},
+				 #{ab},
+				 #{r},
+				 #{h},
+				 #{twoB},
+				 #{threeB},
+				 #{hr},
+				 #{rbi},
+				 #{bb},
+				 #{so},
+				 #{sb},
+				 #{cs},
+				 #{avg},
+				 #{obp},
+				 #{slg},
+				 #{ops},
+				 #{etc},
+				 now(),
+				 'jwlee0208');
+		</insert>	
+		
+		<insert id="insertProfileStatPitcherInfo" parameterType="profile.profileStatPitcherDto" useGeneratedKeys="true" keyProperty="statPitcherId">
+			INSERT INTO TB_PROFILE_STAT_PITCHER
+				(profile_id,
+				p_team_name,
+				p_stat_year,
+				inn,
+				w,
+				l,
+				era,
+				g,
+				gs,
+				sv,
+				svo,
+				ip,
+				h,
+				r,
+				er,
+				hr,
+				bb,
+				so,
+				avg,
+				whip,
+				k,
+				etc,
+				create_date,
+				create_user_id)
+			VALUES
+				(
+				 #{profileId},
+				 #{pTeamName},
+				 #{pStatYear},
+				 #{inn},
+				 #{w},
+				 #{l},
+				 #{era},
+				 #{g},
+				 #{gs},
+				 #{sv},
+				 #{svo},
+				 #{ip},
+				 #{h},
+				 #{r},
+				 #{er},
+				 #{hr},
+				 #{bb},
+				 #{so},
+				 #{avg},
+				 #{whip},
+				 #{k},
+				 #{etc},
+				 now(),
+				 'jwlee0208')
+		</insert>
+		
+		<insert id="insertProfileStreamInfo" parameterType="profile.profileStreamDto" useGeneratedKeys="true" keyProperty="streamId">		
+			INSERT INTO TB_PROFILE_STREAM
+				(profile_id,
+				 stream_title,
+				 stream_url)
+			VALUES
+				(#{profileId},
+				 #{streamTitle},
+				 #{streamUrl})
+		</insert>
+		
+		<insert id="insertProfileAttrElemMapInfo" parameterType="profile.profileAttrElementMapDto" useGeneratedKeys="true" keyProperty="profileAttrElementMapId">
+			INSERT INTO TB_PROFILE_ATTR_ELEMENT_MAP
+				(profile_id,
+				 profile_attr_id,
+				 profile_attr_name,
+				 profile_attr_element_id,
+				 profile_attr_element_map_name,
+				 create_date,
+				 create_user_id)
+			VALUES
+				(#{profileId},
+				 #{profileAttrId},
+				 #{profileAttrName},
+				 #{profileAttrElementId},
+				 #{profileAttrElementMapName},
+				 now(),
+				 'jwlee0208')
+		</insert>
+		
+		<insert id="insertProfileCareerInfo" parameterType="profile.profileCareerDto" useGeneratedKeys="true" keyProperty="careerId">
+			INSERT INTO TB_PROFILE_CAREER
+				(
+				 profile_id,
+				 career_title,
+				 career_description,
+				 start_date,
+				 end_date,
+				 career_status,
+				 career_seq,
+				 create_date,
+				 create_user_id)
+			VALUES
+				(
+				#{profileId},
+				#{careerTitle},
+				#{careerDescription},
+				#{startDate},
+				#{endDate},
+				#{careerStatus},
+				#{careerSeq},
+				now(),
+				'jwlee0208');
+		
+		</insert>	
 	</mapper>

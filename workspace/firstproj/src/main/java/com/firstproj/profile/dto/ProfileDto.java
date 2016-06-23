@@ -3,6 +3,7 @@ package com.firstproj.profile.dto;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.web.multipart.MultipartFile;
 
 @Alias("profile.profileDto")
 public class ProfileDto {
@@ -12,6 +13,7 @@ public class ProfileDto {
 	private String 	catId2;
 	private String 	title;
 	private String 	name;
+	private MultipartFile profileImg;
 	private String 	profileImgPath;
 	private String 	introduce;
 	private String 	createDate;
@@ -36,7 +38,10 @@ public class ProfileDto {
 	private List<ProfileAttrDto> 	profileAttrList;
 	
 	private List<ProfileStreamDto>	profileStreamList;
-	
+
+	// attribute & element map dto
+	private List<ProfileAttrElementMapDto> 	profileAttrElementMapList;
+
 	public int getProfileId() {
 		return profileId;
 	}
@@ -72,6 +77,12 @@ public class ProfileDto {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public MultipartFile getProfileImg() {
+		return profileImg;
+	}
+	public void setProfileImg(MultipartFile profileImg) {
+		this.profileImg = profileImg;
 	}
 	public String getProfileImgPath() {
 		return profileImgPath;
@@ -155,16 +166,24 @@ public class ProfileDto {
 	}
 	public void setProfileStreamList(List<ProfileStreamDto> profileStreamList) {
 		this.profileStreamList = profileStreamList;
+	}	
+	public List<ProfileAttrElementMapDto> getProfileAttrElementMapList() {
+		return profileAttrElementMapList;
+	}
+	public void setProfileAttrElementMapList(List<ProfileAttrElementMapDto> profileAttrElementMapList) {
+		this.profileAttrElementMapList = profileAttrElementMapList;
 	}
 	@Override
 	public String toString() {
 		return "ProfileDto [profileId=" + profileId + ", profileType=" + profileType + ", catId1=" + catId1
-				+ ", catId2=" + catId2 + ", title=" + title + ", name=" + name + ", profileImgPath=" + profileImgPath
-				+ ", introduce=" + introduce + ", createDate=" + createDate + ", profilePlayerDto=" + profilePlayerDto
-				+ ", leagueInfoDto=" + leagueInfoDto + ", profileTeamDto=" + profileTeamDto
-				+ ", profileContactInfoDto=" + profileContactInfoDto + ", profileStatHitterList="
+				+ ", catId2=" + catId2 + ", title=" + title + ", name=" + name + ", profileImg=" + profileImg
+				+ ", profileImgPath=" + profileImgPath + ", introduce=" + introduce + ", createDate=" + createDate
+				+ ", profilePlayerDto=" + profilePlayerDto + ", leagueInfoDto=" + leagueInfoDto + ", profileTeamDto="
+				+ profileTeamDto + ", profileContactInfoDto=" + profileContactInfoDto + ", profileStatHitterList="
 				+ profileStatHitterList + ", profileStatFielderList=" + profileStatFielderList
 				+ ", profileStatPitcherList=" + profileStatPitcherList + ", profileCareerList=" + profileCareerList
-				+ ", profileAttrList=" + profileAttrList + ", profileStreamList=" + profileStreamList + "]";
+				+ ", profileAttrList=" + profileAttrList + ", profileStreamList=" + profileStreamList
+				+ ", profileAttrElementMapList=" + profileAttrElementMapList + "]";
 	}
+
 }
