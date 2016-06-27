@@ -792,4 +792,64 @@
 				'jwlee0208');
 		
 		</insert>	
+		
+		<insert id="insertProfileTeamInfo" parameterType="profile.profileTeamDto" useGeneratedKeys="true" keyProperty="profileTeamId">
+			INSERT INTO TB_PROFILE_TEAM
+				(
+				`league_id`,
+				`profile_id`,
+				`city`,
+				`established_date`,
+				`create_date`,
+				`create_user_id`)
+			VALUES
+				(
+				#{leagueId},
+				#{profileId},
+				#{city},
+				#{establishedDate},
+				now(),
+				'jwlee0208')
+		</insert>
+		
+		<insert id="insertLeagueInfo" parameterType="profile.leagueInfoDto"  useGeneratedKeys="true" keyProperty="leagueId">
+			INSERT INTO `test`.`TB_LEAGUE_INFO`
+			(
+			`league_type`,
+			`league_name`,
+			`league_division`,
+			`commissioner`,
+			`league_website_url`,
+			`joined_team_cnt`,
+			`established_date`,
+			`area`,
+			`country`,
+			`create_date`,
+			`create_user_id`)
+			VALUES
+			(
+			#{leagueType},
+			#{leagueName},
+			#{leagueDivision},
+			#{commissioner},
+			#{leagueWebsiteUrl},
+			#{joinedTeamCnt},
+			#{establishedDate},
+			#{area},
+			#{country},
+			now(),
+			'jwlee0208');
+			
+		</insert>
+		
+		<select id="selectLeagueInfoList" parameterType="profile.leagueInfoDto" resultType="profile.leagueInfoDto">
+			SELECT 
+				 league_id
+				,league_name
+				,league_type
+				,league_division
+				,area
+				,country		
+			FROM TB_LEAGUE_INFO			
+		</select>
 	</mapper>

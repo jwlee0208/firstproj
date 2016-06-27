@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
 import com.firstproj.profile.dao.ProfileDao;
+import com.firstproj.profile.dto.LeagueInfoDto;
 import com.firstproj.profile.dto.ProfileAttrDto;
 import com.firstproj.profile.dto.ProfileAttrElementMapDto;
 import com.firstproj.profile.dto.ProfileCareerDto;
@@ -19,6 +20,7 @@ import com.firstproj.profile.dto.ProfileStatFielderDto;
 import com.firstproj.profile.dto.ProfileStatHitterDto;
 import com.firstproj.profile.dto.ProfileStatPitcherDto;
 import com.firstproj.profile.dto.ProfileStreamDto;
+import com.firstproj.profile.dto.ProfileTeamDto;
 import com.firstproj.profile.dto.SearchProfileDto;
 
 @Service("profileService")
@@ -83,10 +85,51 @@ public class ProfileServiceImpl implements ProfileService{
 		logger.debug("profileId is " + profileId);
 		
 		if(profileId > 0){
-			ProfilePlayerDto profilePlayerParam = profileDto.getProfilePlayerDto();
-			if(profilePlayerParam != null){
-				profilePlayerParam.setProfileId(profileId);
-				this.addProfilePlayerInfo(profilePlayerParam);
+			if(profileDto.getProfileType().equals("1")){
+				ProfilePlayerDto profilePlayerParam = profileDto.getProfilePlayerDto();
+				if(profilePlayerParam != null){
+					profilePlayerParam.setProfileId(profileId);
+					this.addProfilePlayerInfo(profilePlayerParam);
+				}
+				List<ProfileCareerDto> profileCareerParamList = profileDto.getProfileCareerList();
+				if(profileCareerParamList != null && profileCareerParamList.size() > 0){
+					for(ProfileCareerDto profileCareerParam : profileCareerParamList){
+						profileCareerParam.setProfileId(profileId);
+						this.addProfileCareerInfo(profileCareerParam);
+					}
+				}
+				List<ProfileStatHitterDto> profileStatHitterParamList = profileDto.getProfileStatHitterList();
+				if(profileStatHitterParamList != null && profileStatHitterParamList.size() > 0){
+					for(ProfileStatHitterDto profileStatHitterParam : profileStatHitterParamList){
+						profileStatHitterParam.setProfileId(profileId);
+						this.addProfileStatHitterInfo(profileStatHitterParam);	
+					}
+				}
+				
+				List<ProfileStatFielderDto> profileStatFielderParamList = profileDto.getProfileStatFielderList();
+				if(profileStatFielderParamList != null && profileStatFielderParamList.size() > 0){
+					for(ProfileStatFielderDto profileStatFielderParam : profileStatFielderParamList){
+						profileStatFielderParam.setProfileId(profileId);
+						this.addProfileStatFielderInfo(profileStatFielderParam);	
+					}
+				}
+				
+				List<ProfileStatPitcherDto> profileStatPitcherParamList = profileDto.getProfileStatPitcherList();
+				if(profileStatPitcherParamList != null && profileStatPitcherParamList.size() > 0){
+					for(ProfileStatPitcherDto profileStatPitcherParam : profileStatPitcherParamList){
+						profileStatPitcherParam.setProfileId(profileId);
+						this.addProfileStatPitcherInfo(profileStatPitcherParam);	
+					}
+				}			
+				
+			}else if(profileDto.getProfileType().equals("2")){
+				
+			}else if(profileDto.getProfileType().equals("3")){
+				ProfileTeamDto profileTeamParam = profileDto.getProfileTeamDto();
+				if(profileTeamParam != null){
+					profileTeamParam.setProfileId(profileId);
+					this.addProfileTeamInfo(profileTeamParam);
+				}
 			}
 			
 			ProfileContactInfoDto profileContactInfoParam = profileDto.getProfileContactInfoDto();
@@ -95,13 +138,6 @@ public class ProfileServiceImpl implements ProfileService{
 				this.addProfileContactInfo(profileContactInfoParam);
 			}
 			
-			List<ProfileCareerDto> profileCareerParamList = profileDto.getProfileCareerList();
-			if(profileCareerParamList != null && profileCareerParamList.size() > 0){
-				for(ProfileCareerDto profileCareerParam : profileCareerParamList){
-					profileCareerParam.setProfileId(profileId);
-					this.addProfileCareerInfo(profileCareerParam);
-				}
-			}
 			
 			List<ProfileStreamDto> profileStreamParamList = profileDto.getProfileStreamList();
 			if(profileStreamParamList != null && profileStreamParamList.size() > 0){
@@ -111,29 +147,6 @@ public class ProfileServiceImpl implements ProfileService{
 				}
 			}
 			
-			List<ProfileStatHitterDto> profileStatHitterParamList = profileDto.getProfileStatHitterList();
-			if(profileStatHitterParamList != null && profileStatHitterParamList.size() > 0){
-				for(ProfileStatHitterDto profileStatHitterParam : profileStatHitterParamList){
-					profileStatHitterParam.setProfileId(profileId);
-					this.addProfileStatHitterInfo(profileStatHitterParam);	
-				}
-			}
-			
-			List<ProfileStatFielderDto> profileStatFielderParamList = profileDto.getProfileStatFielderList();
-			if(profileStatFielderParamList != null && profileStatFielderParamList.size() > 0){
-				for(ProfileStatFielderDto profileStatFielderParam : profileStatFielderParamList){
-					profileStatFielderParam.setProfileId(profileId);
-					this.addProfileStatFielderInfo(profileStatFielderParam);	
-				}
-			}
-			
-			List<ProfileStatPitcherDto> profileStatPitcherParamList = profileDto.getProfileStatPitcherList();
-			if(profileStatPitcherParamList != null && profileStatPitcherParamList.size() > 0){
-				for(ProfileStatPitcherDto profileStatPitcherParam : profileStatPitcherParamList){
-					profileStatPitcherParam.setProfileId(profileId);
-					this.addProfileStatPitcherInfo(profileStatPitcherParam);	
-				}
-			}			
 			
 			List<ProfileAttrElementMapDto> profileAttrElementMapParamList = profileDto.getProfileAttrElementMapList();
 			if(profileAttrElementMapParamList != null && profileAttrElementMapParamList.size() > 0){
@@ -183,5 +196,20 @@ public class ProfileServiceImpl implements ProfileService{
 	
 	private int addProfileAttrElemMapInfo(ProfileAttrElementMapDto profileAttrElementMapDto){
 		return this.profileDao.insertProfileAttrElemMapInfo(profileAttrElementMapDto);
+	}
+	
+	private int addProfileTeamInfo(ProfileTeamDto profileTeamDto){
+		return this.profileDao.insertProfileTeamInfo(profileTeamDto);
+	}
+	
+	
+	@Override
+	public int addLeagueInfo(LeagueInfoDto leagueInfoDto){
+		return this.profileDao.insertLeagueInfo(leagueInfoDto);
+	}
+	
+	@Override
+	public List<LeagueInfoDto> getLeagueInfoList(){
+		return this.profileDao.selectLeagueInfoList();
 	}
 }

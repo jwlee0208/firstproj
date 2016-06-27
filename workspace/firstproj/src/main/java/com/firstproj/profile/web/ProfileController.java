@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.firstproj.common.paging.PageHolder;
 import com.firstproj.common.util.FileUpload;
+import com.firstproj.profile.dto.LeagueInfoDto;
 import com.firstproj.profile.dto.ProfileAttrDto;
 import com.firstproj.profile.dto.ProfileDto;
 import com.firstproj.profile.dto.SearchProfileDto;
@@ -114,8 +115,14 @@ public class ProfileController {
     	
     	List<ProfileAttrDto> profileAttrList = this.profileService.getProfileAttrElementList(profileDto);
     	
+    	List<LeagueInfoDto> leagueInfoList = null;
+    	if(profileType.equals("3")){
+    		leagueInfoList = this.profileService.getLeagueInfoList();
+    	}
+    	
     	model.addAttribute("profileType"	, profileType);
     	model.addAttribute("profileAttrList", profileAttrList);
+    	model.addAttribute("leagueInfoList", leagueInfoList);
     	return "/profile/regist";
     }
 	
@@ -151,5 +158,43 @@ public class ProfileController {
     	result.put("message", (addCnt > 0) ? "success!!!" : "error!!!");
     	
     	return result;
+    }
+    
+    @RequestMapping(value="/registLeague", method=RequestMethod.GET)
+    public String registLeague(Model model, HttpSession session){
+    	return "/profile/registLeague";
+    }
+    
+    @RequestMapping(value="/registLeagueAction", method=RequestMethod.POST)
+    @ResponseBody
+    public JSONObject registLeague(Model model, HttpSession session, LeagueInfoDto leagueInfoDto) throws Exception{
+    	JSONObject resultObj = new JSONObject();
+    	MultipartFile leagueLogoImg = leagueInfoDto.getLeagueImg();
+    	
+    	String 			imageUploadResult 	= "";
+    	String 			filePath			= "";
+    	
+    	if(null != leagueLogoImg){
+    		imageUploadResult = fileUpload.uploadFile(leagueLogoImg);	
+    	}
+    	
+    	if(!imageUploadResult.equals("") && !imageUploadResult.equals("fileSizeError") && !imageUploadResult.equals("fileExtensionError")){
+    		filePath = imageUploadResult;
+    		leagueInfoDto.setLeagueImgPath(filePath);
+    	}
+
+    	// validation
+    	logger.debug("leagueDto info is " + leagueInfoDto.toString());
+    	// insert data 
+    	
+    	if(this.profileService.addLeagueInfo(leagueInfoDto) > 0){
+    		resultObj.put("code", "success");
+    		resultObj.put("message", "success!!!");
+    	}else{
+    		resultObj.put("code", "error");
+    		resultObj.put("message", "failed registration!!!");
+    	}
+    	
+    	return resultObj;
     }
 }

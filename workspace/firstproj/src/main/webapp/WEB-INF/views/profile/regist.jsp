@@ -403,6 +403,111 @@
 		
 		</c:when>
 		<c:when test="${profileType eq 3}">
+		<h3>Team Information</h3>
+		<hr/>
+		<div class="input-group">
+			<span class="input-group-addon">Profile Image</span>
+			<input type="file" class="form-control" id="profileImg" name="profileImg" placeholder="upload your profile image"/>
+		</div>
+		<br/>
+		<div class="input-group">
+			<span class="input-group-addon">Name</span>
+			<input type="text" class="form-control" id="name" name="name" placeholder="write your name"/>
+		</div>
+		<br/>
+		<div class="input-group">
+		    <span class="input-group-addon">Introduce</span>
+		    <textarea class="form-control tinymce" id="introduce" name="introduce"></textarea>
+		</div>
+		<br/>
+<c:if test="${!empty profileAttrList}">
+	<c:set var="rowCnt" value="${0}"/>
+	<c:forEach var="profileAttrInfo" items="${profileAttrList}">
+		<div class="row">
+			<h4>${profileAttrInfo.profileAttrName}</h4>
+			<c:set var="profileAttrElemList" value="${profileAttrInfo.profileAttrElementList}"/>
+			<c:if test="${!empty profileAttrElemList}">
+				<c:forEach var="profileAttrElemInfo" items="${profileAttrElemList}" varStatus="index">
+			<div class="col-lg-2">
+				<div class="input-group">
+					<input type="hidden" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrId" value="${profileAttrInfo.profileAttrId}"/>
+					<input type="hidden" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrName" value="${profileAttrInfo.profileAttrName}"/>
+					<span class="input-group-addon"><input type="checkbox" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrElementId" aria-label="Checkbox for following text input" value="${profileAttrElemInfo.profileAttrElementId}"></span>
+					<input type="text" class="form-control" aria-label="Text input with checkbox" name="profileAttrElementMapList[${rowCnt}].profileAttrElementMapName" value="${profileAttrElemInfo.profileAttrElementName}">
+				</div>			
+			</div>
+				<c:set var="rowCnt" value="${rowCnt+1}"/>	
+				</c:forEach>
+			</c:if>
+		</div>					
+	</c:forEach>			
+</c:if>
+		<br/>
+		<div class="input-group">
+			<span class="input-group-addon">League</span>
+		    <select class="form-control" id="leagueId" name="profileTeamDto.leagueInfoDto.leagueId">
+		    	<c:if test="${!empty leagueInfoList}">
+		    		<c:forEach var="leagueInfo" items="${leagueInfoList}">
+		    	<option value="${leagueInfo.leagueId}">[${leagueInfo.area}]${leagueInfo.leagueName}</option>	
+		    		</c:forEach>
+		    	</c:if>
+		    	
+		    	
+		    </select>			
+		</div>
+		<br/>
+		<div class="input-group">
+			<span class="input-group-addon">City</span>
+		    <input type="text"	class="form-control" id="profileTeamDto.city" name="profileTeamDto.city"/>		
+		</div>
+		<br/>
+		<div class="input-group">
+			<span class="input-group-addon">Established Date</span>
+		    <input type="date"	class="form-control" id="profileTeamDto.establishedDate" name="profileTeamDto.establishedDate"/>		
+		</div>
+		<br/>
+		<h3>Contact Info.</h3>
+		<hr/>		
+		<div class="input-group">
+			<span class="input-group-addon">Email</span>
+		    <input type="email" class="form-control" id="email" name="profileContactInfoDto.email" placeholder="write your e-mail"/>			
+		</div>
+		<br/>
+		<div class="input-group">
+			<span class="input-group-addon">Phone No.</span>
+		    <input type="tel" class="form-control" id="phoneNo" name="profileContactInfoDto.phoneNo" placeholder="write your phone No."/>			
+		</div>
+		<br/>
+		<div class="input-group">
+			<span class="input-group-addon">cellPhoneNo</span>
+		    <input type="tel" class="form-control" id="cellPhoneNo" name="profileContactInfoDto.cellPhoneNo" placeholder="write your cell phone No."/>		
+		</div>
+		<br/>
+		<div class="input-group">
+ 			<span class="input-group-addon" id="basic-addon3">http://</span>
+		    <input type="url" class="form-control" id="websiteUrl" name="profileContactInfoDto.websiteUrl" placeholder="write your website url" aria-describedby="basic-addon3"/>
+		</div>
+		<br/>		
+		<div class="input-group">
+			<span class="input-group-addon">facebook</span>
+		    <input type="text" class="form-control" id="facebookUrl" name="profileContactInfoDto.faceebookUrl" placeholder="write your facebook id"/>
+		</div>
+		<br/>
+		<div class="input-group">
+			<span class="input-group-addon">twitter</span>
+		    <input type="text" class="form-control" id="twitterUrl" name="profileContactInfoDto.twitterUrl" placeholder="write your twitter id"/>
+		</div>
+		<br/>
+		<div class="input-group">
+			<span class="input-group-addon">instagram</span>
+		    <input type="text" class="form-control" id="instagramUrl" name="profileContactInfoDto.instagramUrl" placeholder="write your instagram id"/>
+		</div>
+		<br/>
+		<div class="input-group">
+			<span class="input-group-addon">Address</span> 				
+			<input type="text" class="form-control" id="address" name="profileContactInfoDto.address" placeholder="write your address"/>		
+		</div>
+		<br/>
 		
 		</c:when>
 	</c:choose>

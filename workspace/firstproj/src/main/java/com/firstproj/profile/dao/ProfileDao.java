@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.firstproj.profile.dto.LeagueInfoDto;
 import com.firstproj.profile.dto.ProfileAttrDto;
 import com.firstproj.profile.dto.ProfileAttrElementMapDto;
 import com.firstproj.profile.dto.ProfileCareerDto;
@@ -15,6 +16,7 @@ import com.firstproj.profile.dto.ProfileStatFielderDto;
 import com.firstproj.profile.dto.ProfileStatHitterDto;
 import com.firstproj.profile.dto.ProfileStatPitcherDto;
 import com.firstproj.profile.dto.ProfileStreamDto;
+import com.firstproj.profile.dto.ProfileTeamDto;
 import com.firstproj.profile.dto.SearchProfileDto;
 
 @Repository("profileDao")
@@ -110,5 +112,17 @@ public class ProfileDao extends SqlSessionDaoSupport{
 	
 	public int insertProfileCareerInfo(ProfileCareerDto param){
 		return getSqlSession().insert("sql.profile.insertProfileCareerInfo", param);
+	}
+	
+	public int insertLeagueInfo(LeagueInfoDto param){
+		return getSqlSession().insert("sql.profile.insertLeagueInfo", param);
+	}
+	
+	public int insertProfileTeamInfo(ProfileTeamDto param){
+		return getSqlSession().insert("sql.profile.insertProfileTeamInfo", param);
+	}
+	
+	public List<LeagueInfoDto> selectLeagueInfoList(){
+		return getSqlSession().selectList("sql.profile.selectLeagueInfoList");
 	}
 }
