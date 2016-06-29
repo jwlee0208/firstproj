@@ -71,31 +71,31 @@
 		<c:set var="categoryAttrElemListLength" value="0"/>
 		<!-- //attribute Info Settion -->
 		
-		<c:forEach var="profileAttrElementInfo" items="${attrElementList}" varStatus="index">
+<%-- 		<c:forEach var="profileAttrElementInfo" items="${attrElementList}" varStatus="index"> --%>
 		
-			<c:set var="profileAttrId" 				value="${profileAttrElementInfo.profileAttrId}"/>
-			<c:set var="profileAttrElemList" 		value="${profileAttrElementInfo.profileAttrElementList}"/>
-			<c:set var="profileAttrElemListLength"  value="${profileAttrElemList.size()}"/>
+<%-- 			<c:set var="profileAttrId" 				value="${profileAttrElementInfo.profileAttrId}"/> --%>
+<%-- 			<c:set var="profileAttrElemList" 		value="${profileAttrElementInfo.profileAttrElementList}"/> --%>
+<%-- 			<c:set var="profileAttrElemListLength"  value="${profileAttrElemList.size()}"/> --%>
 		
-			<c:if test="${prevAttrId eq 0 || (prefAttrId != 0 && profileAttrId > prevAttrId)}">
+<%-- 			<c:if test="${prevAttrId eq 0 || (prefAttrId != 0 && profileAttrId > prevAttrId)}"> --%>
 		
-					<div id="${profileAttrId}" onclick="javascript:attrFilterList(${profileAttrId});" style="font-weight:bold;">${profileAttrElementInfo.profileAttrName}</div>
+<%-- 					<div id="${profileAttrId}" onclick="javascript:attrFilterList(${profileAttrId});" style="font-weight:bold;">${profileAttrElementInfo.profileAttrName}</div> --%>
 		
-			</c:if>
+<%-- 			</c:if> --%>
 			
-			<c:if test="${profileAttrElemListLength > 0}">
-					<input type="hidden" id="attrElemMapList[${index.count-1}].attrId${profileAttrId}" name="attrElemMapList[${index.count-1}].attrId" value="${profileAttrId}" />
+<%-- 			<c:if test="${profileAttrElemListLength > 0}"> --%>
+<%-- 					<input type="hidden" id="attrElemMapList[${index.count-1}].attrId${profileAttrId}" name="attrElemMapList[${index.count-1}].attrId" value="${profileAttrId}" /> --%>
 			
-				<c:forEach var="profileAttrElemInfo" items="${profileAttrElemList}">
-					<span class="label label-default">				
-						<input type="checkbox" id="attrElemMapList[${index.count-1}].attrElemId${ProfileAttrElemInfo.profileAttrElementId}" name="attrElemMapList[${index.count-1}].attrElemId" value="${profileAttrElemInfo.profileAttrElementId}" class="attrElemRadio"/>${profileAttrElemInfo.profileAttrElementName}
-					</span>
-				</c:forEach>
+<%-- 				<c:forEach var="profileAttrElemInfo" items="${profileAttrElemList}"> --%>
+<!-- 					<span class="label label-default">				 -->
+<%-- 						<input type="checkbox" id="attrElemMapList[${index.count-1}].attrElemId${ProfileAttrElemInfo.profileAttrElementId}" name="attrElemMapList[${index.count-1}].attrElemId" value="${profileAttrElemInfo.profileAttrElementId}" class="attrElemRadio"/>${profileAttrElemInfo.profileAttrElementName} --%>
+<!-- 					</span> -->
+<%-- 				</c:forEach> --%>
 			
-			</c:if>	
+<%-- 			</c:if>	 --%>
 		
-			<c:set var="prevAttrId" value="${attrId}"/>
-		</c:forEach>
+<%-- 			<c:set var="prevAttrId" value="${attrId}"/> --%>
+<%-- 		</c:forEach> --%>
 	</c:when>
 	<c:otherwise>
 				<div style="text-align:center">등록된 카테고리가 없습니다.</div>

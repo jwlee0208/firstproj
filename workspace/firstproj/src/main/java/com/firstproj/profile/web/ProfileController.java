@@ -121,8 +121,9 @@ public class ProfileController {
     	}
     	
     	model.addAttribute("profileType"	, profileType);
+    	model.addAttribute("categoryId"		, catId);	
     	model.addAttribute("profileAttrList", profileAttrList);
-    	model.addAttribute("leagueInfoList", leagueInfoList);
+    	model.addAttribute("leagueInfoList"	, leagueInfoList);
     	return "/profile/regist";
     }
 	

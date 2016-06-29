@@ -90,7 +90,7 @@ iframe {width : 250px; height : 200px; align:center;}
 		<c:choose>
 			<c:when test="${!empty recentTeamProfileList}">
 				<c:forEach var="recentTeamProfileInfo" items="${recentTeamProfileList}">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="thumbnail">
 							<c:choose>
 								<c:when test="${recentTeamProfileInfo.profileImgPath ne null && recentTeamProfileInfo.profileImgPath ne ''}">
@@ -112,15 +112,15 @@ iframe {width : 250px; height : 200px; align:center;}
 							<div class="caption" style="cursor:pointer;">
 								<h3 style="background: #efefef; padding:5px 0 5px 0px; text-align:center;"><span onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');">${recentTeamProfileInfo.name}</span></h3>
 								<div class="btn-group btn-group-lg btn-group-justified">
-									<c:if test="${!empty recentTeamProfileInfo.profileAttrList}">
-									<c:forEach var="profileAttrElemInfo" items="${recentTeamProfileInfo.profileAttrList}">
-										<c:if test="${!empty profileAttrElemInfo.profileAttrElementMapList}">
-											<c:forEach var="profileAttrElemInfo" items="${profileAttrElemInfo.profileAttrElementMapList}">
-									<div class="btn btn-default">${profileAttrElemInfo.profileAttrElementMapName}</div>
-											</c:forEach>
-										</c:if>	
-									</c:forEach>				
-									</c:if>
+<%-- 									<c:if test="${!empty recentTeamProfileInfo.profileAttrList}"> --%>
+<%-- 									<c:forEach var="profileAttrElemInfo" items="${recentTeamProfileInfo.profileAttrList}"> --%>
+<%-- 										<c:if test="${!empty profileAttrElemInfo.profileAttrElementMapList}"> --%>
+<%-- 											<c:forEach var="profileAttrElemInfo" items="${profileAttrElemInfo.profileAttrElementMapList}"> --%>
+<%-- 									<div class="btn btn-default">${profileAttrElemInfo.profileAttrElementMapName}</div> --%>
+<%-- 											</c:forEach> --%>
+<%-- 										</c:if>	 --%>
+<%-- 									</c:forEach>				 --%>
+<%-- 									</c:if> --%>
 								</div>
 								<p class="content_${index.count}"></p>
 								<p>

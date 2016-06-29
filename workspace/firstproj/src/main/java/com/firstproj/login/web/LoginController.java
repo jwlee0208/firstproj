@@ -39,7 +39,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/")
 	public String index() throws Exception{
-		return "redirect:/home/0";
+		return "redirect:/home";
 	}
 	
 	@RequestMapping(value="/login/{menuId}")
@@ -128,7 +128,7 @@ public class LoginController {
 		status.setComplete();
 		session.removeAttribute("userInfo");
 		
-		return "redirect:/home/0";
+		return "redirect:/home";
 	}
 	
 	@RequestMapping(value="/ajaxChangeLocale/{locale}")

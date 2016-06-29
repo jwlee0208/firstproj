@@ -16,6 +16,7 @@
 	<h1 id="btn-groups" class="page-header">Registration</h1>
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form"  enctype="multipart/form-data">	
 		<input type="hidden" id="profileType" name="profileType" value="${profileType}"/>
+		<input type="hidden" id="categoryId" name="categoryId" value="${catagoryId}"/>
  	<c:choose>
 		<c:when test="${profileType eq 1}">
 		<h3>Personal Information</h3>
@@ -403,6 +404,10 @@
 		
 		</c:when>
 		<c:when test="${profileType eq 3}">
+		
+			<input type="hidden" id="catId1" name="catId1" value="01010300"/>
+			<input type="hidden" id="catId1" name="catId1" value="01010301"/>	
+		
 		<h3>Team Information</h3>
 		<hr/>
 		<div class="input-group">
@@ -445,7 +450,7 @@
 		<br/>
 		<div class="input-group">
 			<span class="input-group-addon">League</span>
-		    <select class="form-control" id="leagueId" name="profileTeamDto.leagueInfoDto.leagueId">
+		    <select class="form-control" id="leagueId" name="profileTeamDto.leagueId">
 		    	<c:if test="${!empty leagueInfoList}">
 		    		<c:forEach var="leagueInfo" items="${leagueInfoList}">
 		    	<option value="${leagueInfo.leagueId}">[${leagueInfo.area}]${leagueInfo.leagueName}</option>	
@@ -548,8 +553,7 @@
 	   }
 	   alert("정상적으로 등록 되었습니다.");
 	   // 정상 등록 후 목록 화면으로 이동.
-// 	   location.href = "/profile/list/1/01010100";
-	
+	   location.href = "/profile/list/"+ $("#profileType") +"/" + $("#categoryId");	
 	}
 
 	$(function(){
@@ -566,7 +570,15 @@
 					dataType 	: 'json',
 					method 		: 'post',
 					success 	: function(data){
-						
+						var result = data.result;
+						var msg = data.message;
+												
+						if(result == 'success'){
+							location.href = "/player/playerPortal";
+						}else{
+							alert(msg);
+							return;
+						}						
 					}
 				});					
 			}else{

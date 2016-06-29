@@ -30,13 +30,13 @@
 		<div class="collapse navbar-collapse"
 			id="nav-collapse-player-menu-list">
 			<ul class="nav navbar-nav">
-				<li><a href="javascript:;" onclick="javascript:;">Home</a></li>
+				<li><a href="javascript:;" onclick="javascript:goHome();">Home</a></li>
 				<li><a href="javascript:;" onclick="javascript:goProfileList(1, '01010100');"><tag:message code="menu.player" /></a></li>
 				<li><a href="javascript:;" onclick="javascript:goProfileList(2, '01010200');">코치 정보</a></li>
 				<li><a href="javascript:;" onclick="javascript:goProfileList(3, '01010300');"><tag:message code="menu.club" /></a></li>
-				<li><a href="javascript:;" onclick="javascript:;">리그 정보</a></li>
-				<li><a href="javascript:;" onclick="javascript:;">컨설팅 요청</a></li>
-				<li><a href="javascript:;" onclick="javascript:;">About Us</a></li>
+<!-- 				<li><a href="javascript:;" onclick="javascript:alert('ing..');">리그 정보</a></li> -->
+<!-- 				<li><a href="javascript:;" onclick="javascript:alert('ing..');;">컨설팅 요청</a></li> -->
+<!-- 				<li><a href="javascript:;" onclick="javascript:alert('ing..');;">About Us</a></li> -->
 			</ul>
 			<c:if test="${null ne userInfo}">
 			<ul class="nav navbar-nav navbar-right">
