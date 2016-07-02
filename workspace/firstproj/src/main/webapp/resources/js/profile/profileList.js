@@ -1,6 +1,6 @@
 	$(document).on("ready", function() {
-		$("input[name='goToRegist']").on("click", function() {
-			location.href = "/profile/write";
+		$("input[name='goToRegistProfile']").on("click", function() {
+			location.href = "/profile/regist/" + $("#profileType").val() + "/" + $("#catagoryId").val();
 		});
 		
 //		setChildCategory();

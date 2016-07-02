@@ -19,11 +19,25 @@ public class LeagueInfoDto {
 	private String establishedDate;
 	private String createDate;
 	private String createUserId;
+	
 	public int getLeagueId() {
 		return leagueId;
 	}
 	public void setLeagueId(int leagueId) {
 		this.leagueId = leagueId;
+	}
+	
+	public MultipartFile getLeagueImg() {
+		return leagueImg;
+	}
+	public void setLeagueImg(MultipartFile leagueImg) {
+		this.leagueImg = leagueImg;
+	}
+	public String getLeagueImgPath() {
+		return leagueImgPath;
+	}
+	public void setLeagueImgPath(String leagueImgPath) {
+		this.leagueImgPath = leagueImgPath;
 	}
 	public String getLeagueType() {
 		return leagueType;
@@ -90,18 +104,6 @@ public class LeagueInfoDto {
 	}
 	public void setCreateUserId(String createUserId) {
 		this.createUserId = createUserId;
-	}
-	public MultipartFile getLeagueImg() {
-		return leagueImg;
-	}
-	public void setLeagueImg(MultipartFile leagueImg) {
-		this.leagueImg = leagueImg;
-	}
-	public String getLeagueImgPath() {
-		return leagueImgPath;
-	}
-	public void setLeagueImgPath(String leagueImgPath) {
-		this.leagueImgPath = leagueImgPath;
 	}
 	@Override
 	public String toString() {

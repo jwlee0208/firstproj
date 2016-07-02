@@ -813,32 +813,32 @@
 		</insert>
 		
 		<insert id="insertLeagueInfo" parameterType="profile.leagueInfoDto"  useGeneratedKeys="true" keyProperty="leagueId">
-			INSERT INTO `test`.`TB_LEAGUE_INFO`
-			(
-			`league_type`,
-			`league_name`,
-			`league_division`,
-			`commissioner`,
-			`league_website_url`,
-			`joined_team_cnt`,
-			`established_date`,
-			`area`,
-			`country`,
-			`create_date`,
-			`create_user_id`)
+			INSERT INTO `TB_LEAGUE_INFO`
+				(
+				`league_type`,
+				`league_name`,
+				`league_division`,
+				`commissioner`,
+				`league_website_url`,
+				`joined_team_cnt`,
+				`established_date`,
+				`area`,
+				`country`,
+				`create_date`,
+				`create_user_id`)
 			VALUES
-			(
-			#{leagueType},
-			#{leagueName},
-			#{leagueDivision},
-			#{commissioner},
-			#{leagueWebsiteUrl},
-			#{joinedTeamCnt},
-			#{establishedDate},
-			#{area},
-			#{country},
-			now(),
-			'jwlee0208');
+				(
+				#{leagueType},
+				#{leagueName},
+				#{leagueDivision},
+				#{commissioner},
+				#{leagueWebsiteUrl},
+				#{joinedTeamCnt},
+				#{establishedDate},
+				#{area},
+				#{country},
+				now(),
+				'admin');
 			
 		</insert>
 		

@@ -26,6 +26,7 @@ import com.firstproj.profile.dto.ProfileAttrDto;
 import com.firstproj.profile.dto.ProfileDto;
 import com.firstproj.profile.dto.SearchProfileDto;
 import com.firstproj.profile.service.ProfileServiceImpl;
+import com.firstproj.user.dto.UserDto;
 
 @Controller
 @RequestMapping(value="/profile")
@@ -54,14 +55,23 @@ public class ProfileController {
 	}
 	
 	@RequestMapping(value="/list/{profileType}/{catId}")
-	public String getProfileList(Model model, @PathVariable int profileType, @PathVariable String catId){
+	public String getProfileList(Model model, HttpSession session, @PathVariable int profileType, @PathVariable String catId){
 		
+		boolean isLogon     = false;
+        UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+        
+        if(sessionInfo != null){
+        	isLogon    = true;
+        }
+        
 		ProfileDto profileDto = new ProfileDto();
 		profileDto.setCatId1(catId);
 		
 		List<ProfileAttrDto> attrElementList = this.profileService.getProfileAttrElementList(profileDto);
 		
+		model.addAttribute("isLogon"		, isLogon);
 		model.addAttribute("profileType"	, profileType);
+		model.addAttribute("catagoryId"		, catId);
 		model.addAttribute("attrElementList", attrElementList);
 		return "/profile/profileList";
 	}
@@ -109,6 +119,13 @@ public class ProfileController {
     @RequestMapping(value="/regist/{profileType}/{catId}", method=RequestMethod.GET)
     public String getProfileRegistPage(Model model, HttpSession session, @PathVariable String profileType, @PathVariable String catId){
     	
+        boolean isLogon     = false;
+        UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+        
+        if(sessionInfo != null){
+        	isLogon    = true;
+        }
+        
     	ProfileDto profileDto = new ProfileDto();
     	profileDto.setCatId1(catId);
     	profileDto.setProfileType(profileType);
@@ -120,6 +137,7 @@ public class ProfileController {
     		leagueInfoList = this.profileService.getLeagueInfoList();
     	}
     	
+    	model.addAttribute("isLogon"		, isLogon);
     	model.addAttribute("profileType"	, profileType);
     	model.addAttribute("categoryId"		, catId);	
     	model.addAttribute("profileAttrList", profileAttrList);
@@ -175,6 +193,9 @@ public class ProfileController {
     	String 			imageUploadResult 	= "";
     	String 			filePath			= "";
     	
+    	System.out.println("[ LeagueInfo Img ] leagueLogoImg.isEmpty() : " + leagueLogoImg.isEmpty());
+    	System.out.println("[ LeagueInfo Img ] leagueLogoImg : " + leagueLogoImg);
+    	
     	if(null != leagueLogoImg){
     		imageUploadResult = fileUpload.uploadFile(leagueLogoImg);	
     	}
@@ -197,5 +218,18 @@ public class ProfileController {
     	}
     	
     	return resultObj;
+    }
+    
+    @RequestMapping(value="/leagueList")
+    public String getLeagueInfoList(Model model, HttpSession session) throws Exception{
+    	boolean isLogon     = false;
+        UserDto sessionInfo = (UserDto)session.getAttribute("userInfo");
+        
+        if(sessionInfo != null){
+        	isLogon    = true;
+        }
+        model.addAttribute("isLogon"		, isLogon);
+    	model.addAttribute("leagueList", this.profileService.getLeagueInfoList());
+    	return "/profile/leagueList";
     }
 }

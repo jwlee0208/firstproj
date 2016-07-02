@@ -31,6 +31,7 @@
 		<input type="hidden" id="selectedCatId" 		name="selectedCatId" />
 		<input type="hidden" id="page"					name="page"	/>
 		<input type="hidden" id="profileType"			name="profileType" 	value="${profileType}"/>
+		<input type="hidden" id="catagoryId"			name="catagoryId" 	value="${catagoryId}"/>
 		<c:set var="type" value=""/>
 		<c:choose>
 			<c:when test="${profileType eq 1}">
@@ -107,10 +108,10 @@
 			<div id="listDiv" role="main"></div>
 			<!-- // list area -->
 				
-		<c:if test="${isLogon && !isRegisted}">
+		<c:if test="${isLogon}">
 			<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
 				<div class="btn-group">
-					<input type="button" class="btn btn-default pull-right" value="프로필쓰기" name="goToRegist" />
+					<input type="button" class="btn btn-default pull-right" value="regist" name="goToRegistProfile" />
 				</div>
 			</div>		
 		</c:if>

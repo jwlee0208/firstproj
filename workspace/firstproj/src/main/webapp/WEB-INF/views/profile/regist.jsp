@@ -406,7 +406,7 @@
 		<c:when test="${profileType eq 3}">
 		
 			<input type="hidden" id="catId1" name="catId1" value="01010300"/>
-			<input type="hidden" id="catId1" name="catId1" value="01010301"/>	
+			<input type="hidden" id="catId2" name="catId2" value="01010301"/>	
 		
 		<h3>Team Information</h3>
 		<hr/>
@@ -553,7 +553,7 @@
 	   }
 	   alert("정상적으로 등록 되었습니다.");
 	   // 정상 등록 후 목록 화면으로 이동.
-	   location.href = "/profile/list/"+ $("#profileType") +"/" + $("#categoryId");	
+	   location.href = "/profile/list/"+ $("#profileType").val() +"/" + $("#categoryId").val();	
 	}
 
 	$(function(){

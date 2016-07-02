@@ -390,6 +390,15 @@
 			</div>
 		</div>
 </c:if>
+<c:if test="${profileInfo.profileContactInfoDto.websiteUrl ne null}">
+		<div class="form-group">
+	    	<label for="" class="col-sm-2 control-label">My Website</label>
+		    <div class="col-sm-10">
+		    	<p class="form-control-static"><a href="facebook.com/${profileInfo.profileContactInfoDto.websiteUrl}">${profileInfo.profileContactInfoDto.websiteUrl}</a></p>
+			</div>
+		</div>
+</c:if>
+
 <c:if test="${profileInfo.profileContactInfoDto.facebookUrl ne null}">
 		<div class="form-group">
 	    	<label for="" class="col-sm-2 control-label">Facebook</label>
@@ -411,6 +420,14 @@
 	    	<label for="" class="col-sm-2 control-label">Instagram</label>
 		    <div class="col-sm-10">
 		    	<p class="form-control-static"><a href="instagram.com/${profileInfo.profileContactInfoDto.instagramUrl}">${profileInfo.profileContactInfoDto.instagramUrl}</a></p>
+			</div>
+		</div>
+</c:if>
+<c:if test="${profileInfo.profileContactInfoDto.address ne null}">
+		<div class="form-group">
+	    	<label for="" class="col-sm-2 control-label">Address</label>
+		    <div class="col-sm-10">
+		    	<p class="form-control-static"><a>${profileInfo.profileContactInfoDto.address}</a></p>
 			</div>
 		</div>
 </c:if>
