@@ -13,4 +13,5 @@ public interface ProfileService {
 	public int 				getSearchedProfileListCnt(SearchProfileDto searchProfileDto);
 	public int 				addLeagueInfo(LeagueInfoDto leagueInfoDto);
 	public List<LeagueInfoDto> getLeagueInfoList();
+	public LeagueInfoDto 	getLeagueInfo(int leagueId);
 }

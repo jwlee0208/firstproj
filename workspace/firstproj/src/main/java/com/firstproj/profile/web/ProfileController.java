@@ -232,4 +232,13 @@ public class ProfileController {
     	model.addAttribute("leagueList", this.profileService.getLeagueInfoList());
     	return "/profile/leagueList";
     }
+    
+    @RequestMapping(value="/leagueView/{leagueId}")
+    public String getLeagueInfo(Model model, HttpSession session, @PathVariable int leagueId){
+    	
+    	LeagueInfoDto leagueInfo = this.profileService.getLeagueInfo(leagueId);
+    	
+    	model.addAttribute("leagueInfo", leagueInfo);
+    	return "/profile/ajaxLeagueView";
+    }
 }

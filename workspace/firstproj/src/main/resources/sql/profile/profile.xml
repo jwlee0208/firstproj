@@ -841,8 +841,8 @@
 				'admin');
 			
 		</insert>
-		
-		<select id="selectLeagueInfoList" parameterType="profile.leagueInfoDto" resultType="profile.leagueInfoDto">
+
+		<sql id="selectLeagueInfoDefault">
 			SELECT 
 				 league_id
 				,league_name
@@ -850,6 +850,69 @@
 				,league_division
 				,area
 				,country		
-			FROM TB_LEAGUE_INFO			
+			FROM TB_LEAGUE_INFO	li			
+		</sql>		
+
+		<select id="selectLeagueInfoList" parameterType="profile.leagueInfoDto" resultType="profile.leagueInfoDto">
+			<include refid="selectLeagueInfoDefault"/>
+			ORDER BY li.league_id DESC
 		</select>
+
+		<select id="selectLeagueInfo" parameterType="profile.leagueInfoDto" resultMap="leagueInfoMap">
+			SELECT 
+				 li.league_id
+				,li.league_name
+				,li.league_type
+				,li.league_division
+				,li.area
+				,li.country
+				,li.league_website_url
+				,li.joined_team_cnt
+				,pt.profile_team_id
+				,pt.city
+				,p.name		
+				,p.profile_type
+				,p.profile_id
+			FROM 		TB_LEAGUE_INFO	li			
+			LEFT JOIN 	TB_PROFILE_TEAM pt 	ON pt.league_id = li.league_id 
+			LEFT JOIN 	TB_PROFILE 		p 	ON p.profile_id = pt.profile_id 
+			<where>
+				li.league_id = #{leagueId}
+			</where>
+		</select>
+		
+		<resultMap id="leagueInfoMap" type="profile.leagueInfoDto">
+			<id 	column="league_id" 			property="leagueId"/>
+			<result column="league_img_path" 	property="leagueImgPath"/>
+			<result column="league_type" 		property="leagueType"/>
+			<result column="league_name" 		property="leagueName"/>
+			<result column="league_division" 	property="leagueDivision"/>
+			<result column="commissioner" 		property="commissioner"/>
+			<result column="league_division" 	property="leagueDivision"/>
+			<result column="league_website_url" property="leagueWebsiteUrl"/>
+			<result column="joined_team_cnt" 	property="joinedTeamCnt"/>
+			<result column="established_date" 	property="establishedDate"/>
+			<result column="area" 				property="area"/>
+			<result column="country" 			property="country"/>
+			<result column="create_date" 		property="createDate"/>
+			<result column="create_user_id" 	property="createUserId"/>
+			<collection property="teamList" ofType="profile.profileDto">
+				<id 	column="profile_id" 		property="profileId"/>
+				<result column="profile_type" 		property="profileType"/>
+				<result column="cat_id1" 			property="catId1"/>
+				<result column="cat_id2" 			property="catId2"/>
+				<result column="title" 				property="title"/>
+				<result column="name" 				property="name"/>
+				<result column="profile_img_path" 	property="profileImgPath"/>
+				<result column="introduce" 			property="introduce"/>
+				<result column="create_date" 		property="createDate"/>
+				<association 	property="profileTeamDto" javaType="profile.profileTeamDto">
+					<id 	column="profile_team_id" 	property="profileTeamId"/>
+					<result column="city" 				property="city"/>
+					<result column="established_date" 	property="establishedDate"/>
+				</association>
+			</collection>
+		</resultMap>
+		
+		
 	</mapper>

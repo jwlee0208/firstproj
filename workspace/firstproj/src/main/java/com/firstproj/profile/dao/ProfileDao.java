@@ -125,4 +125,8 @@ public class ProfileDao extends SqlSessionDaoSupport{
 	public List<LeagueInfoDto> selectLeagueInfoList(){
 		return getSqlSession().selectList("sql.profile.selectLeagueInfoList");
 	}
+	
+	public LeagueInfoDto selectLeagueInfo(LeagueInfoDto param){
+		return getSqlSession().selectOne("sql.profile.selectLeagueInfo", param);
+	}
 }

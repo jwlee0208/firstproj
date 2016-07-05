@@ -212,4 +212,11 @@ public class ProfileServiceImpl implements ProfileService{
 	public List<LeagueInfoDto> getLeagueInfoList(){
 		return this.profileDao.selectLeagueInfoList();
 	}
+	
+	@Override
+	public LeagueInfoDto getLeagueInfo(int leagueId){
+		LeagueInfoDto leagueInfoDto = new LeagueInfoDto();
+		leagueInfoDto.setLeagueId(leagueId);
+		return this.profileDao.selectLeagueInfo(leagueInfoDto);
+	}
 }

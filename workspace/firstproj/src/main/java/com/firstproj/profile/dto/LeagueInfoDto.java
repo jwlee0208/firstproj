@@ -1,5 +1,7 @@
 package com.firstproj.profile.dto;
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +21,8 @@ public class LeagueInfoDto {
 	private String establishedDate;
 	private String createDate;
 	private String createUserId;
+	
+	List<ProfileDto> teamList;
 	
 	public int getLeagueId() {
 		return leagueId;
@@ -105,15 +109,22 @@ public class LeagueInfoDto {
 	public void setCreateUserId(String createUserId) {
 		this.createUserId = createUserId;
 	}
+	
+	
+	public List<ProfileDto> getTeamList() {
+		return teamList;
+	}
+	public void setTeamList(List<ProfileDto> teamList) {
+		this.teamList = teamList;
+	}
+	
 	@Override
 	public String toString() {
 		return "LeagueInfoDto [leagueId=" + leagueId + ", leagueImg=" + leagueImg + ", leagueImgPath=" + leagueImgPath
 				+ ", leagueType=" + leagueType + ", leagueName=" + leagueName + ", leagueDivision=" + leagueDivision
 				+ ", commissioner=" + commissioner + ", leagueWebsiteUrl=" + leagueWebsiteUrl + ", joinedTeamCnt="
 				+ joinedTeamCnt + ", area=" + area + ", country=" + country + ", establishedDate=" + establishedDate
-				+ ", createDate=" + createDate + ", createUserId=" + createUserId + "]";
+				+ ", createDate=" + createDate + ", createUserId=" + createUserId + ", teamList=" + teamList + "]";
 	}
-	
-	
-	
+		
 }
