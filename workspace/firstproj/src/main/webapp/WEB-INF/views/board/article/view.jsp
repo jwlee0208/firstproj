@@ -180,19 +180,19 @@
 		    </div>	
 		</div>
 		-->
-		<div class="container-fluid">
-			<div class="row">
-				<!-- 상세 페이지 광고 -->
-				<ins class="adsbygoogle"
-				     style="display:block"
-				     data-ad-client="ca-pub-1796756460113850"
-				     data-ad-slot="2379272409"
-				     data-ad-format="auto"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>		
-			</div>		
-		</div>
+<!-- 		<div class="container-fluid"> -->
+<!-- 			<div class="row"> -->
+<!-- 				상세 페이지 광고 -->
+<!-- 				<ins class="adsbygoogle" -->
+<!-- 				     style="display:block" -->
+<!-- 				     data-ad-client="ca-pub-1796756460113850" -->
+<!-- 				     data-ad-slot="2379272409" -->
+<!-- 				     data-ad-format="auto"></ins> -->
+<!-- 				<script> -->
+// 				(adsbygoogle = window.adsbygoogle || []).push({});
+<!-- 				</script>		 -->
+<!-- 			</div>		 -->
+<!-- 		</div> -->
 		  
 		  
 		

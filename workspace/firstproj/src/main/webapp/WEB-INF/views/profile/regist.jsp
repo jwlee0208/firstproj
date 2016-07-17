@@ -222,9 +222,9 @@
 								
 		<h3>Statistics</h3>
 		<hr/>	
-		<h3><small>Pitching Stat</small></h3>
+		<h3><small>Pitching Stat</small>&nbsp;&nbsp;<input type="button" class="btn btn-default addPitcherBtn" value="+"/></h3>
 				
-		<table class="table">
+		<table class="table tablePitcherStat">
 			<thead class="table-inverse">
 				<tr>
 					<th>Team</th>
@@ -272,36 +272,13 @@
 					<td><input type="number" 		class="form-control" id="avg_0" 		name="profileStatPitcherList[0].avg"/></td>
 					<td><input type="number" 		class="form-control" id="whip_0" 		name="profileStatPitcherList[0].whip"/></td>
 					<td><input type="number" 		class="form-control" id="k_0" 		name="profileStatPitcherList[0].k"/></td>
-					<td><input type="button" 		class="btn btn-default addPitcherBtn" value="+"/></td>
-				</tr>
-				<tr id="pitcher_tr_1" class="pitcher_tr">
-					<td><input type="text" 		class="form-control" id="pTeamName_1" name="profileStatPitcherList[1].pTeamName"/></td>
-					<td><input type="month" 		class="form-control" id="pStatYear_1" name="profileStatPitcherList[1].pStatYear"/></td>
-					<td><input type="number" 		class="form-control" id="inn_1" 		name="profileStatPitcherList[1].inn"/></td>
-					<td><input type="number" 	class="form-control" id="w_1" 		name="profileStatPitcherList[1].w"/></td>
-					<td><input type="number" 	class="form-control" id="l_1" 		name="profileStatPitcherList[1].l"/></td>
-					<td><input type="number" 		class="form-control" id="era_1" 		name="profileStatPitcherList[1].era"/></td>
-					<td><input type="number" 		class="form-control" id="g_1" 		name="profileStatPitcherList[1].g"/></td>
-					<td><input type="number" 		class="form-control" id="gs_1" 		name="profileStatPitcherList[1].gs"/></td>
-					<td><input type="number" 		class="form-control" id="sv_1" 		name="profileStatPitcherList[1].sv"/></td>
-					<td><input type="number"		class="form-control" id="svo_1" 		name="profileStatPitcherList[1].svo"/></td>
-					<td><input type="number" 		class="form-control" id="ip_1" 		name="profileStatPitcherList[1].ip"/></td>
-					<td><input type="number" 		class="form-control" id="h_1" 		name="profileStatPitcherList[1].h"/></td>
-					<td><input type="number" 		class="form-control" id="r_1" 		name="profileStatPitcherList[1].r"/></td>
-					<td><input type="number" 		class="form-control" id="er_1" 		name="profileStatPitcherList[1].er"/></td>
-					<td><input type="number" 		class="form-control" id="hr_1" 		name="profileStatPitcherList[1].hr"/></td>
-					<td><input type="number" 		class="form-control" id="bb_1" 		name="profileStatPitcherList[1].bb"/></td>
-					<td><input type="number" 		class="form-control" id="so_1" 		name="profileStatPitcherList[1].so"/></td>
-					<td><input type="number" 		class="form-control" id="avg_1" 		name="profileStatPitcherList[1].avg"/></td>
-					<td><input type="number" 		class="form-control" id="whip_1" 		name="profileStatPitcherList[1].whip"/></td>
-					<td><input type="number" 		class="form-control" id="k_1" 		name="profileStatPitcherList[1].k"/></td>
-					<td><input type="button" 		class="btn btn-default addPitcherBtn" value="+"/></td>
+					<td><input type="button" 		class="btn btn-default removePitcherBtn" value="-"/></td>
 				</tr>
 			</tbody>
 		</table>		
 
-		<h3><small>Hitting Stat</small></h3>		
-		<table class="table">
+		<h3><small>Hitting Stat</small>&nbsp;&nbsp;<input type="button" class="btn btn-default addHitterBtn" value="+"/></h3>		
+		<table class="table tableHitterStat">
 			<thead class="table-inverse">
 				<tr>
 					<th>Team</th>
@@ -345,13 +322,13 @@
 					<td><input type="number" 		class="form-control" id="obp" 		name="profileStatHitterList[0].obp"/></td>
 					<td><input type="number" 		class="form-control" id="slg" 		name="profileStatHitterList[0].slg"/></td>
 					<td><input type="number" 		class="form-control" id="ops" 		name="profileStatHitterList[0].ops"/></td>
-					<td><input type="button" 		class="btn btn-default addHitterBtn" value="+"/></td>
+					<td><input type="button" 		class="btn btn-default removeHitterBtn" value="-"/></td>
 				</tr>
 			</tbody>
 		</table>	
 		
-		<h3><small>Fielding Stat</small></h3>
-		<table class="table">
+		<h3><small>Fielding Stat</small>&nbsp;&nbsp;<input type="button" class="btn btn-default addFielderBtn" value="+"/></h3>
+		<table class="table tableFielderStat">
 			<thead class="table-inverse">
 				<tr>
 					<th>Team</th>
@@ -395,7 +372,7 @@
 	    			<td><input type="number" 		class="form-control" id="cWp" 		name="profileStatFielderList[0].cWp"/></td>
 	    			<td><input type="number" 		class="form-control" id="fpct" 		name="profileStatFielderList[0].fpct"/></td>
 	    			<td><input type="number" 		class="form-control" id="rf" 		name="profileStatFielderList[0].rf"/></td>
-	    			<td><input type="button" 		class="btn btn-default addFielderBtn" value="+"/></td>
+	    			<td><input type="button" 		class="btn btn-default removeFielderBtn" value="-"/></td>
 				</tr>
 			</tbody>
 		</table>											
@@ -591,6 +568,118 @@
 				
 			}
 		});
+		
+		// pitcher stat row removing
+		$(".removePitcherBtn").click(function(){
+			$(".removePitcherBtn").parent().parent().get(0).remove();
+		});
+		// hitter stat row removing
+		$(".removeHitterBtn").click(function(){
+			$(".removeHitterBtn").parent().parent().get(0).remove();
+		});
+		// fielder stat row removing
+		$(".removeFielderBtn").click(function(){
+			$(".removeFielderBtn").parent().parent().get(0).remove();
+		});
+		
+		// pitcher stat row adding
+		$(".addPitcherBtn").click(function(){
+			var rowCount = $(".pitcher_tr").size();
+			if(rowCount >= 10){
+				alert('you can add your stats until 10 rows.');
+				return false;
+			}else{
+				var addPitcherHtml = "<tr id=\"pitcher_tr_"+ rowCount +"\" class=\"pitcher_tr\">";
+					addPitcherHtml += "<td><input type=\"text\" 		class=\"form-control\" id=\"pTeamName_"+ rowCount +"\" name=\"profileStatPitcherList[" + rowCount + "].pTeamName\"/></td>";
+					addPitcherHtml += "<td><input type=\"month\" 		class=\"form-control\" id=\"pStatYear_"+ rowCount +"\" name=\"profileStatPitcherList[" + rowCount + "].pStatYear\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"inn_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].inn\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"w_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].w\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"l_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].l\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"era_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].era\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"g_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].g\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"gs_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].gs\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"sv_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].sv\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\"		class=\"form-control\" id=\"svo_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].svo\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"ip_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].ip\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"h_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].h\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"r_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].r\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"er_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].er\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"hr_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].hr\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"bb_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].bb\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"so_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].so\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"avg_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].avg\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"whip_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].whip\"/></td>";
+					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"k_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].k\"/></td>";
+					addPitcherHtml += "<td><input type=\"button\" 		class=\"btn btn-default removePitcherBtn\" value=\"-\"/></td>";
+				addPitcherHtml += "</tr>";
+			
+				$(".tablePitcherStat > tbody:last").append(addPitcherHtml);				
+			}
+			
+		});	
+		// hitter stat row adding
+		$(".addHitterBtn").click(function(){
+			var rowCount = $(".hitter_tr").size();
+			if(rowCount >= 10){
+				alert('you can add your stats until 10 rows.');
+				return false;
+			}else{
+				var addHitterHtml = "<tr id=\"hitter_tr_"+ rowCount +"\" class=\"hitter_tr\">";
+				addHitterHtml += "<td><input type=\"text\" 			class=\"form-control\" id=\"hTeamName_"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].hTeamName\"/></td>";
+				addHitterHtml += "<td><input type=\"month\" 		class=\"form-control\" id=\"hStatYear_"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].hStatYear\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"g"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].g\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"ab"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].ab\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"r"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].r\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"h"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].h\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"twoB"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].twoB\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"threeB"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].threeB\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"hr"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].hr\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"rbi"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].rbi\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"bb"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].bb\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"so"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].so\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"sb"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].sb\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"cs"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].cs\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"avg"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].avg\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"obp"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].obp\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"slg"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].slg\"/></td>";
+				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"ops"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].ops\"/></td>";
+				addHitterHtml += "<td><input type=\"button\" 		class=\"btn btn-default removeHitterBtn\" value=\"-\"/></td>";
+				addHitterHtml += "</tr>";
+				$(".tableHitterStat > tbody:last").append(addHitterHtml);	
+			}	
+		});
+		// fielder stat row adding
+		$(".addFielderBtn").click(function(){
+			var rowCount = $(".fielder_tr").size();
+			if(rowCount >= 10){
+				alert('you can add your stats until 10 rows.');
+				return false;
+			}else{
+				var addFielderHtml = "<tr id=\"fielder_tr_"+ rowCount +"\" class=\"fielder_tr\">";
+				addFielderHtml += "<th class=\"row\"><input type=\"text\" 		class=\"form-control\" id=\"fTeamName\" 		name=\"profileStatFielderList[" + rowCount + "].fTeamName\"/></th>";								
+				addFielderHtml += "<td><input type=\"month\" 		class=\"form-control\" id=\"fStatYear\" 		name=\"profileStatFielderList[" + rowCount + "].fStatYear\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"pos\" 		name=\"profileStatFielderList[" + rowCount + "].pos\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"g\" 		name=\"profileStatFielderList[" + rowCount + "].g\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"gs\" 		name=\"profileStatFielderList[" + rowCount + "].gs\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"inn\" 		name=\"profileStatFielderList[" + rowCount + "].inn\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"tc\" 		name=\"profileStatFielderList[" + rowCount + "].tc\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"po\" 		name=\"profileStatFielderList[" + rowCount + "].po\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"a\" 		name=\"profileStatFielderList[" + rowCount + "].a\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"e\" 		name=\"profileStatFielderList[" + rowCount + "].e\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"dp\" 		name=\"profileStatFielderList[" + rowCount + "].dp\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"sb\" 		name=\"profileStatFielderList[" + rowCount + "].sb\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"cs\" 		name=\"profileStatFielderList[" + rowCount + "].cs\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"sbpct\" 		name=\"profileStatFielderList[" + rowCount + "].sbpct\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"pb\" 		name=\"profileStatFielderList[" + rowCount + "].pb\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"cWp\" 		name=\"profileStatFielderList[" + rowCount + "].cWp\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"fpct\" 		name=\"profileStatFielderList[" + rowCount + "].fpct\"/></td>";
+				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"rf\" 		name=\"profileStatFielderList[" + rowCount + "].rf\"/></td>";
+				addFielderHtml += "<td><input type=\"button\" 		class=\"btn btn-default removeFielderBtn\" value=\"-\"/></td>";
+				addFielderHtml += "</tr>";
+				$(".tableFielderStat > tbody:last").append(addFielderHtml);	
+			}	
+			
+		});	
 	});
 </script>	
 </html>
