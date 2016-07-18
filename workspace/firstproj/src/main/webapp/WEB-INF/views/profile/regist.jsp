@@ -570,16 +570,16 @@
 		});
 		
 		// pitcher stat row removing
-		$(".removePitcherBtn").click(function(){
-			$(".removePitcherBtn").parent().parent().get(0).remove();
+		$("body").on("click", ".removePitcherBtn", function(){
+			$(this).parent().parent().get(0).remove();
 		});
 		// hitter stat row removing
-		$(".removeHitterBtn").click(function(){
-			$(".removeHitterBtn").parent().parent().get(0).remove();
+		$("body").on("click", ".removeHitterBtn", function(){
+			$(this).parent().parent().get(0).remove();
 		});
 		// fielder stat row removing
-		$(".removeFielderBtn").click(function(){
-			$(".removeFielderBtn").parent().parent().get(0).remove();
+		$("body").on("click", ".removeFielderBtn", function(){
+			$(this).parent().parent().get(0).remove();
 		});
 		
 		// pitcher stat row adding
