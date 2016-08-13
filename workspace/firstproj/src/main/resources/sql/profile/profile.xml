@@ -257,6 +257,38 @@
 			AND p.name like CONCAT('%', #{searchText}, '%')		
 					</if>
 				</if>
+				<!-- Filtering Attribute -->
+				<if test="profileAttrList != null">
+					<foreach collection="profileAttrList"  item="parentAttribute">
+						<if test="parentAttribute.profileAttrElementList != null">
+			AND	EXISTS(SELECT 1 
+					   FROM TB_PROFILE_ATTR_ELEMENT_MAP paem 
+					   WHERE paem.profile_id = p.profile_id 
+					   	 AND paem.profile_attr_id = #{parentAttribute.profileAttrId} 
+					   	 AND paem.profile_attr_element_id IN 
+					   	 <foreach collection="parentAttribute.profileAttrElementList" item="childAttribute" separator="," open="(" close=")">
+					   	 #{childAttribute.profileAttrElementId}
+					   	 </foreach>		   	 
+						)		   	 
+						</if>
+					</foreach>
+				</if>
+				<!-- // Filtering Attribute -->
+				<!-- Filtering nationality -->
+				<if test="area != null and area != ''">
+					<choose>	
+						<when test="profileType == 1">
+			AND pp.nationality = #{area}
+						</when>
+						<when test="profileType == 2">
+			AND pp.nationality = #{area}
+						</when>
+						<when test="profileType == 3">
+			AND li.area = #{area}
+						</when>
+					</choose>	
+				</if>
+				<!-- // Filtering nationality -->
 			</where>    	
     	</sql>
     	
@@ -280,7 +312,6 @@
 				<if test="profileId > 0">
 			AND p.profile_id = #{profileId}  	
 				</if>
-
 			</where>
 			ORDER BY p.create_date DESC   		
     	</select>

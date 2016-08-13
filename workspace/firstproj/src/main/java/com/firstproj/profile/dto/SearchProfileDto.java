@@ -1,5 +1,7 @@
 package com.firstproj.profile.dto;
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 import com.firstproj.common.paging.PageParam;
@@ -13,6 +15,10 @@ public class SearchProfileDto extends PageParam{
     private int			profileId;
     private int			profileType;
     private String		catId1;
+    
+    private String		area;
+    
+    private List<ProfileAttrDto> profileAttrList;
 
     public String getSearchCondition() {
         return searchCondition;
@@ -53,5 +59,28 @@ public class SearchProfileDto extends PageParam{
 	public void setCatId1(String catId1) {
 		this.catId1 = catId1;
 	}
+	
+	public String getArea() {
+		return area;
+	}
 
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public List<ProfileAttrDto> getProfileAttrList() {
+		return profileAttrList;
+	}
+
+	public void setProfileAttrList(List<ProfileAttrDto> profileAttrList) {
+		this.profileAttrList = profileAttrList;
+	}
+
+	@Override
+	public String toString() {
+		return "SearchProfileDto [searchCondition=" + searchCondition + ", searchText=" + searchText + ", profileId="
+				+ profileId + ", profileType=" + profileType + ", catId1=" + catId1 + ", area=" + area
+				+ ", profileAttrList=" + profileAttrList + "]";
+	}
+	
 }
