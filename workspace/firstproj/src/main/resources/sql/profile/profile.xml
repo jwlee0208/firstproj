@@ -851,9 +851,11 @@
 		<insert id="insertLeagueInfo" parameterType="profile.leagueInfoDto"  useGeneratedKeys="true" keyProperty="leagueId">
 			INSERT INTO `TB_LEAGUE_INFO`
 				(
+				`league_img_path`,
 				`league_type`,
 				`league_name`,
 				`league_division`,
+				`introduce`,
 				`commissioner`,
 				`league_website_url`,
 				`joined_team_cnt`,
@@ -864,9 +866,11 @@
 				`create_user_id`)
 			VALUES
 				(
+				#{leagueImgPath},
 				#{leagueType},
 				#{leagueName},
 				#{leagueDivision},
+				#{introduce},
 				#{commissioner},
 				#{leagueWebsiteUrl},
 				#{joinedTeamCnt},
@@ -881,9 +885,11 @@
 		<sql id="selectLeagueInfoDefault">
 			SELECT 
 				 league_id
+				,league_img_path 
 				,league_name
 				,league_type
 				,league_division
+				,introduce
 				,area
 				,country		
 			FROM TB_LEAGUE_INFO	li			
@@ -897,9 +903,11 @@
 		<select id="selectLeagueInfo" parameterType="profile.leagueInfoDto" resultMap="leagueInfoMap">
 			SELECT 
 				 li.league_id
+				,li.league_img_path 
 				,li.league_name
 				,li.league_type
 				,li.league_division
+				,li.introduce
 				,li.area
 				,li.country
 				,li.league_website_url
@@ -923,6 +931,7 @@
 			<result column="league_type" 		property="leagueType"/>
 			<result column="league_name" 		property="leagueName"/>
 			<result column="league_division" 	property="leagueDivision"/>
+			<result column="introduce" 	property="introduce"/>
 			<result column="commissioner" 		property="commissioner"/>
 			<result column="league_division" 	property="leagueDivision"/>
 			<result column="league_website_url" property="leagueWebsiteUrl"/>

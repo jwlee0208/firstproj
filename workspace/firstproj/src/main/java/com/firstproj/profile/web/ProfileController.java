@@ -206,10 +206,11 @@ public class ProfileController {
     	}
 
     	// validation
-    	logger.debug("leagueDto info is " + leagueInfoDto.toString());
+    	logger.error("leagueDto info is " + leagueInfoDto.toString());
     	// insert data 
+    	int result = this.profileService.addLeagueInfo(leagueInfoDto);
     	
-    	if(this.profileService.addLeagueInfo(leagueInfoDto) > 0){
+    	if(result > 0){
     		resultObj.put("code", "success");
     		resultObj.put("message", "success!!!");
     	}else{

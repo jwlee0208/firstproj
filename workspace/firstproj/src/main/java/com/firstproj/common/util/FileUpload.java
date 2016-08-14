@@ -1,6 +1,7 @@
 package com.firstproj.common.util;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -96,14 +97,38 @@ public class FileUpload{
 	            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 	            ftpClient.enterLocalPassiveMode();
 	            
+	            FileInputStream is = null;
+	            ByteArrayInputStream bais = null;
+	            
+	            if (attachFile.getInputStream().getClass().equals(FileInputStream.class)) {
+	            	is = (FileInputStream) attachFile.getInputStream();	
+
+	            	System.out.println("[ fileDirpath ] : " + fileDirPath);
+	                System.out.println(" [ ftpClient ] : makeDir : " + ftpClient.makeDirectory(fileDirPath));
+	                System.out.println(" [ ftpClient ] : storeFile : " + ftpClient.storeFile(fileRealPath.toString(), is));
+	                System.out.println(" [ ftpClient ] : uploading.....");
+	                
+	                is.close();
+
+	            } else if (attachFile.getInputStream().getClass().equals(ByteArrayInputStream.class)) {
+	            	bais = (ByteArrayInputStream) attachFile.getInputStream();
+
+	            	System.out.println("[ fileDirpath ] : " + fileDirPath);
+	                System.out.println(" [ ftpClient ] : makeDir : " + ftpClient.makeDirectory(fileDirPath));
+	                System.out.println(" [ ftpClient ] : storeFile : " + ftpClient.storeFile(fileRealPath.toString(), bais));
+	                System.out.println(" [ ftpClient ] : uploading.....");
+	                
+	                bais.close();
+
+	            }
+/*	            
 	            FileInputStream is = (FileInputStream) attachFile.getInputStream(); 
-                //new FileInputStream(file);
                 System.out.println("[ fileDirpath ] : " + fileDirPath);
                 System.out.println(" [ ftpClient ] : makeDir : " + ftpClient.makeDirectory(fileDirPath));
                 System.out.println(" [ ftpClient ] : storeFile : " + ftpClient.storeFile(fileRealPath.toString(), is));
                 System.out.println(" [ ftpClient ] : uploading.....");
                 is.close();
-                
+*/                
                 ftpClient.logout();
 
 	        }

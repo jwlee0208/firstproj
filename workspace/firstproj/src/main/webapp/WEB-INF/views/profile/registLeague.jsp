@@ -9,7 +9,7 @@
 <!-- editor -->
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/common-editor.js"></script>
-
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/article/common.js"></script>
 
 <style>
 .ui-autocomplete .highlight {
@@ -34,7 +34,7 @@
 <div class="container">
 	<h1 id="btn-groups" class="page-header">Registration</h1>
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form"  enctype="multipart/form-data">	
-		<h3>Personal Information</h3>
+		<h3>League Information</h3>
 		<hr/>
 		<div class="input-group">
 			<span class="input-group-addon">League Logo Image</span>
@@ -70,6 +70,11 @@
 			</select>	
 		</div>
 		<br/>
+		<div class="input-group">
+			<span class="input-group-addon">Introduce</span>
+			<textarea class="form-control tinymce" id="introduce" name="introduce"></textarea>
+		</div>
+		
 		<div class="input-group">
 			<span class="input-group-addon">Commissioner Name</span>
 			<input type="text" class="form-control" id="commissioner" name="commissioner" placeholder="write league's commissioner name"/>
@@ -155,6 +160,9 @@
 			
 			var leagueImg = $.trim($("#leagueImg").val());
 			
+			var introduce = tinyMCE.get('introduce').getContent();
+			$("#introduce").val(introduce);
+
 			if(leagueImg.length == 0){
 				$.ajax({
 					url 		: '/profile/registLeagueAction',

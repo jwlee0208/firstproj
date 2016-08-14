@@ -13,6 +13,7 @@ public class LeagueInfoDto {
 	private String leagueType;
 	private String leagueName;
 	private String leagueDivision;
+	private String introduce;
 	private String commissioner;
 	private String leagueWebsiteUrl;
 	private int joinedTeamCnt;
@@ -108,9 +109,13 @@ public class LeagueInfoDto {
 	}
 	public void setCreateUserId(String createUserId) {
 		this.createUserId = createUserId;
+	}	
+	public String getIntroduce() {
+		return introduce;
 	}
-	
-	
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
 	public List<ProfileDto> getTeamList() {
 		return teamList;
 	}
@@ -122,9 +127,10 @@ public class LeagueInfoDto {
 	public String toString() {
 		return "LeagueInfoDto [leagueId=" + leagueId + ", leagueImg=" + leagueImg + ", leagueImgPath=" + leagueImgPath
 				+ ", leagueType=" + leagueType + ", leagueName=" + leagueName + ", leagueDivision=" + leagueDivision
-				+ ", commissioner=" + commissioner + ", leagueWebsiteUrl=" + leagueWebsiteUrl + ", joinedTeamCnt="
-				+ joinedTeamCnt + ", area=" + area + ", country=" + country + ", establishedDate=" + establishedDate
-				+ ", createDate=" + createDate + ", createUserId=" + createUserId + ", teamList=" + teamList + "]";
+				+ ", introduce=" + introduce + ", commissioner=" + commissioner + ", leagueWebsiteUrl="
+				+ leagueWebsiteUrl + ", joinedTeamCnt=" + joinedTeamCnt + ", area=" + area + ", country=" + country
+				+ ", establishedDate=" + establishedDate + ", createDate=" + createDate + ", createUserId="
+				+ createUserId + ", teamList=" + teamList + "]";
 	}
-		
+	
 }

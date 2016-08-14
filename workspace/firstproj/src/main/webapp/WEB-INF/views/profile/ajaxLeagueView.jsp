@@ -56,6 +56,14 @@
 		  </div>
 
 		  <div class="form-group">
+		    <label for="" class="col-sm-2 control-label">League Introduce</label>
+		    <div class="col-sm-10">
+		      <p class="form-control-static">${leagueInfo.introduce}</p>
+		    </div>
+		  </div>
+
+
+		  <div class="form-group">
 		    <label for="" class="col-sm-2 control-label">Commissioner</label>
 		    <div class="col-sm-10">
 		      <p class="form-control-static">${leagueInfo.commissioner}</p>
