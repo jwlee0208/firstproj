@@ -18,6 +18,8 @@ public class SearchProfileDto extends PageParam{
     
     private String		area;
     
+    private String		country;
+    
     private List<ProfileAttrDto> profileAttrList;
 
     public String getSearchCondition() {
@@ -76,11 +78,19 @@ public class SearchProfileDto extends PageParam{
 		this.profileAttrList = profileAttrList;
 	}
 
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	@Override
 	public String toString() {
 		return "SearchProfileDto [searchCondition=" + searchCondition + ", searchText=" + searchText + ", profileId="
-				+ profileId + ", profileType=" + profileType + ", catId1=" + catId1 + ", area=" + area
-				+ ", profileAttrList=" + profileAttrList + "]";
+				+ profileId + ", profileType=" + profileType + ", catId1=" + catId1 + ", area=" + area + ", country="
+				+ country + ", profileAttrList=" + profileAttrList + "]";
 	}
 	
 }

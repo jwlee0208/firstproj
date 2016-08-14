@@ -276,15 +276,20 @@
 				<!-- // Filtering Attribute -->
 				<!-- Filtering nationality -->
 				<if test="area != null and area != ''">
+					<if test="profileType == 3">
+			AND li.area = #{area}
+					</if>	
+				</if>
+				<if test="country != null and country != ''">
 					<choose>	
 						<when test="profileType == 1">
-			AND pp.nationality = #{area}
+			AND pp.nationality = #{country}
 						</when>
 						<when test="profileType == 2">
-			AND pp.nationality = #{area}
+			AND pp.nationality = #{country}
 						</when>
 						<when test="profileType == 3">
-			AND li.area = #{area}
+			AND li.country = #{country}
 						</when>
 					</choose>	
 				</if>
