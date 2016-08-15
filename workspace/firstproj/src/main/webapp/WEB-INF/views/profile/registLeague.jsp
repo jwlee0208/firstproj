@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
+<%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -50,9 +51,9 @@
 			<span class="input-group-addon">League Type</span>
 			<select id="leagueType" name="leagueType" class="form-control">
 				<option value="">::: select league type :::</option>
-				<option value="pro">Professional</option>
-				<option value="semi pro">Semi Professional</option>
-				<option value="independence">Independence</option>
+				<option value="pro"><tag:message code="code.leaguetype.pro"/></option>
+				<option value="semipro"><tag:message code="code.leaguetype.semipro"/></option>
+				<option value="independence"><tag:message code="code.leaguetype.independence"/></option>
 			</select>	
 		</div>
 		<br/>
@@ -100,12 +101,12 @@
 			<!-- ref.] 대륙별 코드 : http://mindgear.tistory.com/173 -->
 			<select id="area" name="area" class="form-control">
 				<option value="">::: select continent :::</option>
-				<option value="eu">Europe</option>
-				<option value="as">Asia</option>
-				<option value="af">Africa</option>
-				<option value="na">North America</option>
-				<option value="sa">South America</option>
-				<option value="oc">oceania</option>
+				<option value="eu"><tag:message code="code.area.eu"/></option>
+				<option value="as"><tag:message code="code.area.as"/></option>
+				<option value="af"><tag:message code="code.area.af"/></option>
+				<option value="na"><tag:message code="code.area.na"/></option>
+				<option value="sa"><tag:message code="code.area.sa"/></option>
+				<option value="sp"><tag:message code="code.area.sp"/></option>
 			</select>
 		</div>
 		<br/>

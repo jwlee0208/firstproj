@@ -58,9 +58,9 @@
 						<div class="caption" style="cursor:pointer;">
 							<h3 style="background: #efefef; padding:5px 0 5px 0px; text-align:center;"><span onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');">${leagueInfo.leagueName}</span></h3>
 								<div class="btn-group btn-group-lg btn-group-justified">
-									<div class="btn btn-default">${leagueInfo.leagueType}</div>
-									<div class="btn btn-default">${leagueInfo.area}</div>
-									<div class="btn btn-default">${leagueInfo.country}</div>
+									<div class="btn btn-default"><tag:message code="code.leaguetype.${leagueInfo.leagueType}"/></div>
+									<div class="btn btn-default"><tag:message code="code.area.${leagueInfo.area}"/></div>
+									<div class="btn btn-default"><tag:message code="code.country.${leagueInfo.country}"/></div>
 								</div>
 							<p class="content_${index.count}">
 							</p>
