@@ -51,6 +51,8 @@
 				<input type="hidden" 	id="searchCondition" 	name="searchCondition" value="name"/>
 				<input type="hidden" 	id="searchText" 		name="searchText" />
 				<input type="text" 		id="searchTextStr" 		name="searchTextStr" class="form-control ui-autocomplete-input" placeholder="<tag:message code='text.request.insert.search.keyword'/>"/>
+			
+			<div class="collapse"  id="searchDetail">
 			<!-- (Additional) Team Search Condition : Continent -->
 			<c:if test="${profileType eq 3}">
 				<div id="areaList" style="margin-top:10px;">
@@ -135,6 +137,10 @@
 	</c:if>
 				</div>
 			</div>
+			</div>
+			<div class="form-group text-right">
+				<input type="button" data-toggle="collapse" class="btn btn-info" style="margin-right: 10px;" data-target="#searchDetail" value="상세 검색"/>
+			</div>					
 			<!-- list area -->
 			<div id="listDiv" role="main"></div>
 			<!-- // list area -->

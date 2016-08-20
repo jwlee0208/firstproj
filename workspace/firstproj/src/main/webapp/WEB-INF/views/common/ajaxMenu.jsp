@@ -25,14 +25,15 @@
 				onclick="javascript:goHome();"><span
 				style="color: white; font-size: 25px; font-weight: bold;">L</span>inked<span
 				style="color: white; font-size: 25px; font-weight: bold;">N</span>est
-				- <span style="color: white; font-size: 15px;">Finding Your Chances</span>&nbsp;</a>
+				- <span style="color: white; font-size: 15px;">Finding Chances</span>
+			</a>
 		</div>
 		<div class="collapse navbar-collapse"
 			id="nav-collapse-player-menu-list">
 			<ul class="nav navbar-nav">
 				<li><a href="javascript:;" onclick="javascript:goHome();">Home</a></li>
 				<li><a href="javascript:;" onclick="javascript:goProfileList(1, '01010100');">선수 정보</a></li>
-				<li><a href="javascript:;" onclick="javascript:goProfileList(2, '01010200');">코치 정보</a></li>
+<!-- 				<li><a href="javascript:;" onclick="javascript:goProfileList(2, '01010200');">코치 정보</a></li> -->
 				<li><a href="javascript:;" onclick="javascript:goProfileList(3, '01010300');">팀 정보</a></li>
 				<li><a href="/profile/leagueList">리그 정보</a></li>
 <!-- 				<li><a href="javascript:;" onclick="javascript:alert('ing..');;">컨설팅 요청</a></li> -->

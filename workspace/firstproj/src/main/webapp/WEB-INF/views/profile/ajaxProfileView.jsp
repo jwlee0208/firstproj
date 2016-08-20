@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag"%>
 <!DOCTYPE>
 <html>
 <head>
@@ -323,15 +324,15 @@
 		<h3>League Information</h3>
 		<hr/>
 	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Area</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.continent"/></label>
 		    <div class="col-sm-10">
-		    	<p class="form-control-static">${profileInfo.leagueInfoDto.area}</p>
+		    	<p class="form-control-static"><tag:message code="code.area.${profileInfo.leagueInfoDto.area}"/></p>
 			</div>
 		</div>		
 	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Country</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.countries"/></label>
 		    <div class="col-sm-10">
-		    	<p class="form-control-static">${profileInfo.leagueInfoDto.country}</p>
+		    	<p class="form-control-static"><tag:message code="code.country.${profileInfo.leagueInfoDto.country}"/></p>
 			</div>
 		</div>				
 	  	<div class="form-group">
@@ -341,9 +342,9 @@
 			</div>
 		</div>
 	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">League Type</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.league.level"/></label>
 		    <div class="col-sm-10">
-		    	<p class="form-control-static">${profileInfo.leagueInfoDto.leagueType}</p>
+		    	<p class="form-control-static"><tag:message code="code.leaguetype.${profileInfo.leagueInfoDto.leagueType}"/></p>
 			</div>
 		</div>
 	  	<div class="form-group">
@@ -394,7 +395,7 @@
 		<div class="form-group">
 	    	<label for="" class="col-sm-2 control-label">My Website</label>
 		    <div class="col-sm-10">
-		    	<p class="form-control-static"><a href="${profileInfo.profileContactInfoDto.websiteUrl}">${profileInfo.profileContactInfoDto.websiteUrl}</a></p>
+		    	<p class="form-control-static"><a href="http://${profileInfo.profileContactInfoDto.websiteUrl}" target="_blank">${profileInfo.profileContactInfoDto.websiteUrl}</a></p>
 			</div>
 		</div>
 </c:if>
