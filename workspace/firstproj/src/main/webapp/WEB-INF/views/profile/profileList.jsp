@@ -55,22 +55,22 @@
 			<c:if test="${profileType eq 3}">
 				<div id="areaList" style="margin-top:10px;">
 					<div class="row">
-						<div class="col-lg-1"><span class="label label-default">Continent</span></div>
+						<div class="col-lg-1"><span class="label label-default"><tag:message code="text.continent"/></span></div>
 						<div class="col-lg-11">
 								<label>		
-									<input type="radio" id="area1" name="area" value="as" class="attrElemRadio"/>&nbsp;Asia
+									<input type="radio" id="area1" name="area" value="as" class="attrElemRadio"/>&nbsp;<tag:message code="code.area.as"/>
 								</label>
 								<label>		
-									<input type="radio" id="area2" name="area" value="na" class="attrElemRadio"/>&nbsp;North America
+									<input type="radio" id="area2" name="area" value="na" class="attrElemRadio"/>&nbsp;<tag:message code="code.area.na"/>
 								</label>
 								<label>		
-									<input type="radio" id="area3" name="area" value="sa" class="attrElemRadio"/>&nbsp;South America
+									<input type="radio" id="area3" name="area" value="sa" class="attrElemRadio"/>&nbsp;<tag:message code="code.area.sa"/>
 								</label>
 								<label>		
-									<input type="radio" id="area4" name="area" value="eu" class="attrElemRadio"/>&nbsp;Europe
+									<input type="radio" id="area4" name="area" value="eu" class="attrElemRadio"/>&nbsp;<tag:message code="code.area.eu"/>
 								</label>
 								<label>		
-									<input type="radio" id="area5" name="area" value="af" class="attrElemRadio"/>&nbsp;Africa
+									<input type="radio" id="area5" name="area" value="af" class="attrElemRadio"/>&nbsp;<tag:message code="code.area.af"/>
 								</label>
 						</div>
 					</div>
@@ -79,22 +79,22 @@
 			</c:if>	
 				<div id="countryList">
 					<div class="row">
-						<div class="col-lg-1"><span class="label label-default">Contries</span></div>
+						<div class="col-lg-1"><span class="label label-default"><tag:message code="text.countries"/></span></div>
 						<div class="col-lg-11">
 								<label>		
-									<input type="radio" id="country1" name="country" value="ko" class="attrElemRadio"/>&nbsp;Korea
+									<input type="radio" id="country1" name="country" value="KR" class="attrElemRadio"/>&nbsp;<tag:message code="code.country.KR"/>
 								</label>
 								<label>		
-									<input type="radio" id="country2" name="country" value="jp" class="attrElemRadio"/>&nbsp;Japan
+									<input type="radio" id="country2" name="country" value="JP" class="attrElemRadio"/>&nbsp;<tag:message code="code.country.JP"/>
 								</label>
 								<label>		
-									<input type="radio" id="country3" name="country" value="au" class="attrElemRadio"/>&nbsp;Austria
+									<input type="radio" id="country3" name="country" value="AU" class="attrElemRadio"/>&nbsp;<tag:message code="code.country.AU"/>
 								</label>
 								<label>		
-									<input type="radio" id="country4" name="country" value="ge" class="attrElemRadio"/>&nbsp;Germany
+									<input type="radio" id="country4" name="country" value="DE" class="attrElemRadio"/>&nbsp;<tag:message code="code.country.DE"/>
 								</label>
 								<label>		
-									<input type="radio" id="country5" name="country" value="us" class="attrElemRadio"/>&nbsp;USA
+									<input type="radio" id="country5" name="country" value="US" class="attrElemRadio"/>&nbsp;<tag:message code="code.country.US"/>
 								</label>
 						</div>
 					</div>
@@ -116,15 +116,16 @@
 			<c:set var="profileAttrElemList" 		value="${profileAttrElementInfo.profileAttrElementList}"/>
 			<c:set var="profileAttrElemListLength"  value="${profileAttrElemList.size()}"/>
 			<div class="row">
-				<div class="col-lg-1"><span class="label label-default">${profileAttrElementInfo.profileAttrName}</span></div>
+				<div class="col-lg-1"><span class="label label-default"><tag:message code="text.${profileAttrElementInfo.profileAttrName}"/></span></div>
 				<div class="col-lg-11">
 				<c:if test="${profileAttrElemListLength > 0}">
 						<input type="hidden" id="profileAttrList[${index.count-1}].profileAttrId${profileAttrId}" name="profileAttrList[${index.count-1}].profileAttrId" value="${profileAttrId}" />
 				
 					<c:forEach var="profileAttrElemInfo" items="${profileAttrElemList}" varStatus="childIndex">
 						
-							<label><input type="checkbox" id="profileAttrList[${index.count-1}].profileAttrElementList[${childIndex.count-1}].profileAttrElementId${ProfileAttrElemInfo.profileAttrElementId}" name="profileAttrList[${index.count-1}].profileAttrElementList[${childIndex.count-1}].profileAttrElementId" value="${profileAttrElemInfo.profileAttrElementId}" class="attrElemRadio"/>&nbsp;${profileAttrElemInfo.profileAttrElementName}</label>
-						
+							<label><input type="checkbox" id="profileAttrList[${index.count-1}].profileAttrElementList[${childIndex.count-1}].profileAttrElementId${ProfileAttrElemInfo.profileAttrElementId}" name="profileAttrList[${index.count-1}].profileAttrElementList[${childIndex.count-1}].profileAttrElementId" value="${profileAttrElemInfo.profileAttrElementId}" class="attrElemRadio"/>&nbsp;
+							<tag:message code="attr.${profileAttrElementInfo.profileAttrName}.${profileAttrElemInfo.profileAttrElementName}"/>
+							</label>
 					</c:forEach>
 				</c:if>	
 				</div>

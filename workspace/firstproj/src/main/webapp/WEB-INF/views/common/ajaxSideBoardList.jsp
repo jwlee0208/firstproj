@@ -13,7 +13,7 @@
 					<div class="panel-body">
 						
 						<p style="text-align:center;">
-							<img src="/img/default_img.jpg" alt="..." class="img-thumbnail" data-src="holder.js/300x200" style="align:center;">
+							<img src="/img/default_img.jpg" alt="..." class="img-circle" data-src="holder.js/300x200" style="align:center;">
 						</p>
 						<p class="text-primary" style="text-align:center;"><a href="/share/${sideShareInfo.userId}/profile">Here is ${sideShareInfo.shareName}</a></p>
 						<p class="text-muted" 	style="text-align:center;">Joined Date : ${sideShareInfo.createDate}</p>		

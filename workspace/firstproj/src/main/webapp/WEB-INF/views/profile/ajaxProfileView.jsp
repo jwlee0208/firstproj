@@ -33,7 +33,7 @@
 		<input type="hidden" id="profileId" 	name="profileId" value="${profileInfo.profileId}"/>
 		<div style="display:none;"><h2>${profileInfo.title}&nbsp;<small>Profile</small></h2></div>
 		
-		<img src="http://jwlee0208.cdn3.cafe24.com/${profileInfo.profileImgPath}" />
+		<img src="http://jwlee0208.cdn3.cafe24.com/${profileInfo.profileImgPath}" class="img-responsive"/>
 		
 <c:choose>
 	<c:when test="${profileInfo.profileType eq 1}">
@@ -366,7 +366,7 @@
 		
 		<h3>Contact Information</h3>
 		<hr/>	
-<c:if test="${profileInfo.profileContactInfoDto.email ne null}">
+<c:if test="${profileInfo.profileContactInfoDto.email ne null && profileInfo.profileContactInfoDto.email ne ''}">
 		<div class="form-group">
 	    	<label for="" class="col-sm-2 control-label">Email</label>
 		    <div class="col-sm-10">
@@ -374,7 +374,7 @@
 			</div>
 		</div>
 </c:if>		
-<c:if test="${profileInfo.profileContactInfoDto.phoneNo ne null}">
+<c:if test="${profileInfo.profileContactInfoDto.phoneNo ne null && profileInfo.profileContactInfoDto.phoneNo ne ''}">
 		<div class="form-group">
 	    	<label for="" class="col-sm-2 control-label">Phone No.</label>
 		    <div class="col-sm-10">
@@ -382,7 +382,7 @@
 			</div>
 		</div>
 </c:if>
-<c:if test="${profileInfo.profileContactInfoDto.cellPhoneNo ne null}">
+<c:if test="${profileInfo.profileContactInfoDto.cellPhoneNo ne null && profileInfo.profileContactInfoDto.cellPhoneNo ne ''}">
 		<div class="form-group">
 	    	<label for="" class="col-sm-2 control-label">Cell Phone No.</label>
 		    <div class="col-sm-10">
@@ -390,40 +390,40 @@
 			</div>
 		</div>
 </c:if>
-<c:if test="${profileInfo.profileContactInfoDto.websiteUrl ne null}">
+<c:if test="${profileInfo.profileContactInfoDto.websiteUrl ne null && profileInfo.profileContactInfoDto.websiteUrl ne ''}">
 		<div class="form-group">
 	    	<label for="" class="col-sm-2 control-label">My Website</label>
 		    <div class="col-sm-10">
-		    	<p class="form-control-static"><a href="facebook.com/${profileInfo.profileContactInfoDto.websiteUrl}">${profileInfo.profileContactInfoDto.websiteUrl}</a></p>
+		    	<p class="form-control-static"><a href="${profileInfo.profileContactInfoDto.websiteUrl}">${profileInfo.profileContactInfoDto.websiteUrl}</a></p>
 			</div>
 		</div>
 </c:if>
 
-<c:if test="${profileInfo.profileContactInfoDto.facebookUrl ne null}">
+<c:if test="${profileInfo.profileContactInfoDto.facebookUrl ne null && profileInfo.profileContactInfoDto.facebookUrl ne ''}">
 		<div class="form-group">
 	    	<label for="" class="col-sm-2 control-label">Facebook</label>
 		    <div class="col-sm-10">
-		    	<p class="form-control-static"><a href="facebook.com/${profileInfo.profileContactInfoDto.facebookUrl}">${profileInfo.profileContactInfoDto.facebookUrl}</a></p>
+		    	<p class="form-control-static"><a href="https://www.facebook.com/${profileInfo.profileContactInfoDto.facebookUrl}">${profileInfo.profileContactInfoDto.facebookUrl}</a></p>
 			</div>
 		</div>
 </c:if>
-<c:if test="${profileInfo.profileContactInfoDto.twitterUrl ne null}">
+<c:if test="${profileInfo.profileContactInfoDto.twitterUrl ne null && profileInfo.profileContactInfoDto.twitterUrl ne ''}">
 		<div class="form-group">
 	    	<label for="" class="col-sm-2 control-label">Twitter</label>
 		    <div class="col-sm-10">
-		    	<p class="form-control-static"><a href="twitter.com/${profileInfo.profileContactInfoDto.twitterUrl}">${profileInfo.profileContactInfoDto.twitterUrl}</a></p>
+		    	<p class="form-control-static"><a href="https://twitter.com/${profileInfo.profileContactInfoDto.twitterUrl}">${profileInfo.profileContactInfoDto.twitterUrl}</a></p>
 			</div>
 		</div>
 </c:if>
-<c:if test="${profileInfo.profileContactInfoDto.instagramUrl ne null}">
+<c:if test="${profileInfo.profileContactInfoDto.instagramUrl ne null && profileInfo.profileContactInfoDto.instagramUrl ne ''}">
 		<div class="form-group">
 	    	<label for="" class="col-sm-2 control-label">Instagram</label>
 		    <div class="col-sm-10">
-		    	<p class="form-control-static"><a href="instagram.com/${profileInfo.profileContactInfoDto.instagramUrl}">${profileInfo.profileContactInfoDto.instagramUrl}</a></p>
+		    	<p class="form-control-static"><a href="https://instagram.com/${profileInfo.profileContactInfoDto.instagramUrl}">${profileInfo.profileContactInfoDto.instagramUrl}</a></p>
 			</div>
 		</div>
 </c:if>
-<c:if test="${profileInfo.profileContactInfoDto.address ne null}">
+<c:if test="${profileInfo.profileContactInfoDto.address ne null && profileInfo.profileContactInfoDto.address ne ''}">
 		<div class="form-group">
 	    	<label for="" class="col-sm-2 control-label">Address</label>
 		    <div class="col-sm-10">
