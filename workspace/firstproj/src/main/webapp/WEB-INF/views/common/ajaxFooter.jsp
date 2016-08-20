@@ -54,7 +54,7 @@ var _hmt = _hmt || [];
 	  </c:when>
 	  <c:otherwise>
 	  <p><a href="https://www.facebook.com/jwlee0524" target="_blank" class="btn btn-primary">Facebook</a>
-	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/aboutUs/5">contact</a>
+	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/aboutUs">contact</a>
 	  &nbsp;&nbsp;&nbsp;<a target="_blank" class="btn btn-primary" href="/share/main">Share</a></p>
 	  </c:otherwise>
 </c:choose>

@@ -41,27 +41,27 @@
 		<h3>Personal Information</h3>
 		<hr/>
 	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Name</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.player.name"/></label>
 		    <div class="col-sm-10">
 		    	<p class="form-control-static">${profileInfo.name}</p>
 			</div>
 		</div>
 		  <div class="form-group">
-		    <label for="" class="col-sm-2 control-label">Height / Weight</label>
+		    <label for="" class="col-sm-2 control-label"><tag:message code="text.height"/> / <tag:message code="text.weight"/></label>
 		    <div class="col-sm-10">
 		      <p class="form-control-static">${profileInfo.profilePlayerDto.height} / ${profileInfo.profilePlayerDto.weight}</p>
 		    </div>
 		  </div>
 
 		  <div class="form-group">
-		    <label for="" class="col-sm-2 control-label">Date Of Birth</label>
+		    <label for="" class="col-sm-2 control-label"><tag:message code="text.dateofbirth"/></label>
 		    <div class="col-sm-10">
 		      <p class="form-control-static">${profileInfo.profilePlayerDto.birthDate}</p>
 		    </div>
 		  </div>
 
 		  <div class="form-group">
-		    <label for="" class="col-sm-2 control-label">Birth Place</label>
+		    <label for="" class="col-sm-2 control-label"><tag:message code="text.birthplace"/></label>
 		    <div class="col-sm-10">
 		      <p class="form-control-static">${profileInfo.profilePlayerDto.birthPlace}</p>
 		    </div>
@@ -72,11 +72,11 @@
 		<c:if test="${!empty profileAttrList}">
 			<c:forEach var="profileAttrInfo" items="${profileAttrList}">
 		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">${profileAttrInfo.profileAttrName}</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.${profileAttrInfo.profileAttrName}"/></label>
 	    	<c:if test="${!empty profileAttrInfo.profileAttrElementMapList}">
 		    <div class="col-sm-10">
 	    		<c:forEach var="profileAttrElemInfo" items="${profileAttrInfo.profileAttrElementMapList}">
-	    		<p class="form-control-static">${profileAttrElemInfo.profileAttrElementMapName}</p>
+	    		<p class="form-control-static"><tag:message code="attr.${profileAttrInfo.profileAttrName}.${profileAttrElemInfo.profileAttrElementMapName}"/></p>
 	    		</c:forEach>
 	    	</div>	
 	    	</c:if>
@@ -86,7 +86,7 @@
 			
 		</c:if>
 
-		<h3>Career</h3>
+		<h3><tag:message code="text.career"/></h3>
 		<hr/>
 		<c:set var="profileCareerList" value="${profileInfo.profileCareerList}"/>
 		<c:if test="${!empty profileCareerList}">
@@ -132,7 +132,7 @@
 		<c:set var="profileStatFielderList" value="${profileInfo.profileStatFielderList}"/>
 				
 		<c:if test="${!empty profileStatPitcherList}">
-		<h3><small>Pitching Stat</small></h3>
+		<h3><small><tag:message code="text.pitching.stat"/></small></h3>
 				
 		<table class="table">
 			<thead class="table-inverse">
@@ -191,7 +191,7 @@
 				
 		</c:if>
 		<c:if test="${!empty profileStatHitterList}">
-		<h3><small>Hitting Stat</small></h3>		
+		<h3><small><tag:message code="text.hitting.stat"/></small></h3>		
 		<table class="table">
 			<thead class="table-inverse">
 				<tr>
@@ -244,7 +244,7 @@
 		</table>	
 		</c:if>
 		<c:if test="${!empty profileStatFielderList}">
-		<h3><small>Fielding Stat</small></h3>
+		<h3><small><tag:message code="text.fielding.stat"/></small></h3>
 		<table class="table">
 			<thead class="table-inverse">
 				<tr>
@@ -304,19 +304,19 @@
 		<h3>Team Information</h3>
 		<hr/>
 	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Name</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.team.name"/></label>
 		    <div class="col-sm-10">
 		    	<p class="form-control-static">${profileInfo.name}</p>
 			</div>
 		</div>
 	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Franchise</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.team.franchise"/></label>
 		    <div class="col-sm-10">
 		    	<p class="form-control-static">${profileInfo.profileTeamDto.city}</p>
 			</div>
 		</div>	
 	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Established Date</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.team.eastablish.date"/></label>
 		    <div class="col-sm-10">
 		    	<p class="form-control-static">${profileInfo.profileTeamDto.establishedDate}</p>
 			</div>
@@ -336,7 +336,7 @@
 			</div>
 		</div>				
 	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Name</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.league.name"/></label>
 		    <div class="col-sm-10">
 		    	<p class="form-control-static">${profileInfo.leagueInfoDto.leagueName}</p>
 			</div>
@@ -348,7 +348,7 @@
 			</div>
 		</div>
 	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">League Division</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.league.division"/></label>
 		    <div class="col-sm-10">
 		    	<p class="form-control-static">${profileInfo.leagueInfoDto.leagueDivision}</p>
 			</div>
@@ -369,7 +369,7 @@
 		<hr/>	
 <c:if test="${profileInfo.profileContactInfoDto.email ne null && profileInfo.profileContactInfoDto.email ne ''}">
 		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Email</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.email"/></label>
 		    <div class="col-sm-10">
 		    	<p class="form-control-static"><a href="mailto: ${profileInfo.profileContactInfoDto.email}">${profileInfo.profileContactInfoDto.email}</a></p>
 			</div>
@@ -393,7 +393,7 @@
 </c:if>
 <c:if test="${profileInfo.profileContactInfoDto.websiteUrl ne null && profileInfo.profileContactInfoDto.websiteUrl ne ''}">
 		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">My Website</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.website"/></label>
 		    <div class="col-sm-10">
 		    	<p class="form-control-static"><a href="http://${profileInfo.profileContactInfoDto.websiteUrl}" target="_blank">${profileInfo.profileContactInfoDto.websiteUrl}</a></p>
 			</div>
@@ -402,7 +402,7 @@
 
 <c:if test="${profileInfo.profileContactInfoDto.facebookUrl ne null && profileInfo.profileContactInfoDto.facebookUrl ne ''}">
 		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Facebook</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.facebook.id"/></label>
 		    <div class="col-sm-10">
 		    	<p class="form-control-static"><a href="https://www.facebook.com/${profileInfo.profileContactInfoDto.facebookUrl}">${profileInfo.profileContactInfoDto.facebookUrl}</a></p>
 			</div>
@@ -410,7 +410,7 @@
 </c:if>
 <c:if test="${profileInfo.profileContactInfoDto.twitterUrl ne null && profileInfo.profileContactInfoDto.twitterUrl ne ''}">
 		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Twitter</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.twitter.id"/></label>
 		    <div class="col-sm-10">
 		    	<p class="form-control-static"><a href="https://twitter.com/${profileInfo.profileContactInfoDto.twitterUrl}">${profileInfo.profileContactInfoDto.twitterUrl}</a></p>
 			</div>
@@ -418,7 +418,7 @@
 </c:if>
 <c:if test="${profileInfo.profileContactInfoDto.instagramUrl ne null && profileInfo.profileContactInfoDto.instagramUrl ne ''}">
 		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Instagram</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.instagram.id"/></label>
 		    <div class="col-sm-10">
 		    	<p class="form-control-static"><a href="https://instagram.com/${profileInfo.profileContactInfoDto.instagramUrl}">${profileInfo.profileContactInfoDto.instagramUrl}</a></p>
 			</div>
@@ -426,7 +426,7 @@
 </c:if>
 <c:if test="${profileInfo.profileContactInfoDto.address ne null && profileInfo.profileContactInfoDto.address ne ''}">
 		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Address</label>
+	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.address"/></label>
 		    <div class="col-sm-10">
 		    	<p class="form-control-static"><a>${profileInfo.profileContactInfoDto.address}</a></p>
 			</div>
@@ -439,7 +439,8 @@
 <script>
 $(document).ready(function() {
 	$("img").addClass("media-object");
-	$("img").attr("width", "95%");
+// 	$("img").attr("width", "95%");
+	$("img").attr("height", "300px");
 	$("img").off("error");
 	$("img").on("error", function(){
 		$(this).attr("src", '${pageContext.request.contextPath}/img/no_image.png');
