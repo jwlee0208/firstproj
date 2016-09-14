@@ -563,6 +563,18 @@
 				 now(),
 				 'jwlee0208')
 		</insert>
+
+		<update id="updateProfileInfo" parameterType="profile.profileDto">
+			UPDATE TB_PROFILE 
+				SET
+				 cat_id2 = #{catId2},
+				 title = #{title},
+				 name = #{name},
+				 profile_img_path = #{profileImgPath},
+				 introduce = #{introduce}
+			WHERE profile_id = #{profileId}	 
+		</update>
+
 		
 		<insert id="insertProfilePlayerInfo" parameterType="profile.profilePlayerDto" useGeneratedKeys="true" keyProperty="profilePlayerId">
 			INSERT INTO TB_PROFILE_PLAYER
@@ -590,6 +602,22 @@
 				 #{nationality},
 				 #{language})
 		</insert>		
+
+		<update id="updateProfilePlayerInfo" parameterType="profile.profilePlayerDto">
+			UPDATE TB_PROFILE_PLAYER
+				SET
+				 birth_date 	= #{birthDate},
+				 height 		= #{height},
+				 weight 		= #{weight},
+				 birth_place 	= #{birthPlace},
+				 education 		= #{education},
+				 hobbies 		= #{hobbies},
+				 favorite_food 	= #{favoriteFood},
+				 nationality 	= #{nationality},
+				 language 		= #{language}
+			WHERE
+				PROFILE_ID = #{profileId}	 
+		</update>
 		
 		<insert id="insertProfileContactInfo" parameterType="profile.profileContactInfoDto" useGeneratedKeys="true" keyProperty="contactInfoId">
 			INSERT INTO TB_CONTACT_INFO
@@ -620,6 +648,21 @@
 				'jwlee0208')
 
 		</insert>
+			
+			
+		<update id="updateProfileContactInfo" parameterType="profile.profileContactInfoDto">
+			UPDATE TB_CONTACT_INFO
+				SET
+				phone_no = #{phoneNo},
+				cell_phone_no = #{cellPhoneNo},
+				email = #{email},
+				website_url = #{websiteUrl},
+				facebook_url = #{facebookUrl},
+				twitter_url = #{twitterUrl},
+				instagram_url = #{instagramUrl},
+				address = ${address}
+			WHERE PROFILE_ID = #{profileId}	
+		</update>
 					
 		<insert id="insertProfileStatFielderInfo" parameterType="profile.profileStatFielderDto" useGeneratedKeys="true" keyProperty="statFielderId">
 			INSERT INTO TB_PROFILE_STAT_FIELDER
@@ -670,6 +713,10 @@
 				 'jwlee0208')			
 		</insert>	
 		
+		<delete id="deleteProfileStatFielderInfo" parameterType="profile.profileStatFielderDto">
+			DELETE FROM TB_PROFILE_STAT_FIELDER WHERE PROFILE_ID = #{profileId}
+		</delete>
+				
 		<insert id="insertProfileStatHitterInfo" parameterType="profile.profileStatHitterDto" useGeneratedKeys="true" keyProperty="statHitterId">
 			INSERT INTO TB_PROFILE_STAT_HITTER
 				(profile_id,
@@ -718,6 +765,11 @@
 				 now(),
 				 'jwlee0208');
 		</insert>	
+		
+		<delete id="deleteProfileStatHitterInfo" parameterType="profile.profileStatHitterDto">
+			DELETE FROM TB_PROFILE_STAT_HITTER WHERE PROFILE_ID = #{profileId}
+		</delete>
+		
 		
 		<insert id="insertProfileStatPitcherInfo" parameterType="profile.profileStatPitcherDto" useGeneratedKeys="true" keyProperty="statPitcherId">
 			INSERT INTO TB_PROFILE_STAT_PITCHER
@@ -773,6 +825,11 @@
 				 'jwlee0208')
 		</insert>
 		
+		<delete id="deleteProfileStatPitcherInfo" parameterType="profile.profileStatPitcherDto">
+			DELETE FROM TB_PROFILE_STAT_PITCHER WHERE PROFILE_ID = #{profileId}
+		</delete>
+		
+		
 		<insert id="insertProfileStreamInfo" parameterType="profile.profileStreamDto" useGeneratedKeys="true" keyProperty="streamId">		
 			INSERT INTO TB_PROFILE_STREAM
 				(profile_id,
@@ -783,6 +840,11 @@
 				 #{streamTitle},
 				 #{streamUrl})
 		</insert>
+		
+		<delete id="deleteProfileStreamInfo" parameterType="profile.profileStreamDto">
+			DELETE FROM TB_PROFILE_STREAM WHERE PROFILE_ID = #{profileId}
+		</delete>		
+		
 		
 		<insert id="insertProfileAttrElemMapInfo" parameterType="profile.profileAttrElementMapDto" useGeneratedKeys="true" keyProperty="profileAttrElementMapId">
 			INSERT INTO TB_PROFILE_ATTR_ELEMENT_MAP
@@ -803,6 +865,10 @@
 				 'jwlee0208')
 		</insert>
 		
+		<delete id="deleteProfileAttrElemMapInfo" parameterType="profile.profileAttrElementMapDto">
+			DELETE FROM TB_PROFILE_ATTR_ELEMENT_MAP WHERE PROFILE_ID = #{profileId}
+		</delete>
+		
 		<insert id="insertProfileCareerInfo" parameterType="profile.profileCareerDto" useGeneratedKeys="true" keyProperty="careerId">
 			INSERT INTO TB_PROFILE_CAREER
 				(
@@ -811,7 +877,7 @@
 				 career_description,
 				 start_date,
 				 end_date,
-				 career_status,
+<!-- 				 career_status, -->
 				 career_seq,
 				 create_date,
 				 create_user_id)
@@ -822,12 +888,17 @@
 				#{careerDescription},
 				#{startDate},
 				#{endDate},
-				#{careerStatus},
+<!-- 				#{careerStatus}, -->
 				#{careerSeq},
 				now(),
 				'jwlee0208');
 		
-		</insert>	
+		</insert>
+		
+		<delete id="deleteProfileCareerInfo" parameterType="profile.profileCareerDto">
+			DELETE FROM TB_PROFILE_CAREER WHERE PROFILE_ID = #{profileId}
+		</delete>
+			
 		
 		<insert id="insertProfileTeamInfo" parameterType="profile.profileTeamDto" useGeneratedKeys="true" keyProperty="profileTeamId">
 			INSERT INTO TB_PROFILE_TEAM
@@ -847,6 +918,11 @@
 				now(),
 				'jwlee0208')
 		</insert>
+		
+		<update id="updateProfileTeamInfo" parameterType="profile.profileTeamDto">
+		
+		</update>
+		
 		
 		<insert id="insertLeagueInfo" parameterType="profile.leagueInfoDto"  useGeneratedKeys="true" keyProperty="leagueId">
 			INSERT INTO `TB_LEAGUE_INFO`

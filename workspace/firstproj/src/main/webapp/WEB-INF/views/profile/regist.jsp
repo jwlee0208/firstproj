@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="container">
-	<h1 id="btn-groups" class="page-header">Registration</h1>
+	<h1 id="btn-groups" class="page-header">Registration&nbsp;&nbsp;<small>Profile</small></h1>
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form"  enctype="multipart/form-data">	
 		<input type="hidden" id="profileType" name="profileType" value="${profileType}"/>
 		<input type="hidden" id="categoryId" name="categoryId" value="${catagoryId}"/>
@@ -32,7 +32,7 @@
 		</div>
 		<br/>
 		<div class="input-group">
-			<span class="input-group-addon">Position</span>
+			<span class="input-group-addon">Main Position</span>
 			<input type="hidden" id="catId1" name="catId1" value="01010100"/>
 			<select id="catId2" name="catId2" class="form-control">
 				<option value="">::: select your main position :::</option>
@@ -129,9 +129,9 @@
 	</c:forEach>			
 </c:if>
 		<br/>
-		<h3>Career</h3>
+		<h3>Career&nbsp;&nbsp;<input type="button" class="btn btn-default addCareerBtn" value="+"/></h3>
 		<hr/>
-			<table class="table">
+			<table class="table tableCareer">
 				<thead class="thead-inverse">
 					<tr>
 						<th>Title</th>
@@ -143,11 +143,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>		
+					<tr id="career_tr_0" class="career_tr">		
 						<th class="row"><input type="text" class="form-control" id="careerTitle" name="profileCareerList[0].careerTitle"/></th>
 						<td><textarea class="form-control" id="careerTitle" name="profileCareerList[0].careerDescription" row="5" col="20"></textarea></td>
-						<td><input type="month" class="form-control" id="careerTitle" name="profileCareerList[0].startDate"/></td>
-						<td><input type="month" class="form-control" id="careerTitle" name="profileCareerList[0].endDate"/></td>
+						<td><input type="month" class="form-control" id="careerStartDate" name="profileCareerList[0].startDate"/></td>
+						<td><input type="month" class="form-control" id="careerEndDate" name="profileCareerList[0].endDate"/></td>
 						<td>
 							<select class="form-control" id="careerTitle" name="profileCareerList[0].careerStatus">
 								<option value="-1">::: status :::</option>
@@ -159,9 +159,9 @@
 					</tr>
 				</tbody>
 			</table>	
-		<h3>Play Streamming</h3>
+		<h3>Play Streamming&nbsp;&nbsp;<input type="button" class="btn btn-default addStreamBtn" value="+"/></h3>
 		<hr/>
-		<div class="row">
+		<div class="row stream_div">
   			<div class="col-lg-6">
 			    <div class="input-group">
 			    	<span class="input-group-addon">Title</span>
@@ -581,6 +581,64 @@
 		$("body").on("click", ".removeFielderBtn", function(){
 			$(this).parent().parent().get(0).remove();
 		});
+		
+		// career row adding
+		$(".addStreamBtn").click(function(){
+			var rowCount = $(".stream_div").size();
+			if(rowCount >= 10){
+				alert('you can add your stats until 10 rows.');
+				return false;
+			}else{
+				
+				var addStreamHtml = "<div class=\"row stream_div\">";
+				addStreamHtml += "<div class=\"col-lg-6\">";
+				addStreamHtml += "<div class=\"input-group\">";
+				addStreamHtml += "	<span class=\"input-group-addon\">Title</span>";
+				addStreamHtml += "	<input type=\"text\" class=\"form-control\" id=\"streamTitle_"+ rowCount +" name=\"profileStreamList["+ rowCount +"].streamTitle\"/>";  
+				addStreamHtml += "	</div>"; 
+				addStreamHtml += "	</div>";
+				addStreamHtml += "	<div class=\"col-lg-6\">";
+				addStreamHtml += "	<div class=\"input-group\">";
+				addStreamHtml += "		<span class=\"input-group-addon\">URL</span>";
+				addStreamHtml += "		<input type=\"text\" class=\"form-control\" id=\"streamUrl_" + rowCount + "\" name=\"profileStreamList[" + rowCount + "].streamUrl\"/>";
+				addStreamHtml += "	</div>";
+				addStreamHtml += "	</div>";
+				addStreamHtml += "	</div>";
+			
+				$(".stream_div > div:last").append(addStreamHtml);				
+			}
+			
+		});			
+		
+		// career row adding
+		$(".addCareerBtn").click(function(){
+			var rowCount = $(".career_tr").size();
+			if(rowCount >= 10){
+				alert('you can add your stats until 10 rows.');
+				return false;
+			}else{
+				
+				var addCareerHtml = "<tr id=\"career_tr_"+ rowCount +"\" class=\"career_tr\">";		
+				addCareerHtml += "<th class=\"row\"><input type=\"text\" class=\"form-control\" id=\"careerTitle\" name=\"profileCareerList[" + rowCount + "].careerTitle\"/></th>";
+				addCareerHtml += "<td><textarea class=\"form-control\" id=\"careerTitle\" name=\"profileCareerList[" + rowCount + "].careerDescription\" row=\"5\" col=\"20\"></textarea></td>";
+				addCareerHtml += "<td><input type=\"month\" class=\"form-control\" id=\"careerStartDate\" name=\"profileCareerList[" + rowCount + "].startDate\"/></td>";
+				addCareerHtml += "<td><input type=\"month\" class=\"form-control\" id=\"careerEndDate\" name=\"profileCareerList[" + rowCount + "].endDate\"/></td>";
+				addCareerHtml += "<td>";
+				addCareerHtml += "	<select class=\"form-control\" id=\"careerTitle\" name=\"profileCareerList[" + rowCount + "].careerStatus\">";
+				addCareerHtml += "		<option value=\"-1\">::: status :::</option>";
+				addCareerHtml += "		<option value=\"0\">not playing</option>";
+				addCareerHtml += "		<option value=\"1\">playing</option>";
+				addCareerHtml += "	</select>";
+				addCareerHtml += "</td>";
+				addCareerHtml += "<td><input type=\"number\" class=\"form-control\" id=\"careerSeq\" name=\"profileCareerList[0].careerSeq\" min=\"0\" max=\"100\"/></td>";
+				addCareerHtml += "</tr>";				
+			
+				$(".tableCareer > tbody:last").append(addCareerHtml);				
+			}
+			
+		});	
+		
+		
 		
 		// pitcher stat row adding
 		$(".addPitcherBtn").click(function(){

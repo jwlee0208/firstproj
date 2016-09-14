@@ -8,6 +8,7 @@ public class ProfilePlayerDto extends ProfileDto {
 	private int 	profilePlayerId;
 	private String 	birthDate;
 	private float 	height;
+	private float	wgt;
 	private float 	weight;
 	private String 	birthPlace;
 	private String 	education;
@@ -33,6 +34,13 @@ public class ProfilePlayerDto extends ProfileDto {
 	}
 	public void setHeight(float height) {
 		this.height = height;
+	}
+
+	public float getWgt() {
+		return wgt;
+	}
+	public void setWgt(float wgt) {
+		this.wgt = wgt;
 	}
 	public float getWeight() {
 		return weight;
@@ -79,9 +87,9 @@ public class ProfilePlayerDto extends ProfileDto {
 	@Override
 	public String toString() {
 		return "ProfilePlayerDto [profilePlayerId=" + profilePlayerId + ", birthDate=" + birthDate + ", height="
-				+ height + ", weight=" + weight + ", birthPlace=" + birthPlace + ", education=" + education
-				+ ", hobbies=" + hobbies + ", favoriteFood=" + favoriteFood + ", nationality=" + nationality
-				+ ", language=" + language + "]";
+				+ height + ", wgt=" + wgt + ", weight=" + weight + ", birthPlace=" + birthPlace + ", education="
+				+ education + ", hobbies=" + hobbies + ", favoriteFood=" + favoriteFood + ", nationality="
+				+ nationality + ", language=" + language + "]";
 	}
 	
 }

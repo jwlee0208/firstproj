@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag"%>
 <!DOCTYPE>
@@ -70,6 +69,36 @@
 		      <p class="form-control-static">${profileInfo.profilePlayerDto.birthPlace}</p>
 		    </div>
 		  </div>	
+			<div class="form-group">
+			    <label for="" class="col-sm-5 control-label"><tag:message code="text.education"/></label>
+			    <div class="col-sm-7">
+			    	<p class="form-control-static">${profileInfo.profilePlayerDto.education}</p>
+				</div>
+			</div>	
+			<div class="form-groupp">
+			    <label for="" class="col-sm-5 control-label"><tag:message code="text.hobbies"/></label>
+			    <div class="col-sm-7">
+			    	<p class="form-control-static">${profileInfo.profilePlayerDto.hobbies}</p>
+				</div>
+			</div>					
+			<div class="form-group">
+			    <label for="" class="col-sm-5 control-label"><tag:message code="text.favoritefood"/></label>
+			    <div class="col-sm-7">
+				    <p class="form-control-static">${profileInfo.profilePlayerDto.favoriteFood}</p>	    
+			    </div>
+			</div>	
+			<div class="form-group">
+			    <label for="" class="col-sm-5 control-label"><tag:message code="text.nationality"/></label>
+				<div class="col-sm-7">
+				    <p class="form-control-static">${profileInfo.profilePlayerDto.nationality}</p>
+				</div>    
+			</div>	
+			<div class="form-group">
+			    <label for="" class="col-sm-5 control-label"><tag:message code="text.language"/></label>
+			    <div class="col-sm-7">
+				    <p class="form-control-static">${profileInfo.profilePlayerDto.language}</p>
+				</div>
+			</div>		
 
 		</div>
 		

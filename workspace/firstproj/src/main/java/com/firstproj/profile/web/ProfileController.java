@@ -39,7 +39,14 @@ public class ProfileController {
 
 	@Resource(name="profileService")
 	private ProfileServiceImpl profileService;
-	
+	/**
+	 * @brief Profile View
+	 * 
+	 * @param model
+	 * @param profileType
+	 * @param profileId
+	 * @return
+	 */
 	@RequestMapping(value="/view/{profileType}/{profileId}")
 	public String getProfileView(Model model, @PathVariable String profileType, @PathVariable int profileId){
 		
@@ -53,7 +60,34 @@ public class ProfileController {
 		
 		return "/profile/ajaxProfileView";
 	}
+
+	@RequestMapping(value="/modify/{profileType}/{profileId}")
+	public String getProfileUpdateInfo(Model model, @PathVariable String profileType, @PathVariable int profileId){
+		
+		ProfileDto profileDto = new ProfileDto();
+		profileDto.setProfileId(profileId);
+		profileDto.setProfileType(profileType);
+		logger.debug("[ProfileController][getProfileUpdateInfo] profileDto : " + profileDto.toString());
+		ProfileDto selectedProfileInfo = this.profileService.getProfileInfo(profileDto);
+		logger.debug("[ProfileController][getProfileUpdateInfo] selectedProfileInfo : " + selectedProfileInfo.toString());
+		model.addAttribute("profileInfo", selectedProfileInfo);
+		
+		profileDto.setCatId1(selectedProfileInfo.getCatId1());
+		List<ProfileAttrDto> attrElementList = this.profileService.getProfileAttrElementList(profileDto);
+		
+		model.addAttribute("attrElementList", attrElementList);
+		
+		return "/profile/modify";
+	}
 	
+	/**
+	 * @brief Profile List
+	 * @param model
+	 * @param session
+	 * @param profileType
+	 * @param catId
+	 * @return
+	 */
 	@RequestMapping(value="/list/{profileType}/{catId}")
 	public String getProfileList(Model model, HttpSession session, @PathVariable int profileType, @PathVariable String catId){
 		
@@ -75,7 +109,14 @@ public class ProfileController {
 		model.addAttribute("attrElementList", attrElementList);
 		return "/profile/profileList";
 	}
-	
+	/**
+	 * @brief ajaxProfileList
+	 * @param request
+	 * @param model
+	 * @param searchProfileDto
+	 * @param session
+	 * @return
+	 */
     @RequestMapping("/ajaxProfileList")
     public String getAjaxProfileList(HttpServletRequest request, Model model, SearchProfileDto searchProfileDto, HttpSession session){
     	logger.info("[ ProfileController.getAjaxProfileList() ][ Param ] searchProfileDto : " + searchProfileDto.toString());
@@ -108,9 +149,8 @@ public class ProfileController {
         
         return "/profile/ajaxProfileList";
     }
-    
     /**
-     * @brief profile registration page
+     * @brief Profile Registration Page
      * @param model
      * @param session
      * @param profileType
@@ -178,6 +218,63 @@ public class ProfileController {
     	
     	return result;
     }
+    
+    @RequestMapping(value="/modifyAction", method=RequestMethod.POST)
+    @ResponseBody
+    public JSONObject  modifyProfile(ProfileDto profileDto, HttpSession session) throws Exception{
+    	JSONObject 		result 				= new  JSONObject(); 
+    	MultipartFile 	profileImg 			= profileDto.getProfileImg();
+    	
+    	String 			imageUploadResult 	= "";
+    	String 			filePath			= "";
+    	
+    	if(null != profileImg){
+    		imageUploadResult = fileUpload.uploadFile(profileImg);	
+    	}
+    	
+    	if(!imageUploadResult.equals("") && !imageUploadResult.equals("fileSizeError") && !imageUploadResult.equals("fileExtensionError")){
+    		filePath = imageUploadResult;
+    		profileDto.setProfileImgPath(filePath);
+    	}
+    	
+    	profileDto.setTitle(profileDto.getName());
+    	
+    	System.out.println("profileDto is " + profileDto.toString());
+    	logger.debug("profileDto is " + profileDto.toString());
+    	
+    	// validation 
+    	
+    	// service call : insert tables
+    	int addCnt = this.profileService.updateProfileInfos(profileDto);
+    	
+    	result.put("result"	, (addCnt > 0) ? "success" : "error");
+    	result.put("message", (addCnt > 0) ? "success!!!" : "error!!!");
+    	
+    	return result;
+    }
+
+    @RequestMapping(value="/modifyAction.json", method=RequestMethod.POST)
+    @ResponseBody
+    public JSONObject  modifyProfileJSON(ProfileDto profileDto, HttpSession session) throws Exception{
+    	JSONObject 		result 				= new  JSONObject(); 
+    	
+    	profileDto.setTitle(profileDto.getName());
+    	
+    	System.out.println("profileDto.weight is " + profileDto.getProfilePlayerDto().getWeight());
+
+    	System.out.println("profileDto is " + profileDto.toString());
+    	logger.debug("profileDto is " + profileDto.toString());
+    	
+    	// validation 
+    	
+    	// service call : insert tables
+    	int addCnt = this.profileService.updateProfileInfos(profileDto);
+    	
+    	result.put("result"	, (addCnt > 0) ? "success" : "error");
+    	result.put("message", (addCnt > 0) ? "success!!!" : "error!!!");
+    	
+    	return result;
+    }    
     
     @RequestMapping(value="/registLeague", method=RequestMethod.GET)
     public String registLeague(Model model, HttpSession session){

@@ -52,7 +52,7 @@
 				<input type="hidden" 	id="searchText" 		name="searchText" />
 				<input type="text" 		id="searchTextStr" 		name="searchTextStr" class="form-control ui-autocomplete-input" placeholder="<tag:message code='text.request.insert.search.keyword'/>"/>
 			
-			<div class="collapse"  id="searchDetail">
+			<div class="collapse"  id="searchDetail" style="padding-top:10px;">
 			<!-- (Additional) Team Search Condition : Continent -->
 			<c:if test="${profileType eq 3}">
 				<div id="areaList" style="margin-top:10px;">

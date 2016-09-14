@@ -76,6 +76,14 @@ public class ProfileDao extends SqlSessionDaoSupport{
     	}
     	return profileId;
 	}
+	/**
+	 * @brief update profileInfo
+	 * @param param
+	 * @return
+	 */
+	public int updateProfileInfo(ProfileDto param) {
+		return getSqlSession().update("sql.profile.updateProfileInfo", param);
+	}
 
 	/**
 	 * @brief insert profilePlayerInfo 
@@ -85,11 +93,19 @@ public class ProfileDao extends SqlSessionDaoSupport{
 	public int insertProfilePlayerInfo(ProfilePlayerDto param){
 		return getSqlSession().insert("sql.profile.insertProfilePlayerInfo", param);
 	}
+
+	public int updateProfilePlayerInfo(ProfilePlayerDto param){
+		return getSqlSession().update("sql.profile.updateProfilePlayerInfo", param);
+	}	
 	
 	public int insertProfileContactInfo(ProfileContactInfoDto param){
 		return getSqlSession().insert("sql.profile.insertProfileContactInfo", param);
 	}
-	
+
+	public int updateProfileContactInfo(ProfileContactInfoDto param){
+		return getSqlSession().update("sql.profile.insertProfileContactInfo", param);
+	}
+
 	public int insertProfileStatFielderInfo(ProfileStatFielderDto param){
 		return getSqlSession().insert("sql.profile.insertProfileStatFielderInfo", param);
 	}
@@ -113,6 +129,31 @@ public class ProfileDao extends SqlSessionDaoSupport{
 	public int insertProfileCareerInfo(ProfileCareerDto param){
 		return getSqlSession().insert("sql.profile.insertProfileCareerInfo", param);
 	}
+
+	public int deleteProfileStatFielderInfo(int param){
+		return getSqlSession().delete("sql.profile.deleteProfileStatFielderInfo", param);
+	}
+	
+	public int deleteProfileStatHitterInfo(int param){
+		return getSqlSession().delete("sql.profile.deleteProfileStatHitterInfo", param);
+	}
+	
+	public int deleteProfileStatPitcherInfo(int param){
+		return getSqlSession().delete("sql.profile.deleteProfileStatPitcherInfo", param);
+	}
+	
+	public int deleteProfileStreamInfo(int param){
+		return getSqlSession().delete("sql.profile.deleteProfileStreamInfo", param);
+	}
+	
+	public int deleteProfileAttrElemMapInfo(int param){
+		return getSqlSession().delete("sql.profile.deleteProfileAttrElemMapInfo", param);
+	}
+	
+	public int deleteProfileCareerInfo(int param){
+		return getSqlSession().delete("sql.profile.deleteProfileCareerInfo", param);
+	}
+	
 	
 	public int insertLeagueInfo(LeagueInfoDto param){
 		return getSqlSession().insert("sql.profile.insertLeagueInfo", param);
@@ -121,7 +162,11 @@ public class ProfileDao extends SqlSessionDaoSupport{
 	public int insertProfileTeamInfo(ProfileTeamDto param){
 		return getSqlSession().insert("sql.profile.insertProfileTeamInfo", param);
 	}
-	
+
+	public int updateProfileTeamInfo(ProfileTeamDto param){
+		return getSqlSession().insert("sql.profile.updateProfileTeamInfo", param);
+	}
+
 	public List<LeagueInfoDto> selectLeagueInfoList(){
 		return getSqlSession().selectList("sql.profile.selectLeagueInfoList");
 	}
