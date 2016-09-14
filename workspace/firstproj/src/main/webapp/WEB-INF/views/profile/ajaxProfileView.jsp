@@ -117,13 +117,28 @@
 	    		<p class="form-control-static"><tag:message code="attr.${profileAttrInfo.profileAttrName}.${profileAttrElemInfo.profileAttrElementMapName}"/></p>
 	    		</c:forEach>
 	    	</div>	
-	    	</c:if>
-		    	
+	    	</c:if>	
 		</div>
 			</c:forEach>	
 			
 		</c:if>
-
+		<div class="form-group">
+			<label for="" class="col-sm-2 control-label">Main <tag:message code="text.position"/></label>
+			<div class="col-sm-10">
+					<span class="btn btn-danger">
+					<c:if test="${profileInfo.catId2 eq '01010101'}"><tag:message code="attr.position.p"/></c:if>
+					<c:if test="${profileInfo.catId2 eq '01010102'}"><tag:message code="attr.position.cc"/></c:if>
+					<c:if test="${profileInfo.catId2 eq '01010103'}"><tag:message code="attr.position.1b"/></c:if>
+					<c:if test="${profileInfo.catId2 eq '01010104'}"><tag:message code="attr.position.2b"/></c:if>
+					<c:if test="${profileInfo.catId2 eq '01010105'}"><tag:message code="attr.position.3b"/></c:if>
+					<c:if test="${profileInfo.catId2 eq '01010106'}"><tag:message code="attr.position.ss"/></c:if>
+					<c:if test="${profileInfo.catId2 eq '01010107'}"><tag:message code="attr.position.lf"/></c:if>
+					<c:if test="${profileInfo.catId2 eq '01010108'}"><tag:message code="attr.position.cf"/></c:if>
+					<c:if test="${profileInfo.catId2 eq '01010109'}"><tag:message code="attr.position.rf"/></c:if>
+					<c:if test="${profileInfo.catId2 eq '01010110'}"><tag:message code="attr.position.dh"/></c:if>
+					</span>
+			</div>
+		</div>
 		<h3><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>&nbsp;&nbsp;<tag:message code="text.career"/></h3>
 		<hr/>
 		<c:set var="profileCareerList" value="${profileInfo.profileCareerList}"/>
@@ -198,7 +213,6 @@
 					<th>AVG</th>
 					<th>WHIP</th>
 					<th>K</th>
-					<th>ETC</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -224,7 +238,6 @@
 					<td><p class="form-control-static">${profileStatPitcherInfo.avg}</p></td>
 					<td><p class="form-control-static">${profileStatPitcherInfo.whip}</p></td>
 					<td><p class="form-control-static">${profileStatPitcherInfo.k}</p></td>
-					<td><p class="form-control-static">${profileStatPitcherInfo.etc}</p></td>
 				</tr>					
 			</c:forEach>
 			</tbody>
@@ -254,7 +267,6 @@
 					<th>OBP</th>
 					<th>SLG</th>
 					<th>OPS</th>
-					<th>ETC</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -278,7 +290,6 @@
 					<td><p class="form-control-static">${profileStatHitterInfo.obp}</p></td>
 					<td><p class="form-control-static">${profileStatHitterInfo.slg}</p></td>
 					<td><p class="form-control-static">${profileStatHitterInfo.ops}</p></td>
-					<td><p class="form-control-static">${profileStatHitterInfo.etc}</p></td>
 				</tr>	
 			</c:forEach>
 			</tbody>
@@ -307,7 +318,6 @@
 					<th>C_WP</th>
 					<th>FPCT</th>
 					<th>PRF</th>
-					<th>ETC</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -331,7 +341,6 @@
 	    			<td><p class="form-control-static">${profileStatFielderInfo.cWp}</p>
 	    			<td><p class="form-control-static">${profileStatFielderInfo.fpct}</p>
 	    			<td><p class="form-control-static">${profileStatFielderInfo.rf}</p>
-	    			<td><p class="form-control-static">${profileStatFielderInfo.etc}</p>
 				</tr>
 			</c:forEach>						
 			</tbody>					
