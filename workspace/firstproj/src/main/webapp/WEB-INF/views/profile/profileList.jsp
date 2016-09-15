@@ -139,7 +139,7 @@
 			</div>
 			</div>
 			<div class="form-group text-right">
-				<input type="button" data-toggle="collapse" class="btn btn-info" style="margin-right: 10px;" data-target="#searchDetail" value="상세 검색"/>
+				<input type="button" data-toggle="collapse" class="btn btn-info" style="margin-right: 10px;" data-target="#searchDetail" value="<tag:message code='text.filtersearch'/>"/>
 			</div>					
 			<!-- list area -->
 			<div id="listDiv" role="main"></div>

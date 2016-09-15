@@ -32,10 +32,10 @@
 			id="nav-collapse-player-menu-list">
 			<ul class="nav navbar-nav">
 				<li><a href="javascript:;" onclick="javascript:goHome();">Home</a></li>
-				<li><a href="javascript:;" onclick="javascript:goProfileList(1, '01010100');">선수 정보</a></li>
+				<li><a href="javascript:;" onclick="javascript:goProfileList(1, '01010100');"><tag:message code="text.playerlist"/></a></li>
 <!-- 				<li><a href="javascript:;" onclick="javascript:goProfileList(2, '01010200');">코치 정보</a></li> -->
-				<li><a href="javascript:;" onclick="javascript:goProfileList(3, '01010300');">팀 정보</a></li>
-				<li><a href="/profile/leagueList">리그 정보</a></li>
+				<li><a href="javascript:;" onclick="javascript:goProfileList(3, '01010300');"><tag:message code="text.teamlist"/></a></li>
+				<li><a href="/profile/leagueList"><tag:message code="text.leaguelist"/></a></li>
 <!-- 				<li><a href="javascript:;" onclick="javascript:alert('ing..');;">컨설팅 요청</a></li> -->
 <!-- 				<li><a href="javascript:;" onclick="javascript:alert('ing..');;">About Us</a></li> -->
 			</ul>
@@ -54,7 +54,7 @@
 			</c:if>			
 			<form class="navbar-form navbar-right" role="search">			
 				<c:if test="${null eq userInfo}">
-					<a onclick="javascript:goRegist(6);" class="btn btn-danger"><tag:message
+					<a onclick="javascript:goRegist(6);" class="btn btn-info"><tag:message
 							code="signup" /></a>
 					<a onclick="javascript:goLogin(7);" class="btn btn-default"><tag:message
 							code="signin" /></a>
