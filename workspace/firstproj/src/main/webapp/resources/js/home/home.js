@@ -5,7 +5,7 @@ function goProfileList(profileType, catId){
 
 function goList(boardId){	
 	var userId = $("#userId").val();
-	var url = "/share"; // "/board/article/list/" + boardId;
+	var url = "/share"; 
 	if(userId != null && userId != ''){
 		url += "/" + userId;
 	} 
@@ -27,11 +27,11 @@ function goInfo(){
 }
 
 function goRegist(boardId){
-	location.href = "/user/regist/" + boardId;
+	location.href = "/user/regist";
 }
 
 function goLogin(boardId){
-	location.href = "/login/" + boardId;
+	location.href = "/login";
 }
 
 function goTargetList(catId){
@@ -40,18 +40,6 @@ function goTargetList(catId){
 
 function logout(){
 	location.href = "/logout";
-}
-
-function goPortal(menuId, catId){
-	var baseUrl = "";
-	if(catId == 1){
-		baseUrl = "/player/playerPortal";
-	}else{
-		baseUrl = "/team/teamPortal";
-	}
-	
-	baseUrl += "/" + menuId;
-	location.href = baseUrl; 
 }
 
 function goClub(menuId){
@@ -105,9 +93,6 @@ function goTotSearch(){
 		url += "/" + userId;
 	}
 	url += "/list";
-//	else{
-//		url = "/board/article/list";
-//	}
 
 	var frm = $("#totSearchFrm");
 	frm.attr("action"	, url);

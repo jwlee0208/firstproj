@@ -32,10 +32,10 @@
 	<h2 id="btn-groups" class="page-header">Membership</h2>
 	<div class="row" style="padding-bottom:20px; margin-left:10px;">
 		<div class="col-md-4">
-			<a href="/user/regist/6">Sign up</a>
+			<a href="/user/regist">Sign up</a>
 		</div>
 		<div class="col-md-4">
-			<a href="/login/7">Sign in</a>
+			<a href="/login">Sign in</a>
 		</div>
 		<div class="col-md-4">
 			<a href="/user/forgotPassword">forgot password</a>

@@ -22,7 +22,6 @@ public class MenuInterceptor  extends HandlerInterceptorAdapter {
 //        System.out.println("inter remote port : " + request.getRemotePort() +", server port : " + request.getServerPort());
         
         String uri = request.getRequestURI(); 
-//        String url = request.getRequestURL().toString(); 
         Pattern p = Pattern.compile("[/+]");
         if(uri.indexOf("/board/article/main") > 0 || uri.indexOf("/share") > 0){
             

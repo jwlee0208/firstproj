@@ -72,31 +72,8 @@ public class UserController {
     @Inject
     private MessageSourceAccessor   messageSource;
 
-    @RequestMapping(value="/regist")
-    public String registUser(Model model, HttpServletRequest request) throws Exception{
-        return this.registUser(model, request, 0);
-    }
-    
-	@RequestMapping(value="/regist/{boardId}")
-	public String registUser(Model model, HttpServletRequest request, @PathVariable int boardId) throws Exception{
-	    /*
-        String        referer       = request.getHeader("Referer");
-        log.info("[ REFER ] : " + referer);           
-        
-        // Nation List 
-        CodeDto       nationCodeDto = new CodeDto();
-        nationCodeDto.setCodeType("01");
-        List<CodeDto> nationList    = this.commonService.selectCodeList(nationCodeDto);
-        
-        // Language List 
-        CodeDto       langCodeDto   = new CodeDto();
-        langCodeDto.setCodeType("02");
-        List<CodeDto> languageList  = this.commonService.selectCodeList(langCodeDto);
-        
-        model.addAttribute("prevPage"       , referer);
-	    model.addAttribute("nationList"     , nationList);
-	    model.addAttribute("languageList"   , languageList);
-	    */
+	@RequestMapping(value="/regist")
+	public String registUser(Model model, HttpServletRequest request) throws Exception{
 	    this.setRequiredInfos(model, request);
 		return "/user/regist";
 	}

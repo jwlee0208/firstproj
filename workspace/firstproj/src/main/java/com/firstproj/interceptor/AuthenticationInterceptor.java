@@ -14,13 +14,18 @@
 
 package com.firstproj.interceptor;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.firstproj.user.dto.UserDto;
 
@@ -34,24 +39,16 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter{
 		
 		String uri = request.getRequestURI();
 		log.info("[ AuthenticationInterceptor.perHandle() ] url : " + uri);
-		if(!uri.endsWith("login") && !uri.endsWith("logout.page") && !uri.endsWith("regist") && !uri.endsWith("registPlayer.page")){
-			UserDto userInfo = (UserDto) request.getSession().getAttribute("userInfo");
+		if(!uri.endsWith("login") && !uri.endsWith("logout.page") && !uri.endsWith("regist")){	
 			
-			if(null == userInfo){
-//				response.sendRedirect("/board/list.page");
-//				return false;
+			HttpSession session = request.getSession();
+			UserDto userInfo = (UserDto) session.getAttribute("userInfo");
+			
+			if (StringUtils.isEmpty(session.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME))) {
+				session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.ENGLISH);
+				System.out.println("a");
 			}else{
-// 			     log.info("[ AuthenticationInterceptor.perHandle() ] userInfo : " + userInfo.toString());
-//		         Locale language = LocaleUtils.toLocale(userInfo.getLanguage());
-//		         log.info("[ AuthenticationInterceptor.perHandle() ] locale : " + language.toString());
-//		         if(StringUtils.isEmpty(userInfo.getLanguage())){
-//		             language = Locale.ENGLISH;
-//		         }
-//		         
-//		         HttpSession session = request.getSession();
-//		         log.info("session is : " + (session == null));
-		         
-//		         request.getSession().setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, language);
+				System.out.println("b");
 			}
 		}
 		

@@ -160,7 +160,7 @@ public class ProfileServiceImpl implements ProfileService{
 			}
 		}
 		
-		return 0;
+		return 1;
 	}
 
 	public int updateProfileInfos(ProfileDto profileDto){

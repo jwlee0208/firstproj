@@ -97,7 +97,7 @@ function loginAction(){
 			<input type="button" class="btn btn-primary btn-lg btn-block" name="signinSubmit" value="<tag:message code="signin"/>">
 			
 			<div class="btn-group btn-group-justified" style="text-align: center; padding-top:20px;" role="group">
-				<div title="Sign up" class="btn btn-default"><a href="/user/regist/6" ><tag:message code="signup"/></a></div>
+				<div title="Sign up" class="btn btn-default"><a href="/user/regist" ><tag:message code="signup"/></a></div>
 				<div title="Go to home" class="btn btn-default"><a href="/share/main" ><tag:message code="common.home"/></a></div>
 				<div title="Forgot password" class="btn btn-default"><a href="/user/forgotPassword" ><tag:message code="common.forgotpassword"/></a></div>
 			</div>

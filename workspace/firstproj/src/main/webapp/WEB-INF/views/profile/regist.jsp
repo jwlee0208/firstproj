@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,13 +12,22 @@
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/common-editor.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/article/common.js"></script>
-</head>
+
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/profile/autocomplete.js"></script>
+
+	<style>
+		.fixed-height {
+			padding: 1px;
+			max-height: 200px;
+			overflow: auto;
+		}
+	</style></head>
 <body>
 <div class="container">
 	<h1 id="btn-groups" class="page-header">Registration&nbsp;&nbsp;<small>Profile</small></h1>
 	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form"  enctype="multipart/form-data">	
 		<input type="hidden" id="profileType" name="profileType" value="${profileType}"/>
-		<input type="hidden" id="categoryId" name="categoryId" value="${catagoryId}"/>
+		<input type="hidden" id="categoryId" name="categoryId" value="${categoryId}"/>
  	<c:choose>
 		<c:when test="${profileType eq 1}">
 		<h3>Personal Information</h3>
@@ -59,7 +70,7 @@
 		    <div class="col-lg-6">
 		    	<div class="input-group">
 		    		<span class="input-group-addon">Weight (kg)</span>
-		    		<input type="text" class="form-control" id="weight" name=" profilePlayerDto.weight"/>
+		    		<input type="text" class="form-control" id="weight" name="profilePlayerDto.weight"/>
 		    	</div>
 		    </div>
 		</div>	
@@ -91,12 +102,14 @@
 		<br/>						
 		<div class="input-group">
 		    <span class="input-group-addon">Nationality</span>
-		    <input type="text" class="form-control" id="nationality" name="profilePlayerDto.nationality"/>
+		    <input type="text" class="form-control" id="nationalitySearch"/>
+		    <input type="hidden" class="form-control" id="nationality" name="profilePlayerDto.nationality"/>
 		</div>	
 		<br/>								
 		<div class="input-group">
 		    <span class="input-group-addon">Language</span>
-		    <input type="text" class="form-control" id="language" name="profilePlayerDto.language"/>
+		    <input type="text" class="form-control" id="languageSearch"/>
+		    <input type="hidden" class="form-control" id="language" name="profilePlayerDto.language"/>
 		</div>		
 		<br/>									
 		<div class="input-group">
@@ -110,7 +123,7 @@
 	<c:set var="rowCnt" value="${0}"/>
 	<c:forEach var="profileAttrInfo" items="${profileAttrList}">
 		<div class="row">
-			<h4>${profileAttrInfo.profileAttrName}</h4>
+			<h4><tag:message code="text.${profileAttrInfo.profileAttrName}"/></h4>
 			<c:set var="profileAttrElemList" value="${profileAttrInfo.profileAttrElementList}"/>
 			<c:if test="${!empty profileAttrElemList}">
 				<c:forEach var="profileAttrElemInfo" items="${profileAttrElemList}" varStatus="index">
@@ -118,8 +131,9 @@
 				<div class="input-group">
 					<input type="hidden" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrId" value="${profileAttrInfo.profileAttrId}"/>
 					<input type="hidden" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrName" value="${profileAttrInfo.profileAttrName}"/>
+					<input type="hidden" name="profileAttrElementMapList[${rowCnt}].profileAttrElementName" value="${profileAttrElemInfo.profileAttrElementName}">
 					<span class="input-group-addon"><input type="checkbox" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrElementId" aria-label="Checkbox for following text input" value="${profileAttrElemInfo.profileAttrElementId}"></span>
-					<input type="text" class="form-control" aria-label="Text input with checkbox" name="profileAttrElementMapList[${rowCnt}].profileAttrElementMapName" value="${profileAttrElemInfo.profileAttrElementName}">
+					<input type="text" class="form-control" aria-label="Text input with checkbox" name="profileAttrElementMapList[${rowCnt}].profileAttrElementMapName" value="<tag:message code='attr.${profileAttrInfo.profileAttrName}.${profileAttrElemInfo.profileAttrElementName}'/>">
 				</div>			
 			</div>
 				<c:set var="rowCnt" value="${rowCnt+1}"/>	
@@ -551,7 +565,7 @@
 						var msg = data.message;
 												
 						if(result == 'success'){
-							location.href = "/player/playerPortal";
+							location.href = "/profile/list/"+$("#profileType").val() + "/" + $("#categoryId").val();
 						}else{
 							alert(msg);
 							return;
@@ -738,6 +752,11 @@
 			}	
 			
 		});	
-	});
+
+	});	
+		
+
+
+
 </script>	
 </html>

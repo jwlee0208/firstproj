@@ -57,8 +57,9 @@
 				, pa.profile_attr_name    	
     	</sql>
     	<sql id="profileAttributeElementColumnSql">
-				, paem.profile_attr_element_map_id
 				, paem.profile_attr_element_id
+				, paem.profile_attr_element_name
+				, paem.profile_attr_element_map_id
 				, paem.profile_attr_element_map_name				    	
     	</sql>
 		<sql id="profileCareerColumnSql">
@@ -381,6 +382,7 @@
 					<id 	column="profile_attr_element_map_id" 	property="profileAttrElementMapId"/>
 					<result column="profile_attr_name" 			 	property="profileAttrName"/>
 					<result column="profile_attr_element_id" 	 	property="profileAttrElementId"/>
+					<result column="profile_attr_element_name" 	 	property="profileAttrElementName"/>
 					<result column="profile_attr_element_map_name" 	property="profileAttrElementMapName"/>
 				</collection>			
 			</collection>
@@ -852,6 +854,7 @@
 				 profile_attr_id,
 				 profile_attr_name,
 				 profile_attr_element_id,
+				 profile_attr_element_name,
 				 profile_attr_element_map_name,
 				 create_date,
 				 create_user_id)
@@ -860,6 +863,7 @@
 				 #{profileAttrId},
 				 #{profileAttrName},
 				 #{profileAttrElementId},
+				 #{profileAttrElementName},
 				 #{profileAttrElementMapName},
 				 now(),
 				 'jwlee0208')

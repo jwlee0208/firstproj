@@ -18,8 +18,6 @@ import com.firstproj.board.dto.SideBoardCategoryPortalDto;
 import com.firstproj.board.service.BoardArticleService;
 import com.firstproj.board.service.BoardService;
 import com.firstproj.common.dto.ShareDto;
-import com.firstproj.player.dto.CategoryDto;
-import com.firstproj.player.service.PlayerServiceImpl;
 import com.firstproj.share.service.ShareService;
 import com.firstproj.user.dto.UserDto;
 import com.firstproj.user.service.UserService;
@@ -39,9 +37,6 @@ public class CommonController {
 
     @Resource(name = "UserServiceImpl")
     private UserService  userService;
-    
-    @Resource(name="PlayerServiceImpl")
-    private PlayerServiceImpl   playerService;
     
     @RequestMapping(value = "/sideBoardList")
     public String getSideBoardList(Model model) throws Exception{
@@ -116,7 +111,6 @@ public class CommonController {
             model.addAttribute("boardList", this.boardService.getBoardList(boardDto));
             sb.append("ajaxConfigMenu");
         }else{    
-            model.addAttribute("categoryList", this.playerService.getCategoryTwoDepthList());
             sb.append("ajaxMenu");
         }
         return sb.toString();

@@ -219,6 +219,7 @@ public class ProfileController {
     	return result;
     }
     
+    
     @RequestMapping(value="/modifyAction", method=RequestMethod.POST)
     @ResponseBody
     public JSONObject  modifyProfile(ProfileDto profileDto, HttpSession session) throws Exception{
@@ -253,29 +254,6 @@ public class ProfileController {
     	return result;
     }
 
-    @RequestMapping(value="/modifyAction.json", method=RequestMethod.POST)
-    @ResponseBody
-    public JSONObject  modifyProfileJSON(ProfileDto profileDto, HttpSession session) throws Exception{
-    	JSONObject 		result 				= new  JSONObject(); 
-    	
-    	profileDto.setTitle(profileDto.getName());
-    	
-    	System.out.println("profileDto.weight is " + profileDto.getProfilePlayerDto().getWeight());
-
-    	System.out.println("profileDto is " + profileDto.toString());
-    	logger.debug("profileDto is " + profileDto.toString());
-    	
-    	// validation 
-    	
-    	// service call : insert tables
-    	int addCnt = this.profileService.updateProfileInfos(profileDto);
-    	
-    	result.put("result"	, (addCnt > 0) ? "success" : "error");
-    	result.put("message", (addCnt > 0) ? "success!!!" : "error!!!");
-    	
-    	return result;
-    }    
-    
     @RequestMapping(value="/registLeague", method=RequestMethod.GET)
     public String registLeague(Model model, HttpSession session){
     	return "/profile/registLeague";

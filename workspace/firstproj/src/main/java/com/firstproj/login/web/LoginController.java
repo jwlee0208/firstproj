@@ -42,12 +42,6 @@ public class LoginController {
 		return "redirect:/home";
 	}
 	
-	@RequestMapping(value="/login/{menuId}")
-	public String login(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable int menuId) throws Exception{
-		model = this.login(request, model);
-		return "/login";
-	}
-	
 	@RequestMapping(value="/login")
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception{
 		model = this.login(request, model);

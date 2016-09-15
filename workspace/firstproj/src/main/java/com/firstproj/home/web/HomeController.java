@@ -1,7 +1,6 @@
 package com.firstproj.home.web;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -10,13 +9,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.firstproj.board.service.BoardArticleRedisServiceImpl;
 import com.firstproj.board.service.BoardArticleServiceImpl;
-import com.firstproj.player.service.PlayerServiceImpl;
 import com.firstproj.profile.dto.ProfileDto;
 import com.firstproj.profile.service.ProfileServiceImpl;
 
@@ -32,9 +28,6 @@ public class HomeController {
 
 	@Resource(name = "BoardArticleRedisServiceImpl")
 	private BoardArticleRedisServiceImpl   boardArticleRedisService;	
-
-	@Resource(name = "PlayerServiceImpl")
-	private PlayerServiceImpl   playerService;    
 
 	@Resource(name = "profileService")
 	private ProfileServiceImpl profileService;
@@ -61,10 +54,6 @@ public class HomeController {
 		profileTeamDto.setProfileType("3");
 		List<ProfileDto> profileTeamList = this.profileService.getProfileInfos(profileTeamDto);
 		model.addAttribute("recentTeamProfileList", profileTeamList);
-		
-		if (StringUtils.isEmpty(session.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME))) {
-			session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.ENGLISH);
-		}
 		
 	    return "home";
 	}	

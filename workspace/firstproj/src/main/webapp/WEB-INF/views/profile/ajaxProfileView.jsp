@@ -52,7 +52,7 @@
 		  <div class="form-group">
 		    <label for="" class="col-sm-5 control-label"><tag:message code="text.height"/> / <tag:message code="text.weight"/></label>
 		    <div class="col-sm-7">
-		      <p class="form-control-static">${profileInfo.profilePlayerDto.height} / ${profileInfo.profilePlayerDto.weight}</p>
+		      <p class="form-control-static">${profileInfo.profilePlayerDto.height}&nbsp;(cm) / ${profileInfo.profilePlayerDto.weight}&nbsp;(kg)</p>
 		    </div>
 		  </div>
 
@@ -75,7 +75,7 @@
 			    	<p class="form-control-static">${profileInfo.profilePlayerDto.education}</p>
 				</div>
 			</div>	
-			<div class="form-groupp">
+			<div class="form-group">
 			    <label for="" class="col-sm-5 control-label"><tag:message code="text.hobbies"/></label>
 			    <div class="col-sm-7">
 			    	<p class="form-control-static">${profileInfo.profilePlayerDto.hobbies}</p>
@@ -90,13 +90,21 @@
 			<div class="form-group">
 			    <label for="" class="col-sm-5 control-label"><tag:message code="text.nationality"/></label>
 				<div class="col-sm-7">
-				    <p class="form-control-static">${profileInfo.profilePlayerDto.nationality}</p>
+				    <p class="form-control-static">
+				    <c:if test="${profileInfo.profilePlayerDto.nationality ne null && profileInfo.profilePlayerDto.nationality ne ''}">
+				    <tag:message code="code.country.${profileInfo.profilePlayerDto.nationality}"/>
+				    </c:if>
+				    </p>
 				</div>    
 			</div>	
 			<div class="form-group">
 			    <label for="" class="col-sm-5 control-label"><tag:message code="text.language"/></label>
 			    <div class="col-sm-7">
-				    <p class="form-control-static">${profileInfo.profilePlayerDto.language}</p>
+				    <p class="form-control-static">
+				    	<c:if test="${profileInfo.profilePlayerDto.language ne null && profileInfo.profilePlayerDto.language ne ''}">
+				    	<tag:message code="code.language.${profileInfo.profilePlayerDto.language}"/>	
+				    	</c:if>
+				    </p>
 				</div>
 			</div>		
 
@@ -114,7 +122,7 @@
 	    	<c:if test="${!empty profileAttrInfo.profileAttrElementMapList}">
 		    <div class="col-sm-10">
 	    		<c:forEach var="profileAttrElemInfo" items="${profileAttrInfo.profileAttrElementMapList}">
-	    		<p class="form-control-static"><tag:message code="attr.${profileAttrInfo.profileAttrName}.${profileAttrElemInfo.profileAttrElementMapName}"/></p>
+	    		<p class="form-control-static"><tag:message code="attr.${profileAttrInfo.profileAttrName}.${profileAttrElemInfo.profileAttrElementName}"/></p>
 	    		</c:forEach>
 	    	</div>	
 	    	</c:if>	

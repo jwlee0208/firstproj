@@ -10,6 +10,7 @@ public class ProfileAttrElementMapDto extends ProfileAttrElementDto{
 	private int 	profileAttrId;
 	private String	profileAttrName;
 	private int 	profileAttrElementId;
+	private String 	profileAttrElementName;
 	private String 	profileAttrElementMapName;
 	private String 	createDate;
 	private String 	createUserId;
@@ -45,6 +46,12 @@ public class ProfileAttrElementMapDto extends ProfileAttrElementDto{
 	}
 	public void setProfileAttrElementId(int profileAttrElementId) {
 		this.profileAttrElementId = profileAttrElementId;
+	}	
+	public String getProfileAttrElementName() {
+		return profileAttrElementName;
+	}
+	public void setProfileAttrElementName(String profileAttrElementName) {
+		this.profileAttrElementName = profileAttrElementName;
 	}
 	public String getProfileAttrElementMapName() {
 		return profileAttrElementMapName;
@@ -76,14 +83,13 @@ public class ProfileAttrElementMapDto extends ProfileAttrElementDto{
 	public void setModifyUserId(String modifyUserId) {
 		this.modifyUserId = modifyUserId;
 	}
-
 	@Override
 	public String toString() {
 		return "ProfileAttrElementMapDto [profileAttrElementMapId=" + profileAttrElementMapId + ", profileId="
 				+ profileId + ", profileAttrId=" + profileAttrId + ", profileAttrName=" + profileAttrName
-				+ ", profileAttrElementId=" + profileAttrElementId + ", profileAttrElementMapName="
-				+ profileAttrElementMapName + ", createDate=" + createDate + ", createUserId=" + createUserId
-				+ ", modifyDate=" + modifyDate + ", modifyUserId=" + modifyUserId + "]";
+				+ ", profileAttrElementId=" + profileAttrElementId + ", profileAttrElementName="
+				+ profileAttrElementName + ", profileAttrElementMapName=" + profileAttrElementMapName + ", createDate="
+				+ createDate + ", createUserId=" + createUserId + ", modifyDate=" + modifyDate + ", modifyUserId="
+				+ modifyUserId + "]";
 	}
-	
 }

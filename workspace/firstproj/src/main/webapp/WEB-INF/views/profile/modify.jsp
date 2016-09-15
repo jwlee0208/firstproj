@@ -11,6 +11,9 @@
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/common-editor.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/article/common.js"></script>
+
+<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/profile/autocomplete.js"></script>
+
 </head>
 <body>
 <div class="container">
@@ -99,13 +102,15 @@
 			<div class="form-group">
 			    <label for="" class="col-sm-5 control-label"><tag:message code="text.nationality"/></label>
 				<div class="col-sm-7"> 
-				    <p class="form-control-static"><input type="text" class="form-control" id="nationality" name="profilePlayerDto.nationality"  value="${profileInfo.profilePlayerDto.nationality}"/></p>
+				    <p class="form-control-static"><input type="text" class="form-control" id="nationalitySearch" value="<tag:message code='code.country.${profileInfo.profilePlayerDto.nationality}'/>"/></p>
+					<input type="hidden" class="form-control" id="nationality" name="profilePlayerDto.nationality"  value="${profileInfo.profilePlayerDto.nationality}"/>
 				</div>    
 			</div>	
 			<div class="form-group">
 			    <label for="" class="col-sm-5 control-label"><tag:message code="text.language"/></label>
 			    <div class="col-sm-7"> 
-				    <p class="form-control-static"><input type="text" class="form-control" id="language" name="profilePlayerDto.language" value="${profileInfo.profilePlayerDto.language}"/></p>
+				    <p class="form-control-static"><input type="text" class="form-control" id="languageSearch" value="<tag:message code='code.language.${profileInfo.profilePlayerDto.language}'/>"/></p>
+				    <input type="hidden" class="form-control" id="language" name="profilePlayerDto.language" value="${profileInfo.profilePlayerDto.language}"/>
 				</div>
 			</div>		
 		</div>	
@@ -156,6 +161,7 @@
 				<div class="input-group">
 					<input type="hidden" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrId" value="${attrElemInfo.profileAttrId}"/>
 					<input type="hidden" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrName" value="${attrElemInfo.profileAttrName}"/>
+					<input type="hidden" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrElementName" value="${profileAttrElemInfo.profileAttrElementName}"/>
 					<c:if test="${!empty profileAttrList}">
 						<c:forEach var="profileAttrInfo" items="${profileAttrList}">
 							<c:set var="profileAttrElemList" value="${profileAttrInfo.profileAttrElementMapList}"/>
@@ -608,7 +614,7 @@
 			
 			if(profileImg.length == 0){
 				$.ajax({
-					url 		: '/profile/modifyAction.json',
+					url 		: '/profile/modifyAction',
 					data 		: $("#actionFrm").serialize(),
 					dataType 	: 'json',
 					method 		: 'post',
