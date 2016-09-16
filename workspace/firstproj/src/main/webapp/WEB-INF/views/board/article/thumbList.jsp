@@ -62,7 +62,8 @@
 				 	<h4 class="media-heading" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor: pointer;" onclick="javascript:goView('${content.articleId}');">&nbsp;&nbsp;&nbsp;<c:out value="${content.title}"/></h4>
 				 	<div class="row">	
 				 		<div class="btn btn-link" style="float:left; color:#999;" onclick="javascript:goMyShare('${content.shareInfo.userId}');">
-					 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Posted on ${fn:substring(content.createDate, 0, 10)} by <a href="javascript:;">${content.authorNm}</a>
+				 			<fmt:parseDate var="parsedCreateDate" value="${fn:replace(fn:substring(content.createDate, 0, 10), '-', '')}" pattern="yyyyMMdd" />
+					 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Posted on <fmt:formatDate value="${parsedCreateDate}" pattern="MMM dd.yyyy" /> by <a href="javascript:;">${content.authorNm}</a>
 						</div>
 				 	</div>	
 <%-- 				 	<p style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${fn:substring(content.contentText, 0, 200)}...</p> --%>

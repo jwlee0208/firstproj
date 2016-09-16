@@ -53,7 +53,8 @@
 					<div class="panel-body" style="padding-left: 15px; white-space:normal; white-break:break-word;">
 						<div class="row">
 							<div class="btn btn-link" style="float:left; color:#999;" onclick="javascript:goMyShare('${contentInfo.shareInfo.userId}');">
-								<span class="glyphicon glyphicon-calendar"></span>&nbsp;Posted on ${fn:substring(contentInfo.createDate, 0, 10)} by <a href="javascript:;">${contentInfo.authorNm}</a>
+								<fmt:parseDate var="parsedCreateDate" value="${fn:replace(fn:substring(contentInfo.createDate, 0, 10), '-', '')}" pattern="yyyyMMdd" />
+								<span class="glyphicon glyphicon-calendar"></span>&nbsp;Posted on <fmt:formatDate value="${parsedCreateDate}" pattern="MMM dd.yyyy" /> by <a href="javascript:;">${contentInfo.authorNm}</a>
 							</div>
 							<div class="btn btn-link" style="float:right; color:#999;">
 								<a href="/share/${contentInfo.shareInfo.userId}/view/${contentInfo.articleId}" target="_blank">상세보기</a>
