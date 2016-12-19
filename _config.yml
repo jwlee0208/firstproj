@@ -1,0 +1,8 @@
+title: Firstproj
+description: 예제 프로젝트
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-minimal
+
+gems:
+  - jekyll-mentions
