@@ -20,13 +20,14 @@ iframe {width : 250px; height : 200px; align:center;}
 </style>
 
 	<div class="jumbotron" class="padding-top:0px;">
-		<h1><tag:message code='main.text1'/></h1>
+		<h2>Why Don't You Try To Find Your Team?</h2>
+<%-- 		<h1><tag:message code='main.text1'/></h1> --%>
 <%-- 		<p><tag:message code='sub.text1'/></p> --%>
 <%-- 		<p><tag:message code='sub.text2'/></p> --%>
 <%-- 		<p><tag:message code='sub.text3'/></p> --%>
 		<p>&nbsp;</p>
-		<p>&nbsp;</p>
 		<p><strong>"<tag:message code='sub.text4'/>"</strong> - 'Yogi' Lawrence Peter Berra</p>
+		<input type="button" class="btn btn-success btn-lg pull-right registProfile" value="Regist Your Profile"/>
 	</div>
 	<form id="mainFrm" name="mainFrm" method="post"></form>	
 	<div class="container" role="main">
@@ -315,13 +316,6 @@ iframe {width : 250px; height : 200px; align:center;}
 		});
 	}
 
-	function goDetail(userId){
-		var frm = $("#mainFrm");
-		frm.attr("action", "/player/playerDetailView/" + userId);
-		frm.attr("method", "post");
-		frm.submit();		
-	}
-		
 	var jumboHeight = $('.jumbotron').outerHeight();
 	function parallax(){
 	    var scrolled = $(window).scrollTop();

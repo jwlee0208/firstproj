@@ -15,13 +15,13 @@
 		<div class="col-md-4">
 			<p class="text-danger">Player</p>
 			<ul>
-				<li><a href="/player/playerPortal/6">Player List</a></li>
+				<li><a href="/profile/list/1/01010100">Player List</a></li>
 			</ul>
 		</div>
 		<div class="col-md-4">
 			<p class="text-danger">Team</p>
 			<ul>
-				<li><a href="/player/playerPortal/6">Team List</a></li>
+				<li><a href="/profile/list/3/01010300">Team List</a></li>
 			</ul>
 		</div>
 	</div>

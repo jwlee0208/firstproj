@@ -36,18 +36,23 @@
 						</c:choose>					
 						<div class="caption" style="cursor:pointer;">
 							<h3>
-								<span onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');">${list.name}</span>
+								<span onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');">${list.name}</span><br/>
 								<c:choose>
 									<c:when test="${list.profileType eq 1}">
 										<c:set var="playerInfo" value="${list.profilePlayerDto}"/>
-										<small><tag:message code="code.country.${playerInfo.nationality}"/></small>
+										<img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(playerInfo.nationality)}.png" width="30px" height="20px"/>&nbsp;
+										<small><tag:message code="code.country.${fn:toUpperCase(playerInfo.nationality)}"/></small>
 									</c:when>
 									<c:when test="${list.profileType eq 2}">
 									
 									</c:when>
 									<c:when test="${list.profileType eq 3}">
 										<c:set var="teamInfo" value="${list.profileTeamDto}"/>
-										<small>${teamInfo.city}</small>									
+										<c:set var="leagueInfo" value="${list.leagueInfoDto}"/>
+										<img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(leagueInfo.country)}.png" data-src="holder.js/30x20" width="30px" height="20px"/>&nbsp;
+										<small><tag:message code="code.country.${fn:toUpperCase(leagueInfo.country)}"/> | ${teamInfo.city}</small>	
+										<br/>
+										<small><tag:message code="code.leaguetype.${leagueInfo.leagueType}"/> | Division ${leagueInfo.leagueDivision}</small>									
 									</c:when>
 								</c:choose>
 							</h3>
@@ -63,7 +68,8 @@
 							<p class="content_${index.count}">
 							</p>
 							<p>
-								<span class="btn btn-info btn-block btn-md" 		role="button" onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.detailview'/></span>
+<%-- 								<span class="btn btn-info btn-block btn-md" role="button" onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.detailview'/></span> --%>
+								<span class="btn btn-info btn-block btn-md" role="button" onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');"><tag:message code='button.detailview'/></span>
 							</p>
 						</div>
 	

@@ -54,16 +54,16 @@
 							 onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');" 
 							 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
 							</c:otherwise>
-						</c:choose>					
-						<div class="caption" style="cursor:pointer;">
-							<h3 style="background: #efefef; padding:5px 0 5px 0px; text-align:center;"><span onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');">${leagueInfo.leagueName}</span></h3>
-								<div class="btn-group btn-group-lg btn-group-justified">
-									<div class="btn btn-default"><tag:message code="code.leaguetype.${leagueInfo.leagueType}"/></div>
-									<div class="btn btn-default"><tag:message code="code.area.${leagueInfo.area}"/></div>
-									<div class="btn btn-default"><tag:message code="code.country.${leagueInfo.country}"/></div>
-								</div>
-							<p class="content_${index.count}">
-							</p>
+						</c:choose>	
+						<div class="caption" style="cursor:pointer;">				
+							<h3><span onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');">${leagueInfo.leagueName}</span>
+							<br/>
+							<small><tag:message code="code.leaguetype.${leagueInfo.leagueType}"/></small>
+							<br/>
+							<small><tag:message code="code.area.${leagueInfo.area}"/></small>
+							<br/>
+							<small><img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(leagueInfo.country)}.png" width="30px" height="20px"/>&nbsp;<tag:message code="code.country.${fn:toUpperCase(leagueInfo.country)}"/></small>
+							</h3>
 							<p>
 								<span class="btn btn-danger btn-block" 		role="button" onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');" data-toggle="modal" data-target="#myModal">See Detail</span>
 							</p>

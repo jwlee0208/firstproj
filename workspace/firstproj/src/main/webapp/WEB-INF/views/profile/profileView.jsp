@@ -3,11 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag"%>
-<!DOCTYPE>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>::: LinkedNest.net</title>
 
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery-validate.min.js"></script>
@@ -26,9 +21,7 @@
 <style type="text/css">
 	.form-group .col-sm-10 {vertical-align : middle;}
 </style>
-</head>
-<body>
-<div class="container-fluid">
+<div class="container">
 	<form id="viewFrm" name="viewFrm" method="post" class="form-horizontal" role="form">
 		<input type="hidden" id="profileId" 	name="profileId" value="${profileInfo.profileId}"/>
 		<div style="display:none;"><h2>${profileInfo.title}&nbsp;<small>Profile</small></h2></div>
@@ -191,7 +184,7 @@
 		<c:set var="profileStatHitterList" value="${profileInfo.profileStatHitterList}"/>
 		<c:set var="profileStatFielderList" value="${profileInfo.profileStatFielderList}"/>
 
-	<c:if test="${!empty profileStatPitcherList && !empty profileStatHitterList && !empty profileStatFielderList}">			
+	<c:if test="${!empty profileStatPitcherList || !empty profileStatHitterList || !empty profileStatFielderList}">			
 		<h3><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>&nbsp;<tag:message code="text.stats"/></h3>
 		<hr/>	
 				
@@ -493,8 +486,6 @@
 </c:if>
 	</form>
 </div>
-
-</body>
 <script>
 $(document).ready(function() {
 	$("img").addClass("media-object");
@@ -541,4 +532,3 @@ $(function(){
 	});
 });
 </script>
-</html>

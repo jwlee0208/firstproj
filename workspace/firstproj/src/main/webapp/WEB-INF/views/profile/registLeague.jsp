@@ -116,6 +116,7 @@
 			<input type="hidden" class="form-control ui-autocomplete-input" id="country" name="country" />
 		</div>
 	</form>
+	<br/>
 	<div class="btn-group btn-group-justified"">
 		<div class="btn-group">
 			<input type="button" class="btn btn-default" id="saveBtn" value="save" data-loading-text="Processing..."/>	

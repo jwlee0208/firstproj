@@ -58,7 +58,7 @@ public class ProfileController {
 		logger.debug("[ProfileController][getProfileView] selectedProfileInfo : " + selectedProfileInfo.toString());
 		model.addAttribute("profileInfo", selectedProfileInfo);
 		
-		return "/profile/ajaxProfileView";
+		return "/profile/profileView";
 	}
 
 	@RequestMapping(value="/modify/{profileType}/{profileId}")

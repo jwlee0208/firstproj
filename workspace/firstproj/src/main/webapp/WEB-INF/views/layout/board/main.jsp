@@ -26,7 +26,7 @@
 <tiles:insertAttribute name="metatag"/>
 <%@ include file="/WEB-INF/views/common/include.jsp"%>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/board/article/common.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/offcanvas.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/offcanvas.css">
 <style>
 .go_to_top {
     display:scroll;

@@ -1,6 +1,6 @@
 	$(document).on("ready", function() {
 		$("input[name='goToRegist']").on("click", function() {
-			location.href = "/player/write";
+			location.href = "/profile/regist/1/01010100";
 		});
 
 		$( "#searchText" ).keypress(function( event ) {

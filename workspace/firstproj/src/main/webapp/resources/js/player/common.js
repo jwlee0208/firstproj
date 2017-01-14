@@ -52,6 +52,6 @@
 
 	$(function(){
 		$("#registPlayer").click(function(){
-			location.href = "/player/write";	
+			location.href = "/profile/regist/1/01010100";	
 		});			
 	});
