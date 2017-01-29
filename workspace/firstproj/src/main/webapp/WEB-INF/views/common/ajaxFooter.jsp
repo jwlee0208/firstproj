@@ -35,16 +35,6 @@ if($("#buildType").val()=='prod'){
 	wcs_add["wa"] = "47918035f92e80";
 	wcs_do();
 </script>
-<!-- baidu analytics -->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?1bd314db72ba2d5b15923340a7f3d05f";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
 <footer class="footer">
 <c:choose>
 	  <c:when test="${userInfo ne '' && userInfo ne null}">	
@@ -61,13 +51,4 @@ var _hmt = _hmt || [];
 	  <p>Copyrightⓒ2014 All right reserved by LinkedNest</p>
       <p>|&nbsp;<a href="/common/privateRule" class="btn btn_link" target="_blank"><tag:message code='text.privatepolicy'/></a>&nbsp;|&nbsp;<a href="/common/useRule" class="btn btn_link" target="_blank"><tag:message code='text.termsofuse'/></a>&nbsp;|</p>
       <p><a href="#"><tag:message code='text.backtotop'/></a></p>
-
-<!-- translator script -->      
-<!-- <div id="google_translate_element"></div> -->
-<!-- <script type="text/javascript"> -->
-// function googleTranslateElementInit() {
-//  new google.translate.TranslateElement({pageLanguage: 'ko', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT, gaTrack: true, gaId: 'UA-65838621-1'}, 'google_translate_element');
-// }
-<!-- </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
-        
 </footer>

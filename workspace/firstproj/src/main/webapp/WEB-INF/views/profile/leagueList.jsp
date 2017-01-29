@@ -30,24 +30,23 @@
 			
 			<!-- list area -->
 			<div id="listDiv" role="main">
+				<div class="row">
 <c:choose>
 	<c:when test="${!empty leagueList}">
 		<c:forEach var="leagueInfo" items="${leagueList}" varStatus="index">
-		<c:if test="${index.count%3 eq 1}">
-				<div class="card-deck">
-		</c:if>		
+				<div class="col-sm-4">
 					<div class="card">
 						<c:choose>
 							<c:when test="${leagueInfo.leagueImgPath ne null && leagueInfo.leagueImgPath ne ''}">
 						<img src="http://jwlee0208.cdn3.cafe24.com/${leagueInfo.leagueImgPath}" 
-							 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid" 
+							 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid mx-auto d-block" 
 							 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
 							 onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');"  
 							 style="cursor:pointer; "/>
 							</c:when>
 							<c:otherwise>
 						<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
-							 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid"
+							 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid mx-auto d-block"
 							 onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');" 
 							 style="cursor:pointer; "/>
 							</c:otherwise>
@@ -69,18 +68,16 @@
 						<div class="card-footer">
 							<span class="btn btn-outline-danger btn-block" 		role="button" onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');" >See Detail</span>
 						</div>
-
 					</div>		
-				<c:if test="${index.count%3 eq 0}">
+					<br/>
 				</div>	
-				<br/>
-				</c:if>
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
 		nothing
 	</c:otherwise>	
 </c:choose>		
+				</div>
 			</div>
 			<!-- // list area -->
 		<c:if test="${isLogon}">

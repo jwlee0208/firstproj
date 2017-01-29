@@ -13,7 +13,7 @@
 	<input type="hidden" id="menuId" name="menuId" value="${param.menuId}" />
 <!-- 	<div class="container-fluid"> -->
 
-		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#nav-collapse-player-menu-list" aria-controls="nav-collapse-player-menu-list" aria-expanded="false" aria-label="Toggle navigation">
         	<span class="navbar-toggler-icon"></span>
       	</button>
 
@@ -39,9 +39,9 @@
 <!-- 				<li><a href="javascript:;" onclick="javascript:alert('ing..');;">About Us</a></li> -->
 			</ul>
 			<c:if test="${null ne userInfo}">
-			<ul class="nav navbar-nav navbar-right mr-auto">
+			<ul class="nav navbar-nav navbar-right float-right">
 	        	<li class="dropdown nav-item">
-	          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdown_menu" role="button" aria-haspopup="true" aria-expanded="false"><tag:message code="menu.hi"/>, "${userInfo.userNm}" <span class="caret"></span></a>
+	          		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown_menu" role="button" aria-haspopup="true" aria-expanded="false"><tag:message code="menu.hi"/>, "${userInfo.userNm}"</a>
 	          		<div class="dropdown-menu" aria-labelledby="dropdown_menu">
 	          			<a class="dropdown-item" href="/share/${userInfo.userId}" ><tag:message code="common.myshare"/></a>
 			            <a class="dropdown-item" href="#" onclick="javascript:goConfig();"><tag:message code="common.config"/></a>

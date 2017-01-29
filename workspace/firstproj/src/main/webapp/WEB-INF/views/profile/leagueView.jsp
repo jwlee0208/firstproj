@@ -15,10 +15,6 @@
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery.form.min.js"></script>
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 
-<!-- bootstrap -->
-<link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css">
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
-
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/holder.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css"/>

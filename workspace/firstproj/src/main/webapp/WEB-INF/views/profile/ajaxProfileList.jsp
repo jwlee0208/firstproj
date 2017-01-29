@@ -8,6 +8,7 @@
 <style>
 	iframe {width : 250px; height : 200px; align:center;}
 </style>
+<div class="row">
 <c:choose>
 	<c:when test="${empty profileList}">
 		<div class="table-responsive" style="text-align: center; height: 100%;">
@@ -16,21 +17,19 @@
 	</c:when>
 	<c:otherwise>
 			<c:forEach var="list" items="${profileList}" varStatus="index">
-				<c:if test="${index.count%3 eq 1}">		
-			<div class="card-deck">
-				</c:if>
+			<div class="col-sm-4">
 				<div class="card">
 						<c:choose>
 							<c:when test="${list.profileImgPath ne null && list.profileImgPath ne ''}">
 						<img src="http://jwlee0208.cdn3.cafe24.com/${list.profileImgPath}" 
-							 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid" 
+							 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid mx-auto d-block" 
 							 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
 							 onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');"  
 							 style="cursor:pointer;"/>
 							</c:when>
 							<c:otherwise>
 						<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
-							 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid"
+							 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid mx-auto d-block"
 							 onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');" 
 							 style="cursor:pointer;"/>
 							</c:otherwise>
@@ -93,14 +92,13 @@
 						<span class="btn btn-outline-primary btn-lg btn-block" role="button" aria-pressed="true" onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');"><tag:message code='button.detailview'/></span>
 						</div>
 				</div>
-				<c:if test="${index.count%3 eq 0}">
+				<br/>
 			</div>	
-			<br/>
-				</c:if>
+			
 			</c:forEach>
-		
 	</c:otherwise>
 </c:choose>
+</div>
 
 
                         <!-- 리스트 페이징 영역 -->

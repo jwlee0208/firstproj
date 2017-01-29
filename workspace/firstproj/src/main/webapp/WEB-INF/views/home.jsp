@@ -25,27 +25,26 @@ iframe {width : 250px; height : 200px; align:center;}
 	<form id="mainFrm" name="mainFrm" method="post"></form>	
 	<div class="container" role="main">
 		<h4><tag:message code='text.recentregistplayers'/>&nbsp;&nbsp;<small><a href="/profile/list/1/01010100"><tag:message code='button.more'/></a></small></h4>
-		
+		<hr/>
+		<div class="row">
 		<c:choose>
 			<c:when test="${!empty recentPlayerProfileList}">
 				<c:forEach var="recentPlayerProfileInfo" items="${recentPlayerProfileList}" varStatus="index">
-					<c:if test="${index.count%3 eq 1}">		
-				<div class="card-deck">
-					</c:if>
+				<div class="col-sm-4">
 					<div class="card">
 							<c:choose>
 								<c:when test="${recentPlayerProfileInfo.profileImgPath ne null && recentPlayerProfileInfo.profileImgPath ne ''}">
 							<img src="http://jwlee0208.cdn3.cafe24.com/${recentPlayerProfileInfo.profileImgPath}" 
-								 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid" 
+								 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid mx-auto d-block" 
 								 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
 								 onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');" 
 								 style="cursor:pointer; "/>
 								</c:when>
 								<c:otherwise>
 							<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
-								 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid"
+								 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid mx-auto d-block"
 								 onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');" 
-								 style="cursor:pointer;"/>
+								 style="cursor:pointer; width:auto;"/>
 								</c:otherwise>
 							</c:choose>	
 							<div class="card-block" style="cursor:pointer;">
@@ -99,10 +98,8 @@ iframe {width : 250px; height : 200px; align:center;}
 								<span class="btn btn-outline-danger btn-block" 		role="button" onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');"><tag:message code='button.watchme'/></span>					
 							</div>
 					</div>
-				<c:if test="${index.count%3 eq 0 or index.count eq recentPlayerProfileList.size()}">
+					<br/>
 				</div>	
-				<br/>
-				</c:if>	
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
@@ -111,15 +108,15 @@ iframe {width : 250px; height : 200px; align:center;}
 				</div>
 			</c:otherwise>	
 		</c:choose>
-				
+		</div>		
 		
 		<h4>Recent Registered Team List&nbsp;&nbsp;<small><a href="/profile/list/3/01010300"><tag:message code='button.more'/></a></small></h4>
+		<hr/>
+		<div class="row">
 		<c:choose>
 			<c:when test="${!empty recentTeamProfileList}">
 				<c:forEach var="recentTeamProfileInfo" items="${recentTeamProfileList}" varStatus="index">
-					<c:if test="${index.count%3 eq 1}">		
-				<div class="card-deck">
-					</c:if>
+				<div class="col-sm-4">
 					<div class="card">
 							<c:choose>
 								<c:when test="${recentTeamProfileInfo.profileImgPath ne null && recentTeamProfileInfo.profileImgPath ne ''}">
@@ -195,11 +192,8 @@ iframe {width : 250px; height : 200px; align:center;}
 								<span class="btn btn-outline-danger btn-block" 		role="button" onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');"><tag:message code='button.watchme'/></span>							
 							</div>
 					</div>		
-				<c:if test="${index.count%3 eq 0 or index.count eq recentTeamProfileList.size()}">
-				</div>	
-				<br/>
-				</c:if>	
-					
+					<br/>
+				</div>						
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
@@ -207,9 +201,11 @@ iframe {width : 250px; height : 200px; align:center;}
 					<h3><tag:message code='text.noregistplayer'/></h3>
 				</div>
 			</c:otherwise>	
-		</c:choose>		
+		</c:choose>	
+		</div>	
 <!-- // 2016.06.14 이후 작 --> 		
 		<h4><tag:message code='text.recenttryoutinfo'/>&nbsp;&nbsp;<small><a href="/share/jwlee/list/15"><tag:message code='button.more'/></a></small></h4>
+		<hr/>
 <!-- 		<div class="row" style="padding-left: 10px; padding-right: 10px;"> -->
 			<div class="boardDiv li_1_board" style="padding-top : 10px;">
 				<div class="table-responsive">

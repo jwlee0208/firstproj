@@ -117,14 +117,18 @@
 				<div class="col-lg-2"><h4><span class="badge badge-info"><tag:message code="text.${profileAttrElementInfo.profileAttrName}"/></span></h4></div>
 				<div class="col-lg-10 btn-group">
 				<c:if test="${profileAttrElemListLength > 0}">
+					<div class="row btn-group" style="padding-left:15px;"> 
 						<input type="hidden" id="profileAttrList[${index.count-1}].profileAttrId${profileAttrId}" name="profileAttrList[${index.count-1}].profileAttrId" value="${profileAttrId}" />
 				
 					<c:forEach var="profileAttrElemInfo" items="${profileAttrElemList}" varStatus="childIndex">
-						
 							<label class="btn btn-info"><input type="checkbox" id="profileAttrList[${index.count-1}].profileAttrElementList[${childIndex.count-1}].profileAttrElementId${ProfileAttrElemInfo.profileAttrElementId}" name="profileAttrList[${index.count-1}].profileAttrElementList[${childIndex.count-1}].profileAttrElementId" value="${profileAttrElemInfo.profileAttrElementId}" class="attrElemRadio"/>&nbsp;
 							<tag:message code="attr.${profileAttrElementInfo.profileAttrName}.${profileAttrElemInfo.profileAttrElementName}"/>
 							</label>
+							<c:if test="${childIndex.count > 5}">
+								<br/>
+							</c:if>
 					</c:forEach>
+					</div>
 				</c:if>	
 				</div>
 				<c:set var="prevAttrId" value="${attrId}"/>

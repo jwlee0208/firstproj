@@ -219,6 +219,7 @@ public class BoardArticleController {
 		String searchText      = request.getParameter("searchText");
 		String startDate       = request.getParameter("startDate");
 		String endDate         = request.getParameter("endDate");
+		String type			   = StringUtils.defaultIfEmpty(request.getParameter("type"), "blog");
 		
 		int    boardId         = boardArticleDto.getBoardId();
 		// 페이징 관련 params
@@ -227,6 +228,7 @@ public class BoardArticleController {
 		int    pageSize        = (request.getParameter("pageSize") != null) ? Integer.parseInt(request.getParameter("pageSize")) : DEFAULT_PAGE_SIZE;
 		int    totalListCnt    = 0;
 		
+		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// searching condition setting
 		paramMap.put("boardId"        , boardId);
@@ -234,7 +236,8 @@ public class BoardArticleController {
 		paramMap.put("searchText"     , searchText);
 		paramMap.put("startDate"      , startDate);
 		paramMap.put("endDate"        , endDate);
-
+		paramMap.put("type"        	  , type);
+		
 		List<BoardArticleDto> boardArticleList;	
 		
 /*
@@ -308,7 +311,8 @@ public class BoardArticleController {
 		String startDate       = request.getParameter("startDate");
 		String endDate         = request.getParameter("endDate");
 		String createUserId    = (!StringUtils.isEmpty(boardArticleDto.getCreateUserId())) ? boardArticleDto.getCreateUserId() : "";
-
+		String type			   = StringUtils.defaultIfEmpty(request.getParameter("type"), "blog");
+		
 		int    boardId         = boardArticleDto.getBoardId();
 		// 페이징 관련 params
 		int    pageNo          = (request.getParameter("pageNo") != null) ? Integer.parseInt(request.getParameter("pageNo")) : DEFAULT_PAGE_NO;
