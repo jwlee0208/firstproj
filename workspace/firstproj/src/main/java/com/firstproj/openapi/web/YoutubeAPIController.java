@@ -30,6 +30,7 @@ public class YoutubeAPIController {
             searchResultList = this.youtubeAPIService.searchStreamList(keyword);
         }
         
+        model.addAttribute("type", searchCommonAPIDto.getType());
         model.addAttribute("streamList", searchResultList);        
         return "api/youtube/ajaxStreamList";
     }

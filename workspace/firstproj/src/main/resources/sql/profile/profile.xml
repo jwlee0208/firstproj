@@ -99,45 +99,45 @@
 				, psf.stat_fielder_id
 				, psf.f_team_name
 				, psf.f_stat_year
-				, psf.pos
-				, psf.g
-				, psf.gs
-				, psf.inn
-				, psf.tc
-				, psf.po
-				, psf.a
-				, psf.e
-				, psf.dp
-				, psf.sb
-				, psf.cs
-				, psf.sbpct
-				, psf.pb
-				, psf.c_wp
-				, psf.fpct
-				, psf.rf
-				, psf.etc
+				, psf.pos as f_pos
+				, psf.g as f_g
+				, psf.gs as f_gs
+				, psf.inn as f_inn
+				, psf.tc as f_tc
+				, psf.po	as f_po
+				, psf.a	as f_a
+				, psf.e as f_e
+				, psf.dp as f_dp
+				, psf.sb as f_sb
+				, psf.cs	as f_cs
+				, psf.sbpct	as f_sbpct
+				, psf.pb	as f_pb
+				, psf.c_wp	as f_c_wp
+				, psf.fpct	as f_fpct
+				, psf.rf	as f_rf
+				, psf.etc	as f_etc
 		</sql>
 		<sql id="profileStatHitterColumnSql">	
 				, psh.stat_hitter_id
 				, psh.h_team_name
 				, psh.h_stat_year
-				, psh.g
-				, psh.ab
-				, psh.r
-				, psh.h
-				, psh.two_b
-				, psh.three_b
-				, psh.hr
-				, psh.rbi
-				, psh.bb
-				, psh.so
-				, psh.sb
-				, psh.cs
-				, psh.avg
-				, psh.obp
-				, psh.slg
-				, psh.ops
-				, psh.etc		
+				, psh.g as h_g
+				, psh.ab as h_ab
+				, psh.r as h_r
+				, psh.h as h_h
+				, psh.two_b as h_two_b
+				, psh.three_b as h_three_b
+				, psh.hr as h_hr
+				, psh.rbi as h_rbi
+				, psh.bb as h_bb
+				, psh.so as h_so
+				, psh.sb as h_sb
+				, psh.cs as h_cs
+				, psh.avg as h_avg
+				, psh.obp as h_obp
+				, psh.slg as h_slg
+				, psh.ops as h_ops
+				, psh.etc as h_etc		
 		</sql>
 		<sql id="profileStreamColumnSql">
 				, pstream.stream_id
@@ -158,13 +158,14 @@
     	<sql id="selectProfileCoachListSql">
 			SELECT 
 				<include refid="profileColumnSql"/>
-				<include refid="leagueColumnSql"/>
-				<include refid="profileTeamColumnSql"/>
+				<include refid="profilePlayerColumnSql"/>
+<!-- 				<include refid="profileTeamColumnSql"/> -->
 <!-- 				<include refid="profileAttributeColumnSql"/> -->
 <!-- 				<include refid="profileAttributeElementColumnSql"/> -->
 			FROM TB_PROFILE 						p
-			INNER JOIN TB_PROFILE_TEAM 				pt 		ON p.profile_id = pt.profile_id
-			INNER JOIN TB_LEAGUE_INFO 				li 		ON li.league_id = pt.league_id
+			INNER JOIN TB_PROFILE_PLAYER 			pp 		ON p.profile_id = pp.profile_id			
+<!-- 			INNER JOIN TB_PROFILE_TEAM 				pt 		ON p.profile_id = pt.profile_id -->
+<!-- 			INNER JOIN TB_LEAGUE_INFO 				li 		ON li.league_id = pt.league_id -->
 <!-- 			LEFT JOIN TB_PROFILE_ATTR 	  			pa		ON p.cat_id1 = pa.cat_id -->
 <!-- 			LEFT JOIN TB_PROFILE_ATTR_ELEMENT_MAP 	paem 	ON p.profile_id = paem.profile_id AND pa.profile_attr_id = paem.profile_attr_id		 -->
     	</sql>
@@ -319,7 +320,18 @@
 			AND p.profile_id = #{profileId}  	
 				</if>
 			</where>
-			ORDER BY p.create_date DESC   		
+			ORDER BY p.create_date DESC   
+			<choose>
+				<when test="profileType == 1">
+				, psh.h_stat_year DESC, psf.f_stat_year DESC, psp.p_stat_year DESC
+				</when>	
+				<when test="profileType == 2">
+				
+				</when>
+				<when test="profileType == 3">
+				
+				</when>	
+			</choose>	
     	</select>
 
 		<resultMap id="profileListMap" type="profile.profileDto">
@@ -429,45 +441,45 @@
 				<id 	column="stat_hitter_id" property="statHitterId"/>
 				<result column="h_team_name" 	property="hTeamName"/>
 				<result column="h_stat_year" 	property="hStatYear"/>
-				<result column="g" 				property="g"/>
-				<result column="ab" 			property="ab"/>
-				<result column="r" 				property="r"/>
-				<result column="h" 				property="h"/>
-				<result column="two_b" 			property="twoB"/>
-				<result column="three_b" 		property="threeB"/>
-				<result column="hr" 			property="hr"/>
-				<result column="rbi" 			property="rbi"/>
-				<result column="bb" 			property="bb"/>
-				<result column="so" 			property="so"/>
-				<result column="sb" 			property="sb"/>
-				<result column="cs" 			property="cs"/>
-				<result column="avg" 			property="avg"/>
-				<result column="obp" 			property="obp"/>
-				<result column="slg" 			property="slg"/>
-				<result column="ops" 			property="ops"/>
-				<result column="etc" 			property="etc"/>
+				<result column="h_g" 				property="g"/>
+				<result column="h_ab" 			property="ab"/>
+				<result column="h_r" 				property="r"/>
+				<result column="h_h" 				property="h"/>
+				<result column="h_two_b" 			property="twoB"/>
+				<result column="h_three_b" 		property="threeB"/>
+				<result column="h_hr" 			property="hr"/>
+				<result column="h_rbi" 			property="rbi"/>
+				<result column="h_bb" 			property="bb"/>
+				<result column="h_so" 			property="so"/>
+				<result column="h_sb" 			property="sb"/>
+				<result column="h_cs" 			property="cs"/>
+				<result column="h_avg" 			property="avg"/>
+				<result column="h_obp" 			property="obp"/>
+				<result column="h_slg" 			property="slg"/>
+				<result column="h_ops" 			property="ops"/>
+				<result column="h_etc" 			property="etc"/>
 			</collection>
 			<collection property="profileStatFielderList" ofType="profile.profileStatFielderDto">
 				<id 	column="stat_fielder_id" 	property="statFielderId"/>
 				<result column="f_team_name" 		property="fTeamName"/>
 				<result column="f_stat_year" 		property="fStatYear"/>
-				<result column="pos" 				property="pos"/>
-				<result column="g" 					property="g"/>
-				<result column="gs" 				property="gs"/>
-				<result column="inn" 				property="inn"/>
-				<result column="tc" 				property="tc"/>
-				<result column="po" 				property="po"/>
-				<result column="a" 					property="a"/>
-				<result column="e" 					property="e"/>
-				<result column="dp" 				property="dp"/>
-				<result column="sb" 				property="sb"/>
-				<result column="cs" 				property="cs"/>
-				<result column="sbpct" 				property="sbpct"/>
-				<result column="pb" 				property="pb"/>
-				<result column="c_wp" 				property="cWp"/>
-				<result column="fpct" 				property="fpct"/>
-				<result column="rf" 				property="rf"/>
-				<result column="etc" 				property="etc"/>
+				<result column="f_pos" 				property="pos"/>
+				<result column="f_g" 					property="g"/>
+				<result column="f_gs" 				property="gs"/>
+				<result column="f_inn" 				property="inn"/>
+				<result column="f_tc" 				property="tc"/>
+				<result column="f_po" 				property="po"/>
+				<result column="f_a" 					property="a"/>
+				<result column="f_e" 					property="e"/>
+				<result column="f_dp" 				property="dp"/>
+				<result column="f_sb" 				property="sb"/>
+				<result column="f_cs" 				property="cs"/>
+				<result column="f_sbpct" 				property="sbpct"/>
+				<result column="f_pb" 				property="pb"/>
+				<result column="f_c_wp" 				property="cWp"/>
+				<result column="f_fpct" 				property="fpct"/>
+				<result column="f_rf" 				property="rf"/>
+				<result column="f_etc" 				property="etc"/>
 			</collection>				
 		</resultMap>
 		<!-- 검색 리스트 목록 조회 -->			

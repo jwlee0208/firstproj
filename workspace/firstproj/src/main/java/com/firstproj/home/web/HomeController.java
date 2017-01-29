@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.firstproj.board.dto.BoardArticleDto;
 import com.firstproj.board.service.BoardArticleRedisServiceImpl;
 import com.firstproj.board.service.BoardArticleServiceImpl;
 import com.firstproj.profile.dto.ProfileDto;
@@ -42,18 +43,23 @@ public class HomeController {
 	
 	@RequestMapping(value="/home")
 	public String goHome(Model model, HttpSession session) throws Exception{
-
+		// recent player list 
 		ProfileDto profilePlayerDto = new ProfileDto();
 		profilePlayerDto.setCatId1("01010100");
 		profilePlayerDto.setProfileType("1");
 		List<ProfileDto> profilePlayerList = this.profileService.getProfileInfos(profilePlayerDto);
 		model.addAttribute("recentPlayerProfileList", profilePlayerList);
-
+		// recent team list
 		ProfileDto profileTeamDto = new ProfileDto();
 		profileTeamDto.setCatId1("01010300");
 		profileTeamDto.setProfileType("3");
 		List<ProfileDto> profileTeamList = this.profileService.getProfileInfos(profileTeamDto);
 		model.addAttribute("recentTeamProfileList", profileTeamList);
+		// recent tryout list
+	    BoardArticleDto boardDto01 = new BoardArticleDto();
+	    boardDto01.setBoardId(15);
+	    List<BoardArticleDto> recentTryoutList = this.boardArticleService.selectBoardArticleFive(boardDto01);
+	    model.addAttribute("recentTryoutList"  , recentTryoutList);
 		
 	    return "home";
 	}	

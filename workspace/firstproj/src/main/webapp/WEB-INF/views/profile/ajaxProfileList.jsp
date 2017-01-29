@@ -15,46 +15,67 @@
 		</div>	
 	</c:when>
 	<c:otherwise>
-		<div>
-			<c:forEach var="list" items="${profileList}">
-				<div class="col-sm-6 col-md-4">
-					<div class="thumbnail">
+			<c:forEach var="list" items="${profileList}" varStatus="index">
+				<c:if test="${index.count%3 eq 1}">		
+			<div class="card-deck">
+				</c:if>
+				<div class="card">
 						<c:choose>
 							<c:when test="${list.profileImgPath ne null && list.profileImgPath ne ''}">
 						<img src="http://jwlee0208.cdn3.cafe24.com/${list.profileImgPath}" 
-							 data-src="holder.js/250x200" alt="image" class="img-responsive" 
+							 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid" 
 							 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
 							 onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');"  
-							 style="padding-top:10px; cursor:pointer; max-width: 300px; height: 200px;"/>
+							 style="cursor:pointer;"/>
 							</c:when>
 							<c:otherwise>
 						<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
-							 data-src="holder.js/250x200" alt="image" class="img-responsive"
+							 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid"
 							 onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');" 
-							 style="padding-top:10px; cursor:pointer; max-width: 300px; height: 200px;"/>
+							 style="cursor:pointer;"/>
 							</c:otherwise>
 						</c:choose>					
-						<div class="caption" style="cursor:pointer;">
-							<h3>
-								<span onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');">${list.name}</span><br/>
+						<div class="card-block" style="cursor:pointer;">
+							<p class="card-text">
 								<c:choose>
 									<c:when test="${list.profileType eq 1}">
 										<c:set var="playerInfo" value="${list.profilePlayerDto}"/>
 										<img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(playerInfo.nationality)}.png" width="30px" height="20px"/>&nbsp;
-										<small><tag:message code="code.country.${fn:toUpperCase(playerInfo.nationality)}"/></small>
+										<span class="btn btn-outline-primary btn-sm"><tag:message code="code.country.${fn:toUpperCase(playerInfo.nationality)}"/></span>
+										<span class="btn btn-outline-info btn-sm">
+										<c:if test="${list.catId2 eq '01010101'}"><tag:message code="attr.position.p"/></c:if>
+										<c:if test="${list.catId2 eq '01010102'}"><tag:message code="attr.position.cc"/></c:if>
+										<c:if test="${list.catId2 eq '01010103'}"><tag:message code="attr.position.1b"/></c:if>
+										<c:if test="${list.catId2 eq '01010104'}"><tag:message code="attr.position.2b"/></c:if>
+										<c:if test="${list.catId2 eq '01010105'}"><tag:message code="attr.position.3b"/></c:if>
+										<c:if test="${list.catId2 eq '01010106'}"><tag:message code="attr.position.ss"/></c:if>
+										<c:if test="${list.catId2 eq '01010107'}"><tag:message code="attr.position.lf"/></c:if>
+										<c:if test="${list.catId2 eq '01010108'}"><tag:message code="attr.position.cf"/></c:if>
+										<c:if test="${list.catId2 eq '01010109'}"><tag:message code="attr.position.rf"/></c:if>
+										<c:if test="${list.catId2 eq '01010110'}"><tag:message code="attr.position.dh"/></c:if>
+										</span>
 									</c:when>
 									<c:when test="${list.profileType eq 2}">
-									
+										<c:set var="playerInfo" value="${list.profilePlayerDto}"/>
+										<img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(playerInfo.nationality)}.png" width="30px" height="20px"/>&nbsp;
+										<span class="btn btn-outline-primary btn-sm"><tag:message code="code.country.${fn:toUpperCase(playerInfo.nationality)}"/></span>									
 									</c:when>
 									<c:when test="${list.profileType eq 3}">
 										<c:set var="teamInfo" value="${list.profileTeamDto}"/>
 										<c:set var="leagueInfo" value="${list.leagueInfoDto}"/>
 										<img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(leagueInfo.country)}.png" data-src="holder.js/30x20" width="30px" height="20px"/>&nbsp;
-										<small><tag:message code="code.country.${fn:toUpperCase(leagueInfo.country)}"/> | ${teamInfo.city}</small>	
-										<br/>
-										<small><tag:message code="code.leaguetype.${leagueInfo.leagueType}"/> | Division ${leagueInfo.leagueDivision}</small>									
+										<span class="btn btn-outline-primary btn-sm"><tag:message code="code.country.${fn:toUpperCase(leagueInfo.country)}"/></span>
+										<span class="btn btn-outline-info btn-sm">${teamInfo.city}</span>	
+										<div>
+										<span class="btn btn-outline-success btn-sm"><tag:message code="code.leaguetype.${leagueInfo.leagueType}"/></span>
+										<span class="btn btn-outline-info btn-sm">Division ${leagueInfo.leagueDivision}</span>		
+										</div>							
 									</c:when>
 								</c:choose>
+							</p>	
+								<br/>
+							<h3 class="card-title">	
+								<span onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');">${list.name}</span>
 							</h3>
 							<div class="btn-group btn-group-lg btn-group-justified">
 								<c:forEach var="attrInfo" items="${list.profileAttrList}">
@@ -67,17 +88,17 @@
 							</div>
 							<p class="content_${index.count}">
 							</p>
-							<p>
-<%-- 								<span class="btn btn-info btn-block btn-md" role="button" onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.detailview'/></span> --%>
-								<span class="btn btn-info btn-block btn-md" role="button" onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');"><tag:message code='button.detailview'/></span>
-							</p>
+						</div>	
+						<div class="card-footer">
+						<span class="btn btn-outline-primary btn-lg btn-block" role="button" aria-pressed="true" onclick="javascript:goProfileView('${list.profileId}', '${list.profileType}');"><tag:message code='button.detailview'/></span>
 						</div>
-	
-					</div>	
 				</div>
-			
+				<c:if test="${index.count%3 eq 0}">
+			</div>	
+			<br/>
+				</c:if>
 			</c:forEach>
-		</div>
+		
 	</c:otherwise>
 </c:choose>
 

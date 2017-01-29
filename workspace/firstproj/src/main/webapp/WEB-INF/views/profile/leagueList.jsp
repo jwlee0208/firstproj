@@ -3,9 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"	%>
 <%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag"%>
-<!DOCTYPE HTML>
-<html lang="ko">
-<head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" 	content="IE=Edge" />
 <meta name="viewport" 				content="width=device-width, initial-scale=1">
@@ -19,8 +16,6 @@
 
 <link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/pagination.css">
 <link 	rel="stylesheet" 		href="${pageContext.request.contextPath}/css/profileList.css">
-</head>
-<body>
 <form id="listFrm" name="listFrm" method="post">
 	<div class="container">
 	
@@ -37,39 +32,49 @@
 			<div id="listDiv" role="main">
 <c:choose>
 	<c:when test="${!empty leagueList}">
-		<c:forEach var="leagueInfo" items="${leagueList}">
-				<div class="col-sm-6 col-md-4">
-					<div class="thumbnail">
+		<c:forEach var="leagueInfo" items="${leagueList}" varStatus="index">
+		<c:if test="${index.count%3 eq 1}">
+				<div class="card-deck">
+		</c:if>		
+					<div class="card">
 						<c:choose>
 							<c:when test="${leagueInfo.leagueImgPath ne null && leagueInfo.leagueImgPath ne ''}">
 						<img src="http://jwlee0208.cdn3.cafe24.com/${leagueInfo.leagueImgPath}" 
-							 data-src="holder.js/250x200" alt="image" class="img-thumbnail" 
+							 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid" 
 							 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
 							 onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');"  
-							 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
+							 style="cursor:pointer; "/>
 							</c:when>
 							<c:otherwise>
 						<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
-							 data-src="holder.js/250x200" alt="image" class="img-thumbnail"
+							 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid"
 							 onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');" 
-							 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
+							 style="cursor:pointer; "/>
 							</c:otherwise>
 						</c:choose>	
-						<div class="caption" style="cursor:pointer;">				
-							<h3><span onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');">${leagueInfo.leagueName}</span>
-							<br/>
-							<small><tag:message code="code.leaguetype.${leagueInfo.leagueType}"/></small>
-							<br/>
-							<small><tag:message code="code.area.${leagueInfo.area}"/></small>
-							<br/>
-							<small><img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(leagueInfo.country)}.png" width="30px" height="20px"/>&nbsp;<tag:message code="code.country.${fn:toUpperCase(leagueInfo.country)}"/></small>
-							</h3>
-							<p>
-								<span class="btn btn-danger btn-block" 		role="button" onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');" data-toggle="modal" data-target="#myModal">See Detail</span>
+						<div class="card-block" style="cursor:pointer;">				
+							<p class="card-text">
+							<img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(leagueInfo.country)}.png" width="30px" height="20px"/>&nbsp;<tag:message code="code.country.${fn:toUpperCase(leagueInfo.country)}"/>
+							<br/><br/>
+							<span class="btn btn-outline-info btn-sm">
+							<tag:message code="code.area.${leagueInfo.area}"/>
+							</span>
+							<span class="btn btn-outline-primary btn-sm">
+							<tag:message code="code.leaguetype.${leagueInfo.leagueType}"/>
+							</span>
 							</p>
-						</div>	
-					</div>	
-				</div>
+							<h3 class="card-title"><span onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');">${leagueInfo.leagueName}</span>
+							</h3>
+						</div>
+						<div class="card-footer">
+							<span class="btn btn-outline-danger btn-block" 		role="button" onclick="javascript:goDetailLeague('${leagueInfo.leagueId}');" >See Detail</span>
+						</div>
+
+					</div>		
+				<c:if test="${index.count%3 eq 0}">
+				</div>	
+				<br/>
+				</c:if>
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
@@ -80,9 +85,9 @@
 			<!-- // list area -->
 		<c:if test="${isLogon}">
 			<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">
-				<div class="btn-group">
+				
 					<input type="button" class="btn btn-default pull-right" value="새로운 리그 등록" name="goToRegistLeague" />
-				</div>
+				
 			</div>		
 		</c:if>
 		</div>	
@@ -91,7 +96,6 @@
 	<c:import url="/common/modalPopup"/>
 	<!-- // modal popup area -->	
 </form>
-</body>
 <script>
 $(document).on("ready", function() {
 	$("input[name='goToRegistLeague']").on("click", function() {
@@ -121,15 +125,16 @@ function isEmpty(val){
 }
 
 function goDetailLeague(leagueId){
-	$.ajax({
-		url : '/profile/leagueView/' + leagueId,
-		data : '',
-		dataType : 'html',
-		success : function(data){
-			$('.modal-title').html(($(data).find("h2").html()));
-			$('.modal-body').html(data);
-		}
-	});
+	location.href = '/profile/leagueView/' + leagueId;
+// 	$.ajax({
+// 		url : '/profile/leagueView/' + leagueId,
+// 		data : '',
+// 		dataType : 'html',
+// 		success : function(data){
+// 			$('.modal-title').html(($(data).find("h2").html()));
+// 			$('.modal-body').html(data);
+// 		}
+// 	});
 }
 
 // modal 창 조회후 close시 html 초기화 : css issue
@@ -138,4 +143,3 @@ function initModalHtml(){
 }
 
 </script>
-</html>

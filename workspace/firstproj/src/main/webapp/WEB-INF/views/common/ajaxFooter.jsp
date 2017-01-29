@@ -61,4 +61,13 @@ var _hmt = _hmt || [];
 	  <p>Copyrightⓒ2014 All right reserved by LinkedNest</p>
       <p>|&nbsp;<a href="/common/privateRule" class="btn btn_link" target="_blank"><tag:message code='text.privatepolicy'/></a>&nbsp;|&nbsp;<a href="/common/useRule" class="btn btn_link" target="_blank"><tag:message code='text.termsofuse'/></a>&nbsp;|</p>
       <p><a href="#"><tag:message code='text.backtotop'/></a></p>
+
+<!-- translator script -->      
+<!-- <div id="google_translate_element"></div> -->
+<!-- <script type="text/javascript"> -->
+// function googleTranslateElementInit() {
+//  new google.translate.TranslateElement({pageLanguage: 'ko', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT, gaTrack: true, gaId: 'UA-65838621-1'}, 'google_translate_element');
+// }
+<!-- </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+        
 </footer>
