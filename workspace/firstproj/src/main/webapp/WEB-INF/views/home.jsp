@@ -7,75 +7,102 @@
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/profile/profileView.js"></script>
 <style>
 .jumbotron {
-    position: relative;
-    background: #000 url("../img/home/img06.jpg") center center;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    overflow: hidden;
-    text-shadow: #444 0 1px 1px;
-    color: white; 
+background: #000 url("../img/home/img06.jpg") center center;
+background-size: cover; 
+overflow: hidden;
 }
 iframe {width : 250px; height : 200px; align:center;}
 </style>
 
-	<div class="jumbotron" class="padding-top:0px;">
-		<h2>Why Don't You Try To Find Your Team?</h2>
-<%-- 		<h1><tag:message code='main.text1'/></h1> --%>
-<%-- 		<p><tag:message code='sub.text1'/></p> --%>
-<%-- 		<p><tag:message code='sub.text2'/></p> --%>
-<%-- 		<p><tag:message code='sub.text3'/></p> --%>
-		<p>&nbsp;</p>
-		<p><strong>"<tag:message code='sub.text4'/>"</strong> - 'Yogi' Lawrence Peter Berra</p>
-		<input type="button" class="btn btn-success btn-lg pull-right registProfile" value="Regist Your Profile"/>
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-3" style="color:#efefef;">Find &nbsp;|&nbsp; Join &nbsp;|&nbsp; Play</h1>
+			<p class="lead" style="color:#efefef;">Why Don't You Try To Find Your Team?</p>
+			<p class="lead" style="color:#efefef;"><strong>"<tag:message code='sub.text4'/>"</strong> - 'Yogi' Lawrence Peter Berra</p>
+			<input type="button" class="btn btn-primary btn-lg registProfile" value="Regist Your Profile"/>		
+		</div>
 	</div>
 	<form id="mainFrm" name="mainFrm" method="post"></form>	
 	<div class="container" role="main">
 		<h4><tag:message code='text.recentregistplayers'/>&nbsp;&nbsp;<small><a href="/profile/list/1/01010100"><tag:message code='button.more'/></a></small></h4>
 		
-		<div class="row">
 		<c:choose>
 			<c:when test="${!empty recentPlayerProfileList}">
-				<c:forEach var="recentPlayerProfileInfo" items="${recentPlayerProfileList}">
-					<div class="col-md-4">
-						<div class="thumbnail">
+				<c:forEach var="recentPlayerProfileInfo" items="${recentPlayerProfileList}" varStatus="index">
+					<c:if test="${index.count%3 eq 1}">		
+				<div class="card-deck">
+					</c:if>
+					<div class="card">
 							<c:choose>
 								<c:when test="${recentPlayerProfileInfo.profileImgPath ne null && recentPlayerProfileInfo.profileImgPath ne ''}">
 							<img src="http://jwlee0208.cdn3.cafe24.com/${recentPlayerProfileInfo.profileImgPath}" 
-								 data-src="holder.js/250x200" alt="image" class="img-thumbnail" 
+								 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid" 
 								 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
 								 onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');" 
-								 data-toggle="modal" data-target="#myModal" 
-								 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
+								 style="cursor:pointer; "/>
 								</c:when>
 								<c:otherwise>
 							<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
-								 data-src="holder.js/250x200" alt="image" class="img-thumbnail"
+								 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid"
 								 onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');" 
-								 data-toggle="modal" data-target="#myModal" 
-								 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
+								 style="cursor:pointer;"/>
 								</c:otherwise>
 							</c:choose>	
-							<div class="caption" style="cursor:pointer;">
-								<h3 style="background: #efefef; padding:5px 0 5px 0px; text-align:center;"><span onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');">${recentPlayerProfileInfo.name}</span></h3>
-<!-- 								<div class="btn-group btn-group-lg btn-group-justified"> -->
-<%-- 									<c:if test="${!empty recentPlayerProfileInfo.profileAttrList}"> --%>
-<%-- 									<c:forEach var="profileAttrElemInfo" items="${recentPlayerProfileInfo.profileAttrList}"> --%>
-<%-- 										<c:if test="${!empty profileAttrElemInfo.profileAttrElementMapList}"> --%>
-<%-- 											<c:forEach var="profileAttrElemInfo" items="${profileAttrElemInfo.profileAttrElementMapList}"> --%>
-<%-- 									<div class="btn btn-default">${profileAttrElemInfo.profileAttrElementMapName}</div> --%>
-<%-- 											</c:forEach> --%>
-<%-- 										</c:if>	 --%>
-<%-- 									</c:forEach>				 --%>
-<%-- 									</c:if> --%>
-<!-- 								</div> -->
-								<p class="content_${index.count}"></p>
+							<div class="card-block" style="cursor:pointer;">
+							
+								<p class="card-text">
+									<c:choose>
+										<c:when test="${recentPlayerProfileInfo.profileType eq 1}">
+											<c:set var="playerInfo" value="${recentPlayerProfileInfo.profilePlayerDto}"/>
+											<img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(playerInfo.nationality)}.png" width="30px" height="20px"/>&nbsp;
+											<span class="btn btn-outline-primary btn-sm"><tag:message code="code.country.${fn:toUpperCase(playerInfo.nationality)}"/></span>
+											<span class="btn btn-outline-info btn-sm">
+											<c:if test="${recentPlayerProfileInfo.catId2 eq '01010101'}"><tag:message code="attr.position.p"/></c:if>
+											<c:if test="${recentPlayerProfileInfo.catId2 eq '01010102'}"><tag:message code="attr.position.cc"/></c:if>
+											<c:if test="${recentPlayerProfileInfo.catId2 eq '01010103'}"><tag:message code="attr.position.1b"/></c:if>
+											<c:if test="${recentPlayerProfileInfo.catId2 eq '01010104'}"><tag:message code="attr.position.2b"/></c:if>
+											<c:if test="${recentPlayerProfileInfo.catId2 eq '01010105'}"><tag:message code="attr.position.3b"/></c:if>
+											<c:if test="${recentPlayerProfileInfo.catId2 eq '01010106'}"><tag:message code="attr.position.ss"/></c:if>
+											<c:if test="${recentPlayerProfileInfo.catId2 eq '01010107'}"><tag:message code="attr.position.lf"/></c:if>
+											<c:if test="${recentPlayerProfileInfo.catId2 eq '01010108'}"><tag:message code="attr.position.cf"/></c:if>
+											<c:if test="${recentPlayerProfileInfo.catId2 eq '01010109'}"><tag:message code="attr.position.rf"/></c:if>
+											<c:if test="${recentPlayerProfileInfo.catId2 eq '01010110'}"><tag:message code="attr.position.dh"/></c:if>
+											</span>
+										</c:when>
+										<c:when test="${recentPlayerProfileInfo.profileType eq 2}">
+											<c:set var="playerInfo" value="${recentPlayerProfileInfo.profilePlayerDto}"/>
+											<img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(playerInfo.nationality)}.png" width="30px" height="20px"/>&nbsp;
+											<span class="btn btn-outline-primary btn-sm"><tag:message code="code.country.${fn:toUpperCase(playerInfo.nationality)}"/></span>									
+										</c:when>
+										<c:when test="${recentPlayerProfileInfo.profileType eq 3}">
+											<c:set var="teamInfo" value="${recentPlayerProfileInfo.profileTeamDto}"/>
+											<c:set var="leagueInfo" value="${recentPlayerProfileInfo.leagueInfoDto}"/>
+											<img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(leagueInfo.country)}.png" data-src="holder.js/30x20" width="30px" height="20px"/>&nbsp;
+											<span class="btn btn-outline-primary btn-sm"><tag:message code="code.country.${fn:toUpperCase(leagueInfo.country)}"/></span>
+											<span class="btn btn-outline-info btn-sm">${teamInfo.city}</span>	
+											<div>
+											<span class="btn btn-outline-success btn-sm"><tag:message code="code.leaguetype.${leagueInfo.leagueType}"/></span>
+											<span class="btn btn-outline-info btn-sm">Division ${leagueInfo.leagueDivision}</span>		
+											</div>							
+										</c:when>
+									</c:choose>
+								</p>	
+									<br/>							
+							
+								<h3 class="card-title"><span onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');">${recentPlayerProfileInfo.name}</span></h3>
+								<p class="content_${index.count} card-text"></p>
 								<p>
-									<span class="btn btn-danger btn-block" 		role="button" onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.watchme'/></span>
+									
 								</p>
 							</div>
-						</div>		
+							<div class="card-footer">
+								<span class="btn btn-outline-danger btn-block" 		role="button" onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');"><tag:message code='button.watchme'/></span>					
+							</div>
 					</div>
+				<c:if test="${index.count%3 eq 0 or index.count eq recentPlayerProfileList.size()}">
+				</div>	
+				<br/>
+				</c:if>	
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
@@ -84,34 +111,73 @@ iframe {width : 250px; height : 200px; align:center;}
 				</div>
 			</c:otherwise>	
 		</c:choose>
-		</div>			
+				
 		
 		<h4>Recent Registered Team List&nbsp;&nbsp;<small><a href="/profile/list/3/01010300"><tag:message code='button.more'/></a></small></h4>
-		<div class="row">
 		<c:choose>
 			<c:when test="${!empty recentTeamProfileList}">
-				<c:forEach var="recentTeamProfileInfo" items="${recentTeamProfileList}">
-					<div class="col-md-4">
-						<div class="thumbnail">
+				<c:forEach var="recentTeamProfileInfo" items="${recentTeamProfileList}" varStatus="index">
+					<c:if test="${index.count%3 eq 1}">		
+				<div class="card-deck">
+					</c:if>
+					<div class="card">
 							<c:choose>
 								<c:when test="${recentTeamProfileInfo.profileImgPath ne null && recentTeamProfileInfo.profileImgPath ne ''}">
 							<img src="http://jwlee0208.cdn3.cafe24.com/${recentTeamProfileInfo.profileImgPath}" 
-								 data-src="holder.js/250x200" alt="image" class="img-thumbnail" 
+								 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid"" 
 								 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
-								 onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');" 
-								 data-toggle="modal" data-target="#myModal" 
-								 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
+								 onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');"  
+								 style="cursor:pointer;"/>
 								</c:when>
 								<c:otherwise>
 							<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
-								 data-src="holder.js/250x200" alt="image" class="img-thumbnail"
+								 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid""
 								 onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');" 
-								 data-toggle="modal" data-target="#myModal" 
-								 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
+								 style="cursor:pointer;"/>
 								</c:otherwise>
 							</c:choose>	
-							<div class="caption" style="cursor:pointer;">
-								<h3 style="background: #efefef; padding:5px 0 5px 0px; text-align:center;"><span onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');">${recentTeamProfileInfo.name}</span></h3>
+							<div class="card-block" style="cursor:pointer;">
+								<p class="card-text">
+									<c:choose>
+										<c:when test="${recentTeamProfileInfo.profileType eq 1}">
+											<c:set var="playerInfo" value="${recentTeamProfileInfo.profilePlayerDto}"/>
+											<img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(playerInfo.nationality)}.png" width="30px" height="20px"/>&nbsp;
+											<span class="btn btn-outline-primary btn-sm"><tag:message code="code.country.${fn:toUpperCase(playerInfo.nationality)}"/></span>
+											<span class="btn btn-outline-info btn-sm">
+											<c:if test="${recentTeamProfileInfo.catId2 eq '01010101'}"><tag:message code="attr.position.p"/></c:if>
+											<c:if test="${recentTeamProfileInfo.catId2 eq '01010102'}"><tag:message code="attr.position.cc"/></c:if>
+											<c:if test="${recentTeamProfileInfo.catId2 eq '01010103'}"><tag:message code="attr.position.1b"/></c:if>
+											<c:if test="${recentTeamProfileInfo.catId2 eq '01010104'}"><tag:message code="attr.position.2b"/></c:if>
+											<c:if test="${recentTeamProfileInfo.catId2 eq '01010105'}"><tag:message code="attr.position.3b"/></c:if>
+											<c:if test="${recentTeamProfileInfo.catId2 eq '01010106'}"><tag:message code="attr.position.ss"/></c:if>
+											<c:if test="${recentTeamProfileInfo.catId2 eq '01010107'}"><tag:message code="attr.position.lf"/></c:if>
+											<c:if test="${recentTeamProfileInfo.catId2 eq '01010108'}"><tag:message code="attr.position.cf"/></c:if>
+											<c:if test="${recentTeamProfileInfo.catId2 eq '01010109'}"><tag:message code="attr.position.rf"/></c:if>
+											<c:if test="${recentTeamProfileInfo.catId2 eq '01010110'}"><tag:message code="attr.position.dh"/></c:if>
+											</span>
+										</c:when>
+										<c:when test="${recentTeamProfileInfo.profileType eq 2}">
+											<c:set var="playerInfo" value="${recentTeamProfileInfo.profilePlayerDto}"/>
+											<img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(playerInfo.nationality)}.png" width="30px" height="20px"/>&nbsp;
+											<span class="btn btn-outline-primary btn-sm"><tag:message code="code.country.${fn:toUpperCase(playerInfo.nationality)}"/></span>									
+										</c:when>
+										<c:when test="${recentTeamProfileInfo.profileType eq 3}">
+											<c:set var="teamInfo" value="${recentTeamProfileInfo.profileTeamDto}"/>
+											<c:set var="leagueInfo" value="${recentTeamProfileInfo.leagueInfoDto}"/>
+											<img src="${pageContext.request.contextPath}/img/country/${fn:toLowerCase(leagueInfo.country)}.png" data-src="holder.js/30x20" width="30px" height="20px"/>&nbsp;
+											<span class="btn btn-outline-primary btn-sm"><tag:message code="code.country.${fn:toUpperCase(leagueInfo.country)}"/></span>
+											<span class="btn btn-outline-info btn-sm">${teamInfo.city}</span>	
+											<div>
+											<span class="btn btn-outline-success btn-sm"><tag:message code="code.leaguetype.${leagueInfo.leagueType}"/></span>
+											<span class="btn btn-outline-info btn-sm">Division ${leagueInfo.leagueDivision}</span>		
+											</div>							
+										</c:when>
+									</c:choose>
+								</p>	
+									<br/>
+
+							
+								<h3 class="card-title"><span onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');">${recentTeamProfileInfo.name}</span></h3>
 								<div class="btn-group btn-group-lg btn-group-justified">
 <%-- 									<c:if test="${!empty recentTeamProfileInfo.profileAttrList}"> --%>
 <%-- 									<c:forEach var="profileAttrElemInfo" items="${recentTeamProfileInfo.profileAttrList}"> --%>
@@ -124,12 +190,16 @@ iframe {width : 250px; height : 200px; align:center;}
 <%-- 									</c:if> --%>
 								</div>
 								<p class="content_${index.count}"></p>
-								<p>
-									<span class="btn btn-danger btn-block" 		role="button" onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.watchme'/></span>
-								</p>
 							</div>
-						</div>		
-					</div>
+							<div class="card-footer">
+								<span class="btn btn-outline-danger btn-block" 		role="button" onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');"><tag:message code='button.watchme'/></span>							
+							</div>
+					</div>		
+				<c:if test="${index.count%3 eq 0 or index.count eq recentTeamProfileList.size()}">
+				</div>	
+				<br/>
+				</c:if>	
+					
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
@@ -137,118 +207,10 @@ iframe {width : 250px; height : 200px; align:center;}
 					<h3><tag:message code='text.noregistplayer'/></h3>
 				</div>
 			</c:otherwise>	
-		</c:choose>
-		
-		</div>
+		</c:choose>		
 <!-- // 2016.06.14 이후 작 --> 		
-<!-- 		
-		<div class="row">
-		<c:choose>
-			<c:when test="${!empty recentPlayerList}">
-				<c:forEach var="list" items="${recentPlayerList}">
-					<div class="col-md-6">
-						<div class="thumbnail">
-					<c:choose>
-						<c:when test="${list.playerVideoLinkList[0].linkUrl ne null && list.playerVideoLinkList[0].linkUrl ne ''}">
-						<div style="margin: auto;">
-							<c:out value="${list.playerVideoLinkList[0].linkUrl}" escapeXml="false"/>
-						</div>	
-						</c:when>
-						<c:otherwise>
-							<c:choose>
-								<c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">
-							<img src="http://jwlee0208.cdn3.cafe24.com/${list.profileImgFilePath}" 
-								 data-src="holder.js/250x200" alt="image" class="img-thumbnail" 
-								 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
-								 onclick="javascript:goDetail('${list.userInfo.userId}');" 
-								 data-toggle="modal" data-target="#myModal" 
-								 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
-								</c:when>
-								<c:otherwise>
-							<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
-								 data-src="holder.js/250x200" alt="image" class="img-thumbnail"
-								 onclick="javascript:goDetail('${list.userInfo.userId}');" 
-								 data-toggle="modal" data-target="#myModal" 
-								 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
-								</c:otherwise>
-							</c:choose>	
-						</c:otherwise>
-					</c:choose>			
-							<div class="caption" style="cursor:pointer;">
-								<h3 style="background: #efefef; padding:5px 0 5px 0px; text-align:center;"><span onclick="javascript:goDetail('${list.userInfo.userId}');">${list.userInfo.userNm}</span></h3>
-								<div class="btn-group btn-group-lg btn-group-justified">
-									<c:forEach var="attrElemInfo" items="${list.categoryAttrElemList}">
-									<div class="btn btn-default">${attrElemInfo.attrElemNameStr}</div>
-									</c:forEach>				
-								</div>
-								<p class="content_${index.count}"></p>
-								<p>
-									<span class="btn btn-danger btn-block" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');"><tag:message code='button.watchme'/></span>
-								</p>
-							</div>
-						</div>		
-					</div>
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				<div style="text-align:center; min-height : 70px;vertical-align: middle;">
-					<h3><tag:message code='text.noregistplayer'/></h3>
-				</div>
-			</c:otherwise>	
-		</c:choose>
-		</div>	
-		
-		<h4><tag:message code='text.recentregistteams'/>&nbsp;&nbsp;<small><a href="/team/teamPortal/6"><tag:message code='button.more'/></a></small></h4>
-		<div class="row">
-		<c:choose>
-			<c:when test="${!empty recentTeamList}">
-				<c:forEach var="list" items="${recentTeamList}">
-					<div class="col-md-4">
-						<div class="thumbnail">
-					<c:choose>
-						<c:when test="${list.profileImgFilePath ne null && list.profileImgFilePath ne ''}">
-							<img src="http://jwlee0208.cdn3.cafe24.com/${list.profileImgFilePath}" 
-								 data-src="holder.js/250x200" alt="image" class="img-thumbnail" 
-								 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
-								 onclick="javascript:goDetail('${list.userInfo.userId}');" 
-								 data-toggle="modal" data-target="#myModal" 
-								 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
-						</c:when>
-						<c:otherwise>
-							<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
-								 data-src="holder.js/250x200" alt="image" class="img-thumbnail"
-								 onclick="javascript:goDetail('${list.userInfo.userId}');" 
-								 data-toggle="modal" data-target="#myModal" 
-								 style="padding-top:10px; cursor:pointer; width: 250px; height: 200px;"/>
-						</c:otherwise>
-					</c:choose>					
-							<div class="caption" style="cursor:pointer;">
-								<h3><span onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal">${list.userInfo.userNm}</span></h3>
-									<div class="btn-group btn-group-lg btn-group-justified">
-									<c:forEach var="attrElemInfo" items="${list.categoryAttrElemList}">
-										<div class="btn btn-default">${attrElemInfo.attrElemNameStr}</div>
-									</c:forEach>				
-									</div>
-	
-								<p class="content_${index.count}"></p>
-								<p>
-									<span class="btn btn-primary btn-block" 		role="button" onclick="javascript:goDetail('${list.userInfo.userId}');" data-toggle="modal" data-target="#myModal"><tag:message code='button.detailview'/></span>
-								</p>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				<div style="text-align:center; min-height : 70px;vertical-align: middle;">
-				<h3><tag:message code='text.noregistplayer'/></h3>
-				</div>
-			</c:otherwise>	
-		</c:choose>
-		</div>	
- -->		
 		<h4><tag:message code='text.recenttryoutinfo'/>&nbsp;&nbsp;<small><a href="/share/jwlee/list/15"><tag:message code='button.more'/></a></small></h4>
-		<div class="row" style="padding-left: 10px; padding-right: 10px;">
+<!-- 		<div class="row" style="padding-left: 10px; padding-right: 10px;"> -->
 			<div class="boardDiv li_1_board" style="padding-top : 10px;">
 				<div class="table-responsive">
 					<table class="table table-striped">
@@ -258,7 +220,7 @@ iframe {width : 250px; height : 200px; align:center;}
 							<c:forEach var="article" items="${recentTryoutList}">
 						<tr>
 							<td>${fn:substring(article.createDate, 0, 10)}</td>
-							<td><span onclick="javascript:goArticleView('${article.articleId}');" data-toggle="modal" data-target="#myModal" style="cursor:pointer;">${article.title }</span></td>
+							<td><span onclick="javascript:goArticleView('${article.articleId}');" style="cursor:pointer;">${article.title }</span></td>
 						</tr>	
 							</c:forEach> 
 						</c:when>
@@ -269,7 +231,7 @@ iframe {width : 250px; height : 200px; align:center;}
 					</table>
 				</div>
 			</div>
-		</div>	
+<!-- 		</div>	 -->
 	</div>
 	
 	<!-- Modal -->

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
-<%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="tag"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,754 +9,1303 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- editor -->
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/tinymce/tinymce.min.js"></script>
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/common-editor.js"></script>
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/board/article/common.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/common-editor.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/board/article/common.js"></script>
 
-<script type="text/javascript" 		src="${pageContext.request.contextPath}/js/profile/autocomplete.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/profile/regist.js"></script>
 
-	<style>
-		.fixed-height {
-			padding: 1px;
-			max-height: 200px;
-			overflow: auto;
-		}
-	</style></head>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/profile/autocomplete.js"></script>
+
+<style>
+.fixed-height {
+	padding: 1px;
+	max-height: 200px;
+	overflow: auto;
+}
+</style>
+</head>
 <body>
-<div class="container">
-	<h1 id="btn-groups" class="page-header">Registration&nbsp;&nbsp;<small>Profile</small></h1>
-	<form id="actionFrm" name="actionFrm" method="post" class="form-horizontal" role="form"  enctype="multipart/form-data">	
-		<input type="hidden" id="profileType" name="profileType" value="${profileType}"/>
-		<input type="hidden" id="categoryId" name="categoryId" value="${categoryId}"/>
- 	<c:choose>
-		<c:when test="${profileType eq 1}">
-		<h3>Personal Information</h3>
-		<hr/>
-		<div class="input-group">
-			<span class="input-group-addon">Profile Image</span>
-			<input type="file" class="form-control" id="profileImg" name="profileImg" placeholder="upload your profile image"/>
-		</div>
+	<div class="container">
+		<h1 id="btn-groups" class="page-header">
+			Registration&nbsp;&nbsp;<small>Profile</small>
+		</h1>
 		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">Name</span>
-			<input type="text" class="form-control" id="name" name="name" placeholder="write your name"/>
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">Main Position</span>
-			<input type="hidden" id="catId1" name="catId1" value="01010100"/>
-			<select id="catId2" name="catId2" class="form-control">
-				<option value="">::: select your main position :::</option>
-				<option value="01010101">Pitcher</option>
-				<option value="01010102">Catcher</option>
-				<option value="01010103">First Base</option>
-				<option value="01010104">Second Base</option>
-				<option value="01010105">Third Base</option>
-				<option value="01010106">Short Stop</option>
-				<option value="01010107">Left Fielder</option>
-				<option value="01010108">Center Fielder</option>
-				<option value="01010109">Right Fielder</option>
-				<option value="01010110">DH</option>
-			</select>	
-		</div>
-		<br/>
-		<div class="row">
-  			<div class="col-lg-6">
-			    <div class="input-group">
-			    	<span class="input-group-addon">Height (cm)</span>
-			    	<input type="text" class="form-control" id="height" name="profilePlayerDto.height"/>  
-			    </div> 
-		    </div>
-		    <div class="col-lg-6">
-		    	<div class="input-group">
-		    		<span class="input-group-addon">Weight (kg)</span>
-		    		<input type="text" class="form-control" id="weight" name="profilePlayerDto.weight"/>
-		    	</div>
-		    </div>
-		</div>	
-		<br/>
-		<div class="input-group">
-		    <span class="input-group-addon">Date Of Birth</span>
-			<input type="date" class="form-control" id="birthDate" name="profilePlayerDto.birthDate"/>
-		</div>	
-		<br/>
-		<div class="input-group">
-		    <span class="input-group-addon">Birth Place</span>
-		    <input type="text" class="form-control" id="birthPlace" name="profilePlayerDto.birthPlace"/>
-		</div>	
-		<br/>	
-		<div class="input-group">
-		    <span class="input-group-addon">Education</span>
-		    <textarea class="form-control" id="education" name="profilePlayerDto.education"></textarea>
-		</div>	
-		<br/>		
-		<div class="input-group">
-		    <span class="input-group-addon">Hobbies</span>
-		    <input type="text" class="form-control" id="hobbies" name="profilePlayerDto.hobbies"/>
-		</div>					
-		<br/>
-		<div class="input-group">
-		    <span class="input-group-addon">Favorite Foods</span>
-		    <input type="text" class="form-control" id="favoriteFood" name="profilePlayerDto.favoriteFood"/>
-		</div>	
-		<br/>						
-		<div class="input-group">
-		    <span class="input-group-addon">Nationality</span>
-		    <input type="text" class="form-control" id="nationalitySearch"/>
-		    <input type="hidden" class="form-control" id="nationality" name="profilePlayerDto.nationality"/>
-		</div>	
-		<br/>								
-		<div class="input-group">
-		    <span class="input-group-addon">Language</span>
-		    <input type="text" class="form-control" id="languageSearch"/>
-		    <input type="hidden" class="form-control" id="language" name="profilePlayerDto.language"/>
-		</div>		
-		<br/>									
-		<div class="input-group">
-		    <span class="input-group-addon">Introduce</span>
-		    <textarea class="form-control tinymce" id="introduce" name="introduce"></textarea>
-		</div>
-		
-		<h3>Player Information</h3>
-		<hr/>		
-<c:if test="${!empty profileAttrList}">
-	<c:set var="rowCnt" value="${0}"/>
-	<c:forEach var="profileAttrInfo" items="${profileAttrList}">
-		<div class="row">
-			<h4><tag:message code="text.${profileAttrInfo.profileAttrName}"/></h4>
-			<c:set var="profileAttrElemList" value="${profileAttrInfo.profileAttrElementList}"/>
-			<c:if test="${!empty profileAttrElemList}">
-				<c:forEach var="profileAttrElemInfo" items="${profileAttrElemList}" varStatus="index">
-			<div class="col-lg-2">
-				<div class="input-group">
-					<input type="hidden" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrId" value="${profileAttrInfo.profileAttrId}"/>
-					<input type="hidden" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrName" value="${profileAttrInfo.profileAttrName}"/>
-					<input type="hidden" name="profileAttrElementMapList[${rowCnt}].profileAttrElementName" value="${profileAttrElemInfo.profileAttrElementName}">
-					<span class="input-group-addon"><input type="checkbox" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrElementId" aria-label="Checkbox for following text input" value="${profileAttrElemInfo.profileAttrElementId}"></span>
-					<input type="text" class="form-control" aria-label="Text input with checkbox" name="profileAttrElementMapList[${rowCnt}].profileAttrElementMapName" value="<tag:message code='attr.${profileAttrInfo.profileAttrName}.${profileAttrElemInfo.profileAttrElementName}'/>">
-				</div>			
-			</div>
-				<c:set var="rowCnt" value="${rowCnt+1}"/>	
-				</c:forEach>
-			</c:if>
-		</div>					
-	</c:forEach>			
-</c:if>
-		<br/>
-		<h3>Career&nbsp;&nbsp;<input type="button" class="btn btn-default addCareerBtn" value="+"/></h3>
-		<hr/>
-			<table class="table tableCareer">
-				<thead class="thead-inverse">
-					<tr>
-						<th>Title</th>
-						<th>Description</th>
-						<th>Start Date</th>
-						<th>End Date</th>
-						<th>Status</th>
-						<th>Seq</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr id="career_tr_0" class="career_tr">		
-						<th class="row"><input type="text" class="form-control" id="careerTitle" name="profileCareerList[0].careerTitle"/></th>
-						<td><textarea class="form-control" id="careerTitle" name="profileCareerList[0].careerDescription" row="5" col="20"></textarea></td>
-						<td><input type="month" class="form-control" id="careerStartDate" name="profileCareerList[0].startDate"/></td>
-						<td><input type="month" class="form-control" id="careerEndDate" name="profileCareerList[0].endDate"/></td>
-						<td>
-							<select class="form-control" id="careerTitle" name="profileCareerList[0].careerStatus">
+		<form id="actionFrm" name="actionFrm" method="post"
+			class="form-horizontal" role="form" enctype="multipart/form-data">
+			<input type="hidden" id="profileType" name="profileType"
+				value="${profileType}" /> <input type="hidden" id="categoryId"
+				name="categoryId" value="${categoryId}" />
+			<c:choose>
+				<c:when test="${profileType eq 1}">
+					<h3>Personal Information</h3>
+					<hr />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Profile Image</label>
+						<div class="col-10">
+							<input type="file" class="form-control" id="profileImg"
+								name="profileImg" placeholder="upload your profile image" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Name</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="name" name="name"
+								placeholder="write your name" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Main Position</label>
+						<div class="col-10">
+							<input type="hidden" id="catId1" name="catId1" value="01010100" />
+							<select id="catId2" name="catId2" class="form-control">
+								<option value="">::: select your main position :::</option>
+								<option value="01010101">Pitcher</option>
+								<option value="01010102">Catcher</option>
+								<option value="01010103">First Base</option>
+								<option value="01010104">Second Base</option>
+								<option value="01010105">Third Base</option>
+								<option value="01010106">Short Stop</option>
+								<option value="01010107">Left Fielder</option>
+								<option value="01010108">Center Fielder</option>
+								<option value="01010109">Right Fielder</option>
+								<option value="01010110">DH</option>
+							</select>
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Height (cm)</label>
+						<div class="col-4">
+							<input type="text" class="form-control" id="height"
+								name="profilePlayerDto.height" />
+						</div>
+						<label class="col-2 col-form-label">Weight (kg)</label>
+						<div class="col-4">
+							<input type="text" class="form-control" id="weight"
+								name="profilePlayerDto.weight" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Date Of Birth</label>
+						<div class="col-10">
+							<input type="date" class="form-control" id="birthDate"
+								name="profilePlayerDto.birthDate" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Birth Place</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="birthPlace"
+								name="profilePlayerDto.birthPlace" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Education</label>
+						<div class="col-10">
+							<textarea class="form-control" id="education"
+								name="profilePlayerDto.education"></textarea>
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Hobbies</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="hobbies"
+								name="profilePlayerDto.hobbies" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Favorite Foods</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="favoriteFood"
+								name="profilePlayerDto.favoriteFood" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Language</label>
+						<div class="col-4">
+							<input type="text" class="form-control" id="languageSearch" /> <input
+								type="hidden" class="form-control" id="language"
+								name="profilePlayerDto.language" />
+						</div>
+						<label class="col-2 col-form-label">Nationality</label>
+						<div class="col-4">
+							<input type="text" class="form-control" id="nationalitySearch" />
+							<input type="hidden" class="form-control" id="nationality"
+								name="profilePlayerDto.nationality" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Introduce</label>
+						<div class="col-10">
+							<textarea class="form-control tinymce" id="introduce"
+								name="introduce"></textarea>
+						</div>
+					</div>
+					<br />
+					<h3>Player Information</h3>
+					<hr />
+					<c:if test="${!empty profileAttrList}">
+						<c:set var="rowCnt" value="${0}" />
+						<c:forEach var="profileAttrInfo" items="${profileAttrList}">
+							<div class="form-group row">
+								<label for="inputEmail3" class="col-2 col-form-label"><tag:message
+										code="text.${profileAttrInfo.profileAttrName}" /></label>
+								<div class="col-10">
+									<div class="form-group row">
+										<c:set var="profileAttrElemList"
+											value="${profileAttrInfo.profileAttrElementList}" />
+										<c:if test="${!empty profileAttrElemList}">
+											<c:forEach var="profileAttrElemInfo"
+												items="${profileAttrElemList}" varStatus="index">
+												<input type="hidden" id=""
+													name="profileAttrElementMapList[${rowCnt}].profileAttrId"
+													value="${profileAttrInfo.profileAttrId}" />
+												<input type="hidden" id=""
+													name="profileAttrElementMapList[${rowCnt}].profileAttrName"
+													value="${profileAttrInfo.profileAttrName}" />
+												<input type="hidden"
+													name="profileAttrElementMapList[${rowCnt}].profileAttrElementName"
+													value="${profileAttrElemInfo.profileAttrElementName}">
+												<input type="checkbox" id=""
+													name="profileAttrElementMapList[${rowCnt}].profileAttrElementId"
+													aria-label="Checkbox for following text input"
+													value="${profileAttrElemInfo.profileAttrElementId}">
+												<tag:message
+													code='attr.${profileAttrInfo.profileAttrName}.${profileAttrElemInfo.profileAttrElementName}' />
+												<input type="hidden" class="form-control"
+													aria-label="Text input with checkbox"
+													name="profileAttrElementMapList[${rowCnt}].profileAttrElementMapName"
+													value="<tag:message code='attr.${profileAttrInfo.profileAttrName}.${profileAttrElemInfo.profileAttrElementName}'/>">
+												<c:set var="rowCnt" value="${rowCnt+1}" />
+											</c:forEach>
+										</c:if>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</c:if>
+					<br />
+					<h3>
+						Career
+					</h3>
+					<hr />
+					<div class="form-group row">
+						<label class="col-1 col-form-label">Title</label>
+						<div class="col-2">
+							<input type="text" class="form-control" id="careerTitle"
+								name="careerTitle" />
+						</div>
+						<label class="col-2 col-form-label">Description</label>
+						<div class="col-3">
+							<textarea class="form-control"
+								id="careerDescription" name="careerDescription"></textarea>
+						</div>
+						<label class="col-2 col-form-label">Career Status</label>
+						<div class="col-2">
+							<select class="form-control" id="careerStatus" name="careerStatus">
 								<option value="-1">::: status :::</option>
 								<option value="0">not playing</option>
 								<option value="1">playing</option>
 							</select>
-						</td>
-						<td><input type="number" class="form-control" id="careerSeq" name="profileCareerList[0].careerSeq" min="0" max="100"/></td>
-					</tr>
-				</tbody>
-			</table>	
-		<h3>Play Streamming&nbsp;&nbsp;<input type="button" class="btn btn-default addStreamBtn" value="+"/></h3>
-		<hr/>
-		<div class="row stream_div">
-  			<div class="col-lg-6">
-			    <div class="input-group">
-			    	<span class="input-group-addon">Title</span>
-			    	<input type="text" class="form-control" id="streamTitle_0" name="profileStreamList[0].streamTitle"/>  
-			    </div> 
-		    </div>
-		    <div class="col-lg-6">
-		    	<div class="input-group">
-		    		<span class="input-group-addon">URL</span>
-		    		<input type="text" class="form-control" id="streamUrl_0" name="profileStreamList[0].streamUrl"/>
-		    	</div>
-		    </div>
-		</div>
-		<br/>
-		
-		<h3>Contact Info.</h3>
-		<hr/>		
-		<div class="input-group">
-			<span class="input-group-addon">Email</span>
-		    <input type="email" class="form-control" id="email" name="profileContactInfoDto.email" placeholder="write your e-mail"/>			
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">Phone No.</span>
-		    <input type="tel" class="form-control" id="phoneNo" name="profileContactInfoDto.phoneNo" placeholder="write your phone No."/>			
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">cellPhoneNo</span>
-		    <input type="tel" class="form-control" id="cellPhoneNo" name="profileContactInfoDto.cellPhoneNo" placeholder="write your cell phone No."/>		
-		</div>
-		<br/>
-		<div class="input-group">
- 			<span class="input-group-addon" id="basic-addon3">http://</span>
-		    <input type="url" class="form-control" id="websiteUrl" name="profileContactInfoDto.websiteUrl" placeholder="write your website url" aria-describedby="basic-addon3"/>
-		</div>
-		<br/>		
-		<div class="input-group">
-			<span class="input-group-addon">facebook</span>
-		    <input type="text" class="form-control" id="facebookUrl" name="profileContactInfoDto.faceebookUrl" placeholder="write your facebook id"/>
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">twitter</span>
-		    <input type="text" class="form-control" id="twitterUrl" name="profileContactInfoDto.twitterUrl" placeholder="write your twitter id"/>
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">instagram</span>
-		    <input type="text" class="form-control" id="instagramUrl" name="profileContactInfoDto.instagramUrl" placeholder="write your instagram id"/>
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">Address</span> 				
-			<input type="text" class="form-control" id="address" name="profileContactInfoDto.address" placeholder="write your address"/>		
-		</div>
-		<br/>
-								
-		<h3>Statistics</h3>
-		<hr/>	
-		<h3><small>Pitching Stat</small>&nbsp;&nbsp;<input type="button" class="btn btn-default addPitcherBtn" value="+"/></h3>
-				
-		<table class="table tablePitcherStat">
-			<thead class="table-inverse">
-				<tr>
-					<th>Team</th>
-					<th>Year</th>
-					<th>INN</th>
-					<th>W</th>
-					<th>L</th>
-					<th>ERA</th>
-					<th>G</th>
-					<th>GS</th>
-					<th>SV</th>
-					<th>SVO</th>
-					<th>IP</th>
-					<th>H</th>
-					<th>R</th>
-					<th>ER</th>
-					<th>HR</th>
-					<th>BB</th>
-					<th>SO</th>
-					<th>AVG</th>
-					<th>WHIP</th>
-					<th>K</th>
-					<th>Add</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr id="pitcher_tr_0" class="pitcher_tr">
-					<td><input type="text" 			class="form-control" id="pTeamName_0" name="profileStatPitcherList[0].pTeamName"/></td>
-					<td><input type="month" 		class="form-control" id="pStatYear_0" name="profileStatPitcherList[0].pStatYear"/></td>
-					<td><input type="number" 		class="form-control" id="inn_0" 		name="profileStatPitcherList[0].inn"/></td>
-					<td><input type="number" 		class="form-control" id="w_0" 		name="profileStatPitcherList[0].w"/></td>
-					<td><input type="number" 		class="form-control" id="l_0" 		name="profileStatPitcherList[0].l"/></td>
-					<td><input type="number" 		class="form-control" id="era_0" 		name="profileStatPitcherList[0].era"/></td>
-					<td><input type="number" 		class="form-control" id="g_0" 		name="profileStatPitcherList[0].g"/></td>
-					<td><input type="number" 		class="form-control" id="gs_0" 		name="profileStatPitcherList[0].gs"/></td>
-					<td><input type="number" 		class="form-control" id="sv_0" 		name="profileStatPitcherList[0].sv"/></td>
-					<td><input type="number"		class="form-control" id="svo_0" 		name="profileStatPitcherList[0].svo"/></td>
-					<td><input type="number" 		class="form-control" id="ip_0" 		name="profileStatPitcherList[0].ip"/></td>
-					<td><input type="number" 		class="form-control" id="h_0" 		name="profileStatPitcherList[0].h"/></td>
-					<td><input type="number" 		class="form-control" id="r_0" 		name="profileStatPitcherList[0].r"/></td>
-					<td><input type="number" 		class="form-control" id="er_0" 		name="profileStatPitcherList[0].er"/></td>
-					<td><input type="number" 		class="form-control" id="hr_0" 		name="profileStatPitcherList[0].hr"/></td>
-					<td><input type="number" 		class="form-control" id="bb_0" 		name="profileStatPitcherList[0].bb"/></td>
-					<td><input type="number" 		class="form-control" id="so_0" 		name="profileStatPitcherList[0].so"/></td>
-					<td><input type="number" 		class="form-control" id="avg_0" 		name="profileStatPitcherList[0].avg"/></td>
-					<td><input type="number" 		class="form-control" id="whip_0" 		name="profileStatPitcherList[0].whip"/></td>
-					<td><input type="number" 		class="form-control" id="k_0" 		name="profileStatPitcherList[0].k"/></td>
-					<td><input type="button" 		class="btn btn-default removePitcherBtn" value="-"/></td>
-				</tr>
-			</tbody>
-		</table>		
+						</div>
+					</div>						
+					<div class="form-group row">
+						<label class="col-3 col-form-label">StartDate</label>
+						<div class="col-3">
+							<input type="date" class="form-control" id="careerStartDate"
+								name="careerStartDate" />
+						</div>
+						<label class="col-3 col-form-label">End Date</label>
+						<div class="col-3">
+							<input type="date" class="form-control" id="careerEndDate"
+								name="careerEndDate" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<input type="button"
+							class="btn btn-outline-primary addCareerBtn btn-block" value="Add Career(+)" />
+					</div>		
+					<table class="table tableCareer">
+						<thead class="">
+							<tr>
+								<th>Title</th>
+								<th>Description</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Status</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<br/>
+					<h3>Play Streamming&nbsp;&nbsp;</h3>
+					<hr />
+					<div class="form-group row">
+						<div class="col-10">
+							<input type="text" id="searchYoutubeKeyword"
+								name="searchYoutubeKeyword" class="form-control"
+								placeholder="Search Your Youtube Streams" />
+						</div>
+						<div class="col-2">
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-outline-primary"
+								data-toggle="modal" data-target="#searchMyYoutubeList"
+								id="searchMyYoutube">Search My Youtube</button>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">Title</label>
+						<div class="col-4">
+							<input type="text" class="form-control" id="youtubeTitle"
+								name="youtubeTitle" />
+							<!-- 			    	<input type="text" class="form-control" id="streamTitle_0" name="profileStreamList[0].streamTitle"/>   -->
+						</div>
+						<label class="col-1 col-form-label">URL</label>
+						<div class="col-4">
+							<input type="text" class="form-control" id="youtubeUrl"
+								name="youtubeUrl" />
+							<!-- 		    		<input type="text" class="form-control" id="streamUrl_0" name="profileStreamList[0].streamUrl"/> -->
+						</div>
+						<div class="col-2">
+							<input type="button" class="btn btn-default addStreamBtn"
+								value="+" />
+						</div>
+					</div>
+					<div id="streamList"></div>
+					<!-- Modal -->
+					<div class="modal fade" id="searchMyYoutubeList" tabindex="-1"
+						role="dialog" aria-labelledby="searchMyYoutubeList"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Youtube
+										List</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div id="youtubeListDiv"></div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save
+										changes</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br />
 
-		<h3><small>Hitting Stat</small>&nbsp;&nbsp;<input type="button" class="btn btn-default addHitterBtn" value="+"/></h3>		
-		<table class="table tableHitterStat">
-			<thead class="table-inverse">
-				<tr>
-					<th>Team</th>
-					<th>Year</th>
-					<th>G</th>
-					<th>AB</th>
-					<th>R</th>
-					<th>H</th>
-					<th>2B</th>
-					<th>3B</th>
-					<th>HR</th>
-					<th>RBI</th>
-					<th>BB</th>
-					<th>SO</th>
-					<th>SB</th>
-					<th>CS</th>
-					<th>AVG</th>
-					<th>OBP</th>
-					<th>SLG</th>
-					<th>OPS</th>
-					<th>Add</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr id="hitter_tr_0" class="hitter_tr">
-					<td><input type="text" 			class="form-control" id="hTeamName" 		name="profileStatHitterList[0].hTeamName"/></td>
-					<td><input type="month" 		class="form-control" id="hStatYear" 		name="profileStatHitterList[0].hStatYear"/></td>
-					<td><input type="number" 		class="form-control" id="g" 		name="profileStatHitterList[0].g"/></td>
-					<td><input type="number" 		class="form-control" id="ab" 		name="profileStatHitterList[0].ab"/></td>
-					<td><input type="number" 		class="form-control" id="r" 		name="profileStatHitterList[0].r"/></td>
-					<td><input type="number" 		class="form-control" id="h" 		name="profileStatHitterList[0].h"/></td>
-					<td><input type="number" 		class="form-control" id="twoB" 		name="profileStatHitterList[0].twoB"/></td>
-					<td><input type="number" 		class="form-control" id="threeB" 		name="profileStatHitterList[0].threeB"/></td>
-					<td><input type="number" 		class="form-control" id="hr" 		name="profileStatHitterList[0].hr"/></td>
-					<td><input type="number" 		class="form-control" id="rbi" 		name="profileStatHitterList[0].rbi"/></td>
-					<td><input type="number" 		class="form-control" id="bb" 		name="profileStatHitterList[0].bb"/></td>
-					<td><input type="number" 		class="form-control" id="so" 		name="profileStatHitterList[0].so"/></td>
-					<td><input type="number" 		class="form-control" id="sb" 		name="profileStatHitterList[0].sb"/></td>
-					<td><input type="number" 		class="form-control" id="cs" 		name="profileStatHitterList[0].cs"/></td>
-					<td><input type="number" 		class="form-control" id="avg" 		name="profileStatHitterList[0].avg"/></td>
-					<td><input type="number" 		class="form-control" id="obp" 		name="profileStatHitterList[0].obp"/></td>
-					<td><input type="number" 		class="form-control" id="slg" 		name="profileStatHitterList[0].slg"/></td>
-					<td><input type="number" 		class="form-control" id="ops" 		name="profileStatHitterList[0].ops"/></td>
-					<td><input type="button" 		class="btn btn-default removeHitterBtn" value="-"/></td>
-				</tr>
-			</tbody>
-		</table>	
-		
-		<h3><small>Fielding Stat</small>&nbsp;&nbsp;<input type="button" class="btn btn-default addFielderBtn" value="+"/></h3>
-		<table class="table tableFielderStat">
-			<thead class="table-inverse">
-				<tr>
-					<th>Team</th>
-					<th>Year</th>
-					<th>Position</th>
-					<th>G</th>
-					<th>GS</th>
-					<th>INN</th>
-					<th>TC</th>
-					<th>PO</th>
-					<th>A</th>
-					<th>E</th>
-					<th>DP</th>
-					<th>SB</th>
-					<th>CS</th>
-					<th>SBPCT</th>
-					<th>PB</th>
-					<th>C_WP</th>
-					<th>FPCT</th>
-					<th>PRF</th>
-					<th>Add</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr id="fielder_tr_0" class="fielder_tr">
-					<th class="row"><input type="text" 		class="form-control" id="fTeamName" 		name="profileStatFielderList[0].fTeamName"/></th>								
-	    			<td><input type="month" 		class="form-control" id="fStatYear" 		name="profileStatFielderList[0].fStatYear"/></td>
-	    			<td><input type="number" 		class="form-control" id="pos" 		name="profileStatFielderList[0].pos"/></td>
-	    			<td><input type="number" 		class="form-control" id="g" 		name="profileStatFielderList[0].g"/></td>
-	    			<td><input type="number" 		class="form-control" id="gs" 		name="profileStatFielderList[0].gs"/></td>
-	    			<td><input type="number" 		class="form-control" id="inn" 		name="profileStatFielderList[0].inn"/></td>
-	    			<td><input type="number" 		class="form-control" id="tc" 		name="profileStatFielderList[0].tc"/></td>
-	    			<td><input type="number" 		class="form-control" id="po" 		name="profileStatFielderList[0].po"/></td>
-	    			<td><input type="number" 		class="form-control" id="a" 		name="profileStatFielderList[0].a"/></td>
-	    			<td><input type="number" 		class="form-control" id="e" 		name="profileStatFielderList[0].e"/></td>
-	    			<td><input type="number" 		class="form-control" id="dp" 		name="profileStatFielderList[0].dp"/></td>
-	    			<td><input type="number" 		class="form-control" id="sb" 		name="profileStatFielderList[0].sb"/></td>
-	    			<td><input type="number" 		class="form-control" id="cs" 		name="profileStatFielderList[0].cs"/></td>
-	    			<td><input type="number" 		class="form-control" id="sbpct" 		name="profileStatFielderList[0].sbpct"/></td>
-	    			<td><input type="number" 		class="form-control" id="pb" 		name="profileStatFielderList[0].pb"/></td>
-	    			<td><input type="number" 		class="form-control" id="cWp" 		name="profileStatFielderList[0].cWp"/></td>
-	    			<td><input type="number" 		class="form-control" id="fpct" 		name="profileStatFielderList[0].fpct"/></td>
-	    			<td><input type="number" 		class="form-control" id="rf" 		name="profileStatFielderList[0].rf"/></td>
-	    			<td><input type="button" 		class="btn btn-default removeFielderBtn" value="-"/></td>
-				</tr>
-			</tbody>
-		</table>											
-		</c:when>
-		<c:when test="${profileType eq 2}">
-		
-		</c:when>
-		<c:when test="${profileType eq 3}">
-		
-			<input type="hidden" id="catId1" name="catId1" value="01010300"/>
-			<input type="hidden" id="catId2" name="catId2" value="01010301"/>	
-		
-		<h3>Team Information</h3>
-		<hr/>
-		<div class="input-group">
-			<span class="input-group-addon">Profile Image</span>
-			<input type="file" class="form-control" id="profileImg" name="profileImg" placeholder="upload your profile image"/>
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">Name</span>
-			<input type="text" class="form-control" id="name" name="name" placeholder="write your name"/>
-		</div>
-		<br/>
-		<div class="input-group">
-		    <span class="input-group-addon">Introduce</span>
-		    <textarea class="form-control tinymce" id="introduce" name="introduce"></textarea>
-		</div>
-		<br/>
-<c:if test="${!empty profileAttrList}">
-	<c:set var="rowCnt" value="${0}"/>
-	<c:forEach var="profileAttrInfo" items="${profileAttrList}">
-		<div class="row">
-			<h4>${profileAttrInfo.profileAttrName}</h4>
-			<c:set var="profileAttrElemList" value="${profileAttrInfo.profileAttrElementList}"/>
-			<c:if test="${!empty profileAttrElemList}">
-				<c:forEach var="profileAttrElemInfo" items="${profileAttrElemList}" varStatus="index">
-			<div class="col-lg-2">
-				<div class="input-group">
-					<input type="hidden" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrId" value="${profileAttrInfo.profileAttrId}"/>
-					<input type="hidden" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrName" value="${profileAttrInfo.profileAttrName}"/>
-					<span class="input-group-addon"><input type="checkbox" id="" name="profileAttrElementMapList[${rowCnt}].profileAttrElementId" aria-label="Checkbox for following text input" value="${profileAttrElemInfo.profileAttrElementId}"></span>
-					<input type="text" class="form-control" aria-label="Text input with checkbox" name="profileAttrElementMapList[${rowCnt}].profileAttrElementMapName" value="${profileAttrElemInfo.profileAttrElementName}">
-				</div>			
+					<h3>Contact Info.</h3>
+					<hr />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Email</label>
+						<div class="col-10">
+							<input type="email" class="form-control" id="email"
+								name="profileContactInfoDto.email"
+								placeholder="write your e-mail" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Phone No.</label>
+						<div class="col-10">
+							<input type="tel" class="form-control" id="phoneNo"
+								name="profileContactInfoDto.phoneNo"
+								placeholder="write your phone No." />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">cellPhoneNo</label>
+						<div class="col-10">
+							<input type="tel" class="form-control" id="cellPhoneNo"
+								name="profileContactInfoDto.cellPhoneNo"
+								placeholder="write your cell phone No." />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">website url</label>
+						<div class="col-10">
+							<input type="url" class="form-control" id="websiteUrl"
+								name="profileContactInfoDto.websiteUrl"
+								placeholder="write your website url"
+								aria-describedby="basic-addon3" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">facebook</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="facebookUrl"
+								name="profileContactInfoDto.faceebookUrl"
+								placeholder="write your facebook id" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">twitter</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="twitterUrl"
+								name="profileContactInfoDto.twitterUrl"
+								placeholder="write your twitter id" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">instagram</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="instagramUrl"
+								name="profileContactInfoDto.instagramUrl"
+								placeholder="write your instagram id" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Address</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="address"
+								name="profileContactInfoDto.address"
+								placeholder="write your address" />
+						</div>
+					</div>
+					<br />
+					<h3>Statistics</h3>
+					<hr />
+					<h3>
+						<small>Pitching Stat</small>
+					</h3>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">Team Name</label>
+						<div class="col-2">
+							<input type="text" class="form-control" id="pTeamName_pitch_stat"
+								name="pitch_stat_pTeamName" />
+						</div>
+						<label class="col-1 col-form-label">Year</label>
+						<div class="col-2">
+							<input type="month" class="form-control"
+								id="pStatYear_pitch_stat" name="pitch_stat_pStatYear"/>
+						</div>
+						<label class="col-1 col-form-label">INN</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="inn_pitch_stat"
+								name="pitch_stat_inn" value="0.0" />
+						</div>
+						<label class="col-1 col-form-label">W</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="w_pitch_stat"
+								name="pitch_stat_w" value="0" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">L</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="l_pitch_stat"
+								name="pitch_stat_l" value="0" />
+						</div>
+						<label class="col-1 col-form-label">ERA</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="era_pitch_stat"
+								name="pitch_stat_era" value="0.0" />
+						</div>
+						<label class="col-1 col-form-label">G</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="g_pitch_stat"
+								name="pitch_stat_g" value="0" />
+						</div>
+						<label class="col-1 col-form-label">GS</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="gs_pitch_stat"
+								name="pitch_stat_gs" value="0" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">SV</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="sv_pitch_stat"
+								name="pitch_stat_sv" value="0" />
+						</div>
+						<label class="col-1 col-form-label">SVO</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="svo_pitch_stat"
+								name="pitch_stat_svo" value="0" />
+						</div>
+						<label class="col-1 col-form-label">IP</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="ip_pitch_stat"
+								name="pitch_stat_ip" value="0.0" />
+						</div>
+						<label class="col-1 col-form-label">H</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="h_pitch_stat"
+								name="pitch_stat_h" value="0" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">R</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="r_pitch_stat"
+								name="pitch_stat_r" value="0" />
+						</div>
+						<label class="col-1 col-form-label">ER</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="er_pitch_stat"
+								name="pitch_stat_er" value="0" />
+						</div>
+						<label class="col-1 col-form-label">HR</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="hr_pitch_stat"
+								name="pitch_stat_hr" value="0" />
+						</div>
+						<label class="col-1 col-form-label">BB</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="bb_pitch_stat"
+								name="pitch_stat_bb" value="0" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">SO</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="so_pitch_stat"
+								name="pitch_stat_so" value="0" />
+						</div>
+						<label class="col-1 col-form-label">AVG</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="avg_pitch_stat"
+								name="pitch_stat_avg" value="0.0" />
+						</div>
+						<label class="col-1 col-form-label">WHIP</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="whip_pitch_stat"
+								name="pitch_stat_whip" value="0.0" />
+						</div>
+						<label class="col-1 col-form-label">K</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="k_pitch_stat"
+								name="pitch_stat_k" value="0" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<input type="button" class="btn btn-outline-primary addPitcherBtn"
+							value="Add Pitching Stat(+)" />
+					</div>
+					<table class="table tablePitcherStat">
+						<thead class="">
+							<tr>
+								<th>Team</th>
+								<th>Year</th>
+								<th>INN</th>
+								<th>W</th>
+								<th>L</th>
+								<th>ERA</th>
+								<th>G</th>
+								<th>GS</th>
+								<th>SV</th>
+								<th>SVO</th>
+								<th>IP</th>
+								<th>H</th>
+								<th>R</th>
+								<th>ER</th>
+								<th>HR</th>
+								<th>BB</th>
+								<th>SO</th>
+								<th>AVG</th>
+								<th>WHIP</th>
+								<th>K</th>
+								<th>DEL</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<br />
+					<h3>
+						<small>Hitting Stat</small>
+					</h3>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">Team Name</label>
+						<div class="col-2">
+							<input type="text" class="form-control" id="hTeamName_hit_stat"
+								name="hit_stat_hTeamName" />
+						</div>
+						<label class="col-1 col-form-label">Year</label>
+						<div class="col-2">
+							<input type="month" class="form-control" id="hStatYear_hit_stat"
+								name="hit_stat_hStatYear" />
+						</div>
+						<label class="col-1 col-form-label">G</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="g_hit_stat"
+								name="hit_stat_g" value="0" />
+						</div>
+						<label class="col-1 col-form-label">AB</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="ab_hit_stat"
+								name="hit_stat_ab" value="0" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">R</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="r_hit_stat"
+								name="hit_stat_r" value="0" />
+						</div>
+						<label class="col-1 col-form-label">H</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="h_hit_stat"
+								name="hit_stat_h" value="0" />
+						</div>
+						<label class="col-1 col-form-label">2B</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="twoB_hit_stat"
+								name="hit_stat_twoB" value="0" />
+						</div>
+						<label class="col-1 col-form-label">3B</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="threeB_hit_stat"
+								name="hit_stat_threeB" value="0" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">HR</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="hr_hit_stat"
+								name="hit_stat_hr" value="0" />
+						</div>
+						<label class="col-1 col-form-label">RBI</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="rbi_hit_stat"
+								name="hit_stat_rbi" value="0" />
+						</div>
+						<label class="col-1 col-form-label">BB</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="bb_hit_stat"
+								name="hit_stat_bb" value="0" />
+						</div>
+						<label class="col-1 col-form-label">SO</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="so_hit_stat"
+								name="hit_stat_so" value="0" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">SB</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="sb_hit_stat"
+								name="hit_stat_sb" value="0" />
+						</div>
+						<label class="col-1 col-form-label">CS</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="cs_hit_stat"
+								name="hit_stat_cs" value="0" />
+						</div>
+						<label class="col-1 col-form-label">AVG</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="avg_hit_stat"
+								name="hit_stat_avg" value="0.0" />
+						</div>
+
+						<label class="col-1 col-form-label">OBP</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="obp_hit_stat"
+								name="hit_stat_obp" value="0.0" />
+						</div>
+
+					</div>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">SLG</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="slg_hit_stat"
+								name="hit_stat_slg" value="0.0" />
+						</div>
+						<label class="col-1 col-form-label">OPS</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="ops_hit_stat"
+								name="hit_stat_ops" value="0.0" />
+						</div>
+						<div class="col-6"></div>
+					</div>
+					<div class="form-group row">
+						<input type="button" class="btn btn-outline-primary addHitterBtn"
+							value="Add Hitting Stat(+)" />
+					</div>
+					<table class="table tableHitterStat">
+						<thead class="">
+							<tr>
+								<th>Team</th>
+								<th>Year</th>
+								<th>G</th>
+								<th>AB</th>
+								<th>R</th>
+								<th>H</th>
+								<th>2B</th>
+								<th>3B</th>
+								<th>HR</th>
+								<th>RBI</th>
+								<th>BB</th>
+								<th>SO</th>
+								<th>SB</th>
+								<th>CS</th>
+								<th>AVG</th>
+								<th>OBP</th>
+								<th>SLG</th>
+								<th>OPS</th>
+								<th>Add</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<br/>
+					<h3>
+						<small>Fielding Stat</small>
+					</h3>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">Team Name</label>
+						<div class="col-2">
+							<input type="text" class="form-control" id="fTeamName_field_stat"
+								name="field_stat_fTeamName" />
+						</div>
+						<label class="col-1 col-form-label">Year</label>
+						<div class="col-2">
+							<input type="month" class="form-control"
+								id="fStatYear_field_stat" name="field_stat_fStatYear"/>
+						</div>
+						<label class="col-1 col-form-label">POS</label>
+						<div class="col-2">
+							<select id="pos_field_stat" name="field_stat_pos" class="form-control">
+								<option value="">::: select position :::</option>
+								<option value="P">Pitcher</option>
+								<option value="C">Catcher</option>
+								<option value="1B">1st Base</option>
+								<option value="2B">2nd Base</option>
+								<option value="3B">3rd Base</option>
+								<option value="SS">Short Stop</option>
+								<option value="LF">Left Fielder</option>
+								<option value="CF">Center Fielder</option>
+								<option value="RF">Right Fielder</option>
+								<option value="DH">DH</option>
+							</select>						
+						</div>
+						<label class="col-1 col-form-label">G</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="g_field_stat"
+								name="field_stat_g" value="0" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">GS</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="gs_field_stat"
+								name="field_stat_gs" value="0" />
+						</div>
+						<label class="col-1 col-form-label">INN</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="inn_field_stat"
+								name="field_stat_inn" value="0.0" />
+						</div>						
+						<label class="col-1 col-form-label">TC</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="tc_field_stat"
+								name="field_stat_tc" value="0" />
+						</div>
+						<label class="col-1 col-form-label">PO</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="po_field_stat"
+								name="field_stat_po" value="0" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">A</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="a_field_stat"
+								name="field_stat_a" value="0" />
+						</div>
+						<label class="col-1 col-form-label">E</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="e_field_stat"
+								name="field_stat_e" value="0" />
+						</div>
+
+						<label class="col-1 col-form-label">DP</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="dp_field_stat"
+								name="field_stat_dp" value="0" />
+						</div>
+						<label class="col-1 col-form-label">SB</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="sb_field_stat"
+								name="field_stat_sb" value="0" />
+						</div>
+					</div>		
+
+					<div class="form-group row">
+						<label class="col-1 col-form-label">CS</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="cs_field_stat"
+								name="field_stat_cs" value="0" />
+						</div>
+						<label class="col-1 col-form-label">SBPCT</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="sbpct_field_stat"
+								name="field_stat_sbpct" value="0" />
+						</div>
+
+						<label class="col-1 col-form-label">PB</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="pb_field_stat"
+								name="field_stat_pb" value="0" />
+						</div>
+						<label class="col-1 col-form-label">cWP</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="cwp_field_stat"
+								name="field_stat_cwp" value="0" />
+						</div>
+					</div>										
+					<div class="form-group row">
+						<label class="col-1 col-form-label">FPCT</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="fpct_field_stat"
+								name="field_stat_fpct" value="0.0" />
+						</div>
+						<label class="col-1 col-form-label">RF</label>
+						<div class="col-2">
+							<input type="number" class="form-control" id="rf_field_stat"
+								name="field_stat_rf" value="0.0" />
+						</div>
+						<div class="col-6">
+						</div>
+					</div>										
+					<div class="form-group row">
+						<input type="button"
+							class="btn btn-outline-primary addFielderBtn" value="Add Fielding Stat(+)" />					
+					</div>													
+					
+					<table class="table tableFielderStat">
+						<thead class="">
+							<tr>
+								<th>Team</th>
+								<th>Year</th>
+								<th>Position</th>
+								<th>G</th>
+								<th>GS</th>
+								<th>INN</th>
+								<th>TC</th>
+								<th>PO</th>
+								<th>A</th>
+								<th>E</th>
+								<th>DP</th>
+								<th>SB</th>
+								<th>CS</th>
+								<th>SBPCT</th>
+								<th>PB</th>
+								<th>C_WP</th>
+								<th>FPCT</th>
+								<th>PRF</th>
+								<th>Add</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</c:when>
+				<c:when test="${profileType eq 2}">
+					<h3>Personal Information</h3>
+					<hr />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Profile Image</label>
+						<div class="col-10">
+							<input type="file" class="form-control" id="profileImg"
+								name="profileImg" placeholder="upload your profile image" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Name</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="name" name="name"
+								placeholder="write your name" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Height (cm)</label>
+						<div class="col-4">
+							<input type="text" class="form-control" id="height"
+								name="profilePlayerDto.height" />
+						</div>
+						<label class="col-2 col-form-label">Weight (kg)</label>
+						<div class="col-4">
+							<input type="text" class="form-control" id="weight"
+								name="profilePlayerDto.weight" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Date Of Birth</label>
+						<div class="col-10">
+							<input type="date" class="form-control" id="birthDate"
+								name="profilePlayerDto.birthDate" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Birth Place</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="birthPlace"
+								name="profilePlayerDto.birthPlace" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Education</label>
+						<div class="col-10">
+							<textarea class="form-control" id="education"
+								name="profilePlayerDto.education"></textarea>
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Hobbies</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="hobbies"
+								name="profilePlayerDto.hobbies" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Favorite Foods</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="favoriteFood"
+								name="profilePlayerDto.favoriteFood" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Language</label>
+						<div class="col-4">
+							<input type="text" class="form-control" id="languageSearch" /> <input
+								type="hidden" class="form-control" id="language"
+								name="profilePlayerDto.language" />
+						</div>
+						<label class="col-2 col-form-label">Nationality</label>
+						<div class="col-4">
+							<input type="text" class="form-control" id="nationalitySearch" />
+							<input type="hidden" class="form-control" id="nationality"
+								name="profilePlayerDto.nationality" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Introduce</label>
+						<div class="col-10">
+							<textarea class="form-control tinymce" id="introduce"
+								name="introduce"></textarea>
+						</div>
+					</div>
+					<br />
+					<h3>
+						Career
+					</h3>
+					<hr />
+					<div class="form-group row">
+						<label class="col-1 col-form-label">Title</label>
+						<div class="col-2">
+							<input type="text" class="form-control" id="careerTitle"
+								name="careerTitle" />
+						</div>
+						<label class="col-2 col-form-label">Description</label>
+						<div class="col-3">
+							<textarea class="form-control"
+								id="careerDescription" name="careerDescription"></textarea>
+						</div>
+						<label class="col-2 col-form-label">Career Status</label>
+						<div class="col-2">
+							<select class="form-control" id="careerStatus" name="careerStatus">
+								<option value="-1">::: status :::</option>
+								<option value="0">done</option>
+								<option value="1">doing</option>
+							</select>
+						</div>
+					</div>						
+					<div class="form-group row">
+						<label class="col-3 col-form-label">StartDate</label>
+						<div class="col-3">
+							<input type="date" class="form-control" id="careerStartDate"
+								name="careerStartDate" />
+						</div>
+						<label class="col-3 col-form-label">End Date</label>
+						<div class="col-3">
+							<input type="date" class="form-control" id="careerEndDate"
+								name="careerEndDate" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<input type="button"
+							class="btn btn-outline-primary addCareerBtn btn-block" value="Add Career(+)" />
+					</div>		
+					<table class="table tableCareer">
+						<thead class="">
+							<tr>
+								<th>Title</th>
+								<th>Description</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Status</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<br/>
+					<h3>Play Streamming&nbsp;&nbsp;</h3>
+					<hr />
+					<div class="form-group row">
+						<div class="col-10">
+							<input type="text" id="searchYoutubeKeyword"
+								name="searchYoutubeKeyword" class="form-control"
+								placeholder="Search Your Youtube Streams" />
+						</div>
+						<div class="col-2">
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-outline-primary"
+								data-toggle="modal" data-target="#searchMyYoutubeList"
+								id="searchMyYoutube">Search My Youtube</button>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-1 col-form-label">Title</label>
+						<div class="col-4">
+							<input type="text" class="form-control" id="youtubeTitle"
+								name="youtubeTitle" />
+							<!-- 			    	<input type="text" class="form-control" id="streamTitle_0" name="profileStreamList[0].streamTitle"/>   -->
+						</div>
+						<label class="col-1 col-form-label">URL</label>
+						<div class="col-4">
+							<input type="text" class="form-control" id="youtubeUrl"
+								name="youtubeUrl" />
+							<!-- 		    		<input type="text" class="form-control" id="streamUrl_0" name="profileStreamList[0].streamUrl"/> -->
+						</div>
+						<div class="col-2">
+							<input type="button" class="btn btn-default addStreamBtn"
+								value="+" />
+						</div>
+					</div>
+					<div id="streamList"></div>
+					<!-- Modal -->
+					<div class="modal fade" id="searchMyYoutubeList" tabindex="-1"
+						role="dialog" aria-labelledby="searchMyYoutubeList"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Youtube
+										List</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div id="youtubeListDiv"></div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save
+										changes</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br />
+
+					<h3>Contact Info.</h3>
+					<hr />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Email</label>
+						<div class="col-10">
+							<input type="email" class="form-control" id="email"
+								name="profileContactInfoDto.email"
+								placeholder="write your e-mail" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Phone No.</label>
+						<div class="col-10">
+							<input type="tel" class="form-control" id="phoneNo"
+								name="profileContactInfoDto.phoneNo"
+								placeholder="write your phone No." />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">cellPhoneNo</label>
+						<div class="col-10">
+							<input type="tel" class="form-control" id="cellPhoneNo"
+								name="profileContactInfoDto.cellPhoneNo"
+								placeholder="write your cell phone No." />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">website url</label>
+						<div class="col-10">
+							<input type="url" class="form-control" id="websiteUrl"
+								name="profileContactInfoDto.websiteUrl"
+								placeholder="write your website url"
+								aria-describedby="basic-addon3" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">facebook</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="facebookUrl"
+								name="profileContactInfoDto.faceebookUrl"
+								placeholder="write your facebook id" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">twitter</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="twitterUrl"
+								name="profileContactInfoDto.twitterUrl"
+								placeholder="write your twitter id" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">instagram</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="instagramUrl"
+								name="profileContactInfoDto.instagramUrl"
+								placeholder="write your instagram id" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Address</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="address"
+								name="profileContactInfoDto.address"
+								placeholder="write your address" />
+						</div>
+					</div>
+					<br />
+
+				</c:when>
+				<c:when test="${profileType eq 3}">
+
+					<input type="hidden" id="catId1" name="catId1" value="01010300" />
+					<input type="hidden" id="catId2" name="catId2" value="01010301" />
+
+					<h3>Team Information</h3>
+					<hr />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Profile Image</label>
+						<div class="col-10">
+							<input type="file" class="form-control" id="profileImg"
+								name="profileImg" placeholder="upload your profile image" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Name</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="name" name="name"
+								placeholder="write your name" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Introduce</label>
+						<div class="col-10">
+							<textarea class="form-control tinymce" id="introduce"
+								name="introduce"></textarea>
+						</div>
+					</div>
+					<br />
+					<c:if test="${!empty profileAttrList}">
+						<c:set var="rowCnt" value="${0}" />
+						<c:forEach var="profileAttrInfo" items="${profileAttrList}">
+							<div class="row">
+								<h4>${profileAttrInfo.profileAttrName}</h4>
+								<c:set var="profileAttrElemList"
+									value="${profileAttrInfo.profileAttrElementList}" />
+								<c:if test="${!empty profileAttrElemList}">
+									<c:forEach var="profileAttrElemInfo"
+										items="${profileAttrElemList}" varStatus="index">
+										<div class="col-lg-2">
+											<div class="form-group row">
+												<input type="hidden" id=""
+													name="profileAttrElementMapList[${rowCnt}].profileAttrId"
+													value="${profileAttrInfo.profileAttrId}" /> <input
+													type="hidden" id=""
+													name="profileAttrElementMapList[${rowCnt}].profileAttrName"
+													value="${profileAttrInfo.profileAttrName}" /> <label
+													class="col-2 col-form-label"><input type="checkbox"
+													id=""
+													name="profileAttrElementMapList[${rowCnt}].profileAttrElementId"
+													aria-label="Checkbox for following text input"
+													value="${profileAttrElemInfo.profileAttrElementId}"></label>
+												<input type="text" class="form-control"
+													aria-label="Text input with checkbox"
+													name="profileAttrElementMapList[${rowCnt}].profileAttrElementMapName"
+													value="${profileAttrElemInfo.profileAttrElementName}">
+											</div>
+										</div>
+										<c:set var="rowCnt" value="${rowCnt+1}" />
+									</c:forEach>
+								</c:if>
+							</div>
+						</c:forEach>
+					</c:if>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">League</label>
+						<div class="col-10">
+							<select class="form-control" id="leagueId"
+								name="profileTeamDto.leagueId">
+								<c:if test="${!empty leagueInfoList}">
+									<c:forEach var="leagueInfo" items="${leagueInfoList}">
+										<option value="${leagueInfo.leagueId}">[${leagueInfo.area}]${leagueInfo.leagueName}</option>
+									</c:forEach>
+								</c:if>
+							</select>
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">City</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="profileTeamDto.city"
+								name="profileTeamDto.city" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Established Date</label>
+						<div class="col-10">
+							<input type="date" class="form-control"
+								id="profileTeamDto.establishedDate"
+								name="profileTeamDto.establishedDate" />
+						</div>
+					</div>
+					<br />
+					<h3>Contact Info.</h3>
+					<hr />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Email</label>
+						<div class="col-10">
+							<input type="email" class="form-control" id="email"
+								name="profileContactInfoDto.email"
+								placeholder="write your e-mail" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Phone No.</label>
+						<div class="col-10">
+							<input type="tel" class="form-control" id="phoneNo"
+								name="profileContactInfoDto.phoneNo"
+								placeholder="write your phone No." />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">cellPhoneNo</label>
+						<div class="col-10">
+							<input type="tel" class="form-control" id="cellPhoneNo"
+								name="profileContactInfoDto.cellPhoneNo"
+								placeholder="write your cell phone No." />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<span class="form-group row-addon" id="basic-addon3">http://</span>
+						<div class="col-10">
+							<input type="url" class="form-control" id="websiteUrl"
+								name="profileContactInfoDto.websiteUrl"
+								placeholder="write your website url"
+								aria-describedby="basic-addon3" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">facebook</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="facebookUrl"
+								name="profileContactInfoDto.faceebookUrl"
+								placeholder="write your facebook id" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">twitter</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="twitterUrl"
+								name="profileContactInfoDto.twitterUrl"
+								placeholder="write your twitter id" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">instagram</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="instagramUrl"
+								name="profileContactInfoDto.instagramUrl"
+								placeholder="write your instagram id" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Address</label>
+						<div class="col-10">
+							<input type="text" class="form-control" id="address"
+								name="profileContactInfoDto.address"
+								placeholder="write your address" />
+						</div>
+					</div>
+					<br />
+
+				</c:when>
+			</c:choose>
+		</form>
+		<br />
+			<div class="form-group row">
+				<input type="button" class="btn btn-primary btn-block" id="saveBtn"
+					value="Save" data-loading-text="Processing..." />
 			</div>
-				<c:set var="rowCnt" value="${rowCnt+1}"/>	
-				</c:forEach>
-			</c:if>
-		</div>					
-	</c:forEach>			
-</c:if>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">League</span>
-		    <select class="form-control" id="leagueId" name="profileTeamDto.leagueId">
-		    	<c:if test="${!empty leagueInfoList}">
-		    		<c:forEach var="leagueInfo" items="${leagueInfoList}">
-		    	<option value="${leagueInfo.leagueId}">[${leagueInfo.area}]${leagueInfo.leagueName}</option>	
-		    		</c:forEach>
-		    	</c:if>
-		    	
-		    	
-		    </select>			
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">City</span>
-		    <input type="text"	class="form-control" id="profileTeamDto.city" name="profileTeamDto.city"/>		
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">Established Date</span>
-		    <input type="date"	class="form-control" id="profileTeamDto.establishedDate" name="profileTeamDto.establishedDate"/>		
-		</div>
-		<br/>
-		<h3>Contact Info.</h3>
-		<hr/>		
-		<div class="input-group">
-			<span class="input-group-addon">Email</span>
-		    <input type="email" class="form-control" id="email" name="profileContactInfoDto.email" placeholder="write your e-mail"/>			
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">Phone No.</span>
-		    <input type="tel" class="form-control" id="phoneNo" name="profileContactInfoDto.phoneNo" placeholder="write your phone No."/>			
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">cellPhoneNo</span>
-		    <input type="tel" class="form-control" id="cellPhoneNo" name="profileContactInfoDto.cellPhoneNo" placeholder="write your cell phone No."/>		
-		</div>
-		<br/>
-		<div class="input-group">
- 			<span class="input-group-addon" id="basic-addon3">http://</span>
-		    <input type="url" class="form-control" id="websiteUrl" name="profileContactInfoDto.websiteUrl" placeholder="write your website url" aria-describedby="basic-addon3"/>
-		</div>
-		<br/>		
-		<div class="input-group">
-			<span class="input-group-addon">facebook</span>
-		    <input type="text" class="form-control" id="facebookUrl" name="profileContactInfoDto.faceebookUrl" placeholder="write your facebook id"/>
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">twitter</span>
-		    <input type="text" class="form-control" id="twitterUrl" name="profileContactInfoDto.twitterUrl" placeholder="write your twitter id"/>
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">instagram</span>
-		    <input type="text" class="form-control" id="instagramUrl" name="profileContactInfoDto.instagramUrl" placeholder="write your instagram id"/>
-		</div>
-		<br/>
-		<div class="input-group">
-			<span class="input-group-addon">Address</span> 				
-			<input type="text" class="form-control" id="address" name="profileContactInfoDto.address" placeholder="write your address"/>		
-		</div>
-		<br/>
-		
-		</c:when>
-	</c:choose>
-	</form>
-	<div class="btn-group btn-group-justified"">
-		<div class="btn-group">
-			<input type="button" class="btn btn-default" id="saveBtn" value="save" data-loading-text="Processing..."/>	
-		</div>
+		<br />
 	</div>
-	<br/>
-</div>
 </body>
 <script>
-
-	//ajax error check
-	$(document).ajaxError(function(event, request){
-	   if(request.status==500)
-	      alert("등록에 실패하였습니다. \n업로드할 파일을 확인하세요.(파일 최대용량: 20MB)");
-	   	  return;
-	   }
-	);
 	
-	//파일전송 후 콜백 함수
-	function FileuploadCallback(data, state){
-	
-	   if (data=="error"){
-	      alert("파일전송중 에러 발생!!");
-	      return false;
-	   } else if (data == "fileSizeError") {
-		  alert("파일용량은 20MB 이하 이어야 합니다.");
-		  return false;
-	   } else if (data == "fileExtensionError") {
-		   alert("이미지 파일을 업로드 하셔야 합니다.\n(업로드 가능한 확장자: jpg, jpeg, gif, png, bmp)");
-		   return false;
-	   } else if (data == "fileWidthHeightError") {
-		   alert("업로드 가능한 이미지 사이즈는 314 * 166 입니다.");
-		   return false;
-	   }
-	   alert("정상적으로 등록 되었습니다.");
-	   // 정상 등록 후 목록 화면으로 이동.
-	   location.href = "/profile/list/"+ $("#profileType").val() +"/" + $("#categoryId").val();	
-	}
-
-	$(function(){
-		$("#saveBtn").click(function(){
-			var introduce = tinyMCE.get('introduce').getContent();
-			$("#introduce").val(introduce);
-
-			var profileImg = $.trim($("#profileImg").val());
-			
-			if(profileImg.length == 0){
-				$.ajax({
-					url 		: '/profile/registAction',
-					data 		: $("#actionFrm").serialize(),
-					dataType 	: 'json',
-					method 		: 'post',
-					success 	: function(data){
-						var result = data.result;
-						var msg = data.message;
-												
-						if(result == 'success'){
-							location.href = "/profile/list/"+$("#profileType").val() + "/" + $("#categoryId").val();
-						}else{
-							alert(msg);
-							return;
-						}						
-					}
-				});					
-			}else{
-				// 썸네일 파일 업로드 할 때 저장
-				var frm = $("#actionFrm");
-				frm.attr("action", '/profile/registAction');
-				frm.attr("method", "post");
-				frm.ajaxForm(FileuploadCallback); 
-				frm.submit(); 				
-				
-			}
-		});
-		
-		// pitcher stat row removing
-		$("body").on("click", ".removePitcherBtn", function(){
-			$(this).parent().parent().get(0).remove();
-		});
-		// hitter stat row removing
-		$("body").on("click", ".removeHitterBtn", function(){
-			$(this).parent().parent().get(0).remove();
-		});
-		// fielder stat row removing
-		$("body").on("click", ".removeFielderBtn", function(){
-			$(this).parent().parent().get(0).remove();
-		});
-		
-		// career row adding
-		$(".addStreamBtn").click(function(){
-			var rowCount = $(".stream_div").size();
-			if(rowCount >= 10){
-				alert('you can add your stats until 10 rows.');
-				return false;
-			}else{
-				
-				var addStreamHtml = "<div class=\"row stream_div\">";
-				addStreamHtml += "<div class=\"col-lg-6\">";
-				addStreamHtml += "<div class=\"input-group\">";
-				addStreamHtml += "	<span class=\"input-group-addon\">Title</span>";
-				addStreamHtml += "	<input type=\"text\" class=\"form-control\" id=\"streamTitle_"+ rowCount +" name=\"profileStreamList["+ rowCount +"].streamTitle\"/>";  
-				addStreamHtml += "	</div>"; 
-				addStreamHtml += "	</div>";
-				addStreamHtml += "	<div class=\"col-lg-6\">";
-				addStreamHtml += "	<div class=\"input-group\">";
-				addStreamHtml += "		<span class=\"input-group-addon\">URL</span>";
-				addStreamHtml += "		<input type=\"text\" class=\"form-control\" id=\"streamUrl_" + rowCount + "\" name=\"profileStreamList[" + rowCount + "].streamUrl\"/>";
-				addStreamHtml += "	</div>";
-				addStreamHtml += "	</div>";
-				addStreamHtml += "	</div>";
-			
-				$(".stream_div > div:last").append(addStreamHtml);				
-			}
-			
-		});			
-		
-		// career row adding
-		$(".addCareerBtn").click(function(){
-			var rowCount = $(".career_tr").size();
-			if(rowCount >= 10){
-				alert('you can add your stats until 10 rows.');
-				return false;
-			}else{
-				
-				var addCareerHtml = "<tr id=\"career_tr_"+ rowCount +"\" class=\"career_tr\">";		
-				addCareerHtml += "<th class=\"row\"><input type=\"text\" class=\"form-control\" id=\"careerTitle\" name=\"profileCareerList[" + rowCount + "].careerTitle\"/></th>";
-				addCareerHtml += "<td><textarea class=\"form-control\" id=\"careerTitle\" name=\"profileCareerList[" + rowCount + "].careerDescription\" row=\"5\" col=\"20\"></textarea></td>";
-				addCareerHtml += "<td><input type=\"month\" class=\"form-control\" id=\"careerStartDate\" name=\"profileCareerList[" + rowCount + "].startDate\"/></td>";
-				addCareerHtml += "<td><input type=\"month\" class=\"form-control\" id=\"careerEndDate\" name=\"profileCareerList[" + rowCount + "].endDate\"/></td>";
-				addCareerHtml += "<td>";
-				addCareerHtml += "	<select class=\"form-control\" id=\"careerTitle\" name=\"profileCareerList[" + rowCount + "].careerStatus\">";
-				addCareerHtml += "		<option value=\"-1\">::: status :::</option>";
-				addCareerHtml += "		<option value=\"0\">not playing</option>";
-				addCareerHtml += "		<option value=\"1\">playing</option>";
-				addCareerHtml += "	</select>";
-				addCareerHtml += "</td>";
-				addCareerHtml += "<td><input type=\"number\" class=\"form-control\" id=\"careerSeq\" name=\"profileCareerList[0].careerSeq\" min=\"0\" max=\"100\"/></td>";
-				addCareerHtml += "</tr>";				
-			
-				$(".tableCareer > tbody:last").append(addCareerHtml);				
-			}
-			
-		});	
-		
-		
-		
-		// pitcher stat row adding
-		$(".addPitcherBtn").click(function(){
-			var rowCount = $(".pitcher_tr").size();
-			if(rowCount >= 10){
-				alert('you can add your stats until 10 rows.');
-				return false;
-			}else{
-				var addPitcherHtml = "<tr id=\"pitcher_tr_"+ rowCount +"\" class=\"pitcher_tr\">";
-					addPitcherHtml += "<td><input type=\"text\" 		class=\"form-control\" id=\"pTeamName_"+ rowCount +"\" name=\"profileStatPitcherList[" + rowCount + "].pTeamName\"/></td>";
-					addPitcherHtml += "<td><input type=\"month\" 		class=\"form-control\" id=\"pStatYear_"+ rowCount +"\" name=\"profileStatPitcherList[" + rowCount + "].pStatYear\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"inn_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].inn\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"w_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].w\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"l_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].l\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"era_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].era\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"g_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].g\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"gs_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].gs\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"sv_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].sv\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\"		class=\"form-control\" id=\"svo_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].svo\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"ip_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].ip\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"h_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].h\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"r_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].r\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"er_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].er\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"hr_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].hr\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"bb_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].bb\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"so_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].so\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"avg_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].avg\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"whip_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].whip\"/></td>";
-					addPitcherHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"k_"+ rowCount +"\" 		name=\"profileStatPitcherList[" + rowCount + "].k\"/></td>";
-					addPitcherHtml += "<td><input type=\"button\" 		class=\"btn btn-default removePitcherBtn\" value=\"-\"/></td>";
-				addPitcherHtml += "</tr>";
-			
-				$(".tablePitcherStat > tbody:last").append(addPitcherHtml);				
-			}
-			
-		});	
-		// hitter stat row adding
-		$(".addHitterBtn").click(function(){
-			var rowCount = $(".hitter_tr").size();
-			if(rowCount >= 10){
-				alert('you can add your stats until 10 rows.');
-				return false;
-			}else{
-				var addHitterHtml = "<tr id=\"hitter_tr_"+ rowCount +"\" class=\"hitter_tr\">";
-				addHitterHtml += "<td><input type=\"text\" 			class=\"form-control\" id=\"hTeamName_"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].hTeamName\"/></td>";
-				addHitterHtml += "<td><input type=\"month\" 		class=\"form-control\" id=\"hStatYear_"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].hStatYear\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"g"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].g\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"ab"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].ab\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"r"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].r\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"h"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].h\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"twoB"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].twoB\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"threeB"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].threeB\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"hr"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].hr\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"rbi"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].rbi\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"bb"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].bb\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"so"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].so\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"sb"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].sb\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"cs"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].cs\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"avg"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].avg\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"obp"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].obp\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"slg"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].slg\"/></td>";
-				addHitterHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"ops"+ rowCount +"\" 		name=\"profileStatHitterList[" + rowCount + "].ops\"/></td>";
-				addHitterHtml += "<td><input type=\"button\" 		class=\"btn btn-default removeHitterBtn\" value=\"-\"/></td>";
-				addHitterHtml += "</tr>";
-				$(".tableHitterStat > tbody:last").append(addHitterHtml);	
-			}	
-		});
-		// fielder stat row adding
-		$(".addFielderBtn").click(function(){
-			var rowCount = $(".fielder_tr").size();
-			if(rowCount >= 10){
-				alert('you can add your stats until 10 rows.');
-				return false;
-			}else{
-				var addFielderHtml = "<tr id=\"fielder_tr_"+ rowCount +"\" class=\"fielder_tr\">";
-				addFielderHtml += "<th class=\"row\"><input type=\"text\" 		class=\"form-control\" id=\"fTeamName\" 		name=\"profileStatFielderList[" + rowCount + "].fTeamName\"/></th>";								
-				addFielderHtml += "<td><input type=\"month\" 		class=\"form-control\" id=\"fStatYear\" 		name=\"profileStatFielderList[" + rowCount + "].fStatYear\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"pos\" 		name=\"profileStatFielderList[" + rowCount + "].pos\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"g\" 		name=\"profileStatFielderList[" + rowCount + "].g\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"gs\" 		name=\"profileStatFielderList[" + rowCount + "].gs\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"inn\" 		name=\"profileStatFielderList[" + rowCount + "].inn\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"tc\" 		name=\"profileStatFielderList[" + rowCount + "].tc\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"po\" 		name=\"profileStatFielderList[" + rowCount + "].po\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"a\" 		name=\"profileStatFielderList[" + rowCount + "].a\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"e\" 		name=\"profileStatFielderList[" + rowCount + "].e\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"dp\" 		name=\"profileStatFielderList[" + rowCount + "].dp\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"sb\" 		name=\"profileStatFielderList[" + rowCount + "].sb\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"cs\" 		name=\"profileStatFielderList[" + rowCount + "].cs\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"sbpct\" 		name=\"profileStatFielderList[" + rowCount + "].sbpct\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"pb\" 		name=\"profileStatFielderList[" + rowCount + "].pb\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"cWp\" 		name=\"profileStatFielderList[" + rowCount + "].cWp\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"fpct\" 		name=\"profileStatFielderList[" + rowCount + "].fpct\"/></td>";
-				addFielderHtml += "<td><input type=\"number\" 		class=\"form-control\" id=\"rf\" 		name=\"profileStatFielderList[" + rowCount + "].rf\"/></td>";
-				addFielderHtml += "<td><input type=\"button\" 		class=\"btn btn-default removeFielderBtn\" value=\"-\"/></td>";
-				addFielderHtml += "</tr>";
-				$(".tableFielderStat > tbody:last").append(addFielderHtml);	
-			}	
-			
-		});	
-
-	});	
-		
-
-
-
-</script>	
+</script>
 </html>

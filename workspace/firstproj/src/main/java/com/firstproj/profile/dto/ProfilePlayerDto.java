@@ -32,6 +32,10 @@ public class ProfilePlayerDto extends ProfileDto {
 	public float getHeight() {
 		return height;
 	}
+	// feet로 변환
+	public double getHeightAsFeet() {
+		return Double.parseDouble(String.format("%.1f",this.height * 0.0328084));
+	}
 	public void setHeight(float height) {
 		this.height = height;
 	}
@@ -48,6 +52,11 @@ public class ProfilePlayerDto extends ProfileDto {
 	public void setWeight(float weight) {
 		this.weight = weight;
 	}
+	// found로 변환
+	public double getWeightAsFound() {
+		return Double.parseDouble(String.format("%.1f",this.weight * 2.20459)); 
+	}
+	
 	public String getBirthPlace() {
 		return birthPlace;
 	}

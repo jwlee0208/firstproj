@@ -30,16 +30,16 @@
 <meta name="theme-color" content="#ffffff">
 <title>LinkedNest - Link Between Player With Club</title>
 
-<%@ include file="/WEB-INF/views/common/include.jsp"%>
+<%@ include file="/WEB-INF/views/common/includeDefault.jsp"%>
 
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
 	<tiles:insertAttribute name="menu"/>
 	
-<!-- 	<div class="container" role="main"> -->
+	<div role="main">
 		<tiles:insertAttribute name="body"/>
-<!-- 	</div>	 -->
+	</div>	
 	<tiles:insertAttribute name="footer"/>
 </body>
 

@@ -3,9 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 		prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"	%>
 <%@ taglib uri="http://www.springframework.org/tags" 	prefix="tag"%>
-<!DOCTYPE HTML>
-<html lang="ko">
-<head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" 	content="IE=Edge" />
 <meta name="viewport" 				content="width=device-width, initial-scale=1">
@@ -57,45 +54,44 @@
 			<c:if test="${profileType eq 3}">
 				<div id="areaList" style="margin-top:10px;">
 					<div class="row">
-						<div class="col-lg-1"><span class="label label-default"><tag:message code="text.continent"/></span></div>
-						<div class="col-lg-11">
-								<label>		
+						<div class="col-lg-2"><h4><span class="badge badge-primary"><tag:message code="text.continent"/></span></h4></div>
+						<div class="col-lg-10 btn-group">
+								<label class="btn btn-primary">		
 									<input type="radio" id="area1" name="area" value="as" class="attrElemRadio"/>&nbsp;<tag:message code="code.area.as"/>
 								</label>
-								<label>		
+								<label class="btn btn-primary">		
 									<input type="radio" id="area2" name="area" value="na" class="attrElemRadio"/>&nbsp;<tag:message code="code.area.na"/>
 								</label>
-								<label>		
+								<label class="btn btn-primary">		
 									<input type="radio" id="area3" name="area" value="sa" class="attrElemRadio"/>&nbsp;<tag:message code="code.area.sa"/>
 								</label>
-								<label>		
+								<label class="btn btn-primary">		
 									<input type="radio" id="area4" name="area" value="eu" class="attrElemRadio"/>&nbsp;<tag:message code="code.area.eu"/>
 								</label>
-								<label>		
+								<label class="btn btn-primary">		
 									<input type="radio" id="area5" name="area" value="af" class="attrElemRadio"/>&nbsp;<tag:message code="code.area.af"/>
 								</label>
 						</div>
 					</div>
 				</div>
-
 			</c:if>	
 				<div id="countryList">
 					<div class="row">
-						<div class="col-lg-1"><span class="label label-default"><tag:message code="text.countries"/></span></div>
-						<div class="col-lg-11">
-								<label>		
+						<div class="col-lg-2"><h4><span class="badge badge-primary"><tag:message code="text.countries"/></span></h4></div>
+						<div class="col-lg-10 btn-group">
+								<label class="btn btn-primary">		
 									<input type="radio" id="country1" name="country" value="KR" class="attrElemRadio"/>&nbsp;<tag:message code="code.country.KR"/>
 								</label>
-								<label>		
+								<label class="btn btn-primary">		
 									<input type="radio" id="country2" name="country" value="JP" class="attrElemRadio"/>&nbsp;<tag:message code="code.country.JP"/>
 								</label>
-								<label>		
+								<label class="btn btn-primary">		
 									<input type="radio" id="country3" name="country" value="AU" class="attrElemRadio"/>&nbsp;<tag:message code="code.country.AU"/>
 								</label>
-								<label>		
+								<label class="btn btn-primary">		
 									<input type="radio" id="country4" name="country" value="DE" class="attrElemRadio"/>&nbsp;<tag:message code="code.country.DE"/>
 								</label>
-								<label>		
+								<label class="btn btn-primary">		
 									<input type="radio" id="country5" name="country" value="US" class="attrElemRadio"/>&nbsp;<tag:message code="code.country.US"/>
 								</label>
 						</div>
@@ -118,14 +114,14 @@
 			<c:set var="profileAttrElemList" 		value="${profileAttrElementInfo.profileAttrElementList}"/>
 			<c:set var="profileAttrElemListLength"  value="${profileAttrElemList.size()}"/>
 			<div class="row">
-				<div class="col-lg-1"><span class="label label-default"><tag:message code="text.${profileAttrElementInfo.profileAttrName}"/></span></div>
-				<div class="col-lg-11">
+				<div class="col-lg-2"><h4><span class="badge badge-info"><tag:message code="text.${profileAttrElementInfo.profileAttrName}"/></span></h4></div>
+				<div class="col-lg-10 btn-group">
 				<c:if test="${profileAttrElemListLength > 0}">
 						<input type="hidden" id="profileAttrList[${index.count-1}].profileAttrId${profileAttrId}" name="profileAttrList[${index.count-1}].profileAttrId" value="${profileAttrId}" />
 				
 					<c:forEach var="profileAttrElemInfo" items="${profileAttrElemList}" varStatus="childIndex">
 						
-							<label><input type="checkbox" id="profileAttrList[${index.count-1}].profileAttrElementList[${childIndex.count-1}].profileAttrElementId${ProfileAttrElemInfo.profileAttrElementId}" name="profileAttrList[${index.count-1}].profileAttrElementList[${childIndex.count-1}].profileAttrElementId" value="${profileAttrElemInfo.profileAttrElementId}" class="attrElemRadio"/>&nbsp;
+							<label class="btn btn-info"><input type="checkbox" id="profileAttrList[${index.count-1}].profileAttrElementList[${childIndex.count-1}].profileAttrElementId${ProfileAttrElemInfo.profileAttrElementId}" name="profileAttrList[${index.count-1}].profileAttrElementList[${childIndex.count-1}].profileAttrElementId" value="${profileAttrElemInfo.profileAttrElementId}" class="attrElemRadio"/>&nbsp;
 							<tag:message code="attr.${profileAttrElementInfo.profileAttrName}.${profileAttrElemInfo.profileAttrElementName}"/>
 							</label>
 					</c:forEach>
@@ -139,10 +135,10 @@
 			</div>
 			</div>
 			<div class="form-group text-right">
-				<input type="button" data-toggle="collapse" class="btn btn-info" style="margin-right: 10px;" data-target="#searchDetail" value="<tag:message code='text.filtersearch'/>"/>
+				<input type="button" data-toggle="collapse" class="btn btn-outline-primary" style="margin-right: 10px;" data-target="#searchDetail" value="<tag:message code='text.filtersearch'/>"/>
 			</div>					
 			<!-- list area -->
-			<div id="listDiv" role="main"></div>
+			<div id="listDiv" role="main" style="padding:0px 10px 0px 10px;"></div>
 			<!-- // list area -->
 				
 		<c:if test="${isLogon}">

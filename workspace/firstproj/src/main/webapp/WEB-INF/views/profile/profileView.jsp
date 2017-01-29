@@ -10,7 +10,6 @@
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 
 <!-- bootstrap -->
-<link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap-theme.min.css">
 <link 	rel="stylesheet" 			href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" 		src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
 
@@ -28,61 +27,63 @@
 		
 <c:choose>
 	<c:when test="${profileInfo.profileType eq 1}">
-	<h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;<tag:message code="text.personalinfo"/></h3>
+
+	<div style="padding-top:20px;"></div>	
+	<h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span>#&nbsp;&nbsp;<tag:message code="text.personalinfo"/></h3>
 	<hr/>
 
-	<div class="row">
-		<div class="col-sm-6">
-			<img src="http://jwlee0208.cdn3.cafe24.com/${profileInfo.profileImgPath}" class="img-rounded"/>
+	<div class="form-group row">
+		<div class="col-sm-5">
+			<img src="http://jwlee0208.cdn3.cafe24.com/${profileInfo.profileImgPath}" class="img-fluid rounded mx-auto d-block"/>
 		</div>	
-		<div class="col-sm-6">
-	  	<div class="form-group">
-	    	<label for="" class="col-sm-5 control-label"><tag:message code="text.player.name"/></label>
-		    <div class="col-sm-7">
+		<div class="col-sm-7">
+	  	<div class="form-group row">
+	    	<label for="" class="col-sm-4 col-form-label"><tag:message code="text.player.name"/></label>
+		    <div class="col-sm-8">
 		    	<p class="form-control-static">${profileInfo.name}</p>
 			</div>
 		</div>
-		  <div class="form-group">
-		    <label for="" class="col-sm-5 control-label"><tag:message code="text.height"/> / <tag:message code="text.weight"/></label>
-		    <div class="col-sm-7">
-		      <p class="form-control-static">${profileInfo.profilePlayerDto.height}&nbsp;(cm) / ${profileInfo.profilePlayerDto.weight}&nbsp;(kg)</p>
+		  <div class="form-group row">
+		    <label for="" class="col-sm-4 col-form-label"><tag:message code="text.height"/> / <tag:message code="text.weight"/></label>
+		    <div class="col-sm-8">
+		      <p class="form-control-static">${profileInfo.profilePlayerDto.height}&nbsp;cm (${profileInfo.profilePlayerDto.heightAsFeet} feet) / ${profileInfo.profilePlayerDto.weight}&nbsp;kg (${profileInfo.profilePlayerDto.weightAsFound} found)</p>
 		    </div>
 		  </div>
 
-		  <div class="form-group">
-		    <label for="" class="col-sm-5 control-label"><tag:message code="text.dateofbirth"/></label>
-		    <div class="col-sm-7">
+		  <div class="form-group row">
+		    <label for="" class="col-sm-4 col-form-label"><tag:message code="text.dateofbirth"/></label>
+		    <div class="col-sm-8">
 		      <p class="form-control-static">${fn:substring(profileInfo.profilePlayerDto.birthDate,0,10)}</p>
 		    </div>
 		  </div>
 
-		  <div class="form-group">
-		    <label for="" class="col-sm-5 control-label"><tag:message code="text.birthplace"/></label>
-		    <div class="col-sm-7">
+		  <div class="form-group row">
+		    <label for="" class="col-sm-4 col-form-label"><tag:message code="text.birthplace"/></label>
+		    <div class="col-sm-8">
 		      <p class="form-control-static">${profileInfo.profilePlayerDto.birthPlace}</p>
 		    </div>
 		  </div>	
-			<div class="form-group">
-			    <label for="" class="col-sm-5 control-label"><tag:message code="text.education"/></label>
-			    <div class="col-sm-7">
+			<div class="form-group row">
+			    <label for="" class="col-sm-4 col-form-label"><tag:message code="text.education"/></label>
+			    <div class="col-sm-8">
 			    	<p class="form-control-static">${profileInfo.profilePlayerDto.education}</p>
 				</div>
 			</div>	
-			<div class="form-group">
-			    <label for="" class="col-sm-5 control-label"><tag:message code="text.hobbies"/></label>
-			    <div class="col-sm-7">
+			<div class="form-group row">
+			    <label for="" class="col-sm-4 col-form-label"><tag:message code="text.hobbies"/></label>
+			    <div class="col-sm-8">
 			    	<p class="form-control-static">${profileInfo.profilePlayerDto.hobbies}</p>
 				</div>
 			</div>					
-			<div class="form-group">
-			    <label for="" class="col-sm-5 control-label"><tag:message code="text.favoritefood"/></label>
-			    <div class="col-sm-7">
+			<div class="form-group row">
+			    <label for="" class="col-sm-4 col-form-label"><tag:message code="text.favoritefood"/></label>
+			    <div class="col-sm-8">
 				    <p class="form-control-static">${profileInfo.profilePlayerDto.favoriteFood}</p>	    
 			    </div>
 			</div>	
-			<div class="form-group">
-			    <label for="" class="col-sm-5 control-label"><tag:message code="text.nationality"/></label>
-				<div class="col-sm-7">
+			<div class="form-group row">
+			    <label for="" class="col-sm-4 col-form-label"><tag:message code="text.nationality"/></label>
+				<div class="col-sm-8">
 				    <p class="form-control-static">
 				    <c:if test="${profileInfo.profilePlayerDto.nationality ne null && profileInfo.profilePlayerDto.nationality ne ''}">
 				    <tag:message code="code.country.${profileInfo.profilePlayerDto.nationality}"/>
@@ -90,9 +91,9 @@
 				    </p>
 				</div>    
 			</div>	
-			<div class="form-group">
-			    <label for="" class="col-sm-5 control-label"><tag:message code="text.language"/></label>
-			    <div class="col-sm-7">
+			<div class="form-group row">
+			    <label for="" class="col-sm-4 col-form-label"><tag:message code="text.language"/></label>
+			    <div class="col-sm-8">
 				    <p class="form-control-static">
 				    	<c:if test="${profileInfo.profilePlayerDto.language ne null && profileInfo.profilePlayerDto.language ne ''}">
 				    	<tag:message code="code.language.${profileInfo.profilePlayerDto.language}"/>	
@@ -105,13 +106,13 @@
 		
 	</div>	
 	
-		<h3><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>&nbsp;&nbsp;<tag:message code="text.playerattr"/></h3>
+		<h3><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>#&nbsp;&nbsp;<tag:message code="text.playerattr"/></h3>
 		<hr/>
 		<c:set var="profileAttrList" value="${profileInfo.profileAttrList}"/>
 		<c:if test="${!empty profileAttrList}">
 			<c:forEach var="profileAttrInfo" items="${profileAttrList}">
-		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.${profileAttrInfo.profileAttrName}"/></label>
+		<div class="form-group row">
+	    	<label for="" class="col-sm-2 col-form-label"><tag:message code="text.${profileAttrInfo.profileAttrName}"/></label>
 	    	<c:if test="${!empty profileAttrInfo.profileAttrElementMapList}">
 		    <div class="col-sm-10">
 	    		<c:forEach var="profileAttrElemInfo" items="${profileAttrInfo.profileAttrElementMapList}">
@@ -123,8 +124,8 @@
 			</c:forEach>	
 			
 		</c:if>
-		<div class="form-group">
-			<label for="" class="col-sm-2 control-label">Main <tag:message code="text.position"/></label>
+		<div class="form-group row">
+			<label for="" class="col-sm-2 col-form-label">Main <tag:message code="text.position"/></label>
 			<div class="col-sm-10">
 					<span class="btn btn-danger">
 					<c:if test="${profileInfo.catId2 eq '01010101'}"><tag:message code="attr.position.p"/></c:if>
@@ -140,13 +141,13 @@
 					</span>
 			</div>
 		</div>
-		<h3><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>&nbsp;&nbsp;<tag:message code="text.career"/></h3>
+		<h3><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>#&nbsp;&nbsp;<tag:message code="text.career"/></h3>
 		<hr/>
 		<c:set var="profileCareerList" value="${profileInfo.profileCareerList}"/>
 		<c:if test="${!empty profileCareerList}">
 		
-			<table class="table">
-				<thead class="thead-inverse">
+			<table class="table table-bordered table-hover">
+				<thead class="">
 					<tr>
 						<th>Title</th>
 						<th>Description</th>
@@ -159,7 +160,7 @@
 				<tbody>		
 			<c:forEach var="profileCareerInfo" items="${profileCareerList}">
 					<tr>
-			    		<th class="row"><p class="form-control-static">${profileCareerInfo.careerTitle}</p></th>
+			    		<th><p class="form-control-static">${profileCareerInfo.careerTitle}</p></th>
 		    			<td><p class="form-control-static">${profileCareerInfo.careerDescription}</p></td>
 		    			<td><p class="form-control-static">${profileCareerInfo.startDate}</p></td>
 		    			<td><p class="form-control-static">${profileCareerInfo.endDate}</p></td>
@@ -172,7 +173,7 @@
 		</c:if>
 		<c:set var="profileStreamList" value="${profileInfo.profileStreamList}"/>
 		<c:if test="${!empty profileStreamList}">
-		<h3><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>&nbsp;&nbsp;<tag:message code="text.playstream"/></h3>
+		<h3><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>#&nbsp;&nbsp;<tag:message code="text.playstream"/></h3>
 		<hr/>
 		<c:forEach var="profileStreamInfo" items="${profileStreamList}">
 		<h3><small>${profileStreamInfo.streamTitle}</small></h3>	
@@ -185,14 +186,14 @@
 		<c:set var="profileStatFielderList" value="${profileInfo.profileStatFielderList}"/>
 
 	<c:if test="${!empty profileStatPitcherList || !empty profileStatHitterList || !empty profileStatFielderList}">			
-		<h3><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>&nbsp;<tag:message code="text.stats"/></h3>
+		<h3><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>#&nbsp;<tag:message code="text.stats"/></h3>
 		<hr/>	
 				
 		<c:if test="${!empty profileStatPitcherList}">
 		<h3><small><tag:message code="text.pitching.stat"/></small></h3>
 				
-		<table class="table">
-			<thead class="table-inverse">
+		<table class="table table-bordered table-hover">
+			<thead class="">
 				<tr>
 					<th>Team</th>
 					<th>Year</th>
@@ -247,8 +248,8 @@
 		</c:if>
 		<c:if test="${!empty profileStatHitterList}">
 		<h3><small><tag:message code="text.hitting.stat"/></small></h3>		
-		<table class="table">
-			<thead class="table-inverse">
+		<table class="table table-bordered table-hover">
+			<thead class="">
 				<tr>
 					<th>Team</th>
 					<th>Year</th>
@@ -298,8 +299,8 @@
 		</c:if>
 		<c:if test="${!empty profileStatFielderList}">
 		<h3><small><tag:message code="text.fielding.stat"/></small></h3>
-		<table class="table">
-			<thead class="table-inverse">
+		<table class="table table-bordered table-hover">
+			<thead class="">
 				<tr>
 					<th>Team</th>
 					<th>Year</th>
@@ -324,7 +325,7 @@
 			<tbody>
 			<c:forEach var="profileStatFielderInfo" items="${profileStatFielderList}">
 				<tr>
-					<th class="row"><p class="form-control-static">${profileStatFielderInfo.fTeamName}</p></th>								
+					<th><p class="form-control-static">${profileStatFielderInfo.fTeamName}</p></th>								
 	    			<td><p class="form-control-static">${profileStatFielderInfo.fStatYear}</p></td>
 	    			<td><p class="form-control-static">${profileStatFielderInfo.pos}</p>
 	    			<td><p class="form-control-static">${profileStatFielderInfo.g}</p>
@@ -350,58 +351,182 @@
 	</c:if>										  
 	</c:when>
 	<c:when test="${profileInfo.profileType eq 2}">
+	<h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span>#&nbsp;&nbsp;<tag:message code="text.personalinfo"/></h3>
+	<hr/>
+
+	<div class="form-group row">
+		<div class="col-sm-6">
+			<img src="http://jwlee0208.cdn3.cafe24.com/${profileInfo.profileImgPath}" class="img-fluid rounded mx-auto d-block"/>
+		</div>	
+		<div class="col-sm-6">
+	  	<div class="form-group row">
+	    	<label for="" class="col-sm-5 col-form-label"><tag:message code="text.player.name"/></label>
+		    <div class="col-sm-7">
+		    	<p class="form-control-static">${profileInfo.name}</p>
+			</div>
+		</div>
+		  <div class="form-group row">
+		    <label for="" class="col-sm-5 col-form-label"><tag:message code="text.height"/> / <tag:message code="text.weight"/></label>
+		    <div class="col-sm-7">
+		      <p class="form-control-static">${profileInfo.profilePlayerDto.height}&nbsp;cm (${profileInfo.profilePlayerDto.heightAsFeet} feet) / ${profileInfo.profilePlayerDto.weight}&nbsp;kg (${profileInfo.profilePlayerDto.weightAsFound} found)</p>
+		    </div>
+		  </div>
+
+		  <div class="form-group row">
+		    <label for="" class="col-sm-5 col-form-label"><tag:message code="text.dateofbirth"/></label>
+		    <div class="col-sm-7">
+		      <p class="form-control-static">${fn:substring(profileInfo.profilePlayerDto.birthDate,0,10)}</p>
+		    </div>
+		  </div>
+
+		  <div class="form-group row">
+		    <label for="" class="col-sm-5 col-form-label"><tag:message code="text.birthplace"/></label>
+		    <div class="col-sm-7">
+		      <p class="form-control-static">${profileInfo.profilePlayerDto.birthPlace}</p>
+		    </div>
+		  </div>	
+			<div class="form-group row">
+			    <label for="" class="col-sm-5 col-form-label"><tag:message code="text.education"/></label>
+			    <div class="col-sm-7">
+			    	<p class="form-control-static">${profileInfo.profilePlayerDto.education}</p>
+				</div>
+			</div>	
+			<div class="form-group row">
+			    <label for="" class="col-sm-5 col-form-label"><tag:message code="text.hobbies"/></label>
+			    <div class="col-sm-7">
+			    	<p class="form-control-static">${profileInfo.profilePlayerDto.hobbies}</p>
+				</div>
+			</div>					
+			<div class="form-group row">
+			    <label for="" class="col-sm-5 col-form-label"><tag:message code="text.favoritefood"/></label>
+			    <div class="col-sm-7">
+				    <p class="form-control-static">${profileInfo.profilePlayerDto.favoriteFood}</p>	    
+			    </div>
+			</div>	
+			<div class="form-group row">
+			    <label for="" class="col-sm-5 col-form-label"><tag:message code="text.nationality"/></label>
+				<div class="col-sm-7">
+				    <p class="form-control-static">
+				    <c:if test="${profileInfo.profilePlayerDto.nationality ne null && profileInfo.profilePlayerDto.nationality ne ''}">
+				    <tag:message code="code.country.${profileInfo.profilePlayerDto.nationality}"/>
+				    </c:if>
+				    </p>
+				</div>    
+			</div>	
+			<div class="form-group row">
+			    <label for="" class="col-sm-5 col-form-label"><tag:message code="text.language"/></label>
+			    <div class="col-sm-7">
+				    <p class="form-control-static">
+				    	<c:if test="${profileInfo.profilePlayerDto.language ne null && profileInfo.profilePlayerDto.language ne ''}">
+				    	<tag:message code="code.language.${profileInfo.profilePlayerDto.language}"/>	
+				    	</c:if>
+				    </p>
+				</div>
+			</div>		
+
+		</div>
+		
+	</div>	
+		<h3><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>#&nbsp;&nbsp;<tag:message code="text.career"/></h3>
+		<hr/>
+		<c:set var="profileCareerList" value="${profileInfo.profileCareerList}"/>
+		<c:if test="${!empty profileCareerList}">
+		
+			<table class="table table-bordered table-hover">
+				<thead class="">
+					<tr>
+						<th>Title</th>
+						<th>Description</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+<!-- 						<th>Status</th> -->
+<!-- 						<th>Seq</th> -->
+					</tr>
+				</thead>
+				<tbody>		
+			<c:forEach var="profileCareerInfo" items="${profileCareerList}">
+					<tr>
+			    		<th><p class="form-control-static">${profileCareerInfo.careerTitle}</p></th>
+		    			<td><p class="form-control-static">${profileCareerInfo.careerDescription}</p></td>
+		    			<td><p class="form-control-static">${profileCareerInfo.startDate}</p></td>
+		    			<td><p class="form-control-static">${profileCareerInfo.endDate}</p></td>
+<%-- 		    			<td><p class="form-control-static">${profileCareerInfo.careerStatus}</p></td> --%>
+<%-- 		    			<td><p class="form-control-static">${profileCareerInfo.careerSeq}</p></td> --%>
+					</tr>
+			</c:forEach>		
+				</tbody>
+			</table>									
+		</c:if>
+		<c:set var="profileStreamList" value="${profileInfo.profileStreamList}"/>
+		<c:if test="${!empty profileStreamList}">
+		<h3><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>#&nbsp;&nbsp;<tag:message code="text.playstream"/></h3>
+		<hr/>
+		<c:forEach var="profileStreamInfo" items="${profileStreamList}">
+		<h3><small>${profileStreamInfo.streamTitle}</small></h3>	
+		<div class="embed-responsive embed-responsive-16by9">${profileStreamInfo.streamUrl}</div>
+		</c:forEach>
+		</c:if>
 	
 	</c:when>
 	<c:when test="${profileInfo.profileType eq 3}">
 		<h3>Team Information</h3>
 		<hr/>
-	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.team.name"/></label>
-		    <div class="col-sm-10">
-		    	<p class="form-control-static">${profileInfo.name}</p>
+	  	<div class="form-group row">
+	  		<div class="col-sm-6">
+				<img src="http://jwlee0208.cdn3.cafe24.com/${profileInfo.profileImgPath}" class="img-fluid rounded mx-auto d-block"/>
+			</div>	
+			<div class="col-sm-6">
+		    	<div class="form-group row">
+			    	<label for="" class="col-sm-5 col-form-label"><tag:message code="text.team.name"/></label>
+				    <div class="col-sm-7">
+				    	<p class="form-control-static">${profileInfo.name}</p>
+					</div>
+				</div>
+			  	<div class="form-group row">
+			    	<label for="" class="col-sm-5 col-form-label"><tag:message code="text.team.franchise"/></label>
+				    <div class="col-sm-7">
+				    	<p class="form-control-static">${profileInfo.profileTeamDto.city}</p>
+					</div>
+				</div>	
+			  	<div class="form-group row">
+			    	<label for="" class="col-sm-5 col-form-label"><tag:message code="text.team.eastablish.date"/></label>
+				    <div class="col-sm-7">
+				    	<p class="form-control-static">${profileInfo.profileTeamDto.establishedDate}</p>
+					</div>
+				</div>
+
 			</div>
+	  		
 		</div>
-	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.team.franchise"/></label>
-		    <div class="col-sm-10">
-		    	<p class="form-control-static">${profileInfo.profileTeamDto.city}</p>
-			</div>
-		</div>	
-	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.team.eastablish.date"/></label>
-		    <div class="col-sm-10">
-		    	<p class="form-control-static">${profileInfo.profileTeamDto.establishedDate}</p>
-			</div>
-		</div>
-		<h3>League Information</h3>
+		<h3>#&nbsp;&nbsp;League Information</h3>
 		<hr/>
-	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.continent"/></label>
-		    <div class="col-sm-10">
+	  	<div class="form-group row">
+	    	<label for="" class="col-sm-5 col-form-label"><tag:message code="text.continent"/></label>
+		    <div class="col-sm-7">
 		    	<p class="form-control-static"><tag:message code="code.area.${profileInfo.leagueInfoDto.area}"/></p>
 			</div>
 		</div>		
-	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.countries"/></label>
-		    <div class="col-sm-10">
+	  	<div class="form-group row">
+	    	<label for="" class="col-sm-5 col-form-label"><tag:message code="text.countries"/></label>
+		    <div class="col-sm-7">
 		    	<p class="form-control-static"><tag:message code="code.country.${profileInfo.leagueInfoDto.country}"/></p>
 			</div>
 		</div>				
-	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.league.name"/></label>
-		    <div class="col-sm-10">
+	  	<div class="form-group row">
+	    	<label for="" class="col-sm-5 col-form-label"><tag:message code="text.league.name"/></label>
+		    <div class="col-sm-7">
 		    	<p class="form-control-static">${profileInfo.leagueInfoDto.leagueName}</p>
 			</div>
 		</div>
-	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.league.level"/></label>
-		    <div class="col-sm-10">
+	  	<div class="form-group row">
+	    	<label for="" class="col-sm-5 col-form-label"><tag:message code="text.league.level"/></label>
+		    <div class="col-sm-7">
 		    	<p class="form-control-static"><tag:message code="code.leaguetype.${profileInfo.leagueInfoDto.leagueType}"/></p>
 			</div>
 		</div>
-	  	<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.league.division"/></label>
-		    <div class="col-sm-10">
+	  	<div class="form-group row">
+	    	<label for="" class="col-sm-5 col-form-label"><tag:message code="text.league.division"/></label>
+		    <div class="col-sm-7">
 		    	<p class="form-control-static">${profileInfo.leagueInfoDto.leagueDivision}</p>
 			</div>
 		</div>		
@@ -409,81 +534,82 @@
 	</c:when>
 </c:choose>		
 		
-		<h3><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;<tag:message code="text.introduce"/></h3>
+		<h3><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>#&nbsp;&nbsp;<tag:message code="text.introduce"/></h3>
 		<hr/>	
-		<div class="form-group">
+		<div class="form-group row">
 			<div class="col-sm-12">
 			<p class="form-control-static"><c:out value="${profileInfo.introduce}" escapeXml="false"/></p>
 			</div>
 		</div>
 		
-		<h3><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>&nbsp;&nbsp;<tag:message code="text.contact"/></h3>
+		<h3><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>#&nbsp;&nbsp;<tag:message code="text.contact"/></h3>
 		<hr/>	
 <c:if test="${profileInfo.profileContactInfoDto.email ne null && profileInfo.profileContactInfoDto.email ne ''}">
-		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.email"/></label>
-		    <div class="col-sm-10">
+		<div class="form-group row">
+	    	<label for="" class="col-sm-3 col-form-label"><tag:message code="text.email"/></label>
+		    <div class="col-sm-9">
 		    	<p class="form-control-static"><a href="mailto: ${profileInfo.profileContactInfoDto.email}">${profileInfo.profileContactInfoDto.email}</a></p>
 			</div>
 		</div>
 </c:if>		
 <c:if test="${profileInfo.profileContactInfoDto.phoneNo ne null && profileInfo.profileContactInfoDto.phoneNo ne ''}">
-		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Phone No.</label>
-		    <div class="col-sm-10">
+		<div class="form-group row">
+	    	<label for="" class="col-sm-3 col-form-label">Phone No.</label>
+		    <div class="col-sm-9">
 		    	<p class="form-control-static"><a href="tel:${profileInfo.profileContactInfoDto.phoneNo}">${profileInfo.profileContactInfoDto.phoneNo}</a></p>
 			</div>
 		</div>
 </c:if>
 <c:if test="${profileInfo.profileContactInfoDto.cellPhoneNo ne null && profileInfo.profileContactInfoDto.cellPhoneNo ne ''}">
-		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label">Cell Phone No.</label>
-		    <div class="col-sm-10">
+		<div class="form-group row">
+	    	<label for="" class="col-sm-3 col-form-label">Cell Phone No.</label>
+		    <div class="col-sm-9">
 		    	<p class="form-control-static"><a href="tel:${profileInfo.profileContactInfoDto.cellPhoneNo}">${profileInfo.profileContactInfoDto.cellPhoneNo}</a></p>
 			</div>
 		</div>
 </c:if>
 <c:if test="${profileInfo.profileContactInfoDto.websiteUrl ne null && profileInfo.profileContactInfoDto.websiteUrl ne ''}">
-		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.website"/></label>
-		    <div class="col-sm-10">
+		<div class="form-group row">
+	    	<label for="" class="col-sm-3 col-form-label"><tag:message code="text.website"/></label>
+		    <div class="col-sm-9">
 		    	<p class="form-control-static"><a href="http://${profileInfo.profileContactInfoDto.websiteUrl}" target="_blank">${profileInfo.profileContactInfoDto.websiteUrl}</a></p>
 			</div>
 		</div>
 </c:if>
 
 <c:if test="${profileInfo.profileContactInfoDto.facebookUrl ne null && profileInfo.profileContactInfoDto.facebookUrl ne ''}">
-		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.facebook.id"/></label>
-		    <div class="col-sm-10">
+		<div class="form-group row">
+	    	<label for="" class="col-sm-3 col-form-label"><tag:message code="text.facebook.id"/></label>
+		    <div class="col-sm-9">
 		    	<p class="form-control-static"><a href="https://www.facebook.com/${profileInfo.profileContactInfoDto.facebookUrl}">${profileInfo.profileContactInfoDto.facebookUrl}</a></p>
 			</div>
 		</div>
 </c:if>
 <c:if test="${profileInfo.profileContactInfoDto.twitterUrl ne null && profileInfo.profileContactInfoDto.twitterUrl ne ''}">
-		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.twitter.id"/></label>
-		    <div class="col-sm-10">
+		<div class="form-group row">
+	    	<label for="" class="col-sm-3 col-form-label"><tag:message code="text.twitter.id"/></label>
+		    <div class="col-sm-9">
 		    	<p class="form-control-static"><a href="https://twitter.com/${profileInfo.profileContactInfoDto.twitterUrl}">${profileInfo.profileContactInfoDto.twitterUrl}</a></p>
 			</div>
 		</div>
 </c:if>
 <c:if test="${profileInfo.profileContactInfoDto.instagramUrl ne null && profileInfo.profileContactInfoDto.instagramUrl ne ''}">
-		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.instagram.id"/></label>
-		    <div class="col-sm-10">
+		<div class="form-group row">
+	    	<label for="" class="col-sm-3 col-form-label"><tag:message code="text.instagram.id"/></label>
+		    <div class="col-sm-9">
 		    	<p class="form-control-static"><a href="https://instagram.com/${profileInfo.profileContactInfoDto.instagramUrl}">${profileInfo.profileContactInfoDto.instagramUrl}</a></p>
 			</div>
 		</div>
 </c:if>
 <c:if test="${profileInfo.profileContactInfoDto.address ne null && profileInfo.profileContactInfoDto.address ne ''}">
-		<div class="form-group">
-	    	<label for="" class="col-sm-2 control-label"><tag:message code="text.address"/></label>
-		    <div class="col-sm-10">
+		<div class="form-group row">
+	    	<label for="" class="col-sm-3 col-form-label"><tag:message code="text.address"/></label>
+		    <div class="col-sm-9">
 		    	<p class="form-control-static"><a>${profileInfo.profileContactInfoDto.address}</a></p>
 			</div>
 		</div>
 </c:if>
+<br/>
 	</form>
 </div>
 <script>

@@ -315,6 +315,6 @@ public class ProfileController {
     	LeagueInfoDto leagueInfo = this.profileService.getLeagueInfo(leagueId);
     	
     	model.addAttribute("leagueInfo", leagueInfo);
-    	return "/profile/ajaxLeagueView";
+    	return "/profile/leagueView";
     }
 }

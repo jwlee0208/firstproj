@@ -75,7 +75,7 @@ public class ProfileServiceImpl implements ProfileService{
 	 * @return
 	 */
 	public List<ProfileAttrDto> getProfileAttrElementList(ProfileDto profileDto){
-		logger.debug("[ProfileServiceImpl.getProfileAttrElementList] select result : " + this.profileDao.selectProfileAttrElementList(profileDto));
+//		logger.debug("[ProfileServiceImpl.getProfileAttrElementList] select result : " + this.profileDao.selectProfileAttrElementList(profileDto));
 		return this.profileDao.selectProfileAttrElementList(profileDto);
 	}
 	
@@ -90,20 +90,32 @@ public class ProfileServiceImpl implements ProfileService{
 				ProfilePlayerDto profilePlayerParam = profileDto.getProfilePlayerDto();
 				if(profilePlayerParam != null){
 					profilePlayerParam.setProfileId(profileId);
-					this.addProfilePlayerInfo(profilePlayerParam);
+					try {
+						this.addProfilePlayerInfo(profilePlayerParam);						
+					} catch (Exception e) {
+						TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					}
 				}
 				List<ProfileCareerDto> profileCareerParamList = profileDto.getProfileCareerList();
 				if(profileCareerParamList != null && profileCareerParamList.size() > 0){
 					for(ProfileCareerDto profileCareerParam : profileCareerParamList){
 						profileCareerParam.setProfileId(profileId);
-						this.addProfileCareerInfo(profileCareerParam);
+						try {
+							this.addProfileCareerInfo(profileCareerParam);							
+						} catch (Exception e) {
+							TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+						}
 					}
 				}
 				List<ProfileStatHitterDto> profileStatHitterParamList = profileDto.getProfileStatHitterList();
 				if(profileStatHitterParamList != null && profileStatHitterParamList.size() > 0){
 					for(ProfileStatHitterDto profileStatHitterParam : profileStatHitterParamList){
 						profileStatHitterParam.setProfileId(profileId);
-						this.addProfileStatHitterInfo(profileStatHitterParam);	
+						try {
+							this.addProfileStatHitterInfo(profileStatHitterParam);								
+						} catch (Exception e) {
+							TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+						}
 					}
 				}
 				
@@ -111,7 +123,11 @@ public class ProfileServiceImpl implements ProfileService{
 				if(profileStatFielderParamList != null && profileStatFielderParamList.size() > 0){
 					for(ProfileStatFielderDto profileStatFielderParam : profileStatFielderParamList){
 						profileStatFielderParam.setProfileId(profileId);
-						this.addProfileStatFielderInfo(profileStatFielderParam);	
+						try {
+							this.addProfileStatFielderInfo(profileStatFielderParam);								
+						} catch (Exception e) {
+							TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+						}
 					}
 				}
 				
@@ -119,24 +135,55 @@ public class ProfileServiceImpl implements ProfileService{
 				if(profileStatPitcherParamList != null && profileStatPitcherParamList.size() > 0){
 					for(ProfileStatPitcherDto profileStatPitcherParam : profileStatPitcherParamList){
 						profileStatPitcherParam.setProfileId(profileId);
-						this.addProfileStatPitcherInfo(profileStatPitcherParam);	
+						try {
+							this.addProfileStatPitcherInfo(profileStatPitcherParam);								
+						} catch (Exception e) {
+							TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+						}
 					}
 				}			
 				
 			}else if(profileDto.getProfileType().equals("2")){
-				
+				ProfilePlayerDto profilePlayerParam = profileDto.getProfilePlayerDto();
+				if(profilePlayerParam != null){
+					profilePlayerParam.setProfileId(profileId);
+					try {
+						this.addProfilePlayerInfo(profilePlayerParam);						
+					} catch (Exception e) {
+						TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					}
+				}
+				List<ProfileCareerDto> profileCareerParamList = profileDto.getProfileCareerList();
+				if(profileCareerParamList != null && profileCareerParamList.size() > 0){
+					for(ProfileCareerDto profileCareerParam : profileCareerParamList){
+						profileCareerParam.setProfileId(profileId);
+						try {
+							this.addProfileCareerInfo(profileCareerParam);							
+						} catch (Exception e) {
+							TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+						}
+					}
+				}
 			}else if(profileDto.getProfileType().equals("3")){
 				ProfileTeamDto profileTeamParam = profileDto.getProfileTeamDto();
 				if(profileTeamParam != null){
 					profileTeamParam.setProfileId(profileId);
-					this.addProfileTeamInfo(profileTeamParam);
+					try {
+						this.addProfileTeamInfo(profileTeamParam);						
+					} catch (Exception e) {
+						TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					}
 				}
 			}
 			
 			ProfileContactInfoDto profileContactInfoParam = profileDto.getProfileContactInfoDto();
 			if(profileContactInfoParam != null){
 				profileContactInfoParam.setProfileId(profileId);
-				this.addProfileContactInfo(profileContactInfoParam);
+				try {
+					this.addProfileContactInfo(profileContactInfoParam);
+				} catch (Exception e) {
+					TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();	
+				}
 			}
 			
 			
@@ -144,7 +191,11 @@ public class ProfileServiceImpl implements ProfileService{
 			if(profileStreamParamList != null && profileStreamParamList.size() > 0){
 				for(ProfileStreamDto profileStreamParam : profileStreamParamList){
 					profileStreamParam.setProfileId(profileId);
-					this.addProfileStreamInfo(profileStreamParam);
+					try {
+						this.addProfileStreamInfo(profileStreamParam);						
+					} catch (Exception e) {
+						TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					}
 				}
 			}
 			
@@ -154,7 +205,11 @@ public class ProfileServiceImpl implements ProfileService{
 				for(ProfileAttrElementMapDto profileAttrElementMapParam : profileAttrElementMapParamList){
 					if(profileAttrElementMapParam.getProfileAttrElementId() > 0){
 						profileAttrElementMapParam.setProfileId(profileId);
-						this.addProfileAttrElemMapInfo(profileAttrElementMapParam);						
+						try {
+							this.addProfileAttrElemMapInfo(profileAttrElementMapParam);													
+						} catch (Exception e) {
+							TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+						}
 					}
 				}
 			}
@@ -240,7 +295,28 @@ public class ProfileServiceImpl implements ProfileService{
 					}			
 					
 				}else if(profileDto.getProfileType().equals("2")){
-					
+					ProfilePlayerDto profilePlayerParam = profileDto.getProfilePlayerDto();
+					if(profilePlayerParam != null){
+						profilePlayerParam.setProfileId(profileId);
+						try {
+							this.updateProfilePlayerInfo(profilePlayerParam);							
+						} catch (Exception e){
+							TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+						}
+					}
+					List<ProfileCareerDto> profileCareerParamList = profileDto.getProfileCareerList();
+					if(profileCareerParamList != null && profileCareerParamList.size() > 0){
+						this.profileDao.deleteProfileCareerInfo(profileId);
+						for(ProfileCareerDto profileCareerParam : profileCareerParamList){
+							profileCareerParam.setProfileId(profileId);
+							try {
+								this.addProfileCareerInfo(profileCareerParam);
+							} catch (Exception e){
+								e.printStackTrace();
+								TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+							}							
+						}
+					}
 				}else if(profileDto.getProfileType().equals("3")){
 					ProfileTeamDto profileTeamParam = profileDto.getProfileTeamDto();
 					if(profileTeamParam != null){

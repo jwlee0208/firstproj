@@ -121,8 +121,6 @@ public class ProfileDto {
 		this.profileContactInfoDto = profileContactInfoDto;
 	}
 
-	
-
 	public List<ProfileAttrDto> getProfileAttrList() {
 		return profileAttrList;
 	}
