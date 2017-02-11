@@ -30,6 +30,7 @@
 		<input type="hidden" id="totalPageCnt" 	name="totalPageCnt" value="${pagedResult.totalPageCnt}" /> 
 		<input type="hidden" id="startPageNo" 	name="startPageNo" 	value="${pagedResult.startPageNo}" /> 
 		<input type="hidden" id="pageSize" 		name="pageSize" 	value="${pagedResult.pageSize}" />
+		<input type="hidden" id="type" 			name="type" 		value="blog" />
 <div class="panel-group" id="accordion">
 				<c:choose>
 					<c:when test="${null ne pagedResult.list && pagedResult.list.size() > 0}">

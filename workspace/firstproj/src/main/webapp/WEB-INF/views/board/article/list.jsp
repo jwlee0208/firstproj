@@ -46,6 +46,7 @@
 		<input type="hidden" id="totalPageCnt" 	name="totalPageCnt" value="${pagedResult.totalPageCnt}" /> 
 		<input type="hidden" id="startPageNo" 	name="startPageNo" 	value="${pagedResult.startPageNo}" /> 
 		<input type="hidden" id="pageSize" 		name="pageSize" 	value="${pagedResult.pageSize}" />
+		<input type="hidden" id="type"   		name="type" 		value="blog"/>
 
 		<table style="width: 100%;" class="table table-hover">
 			<colgroup>
@@ -92,7 +93,8 @@
 		<c:param value="${totalPageCnt}"            name="totalPageCnt"/>
 	    <c:param value="${pagedResult.pageNo}"      name="pageNo"/>
 	    <c:param value="${pagedResult.startPageNo}" name="startPageNo"/>
-	    <c:param value="${pagedResult.endPageNo}"   name="endPageNo"/>   
+	    <c:param value="${pagedResult.endPageNo}"   name="endPageNo"/> 
+	    <c:param value="blog"   name="type"/>   
 	</c:import>                                                                                                      
 
 	<div class="btn-group btn-group-justified" style="padding-bottom: 20px;">

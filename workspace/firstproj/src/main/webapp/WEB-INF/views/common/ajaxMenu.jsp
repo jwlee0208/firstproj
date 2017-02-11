@@ -24,7 +24,7 @@
 				onclick="javascript:goHome();"><span
 				style="color: white; font-size: 25px; font-weight: bold;">L</span>inked<span
 				style="color: white; font-size: 25px; font-weight: bold;">N</span>est
-				- <span style="color: white; font-size: 15px;">Finding Chances</span>
+				- <span style="color: white; font-size: 15px;">Looking For Chances</span>
 			</a>
 <!-- 		</div> -->
 		<div class="collapse navbar-collapse"

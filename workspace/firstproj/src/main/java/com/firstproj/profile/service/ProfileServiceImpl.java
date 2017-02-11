@@ -241,7 +241,7 @@ public class ProfileServiceImpl implements ProfileService{
 					}
 					List<ProfileCareerDto> profileCareerParamList = profileDto.getProfileCareerList();
 					if(profileCareerParamList != null && profileCareerParamList.size() > 0){
-						this.profileDao.deleteProfileCareerInfo(profileId);
+//						this.profileDao.deleteProfileCareerInfo(profileId);
 						for(ProfileCareerDto profileCareerParam : profileCareerParamList){
 							profileCareerParam.setProfileId(profileId);
 							try {
@@ -306,7 +306,7 @@ public class ProfileServiceImpl implements ProfileService{
 					}
 					List<ProfileCareerDto> profileCareerParamList = profileDto.getProfileCareerList();
 					if(profileCareerParamList != null && profileCareerParamList.size() > 0){
-						this.profileDao.deleteProfileCareerInfo(profileId);
+//						this.profileDao.deleteProfileCareerInfo(profileId);
 						for(ProfileCareerDto profileCareerParam : profileCareerParamList){
 							profileCareerParam.setProfileId(profileId);
 							try {

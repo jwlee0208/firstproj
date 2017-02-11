@@ -17,7 +17,7 @@ iframe {width : 250px; height : 200px; align:center;}
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<h1 class="display-3" style="color:#efefef;">Find &nbsp;|&nbsp; Join &nbsp;|&nbsp; Play</h1>
-			<p class="lead" style="color:#efefef;">Why Don't You Try To Find Your Team?</p>
+			<p class="lead" style="color:#efefef;">Why Don't You Try To Find Your Team Or Player?</p>
 			<p class="lead" style="color:#efefef;"><strong>"<tag:message code='sub.text4'/>"</strong> - 'Yogi' Lawrence Peter Berra</p>
 			<input type="button" class="btn btn-primary btn-lg registProfile" value="Regist Your Profile"/>		
 		</div>
@@ -38,7 +38,7 @@ iframe {width : 250px; height : 200px; align:center;}
 								 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid mx-auto d-block" 
 								 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
 								 onclick="javascript:goProfileView('${recentPlayerProfileInfo.profileId}', '${recentPlayerProfileInfo.profileType}');" 
-								 style="cursor:pointer; "/>
+								 style="cursor:pointer;"/>
 								</c:when>
 								<c:otherwise>
 							<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
@@ -121,14 +121,14 @@ iframe {width : 250px; height : 200px; align:center;}
 							<c:choose>
 								<c:when test="${recentTeamProfileInfo.profileImgPath ne null && recentTeamProfileInfo.profileImgPath ne ''}">
 							<img src="http://jwlee0208.cdn3.cafe24.com/${recentTeamProfileInfo.profileImgPath}" 
-								 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid"" 
+								 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid mx-auto d-block" 
 								 onerror="this.src='http://jwlee0208.cdn3.cafe24.com/img/no_image.png'"  
 								 onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');"  
 								 style="cursor:pointer;"/>
 								</c:when>
 								<c:otherwise>
 							<img src="http://jwlee0208.cdn3.cafe24.com/img/no_image.png" 
-								 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid""
+								 data-src="holder.js/250x200" alt="image" class="card-img-top img-fluid mx-auto d-block"
 								 onclick="javascript:goProfileView('${recentTeamProfileInfo.profileId}', '${recentTeamProfileInfo.profileType}');" 
 								 style="cursor:pointer;"/>
 								</c:otherwise>
@@ -203,7 +203,7 @@ iframe {width : 250px; height : 200px; align:center;}
 			</c:otherwise>	
 		</c:choose>	
 		</div>	
-<!-- // 2016.06.14 이후 작 --> 		
+<!-- // 2016.06.14 이후 작업 --> 		
 		<h4><tag:message code='text.recenttryoutinfo'/>&nbsp;&nbsp;<small><a href="/share/jwlee/list/15"><tag:message code='button.more'/></a></small></h4>
 		<hr/>
 <!-- 		<div class="row" style="padding-left: 10px; padding-right: 10px;"> -->

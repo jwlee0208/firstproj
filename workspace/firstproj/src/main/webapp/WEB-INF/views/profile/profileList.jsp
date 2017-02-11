@@ -163,12 +163,12 @@
 $(function(){	
 // $("input[name=attrElemId]").each(function(){
 // 	var selectedAttrElemId = this;
-	$(".attrElemRadio").each(function(){
-		var attrElemId = this;
-		if($(attrElemId).val() == $(selectedAttrElemId).val()){
-			$(attrElemId).attr("checked", true);
-		}
-	});
+// 	$(".attrElemRadio").each(function(){
+// 		var attrElemId = this;
+// 		if($(attrElemId).val() == $(selectedAttrElemId).val()){
+// 			$(attrElemId).attr("checked", true);
+// 		}
+// 	});
 	
 	$(".attrElemRadio").on("click", function(){
 		loadProfileList();	
