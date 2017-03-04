@@ -29,38 +29,41 @@
 
 	$(function(){
 		$("#saveBtn").click(function(){
-			var introduce = tinyMCE.get('introduce').getContent();
-			$("#introduce").val(introduce);
-
-			var profileImg = $.trim($("#profileImg").val());
 			
-			if(profileImg.length == 0){
-				$.ajax({
-					url 		: '/profile/registAction',
-					data 		: $("#actionFrm").serialize(),
-					dataType 	: 'json',
-					method 		: 'post',
-					success 	: function(data){
-						var result = data.result;
-						var msg = data.message;
-												
-						if(result == 'success'){
-							location.href = "/profile/list/"+$("#profileType").val() + "/" + $("#categoryId").val();
-						}else{
-							alert(msg);
-							return;
-						}						
-					}
-				});					
-			}else{
-				// 썸네일 파일 업로드 할 때 저장
-				var frm = $("#actionFrm");
-				frm.attr("action", '/profile/registAction');
-				frm.attr("method", "post");
-				frm.ajaxForm(FileuploadCallback); 
-				frm.submit(); 				
+			if(validateBeforeRegist()) {
+				var introduce = tinyMCE.get('introduce').getContent();
+				$("#introduce").val(introduce);
+
+				var profileImg = $.trim($("#profileImg").val());
 				
+				if(profileImg.length == 0){
+					$.ajax({
+						url 		: '/profile/registAction',
+						data 		: $("#actionFrm").serialize(),
+						dataType 	: 'json',
+						method 		: 'post',
+						success 	: function(data){
+							var result = data.result;
+							var msg = data.message;
+													
+							if(result == 'success'){
+								location.href = "/profile/list/"+$("#profileType").val() + "/" + $("#categoryId").val();
+							}else{
+								alert(msg);
+								return;
+							}						
+						}
+					});					
+				}else{
+					// 썸네일 파일 업로드 할 때 저장
+					var frm = $("#actionFrm");
+					frm.attr("action", '/profile/registAction');
+					frm.attr("method", "post");
+					frm.ajaxForm(FileuploadCallback); 
+					frm.submit(); 				
+				}				
 			}
+			
 		});
 		
 		// pitcher stat row removing
@@ -186,6 +189,77 @@
 				return false;
 			}
 			return true;
+		}
+		
+		// server 등록 전 validation
+		function validateBeforeRegist() {
+			var catId = $("#categoryId").val();
+			// 1. 선수 등록시
+			if(catId == '01010100') {
+				if($("#name").val().trim() == '') {
+					alert('이름을 작성해주세요.');
+					$("#name").focus();
+					return false;
+				}
+				if($("#catId2 option:checked").val().trim() == ''){
+					alert('포지션을 선택해주세요.');
+					$("#catId2").focus();
+					return false;
+				}
+				if($("#height").val().trim() == '') {
+					alert('키를 입력해주세요.');
+					$("#height").focus();
+					return false;
+				}
+				if($("#weight").val().trim() == '') {
+					alert('몸무게를 입력해주세요.');
+					$("#weight").focus();
+					return false;
+				}
+				if($("#birthDate").val().trim() == '') {
+					alert('생년월일을 작성해주세요.');
+					$("#birthDate").focus();
+					return false;
+				}
+				if($("#birthPlace").val().trim() == '') {
+					alert('출생지를 작성해주세요.');
+					$("#birthPlace").focus();
+					return false;
+				}
+				if($("#education").val().trim() == '') {
+					$("#education").focus();
+					alert('학력을 작성해주세요.');
+					return false;
+				}
+				if($("#language").val().trim() == '') {
+					alert('사용가능 언어를 입력해주세요.');
+					$("#languageSearch").focus();
+					return false;
+				}
+				if($("#nationality").val().trim() == '') {
+					alert('국적을 입력해주세요.');
+					$("#nationalitySearch").focus();
+					return false;
+				}
+				var introduce = tinyMCE.get('introduce').getContent();
+				if(introduce.trim() == '') {
+					alert('자기소개를 작성해주세요.');
+					$("#introduce").focus();
+					return false;
+				}				
+				
+				
+			}
+			// 2. 코치 등록시
+			else if(catId == '01010200') {
+				
+			}
+			// 3. 팀 등록시
+			if(catId == '01010300') {
+				
+			}
+			return true;
+
 		}
 		
 		

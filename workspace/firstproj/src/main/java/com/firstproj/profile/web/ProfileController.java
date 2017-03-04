@@ -47,7 +47,7 @@ public class ProfileController {
 	 * @param profileId
 	 * @return
 	 */
-	@RequestMapping(value="/view/{profileType}/{profileId}")
+	@RequestMapping(value="/view/{profileType}/{profileId}", method=RequestMethod.GET)
 	public String getProfileView(Model model, @PathVariable String profileType, @PathVariable int profileId){
 		
 		ProfileDto profileDto = new ProfileDto();
@@ -58,9 +58,9 @@ public class ProfileController {
 		logger.debug("[ProfileController][getProfileView] selectedProfileInfo : " + selectedProfileInfo.toString());
 		model.addAttribute("profileInfo", selectedProfileInfo);
 		
-		return "/profile/profileView";
+		return "/profile/view";
 	}
-
+	
 	@RequestMapping(value="/modify/{profileType}/{profileId}")
 	public String getProfileUpdateInfo(Model model, @PathVariable String profileType, @PathVariable int profileId){
 		
@@ -150,7 +150,7 @@ public class ProfileController {
         return "/profile/ajaxProfileList";
     }
     /**
-     * @brief Profile Registration Page
+     * @brief Profile Registration Page : 공통 프로필 등록 호출
      * @param model
      * @param session
      * @param profileType
@@ -184,7 +184,7 @@ public class ProfileController {
     	model.addAttribute("leagueInfoList"	, leagueInfoList);
     	return "/profile/regist";
     }
-	
+    
     @RequestMapping(value="/registAction", method=RequestMethod.POST)
     @ResponseBody
     public JSONObject  registProfile(ProfileDto profileDto, HttpSession session) throws Exception{
