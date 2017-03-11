@@ -145,7 +145,7 @@
  												<input type="hidden" class="form-control" 
   													aria-label="Text input with checkbox" 
   													name="profileAttrElementMapList[${rowCnt}].profileAttrElementMapName"  
-<  													value="<tag:message code='attr.${profileAttrInfo.profileAttrName}.${profileAttrElemInfo.profileAttrElementName}'/>">  
+  													value="<tag:message code='attr.${profileAttrInfo.profileAttrName}.${profileAttrElemInfo.profileAttrElementName}'/>"/>  
 												<c:set var="rowCnt" value="${rowCnt+1}" />
 											</c:forEach>
 										</c:if>
