@@ -17,10 +17,12 @@
 	.form-group .col-sm-10 {vertical-align : middle;}
 </style>
 <div class="container">
+	<br/>
+	<h1 id="btn-groups" class="page-header">Profile&nbsp;&nbsp;<small>Detail</small></h1>
+	<hr/>
 	<form id="viewFrm" name="viewFrm" method="post" class="form-horizontal" role="form">
 		<input type="hidden" id="profileId" 	name="profileId" value="${profileInfo.profileId}"/>
 		<div style="display:none;"><h2>${profileInfo.title}&nbsp;<small>Profile</small></h2></div>
-		
 <c:choose>
 	<c:when test="${profileInfo.profileType eq 1}">
 		<%@include file="/WEB-INF/views/profile/ajaxViewPlayer.jsp"%>
@@ -32,7 +34,7 @@
 		<%@include file="/WEB-INF/views/profile/ajaxViewTeam.jsp"%>
 	</c:when>
 </c:choose>		
-		
+	<div id="introduce" class="tab-pane" role="tabpanel">	
 		<h3><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>#&nbsp;&nbsp;<tag:message code="text.introduce"/></h3>
 		<hr/>	
 		<div class="form-group row">
@@ -40,7 +42,8 @@
 			<p class="form-control-static"><c:out value="${profileInfo.introduce}" escapeXml="false"/></p>
 			</div>
 		</div>
-		
+	</div>	
+	<div id="contact" class="tab-pane" role="tabpanel">	
 		<h3><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>#&nbsp;&nbsp;<tag:message code="text.contact"/></h3>
 		<hr/>	
 <c:if test="${profileInfo.profileContactInfoDto.email ne null && profileInfo.profileContactInfoDto.email ne ''}">
@@ -108,8 +111,10 @@
 			</div>
 		</div>
 </c:if>
+	</div>
 <br/>
 	</form>
+</div>
 </div>
 <script>
 $(document).ready(function() {
@@ -120,6 +125,7 @@ $(document).ready(function() {
 	$("img").on("error", function(){
 		$(this).attr("src", '${pageContext.request.contextPath}/img/no_image.png');
 	});
+	
 });
 
 $(function(){
@@ -155,5 +161,7 @@ $(function(){
 		frm.submit();
 // 		location.href = "/player/modify";
 	});
+	
+
 });
 </script>
